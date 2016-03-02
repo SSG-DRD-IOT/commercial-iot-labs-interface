@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Intel® Commercial IoT Workshop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../../../css/main.css">
+
+  <!-- Include CodeMirror CSS-->
+  <link rel="stylesheet" href="../../../css/codemirror.css">
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+  </header>
+  <div class="content">
+
+    <h1>Configuring the XBee devices</h1>
+
+
+    <div class="tldr">
+      Before you plug the USB explorer to your computer, make sure you’ve plugged the XBee module on to it.
+    </div>
+    <div>
+      <ol>
+        <li>
+          <p>
+            Launch X-CTU application in your machine.
+            Click on the + sign at the top left corner which opens a window to add XBee devices. Select the COM port on which the
+            XBee device is connected. Leave the settings and click on Finish.
+          </p>
+          <p><img src="image_1.png" alt="" ></p>
+        </li>
+        <li>
+          <p>
+            Select the newly loaded module from the left pan and wait for the parameters to load in the right pane.
+            Now change the PAN ID to a unique number between 0 and FFFF so that your devices are in a differerent network from others.
+            Note that this PAN ID should be the same for both the XBee devices.
+          </p>
+          <p><img src="image_2.png" alt="" ></p>
+          <p>Next is to create addresses for XBee modules. These values should be unique in you network.
+            Assign value 0 for MY 16-bit source address. Since we have only two ZigBee devices we will use 0 and 1 as addresses.</p>
+            <p>DH and DL are the destination addresses. Leave DH as 0 and set DL to the MY address of the receiving XBee device i.e., 1 in our case.
+            </p>
+          </li>
+
+          <li>
+            <p>Now scroll down the parameters and under Serial Interfacing, select API enabled[1]>
+              <p><img src="image_3.png" alt="" ></p>
+            </li>
+            <li>
+              <p>All the changes has to be saved to the device. You can do this either by clicking the pencil icon present
+                at the right of each field or by clicking the pencil icon at the top. Once the changes are saved in the device,
+                the property background will turn from green to blue.</p>
+                <p><img src="image_4.png" alt="" ></p>
+              </li>
+
+              <li>
+                <p>Follow same steps for configuring the second XBee device.</p>
+                <p><img src="image_5.png" alt="" ></p>
+
+<p>Here are the example settings for two XBee devices.</p>
+                <table style="width:100%">
+    <tr>
+      <th>Setting</th>
+      <th>Acronym</th>
+      <th>XBee1</th>
+      <th>XBee2</th>
+    </tr>
+    <tr>
+      <td>Channel</td>
+      <td>CH</td>
+      <td>C</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <td>PAN ID</td>
+      <td>ID</td>
+      <td>5563</td>
+      <td>5563</td>
+    </tr>
+    <tr>
+      <td>Destination Address High</td>
+      <td>DH</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Destination Address Low</td>
+      <td>DL</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>16-bit Source Address</td>
+      <td>MY</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </table>
+                </li>
+
+                <li>
+                  <p> Lets do a quick test to check the configuration. First click on the Console icon at the top
+                    right to change the mode from Configuration to Console mode.</p>
+                    <p><img src="image_6.png" alt="" ></p>
+                </li>
+
+                <li>
+                  <p>Select the first XBee device and in the console window, click on open to open
+                    the serial port. Under send frames click the + button to create a frame.
+                    Fill the parameters as shown in the image below and click Ok and Add frame.
+                </p>
+                <p><img src="image_7.png" alt="" ></p>
+              </li>
+              <li>
+                <p>Select the added frame and click on Send selected frame. You should see a TX Request sent in the Frames log.</p>
+                <p><img src="image_8.png" alt="" ></p>
+</li>
+              </ol>
+            </div>
+            <p> Now lets write some to send sensor data over XBee.        </p>
+
+            <div class="callout done has-goto-button">
+              <p><!-- describe what they should have at this point --></p>
+              <p><a href="../send_data/index.html" class="link-button centered">Continue to the next step »</a></p>
+            </div>
+
+            <h2>References</h2>
+
+            <ul>
+              <li><p><a href="https://learn.sparkfun.com/tutorials/exploring-xbees-and-xctu#starting-with-x-ctu">https://learn.sparkfun.com/tutorials/exploring-xbees-and-xctu</a></p></li>
+              <li><p><a href="http://www.digi.com/products/xbee-rf-solutions/xctu-software/xctu">http://www.digi.com/products/xbee-rf-solutions/xctu-software/xctu</a></p></li>
+              <li><p><a href="https://www.sparkfun.com/pages/xbee_guide">https://www.sparkfun.com/pages/xbee_guide</a></p></li>
+            </ul>
+
+          </div>
+          <script src="../../../js/codemirror.js"></script>
+          <script src="../../../js/mode/javascript/javascript.js"></script>
+          <script>
+          for (i=1; i<24; i++) {
+            console.log("code" + i);
+            var element = document.getElementById("code" + i);
+
+            if (element == null) { continue; }
+
+            CodeMirror.fromTextArea(element, {
+              lineNumbers: true,
+              matchBrackets: true,
+              continueComments: "Enter",
+              extraKeys: {"Ctrl-Q": "toggleComment"}
+            });
+          };
+          </script>
+
+
+        </body>
+        </html>

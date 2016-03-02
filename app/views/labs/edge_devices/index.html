@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/main.css">
+  </head>
+  <body>
+    <header>
+      <a href="../../index.html"><img src="../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Network Integration of the Edge Device</h1>
+
+      <!-- <p class="subtitle">Part 1: Provisioning Sensors and Actuators on a Managed Iot Network</p> -->
+
+      <!-- <h2>Objective</h2> -->
+
+      <p>Now that you've created a Intel Edison temperature monitor that prints to the LCD screen ( often called the edge device in these labs ), we will begin taking steps to integrate this edge device onto the Intel Iot Gateway's network.  The goal is to move the administration and configuration of the edge device to the gateway. This allows businesses to manage a large deployments of IoT devices in a scalable manner.</p>
+      <p>We will begin by creating a database that will track the status of the IoT edge network. Then we will demonstrate how to make a sensor publish data to the edge netowrk by writing a NodeJS server that publishes the temperature data to the Intel IoT Gateway.  Likewise, we will also write software to allow the LCD screen to be controlled on the edge network.</p>
+      <p>The techniques learned in this exercise can be applied to any network enabled sensor or actuator to integrate them into an IoT edge network.</p>
+
+
+      <div id="exercise1">
+        <h2>Exercise 1: Setup a MQTT Server and a MongoDB database</h2>
+        <div class="tldr">
+          Run the Mosquitto MQTT broker on the gateway.  Then install and run MongoDB.
+        </div>
+        <p><a href="servers/index.html" class="link-button centered">Go to Exercise 1 »</a></p>
+      </div>
+
+      <div id="exercise2">
+        <h2>Exercise 2: Write JavaScript schema and data models</h2>
+        <div class="tldr">
+          Use <a href="http://mongoosejs.com">MongooseJS</a> to create JavaScript objects that can read and write to the database.  You will be creating schemas and models for Sensors, Actuators, Data, Triggers and Errors.
+        </div>
+        <p><a href="models/index.html" class="link-button centered">Go to Exercise 2 »</a></p>
+      </div>
+
+      <div id="exercise3">
+        <h2>Exercise 3: Publish Sensor Data over MQTT</h2>
+        <div class="tldr">
+          Learn about the techniques for publishing sensor data to an edge network by writing a NodeJS server using <a href="http://expressjs.com/">Express</a>
+        </div>
+        <p><a href="sensors/index.html" class="link-button centered">Go to Exercise 3 »</a></p>
+      </div>
+
+      <div id="exercise4">
+        <h2>Exercise 4: Control an Actuator on an Edge Network</h2>
+        <div class="tldr">
+          Learn about the techniques for controlling actuators on an edge network by defining a Restful API to control an LCD screen and then implementing it with NodeJS and <a href="http://expressjs.com/">Express</a>
+        </div>
+        <p><a href="actuators/index.html" class="link-button centered">Go to Exercise 4 »</a></p>
+      </div>
+
+      <div class="callout done has-goto-button">
+        <p>Ready for the next module?</p>
+        <p><a href="/gateway/index.html" class="link-button centered">Go to next module »</a></p>
+      </div>
+    </div>
+  </body>
+</html>

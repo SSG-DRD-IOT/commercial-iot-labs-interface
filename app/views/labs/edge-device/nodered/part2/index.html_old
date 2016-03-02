@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../css/main.css">
+
+    <!-- Include CodeMirror CSS-->
+    <link rel="stylesheet" href="../../../css/codemirror.css">
+  </head>
+  <body>
+    <header>
+      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Write an MQTT Server to Publish Sensor Data</h1>
+
+      <p class="subtitle">Part 3</p>
+
+      <div class="tldr">
+        Write a NodeJS server than monitors the temperature and publishes it over MQTT.
+      </div>
+
+      <p>This server is to be installed on an edge device and it has two purposes. First, to announce its presence on the edge network when it comes online and second to publish sensor data to the Intel Iot Gateway and the rest of the edge network. Both the announcement and the publishing of data will happen over MQTT.</p> 
+
+      <p>
+        In this exercise, you will write an MQTT server that announces its presence and publishes temperature data to the edge network.
+        Be sure that you go to the links in the reference section, they'll provide you with the information to do the lab.
+      </p>
+
+      <p>Here are the steps in this exercise:</p>
+
+      <ol>
+        <li>
+          <p>Create a project named <code>temperaturePublisher</code></p>
+        </li>
+
+        <li>
+          <p>We need an NPM modules for this labs. Add the MQTT NPM package to the dependencies section of the <strong>package.json</strong> file.  The temperature sensor module is already installed on your Intel Edison.</p>
+          <p><code>$ npm install mqtt -g</code></p>
+<p><code>$ npm install intel-commerical-edge-network-database-models --save</code></p>
+	  <p>and in you <code>package.json</code> type in these dependencies</p>
+	  <textarea id="code20" name="code">
+dependencies: {
+  "mqtt" : "latest", 
+  "intel-commercial-edge-network-database-models" : "latest"
+}</textarea>
+        </li>
+        <li><p>Import the MQTT and the <strong>jsupm_grove</strong> packages with the <strong>require</strong> statement.</p>
+
+        <div>
+          <textarea id="code1" name="code">
+// Load Grove module
+var groveSensor = require('jsupm_grove');
+var mqtt = require('mqtt');
+var Data = require('intel-commerical-edge-network-database-models').DataModel;
+          </textarea>
+        </div></li>
+        <li><p>Initialize the temperature sensor. See the <a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">temperature sensor documentation</a> on the <a href="http://software.intel.com/iot/">Intel Developer Zone</a>.
+
+        <div>
+          <textarea id="code2" name="code">
+// Create the temperature sensor object using AIO pin 0
+var temp = new groveSensor.GroveTemp(0);
+          </textarea>
+        </div></p></li>
+        <li><p>Connect to the Mosquitto database. See the <a href="https://www.npmjs.com/package/mqtt">MQTT module documentation.</a></p>
+        <div>
+          <textarea id="code3" name="code">
+// Require the MQTT connections
+var mqtt = require('mqtt');
+var client  = mqtt.connect("mqtt://192.168.1.1");
+     </textarea>
+        </div>
+
+</li>
+        <li>
+          <p>Write an event handler that responds to the MQTT connect event.  In this event handler, publish an announcement that a new sensor is available on the edge network.</p>
+
+</li>
+        <li><p>Publish a sensor announcement from within the MQTT connect event callback. The sensor announcement should be a JSON string. Be sure that you remember the JSON strings format because you will need to receive the announcement and save it to the database in the next lab.</p>
+          <p>The announcement should follow the <b>sensor schema</b> format.</p>
+
+        <textarea id="code4" name="code">
+var announcement = {
+     "name" : "Temperature Sensor",
+     "description" : "A temperature sensor"
+     "frequency" : "1000",
+     "active" : true,
+     "ioType" : "analog"
+}
+
+client.publish('announcements', JSON.stringify(announcement));</textarea></li>
+
+        <li><p>Inside the event, write a <strong>setInterval</strong> function that publishes the sensor data.  The setInterval function is NodeJS function that lets you call a function on a timed interval. See <a href="https://nodejs.org/api/timers.html">Timers Node.js v4.1.1 Manual & Documentation</a> for more information on setInterval</p>
+
+          <p>The temperature data should follow the <b>data schema</b> format.</p>
+
+        <textarea id="code5" name="code">
+var sensorData = {
+    sensor_id: temp.name(),
+    value: temp.value()
+};
+ </textarea>
+<p>Publish the data to the <code>sensors/temperature/data</code> MQTT topic.</p>
+
+</li>
+      </ol>
+
+      <div class="callout done has-goto-button">
+        <p><!-- describe what they should have at this point --></p>
+        <p><a href="../actuators/index.html" class="link-button centered">Continue to the next step »</a></p>
+      </div>
+
+      <h2>References</h2>
+
+      <ul>
+        <li><p><a href="https://www.npmjs.com/package/mqtt">https://www.npmjs.com/package/mqtt</a></p></li>
+        <li><p><a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p></li>
+        <li><p><a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor</a></p></li>
+      </ul>
+
+    </div>
+    <script src="../../../js/codemirror.js"></script>
+    <script src="../../../js/mode/javascript/javascript.js"></script>
+    <script>
+      for (i=1; i<24; i++) {
+          console.log("code" + i);
+          var element = document.getElementById("code" + i);
+
+          if (element == null) { continue; }
+
+          CodeMirror.fromTextArea(element, {
+              lineNumbers: true,
+              matchBrackets: true,
+              continueComments: "Enter",
+              extraKeys: {"Ctrl-Q": "toggleComment"}
+          });
+      };
+     </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop: grsecurity Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../css/main.css">
+  </head>
+  <body>
+    <header>
+      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Hardening the Mosquitto Broker</h1>
+      <p class="subtitle">y</p>
+
+
+      <h2>Notes</h2>
+
+      <ul>
+          <li>Change the user that the broker is running under to mosquitto</li>
+          <li></li>
+          
+      </ul>
+
+
+      <h2>Objective</h2>
+
+      <p>By the end of this module, you should be able to:</p>
+
+      <ul>
+        <li>Ability to execute applications with minimum system level privilege. Protecting
+          System data integrity.</li>
+        <li>Ensuring IoT Gateways so that only trusted modules, Files can Read / Write,
+          Modify & execute.</li>
+        <li>Ability to log the IoT gateway usage and changes</li>
+      </ul>
+
+      <h2>Lab Overview</h2>
+
+      <p><b>GRSecurity</b> is a set of software patches released under the GNU GPL for the Linux kernel to enhance the system security. It allows the system administrator to, among other things, define a minimum privilege policy for the system, in which every process and user have only the lowest privileges necessary to function. GRSecurity has 2 primary features, the RBAC (Rules Based Access Control) and the PaX.</p>
+      <p><b>gradm</b>, the administration utility for the role-based access control system, is a powerful tool that parses your ACLs (Access Control Lists), performs the enforcement of a secure base policy, optimizes the ACLs, as well as handles parsing of the learning logs, merges them with your ACL set and outputs the final ACLs.</p>
+      
+
+      <h2>Disable McAfee Embedded Control</h2>
+
+      <p>By design, <b>McAfee Embedded Control</b> will protect your system from changes. So let's turn it off now.</p> 
+      <pre><code># sadmin disable</code></pre>
+
+      <h2>The gradm command</h2>
+      <p>gradm is the grsecurity RBAC administration and policy analysis utility. It allows you to configure and administrate the grsecurity system.</p>
+      <p>To display all available command-line switches, run gradm --help.</p>
+      <pre><code># gradm</code></pre>
+      <img src="gr1.png"></img>
+
+
+    <h2>Setting up a Role-Based Access</h2>
+    <p>Here we will create three roles <b>root</b>, <b>admin</b>, <b>shutdown</b>. Each of these roles will have unique abilities that will be constrained by the by RBAC. You can use any password that you like for each role.</p>
+    <pre><code># gradm -P</code></pre>
+    <img src="gr0.png"/>
+
+    <pre><code># gradm -P admin</code></pre>
+    <img src="gr2.png"/>
+    <pre><code># gradm -P shutdown</code></pre>
+    <img src="gr3.png"/>
+
+    <h2>Enable Learning Mode</h2>
+    <p>Learning Mode for Role based access – RBAC requires policy to be created to ensure that system is aware of known execution, this can be done by enabling GR-SEC in learning mode or manually updating the policy file.</p>
+    <p>Grsecurity's learning mode can be used on a per-subject or per-role basis, as well as system-wide. When using the learning mode on a single process or role, the rest of the system remains protected as defined by the policy. The learning mode can learn all things that the RBAC system supports: files, capabilities, resources, what IP addresses make use of each role, and socket usage. The learning system performs intelligent reduction of filesystem and network access to reduce policy size, increase readability, and reduce the amount of manual tweaking needed later. Furthermore, the learning system enforces a secure base that is configurable.  Once it learning mode GR-sec will log all the activities of system.</p>
+    <p>To enable full system learning, run gradm as root with the following options:</p>
+    <p>Please run few commands. In actual environment learning mode is usually 24-48 hours.</p>
+      <pre><code># gradm –S
+# gradm –F –L /etc/grsec/learning.logs</code></pre>
+
+# ls
+# pwd
+# date
+# gradm –D
+# gradm –F –L /etc/grsec/learning.logs –O /etc/grsec/learning.roles</code></pre>
+      <img src="gr4.png"/>
+      
+    <p>You've now created a set of commands that are allowed by grsecurity. Let's now enabled grsecurity and test to see if the learned commands are allowed and all other commands are disallowed.</p>
+
+    <h2>Enabling Grsecurity with Learned Rules</h2>
+
+    <p>First backup the current policy file.</p>
+    <pre><code># cp /etc/grsec/policy /etc/grsec/policy.bak
+# cp /etc/grsec/learning.roles /etc/grsec/policy</code></pre>
+
+    <p>Now enable grsecurity.</p>
+    <pre><code># gradm -E</code></pre>
+
+    <h2>Test the Learned Rules</h2>
+     <pre><code># ls
+# pwd
+# cat
+# ifconfig
+# date
+# gradm -D</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="callout done has-goto-button">
+      <p>Ready for the next module?</p>
+      <p><a href="../cloud/index.html" class="link-button centered">Go to next module »</a></p>
+    </div>
+
+</div><!-- end .content -->
+</body>
+</html>

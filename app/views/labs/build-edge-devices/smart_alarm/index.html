@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <header>
+      <a href="/index.html"><img src="/img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Exercise: Smart Alarm Clock</h1>
+
+      <div class="tldr">
+        <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Intel Edison. Set the alarm time using a web page served directly from the Edison itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.</p>
+      </div>
+
+      <ol>
+
+        <li>
+          <p>Connect <strong>Grove Buzzer</strong> to digital pin <strong>D5</strong> of the Grove Base Shield.</p>
+          <p>Connect <strong>Grove Button</strong> to digital pin <strong>D4</strong>.</p>
+          <p>Connect <strong>Grove LCD</strong> display to any <strong>I2C</strong> pin.</p>
+          <p>Connect <strong>Grove Rotary Angle</strong> to analog pin <strong>A0</strong>.</p>
+          <p><img src="image_8.jpg" alt="" ></p>
+        </li>
+
+        <li>
+          <p>To start off, write some code for the hardware in <span class="icon file">main.js</span>:</p>
+          <ul>
+          <li><p>Create and test functions to make the LCD display blink red, and to stop blinking.</p></li>
+          <li><p>Create and test functions to start the buzzer buzzing, and to stop the buzzer.</p></li>
+          <li><p>Changes in rotary angle should change the brightness of LCD display.</p></li>
+          </ul>
+        </li>
+
+        <li>
+          <p>Now, add your server side code in <span class="icon file">main.js</span>:</p>
+          <ul>
+          <li><p>Create a web server on the Intel Edison using express in NodeJS.</p></li>
+          <li><p>Remember to edit your <span class="icon file">package.json</span> to include the <em>express</em>, <em>moment</em>, and <em>superagent</em> npm modules.</p></li>
+          </ul>
+        </li>
+
+        <li>
+          <p>Create a new <span class="icon file">index.html</span> file and write your front end code in there.</p>
+          <ul>
+            <li>Create a simple HTML widget to set the time for the alarm clock.</li>
+          </ul>
+        </li>
+        
+        <li>
+          <p>Finally, hook everything up together:</p>
+          <ul>
+            <li><p>When it’s proper time for alarm to start, LCD display should blink to red and buzzer should start buzzing.</p></li>
+            <li><p>When user presses the button: alarm must turn off, LCD must stop blinking, and buzzer should stop buzzing.</p></li>
+          </ul>
+        </li>
+
+      </ol>
+
+      <h2>References</h2>
+
+      <ul>
+        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js</a></li>
+        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">http://www.seeedstudio.com/wiki/Grove<em>-</em>Rotary_Angle_Sensor</a></li>
+        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js</a></li>
+        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Button">http://www.seeedstudio.com/wiki/Grove<em>-</em>Button</a></li>
+        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js</a></li>
+        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">http://www.seeedstudio.com/wiki/Grove<em>-</em>Buzzer</a></li>
+        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js</a></li>
+        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight">http://www.seeedstudio.com/wiki/Grove<em>-</em>LCD_RGB_Backlight</a></li>
+        <li><a href="http://expressjs.com/starter/hello-world.html">http://expressjs.com/starter/hello-world.html</a></li>
+        <li><a href="https://github.com/visionmedia/superagent">https://github.com/visionmedia/superagent</a></li>
+        <li><a href="http://momentjs.com/docs/">http://momentjs.com/docs/</a></li>
+      </ul>
+
+      <div id="next-steps" class="callout done">
+        <p>You should now see have a prototype of a smart alarm clock.</p>
+        <p><a href="../index.html#done-exercise3" class="link-button centered">Continue to the next step »</a></p>
+      </div>
+
+    </div><!-- end .content -->
+  </body>
+</html>

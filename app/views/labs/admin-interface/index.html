@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/main.css">
+  </head>
+  <body>
+    <header>
+      <a href="../../index.html"><img src="../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Administration Interface</h1>
+
+      <p>You can monitor the status of your edge network system using NodeJS on the back end and HTML, CSS, and JavaScript on the front end. Write system condition based monitoring triggers, record system errors, and perform edge network analytics.</p>
+
+      <h2>Objective</h2>
+
+      <p>By the end of this module, you should be able to:</p>
+
+      <ul>
+        <li>A web-based administrative interface deployed on your Intel IoT Gateway.</li>
+        <li>Have an understanding of how you could build your own web-based monitoring system.</li>
+      </ul>
+
+      <h2>Install the supplied administrative interface</h2>
+
+      <ol>
+
+        <li>
+          <p>Download the <a href="https://drive.google.com/open?id=0B2ywC78pxngCZkhJbkZCR0k2NzA">admin-interface.zip</a>.</p>
+        </li>
+
+        <li>
+          <p>Use <span class="icon windows">FileZilla</span> to transfer the zip to your Intel IoT Gateway.</p>
+        </li>
+
+        <li>
+          <p>Use <span class="icon windows">PuTTY</span> to SSH into the Intel Iot Gateway.</p>
+        </li>
+
+        <li>
+          <p>Navigate to the directory with the zip file and unzip it.</p>
+        </li>
+
+        <li>
+          <p>After the zip file has been uncompressed, go into the resulting folder.</p>
+          <pre><code>cd admin-interface</code></pre>
+        </li>
+
+        <li>
+          <p>Run <span class="icon file">server.js</span> as a <strong>Node</strong> process.</p>
+          <pre><code>node server.js</code></pre>
+          <p>This will start a NodeJS HTTP server that will provide the front end user interface.</p>
+        </li>
+
+        <li>
+          <p>Visit <a href="http://localhost:3000">http://localhost:3000</a> in your development computer's web browser.</p>
+        </li>
+
+        <li>
+          <p>Explore the interface for condition based monitoring triggers, record system errors, and perform edge network analytics. Refer to the files in <span class="icon folder">gateway-frontend</span> for how these features were implemented.</p>
+        </li>
+
+      </ol>
+
+      <div class="callout done has-goto-button">
+        <p>Ready for the next module?</p>
+        <p><a href="../../cbms/index.html" class="link-button centered">Go to next module »</a></p>
+      </div>
+
+    </div>
+  </body>
+</html>

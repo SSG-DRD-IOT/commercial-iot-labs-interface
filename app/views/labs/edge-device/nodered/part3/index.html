@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../css/main.css">
+
+    <!-- Include CodeMirror CSS-->
+    <link rel="stylesheet" href="../../../css/codemirror.css">
+  </head>
+  <body>
+    <header>
+      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Node-Red Flow: HTTP POST to LCD screen</h1>
+
+     
+
+      <h3>Create Node-RED flow that controls the LCD screen with a web request. </h3>
+
+      <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create
+		a flow that controls the LCD with web requests.</p>
+
+		<h2> Create Node-RED Flow </h2>
+		<p>Use the input http, debug, grove-lcd, and http response nodes to create the flow below:</p> 
+	<p><img src="post_flow.png" alt="" ></p>
+	<p> The input http node will listen to a request sent to a specific URL on the local host on port 1880. Once a request is recived this node will pass the payload to the debug colsole, Grove LCD node, and http response node. The http response 
+	node will send a response to the sender of the request to let it know that the message was recieved. Double click the input http node to configure it:</p>
+	<p><img src="config_post.png" alt="" ></p>
+	<p>For this example use POST as the method and /LCD as the URL. </p>
+	<h2> Install Postman </h2>
+	
+	<p>To send web requests to the Intel Edison we will be using Postman, a Chrome app designed to send web requests.</p>
+	<p><img src = "postman_website.png" alt=""></p> 
+	
+	<p>To install the app navigate to <a href ="https://www.getpostman.com/"> https://www.getpostman.com</a> ,
+	Select Chrome App, and install it following the directions given.</p>
+	
+	<h2> Use Postman to send web request </h2>
+	<p>Once Postman is installed launch it from the Google Apps Launcher.</p>
+	<p><img src="postman.png" alt="" ></p>
+	<p>Select post from the dropdown menu and enter the IP address of your Intel Edison port 1880 with the URL specified above.
+	In this case it is "10.175.152.15:1880/LCD". The Grove LCD node requires a specific message to change the backlight color and
+	display text. The message must be a JSON with the structure: {"r":r_val,"g":g_val,"b":b_bal,"text":"text to print"} where r_val, g_val, and b_val
+	are the red, green and blue color values from 0-255. This structure is also specified in the grove-lcd node info tab. 
+	</p><p>To have Postman send a request
+	with this syntax slect the "Body" tab, click the "raw" radial button, and select JSON from the dropdown menu. Now enter the JSON specifed above 
+	entering the color values and message you wish to display. When you are ready hit "Send".</p>
+	<p><img src="post_flow_posted.png" alt="" ></p>
+	<p>If everything has worked properly your LCD should change to the color specifed and display your text. Also the debug tag will show the message that was 
+	recieved, or any errors that were encountered. </p>
+	
+	
+	
+   <h3>Overview of Restful API for controlling the LCD Screen</h3>
+      <p>You have created the restful API for:</p>
+	  <p><b>POST /LCD</b> - which allows you to comtrol the text and backlight.</p>
+	  <p>In the following step you will add the following restful APIs:</p>
+      <ul>
+        <li><b>GET /lcd/backlight</b> - Retrieves the current status of the LCD backlight</li>
+
+        <li><b>DELETE /lcd/backlight</b> - Turns the LCD backlight off</li>
+      
+        <li><b>GET /lcd/text</b> - Retrieves the current status of the LCD text</li>
+       
+        <li><b>DELETE /lcd/text</b> - Turns the LCD text off</li>
+      </ul>
+
+
+      <div class="callout done has-goto-button">
+        <p><!-- describe what they should have at this point --></p>
+        <p><a href="step2.html" class="link-button centered">Continue to the next step »</a></p>
+      </div>
+
+      <h2>References</h2>
+
+      <ul>
+        <li><p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p></li>
+        <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a></p></li>
+      </ul>
+
+    </div>
+    <script src="../../../js/codemirror.js"></script>
+    <script src="../../../js/mode/javascript/javascript.js"></script>
+    <script>
+      var editors = ["code1", "code2"]
+
+      for (i in editors) {
+          console.log(editors[i]);
+          CodeMirror.fromTextArea(document.getElementById(editors[i]), {
+              lineNumbers: true,
+              matchBrackets: true,
+              continueComments: "Enter",
+              extraKeys: {"Ctrl-Q": "toggleComment"}
+          });
+      };
+    </script>
+  </body>
+</html>

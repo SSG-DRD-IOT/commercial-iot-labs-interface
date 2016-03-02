@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../css/main.css">
+  </head>
+  <body>
+    <header>
+      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel® logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Step 4: Deploy a sample application with the Intel® XDK IoT Edition</h1>
+
+      <p class="subtitle">Instructions for the Intel® Galileo or Intel® Edison using any computer OS platform</p>
+
+      <div class="tldr">
+        Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
+      </div>
+
+      <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
+
+      <h2>Launch and sign into the Intel® XDK</h2>
+
+      <div class="tldr">
+        Note: Before you can use the Intel® XDK, you must sign up for an Intel® XDK account or log in to a pre-existing account. You will need to have an internet connection for the first time you launch the Intel® XDK.
+      </div>
+
+      <ol>
+        
+        <li>
+          <p>Launch Intel® XDK IoT Edition.</p>
+        </li>
+
+        <li>
+          <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-exis
+            ting account.</p>
+          <div class="side-by-side">
+            <div class="left">
+              <img src="image_0.png">
+            </div>
+            <div class="right">
+              <img src="image_1.png">
+            </div>
+          </div>
+        </li>
+      
+      </ol>
+
+      <h2>Create a project</h2>
+
+      <ol>
+
+        <li>
+          <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the lefthand menu, select "<strong>Templates</strong>".</p>
+          <p><img src="image_2.png"></p>
+        </li>
+
+        <li>
+          <p>A list of templates for developing Node.js applications will be shown.
+        Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
+          <p><img src="image_3.png"></p>
+        </li>
+        
+        <li>
+          <p>Choose a directory for your project files, and enter a name for your project.</p>
+          <p><img src="image_4.png"></p>
+        </li>
+
+        <li>
+          <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
+          <p><img src="image_5.png"></p>
+        </li>
+
+      </ol>
+
+      <h2>Select a target IoT device</h2>
+
+      <div class="tldr">
+        <p>The Intel® XDK IoT Edition will automatically detect Intel® IoT devices on your network and display them in the "IoT Device" drop down list.</p>
+      </div>
+
+      <!-- <div class="callout troubleshooting">
+        <p><strong>Problems with Wi-Fi? Need to program while offline?</strong></p>
+        <p>The Intel® XDK requires the IP address of your IoT board in order to program it. If your IoT board is online, the IP address is automatically detected in most cases.</p>
+        <p>However, if you are unable to get your IoT board online to the same network as your computer due to restricted or busy Wi-Fi networks, try a direct cable-based method and Add a device manually to the drop down list.</p>
+        <p><strong>Intel® Galileo users:</strong><br>
+        Connect an ethernet cable directly from your computer to the Intel® Galileo.</p>
+        <p><strong>Intel® Edison users:</strong><br>
+        Use the device mode micro-USB cable to establish an "Ethernet over USB" connection.</p>
+      </div> -->
+
+      <ol>
+
+        <li>
+          <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
+          <p><img src="image_6.png"></p>
+        </li>
+
+        <li>
+          <p>Select your target Intel® Galileo or Intel® Edison from the list. If there are multiple devices, choose based on the device name and IP address.</p>
+          <p><img src="image_7.png"></p>
+
+          <div class="callout troubleshooting">
+            <p><strong>Do not see your device in the "IoT Device" drop down list?</strong></p>
+            <p>From the "IoT Device" menu, instead choose "<strong>Add Manual Connection</strong>".</p>
+            <p><img src="image09.png"></p>
+            <ul>
+              <li>For <strong>Address</strong>, enter the IP address of your Intel® Edison Board that you saw in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span>. e.g. 192.168.0.2</li>
+              <li>For <strong>Port</strong>, keep at the default "58888". </li>
+              <li>For <strong>User</strong> Name, use "root"</li>
+              <li>For <strong>Password</strong>, use "intel123" or the password you set in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span></li>
+            </ul>
+            <p>Click "<strong>Connect</strong>".</p>
+          </div>
+
+        </li>
+
+        <li>
+          <p>Wait a moment for the connection to be established. Use the username "<strong>root</strong>" and password "<strong>intel123</strong>" if prompted. A popup window will appear to confirm the connection status.</p>
+          <p><img src="image33.png"></p>
+        </li>
+
+      </ol>
+
+      <h2>Sync device clocks</h2>
+
+      <div class="tldr">
+        Sync your computer's time with the clock on the target board to avoid timing issues. Do this step any time you connect to a new target IoT device or the device has been powered off.
+      </div>
+
+      <ol>
+
+        <li>
+          <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
+          <p><img src="image_8.png"></p>
+        </li>
+
+        <li>
+          <p>Select "<strong>sync PC time w/ clock on target device</strong>".</p>
+          <p><img src="image_9.png"></p>
+        </li>
+
+        <li>
+          <p>A message in the console log will appear to confirm the update.</p>
+          <p><img src="image13.png"></p>
+        </li>
+
+      </ol>
+
+      <h2>Build the application</h2>
+
+      <div class="tldr">
+        Fetch all the Node modules specified in package.json and install them on the IoT device. Run build any time you create a new project, or add/remove Node modules from an existing project.
+      </div>
+
+      <ol>
+
+        <li>
+          <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
+          <p><img src="image_10.png"></p>
+        </li>
+      
+        <li>
+          <p>In the popup, click "<strong>Build</strong>".</p>
+          <p><img src="image_11.png"></p>
+        </li>
+        
+        <li>
+          <p>Wait a moment for the packages to download and install. You will see a confirmation message in the console log.</p>
+          <figure>
+            <img src="image13.png">
+            <figcaption>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</figcaption>
+          </figure>
+        </li>
+
+      </ol>
+
+      <h2>Upload and run the application</h2>
+
+      <div class="tldr">
+        Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
+      </div>
+
+      <ol>
+
+        <li>
+          <p>In the bottom toolbar, click the "<strong>Upload</strong>" icon to upload the current project to the device.</p>
+          <p><img src="image_12.png"></p>
+        </li>
+
+        <li>
+          <p>Check the console log for a message confirming the upload.</p>
+          <p><img src="image_13.png"></p>
+        </li>
+
+        <li>
+          <p>In the bottom toolbar, click the "<strong>Run</strong>"<strong> icon</strong> to run the project that is currently installed on the device.</p>
+          <p><img src="image_14.png"></p>
+        </li>
+
+        <li>
+          <p>Keep an eye on the console log bar for any runtime errors.</p>
+          <p><img src="image_15.png">
+          <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
+          <div class="callout troubleshooting">
+            <p><strong>Get a "cannot find module mraa" message?</strong></p>
+            <p><img src="image25.png"></p>
+            <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
+            <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
+<pre><code>
+echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
+opkg update
+opkg install libmraa0
+</code></pre>
+            <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
+            <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
+          </div>
+        </li>
+
+        <li>
+          <p>Look at your Intel® IoT board for a blinking light.</p>
+          <p><strong>Intel® Galileo Gen 2</strong><br>
+          A green LED is located near the USB port.</p>
+          <p><img src="image18.png"></p>
+          <p><strong>Intel® Edison</strong><br>
+          The LED is located near the center of the board.</p>
+          <p><img src="image28.png"></p>
+
+          <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
+        </li>
+
+      </ol>
+
+      <div id="next-steps" class="callout done">
+        <p>You should now be able to build and deploy projects using the Intel® XDK. An LED should be blinking on your Intel® IoT board.</p>
+        <p><a href="../index.html#done-step4" class="link-button centered">Continue to the next step »</a></p>
+      </div>
+
+    </div><!-- end .content -->
+  </body>
+</html>

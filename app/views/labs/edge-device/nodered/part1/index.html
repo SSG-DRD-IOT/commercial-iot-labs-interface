@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../..//css/main.css">
+	<link rel="stylesheet" href="../../../css/codemirror.css">
+  </head>
+  <body>  
+    <header>
+      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel® logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Node-Red Flow: Temperature to LCD</h1>
+
+     
+
+     <h2>Assemble Sensors</h2>
+
+      <ol>
+        <li>
+          <p>Install the Grove Base Shield onto the Intel® Edison Arduino expansion board.</p>
+          <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
+          <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
+          <p><img src="image_2.jpg" alt="" ></p>
+        </li>
+
+	<h2>Install and run Node-RED</h2>
+
+      <p>Log into the Intel Edison over serial like in Step 3 of Module 1.</p>
+	  <p>First get the ip address of the Edison:</p>
+	  <code>$ ifconfig wlan0</code>
+	  <p><img src="ifconfig.png" alt="" ></p>
+	  <p>The ip address is the address following inet addr. In the case above it is: 10.175.154.190, however yours will be different. Remeber this address for the following step.</p>
+      <p>Install Node-RED with:</p>
+	  
+	  <p><code>$ npm install -g node-red</code></p>
+
+      <p>Once Node-RED is installed you will have to add the custom nodes that will be used to interact with
+	  the temperature sensor and LCD display</p>
+      
+      <p>To install the Node-RED nodes needed use:</p>
+	  <code>$ npm install -g node-red-contrib-grove-sensors-edison </code>
+        
+	  
+      
+	  <p> You should now run the Node-RED server by typing:</p>
+	  <code>$ node-red</code>
+
+      <h2>Program the first flow</h2>
+
+      <p>Make sure that your laptop is connected to the same WiFi network as your Edison and navigate to Edison IP: port 1880 in your browser. 
+		If you were using the IP address above you would enter 10.175.154.190:1880 into your navigation bar.</p>
+
+		<p><img src="new_node_red.png" alt="" ></p>
+		
+		<p> Create a flow where a grove temp sensor node outputs into a function node which outputs into the grove-lcd node. </p>
+		<p><img src="first_flow.png" alt="" ></p>
+		<p> Double click on the Temp node and assign A0 as the pin and interval as 1000 to take a temperature reading every 1000ms. Double click the function node and enter the following code:</p>
+		<textarea id="code14" class="code">
+
+var r_val = 0;
+var g_val = 0;
+var b_val = 0;
+
+if (msg.payload >= 25){
+    r_val = 255;
+    g_val = 0;
+    b_val = 0;
+}
+
+else if (msg.payload <= 20){
+    r_val = 0;
+    g_val = 0;
+    b_val = 255;   
+}
+else {
+    r_val = 0;
+    g_val = 255;
+    b_val = 0;   
+}
+
+msg.payload = {"r":r_val, "g":g_val, "b":b_val, "text":String(msg.payload) + " C"}
+return msg;
+</textarea>
+
+
+
+<p>Click Deploy in the top right corner</p>
+	  
+	  <h2>Flow source code</h2>
+	  <br>
+	  <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to 
+		export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import it into your 
+		work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in. This method provides 
+		a simple way to share your flows with other developers.</p>
+		
+		<textarea id="code15" class="code">
+		[  
+   {  
+      "id":"f7b5c41d.084a38",
+      "type":"grove-lcd",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":400,
+      "y":60,
+      "wires":[  
+
+      ]
+   },
+   {  
+      "id":"f341d7c2.0cbe28",
+      "type":"function",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "func":"var r_val = 0;\nvar g_val = 0;\nvar b_val = 0;\n\nif (msg.payload >= 25){\n    r_val = 255;\n    g_val = 0;\n    b_val = 0;\n}\n\nelse if (msg.payload <= 20){\n    r_val = 0;\n    g_val = 0;\n    b_val = 255;\n    \n}\nelse {\n    r_val = 0;\n    g_val = 255;\n    b_val = 0;\n    \n}\n\nmsg.payload = {\"r\":r_val, \"g\":g_val, \"b\":b_val, \"text\":String(msg.payload) + \" C\"}\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":250,
+      "y":60,
+      "wires":[  
+         [  
+            "f7b5c41d.084a38"
+         ]
+      ]
+   },
+   {  
+      "id":"7b901765.846fe8",
+      "type":"grove_temp",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "pin":"0",
+      "interval":"1000",
+      "x":90,
+      "y":60,
+      "wires":[  
+         [  
+            "f341d7c2.0cbe28"
+         ]
+      ]
+   }
+]
+		</textarea>
+		
+		<p> NOTE: if the JSON references any custom nodes those will have to be installed first. </p>
+
+      
+
+      <div class="callout done has-goto-button">
+        <p>You should now have a Node-RED flow controlling the temperature sensor and LCD screen connected to your Intel® Edison.</p>
+        <p><a href="../sensors/index.html" class="link-button centered">Continue to the next step »</a></p>
+      </div>
+
+      <h3>References</h3>
+
+      <ul>
+        <li><p><a href="http://nodered.org/">http://nodered.org/</a></p></li>
+     
+      </ul>
+
+    </div>
+	<script src="../../../js/codemirror.js"></script>
+    <script src="../../../js/mode/javascript/javascript.js"></script>	
+	<script>
+      for (i=1; i<16; i++) {
+          console.log("code" + i);
+          var element = document.getElementById("code" + i);
+
+          if (element == null) { continue; }
+
+          CodeMirror.fromTextArea(element, {
+              lineNumbers: true,
+              matchBrackets: true,
+              continueComments: "Enter",
+              extraKeys: {"Ctrl-Q": "toggleComment"}
+          });
+      };
+     </script>
+  </body>
+</html>

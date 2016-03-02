@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <!-- Include CodeMirror CSS-->
+    <link rel="stylesheet" href="../../../css/codemirror.css">
+
+  </head>
+  <body>
+    <header>
+      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Exercise: Temperature Sensor and LCD</h1>
+
+      <div class="tldr">
+        Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.
+      </div>
+
+      <h2>Get set up</h2>
+
+      <ol>
+        <li>
+          <p>Install the Grove Base Shield onto the Intel® Edison Arduino expansion board.</p>
+          <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
+          <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
+          <p><img src="image_2.jpg" alt="" ></p>
+        </li>
+
+        <li>
+          <p>Start a new project in the Intel® XDK using a blank template.</p>
+          <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
+          <p><img src="image_0.png" alt="" ></p>
+          <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
+          <p><img src="image_1.png" alt="" ></p>
+        </li>
+
+        <li>
+          <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you with this default JavaScript:</p>
+<pre><code>/*jslint node:true, vars:true, bitwise:true, unparam:true */
+/*jshint unused:true */
+// Leave the above lines for propper jshinting
+//Type Node.js Here :)
+</code></pre>
+        </li>
+
+      </ol>
+
+      <h2>Read the temperature sensor</h2>
+
+      <p>Update <span class="icon file">main.js</span> to read the temperature sensor on program start up and log it to the console.</p>
+
+      <ol>
+
+        <li>
+          <p>Include the JS UPM library for the basic Grove sensors.</p>
+          <p><code>var groveSensor = require('jsupm_grove');</code></p>
+        </li>
+
+        <li>
+          <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
+          <p><code>var temp = new groveSensor.GroveTemp(0);</code></p>
+        </li>
+
+        <li>
+          <p>Read the value of the <code>GroveTemp</code> object you just created.</p>
+          <p><code>var celsius = temp.value();</code></p>
+        </li>
+
+        <li>
+          <p>If desired, convert the Celsius value to Fahrenheit using the standard conversion formula.</p>
+          <p><code>var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);</code></p>
+        </li>
+
+        <li>
+          <p>Finally, output the value of the temperature sensor.</p>
+          <p><code>console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</code></p>
+        </li>
+
+        <li>
+          <p>The final code should look like this:</p>
+
+<textarea id="code1" class="code">/*jslint node:true, vars:true, bitwise:true, unparam:true */
+/*jshint unused:true */
+
+var groveSensor = require('jsupm_grove');
+var temp = new groveSensor.GroveTemp(0);
+var celsius = temp.value();
+var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+</textarea>
+        </li>
+
+        <li>
+          <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel® XDK to:<br>
+            (1) Build your application, <br>
+            (2) Upload it to Intel® Edison, and <br>
+            (3) Run the application.</p>
+          <p><img src="xdk_deploy_steps.png" alt="" ></p>
+        </li>
+
+        <li>
+          <p>If successful, you should see the temperature output in the Intel® XDK console.</p>
+          <p><img src="temp_sensor_success.png" alt="" ></p>
+        </li>
+
+      </ol>
+
+      <h2>Add polling</h2>
+
+      <p>Currently the temperature sensor is only read on application start. Add a JavaScript <code>setInterval</code> to regularly poll the sensor every second (1000 miliseconds).</p>
+      <p>If you are not familiar with JavaScript, the format should look similar to this:</p>
+<textarea id="code2" class="code">function monitor() {
+    setInterval(function() {
+        // code to repeat goes here
+    }, 1000);
+}
+monitor();</textarea>
+
+      <ol>
+
+        <li>
+          <p>Try incorporating the <code>setInterval</code> callback with the code you wrote in <span class="icon bookmark">Read the temperature sensor</span> before scrolling down for the solution.</p>
+          <p class="dont-peek">
+            Write your own code now.<br>
+            Don't peek unless you're stuck! ;)<span class="cursor">|</span>
+          </p>
+          <p class="ready-to-peek">Ready?</p>
+        </li>
+
+        <li>
+          <p>
+            With polling, the exercise code should look like this:</p>
+<textarea id="code3" class="code">var groveSensor = require('jsupm_grove');
+
+var temp = new groveSensor.GroveTemp(0);
+
+function monitor() {
+    setInterval(function() {
+        var celsius = temp.value();
+        var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+    }, 1000);
+}
+
+monitor();</textarea>
+
+        </li>
+
+      </ol>
+
+      <h2>Add the LCD screen</h2>
+
+      <p>Update <span class="icon file">main.js</span> to output the value from the temperature sensor to the LCD display.</p>
+
+      <p>Below are the general steps to complete the exercise.</p>
+
+      <ol>
+
+        <li>
+          <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
+          <p><code>var LCD = require('jsupm_i2clcd');</code></p>
+        </li>
+
+        <li>
+          <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
+          <dl>
+            <dt>I2C bus (Number)</dt>
+            <dd>For the Intel Edison, <strong>use <code>0</code></strong>.</dd>
+
+             <dt>lcdAddress (Number)</dt>
+            <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
+
+            <dt>rgbAddress (Number)</dt>
+            <dd>The JHD1313M1 has two I2C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
+          </dl>
+        </li>
+
+        <li>
+          <p>To write to the LCD, you need to:</p>
+          <ol style="list-style-type:lower-roman;">
+            <li>First, <strong>set the cursor position</strong>.
+              <br>
+              e.g. <code>(0,0)</code> for the top left. The JHD1313M1 has 2 rows (y) and 16 columns (x).</li>
+            <li>Then, <strong>write</strong> a string/message to the screen.
+              <br>
+              e.g. <code>"Temp: " + celsius + "C or " + fahrenheit + "F"</code></li>
+          </ol>
+          <p>The API documentation for generic I2C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
+        </li>
+
+        <li>
+          <p>As a bonus, you can <strong>change the LCD backlight color</strong>.
+          <br>
+          e.g. <code>(255,255,255)</code> for white.</p>
+          <p>The API documentation for the specific Grove RBG LCD you have can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods</a></p>
+        </li>
+
+        <li>
+          <p>Use the steps and reference links above to output the value from the temperature sensor to the LCD display.</p>
+          <p class="dont-peek">
+            Write your own code now.<br>
+            Don't peek unless you're stuck! ;)<span class="cursor">|</span>
+          </p>
+          <p class="ready-to-peek">Ready?</p>
+        </li>
+
+        <li>
+          <p>Below is an example of the final solution.</p>
+<textarea id="code4" class="code">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
+
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+
+function monitor() {
+    setInterval(function() {
+
+      // Read the temperature sensor
+        var celsius = temp.value();
+        var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+        // Update the LCD screen
+        screen.setCursor(0, 0);
+        screen.setColor(255, 255, 255);
+        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+
+    }, 1000);
+}
+
+monitor();</textarea>
+
+        </li>
+
+        <li>
+          <p>Use the buttons at the bottom of the Intel® XDK to:<br>
+            <strike>(1) Build your application</strike>,<br>
+            <span class="footnote">(Note: You only need to do this if you add new dependencies to <span class="icon file">package.json</span>)</span> <br>
+            (2) Upload it to Intel® Edison, and <br>
+            (3) Run the application.</p>
+          <p><img src="xdk_deploy_steps.png" alt="" ></p>
+        </li>
+
+      </ol>
+
+      <div id="next-steps" class="callout done">
+        <p>You should now be seeing the temperature displayed on the LCD.</p>
+        <p><a href="../index.html#done-exercise1" class="link-button centered">Continue to the next step »</a></p>
+      </div>
+
+      <h2>References</h2>
+
+      <p><strong>Grove Temperature Sensor</strong></p>
+
+      <ul>
+        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a></li>
+        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a></li>
+        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a></li>
+      </ul>
+
+      <p><strong>Grove LCD RGB Backlight</strong></p>
+
+      <ul>
+        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" target="_blank">Seeed Studio Wiki: LCD RGB Backlight</a></li>
+        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">UPM API - i2clcd</a></li>
+        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">UPM API - Jhd1313m1</a></li>
+        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js" target="_blank">UPM JavaScript example: RGB LCD</a></li>
+      </ul>
+
+
+    </div><!-- end .content -->
+    <script src="../../../js/codemirror.js"></script>
+    <script src="../../../js/mode/javascript/javascript.js"></script>
+    <script>
+      for (i=1; i<14; i++) {
+          console.log("code" + i);
+          var element = document.getElementById("code" + i);
+
+          if (element == null) { continue; }
+
+          CodeMirror.fromTextArea(element, {
+              lineNumbers: true,
+              matchBrackets: true,
+              continueComments: "Enter",
+              extraKeys: {"Ctrl-Q": "toggleComment"}
+          });
+      };
+     </script>
+
+  </body>
+</html>

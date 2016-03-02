@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/main.css">
+  </head>
+  <body>
+    <header>
+      <a href="/index.html"><img src="/img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Azure Cloud Storage Management Lab</h1>
+
+      <div class="tldr">
+        Create an Azure application, and store and retrieve data using Azure Table storage.
+      </div>
+
+      <h2>Set up your development environment</h2>
+
+      <ol>
+
+        <li>
+          <p>Install the <strong>azure-storage</strong> npm module into the gateway device using putty. Run:</p>
+          <p><code>npm install azure-storage</code></p>
+        </li>
+
+        <li>
+          <p>Obtain the storage account details from the configuration file.</p>
+        </li>
+
+      </ol>
+
+      <h2>Establish a connection with Azure cloud</h2>
+
+      <ol>
+
+        <li>
+          <p>Create a new JavaScript file named <span class="icon file">azure.js</span></p>
+        </li>
+
+        <li>
+          <p>Create a node reference variable for the module:</p>
+          <p><code>var azureStorage = require('azure-storage');</code></p>
+        </li>
+
+        <li>
+          <p>Create a table service to establish a connection with the Azure storage account.</p>
+          <p><code>var tableService = azureStorage.createTableService(accountName, accessKey);</code></p>
+          <p>Please refer Cloud Config document for storage account details.</p>
+          <p><img src="image_0.png" alt="image alt text" /></p>
+        </li>
+
+      </ol>
+
+      <h2>Create an Azure table</h2>
+
+      <ol>
+
+        <li>
+          <p>Using the table service object, call the function <code>createTableIfNotExists</code> with table name as parameter.</p>
+<pre><code>tableService.createTableIfNotExists('tableName', function(error, result, response){
+  if(!error){
+  // table created or already exists
+  }
+});</code></pre>
+          <p>The result will be true if table is created and false if the table already exists. The response contains information about the request.</p>
+        </li>
+
+      </ol>
+
+      <h2>Insert an entity in Azure Table</h2>
+
+      <p>Azure table storage takes data as entities. Each entity must contain a <code>RowKey</code> and <code>PartitionKey</code>, unique identifiers for the entity. A <code>RowKey</code> must be unique to every row.</p>
+
+      <dl>
+        <dt>PartitionKey</dt>
+        <dd>Determines the partition where the entity is stored in</dd>
+
+        <dt>RowKey</dt>
+        <dd>Unique identifier for the entity within the partition</dd>
+
+      </dl>
+
+      <p>Using <code>entityGenerator</code> to create entities.</p>
+
+      <p><code>var entGen = azure.TableUtilities.entityGenerator;</code></p>
+
+      <p>Table service supports a subset of data types defined by the <a href="http://www.odata.org/">OData Protocol Specification</a>. By default a property is created as type <code>String</code> if type is not specified.</p>
+
+<pre><code>var entGen = azureStorage.TableUtilities.entityGenerator;
+
+  var azureEntity = {
+  PartitionKey : entGen.String(sensor_id),
+  RowKey : entGen.String(timestamp.toString()),
+  value : entGen.Double(value),
+  timestamp : entGen.Int64(timestamp)
+};</code></pre>
+
+      <p>Call <code>insertEntity</code> method on table service object with <code>azureEntity</code> object as parameter</p>
+
+<pre><code>tableService.insertEntity('mytable', azureEntity, function (error, result, response) {
+  if(!error){
+    // Entity inserted
+  }
+});</code></pre>
+
+      <p>On success, result will contain the <a href="http://en.wikipedia.org/wiki/HTTP_ETag">ETag</a> of the inserted record and response will contain information about the operation.</p>
+
+      <h2>Store multiple entities on to Azure Table storage</h2>
+
+      <p>You can insert multiple entities in a single batch operation. A single batch can contain up to 100 entities. All entities must contain the same partition key.</p>
+
+<pre><code>var batch = new azureStorage.TableBatch();
+var entGen = azureStorage.TableUtilities.entityGenerator;
+for(i in data) {
+  entity = data[i];
+  var azureEntity = {
+    PartitionKey : entGen.String(entity.sensor_id),
+    RowKey : entGen.String(entity.timestamp.toString())
+  }
+  for (var propertyName in entity) {
+    azureEntity[propertyName] = entGen.String(entity[propertyName]);
+  }
+}
+</code></pre>
+
+      <p><code>insertOrReplaceEntity</code> method replaces an existing entity else inserts a new one if entity deosn’t exists.</p>
+
+      <p><code>batch.insertOrReplaceEntity(azureEntity);</code></p>
+
+      <p>Setting <code>echoContent</code> to true returns the inserted entities as part of the result variable.</p>
+
+<p></p>
+
+<pre><code>tableService.executeBatch(self.config.table, batch,
+    {echoContent: true},
+    function (error, result, response) {
+      if(!error) {
+        // Batch completed
+        logger.info('Azure - Data sent successfully');
+      }
+    });</code></pre>
+
+<p></p>
+
+      <h2>Query data from Azure Table</h2>
+
+      <p>Create query expression using the <code>TableQuery</code> object.</p>
+
+      <p>For example to build a query that returns top 50 entities with Partition key of <code>sensor_id</code></p>
+
+      <h4>Timestamp based query</h4>
+
+      <p><code>dataQuery = new azureStorage.TableQuery().top(50).where('PartitionKey eq ?', readQuery.sensor_id);</code></p>
+
+      <p>Build a query that returns top 50 entities with Partition key of <code>sensor_id</code> and timestamp greater than or equal to timestamp value</p>
+
+      <h4>Sensorid based query</h4>
+
+      <p><code>dataQuery = new azureStorage.TableQuery().top(50).where('PartitionKey eq ?', readQuery.sensor_id).and('timestamp ge ?', readQuery.timestamp);</code></p>
+
+      <p>Use <code>queryEntities</code> function on table service object to perform the query.</p>
+
+<pre><code>tableService.queryEntities('tableName', dataQuery, null, function(error, results) {
+  if(!error){
+    // query successful
+  }
+}</code></pre>
+
+      <p>On success, <code>result.entries</code> will contain an array of entities that match the query. If the query was not able to return all entities, <code>result.continuationToken</code> can be used as the third parameter of queryEntities to retrieve more results. For the initial query, we used null as the third parameter.</p>
+
+      <p>Use <code>lodash</code> module to remove the standard properties from the results</p>
+
+<pre><code>_.map(resp, function (entity){
+  delete entity["PartitionKey"];
+  delete entity["RowKey"];
+  delete entity["Timestamp"];
+  delete entity[".metadata"];
+
+  for (var propertyName in entity) {
+    entity[propertyName] = entity[propertyName]["_"];
+  }
+});
+
+client.queryEntities(‘tableName’, {
+  query: dataQuery,
+  onlyFields: ['sensor_id', 'timestamp', 'value']
+}, function(err, results, continuation) {});
+</code></pre>
+
+      <h2>Delete an Azure Table</h2>
+
+<pre><code>tableService.deleteTable(tablename, function(error, response){
+  if(!error){
+    // Table deleted
+  }
+});
+</code></pre>
+
+      <h2>Additional resources</h2>
+
+      <ul>
+        <li><p>Microsoft documentation - <a href="https://azure.microsoft.com/en-us/develop/nodejs/">https://azure.microsoft.com/en-us/develop/nodejs/</a></p></li>
+        <li><p>Azure node project - <a href="https://www.npmjs.com/package/azure">https://www.npmjs.com/package/azure</a></p></li>
+        <li><p>Azure Table Storage client - <a href="https://www.npmjs.com/package/azure-table-node">https://www.npmjs.com/package/azure-table-node</a></p></li>
+        <li><p>Azure - <a href="https://msdn.microsoft.com/en-us/library/azure/dn578280.aspx">https://msdn.microsoft.com/en-us/library/azure/dn578280.aspx</a></p></li>
+        <li><p>Azure Storage Explorer - <a href="https://azurestorageexplorer.codeplex.com/">https://azurestorageexplorer.codeplex.com/</a></p></li>
+      </ul>
+
+
+
+    </div><!-- end .content -->
+  </body>
+</html>

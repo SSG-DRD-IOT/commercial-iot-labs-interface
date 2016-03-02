@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Intel® Commercial IoT Workshop</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../../css/main.css">
+
+        <!-- Include CodeMirror CSS-->
+        <link rel="stylesheet" href="../../../css/codemirror.css">
+    </head>
+    <body>
+        <header>
+            <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+        </header>
+        <div class="content">
+
+            <h1>Read sensor data over BLE</h1>
+
+            <div class="tldr">
+                <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Intel® Edison into a BLE peripheral.</p>
+            </div>
+
+            <h2>Confirm your set up</h2>
+
+            <ol>
+
+                <li>
+                    <p>The <strong>Grove Temperature Sensor</strong> should be connected to analog pin <strong>A0</strong>.</p>
+                    <p>And the <strong>Grove LCD</strong> should be connected to any <strong>I2C</strong> pin.</p>
+                    <p><img src="image_2.jpg" alt="" ></p>
+                </li>
+
+                <li>
+                    <p>Your <span class="icon file">main.js</span> (running on the Intel® Edison) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
+                    <p class="label">./temperature/main.js</p>
+                    <textarea id="code1" class="code">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
+
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+
+function monitor() {
+  setInterval(function() {
+
+    // Read the temperature sensor
+    var celsius = temp.value();
+    var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+    console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+    // Update the LCD screen
+    screen.setCursor(0, 0);
+    screen.setColor(255, 255, 255);
+    screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+
+  }, 1000);
+}
+
+monitor();</textarea>
+
+                </li>
+
+            </ol>
+
+            <h2>Turn the Intel® Edison into a BLE peripheral</h2>
+
+            <p>Use <a href="https://github.com/sandeepmistry/bleno">bleno</a>, a NodeJS module, to turn the Intel® Edison into a BLE peripheral.</p>
+
+            <ol>
+
+                <li>
+                    <p>In your Intel XDK project, open <span class="icon file">package.json</span> and locate the <code>dependencies</code> configuration.</p>
+                </li>
+
+                <li>
+                    <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
+                    <textarea id="code2" class="code">"dependencies": {
+  "bleno":"*"
+}</textarea>
+                </li>
+
+                <li>
+                    <p>In <span class="icon file">main.js</span>, add <code>bleno</code> alongside the rest of your module imports.</p>
+                    <textarea id="code3" class="code">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
+
+// Include the libraries for BLE
+var bleno = require('bleno'); < /strong>
+
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+var celsius = null;
+
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</textarea>
+                </li>
+
+                <li>
+                    <p>Declare references to the bleno BLE classes for <code>PrimaryService</code>, <code>Characteristic</code>, <code>Descriptor</code>.</p>
+                    // Include the libraries for BLE
+                    var bleno = require('bleno');
+
+                    // Create a new instance of a Grove Temperature Sensor
+                    var temp = new groveSensor.GroveTemp(0);
+                    var celsius = null;
+
+                    // Create a new instance of a Grove RGB LCD screen
+                    var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+
+                    <strong>// Extend the bleno BLE classes
+                        var BlenoPrimaryService = bleno.PrimaryService;
+                        var BlenoCharacteristic = bleno.Characteristic;
+                        var BlenoDescriptor = bleno.Descriptor;</strong>
+                    </code></pre>
+                </li>
+
+                <li>
+                    <p>You will need to inherit from the bleno BLE classes, so add <code>util</code> to your module imports.</p>
+                    <textarea id="code4" class="code">// Include the libraries for BLE
+var bleno = require('bleno');
+var util = require('util');</textarea>
+                </li>
+
+                <li>
+                    <p>Use <code>util</code> to extend bleno's <code>PrimaryService</code> and <code>Characteristic</code>.</p>
+                    <p><code>TemperatureService()</code> and <code>TemperatureReadCharacteristic()</code> have been defined for you below.</p>
+                    <textarea id="code5" class="code">// Extend the bleno BLE classes
+var BlenoPrimaryService = bleno.PrimaryService;
+var BlenoCharacteristic = bleno.Characteristic;
+var BlenoDescriptor = bleno.Descriptor;
+
+< strong > util.inherits(TemperatureReadCharacteristic, BlenoCharacteristic);
+util.inherits(TemperatureService, BlenoPrimaryService);
+
+function TemperatureService() {
+  TemperatureService.super_.call(this, {
+    uuid: 'ec00',
+    characteristics: [
+      new TemperatureReadCharacteristic()
+    ]
+  });
+}
+
+function TemperatureReadCharacteristic() {
+  TemperatureReadCharacteristic.super_.call(this, {
+    uuid: 'ec01',
+    properties: ['read'],
+    descriptors: [
+      new BlenoDescriptor({
+        uuid: 'ec02',
+        value: 'Temperature Read'
+      })
+    ]
+  });
+} < /strong>
+
+function monitor() {
+  //...
+}
+
+monitor();</textarea>
+                </li>
+
+
+                <li>
+                    <p>bleno will need to write the sensor value to a buffer so declare a global variable <code>celsius</code> to use in <code>TemperatureReadCharacteristic.prototype.onReadRequest</code> defined below.</p>
+                    <p>Update <code>monitor()</code> to use the global variable instead of a local variable.</p>
+                    <textarea id="code6" class="code">// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+  var celsius = null;
+
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+
+util.inherits(TemperatureReadCharacteristic, BlenoCharacteristic);
+util.inherits(TemperatureService, BlenoPrimaryService);
+
+// Extend the bleno BLE classes
+var BlenoPrimaryService = bleno.PrimaryService;
+var BlenoCharacteristic = bleno.Characteristic;
+var BlenoDescriptor = bleno.Descriptor;
+
+function TemperatureService() {
+  //...
+}
+
+function TemperatureReadCharacteristic() {
+  //...
+}
+
+TemperatureReadCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  if (offset) {
+    callback(BlenoCharacteristic.RESULT_ATTR_NOT_LONG, null);
+  } else {
+    if (null !== celsius) {
+      var buffer = new Buffer(1);
+      buffer.writeUInt8(celsius, 0);
+      callback(BlenoCharacteristic.RESULT_SUCCESS, buffer);
+    }
+  }
+};
+
+function monitor() {
+  setInterval(function() {
+
+    // Read the temperature sensor
+    < strike >
+      var celsius = temp.value(); < /strike> < strong > celsius = temp.value(); < /strong>
+    var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+    console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+    // Update the LCD screen
+    screen.setCursor(0, 0);
+    screen.setColor(255, 255, 255);
+    screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+
+  }, 1000);
+}
+
+monitor();</textarea>
+                </li>
+
+                <li>
+                    <p>Finally, add event listeners for the <code>stateChange</code> and <code>advertisingStart</code> bleno BLE events.</p>
+                    <p>The callback function for the <code>stateChange</code> event implements a <code>setInterval()</code> so remove the <code>monitor();</code> statement and the <code>setInterval()</code> from <code>monitor()</code>.</p>
+                    <textarea id="code7" class="code">function monitor() {
+  // Read the temperature sensor
+  celsius = temp.value();
+  var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+  console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+  // Update the LCD screen
+  screen.setCursor(0, 0);
+  screen.setColor(255, 255, 255);
+  screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+}
+
+bleno.on('stateChange', function(state) {
+  if (state == 'poweredOn') {
+    bleno.startAdvertising('temperature', [], function(err) {
+      if (err) {
+        console.log(err);
+      }
+      setInterval(monitor, 1000);
+    });
+  } else {
+    bleno.stopAdvertising();
+  }
+});
+
+bleno.on('advertisingStart', function(err) {
+  if (!err) {
+    console.log('Advertising...');
+    bleno.setServices([
+      new TemperatureService()
+    ]);
+  }
+});</textarea>
+                </li>
+
+                <li>
+                    <p>Your final <span class="icon file">main.js</span> should look like the <a href="https://github.com/Vaghesh/Bluetooth-Commercial-IoT-Workshop/blob/master/Temperature-Sensor/EdgeDevices-Peripheral/" target="_blank">final solution on Github</a>.</p>
+                    <p>Make sure your changes have been saved and use the buttons at the bottom of the Intel® XDK to: (1) Build, (2) Upload, and (3) Run the application.</p>
+                    <p>If successful, you should see the console log output the temperature every 1 second.</p>
+                    <p><img src="peripheral-result.png" alt="" ></p>
+                </li>
+
+            </ol>
+
+            <h2>Turn the Intel® IoT Gateway into a BLE central module</h2>
+
+            <p>Use <a href="https://github.com/sandeepmistry/noble">noble</a>, a NodeJS module, to turn the Intel® IoT Gateway into a BLE central module that will read the temperature data broadcasted from a BLE peripheral (i.e. your Intel® Edison).</p>
+
+            <ol>
+
+                <li>
+                    <p>Log into your Intel® IoT Gateway.</p>
+                </li>
+
+                <li>
+                    <p>Create a new project directory.</p>
+                    <p><code>mkdir ble-central</code></p>
+                    <p>And change into it.</p>
+                    <p><code>cd ble-central</code></p>
+                </li>
+
+                <li>
+                    <p>Install <code>noble</code> using NPM.</p>
+                    <p><code>npm install noble</code></p>
+                </li>
+
+                <li>
+                    <p>Create a Node application and name the file <span class="icon file">main.js</span>.</p>
+                    <p><code>touch main.js</code></p>
+                </li>
+
+                <li>
+                    <p>Use vi to edit <span class="icon file">main.js</span>.</p>
+                    <p><code>vi main.js</code></p>
+                </li>
+
+                <li>
+                    <p>Press <code>i</code> to insert code using vi.</p>
+                    <p>Include the <code>noble</code> NodeJS module at the top of the file.</p>
+                    <p><code>var noble = require('noble');</code></p>
+                </li>
+
+                <li>
+                    <p>Declare constants for the BLE service.</p>
+                    <p>These are the <strong>same</strong> UUID's used in the peripheral code that's running on the Intel® Edison.</p>
+                    <textarea id="code8" class="code">var ServiceName = 'temperature';
+var Service_UUID = 'ec00';
+var Characteristic_UUID = 'ec01';
+var TemperatureCharacteristic = null;</textarea>
+                </li>
+
+                <li>
+                    <p>Add the supplied <code>readTemperature()</code> function to read the temperature value from the buffer.</p>
+                    <textarea id="code9" class="code">function readTemperature() {
+  TemperatureCharacteristic.read(function(error) {
+    if (error) {
+      clearInterval(readTemperature);
+      console.log(error);
+    }
+  });
+  TemperatureCharacteristic.once('read', function(value) {
+    var celsius = value.readUInt8(0);
+    console.log('Temperature is ' + celsius + '°C');
+  });
+}</textarea>
+                    <p>Note that the buffer offset position is the <strong>same</strong> as the buffer position used in the peripheral code. If you recall, you used <code>buffer.writeUInt8(celsius,0);</code> on the Intel® Edison.</p>
+                </li>
+
+                <li>
+                    <p><code>handleService()</code> will loop through the Bluetooth characteristics sent and look for the one that matches <code>Characteristic_UUID</code> or <strong>'ec01'</strong>.</p>
+                    function handleService(service){
+                service.discoverCharacteristics([], function(error, characteristics) {
+                  characteristics.forEach(function(characteristic){
+                    console.log('Found Characteristic:', characteristic.uuid);
+                    for(var i = 0, l = characteristics.length; i < l; i++) {
+                      if (characteristics[i].uuid === Characteristic_UUID){
+                        TemperatureCharacteristic = characteristics[i];
+                        setInterval(readTemperature,1000);
+                        break;
+                      }
+                    }
+                  });
+                });
+              }
+                    </code></pre>
+                </li>
+
+                <li>
+                    <p>Finally, add event listeners for the <code>stateChange</code>, <code>discover</code>, and <code>disconnect</code> noble BLE events.</p>
+                    <textarea id="code10" class="code">noble.on('stateChange', function(state) {
+  if (state === 'poweredOn') {
+    noble.startScanning();
+  } else {
+    noble.stopScanning();
+  }
+});
+
+noble.on('discover', function(peripheral) {
+  console.log('Peripheral Name is: ', peripheral.advertisement.localName);
+  if (peripheral.advertisement.localName == ServiceName) {
+    noble.stopScanning();
+    peripheral.connect(function(error) {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      peripheral.discoverServices([], function(error, services) {
+        console.log(services.length, ' services discovered');
+        for (var i = 0, l = services.length; i & lt; l; i++) {
+          var service = services[i];
+          if (Service_UUID == service.uuid) {
+            noble.stopScanning();
+            console.log('Specific service found: ', service.uuid);
+            handleService(service);
+          }
+        }
+      });
+    });
+  }
+});
+
+noble.on('disconnect', function() {
+  console.log('Trying to reconnect');
+  noble.startScanning();
+});</textarea>
+                    <p>The <code>discover</code> event handler is what looks for the <code>'temperature'</code> service in order to call <code>handleService()</code> when there's a matching service found.</p>
+                </li>
+
+                <li>
+                    <p>Press <code>ESC</code> to exit out of vi insert mode.</p>
+                </li>
+
+                <li>
+                    <p>Type <code>:wq</code> to write your changes to the file and quit out vi.</p>
+                </li>
+
+                <li>
+                    <p>Check that your peripheral app is still running on your Intel® Edison. (e.g. It should still be logging temperature values to the Intel®  XDK console.) Restart if needed.</p>
+                </li>
+
+                <li>
+                    <p>Run the BLE central module on the Intel® IoT Gateway as a Node application.</p>
+                    <p><code>$ node main.js</code></p>
+                </li>
+
+                <li>
+                    <p>If successful, you should see the Intel® IoT Gateway scan for matching Bluetooth services. When the Intel® Edison is found, it will read the temperature value and output it to the terminal window.</p>
+                    <p><img src="central-result.png" alt=""></p>
+                </li>
+
+            </ol>
+
+            <div id="next-steps" class="callout done">
+                <p><!-- You should now be seeing the temperature displayed on the LCD. --></p>
+                <p><a href="../index.html#done-temp-sensor" class="link-button centered">Continue to the next step »</a></p>
+            </div>
+
+            <!-- <h2>References</h2> -->
+
+
+        </div><!-- end .content -->
+
+        <script src="../../../js/codemirror.js"></script>
+        <script src="../../..//js/mode/javascript/javascript.js"></script>
+        <script>
+         for (i=1; i<24; i++) {
+             console.log("code" + i);
+             var element = document.getElementById("code" + i);
+
+             if (element == null) { continue; }
+
+             CodeMirror.fromTextArea(element, {
+                 lineNumbers: true,
+                 matchBrackets: true,
+                 continueComments: "Enter",
+                 extraKeys: {"Ctrl-Q": "toggleComment"}
+             });
+         };
+        </script>
+
+    </body>
+</html>

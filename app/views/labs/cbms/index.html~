@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Include CodeMirror CSS-->
+    <link rel="stylesheet" href="/css/codemirror.css">
+  </head>
+  <body>
+    <header>
+      <a href="/index.html"><img src="/img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h1>Condition Base Monitoring</h1>
+
+      <p class="subtitle">Close Loop triggering of events within an Edge Network</p>
+
+      <h2>Objective</h2>
+
+      <p>By the end of this module, you should be able to:</p>
+
+      <ul>
+        <li>Implement your business logic in the form of triggers.</li>
+        <li>Read triggers from the database and evaulate whether any of them should be executed.</li>
+        <li>Write your own Condition Based Monitoring System (CDMS)</li>
+      </ul>
+
+      <h2>Introduction</h2>
+
+      <p>In this lab, we will walk you through building a NodeJS application that implements conditions based monitoring on an edge network.</p>
+
+      <h2>Main Idea</h2>
+
+      <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The Iot Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
+
+      <p>In the example of a temperature controlled room, the temperature sensor is reporting the temperature to the Intel Iot Gateway and the gateway is responsible for triggering an Iot event. An Iot Event (also called a trigger in this workshop) always has a conditions function and a trigger function. In the case that the temperature is too hot the event may take automatic action to turn on the air conditioning on and send an alert to the person responsible for the room.</p>
+
+      <h3>Steps in this Lab</h3>
+
+      <p>In this lab, we will:</p>
+
+      <ul>
+        <li><p>Write several triggers.  Develop an understanding of a condition/predicate function. Develop an understanding of trigger functions and their capabilities.</p></li>
+        <li><p>Add several triggers to the database manually</p></li>
+        <li><p>Create a new NPM package named "trigger-daemon"</p></li>
+        <li><p>Create a NodeJS server that listens to all sensor based data</p></li>
+        <li><p>Reads in the triggers from the MongoDB. We will store the triggers in the Mongo database so that they can be remotely added from the administration interface.</p></li>
+        <li><p>Compare sensor data to the condition function of each trigger</p></li>
+        <li><p>If a comparison function evaluates to true then execute the trigger function.</p></li>
+      </ul>
+
+      <h3>Writing the Trigger's Conditional Functions</h3>
+
+      <p><b>A conditional predicate function always returns a true or false value.</b>  It has access to all of the sensor data on the edge network.</p>
+
+      <p>For example in JavaScript a predicate function that tests if the temperature is greater than 27 looks like this:</p>
+
+      <div>
+        <textarea id="code1" name="code">
+ (
+  function( temperature ) {
+    return stash["temperature"] &gt; 27;
+  }
+)</textarea>
+      </div>
+
+      <div class="callout info">
+        <p>Notice the <span style='font-weight:bold'>parathesis</span> that surround this function.  These are required for the trigger to run correctly.  In JavaScript, these parathesis create a block of executable code called a "closure".  The JavaScript interpreter requires this in order to dynamically evaluate the code.</p>
+      </div>
+
+      <p>Later in this lab, we will implement a associative array called the <b>stash</b>  that contains the last value of each of the sensors on the edge network. Let's build some triggers using the stash now.</p>
+
+      <h4>Exercises:</h4>
+
+      <ol>
+        <li>Write a predicate function that tests if a light sensor has a value less than or equal 15 lumens.</li>
+      <div>
+        <textarea id="code2" name="code">
+(
+  function( light ) {
+    return stash["light"] &lt;= 15;
+  }
+)
+</textarea>
+      </div>
+
+        <li>Write a predicate function that tests of a light sensor has a value greater than 15 lumens and temperature is greater than 27.</li>
+
+      <div>
+        <textarea id="code3" name="code">
+(
+    function( light_temperature ) {
+      return (stash["light"] &gt; 15 &amp;&amp; stash[“temperature”] &gt;= 27;
+    }
+)        </textarea>
+      </div>
+
+</textarea>
+
+        <li>Write a predicate function that generates a false condition if there is no data available to process.</li>
+
+      </ol>
+
+      <h3>Writing Trigger Functions</h3>
+
+      <p>A trigger function is a function that is activated when the predicate function is true.  Trigger functions have access to all of the sensor data on the edge network, as well as, all of the actuators on the network.</p>
+
+      <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network.</p>
+
+
+      <textarea id="code4" name="code">(
+  temperature_too_cold = function() {
+    var alert = {
+      alert: "Cold"
+    };
+    self.mqttClient.publish('sensors/temperature/alerts', JSON.stringify(alert) );
+
+    this.http.get('http://lightandlamp:10010/action?deviceId=light&amp;action=on', function (err, res) {
+      if (err) {
+        console.log("Unable to turn light on");
+        console.log(err);
+      }
+    });
+  };
+)</textarea>
+
+
+      <h4>Exercises:</h4>
+
+      <ol>
+        <li><p>Write a function that changes the LCD backlight to blue and and LCD text to "Warning, too cold!"</p></li>
+        <li><p>Write a function that sends an SMS message to a list of people that should be notified.  Assume that the function SMSsend(person, message) is available to call.</p></li>
+        <li><p>Write a function that saves an error condition to the database.</p></li>
+      </ol>
+
+      <h3>Dependencies</h3>
+
+      <ol>
+        <li><p>This lab depends on the following modules and need to be added to <span class="icon file">package.json</span></li>
+        <li>
+          <p>Create a new file named <span class="icon file">server.js</span> and add these lines:</p>
+          <textarea id="code5" name="code">var mqtt = require('mqtt');
+var mongoose = require('mongoose');
+var http = require('promise-request');
+var _ = require("lodash");
+var config = require("./config.json");</textarea>
+        </li>
+
+      </ol>
+
+      <h3>Server Configuration File</h3>
+
+      <ol>
+
+        <li>
+          <p>Create a file named <span class="icon file">config.json.</span></p>
+        </li>
+
+        <li>
+          <p>Use the following configuration to allow us to change the locations of the MQTT and MongoDB servers:</p>
+          <textarea id="code6" name="code">"mqtt" : {
+  "uri" : "mqtt://192.168.1.1"
+},
+"mongodb" : {
+  "uri" : "mongodb://192.168.1.1/iotdemo"
+            }</textarea>
+        </li>
+      </ol>
+
+<p>By default, the IP address of your gateway on the edge network is 192.168.1.1</p>
+
+
+<h3>Setup the MQTT and Mongoose DB connections</h3>
+
+<p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
+
+<textarea id="code9" name="code">// Connect to the MQTT server
+ var mqttClient  = mqtt.connect(self.config.mqtt.uri);
+
+// Connect to the MongoDB server
+var db = mongoose.connect(self.config.mongodb.uri);
+mongoose.connect(config.mongodb.uri);
+var db = mongoose.connection;
+
+// Bind db errors to the console
+db.on('error', console.error.bind(console, 'connection error:'));
+// When a connection to the
+db.once('open', function (callback) {
+    console.log("Connection to MongoDB successful");
+});</textarea>
+
+
+<h3>Set Up a Context Object for the Triggers</h3>
+<p>When the Condition Based Monitoring System evaluates a trigger's condition and action functions, it runs them in a context that we can define.</p>
+<p>This context object is passed into the function that evaluates the trigger's conditional and action function. Any JavaScript Array or object stored in the context below will be accessable in the triggers' functions through the "this" object. For example, if you add <code>http</code> to the context below it will be accessible through <code>this.http</code> in the trigger.</p>
+
+<p>Let's define the context object and add a couple of items to it. First, we will define two arrays. One array will hold all of the triggers and the second will be treated as an associative array and hold the name of the each sensor and its last published value.</p>
+
+<p>The stash array will be made available to all trigger condition functions and trigger functions.  This make the stash very important because it’s used in all Iot Event triggers as the method of accessing the temperature sensors and any other sensors that are available on the network.</p>
+
+<textarea id="code8" name="code">var context = {
+    // Holds the triggers retrieved from the database
+     triggers : [],
+
+    // Holds the last sensor reading from each sensor
+    stash : [],
+
+    // An object that gives us access to an HTTP service
+    http: http,
+
+    // An object that gives us access to an MQTT service
+    mqttClient: mqttClient,
+
+    // An object that let's us read and write errors to the database
+    ErrorModel: ErrorModel
+};</textarea>
+
+<h3>Retrieve the Triggers from the Database</h3>
+
+<p>Let implement a function to retrieve all of the triggers from the database. Here, we are using MongooseJS to access the database. The find function takes a callback as an argument if there is an error the err argument will have a value.</p>
+
+<p>If you are interested in the <code>then</code> function.  This is called a promise in JavaScript. The Promise object is used for deferred and asynchronous computations. A Promise represents an operation that hasn't completed yet, but is expected in the future.  Allowing the developer to write asynchronous code in a more synchronous fashion</p>
+
+<p>You can read more able Promise in an article entitled <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">JavaScript Promises: There and Back Agin</a></p> by Jake Archibald.</p>
+
+<textarea id="code10" name="code">// On Server start, read the triggers from the db and store them
+// the triggers array.
+var retrieveTriggersFromDB = function() {
+    console.log("Retrieving all triggers from the database");
+
+    TriggerModel
+        .find()
+        .exec().then(function(triggersDB) {
+            console.log("Retrieving triggers from db");
+            context.triggers = triggersDB;
+            _.forEach(context.triggers,
+                      function(trigger) {
+                          console.log("Loaded trigger - " + trigger.name);
+                      });
+        });
+};
+
+retrieveTriggersFromDB();</textarea>
+
+<p>Notice that we call the function as soon as it is defined.  When the Conditional Based Monitoring system starts this will read the triggers from the database.</p>
+
+      <h3>Start the MQTT Event Loop</h3>
+
+      <p>The NodeJS MQTT module starts an event loop that will be the main event loop for the program.  We can set callback functions to be called when different event occur.  We will attach two callback functions, one function to the "connect" event and another to the “message” event.</p>
+
+<textarea id="code11" name="code">// On the start of a connection, do the following...
+mqttClient.on('connect', function () {
+    console.log("Connected to MQTT server");
+    mqttClient.subscribe('triggers/refresh');
+    mqttClient.subscribe('sensors/+/data');
+});</textarea>
+
+      <p>When a message is received then parse it and determine if it is a new sensor or if it is new sensor data.</p>
+
+      <h3>Define a few Helper Functions</h3>
+
+<p>Before we define the on message function, let's define a couple of helper functions. These will make our code a bit easier to read. The first two function match the <code>topic</code> on the incoming MQTT messages. The third function takes an array for triggers and returns an array with all of the triggers that have a sensor_id that matches the sensor_id that we pass into the function.  This will be useful because when a sensor reading arrives it can only fire a trigger that has a sensor_id matching the data. </p>
+
+<textarea id="code12" name="code">var isSensorTopic: function(str) {
+    return str.match(/sensors\/[A-Za-z0-9]{0,32}\/data/);
+}
+
+var isRefreshTopic = function(str) {
+    return str.match(/triggers\/refresh/);
+}
+
+var filter_triggers_by_sensor_id = function(id) {
+    return _.filter(context.triggers, {sensor_id : id});
+};</textarea>
+
+<h3>Define the On Message Callback Function</h3>
+
+<p>There are two types of messages that we will support in our OnMessage function.  The first type is a sensor reading and it is received on the 'sensors/+/data' topic. Remember that the '+' is a wild card character and can stand for 1 or more of any character. Temperature readings would come from the topic 'sensors/temperature/data' and light reading will come from 'sensors/light/data'. Each incoming piece of data has the potential for firing several triggers.  For example, if the temperature sensor sends a temperature reading of 28 degress Celsius then it may fire a trigger. Which triggers will might it fire? The trigger must have a sensor_id of "temperature" which indicates that the condition function of this trigger should be evaluated when a temperature reading arrives.  If the condition function returns a <code>true</code> value then the action function should be run.</p>
+
+<p>The second type of message is a trigger refresh message and is received on the MQTT topic 'triggers/refresh'</p>
+
+<textarea id="code13" name="code">// Every time a new message is received, do the following
+mqttClient.on('message', function (topic, message) {
+    console.log(topic + ":" + message.toString());
+    var json;
+
+    // Parse incoming JSON and print an error if JSON is bad
+    try {
+        json = JSON.parse(message);
+    } catch(error) {
+        console.log("Malformated JSON received: " + message);
+    }
+
+    // Determine if the incoming MQTT message is a sensor reading
+    // or a request for the server to reload the triggers
+    if (isSensorTopic(topic)) {
+        // Received a message on a Sensor MQTT topic
+        processSensorData(json);
+    } else if (isRefreshTopic(topic)) {
+        // Received a message on the Refresh MQTT topic
+        retrieveTriggersFromDB();
+    }
+});</textarea>
+
+      <h3>Check the Predicate Function for each Trigger and Execute a Trigger Function if true</h3>
+
+<textarea id="code14" name="code">var processSensorData = function(json) {
+    var sensor_id = json.sensor_id;
+    var value = json.value;
+
+    // Loop through all of the triggers for the sensor which
+    // is sending this incoming sensor data.
+    context.stash[sensor_id] = value;
+
+    _.forEach(
+        filter_triggers_by_sensor_id(
+            sensor_id
+        ),
+
+        // Check if the triggers predicate evaluates to true
+        function(trigger) {
+
+            // If a trigger is malformatted then log the error
+            try {
+                if (trigger.eval_condition(context, value)) {
+                    console.log("Trigger Fired: " + trigger.name + " with value " + value);
+                    trigger.eval_triggerFunc(context, value);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        });
+
+    // After the trigger is run the value used becomes the previous value
+    context.stash[sensor_id+"_prev"] = value;
+};
+</textarea>
+
+<!-- TODO: The trigger eval condition and eval action Functions -->
+<!-- TODO: Write a better practice triggers section.  too_hot_condition  too_cold_condition -->
+
+
+      <div class="callout done has-goto-button">
+        <p>Ready for the next module?</p>
+        <p><a href="../index.html#done-module-monitoring" class="link-button centered">Go to next module »</a></p>
+      </div>
+
+    </div><!-- end .content -->
+    <script src="/js/codemirror.js"></script>
+    <script src="/js/mode/javascript/javascript.js"></script>
+    <script>
+      for (i=1; i<16; i++) {
+          console.log("code" + i);
+          var element = document.getElementById("code" + i);
+
+          if (element == null) { continue; }
+
+          CodeMirror.fromTextArea(element, {
+              lineNumbers: true,
+              matchBrackets: true,
+              continueComments: "Enter",
+              extraKeys: {"Ctrl-Q": "toggleComment"}
+          });
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Intel® Commercial IoT Workshop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../../../css/main.css">
+
+  <!-- Include CodeMirror CSS-->
+  <link rel="stylesheet" href="../../../css/codemirror.css">
+</head>
+<body>
+  <header>
+    <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+  </header>
+  <div class="content">
+
+    <h1>Write an application to send sensor data over ZigBee</h1>
+
+    <div class="tldr">
+      Write a NodeJS app that reads the temperature value and sends it over ZigBee.
+    </div>
+
+    <p>This application is to be run on an edge device to broadcast the sensor data to the devices in the same ZigBee network.
+    </p>
+
+    <p>
+      In this exercise, you will write a node application that communicates to ZigBee device over serial port.
+      Be sure that you go to the links in the reference section, they'll provide you with the information to do the lab.
+    </p>
+
+    <p>Here are the steps in this exercise:</p>
+
+    <ol>
+      <li>
+        <p>The <strong>Grove Temperature Sensor</strong> should be connected to analog pin <strong>A0</strong>.</p>
+      </li>
+      <li>
+        <p>Create a project named <code>sendDataZigBee</code>.</p>
+      </li>
+      <li>
+        <p>We need to install serialport and xbee-api NPM modules add them to the dependencies section of the <strong>package.json</strong> file.
+          You can do that using the following commands.</p>
+          <p><code>$ npm install serialport --save</code></p>
+
+          <p><code>$ npm install xbee-api --save</code></p>
+
+          <p>the dependencies in your <code>package.json</code> should look like this.</p>
+          <textarea id="code20" name="code">
+            dependencies: {
+              "serialport": "^2.0.6",
+              "xbee-api": "^0.4.0"
+            }</textarea>
+          </li>
+          <li><p>Import the serialport, xbee-api and the <strong>jsupm_grove</strong> packages with the <strong>require</strong> statement.</p>
+
+            <div>
+              <textarea id="code1" name="code">
+                var SerialPort = require('serialport').SerialPort;
+                var xbee_api = require('xbee-api');
+                var groveSensor = require('jsupm_grove');
+              </textarea>
+            </div></li>
+            <li><p>Initialize the temperature sensor. See the <a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">temperature sensor documentation</a> on the <a href="http://software.intel.com/iot/">Intel Developer Zone</a>.
+
+              <div>
+                <textarea id="code2" name="code">
+                  // Create the temperature sensor object using AIO pin 0
+                  var temp = new groveSensor.GroveTemp(0);
+                </textarea>
+              </div></p></li>
+              <li><p>Set API mode, a frame-based method for sending and receiving data to and from a radio's serial UART. See the <a href="https://www.npmjs.com/package/xbee-api">xbee-api module documentation.</a></p>
+                <div>
+                  <textarea id="code3" name="code">
+                    // Constants for the the hex-numbers of the frame types, command options, status types
+                    var C = xbee_api.constants;
+                    // Set API mode
+                    var xbeeAPI = new xbee_api.XBeeAPI({
+                      api_mode: 1
+                    });
+                  </textarea>
+                </div>
+              </li>
+              <li>
+                <p>Initialize serial port with baudrate and set the XBeeAPI parser to parse the receiving frames.</p>
+                <div>
+                  <textarea id="code4" name="code">
+                    var serialport = new SerialPort("/dev/ttyMFD1", {
+                      baudrate: 9600,
+                      parser: xbeeAPI.rawParser()
+                    });
+                  </textarea>
+                </div>
+              </li>
+
+              <li><p>On Serial Port open, call the function <code>sendTemperatureData</code> to send temperature data to the gateway.</p>
+
+                <textarea id="code5" name="code">
+                  function sendTemperatureData(){
+
+                    var celsius = temp.value();
+                    var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+
+                    console.log('Temperature - ', celsius, '°C or ', fahrenheit,'°F');
+
+                    var frame_obj = { // AT Request to be sent to
+                      type: C.FRAME_TYPE.TX_REQUEST_16, // 0x01: TX (Transmit) Request: 16-bit address (802.15.4)
+                      id: 0x01, // optional, nextFrameId() is called per default
+                      destination16: "0000", // MY address of the receiving ZigBee device
+                      options: 0x00, // optional
+                      data: fahrenheit.toString() // Convert Temperature value to ASCII
+                    };
+
+                    serialport.write(xbeeAPI.buildFrame(frame_obj)); // Write frame to Serial Port
+                  };
+                </textarea></li>
+
+                <li><p>On Serial Port open, call the function <code>sendTemperatureData</code> to send temperature data evey 3 secs, to the gateway.</p>
+
+                  <textarea id="code6" name="code">
+                    serialport.on("open", function() {
+                      console.log('serial port opened');
+                      setInterval(sendTemperatureData, 3000);
+                    });
+                  </textarea></li>
+
+                </ol>
+
+                <h1>Write an application to read sensor data over ZigBee</h1>
+
+                <div class="tldr">
+                  Write a NodeJS app that reads the temperature value over ZigBee.
+                </div>
+
+                <p>This application is to be run on an Intel IoT Gateway to read the sensor data using ZigBee device.
+                </p>
+
+                <ol>
+                  <li>
+                  <p>Create a project named <code>readDataZigBee</code>.</p>
+                </li>
+                <li>
+                  <p>We need the same serialport and xbee-api NPM modules here.</p>
+                  <p><code>$ npm install serialport --save</code></p>
+
+                  <p><code>$ npm install xbee-api --save</code></p>
+
+                  <p>the dependencies in your <code>package.json</code> should look like this.</p>
+                  <textarea id="code7" name="code">
+                    dependencies: {
+                      "serialport": "^2.0.6",
+                      "xbee-api": "^0.4.0"
+                    }</textarea>
+                  </li>
+                  <li><p>Import the serialport and xbee-api packages.</p>
+
+                    <div>
+                      <textarea id="code8" name="code">
+                        var SerialPort = require('serialport').SerialPort;
+                        var xbee_api = require('xbee-api');
+                      </textarea>
+                    </div></li>
+
+                    <li><p>Set API mode and open serial port.</a></p>
+                      <div>
+                        <textarea id="code9" name="code">
+                          // Constants for the the hex-numbers of the frame types, command options, status types
+                          var C = xbee_api.constants;
+                          // Set API mode
+                          var xbeeAPI = new xbee_api.XBeeAPI({
+                            api_mode: 1
+                          });
+
+                          var serialport = new SerialPort("/dev/ttyMFD1", {
+                            baudrate: 9600,
+                            parser: xbeeAPI.rawParser()
+                          });
+                        </textarea>
+                      </div>
+                    </li>
+                    <li>
+                      <p>On <code>frame_object</code>, read the data object from the frame.
+                      Convert it to <code>ascii</code> to get the temperature value.</p>
+                      <div>
+                        <textarea id="code10" name="code">
+                          xbeeAPI.on("frame_object", function(frame) {
+                            var temp_value = frame.data.toString('ascii');
+                            console.log("Temperature: ", temp_value, "?F");
+                          });
+                        </textarea>
+                      </div>
+                    </li>
+                    <div class="callout done has-goto-button">
+                      <p><!-- describe what they should have at this point --></p>
+                      <p><a href="../../../index.html" class="link-button centered">Continue to the next module »</a></p>
+                    </div>
+
+                    <h2>References</h2>
+
+                    <ul>
+                      <li><p><a href="https://www.npmjs.com/package/xbee-api">https://www.npmjs.com/package/xbee-api</a></p></li>
+                      <li><p><a href="https://learn.sparkfun.com/tutorials/exploring-xbees-and-xctu#starting-with-x-ctu">https://learn.sparkfun.com/tutorials/exploring-xbees-and-xctu</a></p></li>
+                      <li><p><a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor</a></p></li>
+                    </ul>
+
+                  </div>
+                  <script src="../../../js/codemirror.js"></script>
+                  <script src="../../../js/mode/javascript/javascript.js"></script>
+                  <script>
+                  for (i=1; i<24; i++) {
+                    console.log("code" + i);
+                    var element = document.getElementById("code" + i);
+
+                    if (element == null) { continue; }
+
+                    CodeMirror.fromTextArea(element, {
+                      lineNumbers: true,
+                      matchBrackets: true,
+                      continueComments: "Enter",
+                      extraKeys: {"Ctrl-Q": "toggleComment"}
+                    });
+                  };
+                  </script>
+
+
+                </body>
+                </html>

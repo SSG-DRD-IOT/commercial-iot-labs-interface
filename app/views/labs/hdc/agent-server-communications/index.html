@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Intel® Commercial IoT Workshop</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../../../css/main.css">
+
+        <!-- Include CodeMirror CSS-->
+        <link rel="stylesheet" href="../../../css/codemirror.css">
+    </head>
+    <body>
+        <header>
+            <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel logo" width="52" height="35"></a>
+        </header>
+
+
+        <div class="content">
+            <h1>Agent to Cloud Communication</h1>
+
+            <section>
+            <h2>How agent-server communication works</h2>
+            <p>Helix Device Cloud Agent communicates with the Helix Device Cloud cloud periodically to send events and, ensure all settings are up-to-date.</p>
+            <p>These communications are referred to as agent-server communication. During each agent-server communication, Helix Device Cloud Agent collects its current system properties, as well as events that have not yet been sent, and sends them to the server. The server sends new or changed policies and tasks to Helix Device Cloud Agent, and the repository list if it has changed since the last agent-server communication. Helix Device Cloud Agent enforces the new policies locally on the managed system and applies any task or repository changes.</p>
+            <p>The Helix Device Cloud server uses an industry-standard Transport Layer Security (TLS) network protocol for secure network transmissions.</p>
+
+            <p>When the Helix Device Cloud Agent is first installed, it calls in to the server within few seconds. Thereafter, the Helix Device Cloud Agent calls in whenever one of the following occurs:</p>
+            <ul>
+                <li>The agent-server communication interval (ASCI) elapses.</li>
+                <li>Helix Device Cloud Agent wake-up calls are sent from the Helix Device Cloud server or Agent Handlers.</li>
+                <li>A scheduled wake-up task runs on the client systems.</li>
+                <li>Communication is initiated manually from the managed system (using Agent Status monitor or command line).</li>
+                <li>Helix Device Cloud Agent wake-up calls sent from the Helix Device Cloud server.</li>
+            </ul>
+            </section>
+
+            <section>
+                <h2>Agent-to-Server Communication Interval</h2>
+                <p>The Agent-to-Server Communication Interval (ASCI) determines how often the Helix Device Cloud Agent calls into the Helix Device Cloud ePO server.</p>
+                <p>The Agent-to-Server Communication Interval is set on the General tab of the Helix Device Cloud Agent policy page. The default setting of 60 minutes means that Helix Device Cloud Agent contacts the Helix Device Cloud ePO server once every hour. When deciding whether to modify the interval, consider that Helix Device Cloud Agent performs each of the following actions at each ASCI:</p>
+                <ul>
+                    <li>Collects and sends its properties.</li>
+                    <li>Sends non-priority events that have occurred since the last agent-server communication.</li>
+                    <li>Receives new policies and tasks. This action might trigger other resource-consuming action based on tasks, and or schedules received.</li>
+                    <li>Enforces policies.</li>
+                    <li>Although these activities do not burden any one computer, a number of factors can cause the cumulative demand on the network or Helix Device Cloud ePO servers, or on Agent Handlers to be significant, including:</li>
+                    <li>How many systems are managed by the Helix Device Cloud server</li>
+                    <li>If your organization has stringent threat response requirements.</li>
+                    <li>If the network or physical location of clients in relation to servers or Agent Handlers is highly distributed</li>
+                    <li>If there is inadequate available bandwidth</li>
+                    <li>In general, if your environment includes these variables, you want to perform agent-server communications less often. For individual clients with critical functions, you might want to set a more frequent interval.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Wake-up calls and tasks</h2>
+                <p>A Helix Device Cloud Agent wake-up call triggers an immediate agent-server communication rather than waiting for the current Agent-Server Communication Interval (ASCI) to elapse.</p>
+                <p>Use System Tree actions to wake-up Helix Device Cloud Agent. There are two ways to issue a wake-up call:</p>
+                <ul>
+                    <li><b>Manually from the server</b> — This is the most common approach and requires Helix Device Cloud Agent wake-up communication port be open.</li>
+                    <li><b>On a schedule set by the administrator</b> — This approach is useful when manual agent-server communication is disabled by policy. The administrator can create and deploy a wake-up task, which wakes up Helix Device Cloud Agent and initiates agent-server Communication.</li>
+                </ul>
+                
+                <p>Some reasons for issuing a wake-up call are:</p>
+                <ul>
+                    <li>You make a policy change that you want to enforce immediately, without waiting for the scheduled ASCI to expire.</li>
+                    <li>You created a new task that you want to run immediately. The Run Task Now option creates a task, then assigns it to specified client systems and sends wake-up calls.</li>
+                    <li>A query generated a report indicating that a client is out of compliance, and you want to test its status as part of a troubleshooting procedure.</li>
+                </ul>
+
+            </section>
+        </div>
+        <script src="../../../js/codemirror.js"></script>
+        <script src="../../../js/mode/javascript/javascript.js"></script>
+        <script>
+         var editors = ["code1", "code2"]
+
+         for (i in editors) {
+             console.log(editors[i]);
+             CodeMirror.fromTextArea(document.getElementById(editors[i]), {
+                 lineNumbers: true,
+                 matchBrackets: true,
+                 continueComments: "Enter",
+                 extraKeys: {"Ctrl-Q": "toggleComment"}
+             });
+         };
+        </script>
+    </body>
+</html>

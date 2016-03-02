@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Intel® Commercial IoT Workshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Include CodeMirror CSS-->
+    <link rel="stylesheet" href="/css/codemirror.css">
+  </head>
+  <body>  
+    <header>
+      <a href="/index.html"><img src="/img/intel_logo.png" alt="Intel® logo" width="52" height="35"></a>
+    </header>
+    <div class="content">
+
+      <h2>Sensor Monitoring on the Gateway</h2>
+      <p class="subtitle">Recording MQTT Sensor Activity</p>
+      
+      <p>Once the sensors on the edge network are publishing data, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
+      <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
+      <p>The <code>edge-sensor-monitor</code> does this by listening to all MQTT sensor topics 'sensors/+/data' that are publishing on the edge network. New sensor data is written to the database.</p>
+      <p>The <code>edge-sensor-monitor</code> also listens to the MQTT <code>announcements</code> topic, which will carry information on new sensors that are deployed on the network.</p>
+      
+      <p class="callout info">The Intel XDK only deploys to an Intel Edison.  For this project, you will have to upload your project to the Intel IoT Gateway using WinSCP.</p>
+
+      <h2><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h2>
+
+      <p>Create a new project named <b>edge-sensor-monitor</b></p>
+
+      <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
+      <p>Please note that the <code>intel-commerical-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
+
+      <p class="label">./package.json</p>
+      <textarea id="code1" name="code">	"dependencies": {
+"mqtt": "latest",
+"mongoose": "latest",
+"intel-commerical-edge-network-database-models" : "latest"
+}</textarea>
+
+
+      <p>When you upload your code to the Intel IoT Gateway, you will need to login to the console and run <code>npm install</code> in the top of you project directory. This will install the external NPM dependencies.</p>
+
+      <ol>
+        <h2>Connect to the MQTT Broker and MongoDB</h2>
+        <p>Create a file called <code>server.js</code>.  This will be the main entry point into your edge-sensor-monitor.</p>
+
+        <p>Now you can require the MQTT module and setup a connection to the MQTT broker. Your gateway's IP address is <code>192.168.1.1</code> by default.</p>
+        <p class="label">./server.js</p>
+        <textarea id="code2" name="code">
+// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+var mqttClient = mqtt.connect('mqtt://192.168.1.1');</textarea>
+
+        <p>Likewise, require the MongooseJS module and setup the connection to the MongoDB server.</p>
+
+	<p class="label">./server.js</p>
+        <textarea id="code3" name="code">
+// Require the MongoDB libraries and connect to the database
+var mongoose = require('mongoose');
+mongoose.connect(config.mongodb.host);
+var db = mongoose.connection;
+
+// Report database errors to the console
+db.on('error', console.error.bind(console, 'connection error:'));
+
+// Log when a connection is established to the MongoDB server
+db.once('open', function (callback) {
+console.log("Connection to MongoDB successful");
+});</textarea>
+
+        <p>Here we are also demonstrating binding a handler to two database events the <code>open</code> and <code>error</code> events.</p>
+
+        <p>Now import and initialize a sensor and a data model.</p>
+	<textarea id="code4" name="code">
+// Import the Database Model Objects
+var DataModel = require('intel-commerical-iot-database-models').DataModel;
+var SensorModel = require('intel-commerical-iot-database-models').SensorModel;</textarea>
+
+        <h2>The MQTT Event Loop</h2>
+        <ol>
+          <li>
+            <p>Just as you did in the <a href="/modules/build-edge-devices/temp_sensor/index.html">Publishing Sensor Data Lab</a> create a handler for the MQTT <code>connect</code> event. In this event handler subscribcd tme to the following MQTT topics:</p>
+
+            <ul>
+              <li><code>announcements</code></li>
+              <li><code>sensors/+/data</code></li>
+            </ul>
+
+            <p>The <code>announcements</code> topic will publish messages about new sensors or actuators on the edge network.</p>
+            <p>Note the <code>+</code> sign in the second topic. This is a wildcard character that matches any alphanumeric string. In this case, we are using it where the sensor name would be.  This lets us receive data from all sensors on the edge network.</p>
+          </li>
+          <li>
+
+            <p>The first topic will be published on if a new network sensor come online in the edge network.</p>
+            <p>Notice the second topic has a “+” in it.  This is a wildcard character, and it means that any alphanumeric sequence will match it.  For the purposes of the IoT network we are designing, a sensor’s unique id should go here. So that if we want to listen to the data from a particular sensor we can listen to a topic like “sensors/temperature/data” or if we want to listen to the data from all sensors we can listen to “sensors/+/data”.</p>
+          </li>
+
+          <li>
+            <p>Next, write a handler for the MQTT <code>message</code> event.</p>
+
+	    <textarea id="code5" name="code">
+// A function that runs when MQTT receives a message
+mqttClient.on('message', function (topic, message) {
+
+};</textarea>
+
+            <p>In this function do the implement the following steps:</p>
+
+            <ol>
+              <li>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</li>
+              <li>Decide whether it is a new piece of sensor data or a new announcement.</li>
+              <li>Create a data or sensor object from the DataModel or SensorModel. You can instantiate these with the the <code>new</code> keyword.</li>
+              <li>Write the new piece of data or new sensor to the database</li>
+              <li>Handle any database error by printing the error to the console</li>
+          </li>
+	  </ol>
+    </div>
+
+    <h2>References</h2>
+
+    <ul>
+      <li><p><a href="https://www.npmjs.com/package/mqtt">https://www.npmjs.com/package/mqtt</a></p></li>
+      <li><p><a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p></li>
+      <li><p><a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor</a></p></li>
+    </ul>
+
+    <div class="callout done has-goto-button">
+      <p>Ready for the next module?</p>
+      <p><a href="../../admin-interface/index.html" class="link-button centered">Go to next module »</a></p>
+    </div>
+
+</div>
+<script src="/js/codemirror.js"></script>
+<script src="/js/mode/javascript/javascript.js"></script>
+<script src="/js/init-codemirror.js"></script>
+</body>
+</html>
