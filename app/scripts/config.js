@@ -26,6 +26,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       templateUrl: "views/home.html",
       data: { pageTitle: 'Home' }
     })
+    .state('index.schedule', {
+      url: "/schedule",
+      templateUrl: "views/schedule.html",
+      data: { pageTitle: 'Schedule' }
+    })
     .state('index.presentations', {
       url: "/presentations",
       templateUrl: "views/presentations.html",
@@ -45,6 +50,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       url: "/edge-device",
       templateUrl: "views/labs/edge-device/index.html",
       data: { pageTitle: 'Build an Edge Device' },
+      resolve: {
+        loadPlugin: function ($ocLazyLoad) {
+          return $ocLazyLoad.load([
+            {
+              serie: true,
+              files: [
+                'bower_components/codemirror/lib/codemirror.css',
+                'bower_components/codemirror/theme/ambiance.css',
+                'bower_components/codemirror/lib/codemirror.js',
+                'bower_components/codemirror/mode/javascript/javascript.js'
+              ]
+            },
+            {
+              name: 'ui.codemirror',
+              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }
+          ]);
+        }
+      }
+    })
+    .state('labs.protocols', {
+      url: "/protocols",
+      templateUrl: "views/labs/protocols/index.html",
+      data: { pageTitle: 'Using Bluetooth and Zigbee' },
       resolve: {
         loadPlugin: function ($ocLazyLoad) {
           return $ocLazyLoad.load([

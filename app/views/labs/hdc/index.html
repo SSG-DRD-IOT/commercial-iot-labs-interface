@@ -1,112 +1,221 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>The Helix Device Cloud</h2>
-    <ol class="breadcrumb">
-      <li>
-        <a href="index.html">Home</a>
-      </li>
-      <li>
-        <a>Labs</a>
-      </li>
-      <li class="active">
-        <strong>The Helix Device Cloud</strong>
-      </li>
-    </ol>
-  </div>
-  <div class="col-lg-2">
-
-  </div>
-</div>
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Objectives</h5>
-
-          <div ibox-tools></div>
-        </div>
-
-        <div class="ibox-content">
-
-        </div>
-      </div>
-
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Exercise 1: Overview of the Helix Device Cloud System Tree</h5>
-          <!-- <p>Learn how to login and navigate the features of the Helix Device Cloud.</p> -->
-          <div ibox-tools></div>
-        </div>
-
-        <div class="ibox-content">
-
-        </div>
-      </div>
-
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Exercise 1: Overview of the Helix Device Cloud System Tree</h5>
-          <!-- <p>Learn how to login and navigate the features of the Helix Device Cloud.</p> -->
-          <div ibox-tools></div>
-        </div>
-
-        <div class="ibox-content">
-
-        </div>
-      </div>
-
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Exercise 2: Agent to Cloud Communications</h5>
-
-          <div ibox-tools></div>
-        </div>
-
-        <div class="ibox-content">
-
-        </div>
-      </div>
-
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Exercise 3: Register your device to ePO Server</h5>
-
-          <div ibox-tools></div>
-        </div>
-
-        <div class="ibox-content">
-          <p>Connect your gateway to the Helix Device Cloud and enable the HDC agent.</p>
-        </div>
-      </div>
-
-
-      <div id="exercise3">
-        <h2></h2>
-        <div class="tldr">
-          
-        </div>
-        <p><a href="register-device/index.html" class="link-button centered">Go to Exercise 3 »</a></p>
-      </div>
-
-      <div id="exercise4">
-        <h2>Exercise 4: Send Pseudo Sensor Data to the HDC</h2>
-        <div class="tldr">
-          Use the Psuedo Telemetry sample application to send data from the gateway to the HDC.
-        </div>
-        <p><a href="pseudo-data/index.html" class="link-button centered">Go to Exercise 4 »</a></p>
-      </div>
-
-
-      <div id="exercise5">
-        <h2>Exercise 5: Helix Device Cloud - Web API Scripting</h2>
-        <div class="tldr">
-          Learn to write scripts that automate your device management workflow
-        </div>
-        <p><a href="web-api/index.html" class="link-button centered">Go to Exercise 5 »</a></p>
-      </div>
+    <div class="col-lg-10">
+        <h2>The Helix Device Cloud</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>The Helix Device Cloud</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
 
     </div>
-  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- Objectives -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Objectives</h5>
+
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content collapse">
+
+                </div>
+            </div>
+            <!-- Exercise 1: Overview of the Helix Device Cloud System Tree -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Exercise 1: Overview of the Helix Device Cloud System Tree</h5>
+                    <!-- <p>Learn how to login and navigate the features of the Helix Device Cloud.</p> -->
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content">
+
+                </div>
+            </div>
+            <!-- Exercise 1: Overview of the Helix Device Cloud System Tree -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Exercise 1: Overview of the Helix Device Cloud System Tree</h5>
+                    <!-- <p>Learn how to login and navigate the features of the Helix Device Cloud.</p> -->
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content">
+                    <h1>Introduction to the Helix Device Cloud System Tree</h1>
+
+                    <!-- Connecting to Cloud Server -->
+                    <section>
+                        <h2> Connecting to Cloud Server </h2>
+                        <ol>
+                            <li>
+                                <p>Connect to the device management console, by entering the following URL in a browser.</p>
+                                <p> ePO URL: <code> https://www.helixdevicecloud.com:8443 </code> </p>
+                            </li>
+                            <li>
+                                <p> On first connection to the ePO server, the following security pop-up will appear, at least when using Google Chrome as your web browser:</p>
+                                <img src="./image_2.png" alt="Security Certificate Verification 1"/>
+                            </li>
+                            <li>
+                                <p> Click on <b>'Advanced'</b>, and then <b>'Proceed to www.helixdevicecloud.com (unsafe)'</b>. </p>
+                                <img src="./image_3.png" alt="Security Certificate Verification 2"/>
+                            </li>
+                            <li>
+                                <p> Enter your Login Credentials </p>
+                                <p>User name: <code>Tenant Dependent</code><br>
+                                    Password: <code>User Dependant</code></p>
+                                <img src="./image_4.png" alt="User credentials"/>
+                            </li>
+                            <li>
+                                <p>The main screen of ePO server will appear.</p>
+                                <img src="./image_5.png" alt="ePO Main Screen"/>
+                            </li>
+                        </ol>
+                    </section>
+
+                    <!-- The System Tree -->
+                    <section>
+                        <h2>The System Tree</h2>
+                        <p>The System Tree is a hierarchical structure that organizes the systems in your network into groups and subgroups.
+                            The default System Tree structure includes these groups:</p>
+                        <ol>
+                            <li>My Organization — The root of your System Tree.</li>
+                            <li>My Group — The default group added from the Getting Started initial software installation.</li>
+                            <li>This group name could have been changed from the default during the initial software installation.</li>
+                            <li>Lost&Found — The catch-all for any systems that have not or could not be added to other groups in your System Tree.</li>
+                        </ol>
+
+                        <img src="systemtree.png"/>
+
+                        <h2>The My Organization group</h2>
+                        <p>The My Organization group, the root of your System Tree, contains all systems added to or detected on your network (manually or automatically). Until you create your own structure, all systems are added by default to My Group.</p>
+                        <p>The My Group name could have been changed from the default during the initial software installation.</p>
+                        <p>The My Organization group has these characteristics:</p>
+                        <ol>
+                            <li>It can't be deleted.</li>
+                            <li>It can't be renamed.</li>
+                        </ol>
+
+                        <h2>The lost and found group</h2>
+                        <p>The Lost&Found group is a subgroup of the My Organization group.</p>
+                        <p>Depending on the methods you specify when creating and maintaining the System Tree, the server uses different characteristics to determine where to place systems. The Lost&Found group stores systems whose locations could not be determined.</p>
+                        <p>The Lost&Found group has these characteristics:</p>
+                        <ol>
+                            <li>It can't be deleted.</li>
+                            <li>It can't be renamed.</li>
+                            <li>Its sorting criteria can't be changed from being a catch-all group, although you can provide sorting criteria for the subgroups you create within it.</li>
+                            <li>It always appears last in the System Tree list and is not alphabetized among its peers.</li>
+                            <li>Users must be granted permissions to the Lost&Found group to see its contents.</li>
+                            <li>When a system is sorted into Lost&Found, it is placed in a subgroup named for the system’s domain. If no such group exists, one is created.</li>
+                        </ol>
+
+                        <h2>System Tree groups</h2>
+                        <p>System Tree groups represent a collection of systems and deciding which systems to group together depends on the unique needs of your network and business. You can group systems based on machine-type (for example, laptops, servers, or desktops), geography (for example, North America or Europe), political boundaries (for example, Finance or Development), or any other criteria that supports your needs. Groups can include both systems and other groups (subgroups).</p>
+                        <p>Groups have these characteristics:</p>
+                        <ol>
+                            <li>They are created by administrators or users with the appropriate permissions.</li>
+                            <li>They can include both systems and other groups (subgroups).</li>
+                            <li>They are administered by an administrator or a user with appropriate permissions.</li>
+                            <li>Grouping systems with similar properties or requirements into these units allows you to manage policies for systems in one place, rather than setting policies for each system individually.</li>
+                            <li>As part of the planning process, consider the best way to organize systems into groups before building the System Tree.</li>
+                        </ol>
+
+                        <h2>Inheritance</h2>
+                        <p>Inheritance is an important property that simplifies policy and task administration. Because of inheritance, child groups in the System Tree hierarchy inherit policies set at their parent groups.</p>
+                        <p>For example:</p>
+                        <ol>
+                            <li>Policies set at the My Organization level of the System Tree are inherited by groups below it.</li>
+                            <li>Group policies are inherited by subgroups or individual systems within that group.</li>
+                            <li>Inheritance is enabled by default for all groups and individual systems that you add to the System Tree. This allows you to set policies and schedule client tasks in fewer places.</li>
+                            <li>To allow for customization, inheritance can be broken by applying a new policy at any location of the System Tree. You can lock policy assignments to preserve inheritance.</li>
+                        </ol>
+                    </section>
+
+                    <!-- Create and populate System Tree Groups  -->
+                    <section>
+                        <h2>Create and Populate System Tree Groups</h2>
+
+                        <p>There is no single way to organize a System Tree, and because every network is different, your System Tree organization can be as unique as your network layout. Although you won’t use each method offered, you can use more than one.</p>
+                        <p>The Helix Device Cloud will place your device in the <b>Lost & Found</b> group by default.</p>
+
+                        <ol>
+                            <li>Go the Main menu in the upper, left side of the console.</li>
+                            <li>Click on <b>System Tree</b> <img src="systemtreemenu.png"/></li>
+                            <li>In the left side bar click on <b>Lost & Found</b> and then locate your device. You'll be able to identify it by it IP address. <img src="findyoursystem.png"/></li>
+                            <li>Click on your device to show the device details screen. <img src="devicedetails.png"/></li>
+                            <li>Then in the lower left corner goto the <b>Actions menu -> Directory Management -> Move Systems</b> <img src="movesystem.png"></li> 
+                            <li>Select the Group in which you'd like to move your device. Press OK. <img src="selectgroup.png"/></li>
+                            <li>You have move your device into a System Group</li>
+                        </ol>
+
+                    </section>
+                    
+                </div>
+            </div>
+            <!-- Exercise 2: Agent to Cloud Communications -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Exercise 2: Agent to Cloud Communications</h5>
+
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content">
+
+                </div>
+            </div>
+            <!-- Exercise 3: Register your device to ePO Server -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Exercise 3: Register your device to ePO Server</h5>
+
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content">
+                    <p>Connect your gateway to the Helix Device Cloud and enable the HDC agent.</p>
+                </div>
+            </div>
+
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Exercise 4: Send Pseudo Sensor Data to the HDC</h5>
+
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content">
+                    <p>Connect your gateway to the Helix Device Cloud and enable the HDC agent.</p>
+                </div>
+            </div>
+
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Exercise 5: Helix Device Cloud - Web API Scripting</h5>
+
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content">
+                    <p>Connect your gateway to the Helix Device Cloud and enable the HDC agent.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
