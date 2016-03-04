@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Build an Edge Device</h2>
+        <h2>Application Protocols: MQTT and HTTP</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -9,7 +9,7 @@
                 <a>Labs</a>
             </li>
             <li class="active">
-                <strong>Build an Edge Device</strong>
+                <strong>Application Protocols: MQTT and HTTP</strong>
             </li>
         </ol>
     </div>
@@ -20,18 +20,26 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
+
+            <!-- Objective -->
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Objective</h5>
 
                     <div ibox-tools></div>
-                </div>
+                </div> 
 
                 <div class="ibox-content">
                     <p>In this lab, we will explore the using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
 
+                    <ol>
+                        <li>Build a data flow that sends information from the temperature sensors to the LCD screen. Dataflow is entirely on the edge device</li>
+                        <li>Build a data flow that sends information from the temperature sensor to an MQTT broker on the gateway</li>
+                        <li>Build a data flow that receives Restful HTTP requests and changes the state of the LCD screen</li> 
+                    </ol>
                 </div>
             </div>
+
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -40,15 +48,12 @@
                 </div>
 
                 <div class="ibox-content collapse">
-
-                    <h2>Assemble Sensors</h2>
-
                     <ol>
                         <li>
                             <p>Install the Grove Base Shield onto the Intel® Edison Arduino expansion board.</p>
                             <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
                             <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
-                            <p><img src="./views/labs/edge-device/nodered/part1/image_2.jpg" alt="" ></p>
+                            <p><img src="./views/labs/protocols/nodered/part1/image_2.jpg" alt="" ></p>
                         </li>
 
 	                      <h2>Install and run Node-RED</h2>
@@ -56,7 +61,7 @@
                         <p>Log into the Intel® Edison over serial like in Step 3 of Module 1.</p>
 	                      <p>First get the ip address of the Edison:</p>
 	                      <code>$ ifconfig wlan0</code>
-	                      <p><img src="./views/labs/edge-device/nodered/part1/ifconfig.png" alt="" ></p>
+	                      <p><img src="./views/labs/protocols/nodered/part1/ifconfig.png" alt="" ></p>
 	                      <p>The ip address is the address following inet addr. In the case above it is: 10.175.154.190, however yours will be different. Remeber this address for the following step.</p>
                         <p>Install Node-RED with:</p>
 
@@ -76,10 +81,10 @@
                         <p>Make sure that your laptop is connected to the same WiFi network as your Edison and navigate to Edison IP: port 1880 in your browser. 
 		                        If you were using the IP address above you would enter 10.175.154.190:1880 into your navigation bar.</p>
 
-		                    <p><img src="./views/labs/edge-device/nodered/part1/new_node_red.png" alt="" ></p>
+		                    <p><img src="./views/labs/protocols/nodered/part1/new_node_red.png" alt="" ></p>
 		                    
 		                    <p> Create a flow where a grove temp sensor node outputs into a function node which outputs into the grove-lcd node. </p>
-		                    <p><img src="./views/labs/edge-device/nodered/part1/first_flow.png" alt="" ></p>
+		                    <p><img src="./views/labs/protocols/nodered/part1/first_flow.png" alt="" ></p>
 		                    <p> Double click on the Temp node and assign A0 as the pin and interval as 1000 to take a temperature reading every 1000ms. Double click the function node and enter the following code:</p>
                         <ui-codemirror ui-codemirror-opts="editorOptions">    var r_val = 0;
     var g_val = 0;
@@ -109,8 +114,8 @@
                         </ui-codemirror>
 
                         <p>Click Deploy in the top right corner</p>
-	                      
-	                      <h2>Flow source code</h2>
+
+                        <h2>Flow source code</h2>
 	                      <br>
 	                      <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to 
 		                        export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import it into your 
@@ -212,16 +217,24 @@
 
 		                <p>Now you will create a new flow in Node-RED in order to send the temperature data up to your MQTT server.<p>
 		                    <p>Using the "grove temp sensor", "mqtt" output, "mqtt" input, and "debug" nodes create the following flow:</p>
-		                    <p><img src="./views/labs/edge-device/nodered/part2/mqtt_flow.png" alt=""></p>
+		                    <p><img src="./views/labs/protocols/nodered/part2/mqtt_flow.png" alt=""></p>
 		                    <p>Double click the temp node to assign it to pin A0</p>
 		                    <p> Double click the mqtt nodes to configure them.</p>
-		                    <p><img src="./views/labs/edge-device/nodered/part2/mqtt_setup.png" alt=""></p>
+		                    <p><img src="./views/labs/protocols/nodered/part2/mqtt_setup.png" alt=""></p>
 		                    <p>Use the IP address of the gateway as the server and "temp" as the topic</p>
 		                    <p>When you are done configuring the nodes hit deploy</p>
-		                    <p><img src="./views/labs/edge-device/nodered/part2/mqtt_flow_connected.png" alt=""></p>
+		                    <p><img src="./views/labs/protocols/nodered/part2/mqtt_flow_connected.png" alt=""></p>
 		                    <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the Edison is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
 
 
+
+		                    <h2>Monitor MQTT Topic on Gateway</h2>
+		                    <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
+		                    <p>In the SSH terminal to the Gateway create a new screen console (Ctrl-A C) and switch to it (Ctrl-A ").</p>
+			                  <code>mosquitto_sub -t temp</code>
+					              <p><img src="sub.png" alt=""></p>
+			                  <p>You will start to see the data being published to the "temp" topic.</p>
+		                    
 		                    <h2>Flow Source Code</h2>
                         <ui-codemirror ui-codemirror-opts="editorOptions">
 		  [  
@@ -304,22 +317,22 @@
 
 		                <h2> Create Node-RED Flow </h2>
 		                <p>Use the input http, debug, grove-lcd, and http response nodes to create the flow below:</p> 
-	                  <p><img src="./views/labs/edge-device/nodered/part3/post_flow.png" alt="" ></p>
+	                  <p><img src="./views/labs/protocols/nodered/part3/post_flow.png" alt="" ></p>
 	                  <p> The input http node will listen to a request sent to a specific URL on the local host on port 1880. Once a request is recived this node will pass the payload to the debug colsole, Grove LCD node, and http response node. The http response 
 	                      node will send a response to the sender of the request to let it know that the message was recieved. Double click the input http node to configure it:</p>
-	                  <p><img src="./views/labs/edge-device/nodered/part3/config_post.png" alt="" ></p>
+	                  <p><img src="./views/labs/protocols/nodered/part3/config_post.png" alt="" ></p>
 	                  <p>For this example use POST as the method and /LCD as the URL. </p>
 	                  <h2> Install Postman </h2>
 
 	                  <p>To send web requests to the Intel® Edison we will be using Postman, a Chrome app designed to send web requests.</p>
-	                  <p><img src = "./views/labs/edge-device/nodered/part3/postman_website.png" alt=""></p> 
+	                  <p><img src = "./views/labs/protocols/nodered/part3/postman_website.png" alt=""></p> 
 
 	                  <p>To install the app navigate to <a href ="https://www.getpostman.com/"> https://www.getpostman.com</a> ,
 	                      Select Chrome App, and install it following the directions given.</p>
 
 	                  <h2> Use Postman to send web request </h2>
 	                  <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
-	                  <p><img src="./views/labs/edge-device/nodered/part3/postman.png" alt="" ></p>
+	                  <p><img src="./views/labs/protocols/nodered/part3/postman.png" alt="" ></p>
 	                  <p>Select post from the dropdown menu and enter the IP address of your Intel® Edison port 1880 with the URL specified above.
 	                      In this case it is "10.175.152.15:1880/LCD". The Grove LCD node requires a specific message to change the backlight color and
 	                      display text. The message must be a JSON with the structure: {"r":r_val,"g":g_val,"b":b_bal,"text":"text to print"} where r_val, g_val, and b_val
@@ -327,7 +340,7 @@
 	                  </p><p>To have Postman send a request
 	                      with this syntax slect the "Body" tab, click the "raw" radial button, and select JSON from the dropdown menu. Now enter the JSON specifed above 
 	                      entering the color values and message you wish to display. When you are ready hit "Send".</p>
-	                  <p><img src="./views/labs/edge-device/nodered/part3/post_flow_posted.png" alt="" ></p>
+	                  <p><img src="./views/labs/protocols/nodered/part3/post_flow_posted.png" alt="" ></p>
 	                  <p>If everything has worked properly your LCD should change to the color specifed and display your text. Also the debug tag will show the message that was 
 	                      recieved, or any errors that were encountered. </p>
 

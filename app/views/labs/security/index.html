@@ -27,7 +27,7 @@
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
+                <div class="ibox-content collapse">
                     <p>By the end of this module, you should be able to:</p>
 
                     <ul>
@@ -37,7 +37,7 @@
                         <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li>
                         <li>Ensuring IoT Gateways so that only trusted modules, Files can Read / Write, Modify & execute.</li>
                         <li>Ability to log the IoT gateway usage and changes</li>
-                            
+                        
                     </ul>
                 </div>
             </div>
@@ -50,8 +50,7 @@
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
-
+                <div class="ibox-content collapse">
                     <h5>Lab Overview</h5>
 
                     <p>The Intel Iot Gateway provides a McAfee layer that let you configure McAfee embedded products for the Wind River Linux target platform.  McAfee Embedded Control (MEC) provides the following capabilities in Wind River Linux platforms:</p>
@@ -85,397 +84,469 @@ solidcores3-6.6.0_145-r0.0.intel_baytrail_64
                             </code></pre>
                         </li>
 
-                        <li>
-                            <p>Execute the the following command to display the help menu:</p>
-                            <p><code>sadmin help</code></p>
-                            <p><img src="./views/labs/security/mec/image_0.png" alt="image alt text" /></p>
+                <li>
+                <p>Execute the the following command to display the help menu:</p>
+                <p><code>sadmin help</code></p>
+                <p><img src="./views/labs/security/mec/image_0.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to review the list of all application control features and their status (enabled or disabled).</p>
-                            <p><code>sadmin features</code></p>
-                            <p><img src="./views/labs/security/mec/image_1.png" alt="image alt text" /></p>
-                            <p>Note the following aspect of the MEC features:</p>
-                            <ul>
-                                <li><p>The feature <strong>script-auth</strong> is like deny-exec, but for scripts - only whitelisted scripts file can execute.</p></li>
-                                <li><p>The feature <strong>deny-write</strong> providers tamper-proofing to protect data file ( for example configuration file).  Unlike the deny-exec and script-auth features (which rely on a whitelist), the deny-write feature is rules-based.  The MEC configuration file (solidcore.conf) records the rules.</p></li>
-                                <li><p>The feature <strong>deny-read</strong> provides tamper-proofing to prevent reading of critical files.  The feature <strong>deny-read</strong> is alos rule based (like deny-write) - The MEC configuration file (solidcore.conf) records the rules.  The feature is disabled by default.</p></li>
-                                <li><p>The feature <strong>integrity</strong> protects MEC data and file from modification , renaming or deletion.</p></li>
+                <li>
+                <p>Execute the following command to review the list of all application control features and their status (enabled or disabled).</p>
+                <p><code>sadmin features</code></p>
+                <p><img src="./views/labs/security/mec/image_1.png" alt="image alt text" /></p>
+                <p>Note the following aspect of the MEC features:</p>
+                <ul>
+                <li><p>The feature <strong>script-auth</strong> is like deny-exec, but for scripts - only whitelisted scripts file can execute.</p></li>
+                <li><p>The feature <strong>deny-write</strong> providers tamper-proofing to protect data file ( for example configuration file).  Unlike the deny-exec and script-auth features (which rely on a whitelist), the deny-write feature is rules-based.  The MEC configuration file (solidcore.conf) records the rules.</p></li>
+                <li><p>The feature <strong>deny-read</strong> provides tamper-proofing to prevent reading of critical files.  The feature <strong>deny-read</strong> is alos rule based (like deny-write) - The MEC configuration file (solidcore.conf) records the rules.  The feature is disabled by default.</p></li>
+                <li><p>The feature <strong>integrity</strong> protects MEC data and file from modification , renaming or deletion.</p></li>
                             </ul>
                         </li>
 
-                        <li>
-                            <p>As the MEC administrators, execute the following command to check the status of the McAfee embedded control on your target:</p>
-                            <p><code>sadmin status</code><p>
-                                <p><img src="./views/labs/security/mec/image_2.png" alt="image alt text" /></p>
-                                <p>Observe that the status is Unsolidified.</p>
+                <li>
+                <p>As the MEC administrators, execute the following command to check the status of the McAfee embedded control on your target:</p>
+                <p><code>sadmin status</code><p>
+                <p><img src="./views/labs/security/mec/image_2.png" alt="image alt text" /></p>
+                <p>Observe that the status is Unsolidified.</p>
 
-                                <p>The following table describes the fields and their meaning.</p>
-                                <table>
-                                    <tr>
-                                        <th style="width: 140px;">Field</th>
-                                        <th>Description</th>
+                <p>The following table describes the fields and their meaning.</p>
+                <table>
+                <tr>
+                <th style="width: 140px;">Field</th>
+                <th>Description</th>
                                     </tr>
-                                    <tr>
-                                        <td>McAfee Solidifier</td>
-                                        <td>specifies the operation mode of the application control</td>
+                <tr>
+                <td>McAfee Solidifier</td>
+                <td>specifies the operation mode of the application control</td>
                                     </tr>
-                                    <tr>
-                                        <td>McAfee Solidifier on reboot</td>
-                                        <td>specifies the operation mode of the application control after a system restart</td>
+                <tr>
+                <td>McAfee Solidifier on reboot</td>
+                <td>specifies the operation mode of the application control after a system restart</td>
                                     </tr>
-                                    <tr>
-                                        <td>ePO Managed</td>
-                                        <td>displays the connectivity status of application control with McAfee ePO.  In a standalone configuration, this status is No.</td>
+                <tr>
+                <td>ePO Managed</td>
+                <td>displays the connectivity status of application control with McAfee ePO.  In a standalone configuration, this status is No.</td>
                                     </tr>
-                                    <tr>
-                                        <td>Local CLI Access</td>
-                                        <td>displays the statue (lockdown or recovered) of the local CLI.  In standalone configuration, this status is Recovered.</td>
+                <tr>
+                <td>Local CLI Access</td>
+                <td>displays the statue (lockdown or recovered) of the local CLI.  In standalone configuration, this status is Recovered.</td>
                                     </tr>
-                                    <tr>
-                                        <td>fstype</td>
-                                        <td>displays the supported file systems for a volume</td>
+                <tr>
+                <td>fstype</td>
+                <td>displays the supported file systems for a volume</td>
                                     </tr>
-                                    <tr>
-                                        <td>status</td>
-                                        <td>displays the current whitelist status for all the supported volumes on a system.  If a volume name is specified, only the whitelist status for the volume displays.</td>
+                <tr>
+                <td>status</td>
+                <td>displays the current whitelist status for all the supported volumes on a system.  If a volume name is specified, only the whitelist status for the volume displays.</td>
                                     </tr>
-                                    <tr>
-                                        <td>driver status</td>
-                                        <td>displays whether the application control driver is loaded on a volume.  If the driver is loaded, the status is attached; otherwise the status is unattached.</td>
+                <tr>
+                <td>driver status</td>
+                <td>displays whether the application control driver is loaded on a volume.  If the driver is loaded, the status is attached; otherwise the status is unattached.</td>
                                     </tr>
-                                    <tr>
-                                        <td>volume</td>
-                                        <td>displays the volume name</td>
+                <tr>
+                <td>volume</td>
+                <td>displays the volume name</td>
                                     </tr>
                                 </table>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to display the log file:</p>
-                            <p><code>cat /usr/local/mcafee/solidcore/log/solidcore.log</code></p>
+                <li>
+                <p>Execute the following command to display the log file:</p>
+                <p><code>cat /usr/local/mcafee/solidcore/log/solidcore.log</code></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to display the configuration file:</p>
-                            <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
-                            <p>Observe that the file includes the following rules and configurations:</p>
-                            <ul>
-                                <li><p>the run-time mode</p></li>
-                                <li><p>the run-time mode on next reboot</p></li>
-                                <li><p>the license</p></li>
-                                <li><p>the features installed</p></li>
-                                <li><p>the features enabled</p></li>
-                                <li><p>write protect, read protect, and monitoring rules</p></li>
-                                <li><p>the installation directory</p></li>
-                                <li><p>the log file directory</p></li>
+                <li>
+                <p>Execute the following command to display the configuration file:</p>
+                <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
+                <p>Observe that the file includes the following rules and configurations:</p>
+                <ul>
+                <li><p>the run-time mode</p></li>
+                <li><p>the run-time mode on next reboot</p></li>
+                <li><p>the license</p></li>
+                <li><p>the features installed</p></li>
+                <li><p>the features enabled</p></li>
+                <li><p>write protect, read protect, and monitoring rules</p></li>
+                <li><p>the installation directory</p></li>
+                <li><p>the log file directory</p></li>
                             </ul>
                         </li>
 
-                        <li>
-                            <p><code>sadmin features list</code></p>
-                            <p><img src="./views/labs/security/mec/image_3.png" alt="image alt text" /></p>
+                <li>
+                <p><code>sadmin features list</code></p>
+                <p><img src="./views/labs/security/mec/image_3.png" alt="image alt text" /></p>
                         </li>
 
                     </ol>
 
-                    <h5>2. Enabling McAfee Embedded Control</h5>
+                <h5>2. Enabling McAfee Embedded Control</h5>
 
-                    <p>In this section you will generate an initial whitelist, enable MEC, and restart the McAfee solidifier service.</p>
+                <p>In this section you will generate an initial whitelist, enable MEC, and restart the McAfee solidifier service.</p>
 
-                    <p>Dynamic whitelisting is a core feature of MEC.  The whitelist (or inventory) enumerates the set of programs (called authorized or solidified program code) that are allowed to run on the host computer.  Any programs not in the whitelist are considered unauthorized - they cannot execute, and MEC logs their failed attempt to execute.  Whitelisting does not change the files listed in the inventory.</p>
+                <p>Dynamic whitelisting is a core feature of MEC.  The whitelist (or inventory) enumerates the set of programs (called authorized or solidified program code) that are allowed to run on the host computer.  Any programs not in the whitelist are considered unauthorized - they cannot execute, and MEC logs their failed attempt to execute.  Whitelisting does not change the files listed in the inventory.</p>
 
-                    <ol>
+                <ol>
 
-                        <li>
-                            <p>As the MEC administrator, execute the following command to create the initial whitelist.</p>
-                            <p><code>sadmin solidify /bin /boot /etc /lib /lib64 /opt /root /sbin /usr /www</code></p>
-                            <p>This command may take a few minutes to complete.</p>
+                <li>
+                <p>As the MEC administrator, execute the following command to create the initial whitelist.</p>
+                <p><code>sadmin solidify /bin /boot /etc /lib /lib64 /opt /root /sbin /usr /www</code></p>
+                <p>This command may take a few minutes to complete.</p>
                         </li>
 
-                        <li>
-                            <p>As the MEC administrator, execute the following command to confirm that MEC created the initial whitelist.  The application control component stores a whitelist for each volume at volume<strong>/.solidcore/scinv</strong></p>
-                            <p><img src="./views/labs/security/mec/image_4.png" alt="image alt text" /></p>
+                <li>
+                <p>As the MEC administrator, execute the following command to confirm that MEC created the initial whitelist.  The application control component stores a whitelist for each volume at volume<strong>/.solidcore/scinv</strong></p>
+                <p><img src="./views/labs/security/mec/image_4.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to check the status of McAfee embedded control.</p>
-                            <p><img src="./views/labs/security/mec/image_5.png" alt="image alt text" /></p>
-                            <p>Observe that the status of the ext3 drive has changed to Solidified.</p>
+                <li>
+                <p>Execute the following command to check the status of McAfee embedded control.</p>
+                <p><img src="./views/labs/security/mec/image_5.png" alt="image alt text" /></p>
+                <p>Observe that the status of the ext3 drive has changed to Solidified.</p>
                         </li>
 
-                        <li>
-                            <p>As the MEC administrator, execute the following command to enable MEC.</p>
-                            <p><code>sadmin enable</code></p>
-                            <p>McAfee Solidifier will be enabled on service restart.</p>
-                            <p><img src="./views/labs/security/mec/image_6.png" alt="image alt text" /></p>
+                <li>
+                <p>As the MEC administrator, execute the following command to enable MEC.</p>
+                <p><code>sadmin enable</code></p>
+                <p>McAfee Solidifier will be enabled on service restart.</p>
+                <p><img src="./views/labs/security/mec/image_6.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>As the MEC admin, execute this command to restart the McAfee service</p>
-                            <p><code>systemctl restart scsrvc</code></p>
+                <li>
+                <p>As the MEC admin, execute this command to restart the McAfee service</p>
+                <p><code>systemctl restart scsrvc</code></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to verify that MEC is enabled.</p>
-                            <p><code>systemctl status scsrvc</code></p>
-                            <p><img src="./views/labs/security/mec/image_7.png" alt="image alt text" /></p>
+                <li>
+                <p>Execute the following command to verify that MEC is enabled.</p>
+                <p><code>systemctl status scsrvc</code></p>
+                <p><img src="./views/labs/security/mec/image_7.png" alt="image alt text" /></p>
                         </li>
 
                     </ol>
 
-                    <h5>3. Verifying MEC Code and Application Protection</h5>
+                <h5>3. Verifying MEC Code and Application Protection</h5>
 
-                    <p>In this section you will create a script and observe how MEC code and application protection works.</p>
+                <p>In this section you will create a script and observe how MEC code and application protection works.</p>
 
-                    <p>MEC only lets whitelisted programs (binaries, executables, or scripts) run - any program not in the whitelist cannot run.</p>
+                <p>MEC only lets whitelisted programs (binaries, executables, or scripts) run - any program not in the whitelist cannot run.</p>
 
-                    <ol>
+                <ol>
 
-                        <li>
-                            <p>Create the script by typing</p>
-                            <p><code># vi /root/test_script.sh</code></p>
-                            <p>Type "i" to enter insert mode and then type</p>
-                            <pre><code>#!/bin/bash
+                <li>
+                <p>Create the script by typing</p>
+                <p><code># vi /root/test_script.sh</code></p>
+                <p>Type "i" to enter insert mode and then type</p>
+                <pre><code>#!/bin/bash
 echo "Hello, World"
                             </code></pre>
-                            <p>Then press "ESC" and type “:wq”  This will save and quit the vi editor.</p>
+                <p>Then press "ESC" and type “:wq”  This will save and quit the vi editor.</p>
                         </li>
 
-                        <li>
-	                          <p>Give the script execute permissions</p>
-	                          <p><code>$ chmod +x /root/test_script.sh</code></p>
-	                          <p>Then try to execute the script.</p>
-                            <p><img src="./views/labs/security/mec/image_8.png" alt="image alt text" /></p>
-                            <p>Note the response Permission denied - MEC did not allow the script to run.</p>
+                <li>
+	                <p>Give the script execute permissions</p>
+	                <p><code>$ chmod +x /root/test_script.sh</code></p>
+	                <p>Then try to execute the script.</p>
+                <p><img src="./views/labs/security/mec/image_8.png" alt="image alt text" /></p>
+                <p>Note the response Permission denied - MEC did not allow the script to run.</p>
                         </li>
 
-                        <li>
-                            <p>Review the log by typing</p>
-                            <p><code>cat /usr/local/mcafee/solidcore/log/solidcore.log | tail -n 1</code></p>
-                            <p><img src="./views/labs/security/mec/image_9.png" alt="image alt text" /></p>
-                            <p>This response indicates that MEC prevented the script from executing.</p>
-                            <ol>
-                                <li style="list-style-type:lower-latin;">
-                                    <p>Check if the script is on the whitelist</p>
-                                    <p><code>sadmin list-solidified | grep /root/test_script.sh</code></p>
-                                    <p>Not out displays - this confirms that test_script.sh is not on the whitelist.</p>
+                <li>
+                <p>Review the log by typing</p>
+                <p><code>cat /usr/local/mcafee/solidcore/log/solidcore.log | tail -n 1</code></p>
+                <p><img src="./views/labs/security/mec/image_9.png" alt="image alt text" /></p>
+                <p>This response indicates that MEC prevented the script from executing.</p>
+                <ol>
+                <li style="list-style-type:lower-latin;">
+                <p>Check if the script is on the whitelist</p>
+                <p><code>sadmin list-solidified | grep /root/test_script.sh</code></p>
+                <p>Not out displays - this confirms that test_script.sh is not on the whitelist.</p>
                                 </li>
-                                <li>
-                                    <p>Add test_script.sh to the whitelist</p>
-                                    <p><code>sadmin so /root/test_script.sh</code></p>
-                                    <p><img src="./views/labs/security/mec/image_10.png" alt="image alt text" /></p>
+                <li>
+                <p>Add test_script.sh to the whitelist</p>
+                <p><code>sadmin so /root/test_script.sh</code></p>
+                <p><img src="./views/labs/security/mec/image_10.png" alt="image alt text" /></p>
                                 </li>
-                                <li>
-                                    <p>Execute the command again.</p>
-                                    <pre><code>/root/test_script.sh
+                <li>
+                <p>Execute the command again.</p>
+                <pre><code>/root/test_script.sh
 Hello, World</code></pre>
                                 </li>
-                                <li>
-                                    <p>Check the MEC log. The script was allowed to execute.</p>
-                                    <p><img src="./views/labs/security/mec/image_11.png" alt="image alt text" /></p>
+                <li>
+                <p>Check the MEC log. The script was allowed to execute.</p>
+                <p><img src="./views/labs/security/mec/image_11.png" alt="image alt text" /></p>
                                 </li>
                             </ol>
                         </li>
 
                     </ol>
 
-                    <h5>4. Verifying MEC Write/Read Protection</h5>
+                <h5>4. Verifying MEC Write/Read Protection</h5>
 
-                    <p>In this section you will implement write and read protection to the file /root/test_script.sh</p>
+                <p>In this section you will implement write and read protection to the file /root/test_script.sh</p>
 
-                    <p>MEC not only protects executable files, but also data files (including configuration files).  The MEC write/read protection feature provides tamper-proofing for all kinds of files. Unlike the code and application protection feature is rule-based, with the rules recorded in the MEC configuration file).</p>
+                <p>MEC not only protects executable files, but also data files (including configuration files).  The MEC write/read protection feature provides tamper-proofing for all kinds of files. Unlike the code and application protection feature is rule-based, with the rules recorded in the MEC configuration file).</p>
 
-                    <ol>
+                <ol>
 
-                        <li>
-                            <p>Execute the following command to set write protection for the file.</p>
-                            <p><code>sadmin wp -i /root/test_script.sh</code></p>
+                <li>
+                <p>Execute the following command to set write protection for the file.</p>
+                <p><code>sadmin wp -i /root/test_script.sh</code></p>
                         </li>
 
-                        <li>
-                            <p>As the MEC administrator, execute the following command to review the MEC configuration file and confirm that you added a rule to write-protect <strong>/root/test_script.sh</strong></p>
-                            <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
-                            <p><img src="./views/labs/security/mec/image_14.png" alt="image alt text" /></p>
+                <li>
+                <p>As the MEC administrator, execute the following command to review the MEC configuration file and confirm that you added a rule to write-protect <strong>/root/test_script.sh</strong></p>
+                <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
+                <p><img src="./views/labs/security/mec/image_14.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>Now try to modify the file by executing the following command.</p>
-                            <p><img src="./views/labs/security/mec/image_15.png" alt="image alt text" /></p>
+                <li>
+                <p>Now try to modify the file by executing the following command.</p>
+                <p><img src="./views/labs/security/mec/image_15.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the Permission denied.<img src="./views/labs/security/mec/image_16.png" alt="image alt text" /></p>
+                <li>
+                <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the Permission denied.<img src="./views/labs/security/mec/image_16.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to enabled deny-read and then review the status of the MEC features.</p>
-                            <p><img src="./views/labs/security/mec/image_17.png" alt="image alt text" /></p>
-                            <p>The response indicates that the deny-read feature.</p>
+                <li>
+                <p>Execute the following command to enabled deny-read and then review the status of the MEC features.</p>
+                <p><img src="./views/labs/security/mec/image_17.png" alt="image alt text" /></p>
+                <p>The response indicates that the deny-read feature.</p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to set read protection for the file.</p>
-	                          <p><code>sadmin rp -i /root/test_script.sh</code></p>
+                <li>
+                <p>Execute the following command to set read protection for the file.</p>
+	                <p><code>sadmin rp -i /root/test_script.sh</code></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to review the MEC configuration file and confirm that you added read protection for the file /root/test_setup.sh</p>
-                            <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
-                            <p><img src="./views/labs/security/mec/image_19.png" alt="image alt text" /></p>
+                <li>
+                <p>Execute the following command to review the MEC configuration file and confirm that you added read protection for the file /root/test_setup.sh</p>
+                <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
+                <p><img src="./views/labs/security/mec/image_19.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>Now attempt to read the file by printing to the console.</p>
-                            <p><img src="./views/labs/security/mec/image_20.png" alt="image alt text" /></p>
+                <li>
+                <p>Now attempt to read the file by printing to the console.</p>
+                <p><img src="./views/labs/security/mec/image_20.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the <strong>Permission denied error</strong>.</p>
-                            <p><img src="./views/labs/security/mec/image_21.png" alt="image alt text" /></p>
-                        </li>
-
-                    </ol>
-
-                    <h5>5. Using the Update Mode</h5>
-
-                    <p>In this section you will use MEC update mode to update the file /root/test_script.sh which is write and read protected.</p>
-
-                    <p>When MEC is in update mode it allows all changes on a protected system.  You can use update mode to complete maintenance tasks, such as installing patches or upgrading software and data files.</p>
-
-                    <ol>
-
-                        <li>
-                            <p>Type this command to cause MEC to go into update mode.</p>
-                            <p><img src="./views/labs/security/mec/image_22.png" alt="image alt text" /></p>
-	                          <p>Notice that McAfee is now in Update mode</p>
-	                          <p><img src="./views/labs/security/mec/image_23.png" alt="image alt text" /></p>
-                        </li>
-
-                        <li>
-                            <p>Execute the following command to display then update the contents of the file</p>
-                            <p><code>/root/test_script.sh</code></p>
-                            <p><img src="./views/labs/security/mec/image_24.png" alt="image alt text" /></p>
-                        </li>
-
-                        <li>
-                            <p>Now that you have modified /root/test_script.sh, execute the following command to change the MEC operational mode from update to enable and verify the new status.</p>
-                            <p><img src="./views/labs/security/mec/image_25.png" alt="image alt text" /></p>
-                        </li>
-
-                        <li>
-                            <p>Execute the following command to test that update mode is closed and write/read protection is working.</p>
-                            <p><img src="./views/labs/security/mec/image_26.png" alt="image alt text" /></p>
-                            <p>The <strong>Permission denied</strong> response confirm that you cannot read or change the file and that MEC protection is working.</p>
+                <li>
+                <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the <strong>Permission denied error</strong>.</p>
+                <p><img src="./views/labs/security/mec/image_21.png" alt="image alt text" /></p>
                         </li>
 
                     </ol>
 
-                    <h3>Disable Application Control</h3>
+                <h5>5. Using the Update Mode</h5>
 
-                    <p>In this section, you will disable the MEC feature to return your target to the standard configuration.</p>
+                <p>In this section you will use MEC update mode to update the file /root/test_script.sh which is write and read protected.</p>
 
-                    <ol>
+                <p>When MEC is in update mode it allows all changes on a protected system.  You can use update mode to complete maintenance tasks, such as installing patches or upgrading software and data files.</p>
 
-                        <li>
-                            <p>As the MEC administrator, execute the following command to switch EC to disabled mode to deactivate the features of MEC application control.</p>
-                            <p><code>sadmin disable</code></p>
-                            <p><img src="./views/labs/security/mec/image_27.png" alt="image alt text" /></p>
+                <ol>
+
+                <li>
+                <p>Type this command to cause MEC to go into update mode.</p>
+                <p><img src="./views/labs/security/mec/image_22.png" alt="image alt text" /></p>
+	                <p>Notice that McAfee is now in Update mode</p>
+	                <p><img src="./views/labs/security/mec/image_23.png" alt="image alt text" /></p>
                         </li>
 
-                        <li>
-                            <p>As the MEC administrator, execute the following command to reboot the target.</p>
-                            <p><code>reboot</code></p>
+                <li>
+                <p>Execute the following command to display then update the contents of the file</p>
+                <p><code>/root/test_script.sh</code></p>
+                <p><img src="./views/labs/security/mec/image_24.png" alt="image alt text" /></p>
+                        </li>
+
+                <li>
+                <p>Now that you have modified /root/test_script.sh, execute the following command to change the MEC operational mode from update to enable and verify the new status.</p>
+                <p><img src="./views/labs/security/mec/image_25.png" alt="image alt text" /></p>
+                        </li>
+
+                <li>
+                <p>Execute the following command to test that update mode is closed and write/read protection is working.</p>
+                <p><img src="./views/labs/security/mec/image_26.png" alt="image alt text" /></p>
+                <p>The <strong>Permission denied</strong> response confirm that you cannot read or change the file and that MEC protection is working.</p>
                         </li>
 
                     </ol>
 
-                    <div class="callout done has-goto-button">
-                        <p>Ready for the next module?</p>
-                        <p><a href="../cloud/index.html" class="link-button centered">Go to next module »</a></p>
+                <h3>Disable Application Control</h3>
+
+                <p>In this section, you will disable the MEC feature to return your target to the standard configuration.</p>
+
+                <ol>
+
+                <li>
+                <p>As the MEC administrator, execute the following command to switch EC to disabled mode to deactivate the features of MEC application control.</p>
+                <p><code>sadmin disable</code></p>
+                <p><img src="./views/labs/security/mec/image_27.png" alt="image alt text" /></p>
+                        </li>
+
+                <li>
+                <p>As the MEC administrator, execute the following command to reboot the target.</p>
+                <p><code>reboot</code></p>
+                        </li>
+
+                    </ol>
+
+                <div class="callout done has-goto-button">
+                <p>Ready for the next module?</p>
+                <p><a href="../cloud/index.html" class="link-button centered">Go to next module »</a></p>
                     </div>
 
                 </div>
             </div>
 
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 2: Role Based Security and Memory Protection with GrSecurity</h5>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Exercise 2: Role Based Security and Memory Protection with GrSecurity</h5>
 
-                    <div ibox-tools></div>
-                </div>
+                        <div ibox-tools></div>
+                    </div>
 
-                <div class="ibox-content">
+                    <div class="ibox-content collapse">
 
-                   
-                    <h5>Lab Overview</h5>
+                        
+                        <h5>Lab Overview</h5>
 
-                    <p><b>GRSecurity</b> is a set of software patches released under the GNU GPL for the Linux kernel to enhance the system security. It allows the system administrator to, among other things, define a minimum privilege policy for the system, in which every process and user have only the lowest privileges necessary to function. GRSecurity has 2 primary features, the RBAC (Rules Based Access Control) and the PaX.</p>
-                    <p><b>gradm</b>, the administration utility for the role-based access control system, is a powerful tool that parses your ACLs (Access Control Lists), performs the enforcement of a secure base policy, optimizes the ACLs, as well as handles parsing of the learning logs, merges them with your ACL set and outputs the final ACLs.</p>
-                    
+                        <p><b>GRSecurity</b> is a set of software patches released under the GNU GPL for the Linux kernel to enhance the system security. It allows the system administrator to, among other things, define a minimum privilege policy for the system, in which every process and user have only the lowest privileges necessary to function. GRSecurity has 2 primary features, the RBAC (Rules Based Access Control) and the PaX.</p>
+                        <p><b>gradm</b>, the administration utility for the role-based access control system, is a powerful tool that parses your ACLs (Access Control Lists), performs the enforcement of a secure base policy, optimizes the ACLs, as well as handles parsing of the learning logs, merges them with your ACL set and outputs the final ACLs.</p>
+                        
 
-                    <h5>Disable McAfee Embedded Control</h5>
+                        <h5>Disable McAfee Embedded Control</h5>
 
-                    <p>By design, <b>McAfee Embedded Control</b> will protect your system from changes. So let's turn it off now.</p> 
-                    <pre><code># sadmin disable</code></pre>
+                        <p>By design, <b>McAfee Embedded Control</b> will protect your system from changes. So let's turn it off now.</p> 
+                        <pre><code># sadmin disable</code></pre>
 
-                    <h5>The gradm command</h5>
-                    <p>gradm is the grsecurity RBAC administration and policy analysis utility. It allows you to configure and administrate the grsecurity system.</p>
-                    <p>To display all available command-line switches, run gradm --help.</p>
-                    <pre><code># gradm</code></pre>
-                    <img src="./views/labs/security/grsecurity/gr1.png"></img>
+                        <h5>The gradm command</h5>
+                        <p>gradm is the grsecurity RBAC administration and policy analysis utility. It allows you to configure and administrate the grsecurity system.</p>
+                        <p>To display all available command-line switches, run gradm --help.</p>
+                        <pre><code># gradm</code></pre>
+                        <img src="./views/labs/security/grsecurity/gr1.png"></img>
 
 
-                    <h5>Setting up a Role-Based Access</h5>
-                    <p>Here we will create three roles <b>root</b>, <b>admin</b>, <b>shutdown</b>. Each of these roles will have unique abilities that will be constrained by the by RBAC. You can use any password that you like for each role.</p>
-                    <pre><code># gradm -P</code></pre>
-                    <img src="./views/labs/security/grsecurity/gr0.png"/>
+                        <h5>Setting up a Role-Based Access</h5>
+                        <p>Here we will create three roles <b>root</b>, <b>admin</b>, <b>shutdown</b>. Each of these roles will have unique abilities that will be constrained by the by RBAC. You can use any password that you like for each role.</p>
+                        <pre><code># gradm -P</code></pre>
+                        <img src="./views/labs/security/grsecurity/gr0.png"/>
 
-                    <pre><code># gradm -P admin</code></pre>
-                    <img src="./views/labs/security/grsecurity/gr2.png"/>
-                    <pre><code># gradm -P shutdown</code></pre>
-                    <img src="./views/labs/security/grsecurity/gr3.png"/>
+                        <pre><code># gradm -P admin</code></pre>
+                        <img src="./views/labs/security/grsecurity/gr2.png"/>
+                        <pre><code># gradm -P shutdown</code></pre>
+                        <img src="./views/labs/security/grsecurity/gr3.png"/>
 
-                    <h5>Enable Learning Mode</h5>
-                    <p>Learning Mode for Role based access – RBAC requires policy to be created to ensure that system is aware of known execution, this can be done by enabling GR-SEC in learning mode or manually updating the policy file.</p>
-                    <p>Grsecurity's learning mode can be used on a per-subject or per-role basis, as well as system-wide. When using the learning mode on a single process or role, the rest of the system remains protected as defined by the policy. The learning mode can learn all things that the RBAC system supports: files, capabilities, resources, what IP addresses make use of each role, and socket usage. The learning system performs intelligent reduction of filesystem and network access to reduce policy size, increase readability, and reduce the amount of manual tweaking needed later. Furthermore, the learning system enforces a secure base that is configurable.  Once it learning mode GR-sec will log all the activities of system.</p>
-                    <p>To enable full system learning, run gradm as root with the following options:</p>
-                    <p>Please run few commands. In actual environment learning mode is usually 24-48 hours.</p>
-                    <pre><code># gradm –S
+                        <h5>Enable Learning Mode</h5>
+                        <p>Learning Mode for Role based access – RBAC requires policy to be created to ensure that system is aware of known execution, this can be done by enabling GR-SEC in learning mode or manually updating the policy file.</p>
+                        <p>Grsecurity's learning mode can be used on a per-subject or per-role basis, as well as system-wide. When using the learning mode on a single process or role, the rest of the system remains protected as defined by the policy. The learning mode can learn all things that the RBAC system supports: files, capabilities, resources, what IP addresses make use of each role, and socket usage. The learning system performs intelligent reduction of filesystem and network access to reduce policy size, increase readability, and reduce the amount of manual tweaking needed later. Furthermore, the learning system enforces a secure base that is configurable.  Once it learning mode GR-sec will log all the activities of system.</p>
+                        <p>To enable full system learning, run gradm as root with the following options:</p>
+                        <p>Please run few commands. In actual environment learning mode is usually 24-48 hours.</p>
+                        <pre><code># gradm –S
 # gradm –F –L /etc/grsec/learning.logs</code></pre>
 
-                    # ls
-                    # pwd
-                    # date
-                    # gradm –D
-                    # gradm –F –L /etc/grsec/learning.logs –O /etc/grsec/learning.roles</code></pre>
-                            <img src="./views/labs/security/grsecurity/gr4.png"/>
+                        # ls
+                        # pwd
+                        # date
+                        # gradm –D
+                        # gradm –F –L /etc/grsec/learning.logs –O /etc/grsec/learning.roles</code></pre>
+<img src="./views/labs/security/grsecurity/gr4.png"/>
 
-                            <p>You've now created a set of commands that are allowed by grsecurity. Let's now enabled grsecurity and test to see if the learned commands are allowed and all other commands are disallowed.</p>
+<p>You've now created a set of commands that are allowed by grsecurity. Let's now enabled grsecurity and test to see if the learned commands are allowed and all other commands are disallowed.</p>
 
-                            <h5>Enabling Grsecurity with Learned Rules</h5>
+<h5>Enabling Grsecurity with Learned Rules</h5>
 
-                            <p>First backup the current policy file.</p>
-                            <pre><code># cp /etc/grsec/policy /etc/grsec/policy.bak
+<p>First backup the current policy file.</p>
+<pre><code># cp /etc/grsec/policy /etc/grsec/policy.bak
 # cp /etc/grsec/learning.roles /etc/grsec/policy</code></pre>
 
-                            <p>Now enable grsecurity.</p>
-                            <pre><code># gradm -E</code></pre>
+<p>Now enable grsecurity.</p>
+<pre><code># gradm -E</code></pre>
 
-                            <h5>Test the Learned Rules</h5>
-                            <pre><code># ls
+<h5>Test the Learned Rules</h5>
+<pre><code># ls
 # pwd
 # cat
 # ifconfig
 # date
 # gradm -D</code></pre>
 
+                    </div>
                 </div>
-            </div>
 
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Exercise 3: Node-RED with HTTPS</h5>
+
+                        <div ibox-tools></div>
+                    </div>
+
+                    <div class="ibox-content collapse">
+	                      <p>HTTPS provides SSL encyption for all data passed between client and server. Below you will	
+		                        learn how to secure your Node-RED server, and all web requests to it, with HTTPS. More info can be found 
+		                        at <a href="https://nodejs.org/api/https.html">https://nodejs.org/api/https.html</a> </p>
+
+
+                        <h5>Generate Certificates</h5>
+
+
+                        <p>First you will generate a private key and certificate using openssl.</p>
+	                      <p>Make a serial connection to your Edison and enter in the following commands:</p>
+	                      <code>$	cd ~ </code><br><br>
+	                      <code>$ openssl req
+       -newkey rsa:2048 -nodes -keyout privatekey.pem
+       -x509 -days 365 -out certificate.pem </code>
+
+	                      <p>Answer the prompts with your info, or hit enter to leave as blank.</p>
+	                      <p>you now have a private key and certificate in your home directory. </p>
+
+	                      <h5>Edit Node-RED Settings</h5>
+	                      <p>In order to enable HTTPS on your Node-RED server you must edit the settings file.</p>
+	                      <p>Edit settings.js in user Node-RED user directory:</p>
+	                      <code>$ vi ~/.node-red/settings.js</code><br><br>
+
+	                      <li>Hit "a" to enable editing</li>
+	                      <li>On line 19 remove the "//" to uncomment the line.</li>
+	                      <li>On lines 107-110 remove the "//" at the start of each line to uncomment the lines.</li>
+	                      <li>Hit Esc, type :wq, and hit enter to save and exit vi.</li>
+
+                        
+		                    <p><img src="./views/labs/security/vi_settings.png" alt="" ></p>
+		                    
+	                      
+	                      <h5>Run Node-RED server</h5>
+	                      <p>Launch Node-RED with:</p>
+	                      <code>$ cd ~</code><br><br>
+	                      <code>$ node-red</code>
+	                      <p>Navigate to the Node-RED server in your browser at https://edison-ip:1880 , note that you must replace edison-ip 
+	                          with the actual ip address of your Edison.</p>
+	                      
+	                      <p><img src="./views/labs/security/sll_warning.png" alt="" ></p>
+	                      
+	                      <p>Since the SSL certifiacte you are using is self signed your browser will throw a warning. Click
+	                          advanced and select "Proceed to xx.xx.xx (unsafe)"</p>
+	                      
+	                      
+                        <p><img src="./views/labs/security/https_box.png" alt="" ></p>
+	                      <p>Your Node-RED server now uses TLS 1.2 to secure the connection.</p>
+
+                        <div class="callout done has-goto-button">
+                            <p>You should now have a Node-RED HTTPS server running.</p>
+                            <p><a href="../index.html" class="link-button centered">Back Home</a></p>
+                        </div>
+
+                        <h3>References</h3>
+
+                        <ul>
+                            <li><p><a href="https://www.openssl.org/">https://www.openssl.org/</a></p></li>
+                            
+                        </ul>
+
+
+                    </div>
+                </div>
 
         </div>
     </div>
-                            </p>
+</p>
                     </p></div>

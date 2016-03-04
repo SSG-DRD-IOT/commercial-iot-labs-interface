@@ -5,7 +5,7 @@
             <li>
                 <a href="index.html">Home</a>
             </li>
-            <li>
+                                      <li>
                 <a>Labs</a>
             </li>
             <li class="active">
@@ -62,7 +62,7 @@
 $ killall bluetoothd
 $ systemctl disable bluetooth
 $ hciconfig hci0 up</code></pre>
-                            <p><img src="./views/labs/protocols/setup/commands.png" alt=""></p>
+                            <p><img src="./views/labs/networking/setup/commands.png" alt=""></p>
                         </li>
 
                         <li>
@@ -81,7 +81,7 @@ $ hciconfig hci0 up</code></pre>
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
+                <div class="ibox-content collapse">
 
                     <h1>Read sensor data over BLE</h1>
 
@@ -96,7 +96,7 @@ $ hciconfig hci0 up</code></pre>
                         <li>
                             <p>The <strong>Grove Temperature Sensor</strong> should be connected to analog pin <strong>A0</strong>.</p>
                             <p>And the <strong>Grove LCD</strong> should be connected to any <strong>I2C</strong> pin.</p>
-                            <p><img src="./views/labs/protocols/temp_sensor/image_2.jpg" alt="" ></p>
+                            <p><img src="./views/labs/networking/temp_sensor/image_2.jpg" alt="" ></p>
                         </li>
 
                         <li>
@@ -335,7 +335,7 @@ bleno.on('advertisingStart', function(err) {
                             <p>Your final <span class="icon file">main.js</span> should look like the <a href="https://github.com/Vaghesh/Bluetooth-Commercial-IoT-Workshop/blob/master/Temperature-Sensor/EdgeDevices-Peripheral/" target="_blank">final solution on Github</a>.</p>
                             <p>Make sure your changes have been saved and use the buttons at the bottom of the Intel® XDK to: (1) Build, (2) Upload, and (3) Run the application.</p>
                             <p>If successful, you should see the console log output the temperature every 1 second.</p>
-                            <p><img src="./views/labs/protocols/temp_sensor/peripheral-result.png" alt="" ></p>
+                            <p><img src="./views/labs/networking/temp_sensor/peripheral-result.png" alt="" ></p>
                         </li>
 
                     </ol>
@@ -483,7 +483,7 @@ noble.on('disconnect', function() {
 
                         <li>
                             <p>If successful, you should see the Intel® IoT Gateway scan for matching Bluetooth services. When the Intel® Edison is found, it will read the temperature value and output it to the terminal window.</p>
-                            <p><img src="./views/labs/protocols/temp_sensor/central-result.png" alt=""></p>
+                            <p><img src="./views/labs/networking/temp_sensor/central-result.png" alt=""></p>
                         </li>
 
                     </ol>
@@ -512,7 +512,7 @@ noble.on('disconnect', function() {
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
+                <div class="ibox-content collapse">
                     
                 </div>
             </div>

@@ -70,6 +70,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+    .state('labs.networking', {
+      url: "/networking",
+      templateUrl: "views/labs/networking/index.html",
+      data: { pageTitle: 'Application Protocols: MQTT and HTTP' },
+      resolve: {
+        loadPlugin: function ($ocLazyLoad) {
+          return $ocLazyLoad.load([
+            {
+              serie: true,
+              files: [
+                'bower_components/codemirror/lib/codemirror.css',
+                'bower_components/codemirror/theme/ambiance.css',
+                'bower_components/codemirror/lib/codemirror.js',
+                'bower_components/codemirror/mode/javascript/javascript.js'
+              ]
+            },
+            {
+              name: 'ui.codemirror',
+              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }
+          ]);
+        }
+      }
+    })
     .state('labs.protocols', {
       url: "/protocols",
       templateUrl: "views/labs/protocols/index.html",
@@ -98,6 +122,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       url: "/helix",
       templateUrl: "views/labs/hdc/index.html",
       data: { pageTitle: 'Helix Device Cloud' }
+    })
+    .state('labs.automation', {
+      url: "/automation",
+      templateUrl: "views/labs/automation/index.html",
+      data: { pageTitle: 'Automation on the Internet of Things' },
+      resolve: {
+        loadPlugin: function ($ocLazyLoad) {
+          return $ocLazyLoad.load([
+            {
+              serie: true,
+              files: [
+                'bower_components/codemirror/lib/codemirror.css',
+                'bower_components/codemirror/theme/ambiance.css',
+                'bower_components/codemirror/lib/codemirror.js',
+                'bower_components/codemirror/mode/javascript/javascript.js'
+              ]
+            },
+            {
+              name: 'ui.codemirror',
+              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }
+          ]);
+        }
+      }
     })
     .state('labs.security', {
       url: "/security",
