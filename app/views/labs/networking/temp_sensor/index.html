@@ -61,7 +61,7 @@ function monitor() {
   }, 1000);
 }
 
-monitor();</ui-codemirror>
+monitor();</textarea>
 
                 </li>
 
@@ -81,7 +81,7 @@ monitor();</ui-codemirror>
                     <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
                     <textarea id="code2" class="code">"dependencies": {
   "bleno":"*"
-}</ui-codemirror>
+}</textarea>
                 </li>
 
                 <li>
@@ -98,7 +98,7 @@ var temp = new groveSensor.GroveTemp(0);
 var celsius = null;
 
 // Create a new instance of a Grove RGB LCD screen
-var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</textarea>
                 </li>
 
                 <li>
@@ -124,7 +124,7 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
                     <p>You will need to inherit from the bleno BLE classes, so add <code>util</code> to your module imports.</p>
                     <textarea id="code4" class="code">// Include the libraries for BLE
 var bleno = require('bleno');
-var util = require('util');</ui-codemirror>
+var util = require('util');</textarea>
                 </li>
 
                 <li>
@@ -164,7 +164,7 @@ function monitor() {
   //...
 }
 
-monitor();</ui-codemirror>
+monitor();</textarea>
                 </li>
 
 
@@ -223,7 +223,7 @@ function monitor() {
   }, 1000);
 }
 
-monitor();</ui-codemirror>
+monitor();</textarea>
                 </li>
 
                 <li>
@@ -261,7 +261,7 @@ bleno.on('advertisingStart', function(err) {
       new TemperatureService()
     ]);
   }
-});</ui-codemirror>
+});</textarea>
                 </li>
 
                 <li>
@@ -317,7 +317,7 @@ bleno.on('advertisingStart', function(err) {
                     <textarea id="code8" class="code">var ServiceName = 'temperature';
 var Service_UUID = 'ec00';
 var Characteristic_UUID = 'ec01';
-var TemperatureCharacteristic = null;</ui-codemirror>
+var TemperatureCharacteristic = null;</textarea>
                 </li>
 
                 <li>
@@ -333,7 +333,7 @@ var TemperatureCharacteristic = null;</ui-codemirror>
     var celsius = value.readUInt8(0);
     console.log('Temperature is ' + celsius + '°C');
   });
-}</ui-codemirror>
+}</textarea>
                     <p>Note that the buffer offset position is the <strong>same</strong> as the buffer position used in the peripheral code. If you recall, you used <code>buffer.writeUInt8(celsius,0);</code> on the Intel® Edison.</p>
                 </li>
 
@@ -393,7 +393,7 @@ noble.on('discover', function(peripheral) {
 noble.on('disconnect', function() {
   console.log('Trying to reconnect');
   noble.startScanning();
-});</ui-codemirror>
+});</textarea>
                     <p>The <code>discover</code> event handler is what looks for the <code>'temperature'</code> service in order to call <code>handleService()</code> when there's a matching service found.</p>
                 </li>
 

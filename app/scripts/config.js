@@ -47,8 +47,8 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       data: { pageTitle: 'Introduction' }
     })
     .state('labs.build', {
-      url: "/edge-device",
-      templateUrl: "views/labs/edge-device/index.html",
+      url: "/build",
+      templateUrl: "views/labs/build/index.html",
       data: { pageTitle: 'Build an Edge Device' },
       resolve: {
         loadPlugin: function ($ocLazyLoad) {

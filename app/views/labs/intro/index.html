@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Introduction to the Intel IoT Gateway</h2>
+        <h2>Introduction to the Intel® IoT Gateway</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -20,6 +20,8 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
+
+            <!-- Objective -->
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                 <h5>Objective</h5>
@@ -29,575 +31,585 @@
 
                 <div class="ibox-content">
 
-                    <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
+                <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
 
-                    <p>By the end of this module, you should be able to:</p>
+                <p>By the end of this module, you should be able to:</p>
 
-                    <ul>
-                    <li>Connect to your Intel® IoT Gateway using SSH in order to run commands on the gateway.</li>
-                    <li>Connect to your Intel® Edison using a serial connection in order to configure the board.</li>
-                    <li>Use the Intel® XDK to deploy an application to your Intel® Edison.</li>
-                    <li>Blink the onboard LED of your Intel® Edison.</li>
+                <ul>
+                <li>Connect to your Intel® IoT Gateway using SSH in order to run commands on the gateway.</li>
+                <li>Connect to your Intel® Edison using a serial connection in order to configure the board.</li>
+                <li>Use the Intel® XDK to deploy an application to your Intel® Edison.</li>
+                <li>Blink the onboard LED of your Intel® Edison.</li>
                     </ul>
                 </div>
             </div>
 
+            <!-- Login to your Intel Iot Gateway -->
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                <h5>Step 1: Login to your Intel Iot Gateway</h5>
+                <h5>Login to your Intel Iot Gateway</h5>
                 <div ibox-tools></div>
                 </div>
-
                 <div class="ibox-content collapse">
-
                 <p class="subtitle">Instructions for the Intel® IoT Gateway using Windows</p>
-
                 <div class="tldr">
                 Establish an SSH connection to your Intel® IoT Gateway using <span class="icon windows">PuTTY</span> installed on your development computer.
                     </div>
-
                 <ol>
                 <li>
                 <p>Check the side of your Intel® Iot Gateway. The Gateway’s network SSID should be labelled on the side. The network SSID will look something like "<strong>IDPDK-22a6</strong>".</p>
                         </li>
-
                 <li>
                 <p>From your development computer, connect to the SSID labelled on your Gateway.</p>
 	                <p><b>The password to your gateway is "windriveridp"</b></p>
                 <p><img src="./views/labs/intro/step1/image_0.png"></p>
                         </li>
-
                 <li>
                 <p>Double-click <span class="icon file">putty.exe</span> on your computer to launch <span class="icon windows">PuTTY</span>.</p><p>The IP address of the Intel Iot Gateway is <code>192.168.1.1</code>.</p>
                 <p><img src="./views/labs/intro/step1/image_3.png"></p>
                         </li>
-
                 <li>
                 <p>You can login with the username "root" and the password “root.”</p>
                         </li>
-
                     </ol>
 
                 <div id="next-steps" class="callout done">
                 <p>You should now be logged into the Intel® IoT Gateway.</p>
                 <p><a href="../step2/index.html" class="link-button centered">Continue to the next step »</a></p>
                     </div>
-            </section>
+                </div>
+            </div>
 
-                <!-- Quick tutorial on Screen command -->
-                <section>
-                <h2>Setup Screen Window Manager</h2>
+            <!-- Setup Screen Window Manager -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                <h5>Setup Screen Window Manager</h5>
+                <div ibox-tools></div>
+                </div>
+                <div class="ibox-content collapse">
                 <p>The <b>screen</b> program is a terminal based window manager that will be very helpful when you begin working with multiple terminal windows. Here is a quick primer to get you started.</p>
                 <p>Once you log in the Intel® Iot Gateway, start the <code>screen</code> window manager. </p>
                 <p><code>$ screen</code></p>
 
                 <p>You can open multiple console windows, name them and switch between them using screen.  There will be many times when you will want to run several processes at the same time and <code>screen</code> will be very useful to launch them in separate windows.  The another alternative is to simply SSH into the server multiple times.  Of course, in production you will want to launch most processes at boot time using Systemd.</p>
                 <ul>
-                <p>To create a new console type <code>Ctrl-A C</code></p>
-                <p>To name the console type <code>Ctrl-A Shift-A</code></p>
-                <p>To get a list of all consoles type <code>Ctrl-A &quot;</code></p>
-                </ul>
-            </section>
+                <li><p>To create a new console type <code>Ctrl-A C</code></p></li>
+                <li><p>To name the console type <code>Ctrl-A Shift-A</code></p></li>
+                <li><p>To get a list of all consoles type <code>Ctrl-A &quot;</code></p></li>
+                    </ul>
+                </div>
+            </div>
 
-                <!-- Launch the Mosquitto Broker -->
-                <section>
-                <h2>Launch the Mosquitto MQTT Broker</h2>
-                <p>Mosquitto may already be running on the Intel IoT Gateway. However, if you need to start the process again simply type.</p>
+            <!-- Launch the Mosquitto Broker -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                <h5>Launch the Mosquitto MQTT Broker</h5>
+                <div ibox-tools></div>
+                </div>
+                <div class="ibox-content collapse">
+                <p>Mosquitto may already be running on the Intel® IoT Gateway. However, if you need to start the process again simply type.</p>
 
                 <p><code>$ mosquitto</code></p>
+                <p>A traditional IoT architecture has one or more sensors, actuators and controllers. These communicate to an edge gateway. The edge gateway talks across the wide area network, often the internet, to the cloud or enterprise or server. Mosquitto is an <a href="http://mqtt.org/">MQTT</a> broker that will enable sensor data to be transferred from sensors to the gateway.  It's a commonly used protocol in the Internet of Things because it is a publish/subscribe protocol rather than a client/server protocol.  Many applications can subscribe to the same event and the MQTT server will deliver the event to all interested applications.</p>
+                </div>
+            </div>
 
-                <p>A traditional IoT architecture has one or more sensors, actuators and controllers. These communicate to an edge gateway. The edge gateway talks across the wide area network, often the internet, to the cloud or enterprise or server. Mosquitto is an <a href="http://mqtt.org/">MQTT</a> broker that will enable sensor data to be transferred from sensors to the gateway.  It's a commonly used protocol in the Internet of Things because it is a publish/subscribe protocol rather than a client/server protocol.  Many applications can subscribe to the same event and the MQTT server will deliver the event to all interested applications. </p>
-
-            </section>
-
-                <!-- Enable MongoDB and NodeJS -->
-                <section>
-                <h2>Set Permissions for MongoDB and NodeJS</h2>
-
+            <!-- Set Permissions for MongoDB and NodeJS -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                <h5>Set Permissions for MongoDB and NodeJS</h5>
+                <div ibox-tools></div>
+                </div>
+                <div class="ibox-content collapse">
                 <ol>
-
                 <li>
                 <p>The Intel Iot Gateway is enabled with <strong>grsecurity</strong> which by default prevents the execution of processes that are not added to a white list.</p>
                 <p>Add the MongoDB daemon (<code>mongod</code>)and the Mongo Client (<code>mongo</code>) to the whitelist type:</p>
                 <pre><code>$ paxctl -Cm /usr/bin/mongod</code></pre>
                 <pre><code>$ paxctl -Cm /usr/bin/mongo</code></pre>
                 <pre><code>$ paxctl -Cm /usr/bin/node</code></pre>
-                    </li>
+                        </li>
 
                 <li>
                 <p>Start the MongoDB daemon using the <code>mongod</code> command:</p>
                 <pre><code>$ mongod</code></pre>
-                    </li>
-
-                </ol>
-
+                        </li>
+                    </ol>
                 </div>
             </div>
-                
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                    <h5>Step 2: Set up your Intel Edison</h5>    
-                    <div ibox-tools></div>
+
+            <!-- Setup your Intel® Edison -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                <h5>Set up your Intel® Edison</h5>
+                <div ibox-tools></div>
                 </div>
+                <div class="ibox-content collapse">
+                <p class="subtitle">Instructions f or the <strong>Intel® Edison Kit for Arduino</strong>with Arduino-compatible expansion board.</p>
+                
+                <div class="tldr">
+                Connect your development computer to the Intel® Edison using the supplied micro-USB cables.
+                        </div>
 
-                    <div class="ibox-content collapse">
-                    
-                    <p class="subtitle">Instructions f or the <strong>Intel® Edison Kit for Arduino</strong>with Arduino-compatible expansion board.</p>
+                <ol>
 
-                    <div class="tldr">
-                    Connect your development computer to the Intel® Edison using the supplied micro-USB cables.
-                    </div>
-
-                    <ol>
-
-                    <li>
-                    <p>Connect your Intel® Edison to your computer as described below.</p>
-                    <p><img style="width:100%"  src="./views/labs/intro/step2/image_0.png"></p>
-                    <p>(1) <strong>microswitch</strong> in "USB device mode" (i.e. toggled <strong><em>down</em></strong> towards the micro-USB ports)</p>
-                    <p>(2) <strong>device mode micro-USB cable</strong> plugged into your computer</p>
-                    <p>(3) <strong>UART/serial micro-USB cable</strong> plugged into your computer</p>
-                    <p>The Arduino expansion board for Intel® Edison can be powered via the DC power jack, the device mode micro-USB port, or both. This setup uses only a micro-USB cable for power.</p>
+                <li>
+                <p>Connect your Intel® Edison to your computer as described below.</p>
+                <p><img style="width:100%"  src="./views/labs/intro/step2/image_0.png"></p>
+                <p>(1) <strong>microswitch</strong> in "USB device mode" (i.e. toggled <strong><em>down</em></strong> towards the micro-USB ports)</p>
+                <p>(2) <strong>device mode micro-USB cable</strong> plugged into your computer</p>
+                <p>(3) <strong>UART/serial micro-USB cable</strong> plugged into your computer</p>
+                <p>The Arduino expansion board for Intel® Edison can be powered via the DC power jack, the device mode micro-USB port, or both. This setup uses only a micro-USB cable for power.</p>
                         </li>
 
-                    <li>
-                    <p>Wait one minute for the Intel® Edison to finish booting up.</p>
-                    <div class="callout info">
-                    <p><strong>How do you know when the board is ready?</strong></p>
-                    <p>You will know that the Intel® Edison is fully initialized when your computer mounts a new drive (much like inserting a SD card into your computer).</p>
+                <li>
+                <p>Wait one minute for the Intel® Edison to finish booting up.</p>
+                <div class="callout info">
+                <p><strong>How do you know when the board is ready?</strong></p>
+                <p>You will know that the Intel® Edison is fully initialized when your computer mounts a new drive (much like inserting a SD card into your computer).</p>
                             </div>
                         </li>
 
                     </ol>
 
-                    <div id="next-steps" class="callout done">
-                    <p>The Intel® Edison should now have a green light lit indicating that it has been powered on and you should see a new "Edison" drive mounted.</p>
-                    <p><a href="../index.html#done-step2" class="link-button centered">Continue to the next step »</a></p>
+                <div id="next-steps" class="callout done">
+                <p>The Intel® Edison should now have a green light lit indicating that it has been powered on and you should see a new "Edison" drive mounted.</p>
+                <p><a href="../index.html#done-step2" class="link-button centered">Continue to the next step »</a></p>
                     </div>
 
                     </div>
-                </div>
+            </div>
 
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                    <h5>Step 3: Login to your Intel Edison</h5>
+            <!-- Login to you Intel® Edison  -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Login to your Intel® Edison</h5>
                     <div ibox-tools></div>
                 </div>
 
-                    <div class="ibox-content collapse">
-
-                    <h1>Step 3: Login to your Intel® Edison</h1>
-
+                <div class="ibox-content collapse">
                     <p class="subtitle">Instructions for the Intel® Galileo or Intel® Edison using Windows.</p>
 
                     <div class="tldr">
-                    Establish a serial connection to your IoT board using <span class="icon windows">PuTTY</span> installed on your development computer. Use <span class="icon windows">Device Manager</span> to find the COM port number for the "<strong>USB Serial Port</strong>" connection.
+                        Establish a serial connection to your IoT board using <span class="icon windows">PuTTY</span> installed on your development computer. Use <span class="icon windows">Device Manager</span> to find the COM port number for the "<strong>USB Serial Port</strong>" connection.
                     </div>
 
                     <p>If you need to configure your IoT board, you will need to remotely connect to the Intel® Edison or Intel® Galileo. Once connected to your Intel® IoT board, you have access to the Linux-based Yocto operating system running on the board.</p>
 
-                    <h2>Establish serial connection using PuTTY</h2>
+                </div>
+            </div>
 
-                    <ol>
+            <!-- Establish serial connection using PuTTY -->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Establish serial connection using PuTTY</h5>
+                    <div ibox-tools></div>
+                </div>
 
-                    <li>
-                    <p>Open <span class="icon windows">Device Manager</span> and scroll down to the "Ports (COM &amp; LPT)" section.</p>
-                    <div class="side-by-side">
-                    <div class="left">
-                    <p><strong>Windows 7 and below:</strong></p>
+                <div class="ibox-content collapse">
                     <ol>
-                    <li>Open <span class="icon windows">Start</span> menu.</li>
-                    <li>Start typing "device manager" in the search field. </li>
-                    <li>Select "Device Manager" under "Control Panel"</li>
+                        <li>
+                            <p>Open <span class="icon windows">Device Manager</span> and scroll down to the "Ports (COM &amp; LPT)" section.</p>
+                            <div class="side-by-side">
+                                <div class="left">
+                                    <p><strong>Windows 7 and below:</strong></p>
+                                    <ol>
+                                        <li>Open <span class="icon windows">Start</span> menu.</li>
+                                        <li>Start typing "device manager" in the search field. </li>
+                                        <li>Select "Device Manager" under "Control Panel"</li>
                                     </ol>
-                    <p><img src="./views/labs/intro/step3/image00.jpg"></p>
+                                    <p><img src="./views/labs/intro/step3/image00.jpg"></p>
                                 </div>
-                    <div class="right">
-                    <p><strong>Windows 8:</strong></p>
-                    <ol>
-                    <li>Go into <span class="icon windows">Desktop mode</span>.</li>
-                    <li>Right-click on the <span class="icon windows">Start</span> menu button.</li>
-                    <li>Select "Device Manager".</li>
+                                <div class="right">
+                                    <p><strong>Windows 8:</strong></p>
+                                    <ol>
+                                        <li>Go into <span class="icon windows">Desktop mode</span>.</li>
+                                        <li>Right-click on the <span class="icon windows">Start</span> menu button.</li>
+                                        <li>Select "Device Manager".</li>
                                     </ol>
-                    <p><img src="./views/labs/intro/step3/image09.png"></p>
+                                    <p><img src="./views/labs/intro/step3/image09.png"></p>
                                 </div>
                             </div>
                         </li>
 
-                    <li>
-                    <p>Make a note of your <strong>COM #</strong> for the "<strong>USB Serial Port</strong>" device.</p>
-                    <p><img src="./views/labs/intro/step3/image_1.png"></p>
-                    <div class="callout warning">
-                    <p><strong>Do you have the right COM number?</strong></p>
-                    <p>Use the COM # shown in your <span class="icon windows">Device Manager</span>. In the screenshot, it is "COM3" but <strong>your</strong> computer will have unique COM port number assignments and may be different from the screenshot.</p>
-                    <p>Do <strong>not</strong> use the COM number for  "Intel Edison USB Composite Device" or "Intel Edison Virtual Com Port".</p>
+                        <li>
+                            <p>Make a note of your <strong>COM #</strong> for the "<strong>USB Serial Port</strong>" device.</p>
+                            <p><img src="./views/labs/intro/step3/image_1.png"></p>
+                            <div class="callout warning">
+                                <p><strong>Do you have the right COM number?</strong></p>
+                                <p>Use the COM # shown in your <span class="icon windows">Device Manager</span>. In the screenshot, it is "COM3" but <strong>your</strong> computer will have unique COM port number assignments and may be different from the screenshot.</p>
+                                <p>Do <strong>not</strong> use the COM number for  "Intel® Edison USB Composite Device" or "Intel® Edison Virtual Com Port".</p>
                             </div>
                         </li>
 
-                    <li>
-                    <p>Double-click <span class="icon file">putty.exe</span> on your computer to launch <span class="icon windows">PuTTY</span>.</p>
-                    <p><img src="./views/labs/intro/step3/image_4.png"></p>
+                        <li>
+                            <p>Double-click <span class="icon file">putty.exe</span> on your computer to launch <span class="icon windows">PuTTY</span>.</p>
+                            <p><img src="./views/labs/intro/step3/image_4.png"></p>
                         </li>
 
-                    <li>
-                    <p>In <span class="icon windows">PuTTY</span>, double-check that you are in the "Session" screen.</p>
+                        <li>
+                            <p>In <span class="icon windows">PuTTY</span>, double-check that you are in the "Session" screen.</p>
                         </li>
 
-                    <li>
-                    <p><img src="./views/labs/intro/step3/image_6.png"></p>
+                        <li>
+                            <p><img src="./views/labs/intro/step3/image_6.png"></p>
                         </li>
 
-                    <li>
-                    <p>Select the "<strong>Serial</strong>" radio button under "Connection type".</p>
-                    <p><img src="./views/labs/intro/step3/image_7.png"></p>
+                        <li>
+                            <p>Select the "<strong>Serial</strong>" radio button under "Connection type".</p>
+                            <p><img src="./views/labs/intro/step3/image_7.png"></p>
                         </li>
 
-                    <li>
-                    <p>Specify the destination you want to connect to:</p>
-                    <ul>
-                    <li><p><strong>Serial Line</strong>: use the <strong>COM #</strong> noted previously in step #2 by using <span class="icon windows">Device Manager</span></p></li>
-                    <li><p><strong>Speed</strong>: use "115200" for the baud rate</p></li>
+                        <li>
+                            <p>Specify the destination you want to connect to:</p>
+                            <ul>
+                                <li><p><strong>Serial Line</strong>: use the <strong>COM #</strong> noted previously in step #2 by using <span class="icon windows">Device Manager</span></p></li>
+                                <li><p><strong>Speed</strong>: use "115200" for the baud rate</p></li>
                             </ul>
                         </li>
-                    <p><img src="./views/labs/intro/step3/image_9.png"></p>
-                    
-                    <li>
-                    <p>Click "<strong>Open</strong>" to connect to the board.</p>
-                    <p><img src="./views/labs/intro/step3/image_10.png"></p>
+                        <p><img src="./views/labs/intro/step3/image_9.png"></p>
+
+                        <li>
+                            <p>Click "<strong>Open</strong>" to connect to the board.</p>
+                            <p><img src="./views/labs/intro/step3/image_10.png"></p>
                         </li>
 
-                    <li>
-                    <p>When you see a blank screen, <strong>press the Enter key.</strong></p>
-                    <p><img src="./views/labs/intro/step3/image_11.png"></p>
+                        <li>
+                            <p>When you see a blank screen, <strong>press the Enter key.</strong></p>
+                            <p><img src="./views/labs/intro/step3/image_11.png"></p>
                         </li>
 
-                    <li>
-                    <p>Once connected you will see a login prompt.</p>
-                    <p>Type in "<strong>root</strong>" for the username and press <strong>Enter</strong>.</p>
-                    <p><img src="./views/labs/intro/step3/image_12.png"></p>
+                        <li>
+                            <p>Once connected you will see a login prompt.</p>
+                            <p>Type in "<strong>root</strong>" for the username and press <strong>Enter</strong>.</p>
+                            <p><img src="./views/labs/intro/step3/image_12.png"></p>
                         </li>
 
-                    <li>
-                    <p>You are now logged into your IoT board and can run shell commands!</p>
+                        <li>
+                            <p>You are now logged into your IoT board and can run shell commands!</p>
                         </li>
-                    
+
+                    </ol>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Configure Intel® Edison via command line</h5>
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content collapse">
+                    <ol>
+                        <li>
+                            <p>Set up your board using the <code>configure_edison</code> command with the <code>--setup</code> flag.</p>
+                            <p>You will use these credentials to connect to the board if you need to re-connect the serial connection, or program the board using the Intel® XDK in the next section of this workshop module.</p>
+                            <pre><code>configure_edison --setup</code></pre>
+                        </li>
+
+                        <li>
+                            <p>Follow the prompts to set the device password to be "<strong>intel123</strong>".</p>
+                        </li>
+
+                        <li>
+                            <p>Then follow the prompts to give your Intel® Edison device an easy to recognize name.</p>
+                        </li>
+
+                        <li>
+                            <p>When asked if you want to set up wifi, type "<strong>Y</strong>" and press Enter.</p>
+                        </li>
+
+                        <li>
+                            <p>The Intel® Edison will scan for Wi-Fi networks and display a list of available networks when finished.</p>
+                            <figure>
+                                <img src="./views/labs/intro/step3/image_13.png">
+                                <figcaption>If you do not see any networks, try re-scanning by entering "0", or run <code>configure_edison --wifi</code>.</figcaption>
+                            </figure>
+                        </li>
+
+                        <li>
+                            <p>Locate your Intel® IoT Gateway SSID in the list and enter the <strong>corresponding number</strong> in the prompt. Press Enter.</p>
+                            <p>To confirm your entry, type "<strong>Y</strong>" and press Enter.</p>
+                            <figure>
+                                <img src="./views/labs/intro/step3/image_14.jpg">
+                                <figcaption>In this example, to connect to "kafka" use the number “16”.</figcaption>
+                            </figure>
+                        </li>
+
+                        <li>
+                            <p>The network in this example requires a password. Your network might require other information. Enter the appropriate network credentials. Press Enter when finished.</p>
+                            <p><img src="./views/labs/intro/step3/image_15.jpg"></p>
+                        </li>
+
+                        <li>
+                            <p>The Intel® Edison will attempt to make a connection to the Intel® IoT Gateway.</p>
+                        </li>
+
+                        <li>
+                            <p>When you see a "Done" message, you are now connected to the Gatewaya Wi-Fi network.</p>
+                            <p><strong>Note the IP address.</strong> You will need it in <span class="icon bookmark">Step 4: Deploy sample application with the Intel® XDK IoT Edition</span>.</p>
+                            <p><img src="./views/labs/intro/step3/image03.png"></p>
+                        </li>
                     </ol>
 
-                    <h2>Configure Intel® Edison via command line</h2>
+                    <div id="next-steps" class="callout done">
+                        <p>You should now understand how to gain shell access to your Intel® Edison. And your Intel® Edison should now be connected to your Intel® IoT Gateway.</p>
+                        <p><a href="../index.html#done-step3" class="link-button centered">Continue to the next step »</a></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Step 4: Deploy sample application with the Intel® XDK IoT Edition</h5>
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content collapse">
+                    <h1>Step 4: Deploy a sample application with the Intel® XDK IoT Edition</h1>
+
+                    <p class="subtitle">Instructions for the Intel® Galileo or Intel® Edison using any computer OS platform</p>
+
+                    <div class="tldr">
+                        Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
+                    </div>
+
+                    <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
+
+                    <h2>Launch and sign into the Intel® XDK</h2>
+
+                    <div class="tldr">
+                        Note: Before you can use the Intel® XDK, you must sign up for an Intel® XDK account or log in to a pre-existing account. You will need to have an internet connection for the first time you launch the Intel® XDK.
+                    </div>
+
+                    <ol>
+                        
+                        <li>
+                            <p>Launch Intel® XDK IoT Edition.</p>
+                        </li>
+
+                        <li>
+                            <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-exis
+                                ting account.</p>
+                            <div class="side-by-side">
+                                <div class="left">
+                                    <img src="./views/labs/intro/step4/image_0.png">
+                                </div>
+                                <div class="right">
+                                    <img src="./views/labs/intro/step4/image_1.png">
+                                </div>
+                            </div>
+                        </li>
+                        
+                    </ol>
+
+                    <h2>Create a project</h2>
 
                     <ol>
 
-                    <li>
-                    <p>Set up your board using the <code>configure_edison</code> command with the <code>--setup</code> flag.</p>
-                    <p>You will use these credentials to connect to the board if you need to re-connect the serial connection, or program the board using the Intel® XDK in the next section of this workshop module.</p>
-                    <pre><code>configure_edison --setup</code></pre>
-                        </li>
-                    
-
-                    <li>
-                    <p>Follow the prompts to set the device password to be "<strong>intel123</strong>".</p>
+                        <li>
+                            <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the lefthand menu, select "<strong>Templates</strong>".</p>
+                            <p> <img src="./views/labs/intro/step4/image_2.png"></p>
                         </li>
 
-                    <li>
-                    <p>Then follow the prompts to give your Intel® Edison device an easy to recognize name.</p>
+                        <li>
+                            <p>A list of templates for developing Node.js applications will be shown.
+                                Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
+                            <p> <img src="./views/labs/intro/step4/image_3.png"></p>
+                        </li>
+                        
+                        <li>
+                            <p>Choose a directory for your project files, and enter a name for your project.</p>
+                            <p> <img src="./views/labs/intro/step4/image_4.png"></p>
                         </li>
 
-                    <li>
-                    <p>When asked if you want to set up wifi, type "<strong>Y</strong>" and press Enter.</p>
+                        <li>
+                            <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
+                            <p> <img src="./views/labs/intro/step4/image_5.png"></p>
                         </li>
 
-                    <li>
-                    <p>The Intel® Edison will scan for Wi-Fi networks and display a list of available networks when finished.</p>
-                    <figure>
-                    <img src="./views/labs/intro/step3/image_13.png">
-                    <figcaption>If you do not see any networks, try re-scanning by entering "0", or run <code>configure_edison --wifi</code>.</figcaption>
+                    </ol>
+
+                    <h2>Select a target IoT device</h2>
+
+                    <div class="tldr">
+                        <p>The Intel® XDK IoT Edition will automatically detect Intel® IoT devices on your network and display them in the "IoT Device" drop down list.</p>
+                    </div>
+
+                    <!-- <div class="callout troubleshooting">
+                         <p><strong>Problems with Wi-Fi? Need to program while offline?</strong></p>
+                         <p>The Intel® XDK requires the IP address of your IoT board in order to program it. If your IoT board is online, the IP address is automatically detected in most cases.</p>
+                         <p>However, if you are unable to get your IoT board online to the same network as your computer due to restricted or busy Wi-Fi networks, try a direct cable-based method and Add a device manually to the drop down list.</p>
+                         <p><strong>Intel® Galileo users:</strong><br>
+                         Connect an ethernet cable directly from your computer to the Intel® Galileo.</p>
+                         <p><strong>Intel® Edison users:</strong><br>
+                         Use the device mode micro-USB cable to establish an "Ethernet over USB" connection.</p>
+                         </div> -->
+
+                    <ol>
+
+                        <li>
+                            <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
+                            <p> <img src="./views/labs/intro/step4/image_6.png"></p>
+                        </li>
+
+                        <li>
+                            <p>Select your target Intel® Galileo or Intel® Edison from the list. If there are multiple devices, choose based on the device name and IP address.</p>
+                            <p> <img src="./views/labs/intro/step4/image_7.png"></p>
+
+                            <div class="callout troubleshooting">
+                                <p><strong>Do not see your device in the "IoT Device" drop down list?</strong></p>
+                                <p>From the "IoT Device" menu, instead choose "<strong>Add Manual Connection</strong>".</p>
+                                <p> <img src="./views/labs/intro/step4/image09.png"></p>
+                                <ul>
+                                    <li>For <strong>Address</strong>, enter the IP address of your Intel® Edison Board that you saw in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span>. e.g. 192.168.0.2</li>
+                                    <li>For <strong>Port</strong>, keep at the default "58888". </li>
+                                    <li>For <strong>User</strong> Name, use "root"</li>
+                                    <li>For <strong>Password</strong>, use "intel123" or the password you set in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span></li>
+                                </ul>
+                                <p>Click "<strong>Connect</strong>".</p>
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <p>Wait a moment for the connection to be established. Use the username "<strong>root</strong>" and password "<strong>intel123</strong>" if prompted. A popup window will appear to confirm the connection status.</p>
+                            <p> <img src="./views/labs/intro/step4/image33.png"></p>
+                        </li>
+
+                    </ol>
+
+                    <h2>Sync device clocks</h2>
+
+                    <div class="tldr">
+                        Sync your computer's time with the clock on the target board to avoid timing issues. Do this step any time you connect to a new target IoT device or the device has been powered off.
+                    </div>
+
+                    <ol>
+
+                        <li>
+                            <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
+                            <p> <img src="./views/labs/intro/step4/image_8.png"></p>
+                        </li>
+
+                        <li>
+                            <p>Select "<strong>sync PC time w/ clock on target device</strong>".</p>
+                            <p> <img src="./views/labs/intro/step4/image_9.png"></p>
+                        </li>
+
+                        <li>
+                            <p>A message in the console log will appear to confirm the update.</p>
+                            <p> <img src="./views/labs/intro/step4/image13.png"></p>
+                        </li>
+
+                    </ol>
+
+                    <h2>Build the application</h2>
+
+                    <div class="tldr">
+                        Fetch all the Node modules specified in package.json and install them on the IoT device. Run build any time you create a new project, or add/remove Node modules from an existing project.
+                    </div>
+
+                    <ol>
+
+                        <li>
+                            <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
+                            <p> <img src="./views/labs/intro/step4/image_10.png"></p>
+                        </li>
+                        
+                        <li>
+                            <p>In the popup, click "<strong>Build</strong>".</p>
+                            <p> <img src="./views/labs/intro/step4/image_11.png"></p>
+                        </li>
+                        
+                        <li>
+                            <p>Wait a moment for the packages to download and install. You will see a confirmation message in the console log.</p>
+                            <figure>
+                                <img src="./views/labs/intro/step4/image13.png">
+                                <figcaption>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</figcaption>
                             </figure>
                         </li>
 
-                    <li>
-                    <p>Locate your Intel® IoT Gateway SSID in the list and enter the <strong>corresponding number</strong> in the prompt. Press Enter.</p>
-                    <p>To confirm your entry, type "<strong>Y</strong>" and press Enter.</p>
-                    <figure>
-                    <img src="./views/labs/intro/step3/image_14.jpg">
-                    <figcaption>In this example, to connect to "kafka" use the number “16”.</figcaption>
-                            </figure>
-                        </li>
-                    
-                    <li>
-                    <p>The network in this example requires a password. Your network might require other information. Enter the appropriate network credentials. Press Enter when finished.</p>
-                    <p><img src="./views/labs/intro/step3/image_15.jpg"></p>
+                    </ol>
+
+                    <h2>Upload and run the application</h2>
+
+                    <div class="tldr">
+                        Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
+                    </div>
+
+                    <ol>
+
+                        <li>
+                            <p>In the bottom toolbar, click the "<strong>Upload</strong>" icon to upload the current project to the device.</p>
+                            <p> <img src="./views/labs/intro/step4/image_12.png"></p>
                         </li>
 
-                    <li>
-                    <p>The Intel® Edison will attempt to make a connection to the Intel® IoT Gateway.</p>
+                        <li>
+                            <p>Check the console log for a message confirming the upload.</p>
+                            <p> <img src="./views/labs/intro/step4/image_13.png"></p>
                         </li>
 
-                    <li>
-                    <p>When you see a "Done" message, you are now connected to the Gatewaya Wi-Fi network.</p>
-                    <p><strong>Note the IP address.</strong> You will need it in <span class="icon bookmark">Step 4: Deploy sample application with the Intel® XDK IoT Edition</span>.</p>
-                    <p><img src="./views/labs/intro/step3/image03.png"></p>
+                        <li>
+                            <p>In the bottom toolbar, click the "<strong>Run</strong>"<strong> icon</strong> to run the project that is currently installed on the device.</p>
+                            <p> <img src="./views/labs/intro/step4/image_14.png"></p>
+                        </li>
+
+                        <li>
+                            <p>Keep an eye on the console log bar for any runtime errors.</p>
+                            <p> <img src="./views/labs/intro/step4/image_15.png">
+                                <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
+                                <div class="callout troubleshooting">
+                                    <p><strong>Get a "cannot find module mraa" message?</strong></p>
+                                    <p> <img src="./views/labs/intro/step4/image25.png"></p>
+                                    <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
+                                    <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
+                                    <pre><code>
+echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
+opkg update
+opkg install libmraa0
+                                    </code></pre>
+                                    <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
+                                    <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
+                                </div>
+                        </li>
+
+                        <li>
+                            <p>Look at your Intel® IoT board for a blinking light.</p>
+                            <p><strong>Intel® Galileo Gen 2</strong><br>
+                                A green LED is located near the USB port.</p>
+                            <p> <img src="./views/labs/intro/step4/image18.png"></p>
+                            <p><strong>Intel® Edison</strong><br>
+                                The LED is located near the center of the board.</p>
+                            <p> <img src="./views/labs/intro/step4/image28.png"></p>
+
+                            <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
                         </li>
 
                     </ol>
 
                     <div id="next-steps" class="callout done">
-                    <p>You should now understand how to gain shell access to your Intel® Edison. And your Intel® Edison should now be connected to your Intel® IoT Gateway.</p>
-                    <p><a href="../index.html#done-step3" class="link-button centered">Continue to the next step »</a></p>
+                        <p>You should now be able to build and deploy projects using the Intel® XDK. An LED should be blinking on your Intel® IoT board.</p>
+                        <p><a href="../index.html#done-step4" class="link-button centered">Continue to the next step »</a></p>
                     </div>
 
                 </div>
-                </div>
+            </div>
 
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Step 4: Deploy sample application with the Intel® XDK IoT Edition</h5>
-                        <div ibox-tools></div>
-                    </div>
-
-                    <div class="ibox-content collapse">
-                        
-                        <h1>Step 4: Deploy a sample application with the Intel® XDK IoT Edition</h1>
-
-                        <p class="subtitle">Instructions for the Intel® Galileo or Intel® Edison using any computer OS platform</p>
-
-                        <div class="tldr">
-                            Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
-                        </div>
-
-                        <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
-
-                        <h2>Launch and sign into the Intel® XDK</h2>
-
-                        <div class="tldr">
-                            Note: Before you can use the Intel® XDK, you must sign up for an Intel® XDK account or log in to a pre-existing account. You will need to have an internet connection for the first time you launch the Intel® XDK.
-                        </div>
-
-                        <ol>
-                            
-                            <li>
-                                <p>Launch Intel® XDK IoT Edition.</p>
-                            </li>
-
-                            <li>
-                                <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-exis
-                                    ting account.</p>
-                                <div class="side-by-side">
-                                    <div class="left">
-                                        <img src="./views/labs/intro/step4/image_0.png">
-                                    </div>
-                                    <div class="right">
-                                         <img src="./views/labs/intro/step4/image_1.png">
-                                    </div>
-                                </div>
-                            </li>
-                            
-                        </ol>
-
-                        <h2>Create a project</h2>
-
-                        <ol>
-
-                            <li>
-                                <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the lefthand menu, select "<strong>Templates</strong>".</p>
-                                <p> <img src="./views/labs/intro/step4/image_2.png"></p>
-                            </li>
-
-                            <li>
-                                <p>A list of templates for developing Node.js applications will be shown.
-                                    Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
-                                <p> <img src="./views/labs/intro/step4/image_3.png"></p>
-                            </li>
-                            
-                            <li>
-                                <p>Choose a directory for your project files, and enter a name for your project.</p>
-                                <p> <img src="./views/labs/intro/step4/image_4.png"></p>
-                            </li>
-
-                            <li>
-                                <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
-                                <p> <img src="./views/labs/intro/step4/image_5.png"></p>
-                            </li>
-
-                        </ol>
-
-                        <h2>Select a target IoT device</h2>
-
-                        <div class="tldr">
-                            <p>The Intel® XDK IoT Edition will automatically detect Intel® IoT devices on your network and display them in the "IoT Device" drop down list.</p>
-                        </div>
-
-                        <!-- <div class="callout troubleshooting">
-                             <p><strong>Problems with Wi-Fi? Need to program while offline?</strong></p>
-                             <p>The Intel® XDK requires the IP address of your IoT board in order to program it. If your IoT board is online, the IP address is automatically detected in most cases.</p>
-                             <p>However, if you are unable to get your IoT board online to the same network as your computer due to restricted or busy Wi-Fi networks, try a direct cable-based method and Add a device manually to the drop down list.</p>
-                             <p><strong>Intel® Galileo users:</strong><br>
-                             Connect an ethernet cable directly from your computer to the Intel® Galileo.</p>
-                             <p><strong>Intel® Edison users:</strong><br>
-                             Use the device mode micro-USB cable to establish an "Ethernet over USB" connection.</p>
-                             </div> -->
-
-                        <ol>
-
-                            <li>
-                                <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
-                                <p> <img src="./views/labs/intro/step4/image_6.png"></p>
-                            </li>
-
-                            <li>
-                                <p>Select your target Intel® Galileo or Intel® Edison from the list. If there are multiple devices, choose based on the device name and IP address.</p>
-                                <p> <img src="./views/labs/intro/step4/image_7.png"></p>
-
-                                <div class="callout troubleshooting">
-                                    <p><strong>Do not see your device in the "IoT Device" drop down list?</strong></p>
-                                    <p>From the "IoT Device" menu, instead choose "<strong>Add Manual Connection</strong>".</p>
-                                    <p> <img src="./views/labs/intro/step4/image09.png"></p>
-                                    <ul>
-                                        <li>For <strong>Address</strong>, enter the IP address of your Intel® Edison Board that you saw in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span>. e.g. 192.168.0.2</li>
-                                        <li>For <strong>Port</strong>, keep at the default "58888". </li>
-                                        <li>For <strong>User</strong> Name, use "root"</li>
-                                        <li>For <strong>Password</strong>, use "intel123" or the password you set in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span></li>
-                                    </ul>
-                                    <p>Click "<strong>Connect</strong>".</p>
-                                </div>
-
-                            </li>
-
-                            <li>
-                                <p>Wait a moment for the connection to be established. Use the username "<strong>root</strong>" and password "<strong>intel123</strong>" if prompted. A popup window will appear to confirm the connection status.</p>
-                                <p> <img src="./views/labs/intro/step4/image33.png"></p>
-                            </li>
-
-                        </ol>
-
-                        <h2>Sync device clocks</h2>
-
-                        <div class="tldr">
-                            Sync your computer's time with the clock on the target board to avoid timing issues. Do this step any time you connect to a new target IoT device or the device has been powered off.
-                        </div>
-
-                        <ol>
-
-                            <li>
-                                <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
-                                <p> <img src="./views/labs/intro/step4/image_8.png"></p>
-                            </li>
-
-                            <li>
-                                <p>Select "<strong>sync PC time w/ clock on target device</strong>".</p>
-                                <p> <img src="./views/labs/intro/step4/image_9.png"></p>
-                            </li>
-
-                            <li>
-                                <p>A message in the console log will appear to confirm the update.</p>
-                                <p> <img src="./views/labs/intro/step4/image13.png"></p>
-                            </li>
-
-                        </ol>
-
-                        <h2>Build the application</h2>
-
-                        <div class="tldr">
-                            Fetch all the Node modules specified in package.json and install them on the IoT device. Run build any time you create a new project, or add/remove Node modules from an existing project.
-                        </div>
-
-                        <ol>
-
-                            <li>
-                                <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
-                                <p> <img src="./views/labs/intro/step4/image_10.png"></p>
-                            </li>
-                            
-                            <li>
-                                <p>In the popup, click "<strong>Build</strong>".</p>
-                                <p> <img src="./views/labs/intro/step4/image_11.png"></p>
-                            </li>
-                            
-                            <li>
-                                <p>Wait a moment for the packages to download and install. You will see a confirmation message in the console log.</p>
-                                <figure>
-                                     <img src="./views/labs/intro/step4/image13.png">
-                                    <figcaption>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</figcaption>
-                                </figure>
-                            </li>
-
-                        </ol>
-
-                        <h2>Upload and run the application</h2>
-
-                        <div class="tldr">
-                            Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
-                        </div>
-
-                        <ol>
-
-                            <li>
-                                <p>In the bottom toolbar, click the "<strong>Upload</strong>" icon to upload the current project to the device.</p>
-                                <p> <img src="./views/labs/intro/step4/image_12.png"></p>
-                            </li>
-
-                            <li>
-                                <p>Check the console log for a message confirming the upload.</p>
-                                <p> <img src="./views/labs/intro/step4/image_13.png"></p>
-                            </li>
-
-                            <li>
-                                <p>In the bottom toolbar, click the "<strong>Run</strong>"<strong> icon</strong> to run the project that is currently installed on the device.</p>
-                                <p> <img src="./views/labs/intro/step4/image_14.png"></p>
-                            </li>
-
-                            <li>
-                                <p>Keep an eye on the console log bar for any runtime errors.</p>
-                                <p> <img src="./views/labs/intro/step4/image_15.png">
-                                    <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
-                                    <div class="callout troubleshooting">
-                                        <p><strong>Get a "cannot find module mraa" message?</strong></p>
-                                        <p> <img src="./views/labs/intro/step4/image25.png"></p>
-                                        <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
-                                        <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
-                                        <pre><code>
-echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
-opkg update
-opkg install libmraa0
-                                        </code></pre>
-                                        <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
-                                        <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
-                                    </div>
-                            </li>
-
-                            <li>
-                                <p>Look at your Intel® IoT board for a blinking light.</p>
-                                <p><strong>Intel® Galileo Gen 2</strong><br>
-                                    A green LED is located near the USB port.</p>
-                                <p> <img src="./views/labs/intro/step4/image18.png"></p>
-                                <p><strong>Intel® Edison</strong><br>
-                                    The LED is located near the center of the board.</p>
-                                <p> <img src="./views/labs/intro/step4/image28.png"></p>
-
-                                <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
-                            </li>
-
-                        </ol>
-
-                        <div id="next-steps" class="callout done">
-                            <p>You should now be able to build and deploy projects using the Intel® XDK. An LED should be blinking on your Intel® IoT board.</p>
-                            <p><a href="../index.html#done-step4" class="link-button centered">Continue to the next step »</a></p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
                     <h5>Additional resources</h5>
                     <div ibox-tools></div>
                 </div>
 
-                    <div class="ibox-content">
+                <div class="ibox-content">
                     <ul>
                         <li><a href="putty/index.html">Troubleshooting &amp; Tips - Using PuTTY</a></li>
                         <li><a href="xdk/index.html">Troubleshooting &amp; Tips - Intel XDK</a></li>
                     </ul>
-                    </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
