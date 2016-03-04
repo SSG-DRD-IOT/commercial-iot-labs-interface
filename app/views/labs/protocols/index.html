@@ -28,17 +28,8 @@
                 </div>
 
                 <div class="ibox-content">
+                    <p>In this lab, we will explore the using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
 
-                    <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
-
-                    <p>By the end of this module, you should be able to:</p>
-
-                    <ul>
-                        <li>Connect to your Intel® IoT Gateway using SSH in order to run commands on the gateway.</li>
-                        <li>Connect to your Intel® Edison using a serial connection in order to configure the board.</li>
-                        <li>Use the Intel® XDK to deploy an application to your Intel® Edison.</li>
-                        <li>Blink the onboard LED of your Intel® Edison.</li>
-                    </ul>
                 </div>
             </div>
 
@@ -62,7 +53,7 @@
 
 	                      <h2>Install and run Node-RED</h2>
 
-                        <p>Log into the Intel Edison over serial like in Step 3 of Module 1.</p>
+                        <p>Log into the Intel® Edison over serial like in Step 3 of Module 1.</p>
 	                      <p>First get the ip address of the Edison:</p>
 	                      <code>$ ifconfig wlan0</code>
 	                      <p><img src="./views/labs/edge-device/nodered/part1/ifconfig.png" alt="" ></p>
@@ -320,7 +311,7 @@
 	                  <p>For this example use POST as the method and /LCD as the URL. </p>
 	                  <h2> Install Postman </h2>
 
-	                  <p>To send web requests to the Intel Edison we will be using Postman, a Chrome app designed to send web requests.</p>
+	                  <p>To send web requests to the Intel® Edison we will be using Postman, a Chrome app designed to send web requests.</p>
 	                  <p><img src = "./views/labs/edge-device/nodered/part3/postman_website.png" alt=""></p> 
 
 	                  <p>To install the app navigate to <a href ="https://www.getpostman.com/"> https://www.getpostman.com</a> ,
@@ -329,7 +320,7 @@
 	                  <h2> Use Postman to send web request </h2>
 	                  <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
 	                  <p><img src="./views/labs/edge-device/nodered/part3/postman.png" alt="" ></p>
-	                  <p>Select post from the dropdown menu and enter the IP address of your Intel Edison port 1880 with the URL specified above.
+	                  <p>Select post from the dropdown menu and enter the IP address of your Intel® Edison port 1880 with the URL specified above.
 	                      In this case it is "10.175.152.15:1880/LCD". The Grove LCD node requires a specific message to change the backlight color and
 	                      display text. The message must be a JSON with the structure: {"r":r_val,"g":g_val,"b":b_bal,"text":"text to print"} where r_val, g_val, and b_val
 	                      are the red, green and blue color values from 0-255. This structure is also specified in the grove-lcd node info tab. 
