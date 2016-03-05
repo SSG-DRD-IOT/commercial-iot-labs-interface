@@ -30,24 +30,7 @@
                 </div>
 
                 <div class="ibox-content">
-
-                </div>
-            </div>
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Objectives</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content">
-
-                    <p class="subtitle">Introduction &amp; Overview</p>
-
-                    <h2>Objective</h2>
-
-                    <p>In this module, prototype with the help of the Grove sensors and actuators, and with NodeJS.</p>
+                    <p>To learn how to build stand alone IoT devices with Intel® Edison.  Learn to use sensors and actuators to gather and respond to data.  The devices built during this lab will be extended in later labs to send their data to the Intel® IoT Gateway and to the cloud</p>
 
                     <p>By the end of this module, you should be able to:</p>
 
@@ -61,57 +44,428 @@
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Objectives</h5>
+                    <h5>Exercise 1: Temperature Sensor and LCD</h5>
 
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
-
+                <div class="ibox-content collapse">
                     <div id="start">
-                        <h2>Exercise 1: Temperature Sensor and LCD</h2>
                         <div class="tldr">
-                            Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.
+                            Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.
                         </div>
-                        <p><a href="temp_sensor/index.html" class="link-button centered">Go to Exercise 1 »</a></p>
+
+                        <ol>
+                            <li>
+                                <p>Install the Grove Base Shield onto the Intel® Edison Arduino expansion board.</p>
+                                <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
+                                <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
+                                <p><img src="./views/labs/build/temp_sensor/image_2.jpg" alt="" ></p>
+                            </li>
+
+                            <li>
+                                <p>Start a new project in the Intel® XDK using a blank template.</p>
+                                <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
+                                <p><img src="./views/labs/build/temp_sensor/image_0.png" alt="" ></p>
+                                <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
+                                <p><img src="./views/labs/build/temp_sensor/image_1.png" alt="" ></p>
+                            </li>
+
+                            <li>
+                                <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you with this default JavaScript:</p>
+                                <pre><code>/*jslint node:true, vars:true, bitwise:true, unparam:true */
+/*jshint unused:true */
+// Leave the above lines for propper jshinting
+//Type Node.js Here :)
+                                </code></pre>
+                            </li>
+
+                        </ol>
+
+                        <h5>Read the temperature sensor</h5>
+
+                        <p>Update <span class="icon file">main.js</span> to read the temperature sensor on program start up and log it to the console.</p>
+
+                        <ol>
+
+                            <li>
+                                <p>Include the JS UPM library for the basic Grove sensors.</p>
+                                <p><code>var groveSensor = require('jsupm_grove');</code></p>
+                            </li>
+
+                            <li>
+                                <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
+                                <p><code>var temp = new groveSensor.GroveTemp(0);</code></p>
+                            </li>
+
+                            <li>
+                                <p>Read the value of the <code>GroveTemp</code> object you just created.</p>
+                                <p><code>var celsius = temp.value();</code></p>
+                            </li>
+
+                            <li>
+                                <p>If desired, convert the Celsius value to Fahrenheit using the standard conversion formula.</p>
+                                <p><code>var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);</code></p>
+                            </li>
+
+                            <li>
+                                <p>Finally, output the value of the temperature sensor.</p>
+                                <p><code>console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</code></p>
+                            </li>
+
+                            <li>
+                                <p>The final code should look like this:</p>
+
+                                <ui-codemirror ui-codemirror-opts="editorOptions">/*jslint node:true, vars:true, bitwise:true, unparam:true */
+/*jshint unused:true */
+
+var groveSensor = require('jsupm_grove');
+var temp = new groveSensor.GroveTemp(0);
+var celsius = temp.value();
+var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+                                </ui-codemirror>
+                            </li>
+
+                            <li>
+                                <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel® XDK to:<br>
+                                    (1) Build your application, <br>
+                                    (2) Upload it to Intel® Edison, and <br>
+                                    (3) Run the application.</p>
+                                <p><img src="./views/labs/build/temp_sensor/xdk_deploy_steps.png" alt="" ></p>
+                            </li>
+
+                            <li>
+                                <p>If successful, you should see the temperature output in the Intel® XDK console.</p>
+                                <p><img src="./views/labs/build/temp_sensor/temp_sensor_success.png" alt="" ></p>
+                            </li>
+
+                        </ol>
+
+                        <h5>Add polling</h5>
+
+                        <p>Currently the temperature sensor is only read on application start. Add a JavaScript <code>setInterval</code> to regularly poll the sensor every second (1000 miliseconds).</p>
+                        <p>If you are not familiar with JavaScript, the format should look similar to this:</p>
+                        <ui-codemirror ui-codemirror-opts="editorOptions">function monitor() {
+    setInterval(function() {
+        // code to repeat goes here
+    }, 1000);
+}
+monitor();</ui-codemirror>
+
+                        <ol>
+
+                            <li>
+                                <p>Try incorporating the <code>setInterval</code> callback with the code you wrote in <span class="icon bookmark">Read the temperature sensor</span> before scrolling down for the solution.</p>
+                                <p class="dont-peek">
+                                    Write your own code now.<br>
+                                    Don't peek unless you're stuck! ;)<span class="cursor">|</span>
+                                </p>
+                                <p class="ready-to-peek">Ready?</p>
+                            </li>
+
+                            <li>
+                                <p>
+                                    With polling, the exercise code should look like this:</p>
+                                <ui-codemirror ui-codemirror-opts="editorOptions">var groveSensor = require('jsupm_grove');
+
+var temp = new groveSensor.GroveTemp(0);
+
+function monitor() {
+    setInterval(function() {
+        var celsius = temp.value();
+        var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+    }, 1000);
+}
+
+monitor();</ui-codemirror>
+
+                            </li>
+
+                        </ol>
+
+                        <h5>Add the LCD screen</h5>
+
+                        <p>Update <span class="icon file">main.js</span> to output the value from the temperature sensor to the LCD display.</p>
+
+                        <p>Below are the general steps to complete the exercise.</p>
+
+                        <ol>
+
+                            <li>
+                                <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
+                                <p><code>var LCD = require('jsupm_i2clcd');</code></p>
+                            </li>
+
+                            <li>
+                                <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
+                                <dl>
+                                    <dt>I2C bus (Number)</dt>
+                                    <dd>For the Intel Edison, <strong>use <code>0</code></strong>.</dd>
+
+                                    <dt>lcdAddress (Number)</dt>
+                                    <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
+
+                                    <dt>rgbAddress (Number)</dt>
+                                    <dd>The JHD1313M1 has two I2C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
+                                </dl>
+                            </li>
+
+                            <li>
+                                <p>To write to the LCD, you need to:</p>
+                                <ol style="list-style-type:lower-roman;">
+                                    <li>First, <strong>set the cursor position</strong>.
+                                        <br>
+                                        e.g. <code>(0,0)</code> for the top left. The JHD1313M1 has 2 rows (y) and 16 columns (x).</li>
+                                    <li>Then, <strong>write</strong> a string/message to the screen.
+                                        <br>
+                                        e.g. <code>"Temp: " + celsius + "C or " + fahrenheit + "F"</code></li>
+                                </ol>
+                                <p>The API documentation for generic I2C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
+                            </li>
+
+                            <li>
+                                <p>As a bonus, you can <strong>change the LCD backlight color</strong>.
+                                    <br>
+                                    e.g. <code>(255,255,255)</code> for white.</p>
+                                <p>The API documentation for the specific Grove RBG LCD you have can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods</a></p>
+                            </li>
+
+                            <li>
+                                <p>Use the steps and reference links above to output the value from the temperature sensor to the LCD display.</p>
+                                <p class="dont-peek">
+                                    Write your own code now.<br>
+                                    Don't peek unless you're stuck! ;)<span class="cursor">|</span>
+                                </p>
+                                <p class="ready-to-peek">Ready?</p>
+                            </li>
+
+                            <li>
+                                <p>Below is an example of the final solution.</p>
+                                <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
+
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+
+function monitor() {
+    setInterval(function() {
+
+      // Read the temperature sensor
+        var celsius = temp.value();
+        var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+        // Update the LCD screen
+        screen.setCursor(0, 0);
+        screen.setColor(255, 255, 255);
+        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+
+    }, 1000);
+}
+
+monitor();</ui-codemirror>
+
+                            </li>
+
+                            <li>
+                                <p>Use the buttons at the bottom of the Intel® XDK to:<br>
+                                    <strike>(1) Build your application</strike>,<br>
+                                    <span class="footnote">(Note: You only need to do this if you add new dependencies to <span class="icon file">package.json</span>)</span> <br>
+                                    (2) Upload it to Intel® Edison, and <br>
+                                    (3) Run the application.</p>
+                                <p><img src="./views/labs/build/temp_sensor/xdk_deploy_steps.png" alt="" ></p>
+                            </li>
+
+                        </ol>
+
+                        <div id="next-steps" class="callout done">
+                            <p>You should now be seeing the temperature displayed on the LCD.</p>
+                            <p><a href="../index.html#done-exercise1" class="link-button centered">Continue to the next step »</a></p>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Objectives</h5>
-
+                    <h5>Exercise 2: Earthquake Detector</h5>
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
+                <div class="ibox-content collapse">
 
+                    <div class="tldr">
+                        Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
+                    </div>
+
+                    <ol>
+
+                        <li>
+                            <p>Connect <strong>Grove Accelerometer</strong> to one of the <strong>I2C</strong> pins of the Grove Base Shield.</p>
+                            <p>Connect <strong>Grove LCD</strong> display to another <strong>I2C</strong> pin.</p>
+                            <p><img src="./views/labs/build/earthquake/image_6.jpg" alt="" ></p>
+                        </li>
+
+                        <li>
+                            <p>In <span class="icon file">main.js</span>, write your code to read values from the accelerometer and detect an earthquake.</p>
+                            <p>As a starting point, use the reference links below to view example code for each Grove component in this exercise.</p>
+                        </li>
+
+                    </ol>
+
+                
                     <div id="done-exercise1">
-                        <h2>Exercise 2: Earthquake Detector</h2>
+
                         <div class="tldr">
                             Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
                         </div>
-                        <p><a href="earthquake/index.html" class="link-button centered">Go to Exercise 2 »</a></p>
+
+                        <ui-codemirror ui-codemirror-opts="editorOptions">
+var digitalAccelerometer = require('jsupm_mma7660');
+
+// Instantiate an MMA7660 on I2C bus 0
+var myDigitalAccelerometer = new digitalAccelerometer.MMA7660(
+					digitalAccelerometer.MMA7660_I2C_BUS, 
+					digitalAccelerometer.MMA7660_DEFAULT_I2C_ADDR);
+
+// place device in standby mode so we can write registers
+myDigitalAccelerometer.setModeStandby();
+
+// enable 64 samples per second
+myDigitalAccelerometer.setSampleRate(digitalAccelerometer.MMA7660.AUTOSLEEP_64);
+
+// place device into active mode
+myDigitalAccelerometer.setModeActive();
+
+var x, y, z;
+x = digitalAccelerometer.new_intp();
+y = digitalAccelerometer.new_intp();
+z = digitalAccelerometer.new_intp();
+
+var ax, ay, az;
+ax = digitalAccelerometer.new_floatp();
+ay = digitalAccelerometer.new_floatp();
+az = digitalAccelerometer.new_floatp();
+
+var outputStr;
+
+var myInterval = setInterval(function()
+{
+	myDigitalAccelerometer.getRawValues(x, y, z);
+	outputStr = "Raw values: x = " + digitalAccelerometer.intp_value(x) +
+	" y = " + digitalAccelerometer.intp_value(y) +
+	" z = " + digitalAccelerometer.intp_value(z);
+	console.log(outputStr);
+
+	myDigitalAccelerometer.getAcceleration(ax, ay, az);
+	outputStr = "Acceleration: x = " 
+		+ roundNum(digitalAccelerometer.floatp_value(ax), 6)
+		+ "g y = " + roundNum(digitalAccelerometer.floatp_value(ay), 6) 
+		+ "g z = " + roundNum(digitalAccelerometer.floatp_value(az), 6) + "g";
+	console.log(outputStr);
+}, 500);
+
+// round off output to match C example, which has 6 decimal places
+function roundNum(num, decimalPlaces)
+{
+	var extraNum = (1 / (Math.pow(10, decimalPlaces) * 1000));
+	return (Math.round((num + extraNum) 
+		* (Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces));
+}
+
+// When exiting: clear interval and print message
+process.on('SIGINT', function()
+{
+	clearInterval(myInterval);
+
+	// clean up memory
+	digitalAccelerometer.delete_intp(x);
+	digitalAccelerometer.delete_intp(y);
+	digitalAccelerometer.delete_intp(z);
+
+	digitalAccelerometer.delete_floatp(ax);
+	digitalAccelerometer.delete_floatp(ay);
+	digitalAccelerometer.delete_floatp(az);
+
+	myDigitalAccelerometer.setModeStandby();
+
+	console.log("Exiting...");
+	process.exit(0);
+});
+                            </ui-codemirror>
+
                     </div>
                 </div>
             </div>
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Objectives</h5>
-
+                    <h5>Exercise 3: Smart Alarm Clock</h5>
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
+                <div class="ibox-content collapse">
 
                     <div id="done-exercise1">
-                        <h2>Exercise 2: Smart Alarm Clock</h2>
                         <div class="tldr">
                             Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Intel® Edison. Set the alarm time using a web page served directly from the Edison itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.
                         </div>
-                        <p><a href="smart_alarm/index.html" class="link-button centered">Go to Exercise 2 »</a></p>
+
+                        <div class="tldr">
+                            <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Intel Edison. Set the alarm time using a web page served directly from the Edison itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.</p>
+                        </div>
+
+                        <ol>
+
+                            <li>
+                                <p>Connect <strong>Grove Buzzer</strong> to digital pin <strong>D5</strong> of the Grove Base Shield.</p>
+                                <p>Connect <strong>Grove Button</strong> to digital pin <strong>D4</strong>.</p>
+                                <p>Connect <strong>Grove LCD</strong> display to any <strong>I2C</strong> pin.</p>
+                                <p>Connect <strong>Grove Rotary Angle</strong> to analog pin <strong>A0</strong>.</p>
+                                <p><img src="./views/labs/build/smart_alarm/image_8.jpg" alt="" ></p>
+                            </li>
+
+                            <li>
+                                <p>To start off, write some code for the hardware in <span class="icon file">main.js</span>:</p>
+                                <ul>
+                                    <li><p>Create and test functions to make the LCD display blink red, and to stop blinking.</p></li>
+                                    <li><p>Create and test functions to start the buzzer buzzing, and to stop the buzzer.</p></li>
+                                    <li><p>Changes in rotary angle should change the brightness of LCD display.</p></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <p>Now, add your server side code in <span class="icon file">main.js</span>:</p>
+                                <ul>
+                                    <li><p>Create a web server on the Intel Edison using express in NodeJS.</p></li>
+                                    <li><p>Remember to edit your <span class="icon file">package.json</span> to include the <em>express</em>, <em>moment</em>, and <em>superagent</em> npm modules.</p></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <p>Create a new <span class="icon file">index.html</span> file and write your front end code in there.</p>
+                                <ul>
+                                    <li>Create a simple HTML widget to set the time for the alarm clock.</li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <p>Finally, hook everything up together:</p>
+                                <ul>
+                                    <li><p>When it’s proper time for alarm to start, LCD display should blink to red and buzzer should start buzzing.</p></li>
+                                    <li><p>When user presses the button: alarm must turn off, LCD must stop blinking, and buzzer should stop buzzing.</p></li>
+                                </ul>
+                            </li>
+
+                        </ol>
+
                     </div>
                 </div>
             </div>
@@ -119,17 +473,44 @@
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Objectives</h5>
+                    <h5>Additional resources</h5>
 
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content">
+                <div class="ibox-content collapse">
+                    <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
 
-                    <h3>Additional resources</h3>
+                    <p><strong>Grove Temperature Sensor</strong></p>
 
                     <ul>
-                        <li>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></li>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a></li>
+                        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a></li>
+                    </ul>
+
+                    <p><strong>Grove LCD RGB Backlight</strong></p>
+
+                    <ul>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" target="_blank">Seeed Studio Wiki: LCD RGB Backlight</a></li>
+                        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">UPM API - i2clcd</a></li>
+                        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">UPM API - Jhd1313m1</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js" target="_blank">UPM JavaScript example: RGB LCD</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js</a></li>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_3-Axis_Digital_Accelerometer(%C2%B11.5g)">http://www.seeedstudio.com/wiki/Grove<em>-</em>3-Axis_Digital_Accelerometer(%C2%B11.5g)</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js</a></li>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight">http://www.seeedstudio.com/wiki/Grove<em>-</em>LCD_RGB_Backlight</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js</a></li>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">http://www.seeedstudio.com/wiki/Grove<em>-</em>Rotary_Angle_Sensor</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js</a></li>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Button">http://www.seeedstudio.com/wiki/Grove<em>-</em>Button</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js</a></li>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">http://www.seeedstudio.com/wiki/Grove<em>-</em>Buzzer</a></li>
+                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js</a></li>
+                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight">http://www.seeedstudio.com/wiki/Grove<em>-</em>LCD_RGB_Backlight</a></li>
+                        <li><a href="http://expressjs.com/starter/hello-world.html">http://expressjs.com/starter/hello-world.html</a></li>
+                        <li><a href="https://github.com/visionmedia/superagent">https://github.com/visionmedia/superagent</a></li>
+                        <li><a href="http://momentjs.com/docs/">http://momentjs.com/docs/</a></li>
                     </ul>
                 </div>
             </div>

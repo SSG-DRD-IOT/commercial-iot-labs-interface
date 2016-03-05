@@ -24,7 +24,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('index.home', {
       url: "/home",
       templateUrl: "views/home.html",
-      data: { pageTitle: 'Home' }
+      data: { pageTitle: 'Home', specialClass: 'landing-page' }
     })
     .state('index.schedule', {
       url: "/schedule",
@@ -35,6 +35,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       url: "/presentations",
       templateUrl: "views/presentations.html",
       data: { pageTitle: 'Slides View' }
+    })
+    .state('index.videos', {
+      url: "/videos",
+      templateUrl: "views/videos.html",
+      data: { pageTitle: 'Videos' }
     })
     .state('labs', {
       abstract: true,
@@ -98,6 +103,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       url: "/protocols",
       templateUrl: "views/labs/protocols/index.html",
       data: { pageTitle: 'Using Bluetooth and Zigbee' },
+      resolve: {
+        loadPlugin: function ($ocLazyLoad) {
+          return $ocLazyLoad.load([
+            {
+              serie: true,
+              files: [
+                'bower_components/codemirror/lib/codemirror.css',
+                'bower_components/codemirror/theme/ambiance.css',
+                'bower_components/codemirror/lib/codemirror.js',
+                'bower_components/codemirror/mode/javascript/javascript.js'
+              ]
+            },
+            {
+              name: 'ui.codemirror',
+              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }
+          ]);
+        }
+      }
+    })
+    .state('labs.databases', {
+      url: "/databases",
+      templateUrl: "views/labs/databases/index.html",
+      data: { pageTitle: 'Build an Edge Device' },
       resolve: {
         loadPlugin: function ($ocLazyLoad) {
           return $ocLazyLoad.load([

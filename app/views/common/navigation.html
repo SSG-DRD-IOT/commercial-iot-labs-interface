@@ -29,9 +29,13 @@
                 <a ui-sref="index.schedule"><i class="fa fa-calendar"></i> <span class="nav-label">Schedule</span></a>
             </li>
             <li>
-                <a ui-sref="index.presentations"><i class="fa fa-desktop"></i> <span class="nav-label">Presentations</span></a>
+                <a ui-sref="index.presentations"><i class="fa fa-slideshare"></i> <span class="nav-label">Presentations</span></a>
             </li>
-          
+
+            <li>
+                <a ui-sref="index.videos"><i class="fa fa-desktop"></i> <span class="nav-label">Videos</span></a>
+            </li>
+
             <li ng-class="{active: $state.includes('labs')}">
                 <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Labs</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
@@ -39,13 +43,18 @@
                     <li ui-sref-active="active"><a ui-sref="labs.build">Building Edge Sensors and Actuators</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.protocols">Application Protocols: MQTT and HTTP</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.networking">Networking Protocols: WIFI, Bluetooth*, Zigbee*</a></li>
+                    <!-- <li ui-sref-active="active"><a ui-sref="labs.databases">Databases at the Edge</a></li> -->
                     <li ui-sref-active="active"><a ui-sref="labs.helix">Helix Device Cloud</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.automation">Automation on the Edge Network</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.security">Security and the Internet of Things</a></li>
-                    <!--                     <li ui-sref-active="active"><a ui-sref="labs.introduction4">Data Analytics in the Cloud</a></li> -->
+                    <li ui-sref-active="active"><a ui-sref="labs.introduction4">Data Analytics in the Cloud</a></li>
                 </ul>
             </li>
-            
+
+            <li>
+                <a ui-sref="index.solutions"><i class="fa fa-github"></i> <span class="nav-label">Solutions</span></a>
+            </li>
+
         </ul>
 
     </div>
