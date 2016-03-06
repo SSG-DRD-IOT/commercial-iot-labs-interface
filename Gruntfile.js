@@ -125,7 +125,7 @@ module.exports = function (grunt) {
                             'views/{,*/}*.html',
                             'views/**/*',
                             'styles/patterns/*.*',
-                            'img/{,*/}*.*'
+                            'img/**/*'
                         ]
                     },
                     {
