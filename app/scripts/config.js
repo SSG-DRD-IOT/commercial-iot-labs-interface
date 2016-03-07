@@ -152,6 +152,30 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       templateUrl: "views/labs/hdc/index.html",
       data: { pageTitle: 'Helix Device Cloud' }
     })
+    .state('labs.admin', {
+      url: "/admin-interface",
+      templateUrl: "views/labs/admin-interface/index.html",
+      data: { pageTitle: 'Custom Admin Interface' },
+      resolve: {
+        loadPlugin: function ($ocLazyLoad) {
+          return $ocLazyLoad.load([
+            {
+              serie: true,
+              files: [
+                'bower_components/codemirror/lib/codemirror.css',
+                'bower_components/codemirror/theme/ambiance.css',
+                'bower_components/codemirror/lib/codemirror.js',
+                'bower_components/codemirror/mode/javascript/javascript.js'
+              ]
+            },
+            {
+              name: 'ui.codemirror',
+              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }
+          ]);
+        }
+      }
+    })
     .state('labs.automation', {
       url: "/automation",
       templateUrl: "views/labs/automation/index.html",
