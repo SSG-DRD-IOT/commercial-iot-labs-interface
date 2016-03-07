@@ -144,13 +144,13 @@
                             <li>Click on <b>System Tree</b> <img src="./views/labs/hdc/epo-introduction/systemtreemenu.png"/></li>
                             <li>In the left side bar click on <b>Lost & Found</b> and then locate your device. You'll be able to identify it by it IP address. <img src="./views/labs/hdc/epo-introduction/findyoursystem.png"/></li>
                             <li>Click on your device to show the device details screen. <img src="./views/labs/hdc/epo-introduction/devicedetails.png"/></li>
-                            <li>Then in the lower left corner goto the <b>Actions menu -> Directory Management -> Move Systems</b> <img src="./views/labs/hdc/epo-introduction/movesystem.png"></li> 
+                            <li>Then in the lower left corner goto the <b>Actions menu -> Directory Management -> Move Systems</b> <img src="./views/labs/hdc/epo-introduction/movesystem.png"></li>
                             <li>Select the Group in which you'd like to move your device. Press OK. <img src="./views/labs/hdc/epo-introduction/selectgroup.png"/></li>
                             <li>You have move your device into a System Group</li>
                         </ol>
 
                     </section>
-                    
+
                 </div>
             </div>
 
@@ -206,7 +206,7 @@
                             <li><b>Manually from the server</b> — This is the most common approach and requires Helix Device Cloud Agent wake-up communication port be open.</li>
                             <li><b>On a schedule set by the administrator</b> — This approach is useful when manual agent-server communication is disabled by policy. The administrator can create and deploy a wake-up task, which wakes up Helix Device Cloud Agent and initiates agent-server Communication.</li>
                         </ul>
-                        
+
                         <p>Some reasons for issuing a wake-up call are:</p>
                         <ul>
                             <li>You make a policy change that you want to enforce immediately, without waiting for the scheduled ASCI to expire.</li>
@@ -435,71 +435,8 @@
             </div>
 
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 5: Helix Device Cloud - Web API Scripting</h5>
 
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content collapse">
-
-                    <div class="tldr">
-<p> A sample HDC application is provided which sends telemetry data from the device to the helix device cloud.
-
-</p>
-                    </div>
-                    <article>
-                        <h5> Running the pseudo-telemetry Application on Gateway</h5>
-                        <ol>
-                            <li>
-                                <p> Go to <b>ePO dashboard</b> from your browser, and select the <b>Systems Information</b> page of the device to which you want to connect.
-                                    Switch to the <b>Data Source</b> pane. It should be empty if you never ran application pushing telemetry data to the Cloud on that particular asset.
-                                </p>
-                                <img src="./views/labs/hdc/web-api/./image_2.png" alt="ePO dashboard"/>
-                            </li>
-                            <li>
-                                <p>On the gateway switch to the wra user (this is not necessary, as the application can be executed as root as well, but still it is good practice). Execute the following command to change user. </p>
-                                <code>$ su wra</code>
-                            </li>
-                            <li>
-                                <p>Execute the following command to execute the sample pseudo telemetry application </p>
-                                <code>$ /opt/nova-apps/bin/pseudo-telemetry &</code>
-                            </li>
-                            <li>
-                                <p>You will see temperature and light telemetry data display on the serial console.</p>
-                                <img src="./views/labs/hdc/web-api/./image_1.png" alt="Terminal output of pseudo telemetry data"/>
-                            </li>
-                            <li>
-                                <p>If you refresh your browser you will see something similar to the following, with temperature and light telemetry data displayed in the asset 'Data Source' pane. </p>
-                                <img src="./views/labs/hdc/web-api/./image_3.png" alt="Checking data on hdc cloud"/>
-                            </li>
-                        </ol>
-                    </article>
-
-                    <article>
-                        <h5>Notes </h5>
-                        <ol>
-                            <li>
-                                <p>The temperature and light telemetry data are not coming from real sensors, but instead generated by s/w, therefore do not be surprise if the values displayed do not match the environment of the board. </p>
-                            </li>
-                            <li>
-                                <p>The current version of the 'Data Source' pane only display live telemetry data values. In addition, the page need to be refreshed manually to display the latest values pushed by the asset
-                            </li>
-                        </ol>
-                    </article>
-
-                    <h5>References</h5>
-
-                    <ul>
-                        <li><p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p></li>
-                        <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a></p></li>
-                    </ul>
-
-                </div>
-            </div>
 
         </div>
     </div>
 </div>
-
