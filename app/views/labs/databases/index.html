@@ -104,8 +104,7 @@
 
                     <div>
                         <p class="label">schema/sensorSchema.js</p>
-                        <ui-codemirror ui-codemirror-opts="editorOptions">
-var mongoose = require('mongoose');
+                        <ui-codemirror ui-codemirror-opts="editorOptions">var mongoose = require('mongoose');
 var sensorSchema = new mongoose.Schema({
   id: {
     type: String,
@@ -193,8 +192,7 @@ module.exports = sensorSchema;
 
                     <p>Write this code to <code>/index.js</code> at the root level of this project.</p>
 
-                    <div><ui-codemirror ui-codemirror-opts="editorOptions">
-var mongoose = require('mongoose');
+                    <div><ui-codemirror ui-codemirror-opts="editorOptions">var mongoose = require('mongoose');
 
 var SensorSchema = require('./schema/sensorSchema.js');
 var ActuatorSchema = require('./schema/actuatorSchema.js');
@@ -237,10 +235,10 @@ module.exports = {
 
                     <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
                     <p>Please note that the <code>intel-commerical-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
-
+                    <p class="subtitle">Recording MQTT Sensor Activity</p>
                     <p class="label">./package.json</p>
                     
-                    <p class="subtitle">Recording MQTT Sensor Activity</p>
+
                     <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
 "mqtt": "latest",
 "mongoose": "latest",
@@ -256,16 +254,14 @@ module.exports = {
 
                         <p>Now you can require the MQTT module and setup a connection to the MQTT broker. Your gateway's IP address is <code>192.168.1.1</code> by default.</p>
                         <p class="label">./server.js</p>
-                        <ui-codemirror ui-codemirror-opts="editorOptions"> 
-// Require MQTT and setup the connection to the broker
+                        <ui-codemirror ui-codemirror-opts="editorOptions">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
 var mqttClient = mqtt.connect('mqtt://192.168.1.1');</ui-codemirror>
 
                         <p>Likewise, require the MongooseJS module and setup the connection to the MongoDB server.</p>
 
 	                      <p class="label">./server.js</p>
-                        <ui-codemirror ui-codemirror-opts="editorOptions"> 
-// Require the MongoDB libraries and connect to the database
+                        <ui-codemirror ui-codemirror-opts="editorOptions">// Require the MongoDB libraries and connect to the database
 var mongoose = require('mongoose');
 mongoose.connect(config.mongodb.host);
 var db = mongoose.connection;
@@ -281,15 +277,14 @@ console.log("Connection to MongoDB successful");
                         <p>Here we are also demonstrating binding a handler to two database events the <code>open</code> and <code>error</code> events.</p>
 
                         <p>Now import and initialize a sensor and a data model.</p>
-	                      <ui-codemirror ui-codemirror-opts="editorOptions"> 
-// Import the Database Model Objects
+	                      <ui-codemirror ui-codemirror-opts="editorOptions">// Import the Database Model Objects
 var DataModel = require('intel-commerical-iot-database-models').DataModel;
 var SensorModel = require('intel-commerical-iot-database-models').SensorModel;</ui-codemirror>
 
                         <h5>The MQTT Event Loop</h5>
                         <ol>
                             <li>
-                                <p>Just as you did in the <a href="/modules/build-edge-devices/temp_sensor/index.html">Publishing Sensor Data Lab</a> create a handler for the MQTT <code>connect</code> event. In this event handler subscribcd tme to the following MQTT topics:</p>
+                                <p>Just as you did in the <a href="/modules/build-edge-devices/temp_sensor/index.html">Publishing Sensor Data Lab</a> create a handler for the MQTT <code>connect</code> event. In this event handler subscribe to the following MQTT topics:</p>
 
                                 <ul>
                                     <li><code>announcements</code></li>
@@ -308,13 +303,13 @@ var SensorModel = require('intel-commerical-iot-database-models').SensorModel;</
                             <li>
                                 <p>Next, write a handler for the MQTT <code>message</code> event.</p>
 
-	                              <ui-codemirror ui-codemirror-opts="editorOptions"> 
-// A function that runs when MQTT receives a message
+	                              <ui-codemirror ui-codemirror-opts="editorOptions">// A function that runs when MQTT receives a message
 mqttClient.on('message', function (topic, message) {
 
 };</ui-codemirror>
-
-                                <p>In this function do the implement the following steps:</p>
+                            </li>
+                        </ol>
+                        <p>In this functionThe MQTT Event Loop implement the following steps:</p>
 
                                 <ol>
                                     <li>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</li>

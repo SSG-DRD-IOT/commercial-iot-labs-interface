@@ -79,105 +79,6 @@
         </div>
       </div>
 
-
-
-      <!-- Objectives -->
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Change the Wi-Fi* Channel/Frequency</h5>
-
-          <div ibox-tools></div>
-        </div>
-
-        <div class="ibox-content collapse">
-          <p>In a workshop, you will want to change the channel on which your gateway broadcasts Wi-Fi. Otherwise with many Wi-Fi routers in the room bandwidth may become very slow or even stop altogether.  This is because of <a href="https://en.wikipedia.org/wiki/Electromagnetic_interference">radio frequency interference</a>. </p>
-
-          <p>To fix this once you have connected to your gateway's Wi-Fi, open a Internet browser and go to <a href="https://192.168.1.1">https://192.168.1.1</a>.  If this is the first time you have been to this URL then you will often see a screen warning you that the TLS certificate is not recognized by the trusted certificate hierarchy installed on your browser. This is OK.  Click past it.</p>
-
-          <img src="./views/labs/intro/danger.png"></img>
-          <p>and enter the gateway root password</p>
-          <p>Then go to the Network -> Wifi menu</p>
-          
-          <img src="./views/labs/intro/wifi-menu.png"></img>
-          <p>Scroll down to the Channel select box. <b>Ask your neighbor what channel they are using and then pick a different frequency.</b></p>
-          <img src="./views/labs/intro/channel.png"></img>
-
-          <p><b>Congratulations! You have fought back radio frequency interference in your area!</b></p>
-        </div>
-      </div>
-
-
-      <!-- Setup Screen Window Manager -->
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Helpful Hints: Using the Screen Window Manager</h5>
-          <div ibox-tools></div>
-        </div>
-        <div class="ibox-content collapse">
-          <p>The <b>screen</b> program is a terminal based window manager that will be very helpful when you begin working with multiple terminal windows. Here is a quick primer to get you started.</p>
-          <p>Once you log in the Intel® Iot Gateway, start the <code>screen</code> window manager. </p>
-          <p><code>$ screen</code></p>
-
-          <p>You can open multiple console windows, name them and switch between them using screen.  There will be many times when you will want to run several processes at the same time and <code>screen</code> will be very useful to launch them in separate windows.  The another alternative is to simply SSH into the server multiple times.  Of course, in production you will want to launch most processes at boot time using Systemd.</p>
-          <ul>
-            <li><p>To create a new console type <code>Ctrl-A C</code></p></li>
-            <li><p>To name the console type <code>Ctrl-A Shift-A</code></p></li>
-            <li><p>To get a list of all consoles type <code>Ctrl-A &quot;</code></p></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Launch the Mosquitto Broker -->
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Launch the Mosquitto MQTT Broker</h5>
-          <div ibox-tools></div>
-        </div>
-        <div class="ibox-content collapse">
-          <p>Mosquitto may already be running on the Intel® IoT Gateway. However, if you need to start the process again simply type.</p>
-
-          <p><code>$ mosquitto</code></p>
-          <p>A traditional IoT architecture has one or more sensors, actuators and controllers. These communicate to an edge gateway. The edge gateway talks across the wide area network, often the internet, to the cloud or enterprise or server. Mosquitto is an <a href="http://mqtt.org/">MQTT</a> broker that will enable sensor data to be transferred from sensors to the gateway.  It's a commonly used protocol in the Internet of Things because it is a publish/subscribe protocol rather than a client/server protocol.  Many applications can subscribe to the same event and the MQTT server will deliver the event to all interested applications.</p>
-        </div>
-      </div>
-
-      <!-- Set Permissions for MongoDB and NodeJS -->
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Setup MongoDB and NodeJS</h5>
-          <div ibox-tools></div>
-        </div>
-        <div class="ibox-content collapse">
-          <ol>
-            <li>Download the MongoDB database. Use wget on the command line to download it.<br/>
-              <pre><code>wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-amazon-3.2.3.tgz</pre></code>
-            </li>
-
-            <li>Unarchive the mongodb files and install it.
-              <pre><code>cd mongodb-linux-x86_64-3.0.6/bin</code></pre>
-              <pre><code>cp * /usr/bin/</code></pre>
-            </li>
-            
-
-            </li>
-
-            <li>
-              <p>The Intel Iot Gateway is enabled with <strong>grsecurity</strong> which by default prevents the execution of processes that are not added to a white list.</p>
-              <p>Add the MongoDB daemon (<code>mongod</code>)and the Mongo Client (<code>mongo</code>) to the whitelist type:</p>
-              <pre><code>$ paxctl -Cm /usr/bin/mongod</code></pre>
-              <pre><code>$ paxctl -Cm /usr/bin/mongo</code></pre>
-              <pre><code>$ paxctl -Cm /usr/bin/node</code></pre>
-            </li>
-
-            <li>
-              <p>Start the MongoDB daemon using the <code>mongod</code> command:</p>
-              <pre><code>$ mongod</code></pre>
-              <p>Hint if you create a new console with the Screen window manager, you can leave it running while working in a different console.</p>
-            </li>
-          </ol>
-        </div>
-      </div>
-
       <!-- Setup your Intel® Edison -->
       <div class="ibox float-e-margins">
         <div class="ibox-title">
@@ -185,7 +86,7 @@
           <div ibox-tools></div>
         </div>
         <div class="ibox-content collapse">
-          <p class="subtitle">Instructions f or the <strong>Intel® Edison Kit for Arduino</strong>with Arduino-compatible expansion board.</p>
+          <p class="subtitle">Instructions for the <strong>Intel® Edison Kit for Arduino</strong>with Arduino-compatible expansion board.</p>
           
           <div class="tldr">
             Connect your development computer to the Intel® Edison using the supplied micro-USB cables.
@@ -361,7 +262,7 @@
             <li>
               <p>The Intel® Edison will scan for Wi-Fi networks and display a list of available networks when finished.</p>
               <figure>
-                <img src="./views/labs/intro/step3/image_13.png">
+                <img class="img-responsive" src="./views/labs/intro/step3/image_13.png">
                 <figcaption>If you do not see any networks, try re-scanning by entering "0", or run <code>configure_edison --wifi</code>.</figcaption>
               </figure>
             </li>

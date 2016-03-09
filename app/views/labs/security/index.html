@@ -238,13 +238,14 @@ solidcores3-6.6.0_145-r0.0.intel_baytrail_64
                 <pre><code>#!/bin/bash
 echo "Hello, World"
                             </code></pre>
-                <p>Then press "ESC" and type “:wq”  This will save and quit the vi editor.</p>
+                <p><b>Then press "ESC" and type “:wq”  This will save and quit the vi editor.</b></p>
                         </li>
 
                 <li>
 	                <p>Give the script execute permissions</p>
 	                <p><code>$ chmod +x /root/test_script.sh</code></p>
 	                <p>Then try to execute the script.</p>
+                  <p><code>$ /root/test_script.sh</code></p>
                 <p><img src="./views/labs/security/mec/image_8.png" alt="image alt text" /></p>
                 <p>Note the response Permission denied - MEC did not allow the script to run.</p>
                         </li>
@@ -300,41 +301,45 @@ Hello, World</code></pre>
 
                 <li>
                 <p>Now try to modify the file by executing the following command.</p>
+                <p><code>cat /root/test_script.sh</code></p>
                 <p><img src="./views/labs/security/mec/image_15.png" alt="image alt text" /></p>
                         </li>
 
                 <li>
-                <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the Permission denied.<img src="./views/labs/security/mec/image_16.png" alt="image alt text" /></p>
-                        </li>
+                    <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the Permission denied.</p>
+                    <p><code>cat /usr/loca/mcafee/solidcore/log/solidcore.log | tail -n 1</code></p>
+                    <img src="./views/labs/security/mec/image_16.png" alt="image alt text" /></p>
+                </li>
 
                 <li>
-                <p>Execute the following command to enabled deny-read and then review the status of the MEC features.</p>
-                <p><img src="./views/labs/security/mec/image_17.png" alt="image alt text" /></p>
-                <p>The response indicates that the deny-read feature.</p>
-                        </li>
+                    <p>Execute the following command to enabled deny-read and then review the status of the MEC features.</p>
+                    <p><code>sadmin features enable deny-read</code></p>
+                    <p><img src="./views/labs/security/mec/image_17.png" alt="image alt text" /></p>
+                    <p>The response indicates that the deny-read feature.</p>
+                </li>
 
                 <li>
-                <p>Execute the following command to set read protection for the file.</p>
-	                <p><code>sadmin rp -i /root/test_script.sh</code></p>
-                        </li>
+                    <p>Execute the following command to set read protection for the file.</p>
+	                  <p><code>sadmin rp -i /root/test_script.sh</code></p>
+                </li>
 
                 <li>
-                <p>Execute the following command to review the MEC configuration file and confirm that you added read protection for the file /root/test_setup.sh</p>
-                <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
-                <p><img src="./views/labs/security/mec/image_19.png" alt="image alt text" /></p>
-                        </li>
+                    <p>Execute the following command to review the MEC configuration file and confirm that you added read protection for the file /root/test_setup.sh</p>
+                    <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
+                    <p><img src="./views/labs/security/mec/image_19.png" alt="image alt text" /></p>
+                </li>
 
                 <li>
-                <p>Now attempt to read the file by printing to the console.</p>
-                <p><img src="./views/labs/security/mec/image_20.png" alt="image alt text" /></p>
-                        </li>
+                    <p>Now attempt to read the file by printing to the console.</p>
+                    <p><img src="./views/labs/security/mec/image_20.png" alt="image alt text" /></p>
+                </li>
 
                 <li>
-                <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the <strong>Permission denied error</strong>.</p>
-                <p><img src="./views/labs/security/mec/image_21.png" alt="image alt text" /></p>
-                        </li>
+                    <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the <strong>Permission denied error</strong>.</p>
+                    <p><img src="./views/labs/security/mec/image_21.png" alt="image alt text" /></p>
+                </li>
 
-                    </ol>
+                </ol>
 
                 <h5>5. Using the Update Mode</h5>
 
