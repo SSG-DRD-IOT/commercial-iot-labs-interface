@@ -21,26 +21,222 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Objectives</h5>
+          <!-- Objectives -->
+          <div ibox  title="Objectives">
+            <div content-block name="read-objectives" message="Read the Objectives">
 
-                    <div ibox-tools></div>
-                </div>
+              <p>To learn how to build stand alone IoT devices with Intel® Edison.  Learn to use sensors and actuators to gather and respond to data.  The devices built during this lab will be extended in later labs to send their data to the Intel® IoT Gateway and to the cloud</p>
 
-                <div class="ibox-content">
-                    <p>To learn how to build stand alone IoT devices with Intel® Edison.  Learn to use sensors and actuators to gather and respond to data.  The devices built during this lab will be extended in later labs to send their data to the Intel® IoT Gateway and to the cloud</p>
+              <p>By the end of this module, you should be able to:</p>
 
-                    <p>By the end of this module, you should be able to:</p>
-
-                    <ul>
-                        <li>Connect Grove Kit sensors and actuators to your Intel® Edison.</li>
-                        <li>Use the JavaScript UPM libraries to control actuators and read data from sensors.</li>
-                        <li>Create a NodeJS server to configure and analyze the Grove components as "edge devices" — devices triggered over a network instead of directly on the board.</li>
-                    </ul>
-                </div>
+              <ul>
+                <li>Connect Grove Kit sensors and actuators to your Intel® Edison.</li>
+                <li>Use the JavaScript UPM libraries to control actuators and read data from sensors.</li>
+                <li>Create a NodeJS server to configure and analyze the Grove components as "edge devices" — devices triggered over a network instead of directly on the board.</li>
+              </ul>
             </div>
+          </div>
+
+          <div ibox title="Deploy sample application with the Intel® XDK IoT Edition">
+            <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction"
+            image-link="./views/labs/build/xdk-splash.png">
+
+            <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel® Edison using any computer OS platform</p>
+
+            <p>
+              Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
+            </p>
+
+            <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition
+              also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
+            </div>
+
+            <div content-block name="launch-xdk" message="Launch and Sign In to the Intel XDK" image-link="./views/labs/build/image_0.png">
+              <p>Begin by launching the Intel XDK</p>
+
+              <div class="alert alert-warning">
+                Note: Before you can use the Intel® XDK, you must sign up for an Intel® XDK account or log in to a pre-existing account. You will need to have an internet connection for the first time you launch the Intel® XDK.
+              </div>
+            </div>
+
+            <div content-block name="xdk-signup" message="Create an account and sign in to the Intel XDK" image-link="./views/labs/build/image_1.png">
+
+              <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-existing account.</p>
+            </div>
+
+            <div content-block name="create-xdk-project" message="Click on Templates" image-link="./views/labs/build/image_2.png">
+                <p>Create a project</p>
+
+                <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the lefthand menu, select "<strong>Templates</strong>".</p>
+            </div>
+
+            <div content-block name="select-template" message="Select the LED Blink Template" image-link="./views/labs/build/image_3.png">
+              <p>A list of templates for developing Node.js applications will be shown. Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
+            </div>
+
+            <div content-block name="select-template" message="Name and then Create the New Project">
+              <p>Choose a directory for your project files, and enter a name for your project.</p>
+              <p> <img src="./views/labs/build/image_4.png"></p>
+              <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
+              <p> <img src="./views/labs/build/image_5.png"></p>
+            </div>
+
+            <div content-block name="select-device" message="Select a target IoT device" image-link="./views/labs/build/image_6.png">
+              <p>The Intel® XDK IoT Edition will automatically detect Intel® IoT devices on your network and display them in the "IoT Device" drop down list.</p>
+
+              <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
+
+              <p>Select your target Intel® Galileo or Intel® Edison from the list. If there are multiple devices, choose based on the device name and IP address.</p>
+              <img src="./views/labs/build/image_7.png"/>
+
+              <div class="alert alert-warning">
+                <p><strong>Do not see your device in the "IoT Device" drop down list?</strong></p>
+                <p>From the "IoT Device" menu, instead choose "<strong>Add Manual Connection</strong>".</p>
+                <p> <img src="./views/labs/build/image09.png"></p>
+                <ul>
+                  <li>For <strong>Address</strong>, enter the IP address of your Intel® Edison Board that you saw in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span>. e.g. 192.168.0.2</li>
+                  <li>For <strong>Port</strong>, keep at the default "58888". </li>
+                  <li>For <strong>User</strong> Name, use "root"</li>
+                  <li>For <strong>Password</strong>, use "intel123" or the password you set in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span></li>
+                </ul>
+                <p>Click "<strong>Connect</strong>".</p>
+              </div>
+
+            </div>
+
+                <!-- <div class="callout troubleshooting">
+                     <p><strong>Problems with Wi-Fi? Need to program while offline?</strong></p>
+                     <p>The Intel® XDK requires the IP address of your IoT board in order to program it. If your IoT board is online, the IP address is automatically detected in most cases.</p>
+                     <p>However, if you are unable to get your IoT board online to the same network as your computer due to restricted or busy Wi-Fi networks, try a direct cable-based method and Add a device manually to the drop down list.</p>
+                     <p><strong>Intel® Galileo users:</strong><br>
+                       Connect an ethernet cable directly from your computer to the Intel® Galileo.</p>
+                     <p><strong>Intel® Edison users:</strong><br>
+                       Use the device mode micro-USB cable to establish an "Ethernet over USB" connection.</p>
+                </div> -->
+
+
+                  </li>
+
+                  <li>
+                    <p>Wait a moment for the connection to be established. Use the username "<strong>root</strong>" and password "<strong>intel123</strong>" if prompted. A popup window will appear to confirm the connection status.</p>
+                    <p> <img src="./views/labs/build/image33.png"></p>
+                  </li>
+
+                </ol>
+
+                <h5>Sync device clocks</h5>
+
+                <div class="tldr">
+                  Sync your computer's time with the clock on the target board to avoid timing issues. Do this step any time you connect to a new target IoT device or the device has been powered off.
+                </div>
+
+                <ol>
+
+                  <li>
+                    <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
+                    <p> <img src="./views/labs/build/image_8.png"></p>
+                  </li>
+
+                  <li>
+                    <p>Select "<strong>sync PC time w/ clock on target device</strong>".</p>
+                    <p> <img src="./views/labs/build/image_9.png"></p>
+                  </li>
+
+                  <li>
+                    <p>A message in the console log will appear to confirm the update.</p>
+                    <p> <img src="./views/labs/build/image13.png"></p>
+                  </li>
+
+                </ol>
+
+                <h5>Build the application</h5>
+
+                <div class="tldr">
+                  Fetch all the Node modules specified in package.json and install them on the IoT device. Run build any time you create a new project, or add/remove Node modules from an existing project.
+                </div>
+
+                <ol>
+
+                  <li>
+                    <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
+                    <p> <img src="./views/labs/build/image_10.png"></p>
+                  </li>
+
+                  <li>
+                    <p>In the popup, click "<strong>Build</strong>".</p>
+                    <p> <img src="./views/labs/build/image_11.png"></p>
+                  </li>
+
+                  <li>
+                    <p>Wait a moment for the packages to download and install. You will see a confirmation message in the console log.</p>
+                    <figure>
+                      <img src="./views/labs/build/image13.png">
+                      <figcaption>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</figcaption>
+                    </figure>
+                  </li>
+
+                </ol>
+
+                <h5>Upload and run the application</h5>
+
+                <div class="tldr">
+                  Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
+                </div>
+
+                <ol>
+
+                  <li>
+                    <p>In the bottom toolbar, click the "<strong>Upload</strong>" icon to upload the current project to the device.</p>
+                    <p> <img src="./views/labs/build/image_12.png"></p>
+                  </li>
+
+                  <li>
+                    <p>Check the console log for a message confirming the upload.</p>
+                    <p> <img src="./views/labs/build/image_13.png"></p>
+                  </li>
+
+                  <li>
+                    <p>In the bottom toolbar, click the "<strong>Run</strong>"<strong> icon</strong> to run the project that is currently installed on the device.</p>
+                    <p> <img src="./views/labs/build/image_14.png"></p>
+                  </li>
+
+                  <li>
+                    <p>Keep an eye on the console log bar for any runtime errors.</p>
+                    <p> <img src="./views/labs/build/image_15.png">
+                      <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
+                      <div class="callout troubleshooting">
+                        <p><strong>Get a "cannot find module mraa" message?</strong></p>
+                        <p> <img src="./views/labs/build/image25.png"></p>
+                        <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
+                        <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
+                        <pre><code>echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
+          opkg update
+          opkg install libmraa0</code></pre>
+                        <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
+                        <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
+                      </div>
+                  </li>
+
+                  <li>
+                    <p>Look at your Intel® IoT board for a blinking light.</p>
+                    <p><strong>Intel® Galileo Gen 2</strong>
+                      <br> A green LED is located near the USB port.</p>
+                    <p> <img src="./views/labs/build/image18.png"></p>
+                    <p><strong>Intel® Edison</strong>
+                      <br> The LED is located near the center of the board.</p>
+                    <p> <img src="./views/labs/build/image28.png"></p>
+
+                    <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
+                  </li>
+
+                </ol>
+
+                <div id="next-steps" class="callout done">
+                  <p>You should now be able to build and deploy projects using the Intel® XDK. An LED should be blinking on your Intel® IoT board.</p>
+                </div>
+
+              </div>
+
 
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -49,7 +245,7 @@
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content collapse">
+                <div class="ibox-content ">
                     <div id="start">
                         <div class="tldr">
                             Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.
@@ -299,7 +495,7 @@ monitor();</ui-codemirror>
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content collapse">
+                <div class="ibox-content ">
 
                     <div class="tldr">
                         Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
@@ -320,7 +516,7 @@ monitor();</ui-codemirror>
 
                     </ol>
 
-                
+
                     <div id="done-exercise1">
 
                         <div class="tldr">
@@ -332,7 +528,7 @@ var digitalAccelerometer = require('jsupm_mma7660');
 
 // Instantiate an MMA7660 on I2C bus 0
 var myDigitalAccelerometer = new digitalAccelerometer.MMA7660(
-					digitalAccelerometer.MMA7660_I2C_BUS, 
+					digitalAccelerometer.MMA7660_I2C_BUS,
 					digitalAccelerometer.MMA7660_DEFAULT_I2C_ADDR);
 
 // place device in standby mode so we can write registers
@@ -365,9 +561,9 @@ var myInterval = setInterval(function()
 	console.log(outputStr);
 
 	myDigitalAccelerometer.getAcceleration(ax, ay, az);
-	outputStr = "Acceleration: x = " 
+	outputStr = "Acceleration: x = "
 		+ roundNum(digitalAccelerometer.floatp_value(ax), 6)
-		+ "g y = " + roundNum(digitalAccelerometer.floatp_value(ay), 6) 
+		+ "g y = " + roundNum(digitalAccelerometer.floatp_value(ay), 6)
 		+ "g z = " + roundNum(digitalAccelerometer.floatp_value(az), 6) + "g";
 	console.log(outputStr);
 }, 500);
@@ -376,7 +572,7 @@ var myInterval = setInterval(function()
 function roundNum(num, decimalPlaces)
 {
 	var extraNum = (1 / (Math.pow(10, decimalPlaces) * 1000));
-	return (Math.round((num + extraNum) 
+	return (Math.round((num + extraNum)
 		* (Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces));
 }
 
@@ -411,7 +607,7 @@ process.on('SIGINT', function()
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content collapse">
+                <div class="ibox-content ">
 
                     <div id="done-exercise1">
                         <div class="tldr">
@@ -478,7 +674,7 @@ process.on('SIGINT', function()
                     <div ibox-tools></div>
                 </div>
 
-                <div class="ibox-content collapse">
+                <div class="ibox-content ">
                     <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
 
                     <p><strong>Grove Temperature Sensor</strong></p>
@@ -518,4 +714,3 @@ process.on('SIGINT', function()
         </div>
     </div>
 </div>
-

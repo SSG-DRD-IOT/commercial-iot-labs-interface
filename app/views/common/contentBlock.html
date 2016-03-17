@@ -1,0 +1,20 @@
+<section id="{{name}}">
+    <div ng-show="imageLink != null">
+        <div class="row">
+            <div ng-transclude class="col-sm-7">
+            </div>
+            <div class="col-sm-5">
+                <img class="pull-right img-responsive img-thumbnail" ng-src="{{imageLink}}">
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="imageLink == null">
+        <div class="row">
+            <div ng-transclude class="col-sm-12">
+            </div>
+        </div>
+    </div>
+
+    <checkbox>{{message}}</checkbox>
+</section>

@@ -2439,3 +2439,154 @@ body.tour-open .animated {
 .wizard > .content > .body {
   position: relative
 }
+
+@checkbox-marked-color: #5DFF94;
+@checkbox-height: 36px;
+@font-face {
+    font-family: 'fontello';
+    src: url('./font/fontello.eot?80231704');
+    src: url('./font/fontello.eot?80231704#iefix') format('embedded-opentype'),
+    url('./font/fontello.woff?80231704') format('woff'),
+    url('./font/fontello.ttf?80231704') format('truetype'),
+    url('./font/fontello.svg?80231704#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.Checkbox {
+    position: relative;
+    clear: both;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: #e9f0f3;
+    border-left: 4px solid #fff;
+
+    &.marked .checkbox-holder .chkbox {
+        border-color: @checkbox-marked-color;
+        background: @checkbox-marked-color;
+        box-shadow: none;
+
+        i {
+            height: 37px;
+            width: 47px;
+            line-height: 35px;
+            margin-top: -9px;
+            margin-left: -5px;
+            font-size: 30px;
+            color: #fff;
+            text-shadow: black 0 0 3px;
+            animation-name: bounceIn;
+            animation-duration: .4s !important;
+            animation-fill-mode: both;
+        }
+
+    }
+
+    .checkbox-holder {
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        .chkbox {
+            width: 36px;
+            height: 36px;
+            border: 4px solid;
+            cursor: pointer;
+            border-radius: 3px;
+            user-select: none;
+
+            i {
+                position: absolute;
+                -webkit-backface-visibility: hidden;
+                -webkit-transform: translate3d(0, 0, 0);
+            }
+
+            &.checked {
+            }
+
+            
+            box-shadow: inset 0 0 7px 1px rgba(0,0,0,0.1);
+            border-color: #FF8E8E;
+            background: #fff;
+            
+            i {
+                font-weight: bolder;
+                margin-top: 3px;
+                margin-left: 3px;
+                font-size: 14px;
+                color: #ddd;
+            }
+        }
+    }
+
+
+    // Leave an instructional message
+    // on the checkbox
+    .tooltip {
+        position: absolute;
+        width: 110px;
+        padding: 5px 5px;
+        color: #FFFFFF;
+        background: #000000;
+        height: 24px;
+        line-height: 1.1rem;
+        text-align: center;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        visibility: visible;
+        opacity: 0.8;
+        bottom: 30px;
+        left: 50%;
+        top: -44px;
+        margin-left: -35px;
+    }
+
+    .checkbox-content {
+        display: inline-block;
+        vertical-align: top;
+        width: 92%;
+        padding-top: 5px;
+        padding-left: 10px;
+    }
+
+}
+
+.icon-ok:before {
+    content: '\e800';
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
+}
+
+.checkboxFade {
+    .opacity(0.35);
+    transition: opacity .25s ease-in-out;
+   -moz-transition: opacity .25s ease-in-out;
+   -webkit-transition: opacity .25s ease-in-out;
+}
+
+.labels {
+    margin: 5px 5px 5px 0;
+    span {
+        margin-right: 5px;
+    }
+}
