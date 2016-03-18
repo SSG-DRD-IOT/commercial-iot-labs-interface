@@ -1,716 +1,609 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Building Edge Sensors and Actuators</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a>Labs</a>
-            </li>
-            <li class="active">
-                <strong>Building Edge Sensors and Actuators</strong>
-            </li>
-        </ol>
-    </div>
-    <div class="col-lg-2">
+  <div class="col-lg-10">
+    <h2>Building Edge Sensors and Actuators</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a>Labs</a>
+      </li>
+      <li class="active">
+        <strong>Building Edge Sensors and Actuators</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
 
-    </div>
+  </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-12">
 
-          <!-- Objectives -->
-          <div ibox  title="Objectives">
-            <div content-block name="read-objectives" message="Read the Objectives">
+      <!-- Objectives -->
 
-              <p>To learn how to build stand alone IoT devices with Intel® Edison.  Learn to use sensors and actuators to gather and respond to data.  The devices built during this lab will be extended in later labs to send their data to the Intel® IoT Gateway and to the cloud</p>
+      <div ibox title="Objectives">
+        <div content-block name="read-objectives" message="Read the Objectives">
 
-              <p>By the end of this module, you should be able to:</p>
+          <p>To learn how to build stand alone IoT devices with Intel® Edison. Learn to use sensors and actuators to gather and respond to data. The devices built during this lab will be extended in later labs to send their data to the Intel® IoT Gateway
+            and to the cloud</p>
 
-              <ul>
-                <li>Connect Grove Kit sensors and actuators to your Intel® Edison.</li>
-                <li>Use the JavaScript UPM libraries to control actuators and read data from sensors.</li>
-                <li>Create a NodeJS server to configure and analyze the Grove components as "edge devices" — devices triggered over a network instead of directly on the board.</li>
-              </ul>
-            </div>
+          <p>By the end of this module, you should be able to:</p>
+
+          <ul>
+            <li>Connect Grove Kit sensors and actuators to your Intel® Edison.</li>
+            <li>Use the JavaScript UPM libraries to control actuators and read data from sensors.</li>
+            <li>Create a NodeJS server to configure and analyze the Grove components as "edge devices" — devices triggered over a network instead of directly on the board.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div ibox collapse title="Deploy sample application with the Intel® XDK IoT Edition">
+        <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction" image-link="./views/labs/build/xdk-splash.png">
+
+          <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel® Edison using any computer OS platform</p>
+
+          <p>
+            Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
+          </p>
+
+          <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition
+            also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
+        </div>
+
+        <div content-block name="launch-xdk" message="Launch and Sign In to the Intel XDK" image-link="./views/labs/build/image_0.png">
+          <p>Begin by launching the Intel XDK</p>
+
+          <div class="alert alert-warning">
+            Note: Before you can use the Intel® XDK, you must sign up for an Intel® XDK account or log in to a pre-existing account. You will need to have an internet connection for the first time you launch the Intel® XDK.
           </div>
+        </div>
 
-          <div ibox title="Deploy sample application with the Intel® XDK IoT Edition">
-            <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction"
-            image-link="./views/labs/build/xdk-splash.png">
+        <div content-block name="xdk-signup" message="Create an account and sign in to the Intel XDK" image-link="./views/labs/build/image_1.png">
 
-            <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel® Edison using any computer OS platform</p>
+          <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-existing account.</p>
+        </div>
 
-            <p>
-              Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
-            </p>
+        <div content-block name="click-on-templates" message="Click on Templates" image-link="./views/labs/build/image_2.png">
+          <p>Create a project</p>
 
-            <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition
-              also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
-            </div>
+          <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the lefthand menu, select "<strong>Templates</strong>".</p>
+        </div>
 
-            <div content-block name="launch-xdk" message="Launch and Sign In to the Intel XDK" image-link="./views/labs/build/image_0.png">
-              <p>Begin by launching the Intel XDK</p>
+        <div content-block name="select-led-blink-template" message="Select the LED Blink Template" image-link="./views/labs/build/image_3.png">
+          <p>A list of templates for developing Node.js applications will be shown. Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
+        </div>
 
-              <div class="alert alert-warning">
-                Note: Before you can use the Intel® XDK, you must sign up for an Intel® XDK account or log in to a pre-existing account. You will need to have an internet connection for the first time you launch the Intel® XDK.
-              </div>
-            </div>
+        <div content-block name="create-project" message="Name and then Create the New Project">
+          <p>Choose a directory for your project files, and enter a name for your project.</p>
+          <p> <img src="./views/labs/build/image_4.png"></p>
+          <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
+          <p> <img src="./views/labs/build/image_5.png"></p>
+        </div>
 
-            <div content-block name="xdk-signup" message="Create an account and sign in to the Intel XDK" image-link="./views/labs/build/image_1.png">
-
-              <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-existing account.</p>
-            </div>
-
-            <div content-block name="create-xdk-project" message="Click on Templates" image-link="./views/labs/build/image_2.png">
-                <p>Create a project</p>
-
-                <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the lefthand menu, select "<strong>Templates</strong>".</p>
-            </div>
-
-            <div content-block name="select-template" message="Select the LED Blink Template" image-link="./views/labs/build/image_3.png">
-              <p>A list of templates for developing Node.js applications will be shown. Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
-            </div>
-
-            <div content-block name="select-template" message="Name and then Create the New Project">
-              <p>Choose a directory for your project files, and enter a name for your project.</p>
-              <p> <img src="./views/labs/build/image_4.png"></p>
-              <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
-              <p> <img src="./views/labs/build/image_5.png"></p>
-            </div>
-
-            <div content-block name="select-device" message="Select a target IoT device" image-link="./views/labs/build/image_6.png">
+        <div content-block name="select-device" message="Select a target IoT device">
+          <div class="row">
+            <div class="col-sm-7">
               <p>The Intel® XDK IoT Edition will automatically detect Intel® IoT devices on your network and display them in the "IoT Device" drop down list.</p>
 
               <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
 
               <p>Select your target Intel® Galileo or Intel® Edison from the list. If there are multiple devices, choose based on the device name and IP address.</p>
-              <img src="./views/labs/build/image_7.png"/>
-
-              <div class="alert alert-warning">
-                <p><strong>Do not see your device in the "IoT Device" drop down list?</strong></p>
-                <p>From the "IoT Device" menu, instead choose "<strong>Add Manual Connection</strong>".</p>
-                <p> <img src="./views/labs/build/image09.png"></p>
-                <ul>
-                  <li>For <strong>Address</strong>, enter the IP address of your Intel® Edison Board that you saw in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span>. e.g. 192.168.0.2</li>
-                  <li>For <strong>Port</strong>, keep at the default "58888". </li>
-                  <li>For <strong>User</strong> Name, use "root"</li>
-                  <li>For <strong>Password</strong>, use "intel123" or the password you set in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span></li>
-                </ul>
-                <p>Click "<strong>Connect</strong>".</p>
-              </div>
-
             </div>
+            <div class="col-sm-5">
+              <img src="./views/labs/build/image_6.png" />
+              <img src="./views/labs/build/image_7.png" />
+            </div>
+          </div>
+        </div>
 
-                <!-- <div class="callout troubleshooting">
-                     <p><strong>Problems with Wi-Fi? Need to program while offline?</strong></p>
-                     <p>The Intel® XDK requires the IP address of your IoT board in order to program it. If your IoT board is online, the IP address is automatically detected in most cases.</p>
-                     <p>However, if you are unable to get your IoT board online to the same network as your computer due to restricted or busy Wi-Fi networks, try a direct cable-based method and Add a device manually to the drop down list.</p>
-                     <p><strong>Intel® Galileo users:</strong><br>
-                       Connect an ethernet cable directly from your computer to the Intel® Galileo.</p>
-                     <p><strong>Intel® Edison users:</strong><br>
-                       Use the device mode micro-USB cable to establish an "Ethernet over USB" connection.</p>
-                </div> -->
+        <div content-block name="manually-enter-ip-address" message="If needed you can manually enter the IP address of your Intel Edison" image-link="./views/labs/build/image09.png">
+          <div class="alert alert-warning">
+            <p><strong>Do not see your device in the "IoT Device" drop down list?</strong></p>
+            <p>From the "IoT Device" menu, instead choose "<strong>Add Manual Connection</strong>".</p>
 
+            <ul>
+              <li>For <strong>Address</strong>, enter the IP address of your Intel® Edison Board that you saw in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span>. e.g. 192.168.0.2</li>
+              <li>For <strong>Port</strong>, keep at the default "58888". </li>
+              <li>For <strong>User</strong> Name, use "root"</li>
+              <li>For <strong>Password</strong>, use the password you set up.</li>
+            </ul>
+            <p>Click "<strong>Connect</strong>".</p>
+          </div>
+        </div>
 
-                  </li>
+        <div content-block name="establish-connection" message="Establish the connection to the Intel Edison and synchronize the clocks between your development system and your Intel Edison" image-link="./views/labs/build/image33.png">
 
-                  <li>
-                    <p>Wait a moment for the connection to be established. Use the username "<strong>root</strong>" and password "<strong>intel123</strong>" if prompted. A popup window will appear to confirm the connection status.</p>
-                    <p> <img src="./views/labs/build/image33.png"></p>
-                  </li>
+          <p>Wait a moment for the connection to be established. Use the username "<strong>root</strong>" and password "<strong>intel123</strong>" if prompted. A popup window will appear to confirm the connection status.</p>
 
-                </ol>
+          <p>
+            Sync your computer's time with the clock on the target board to avoid timing issues. Do this step any time you connect to a new target IoT device or the device has been powered off.
+          </p>
+        </div>
 
-                <h5>Sync device clocks</h5>
+        <div content-block name="know-the-toolbar" message="Get to know the Intel XDK Build toolbar.">
+          <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
+          <p> <img src="./views/labs/build/build.png"></p>
 
-                <div class="tldr">
-                  Sync your computer's time with the clock on the target board to avoid timing issues. Do this step any time you connect to a new target IoT device or the device has been powered off.
-                </div>
+          <p>Select "<strong>sync PC time w/ clock on target device</strong>".</p>
+          <p>A message in the console log will appear to confirm the update.</p>
+        </div>
 
-                <ol>
+        <div content-block name="build-the-xdk-app" message="Build the application" image-link="./views/labs/build/image_10.png">
 
-                  <li>
-                    <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
-                    <p> <img src="./views/labs/build/image_8.png"></p>
-                  </li>
+          <p>The Build button will fetch all of the dependecies listed in the package.json file. It will install them on the Intel Edison board. Run build any time you create a new project, or add/remove Node modules from an existing project.
+          </p>
 
-                  <li>
-                    <p>Select "<strong>sync PC time w/ clock on target device</strong>".</p>
-                    <p> <img src="./views/labs/build/image_9.png"></p>
-                  </li>
+          <ol>
 
-                  <li>
-                    <p>A message in the console log will appear to confirm the update.</p>
-                    <p> <img src="./views/labs/build/image13.png"></p>
-                  </li>
+            <li>
+              <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
+              <p> <img src=></p>
+            </li>
 
-                </ol>
+            <li>
+              <p>Wait a moment for the packages to download and install. You will see a confirmation message in the console log.</p>
+              <figure>
+                <figcaption>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</figcaption>
+              </figure>
+            </li>
 
-                <h5>Build the application</h5>
+          </ol>
+        </div>
 
-                <div class="tldr">
-                  Fetch all the Node modules specified in package.json and install them on the IoT device. Run build any time you create a new project, or add/remove Node modules from an existing project.
-                </div>
+        <div content-block name="build-the-xdk-app" message="Run the application">
 
-                <ol>
+          <p>
+            Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
+          </p>
 
-                  <li>
-                    <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
-                    <p> <img src="./views/labs/build/image_10.png"></p>
-                  </li>
+          <ol>
+            <li>
+              <p>In the bottom toolbar, click the "<strong>Run</strong>"<strong> icon</strong> to run the project.</p>
+              <img src="./views/labs/build/run.png"></img>
+            </li>
 
-                  <li>
-                    <p>In the popup, click "<strong>Build</strong>".</p>
-                    <p> <img src="./views/labs/build/image_11.png"></p>
-                  </li>
-
-                  <li>
-                    <p>Wait a moment for the packages to download and install. You will see a confirmation message in the console log.</p>
-                    <figure>
-                      <img src="./views/labs/build/image13.png">
-                      <figcaption>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</figcaption>
-                    </figure>
-                  </li>
-
-                </ol>
-
-                <h5>Upload and run the application</h5>
-
-                <div class="tldr">
-                  Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
-                </div>
-
-                <ol>
-
-                  <li>
-                    <p>In the bottom toolbar, click the "<strong>Upload</strong>" icon to upload the current project to the device.</p>
-                    <p> <img src="./views/labs/build/image_12.png"></p>
-                  </li>
-
-                  <li>
-                    <p>Check the console log for a message confirming the upload.</p>
-                    <p> <img src="./views/labs/build/image_13.png"></p>
-                  </li>
-
-                  <li>
-                    <p>In the bottom toolbar, click the "<strong>Run</strong>"<strong> icon</strong> to run the project that is currently installed on the device.</p>
-                    <p> <img src="./views/labs/build/image_14.png"></p>
-                  </li>
-
-                  <li>
-                    <p>Keep an eye on the console log bar for any runtime errors.</p>
-                    <p> <img src="./views/labs/build/image_15.png">
-                      <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
-                      <div class="callout troubleshooting">
-                        <p><strong>Get a "cannot find module mraa" message?</strong></p>
-                        <p> <img src="./views/labs/build/image25.png"></p>
-                        <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
-                        <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
-                        <pre><code>echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
-          opkg update
-          opkg install libmraa0</code></pre>
-                        <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
-                        <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
-                      </div>
-                  </li>
-
-                  <li>
-                    <p>Look at your Intel® IoT board for a blinking light.</p>
-                    <p><strong>Intel® Galileo Gen 2</strong>
-                      <br> A green LED is located near the USB port.</p>
-                    <p> <img src="./views/labs/build/image18.png"></p>
-                    <p><strong>Intel® Edison</strong>
-                      <br> The LED is located near the center of the board.</p>
-                    <p> <img src="./views/labs/build/image28.png"></p>
-
-                    <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
-                  </li>
-
-                </ol>
-
-                <div id="next-steps" class="callout done">
-                  <p>You should now be able to build and deploy projects using the Intel® XDK. An LED should be blinking on your Intel® IoT board.</p>
-                </div>
-
+            <li>
+              <p>Keep an eye on the console log bar for any runtime errors.</p>
+              <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
+              <div class="callout troubleshooting">
+                <p><strong>Get a "cannot find module mraa" message?</strong></p>
+                <p> <img src="./views/labs/build/image25.png"></p>
+                <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
+                <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
+                <pre><code>echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
+                opkg update
+                opkg install libmraa0</code></pre>
+                <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
+                <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
               </div>
+            </li>
+          </ol>
+        </div>
+
+        <div content-block name="blink-the-light" message="Congratulations, you just ran your first Intel® XDK application!" image-link="./views/labs/build/image28.png">
+
+          <p>Look at your Intel® IoT board for a blinking light.</p>
+          <p> The LED is located near the center of the board.</p>
+
+          <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
+
+          <div id="next-steps" class="callout done">
+            <p>You should now be able to build and deploy projects using the Intel® XDK. An LED should be blinking on your Intel® IoT board.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div ibox collapse title="Exercise 1: Temperature Sensor and LCD">
+        <div content-block name="read-xdk-intro" message="Plug in the Grove shield, temperature sensor and the LCD" image-link="./views/labs/build/temperature-sensors.jpg">
+
+          <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
+
+          <ol>
+            <li>
+              <p>Install the Grove Base Shield onto the Intel® Edison Arduino expansion board.</p>
+            </li>
+            <li><p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p></li>
+            <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p></li>
+          </ol>
+
+        </div>
+
+        <div
+        content-block name="read-xdk-intro"
+        message="Start a new project in the Intel® XDK using a blank template."
+        image-link="./views/labs/build/new-project.png">
+            <ol>
+              <li><p>Start a new project in the Intel® XDK using a blank template.</p></li>
+              <li><p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p></li>
+            </ol>
+
+            <div class="alert alert-info">
+              <p>This temperature project will be used in all the later labs to supply a steady stream of data.</p>
+            </div>
+          </div>
+
+          <div
+          content-block name="read-xdk-intro"
+          message="Select the Blank Template"
+          image-link="./views/labs/build/blank_template.png">
+              <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
 
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 1: Temperature Sensor and LCD</h5>
+              <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
+          </div>
 
-                    <div ibox-tools></div>
-                </div>
+          <div
+          content-block name="read-xdk-intro"
+          message="Write the Code to Read the Temperature Sensor.">
+          <h5>Read the temperature sensor</h5>
 
-                <div class="ibox-content ">
-                    <div id="start">
-                        <div class="tldr">
-                            Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.
-                        </div>
+          <p>Update <span class="icon file">main.js</span> to read the temperature sensor on program start up and log it to the console.</p>
 
-                        <ol>
-                            <li>
-                                <p>Install the Grove Base Shield onto the Intel® Edison Arduino expansion board.</p>
-                                <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
-                                <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
-                                <p><img src="./views/labs/build/temp_sensor/image_2.jpg" alt="" ></p>
-                            </li>
+          <ol>
 
-                            <li>
-                                <p>Start a new project in the Intel® XDK using a blank template.</p>
-                                <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
-                                <p><img src="./views/labs/build/temp_sensor/image_0.png" alt="" ></p>
-                                <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
-                                <p><img src="./views/labs/build/temp_sensor/image_1.png" alt="" ></p>
-                            </li>
+            <li>
+              <p>Include the JS UPM library for the basic Grove sensors.</p>
+              <p><code>var groveSensor = require('jsupm_grove');</code></p>
+            </li>
 
-                            <li>
-                                <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you with this default JavaScript:</p>
-                                <pre><code>/*jslint node:true, vars:true, bitwise:true, unparam:true */
+            <li>
+              <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
+              <p><code>var temp = new groveSensor.GroveTemp(0);</code></p>
+            </li>
+
+            <li>
+              <p>Read the value of the <code>GroveTemp</code> object you just created.</p>
+              <p><code>var celsius = temp.value();</code></p>
+            </li>
+
+            <li>
+              <p>If desired, convert the Celsius value to Fahrenheit using the standard conversion formula.</p>
+              <p><code>var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);</code></p>
+            </li>
+
+            <li>
+              <p>Finally, output the value of the temperature sensor.</p>
+              <p><code>console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</code></p>
+            </li>
+
+            <li>
+              <p>The final code should look like this:</p>
+
+              <ui-codemirror ui-codemirror-opts="editorOptions">/*jslint node:true, vars:true, bitwise:true, unparam:true */
 /*jshint unused:true */
-// Leave the above lines for propper jshinting
-//Type Node.js Here :)
-                                </code></pre>
-                            </li>
-
-                        </ol>
-
-                        <h5>Read the temperature sensor</h5>
-
-                        <p>Update <span class="icon file">main.js</span> to read the temperature sensor on program start up and log it to the console.</p>
-
-                        <ol>
-
-                            <li>
-                                <p>Include the JS UPM library for the basic Grove sensors.</p>
-                                <p><code>var groveSensor = require('jsupm_grove');</code></p>
-                            </li>
-
-                            <li>
-                                <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
-                                <p><code>var temp = new groveSensor.GroveTemp(0);</code></p>
-                            </li>
-
-                            <li>
-                                <p>Read the value of the <code>GroveTemp</code> object you just created.</p>
-                                <p><code>var celsius = temp.value();</code></p>
-                            </li>
-
-                            <li>
-                                <p>If desired, convert the Celsius value to Fahrenheit using the standard conversion formula.</p>
-                                <p><code>var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);</code></p>
-                            </li>
-
-                            <li>
-                                <p>Finally, output the value of the temperature sensor.</p>
-                                <p><code>console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</code></p>
-                            </li>
-
-                            <li>
-                                <p>The final code should look like this:</p>
-
-                                <ui-codemirror ui-codemirror-opts="editorOptions">/*jslint node:true, vars:true, bitwise:true, unparam:true */
-/*jshint unused:true */
-
 var groveSensor = require('jsupm_grove');
 var temp = new groveSensor.GroveTemp(0);
 var celsius = temp.value();
 var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
-console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
-                                </ui-codemirror>
-                            </li>
+console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</ui-codemirror>
+            </li>
 
-                            <li>
-                                <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel® XDK to:<br>
-                                    (1) Build your application, <br>
-                                    (2) Upload it to Intel® Edison, and <br>
-                                    (3) Run the application.</p>
-                                <p><img src="./views/labs/build/temp_sensor/xdk_deploy_steps.png" alt="" ></p>
-                            </li>
+            <li>
+              <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel® XDK to:
+                <br> (1) Build your application,
+                <br> (2) Upload it to Intel® Edison, and
+                <br> (3) Run the application.</p>
+            </li>
 
-                            <li>
-                                <p>If successful, you should see the temperature output in the Intel® XDK console.</p>
-                                <p><img src="./views/labs/build/temp_sensor/temp_sensor_success.png" alt="" ></p>
-                            </li>
+            <li>
+              <p>If successful, you should see the temperature output in the Intel® XDK console.</p>
+            </li>
 
-                        </ol>
+          </ol>
+        </div>
 
-                        <h5>Add polling</h5>
-
-                        <p>Currently the temperature sensor is only read on application start. Add a JavaScript <code>setInterval</code> to regularly poll the sensor every second (1000 miliseconds).</p>
-                        <p>If you are not familiar with JavaScript, the format should look similar to this:</p>
-                        <ui-codemirror ui-codemirror-opts="editorOptions">function monitor() {
+        <div content-block name="repeat-sensor-reading" message="Make the sensor reading repeat once per second">
+          <p>Currently the temperature sensor is only read on application start. Add a JavaScript <code>setInterval</code> to regularly poll the sensor every second (1000 miliseconds).</p>
+          <p>If you are not familiar with JavaScript, the format should look similar to this:</p>
+<ui-codemirror ui-codemirror-opts="editorOptions">  function monitor() {
     setInterval(function() {
-        // code to repeat goes here
+      // code to repeat goes here
     }, 1000);
-}
-monitor();</ui-codemirror>
+  }
+  monitor();</ui-codemirror>
+        </div>
 
-                        <ol>
 
-                            <li>
-                                <p>Try incorporating the <code>setInterval</code> callback with the code you wrote in <span class="icon bookmark">Read the temperature sensor</span> before scrolling down for the solution.</p>
-                                <p class="dont-peek">
-                                    Write your own code now.<br>
-                                    Don't peek unless you're stuck! ;)<span class="cursor">|</span>
-                                </p>
-                                <p class="ready-to-peek">Ready?</p>
-                            </li>
+        <div content-block name="repeat-sensor-reading" message="Bring the SetInterval and Sensor Reading code together.">
+        <ol>
 
-                            <li>
-                                <p>
-                                    With polling, the exercise code should look like this:</p>
-                                <ui-codemirror ui-codemirror-opts="editorOptions">var groveSensor = require('jsupm_grove');
+          <li>
+            <p>Try incorporating the <code>setInterval</code> callback with the code you wrote in <span class="icon bookmark">Read the temperature sensor</span> before scrolling down for the solution.</p>
+          </li>
 
+          <li>
+            <p>
+              With polling, the exercise code should look like this:</p>
+              <ui-codemirror ui-codemirror-opts="editorOptions">var groveSensor = require('jsupm_grove');
 var temp = new groveSensor.GroveTemp(0);
 
 function monitor() {
-    setInterval(function() {
-        var celsius = temp.value();
-        var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
-        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
-    }, 1000);
+  setInterval(function() {
+    var celsius = temp.value();
+    var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+    console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit ");
+  }, 1000);
 }
-
 monitor();</ui-codemirror>
 
-                            </li>
+            </li>
 
-                        </ol>
+          </ol>
+        </div>
 
-                        <h5>Add the LCD screen</h5>
+        <div content-block name="repeat-sensor-reading" message="Add the LCD Screen.">
+          <p>Update <span class="icon file">main.js</span> to output the value from the temperature sensor to the LCD display.</p>
 
-                        <p>Update <span class="icon file">main.js</span> to output the value from the temperature sensor to the LCD display.</p>
+          <p>Below are the general steps to complete the exercise.</p>
 
-                        <p>Below are the general steps to complete the exercise.</p>
+          <ol>
 
-                        <ol>
+            <li>
+              <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
+              <p><code>var LCD = require('jsupm_i2clcd');</code></p>
+            </li>
 
-                            <li>
-                                <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
-                                <p><code>var LCD = require('jsupm_i2clcd');</code></p>
-                            </li>
+            <li>
+              <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
+              <dl>
+                <dt>I2C bus (Number)</dt>
+                <dd>For the Intel Edison, <strong>use <code>0</code></strong>.</dd>
 
-                            <li>
-                                <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
-                                <dl>
-                                    <dt>I2C bus (Number)</dt>
-                                    <dd>For the Intel Edison, <strong>use <code>0</code></strong>.</dd>
+                <dt>lcdAddress (Number)</dt>
+                <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
 
-                                    <dt>lcdAddress (Number)</dt>
-                                    <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
+                <dt>rgbAddress (Number)</dt>
+                <dd>The JHD1313M1 has two I2C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
+              </dl>
+            </li>
 
-                                    <dt>rgbAddress (Number)</dt>
-                                    <dd>The JHD1313M1 has two I2C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
-                                </dl>
-                            </li>
+            <li>
+              <p>To write to the LCD, you need to:</p>
+              <ol style="list-style-type:lower-roman;">
+                <li>First, <strong>set the cursor position</strong>.
+                  <br> e.g. <code>(0,0)</code> for the top left. The JHD1313M1 has 2 rows (y) and 16 columns (x).</li>
+                <li>Then, <strong>write</strong> a string/message to the screen.
+                  <br> e.g. <code>"Temp: " + celsius + "C or " + fahrenheit + "F"</code></li>
+              </ol>
+              <p>The API documentation for generic I2C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
+            </li>
 
-                            <li>
-                                <p>To write to the LCD, you need to:</p>
-                                <ol style="list-style-type:lower-roman;">
-                                    <li>First, <strong>set the cursor position</strong>.
-                                        <br>
-                                        e.g. <code>(0,0)</code> for the top left. The JHD1313M1 has 2 rows (y) and 16 columns (x).</li>
-                                    <li>Then, <strong>write</strong> a string/message to the screen.
-                                        <br>
-                                        e.g. <code>"Temp: " + celsius + "C or " + fahrenheit + "F"</code></li>
-                                </ol>
-                                <p>The API documentation for generic I2C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
-                            </li>
+            <li>
+              <p>As a bonus, you can <strong>change the LCD backlight color</strong>.
+                <br> e.g. <code>(255,255,255)</code> for white.</p>
+              <p>The API documentation for the specific Grove RBG LCD you have can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods</a></p>
+            </li>
 
-                            <li>
-                                <p>As a bonus, you can <strong>change the LCD backlight color</strong>.
-                                    <br>
-                                    e.g. <code>(255,255,255)</code> for white.</p>
-                                <p>The API documentation for the specific Grove RBG LCD you have can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods</a></p>
-                            </li>
+            <li>
+              <p>Use the steps and reference links above to output the value from the temperature sensor to the LCD display.</p>
+              <p class="dont-peek">
+                Write your own code now.
+                <br> Don't peek unless you're stuck! ;)<span class="cursor">|</span>
+              </p>
+              <p class="ready-to-peek">Ready?</p>
+            </li>
 
-                            <li>
-                                <p>Use the steps and reference links above to output the value from the temperature sensor to the LCD display.</p>
-                                <p class="dont-peek">
-                                    Write your own code now.<br>
-                                    Don't peek unless you're stuck! ;)<span class="cursor">|</span>
-                                </p>
-                                <p class="ready-to-peek">Ready?</p>
-                            </li>
-
-                            <li>
-                                <p>Below is an example of the final solution.</p>
-                                <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
+            <li>
+              <p>Below is an example of the final solution.</p>
+              <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
 var LCD = require("jsupm_i2clcd");
-
 // Create a new instance of a Grove Temperature Sensor
-var temp = new groveSensor.GroveTemp(0);
-
-// Create a new instance of a Grove RGB LCD screen
+var temp = new groveSensor.GroveTemp(0); // Create a new instance
+of a Grove RGB LCD screen
 var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
 
 function monitor() {
-    setInterval(function() {
-
-      // Read the temperature sensor
-        var celsius = temp.value();
-        var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
-        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
-
-        // Update the LCD screen
-        screen.setCursor(0, 0);
-        screen.setColor(255, 255, 255);
-        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
-
-    }, 1000);
+  setInterval(function() {
+    // Read the temperature sensor
+    var celsius = temp.value();
+    var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+    console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+    // Update the LCD screen
+    screen.setCursor(0, 0);
+    screen.setColor(255, 255, 255);
+    screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+  }, 1000);
 }
-
 monitor();</ui-codemirror>
 
-                            </li>
-
-                            <li>
-                                <p>Use the buttons at the bottom of the Intel® XDK to:<br>
-                                    <strike>(1) Build your application</strike>,<br>
-                                    <span class="footnote">(Note: You only need to do this if you add new dependencies to <span class="icon file">package.json</span>)</span> <br>
-                                    (2) Upload it to Intel® Edison, and <br>
-                                    (3) Run the application.</p>
-                                <p><img src="./views/labs/build/temp_sensor/xdk_deploy_steps.png" alt="" ></p>
-                            </li>
-
-                        </ol>
-
-                        <div id="next-steps" class="callout done">
-                            <p>You should now be seeing the temperature displayed on the LCD.</p>
-                            <p><a href="../index.html#done-exercise1" class="link-button centered">Continue to the next step »</a></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 2: Earthquake Detector</h5>
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content ">
-
-                    <div class="tldr">
-                        Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
-                    </div>
-
-                    <ol>
-
-                        <li>
-                            <p>Connect <strong>Grove Accelerometer</strong> to one of the <strong>I2C</strong> pins of the Grove Base Shield.</p>
-                            <p>Connect <strong>Grove LCD</strong> display to another <strong>I2C</strong> pin.</p>
-                            <p><img src="./views/labs/build/earthquake/image_6.jpg" alt="" ></p>
-                        </li>
-
-                        <li>
-                            <p>In <span class="icon file">main.js</span>, write your code to read values from the accelerometer and detect an earthquake.</p>
-                            <p>As a starting point, use the reference links below to view example code for each Grove component in this exercise.</p>
-                        </li>
-
-                    </ol>
+            </li>
+          </ol>
+        </div>
 
 
-                    <div id="done-exercise1">
+        <div content-block name="deploy-temperature-sensor" message="Deploy the temperature sensor application">
+        <p>Build and run your application.</p>
 
-                        <div class="tldr">
-                            Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
-                        </div>
+          <div class="alert alert-success">
+            <p>You should now be seeing the temperature displayed on the LCD.</p>
+          </div>
 
-                        <ui-codemirror ui-codemirror-opts="editorOptions">
-var digitalAccelerometer = require('jsupm_mma7660');
+        </div>
+      </div>
 
-// Instantiate an MMA7660 on I2C bus 0
-var myDigitalAccelerometer = new digitalAccelerometer.MMA7660(
-					digitalAccelerometer.MMA7660_I2C_BUS,
-					digitalAccelerometer.MMA7660_DEFAULT_I2C_ADDR);
 
-// place device in standby mode so we can write registers
-myDigitalAccelerometer.setModeStandby();
 
+        <div ibox collapse title="Exercise 2: Earthquake Detector">
+          <div content-block name="earthquake-sensor-intro" message="Read the introduction to the Earthquake Detector Exercise">
+
+            <p> Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.</p>
+          </div>
+
+          <div content-block name="earthquake-sensor-plug-in" message="Plug in the Accelerometer"
+          image-link="./views/labs/build/earthquake-detector.jpg">
+              <p>Connect <strong>Grove Accelerometer</strong> to one of the <strong>I2C</strong> pins of the Grove Base Shield.</p>
+              <p>Connect <strong>Grove LCD</strong> display to another <strong>I2C</strong> pin.</p>
+
+          </div>
+            <li>
+              <p>In <span class="icon file">main.js</span>, write your code to read values from the accelerometer and detect an earthquake.</p>
+              <p>As a starting point, use the reference links below to view example code for each Grove component in this exercise.</p>
+            </li>
+
+          </ol>
+
+
+          <div id="done-exercise1">
+
+            <p>
+              Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
+            </p>
+
+            <ui-codemirror ui-codemirror-opts="editorOptions">var digitalAccelerometer = require('jsupm_mma7660'); // Instantiate an MMA7660 on I2C bus 0
+var myDigitalAccelerometer = new digitalAccelerometer.MMA7660(digitalAccelerometer.MMA7660_I2C_BUS, digitalAccelerometer.MMA7660_DEFAULT_I2C_ADDR);
+// place device
+in standby mode so we can write registers myDigitalAccelerometer.setModeStandby();
 // enable 64 samples per second
 myDigitalAccelerometer.setSampleRate(digitalAccelerometer.MMA7660.AUTOSLEEP_64);
-
-// place device into active mode
-myDigitalAccelerometer.setModeActive();
-
+// place device into active mode myDigitalAccelerometer.setModeActive();
 var x, y, z;
 x = digitalAccelerometer.new_intp();
 y = digitalAccelerometer.new_intp();
 z = digitalAccelerometer.new_intp();
-
 var ax, ay, az;
 ax = digitalAccelerometer.new_floatp();
 ay = digitalAccelerometer.new_floatp();
 az = digitalAccelerometer.new_floatp();
-
 var outputStr;
-
-var myInterval = setInterval(function()
-{
-	myDigitalAccelerometer.getRawValues(x, y, z);
-	outputStr = "Raw values: x = " + digitalAccelerometer.intp_value(x) +
-	" y = " + digitalAccelerometer.intp_value(y) +
-	" z = " + digitalAccelerometer.intp_value(z);
-	console.log(outputStr);
-
-	myDigitalAccelerometer.getAcceleration(ax, ay, az);
-	outputStr = "Acceleration: x = "
-		+ roundNum(digitalAccelerometer.floatp_value(ax), 6)
-		+ "g y = " + roundNum(digitalAccelerometer.floatp_value(ay), 6)
-		+ "g z = " + roundNum(digitalAccelerometer.floatp_value(az), 6) + "g";
-	console.log(outputStr);
+var myInterval = setInterval(function() {
+  myDigitalAccelerometer.getRawValues(x, y, z);
+  outputStr = "Raw values: x = " + digitalAccelerometer.intp_value(x) + " y = " + digitalAccelerometer.intp_value(y) + " z = " + digitalAccelerometer.intp_value(z);
+  console.log(outputStr);
+  myDigitalAccelerometer.getAcceleration(ax, ay, az);
+  outputStr = "Acceleration: x = " + roundNum(digitalAccelerometer.floatp_value(ax), 6) + "g y = " + roundNum(digitalAccelerometer.floatp_value(ay), 6) + "g z = " + roundNum(digitalAccelerometer.floatp_value(az), 6) + "g";
+  console.log(outputStr);
 }, 500);
-
 // round off output to match C example, which has 6 decimal places
-function roundNum(num, decimalPlaces)
-{
-	var extraNum = (1 / (Math.pow(10, decimalPlaces) * 1000));
-	return (Math.round((num + extraNum)
-		* (Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces));
-}
+function roundNum(num, decimalPlaces) {
+  var extraNum = (1 / (Math.pow(10, decimalPlaces) * 1000));
+  return (Math.round((num + extraNum) * (Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces));
+} // When exiting: clear interval and print message
+process.on('SIGINT', function() {
+  clearInterval(myInterval); // clean up memory
+  digitalAccelerometer.delete_intp(x);
+  digitalAccelerometer.delete_intp(y);
+  digitalAccelerometer.delete_intp(z);
+  digitalAccelerometer.delete_floatp(ax);
+  digitalAccelerometer.delete_floatp(ay);
+  digitalAccelerometer.delete_floatp(az);
+  myDigitalAccelerometer.setModeStandby();
+  console.log("Exiting...");
+  process.exit(0);
+});</ui-codemirror>
 
-// When exiting: clear interval and print message
-process.on('SIGINT', function()
-{
-	clearInterval(myInterval);
-
-	// clean up memory
-	digitalAccelerometer.delete_intp(x);
-	digitalAccelerometer.delete_intp(y);
-	digitalAccelerometer.delete_intp(z);
-
-	digitalAccelerometer.delete_floatp(ax);
-	digitalAccelerometer.delete_floatp(ay);
-	digitalAccelerometer.delete_floatp(az);
-
-	myDigitalAccelerometer.setModeStandby();
-
-	console.log("Exiting...");
-	process.exit(0);
-});
-                            </ui-codemirror>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 3: Smart Alarm Clock</h5>
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content ">
-
-                    <div id="done-exercise1">
-                        <div class="tldr">
-                            Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Intel® Edison. Set the alarm time using a web page served directly from the Edison itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.
-                        </div>
-
-                        <div class="tldr">
-                            <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Intel Edison. Set the alarm time using a web page served directly from the Edison itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.</p>
-                        </div>
-
-                        <ol>
-
-                            <li>
-                                <p>Connect <strong>Grove Buzzer</strong> to digital pin <strong>D5</strong> of the Grove Base Shield.</p>
-                                <p>Connect <strong>Grove Button</strong> to digital pin <strong>D4</strong>.</p>
-                                <p>Connect <strong>Grove LCD</strong> display to any <strong>I2C</strong> pin.</p>
-                                <p>Connect <strong>Grove Rotary Angle</strong> to analog pin <strong>A0</strong>.</p>
-                                <p><img src="./views/labs/build/smart_alarm/image_8.jpg" alt="" ></p>
-                            </li>
-
-                            <li>
-                                <p>To start off, write some code for the hardware in <span class="icon file">main.js</span>:</p>
-                                <ul>
-                                    <li><p>Create and test functions to make the LCD display blink red, and to stop blinking.</p></li>
-                                    <li><p>Create and test functions to start the buzzer buzzing, and to stop the buzzer.</p></li>
-                                    <li><p>Changes in rotary angle should change the brightness of LCD display.</p></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <p>Now, add your server side code in <span class="icon file">main.js</span>:</p>
-                                <ul>
-                                    <li><p>Create a web server on the Intel Edison using express in NodeJS.</p></li>
-                                    <li><p>Remember to edit your <span class="icon file">package.json</span> to include the <em>express</em>, <em>moment</em>, and <em>superagent</em> npm modules.</p></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <p>Create a new <span class="icon file">index.html</span> file and write your front end code in there.</p>
-                                <ul>
-                                    <li>Create a simple HTML widget to set the time for the alarm clock.</li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <p>Finally, hook everything up together:</p>
-                                <ul>
-                                    <li><p>When it’s proper time for alarm to start, LCD display should blink to red and buzzer should start buzzing.</p></li>
-                                    <li><p>When user presses the button: alarm must turn off, LCD must stop blinking, and buzzer should stop buzzing.</p></li>
-                                </ul>
-                            </li>
-
-                        </ol>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Additional resources</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content ">
-                    <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
-
-                    <p><strong>Grove Temperature Sensor</strong></p>
-
-                    <ul>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a></li>
-                        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a></li>
-                    </ul>
-
-                    <p><strong>Grove LCD RGB Backlight</strong></p>
-
-                    <ul>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" target="_blank">Seeed Studio Wiki: LCD RGB Backlight</a></li>
-                        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">UPM API - i2clcd</a></li>
-                        <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">UPM API - Jhd1313m1</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js" target="_blank">UPM JavaScript example: RGB LCD</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js</a></li>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_3-Axis_Digital_Accelerometer(%C2%B11.5g)">http://www.seeedstudio.com/wiki/Grove<em>-</em>3-Axis_Digital_Accelerometer(%C2%B11.5g)</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js</a></li>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight">http://www.seeedstudio.com/wiki/Grove<em>-</em>LCD_RGB_Backlight</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js</a></li>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">http://www.seeedstudio.com/wiki/Grove<em>-</em>Rotary_Angle_Sensor</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js</a></li>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Button">http://www.seeedstudio.com/wiki/Grove<em>-</em>Button</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js</a></li>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">http://www.seeedstudio.com/wiki/Grove<em>-</em>Buzzer</a></li>
-                        <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js</a></li>
-                        <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight">http://www.seeedstudio.com/wiki/Grove<em>-</em>LCD_RGB_Backlight</a></li>
-                        <li><a href="http://expressjs.com/starter/hello-world.html">http://expressjs.com/starter/hello-world.html</a></li>
-                        <li><a href="https://github.com/visionmedia/superagent">https://github.com/visionmedia/superagent</a></li>
-                        <li><a href="http://momentjs.com/docs/">http://momentjs.com/docs/</a></li>
-                    </ul>
-                </div>
-            </div>
-
+          </div>
         </div>
+
+
+
+        <div ibox collapse title="Exercise 3: Smart Alarm Clock">
+          <div content-block name="alarm-intro" message="Read the project introduction">
+            <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Intel Edison. Set the alarm time using a web page served directly from the Edison itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.</p>
+          </div>
+
+          <div content-block name="alarm-sensors" message="Connect all of the sensors"
+          image-link="./views/labs/build/smartalarm.jpg">
+            <ol>
+              <li><p>Connect <strong>Grove Buzzer</strong> to digital pin <strong>D5</strong> of the Grove Base Shield.</p></li>
+              <li><p>Connect <strong>Grove Button</strong> to digital pin <strong>D4</strong>.</p></li>
+              <li><p>Connect <strong>Grove LCD</strong> display to any <strong>I2C</strong> pin.</p></li>
+              <li><p>Connect <strong>Grove Rotary Angle</strong> to analog pin <strong>A0</strong>.</p></li>
+            </ol>
+          </div>
+
+          <div content-block name="alarm-sensors" message="Code for the alarm clock is completed.">
+              <li>
+                <p>To start off, write some code for the hardware in <span class="icon file">main.js</span>:</p>
+                <ul>
+                  <li>
+                    <p>Create and test functions to make the LCD display blink red, and to stop blinking.</p>
+                  </li>
+                  <li>
+                    <p>Create and test functions to start the buzzer buzzing, and to stop the buzzer.</p>
+                  </li>
+                  <li>
+                    <p>Changes in rotary angle should change the brightness of LCD display.</p>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <p>Now, add your server side code in <span class="icon file">main.js</span>:</p>
+                <ul>
+                  <li>
+                    <p>Create a web server on the Intel Edison using express in NodeJS.</p>
+                  </li>
+                  <li>
+                    <p>Remember to edit your <span class="icon file">package.json</span> to include the <em>express</em>, <em>moment</em>, and <em>superagent</em> npm modules.</p>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <p>Create a new <span class="icon file">index.html</span> file and write your front end code in there.</p>
+                <ul>
+                  <li>Create a simple HTML widget to set the time for the alarm clock.</li>
+                </ul>
+              </li>
+
+              <li>
+                <p>Finally, hook everything up together:</p>
+                <ul>
+                  <li>
+                    <p>When it’s proper time for alarm to start, LCD display should blink to red and buzzer should start buzzing.</p>
+                  </li>
+                  <li>
+                    <p>When user presses the button: alarm must turn off, LCD must stop blinking, and buzzer should stop buzzing.</p>
+                  </li>
+                </ul>
+              </li>
+
+            </ol>
+
+          </div>
+        </div>
+
+      <div ibox title="Additional resources">
+        <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
+
+        <p><strong>Grove Temperature Sensor</strong></p>
+
+        <ul>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a></li>
+          <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a></li>
+        </ul>
+
+        <p><strong>Grove LCD RGB Backlight</strong></p>
+
+        <ul>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" target="_blank">Seeed Studio Wiki: LCD RGB Backlight</a></li>
+          <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">UPM API - i2clcd</a></li>
+          <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">UPM API - Jhd1313m1</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js" target="_blank">UPM JavaScript example: RGB LCD</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js</a></li>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_3-Axis_Digital_Accelerometer(%C2%B11.5g)">http://www.seeedstudio.com/wiki/Grove<em>-</em>3-Axis_Digital_Accelerometer(%C2%B11.5g)</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js</a></li>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight">http://www.seeedstudio.com/wiki/Grove<em>-</em>LCD_RGB_Backlight</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js</a></li>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">http://www.seeedstudio.com/wiki/Grove<em>-</em>Rotary_Angle_Sensor</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js</a></li>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Button">http://www.seeedstudio.com/wiki/Grove<em>-</em>Button</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js</a></li>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">http://www.seeedstudio.com/wiki/Grove<em>-</em>Buzzer</a></li>
+          <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js">https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/rgb-lcd.js</a></li>
+          <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight">http://www.seeedstudio.com/wiki/Grove<em>-</em>LCD_RGB_Backlight</a></li>
+          <li><a href="http://expressjs.com/starter/hello-world.html">http://expressjs.com/starter/hello-world.html</a></li>
+          <li><a href="https://github.com/visionmedia/superagent">https://github.com/visionmedia/superagent</a></li>
+          <li><a href="http://momentjs.com/docs/">http://momentjs.com/docs/</a></li>
+        </ul>
+      </div>
     </div>
+
+  </div>
+</div>
 </div>
