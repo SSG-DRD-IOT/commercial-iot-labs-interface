@@ -21,169 +21,144 @@
     <div class="row">
         <div class="col-lg-12">
 
+          <div ibox collapse title="Bluetooth Low Energy (BLE) Lab: Objectives">
             <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Bluetooth Low Energy (BLE) Lab: Objectives</h5>
+            <div content-block name="ble-objectives" message="Read the Objectives">
+              <p>In this module, you will use Bluetooth Low Energy (BLE) to send data between your Intel® Edison and your Intel ®IoT Gateway.</p>
+              <p>By the end of this module, you should be able to:</p>
 
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content collapse">
-                    <p>In this module, use Bluetooth Low Energy (BLE) to send data between your Intel® Edison and your Intel ®IoT Gateway.</p>
-
-                    <p>By the end of this module, you should be able to:</p>
-
-                    <ul>
-                        <li>Enable the Bluetooth Low Energy (BLE) services on Linux.</li>
-                        <li>Turn the Intel® IoT Gateway into a BLE central module using the <strong>noble</strong> NodeJS library.</li>
-                        <li>Turn the Intel® Edison into a BLE perphiphal using the <strong>bleno</strong> NodeJS library.</li>
-                        <li>Send and receive a single sensor data value over BLE.</li>
-                    </ul>
-
-                </div>
+              <ul>
+                  <li>Enable the Bluetooth Low Energy (BLE) services on Linux.</li>
+                  <li>Turn the Intel® IoT Gateway into a BLE central module using the <strong>noble</strong> NodeJS library.</li>
+                  <li>Turn the Intel® Edison into a BLE perphiphal using the <strong>bleno</strong> NodeJS library.</li>
+                  <li>Send and receive a single sensor data value over BLE.</li>
+              </ul>
             </div>
+          </div>
 
+
+          <div ibox collapse title="Set up Bluetooth">
             <!-- Setup Bluetooth -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Set up Bluetooth</h5>
+            <div content-block name="ble-objectives" message="Enable Bluetooth by running the commands above">
 
-                    <div ibox-tools></div>
-                </div>
+              <p>Run shell commands on <strong>both</strong> your Intel® Edison and Intel® IoT Gateway devices to enable the correct Bluetooth Low Energy (BLE) services.</p>
 
-                <div class="ibox-content collapse">
-                    <p>Run shell commands on <strong>both</strong> your Intel® Edison and Intel® IoT Gateway devices to enable the correct Bluetooth Low Energy (BLE) services.</p>
-
-                    <ol>
-                        <li>
-                            <p>Shell into your Intel® Edison and run the following commands:</p>
-                            <pre><code>$ rfkill unblock bluetooth
+              <ol>
+                <li>
+                  <p>Shell into your Intel® Edison and run the following commands:</p>
+                  <pre><code>$ rfkill unblock bluetooth
 $ killall bluetoothd
 $ systemctl disable bluetooth
 $ hciconfig hci0 up</code></pre>
-                            <p><img src="./views/labs/networking/setup/commands.png" alt=""></p>
-                        </li>
+                    <p><img src="./views/labs/networking/setup/commands.png" alt=""></p>
+                  </li>
 
-                        <li>
-                            <p>Shell into your Intel® IoT Gateway and run the same commands as above on your Gateway.</p>
-                        </li>
+                  <li>
+                    <p>Shell into your Intel® IoT Gateway and run the same commands as above on your Gateway.</p>
+                  </li>
 
-                    </ol>
-                </div>
+                </ol>
+              </div>
             </div>
 
             <!-- Read sensor data over BLE -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Read sensor data over BLE</h5>
+          <div ibox title="Read sensor data over Bluetooth Low Energy">
+            <div content-block name="read-sensor-data-over-BLE" message="Plug in sensors to the Intel Edison"
+            image-link="./views/labs/networking/temp_sensor/image_2.jpg">
+              <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Intel® Edison into a BLE peripheral.</p>
 
-                    <div ibox-tools></div>
-                </div>
+              <ol>
+                <li>
+                  <p>The <strong>Grove Temperature Sensor</strong> should be connected to analog pin <strong>A0</strong>.</p>
+                  <p>And the <strong>Grove LCD</strong> should be connected to any <strong>I2C</strong> pin.</p>
+                </li>
+              </ol>
+            </div>
 
-                <div class="ibox-content collapse">
+            <div content-block name="read-sensor-data-over-BLE" message="Create a New Project and use the code this code in Main.js as a starting point">
+              <ol>
+                <li>
+                  <p>Your <span class="fa fa-file">main.js</span> (running on the Intel® Edison) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
+                  <p class="label">./temperature/main.js</p>
+                </li>
+              </ol>
+                <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
 
-                    <div class="tldr">
-                        <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Intel® Edison into a BLE peripheral.</p>
-                    </div>
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
 
-                    <h2>Confirm your set up</h2>
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
 
-                    <ol>
+function monitor() {
+    setInterval(function() {
 
-                        <li>
-                            <p>The <strong>Grove Temperature Sensor</strong> should be connected to analog pin <strong>A0</strong>.</p>
-                            <p>And the <strong>Grove LCD</strong> should be connected to any <strong>I2C</strong> pin.</p>
-                            <p><img src="./views/labs/networking/temp_sensor/image_2.jpg" alt="" ></p>
-                        </li>
+        // Read the temperature sensor
+        var celsius = temp.value();
+        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
 
-                        <li>
-                            <p>Your <span class="icon file">main.js</span> (running on the Intel® Edison) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
-                            <p class="label">./temperature/main.js</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
-                                var groveSensor = require('jsupm_grove');
-                                var LCD = require("jsupm_i2clcd");
+        // Update the LCD screen
+        screen.setCursor(0, 0);
+        screen.setColor(255, 255, 255);
+        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
 
-                                // Create a new instance of a Grove Temperature Sensor
-                                var temp = new groveSensor.GroveTemp(0);
+    }, 1000);
+}
 
-                                // Create a new instance of a Grove RGB LCD screen
-                                var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+monitor();</ui-codemirror>
+</div>
 
-                                function monitor() {
-                                setInterval(function() {
+<div content-block name="read-sensor-data-over-BLE" message="Turn the Intel® Edison into a BLE peripheral">
+  <p><a href="https://github.com/sandeepmistry/bleno">Bleno</a> is a JavaScript Bluetooth module that can be used with the Intel® Edison.</p>
+  <ol>
+    <li>
+      <p>In your Intel XDK project, open <span class="icon file">package.json</span> and locate the <code>dependencies</code> configuration.</p>
+    </li>
+    <li>
+      <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
+  "bleno":"*"
+}</ui-codemirror>
+    </li>
 
-                                // Read the temperature sensor
-                                var celsius = temp.value();
-                                var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
-                                console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+    <li>
+      <p>In <span class="fa fa-file">main.js</span>, add <code>bleno</code> alongside the rest of your module imports.</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
 
-                                // Update the LCD screen
-                                screen.setCursor(0, 0);
-                                screen.setColor(255, 255, 255);
-                                screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+// Include the libraries for BLE
+var bleno = require('bleno'); < /strong>
 
-                                }, 1000);
-                                }
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+var celsius = null;
 
-                                monitor();</ui-codemirror>
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
+    </li>
 
-                        </li>
+    <li>
+      <p>Declare references to the bleno BLE classes for <code>PrimaryService</code>, <code>Characteristic</code>, <code>Descriptor</code>.</p>
+      // Include the libraries for BLE
+      var bleno = require('bleno');
 
-                    </ol>
+      // Create a new instance of a Grove Temperature Sensor
+      var temp = new groveSensor.GroveTemp(0);
+      var celsius = null;
 
-                    <h2>Turn the Intel® Edison into a BLE peripheral</h2>
+      // Create a new instance of a Grove RGB LCD screen
+      var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
 
-                    <p>Use <a href="https://github.com/sandeepmistry/bleno">bleno</a>, a NodeJS module, to turn the Intel® Edison into a BLE peripheral.</p>
-
-                    <ol>
-
-                        <li>
-                            <p>In your Intel XDK project, open <span class="icon file">package.json</span> and locate the <code>dependencies</code> configuration.</p>
-                        </li>
-
-                        <li>
-                            <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
-                                "bleno":"*"
-                                }</ui-codemirror>
-                        </li>
-
-                        <li>
-                            <p>In <span class="icon file">main.js</span>, add <code>bleno</code> alongside the rest of your module imports.</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
-                                var groveSensor = require('jsupm_grove');
-                                var LCD = require("jsupm_i2clcd");
-
-                                // Include the libraries for BLE
-                                var bleno = require('bleno'); < /strong>
-
-                                // Create a new instance of a Grove Temperature Sensor
-                                var temp = new groveSensor.GroveTemp(0);
-                                var celsius = null;
-
-                                // Create a new instance of a Grove RGB LCD screen
-                                var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
-                        </li>
-
-                        <li>
-                            <p>Declare references to the bleno BLE classes for <code>PrimaryService</code>, <code>Characteristic</code>, <code>Descriptor</code>.</p>
-                            // Include the libraries for BLE
-                            var bleno = require('bleno');
-
-                            // Create a new instance of a Grove Temperature Sensor
-                            var temp = new groveSensor.GroveTemp(0);
-                            var celsius = null;
-
-                            // Create a new instance of a Grove RGB LCD screen
-                            var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
-
-                            <strong>// Extend the bleno BLE classes
-                                var BlenoPrimaryService = bleno.PrimaryService;
-                                var BlenoCharacteristic = bleno.Characteristic;
-                                var BlenoDescriptor = bleno.Descriptor;</strong>
-                            </code></pre>
-                        </li>
+      <strong>// Extend the bleno BLE classes
+          var BlenoPrimaryService = bleno.PrimaryService;
+          var BlenoCharacteristic = bleno.Characteristic;
+          var BlenoDescriptor = bleno.Descriptor;</strong>
+      </code></pre>
+  </li>
 
                         <li>
                             <p>You will need to inherit from the bleno BLE classes, so add <code>util</code> to your module imports.</p>
@@ -502,16 +477,16 @@ $ hciconfig hci0 up</code></pre>
                     </div>
                 </div>
             </div>
-            
+
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Zigbee Communication</h5>
-                    
+
                     <div ibox-tools></div>
                 </div>
-                
+
                 <div class="ibox-content collapse">
-                    
+
                     <p>In this module, you will learn how to use ZigBee radios to transfer data between your Intel® Edison and your Intel® IoT Gateway.</p>
                     <p>We will be using XBee's Series 1 (also called XBee 802.15.4) based radios and xbee-api node module to establish communication with XBee devices.</p>
                     <div id="exercise1">

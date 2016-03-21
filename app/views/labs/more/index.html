@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Application Protocols: MQTT and HTTP</h2>
+        <h2>Additional Information</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -9,7 +9,7 @@
                 <a>Labs</a>
             </li>
             <li class="active">
-                <strong>Application Protocols: MQTT and HTTP</strong>
+                <strong>Additional Information</strong>
             </li>
         </ol>
     </div>
@@ -307,69 +307,72 @@ return msg;</ui-codemirror>
                 </div>
             </div>
 
-            <div ibox title="Node-Red Flow: HTTP POST to LCD screen">
-              <div content-block name="node-red-http-intro" message="Create Node-RED flow that controls the LCD screen with a web request">
-                <h3>Create Node-RED flow that controls the LCD screen with a web request.</h3>
+          <div ibox title="Node-Red Flow: HTTP POST to LCD screen">
+            <div content-block name="node-red-http-intro" message="Create Node-RED flow that controls the LCD screen with a web request">
+              <h3>Create Node-RED flow that controls the LCD screen with a web request.</h3>
 
-                <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
-              </div>
-
-              <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/nodered/part3/post_flow.png">
-                <h5>Create Node-RED Flow</h5>
-                <p>Use the input http, debug, grove-lcd, and http response nodes to create the flow below:</p>
-                <p>The input http node will listen to a request sent to a specific URL on the local host on port 1880. Once a request is recived this node will pass the payload to the debug colsole, Grove LCD node, and http response node. The http response node will send a response to the sender of the request to let it know that the message was recieved.</p>
-              </div>
-
-              <div content-block name="configure-http-node" message="Configure the HTTP node" image-link="./views/labs/protocols/nodered/part3/config_post.png">
-                <p>Double click the input http node to configure it:</p>
-                <p>For this example use POST as the method and /LCD as the URL.</p>
-              </div>
-
-              <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/nodered/part3/postman_website.png">
-                <h5> Install Postman </h5>
-                <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
-                <p>To send web requests to the Intel® Edison we will be using Postman, a Chrome app designed to send web requests.</p>
-
-                <p>To install the app navigate to <a href ="https://www.getpostman.com/"> https://www.getpostman.com</a>,
-	                      Select Chrome App, and install it following the directions given.</p>
-              </div>
-
-                <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/nodered/part3/postman.png">
-	                  <h5>Use Postman to send web request </h5>
-	                  <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
-                    <ol>
-                      <li>Select post from the dropdown menu and enter the IP address of your Intel® Edison port 1880 with the URL specified above. In this case it is <code>10.175.152.15:1880/LCD</code></li>
-                      <li>The Grove LCD node requires a specific message to change the backlight color and display text. The message must be a JSON with the structure: <code>{"r":r_val,"g":g_val,"b":b_bal,"text":"text to print"}</code> where r_val, g_val, and b_val are the red, green and blue color values from 0-255. This structure is also specified in the grove-lcd node info tab.</li>
-
-                      <li>To have Postman send a request with this syntax slect the "Body" tab, click the "raw" radial button, and select JSON from the dropdown menu. Now enter the JSON specifed above entering the color values and message you wish to display. When you are ready hit "Send".</li>
-                    </ol>
-                </div>
-
-                <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/nodered/part3/postman.png">
-	                  <p><img src="" alt="" ></p>
-	                  <p>If everything has worked properly your LCD should change to the color specifed and display your text. Also the debug tag will show the message that was
-	                      recieved, or any errors that were encountered. </p>
-
-                    <h3>Overview of Restful API for controlling the LCD Screen</h3>
-                    <p>You have created the restful API for:</p>
-	                  <p><b>POST /LCD</b> - which allows you to comtrol the text and backlight.</p>
-	                  <p>In the following step you will add the following restful APIs:</p>
-                    <ul>
-                        <li><b>GET /lcd/backlight</b> - Retrieves the current status of the LCD backlight</li>
-                        <li><b>DELETE /lcd/backlight</b> - Turns the LCD backlight off</li>
-                        <li><b>GET /lcd/text</b> - Retrieves the current status of the LCD text</li>
-                        <li><b>DELETE /lcd/text</b> - Turns the LCD text off</li>
-                    </ul>
-                </div>
+              <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
             </div>
 
+            <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/nodered/part3/post_flow.png">
+              <h5>Create Node-RED Flow</h5>
+              <p>Use the input http, debug, grove-lcd, and http response nodes to create the flow below:</p>
+              <p><img src="./views/labs/protocols/nodered/part3/post_flow.png" alt="" ></p>
+              <p>The input http node will listen to a request sent to a specific URL on the local host on port 1880. Once a request is recived this node will pass the payload to the debug colsole, Grove LCD node, and http response node. The http response node will send a response to the sender of the request to let it know that the message was recieved. Double click the input http node to configure it:</p>
+              <p><img src="./views/labs/protocols/nodered/part3/config_post.png" alt="" ></p>
+              <p>For this example use POST as the method and /LCD as the URL. </p>
+              <h5> Install Postman </h5>
 
-            <div ibox title="Additional Resources">
+              <p>To send web requests to the Intel® Edison we will be using Postman, a Chrome app designed to send web requests.</p>
+              <p><img src = "./views/labs/protocols/nodered/part3/postman_website.png" alt=""></p>
+
+              <p>To install the app navigate to <a href ="https://www.getpostman.com/"> https://www.getpostman.com</a> ,
+                  Select Chrome App, and install it following the directions given.</p>
+
+              <h5> Use Postman to send web request </h5>
+              <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
+              <p><img src="./views/labs/protocols/nodered/part3/postman.png" alt="" ></p>
+              <p>Select post from the dropdown menu and enter the IP address of your Intel® Edison port 1880 with the URL specified above.
+                  In this case it is "10.175.152.15:1880/LCD". The Grove LCD node requires a specific message to change the backlight color and
+                  display text. The message must be a JSON with the structure: {"r":r_val,"g":g_val,"b":b_bal,"text":"text to print"} where r_val, g_val, and b_val
+                  are the red, green and blue color values from 0-255. This structure is also specified in the grove-lcd node info tab.
+              </p><p>To have Postman send a request
+                  with this syntax slect the "Body" tab, click the "raw" radial button, and select JSON from the dropdown menu. Now enter the JSON specifed above
+                  entering the color values and message you wish to display. When you are ready hit "Send".</p>
+              <p><img src="./views/labs/protocols/nodered/part3/post_flow_posted.png" alt="" ></p>
+              <p>If everything has worked properly your LCD should change to the color specifed and display your text. Also the debug tag will show the message that was
+                  recieved, or any errors that were encountered. </p>
+
+              <h3>Overview of Restful API for controlling the LCD Screen</h3>
+              <p>You have created the restful API for:</p>
+              <p><b>POST /LCD</b> - which allows you to comtrol the text and backlight.</p>
+              <p>In the following step you will add the following restful APIs:</p>
               <ul>
-                  <li><p><a href="http://mqtt.org/">http://mqtt.org/</a></p></li>
-                  <li><p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p></li>
-                  <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a></p></li>
+                  <li><b>GET /lcd/backlight</b> - Retrieves the current status of the LCD backlight</li>
+
+                  <li><b>DELETE /lcd/backlight</b> - Turns the LCD backlight off</li>
+
+                  <li><b>GET /lcd/text</b> - Retrieves the current status of the LCD text</li>
+
+                  <li><b>DELETE /lcd/text</b> - Turns the LCD text off</li>
               </ul>
+          </div>
+      </div>
+
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>References</h5>
+                    <div ibox-tools></div>
+                </div>
+
+                <div class="ibox-content collapse">
+                    <ul>
+                        <li><p><a href="http://mqtt.org/">http://mqtt.org/</a></p></li>
+                        <li><p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p></li>
+                        <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a></p></li>
+                    </ul>
+                </div>
             </div>
 
 

@@ -1,10 +1,10 @@
 <section id="{{name}}">
     <div ng-show="imageLink != null">
         <div class="row">
-            <div ng-transclude class="col-sm-7">
-            </div>
+          <div ng-transclude class="col-sm-7">
+          </div>
             <div class="col-sm-5">
-                <img class="pull-right img-responsive img-thumbnail" ng-src="{{imageLink}}">
+                 <img class="img-thumbnail img-zoom" src="{{imageLink}}" alt="{{message}}">
             </div>
         </div>
     </div>
