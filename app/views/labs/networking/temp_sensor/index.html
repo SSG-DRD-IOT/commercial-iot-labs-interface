@@ -103,6 +103,7 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</textarea>
 
                 <li>
                     <p>Declare references to the bleno BLE classes for <code>PrimaryService</code>, <code>Characteristic</code>, <code>Descriptor</code>.</p>
+<textarea id="code4" class="code">
                     // Include the libraries for BLE
                     var bleno = require('bleno');
 
@@ -118,11 +119,12 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</textarea>
                         var BlenoCharacteristic = bleno.Characteristic;
                         var BlenoDescriptor = bleno.Descriptor;</strong>
                     </code></pre>
+                  </textarea>
                 </li>
 
                 <li>
                     <p>You will need to inherit from the bleno BLE classes, so add <code>util</code> to your module imports.</p>
-                    <textarea id="code4" class="code">// Include the libraries for BLE
+                    <textarea id="code5" class="code">// Include the libraries for BLE
 var bleno = require('bleno');
 var util = require('util');</textarea>
                 </li>
@@ -130,7 +132,7 @@ var util = require('util');</textarea>
                 <li>
                     <p>Use <code>util</code> to extend bleno's <code>PrimaryService</code> and <code>Characteristic</code>.</p>
                     <p><code>TemperatureService()</code> and <code>TemperatureReadCharacteristic()</code> have been defined for you below.</p>
-                    <textarea id="code5" class="code">// Extend the bleno BLE classes
+                    <textarea id="code6" class="code">// Extend the bleno BLE classes
 var BlenoPrimaryService = bleno.PrimaryService;
 var BlenoCharacteristic = bleno.Characteristic;
 var BlenoDescriptor = bleno.Descriptor;
@@ -171,7 +173,7 @@ monitor();</textarea>
                 <li>
                     <p>bleno will need to write the sensor value to a buffer so declare a global variable <code>celsius</code> to use in <code>TemperatureReadCharacteristic.prototype.onReadRequest</code> defined below.</p>
                     <p>Update <code>monitor()</code> to use the global variable instead of a local variable.</p>
-                    <textarea id="code6" class="code">// Create a new instance of a Grove Temperature Sensor
+                    <textarea id="code7" class="code">// Create a new instance of a Grove Temperature Sensor
 var temp = new groveSensor.GroveTemp(0);
   var celsius = null;
 
@@ -229,7 +231,7 @@ monitor();</textarea>
                 <li>
                     <p>Finally, add event listeners for the <code>stateChange</code> and <code>advertisingStart</code> bleno BLE events.</p>
                     <p>The callback function for the <code>stateChange</code> event implements a <code>setInterval()</code> so remove the <code>monitor();</code> statement and the <code>setInterval()</code> from <code>monitor()</code>.</p>
-                    <textarea id="code7" class="code">function monitor() {
+                    <textarea id="code8" class="code">function monitor() {
   // Read the temperature sensor
   celsius = temp.value();
   var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
@@ -314,7 +316,7 @@ bleno.on('advertisingStart', function(err) {
                 <li>
                     <p>Declare constants for the BLE service.</p>
                     <p>These are the <strong>same</strong> UUID's used in the peripheral code that's running on the Intel® Edison.</p>
-                    <textarea id="code8" class="code">var ServiceName = 'temperature';
+                    <textarea id="code9" class="code">var ServiceName = 'temperature';
 var Service_UUID = 'ec00';
 var Characteristic_UUID = 'ec01';
 var TemperatureCharacteristic = null;</textarea>
@@ -322,7 +324,7 @@ var TemperatureCharacteristic = null;</textarea>
 
                 <li>
                     <p>Add the supplied <code>readTemperature()</code> function to read the temperature value from the buffer.</p>
-                    <textarea id="code9" class="code">function readTemperature() {
+                    <textarea id="code10" class="code">function readTemperature() {
   TemperatureCharacteristic.read(function(error) {
     if (error) {
       clearInterval(readTemperature);
@@ -339,6 +341,7 @@ var TemperatureCharacteristic = null;</textarea>
 
                 <li>
                     <p><code>handleService()</code> will loop through the Bluetooth characteristics sent and look for the one that matches <code>Characteristic_UUID</code> or <strong>'ec01'</strong>.</p>
+                    <textarea id="code11" class="code">
                     function handleService(service){
                 service.discoverCharacteristics([], function(error, characteristics) {
                   characteristics.forEach(function(characteristic){
@@ -358,7 +361,7 @@ var TemperatureCharacteristic = null;</textarea>
 
                 <li>
                     <p>Finally, add event listeners for the <code>stateChange</code>, <code>discover</code>, and <code>disconnect</code> noble BLE events.</p>
-                    <textarea id="code10" class="code">noble.on('stateChange', function(state) {
+                    <textarea id="code12" class="code">noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
     noble.startScanning();
   } else {
@@ -377,7 +380,7 @@ noble.on('discover', function(peripheral) {
       }
       peripheral.discoverServices([], function(error, services) {
         console.log(services.length, ' services discovered');
-        for (var i = 0, l = services.length; i & lt; l; i++) {
+        for (var i = 0, l = services.length; i < l; i++) {
           var service = services[i];
           if (Service_UUID == service.uuid) {
             noble.stopScanning();
