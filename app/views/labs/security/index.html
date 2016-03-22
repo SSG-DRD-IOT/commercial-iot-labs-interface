@@ -20,37 +20,24 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Objectives</h5>
+          <div ibox title="Objectives">
+            <div content-block name="security-objectives" message="Read the Objectives">
+              <p>By the end of this module, you should be able to:</p>
 
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content collapse">
-                    <p>By the end of this module, you should be able to:</p>
-
-                    <ul>
-                        <li>Use McAfee Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
-                        <li>Have an understanding of the core MEC features, including code and application protection, write and read protection and dynamic whitelisting.</li>
-                        <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li>
-                        <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li>
-                        <li>Ensuring IoT Gateways so that only trusted modules, Files can Read / Write, Modify & execute.</li>
-                        <li>Ability to log the IoT gateway usage and changes</li>
-                        
-                    </ul>
-                </div>
+              <ul>
+                  <li>Use McAfee Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
+                  <li>Have an understanding of the core MEC features, including code and application protection, write and read protection and dynamic whitelisting.</li>
+                  <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li>
+                  <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li>
+                  <li>Ensuring IoT Gateways so that only trusted modules, Files can Read / Write, Modify & execute.</li>
+                  <li>Ability to log the IoT gateway usage and changes</li>
+              </ul>
             </div>
+          </div>
 
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 1: McAfee Embedded Control</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content collapse">
+          <div ibox collapse title="Exercise 1: McAfee Embedded Control">
+            <div content-block name="security-objectives" message="Complete the McAfee Embedded Control Exercises">
                     <h5>Lab Overview</h5>
 
                     <p>The Intel Iot Gateway provides a McAfee layer that let you configure McAfee embedded products for the Wind River Linux target platform.  McAfee Embedded Control (MEC) provides the following capabilities in Wind River Linux platforms:</p>
@@ -403,25 +390,19 @@ Hello, World</code></pre>
             </div>
 
 
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Exercise 2: Role Based Security and Memory Protection with GrSecurity</h5>
 
-                        <div ibox-tools></div>
-                    </div>
+              <div ibox collapse title="Exercise 2: Role Based Security and Memory Protection with GrSecurity">
+                <div content-block name="grsecurity-objectives" message="Exercise 2: Role Based Security and Memory Protection with GrSecurity">
 
-                    <div class="ibox-content collapse">
-
-                        
                         <h5>Lab Overview</h5>
 
                         <p><b>GRSecurity</b> is a set of software patches released under the GNU GPL for the Linux kernel to enhance the system security. It allows the system administrator to, among other things, define a minimum privilege policy for the system, in which every process and user have only the lowest privileges necessary to function. GRSecurity has 2 primary features, the RBAC (Rules Based Access Control) and the PaX.</p>
                         <p><b>gradm</b>, the administration utility for the role-based access control system, is a powerful tool that parses your ACLs (Access Control Lists), performs the enforcement of a secure base policy, optimizes the ACLs, as well as handles parsing of the learning logs, merges them with your ACL set and outputs the final ACLs.</p>
-                        
+
 
                         <h5>Disable McAfee Embedded Control</h5>
 
-                        <p>By design, <b>McAfee Embedded Control</b> will protect your system from changes. So let's turn it off now.</p> 
+                        <p>By design, <b>McAfee Embedded Control</b> will protect your system from changes. So let's turn it off now.</p>
                         <pre><code># sadmin disable</code></pre>
 
                         <h5>The gradm command</h5>
@@ -479,16 +460,10 @@ Hello, World</code></pre>
                 </div>
 
 
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Exercise 3: Node-RED with HTTPS</h5>
-
-                        <div ibox-tools></div>
-                    </div>
-
-                    <div class="ibox-content collapse">
-	                      <p>HTTPS provides SSL encyption for all data passed between client and server. Below you will	
-		                        learn how to secure your Node-RED server, and all web requests to it, with HTTPS. More info can be found 
+                <div ibox collapse title="Exercise 3: Node-RED with HTTPS">
+                  <div content-block name="grsecurity-objectives" message="Exercise 3: Node-RED with HTTPS">
+	                      <p>HTTPS provides SSL encyption for all data passed between client and server. Below you will
+		                        learn how to secure your Node-RED server, and all web requests to it, with HTTPS. More info can be found
 		                        at <a href="https://nodejs.org/api/https.html">https://nodejs.org/api/https.html</a> </p>
 
 
@@ -515,23 +490,23 @@ Hello, World</code></pre>
 	                      <li>On lines 107-110 remove the "//" at the start of each line to uncomment the lines.</li>
 	                      <li>Hit Esc, type :wq, and hit enter to save and exit vi.</li>
 
-                        
+
 		                    <p><img src="./views/labs/security/vi_settings.png" alt="" ></p>
-		                    
-	                      
+
+
 	                      <h5>Run Node-RED server</h5>
 	                      <p>Launch Node-RED with:</p>
 	                      <code>$ cd ~</code><br><br>
 	                      <code>$ node-red</code>
-	                      <p>Navigate to the Node-RED server in your browser at https://edison-ip:1880 , note that you must replace edison-ip 
+	                      <p>Navigate to the Node-RED server in your browser at https://edison-ip:1880 , note that you must replace edison-ip
 	                          with the actual ip address of your Edison.</p>
-	                      
+
 	                      <p><img src="./views/labs/security/sll_warning.png" alt="" ></p>
-	                      
+
 	                      <p>Since the SSL certifiacte you are using is self signed your browser will throw a warning. Click
 	                          advanced and select "Proceed to xx.xx.xx (unsafe)"</p>
-	                      
-	                      
+
+
                         <p><img src="./views/labs/security/https_box.png" alt="" ></p>
 	                      <p>Your Node-RED server now uses TLS 1.2 to secure the connection.</p>
 
@@ -544,7 +519,7 @@ Hello, World</code></pre>
 
                         <ul>
                             <li><p><a href="https://www.openssl.org/">https://www.openssl.org/</a></p></li>
-                            
+
                         </ul>
 
 
@@ -553,5 +528,4 @@ Hello, World</code></pre>
 
         </div>
     </div>
-</p>
-                    </p></div>
+</div>

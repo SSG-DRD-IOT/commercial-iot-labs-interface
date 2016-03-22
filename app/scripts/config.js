@@ -1,11 +1,3 @@
-/**
- * INSPINIA - Responsive Admin Theme
- *
- * Inspinia theme use AngularUI Router to manage routing and views
- * Each view are defined as state.
- * Initial there are written stat for all view in theme.
- *
- */
 function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
   $urlRouterProvider.otherwise("/index/home");
 
@@ -146,6 +138,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
           ]);
         }
       }
+    })
+    .state('labs.admin', {
+      url: "/admin-interface",
+      templateUrl: "views/labs/admin-interface/index.html",
+      data: { pageTitle: 'Custom Administrative Interface' }
     })
     .state('labs.automation', {
       url: "/automation",

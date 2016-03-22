@@ -1,87 +1,77 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Custom Administrative Interfaces</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a>Labs</a>
-            </li>
-            <li class="active">
-                <strong>Custom Administrative Interfaces</strong>
-            </li>
-        </ol>
-    </div>
-    <div class="col-lg-2">
+  <div class="col-lg-10">
+    <h2>Custom Administrative Interfaces</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a>Labs</a>
+      </li>
+      <li class="active">
+        <strong>Custom Administrative Interfaces</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
 
-    </div>
+  </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Administration Interface</h5>
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Objectives -->
+      <div ibox title="Administration Interface">
+        <div content-block name="database-objectives" message="Install and Run the Custom Administration Interface">
+          <p>You can monitor the status of your edge network system using NodeJS on the back end and HTML, CSS, and JavaScript on the front end. Write system condition based monitoring triggers, record system errors, and perform edge network analytics.</p>
+          <p>By the end of this module, you should be able to:</p>
 
-                    <div ibox-tools></div>
-                </div>
+          <ul>
+            <li>A web-based administrative interface deployed on your Intel® IoT Gateway.</li>
+            <li>Have an understanding of how you could build your own web-based monitoring system.</li>
+          </ul>
 
-                <div class="ibox-content">
-                    <p>You can monitor the status of your edge network system using NodeJS on the back end and HTML, CSS, and JavaScript on the front end. Write system condition based monitoring triggers, record system errors, and perform edge network analytics.</p>
+          <h2>Install the supplied administrative interface</h2>
 
-                    <h2>Objective</h2>
+          <ol>
+            <li>
+              <p>Download the <a href="https://drive.google.com/open?id=0B2ywC78pxngCZkhJbkZCR0k2NzA">admin-interface.zip</a>.</p>
+            </li>
 
-                    <p>By the end of this module, you should be able to:</p>
+            <li>
+              <p>Use <span class="icon windows">FileZilla</span> to transfer the zip to your Intel® IoT Gateway.</p>
+            </li>
 
-                    <ul>
-                        <li>A web-based administrative interface deployed on your Intel® IoT Gateway.</li>
-                        <li>Have an understanding of how you could build your own web-based monitoring system.</li>
-                    </ul>
+            <li>
+              <p>Use <span class="icon windows">PuTTY</span> to SSH into the Intel Iot Gateway.</p>
+            </li>
 
-                    <h2>Install the supplied administrative interface</h2>
+            <li>
+              <p>Navigate to the directory with the zip file and unzip it.</p>
+            </li>
 
-                    <ol>
+            <li>
+              <p>After the zip file has been uncompressed, go into the resulting folder.</p>
+              <pre><code>cd admin-interface</code></pre>
+            </li>
 
-                        <li>
-                            <p>Download the <a href="https://drive.google.com/open?id=0B2ywC78pxngCZkhJbkZCR0k2NzA">admin-interface.zip</a>.</p>
-                        </li>
+            <li>
+              <p>Run <span class="icon file">server.js</span> as a <strong>Node</strong> process.</p>
+              <pre><code>node server.js</code></pre>
+              <p>This will start a NodeJS HTTP server that will provide the front end user interface.</p>
+            </li>
 
-                        <li>
-                            <p>Use <span class="icon windows">FileZilla</span> to transfer the zip to your Intel® IoT Gateway.</p>
-                        </li>
+            <li>
+              <p>Visit <a href="http://localhost:3000">http://localhost:3000</a> in your development computer's web browser.</p>
+            </li>
 
-                        <li>
-                            <p>Use <span class="icon windows">PuTTY</span> to SSH into the Intel Iot Gateway.</p>
-                        </li>
+            <li>
+              <p>Explore the interface for condition based monitoring triggers, record system errors, and perform edge network analytics. Refer to the files in <span class="icon folder">gateway-frontend</span> for how these features were implemented.</p>
+            </li>
 
-                        <li>
-                            <p>Navigate to the directory with the zip file and unzip it.</p>
-                        </li>
-
-                        <li>
-                            <p>After the zip file has been uncompressed, go into the resulting folder.</p>
-                            <pre><code>cd admin-interface</code></pre>
-                        </li>
-
-                        <li>
-                            <p>Run <span class="icon file">server.js</span> as a <strong>Node</strong> process.</p>
-                            <pre><code>node server.js</code></pre>
-                            <p>This will start a NodeJS HTTP server that will provide the front end user interface.</p>
-                        </li>
-
-                        <li>
-                            <p>Visit <a href="http://localhost:3000">http://localhost:3000</a> in your development computer's web browser.</p>
-                        </li>
-
-                        <li>
-                            <p>Explore the interface for condition based monitoring triggers, record system errors, and perform edge network analytics. Refer to the files in <span class="icon folder">gateway-frontend</span> for how these features were implemented.</p>
-                        </li>
-
-                    </ol>
-                </div>
-            </div>
+          </ol>
         </div>
+      </div>
     </div>
+  </div>
 </div>
