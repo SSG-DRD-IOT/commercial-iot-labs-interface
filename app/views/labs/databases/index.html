@@ -20,37 +20,25 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
-            <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Objectives</h5>
 
-                    <div ibox-tools></div>
-                </div>
 
-                <div class="ibox-content">
-                    <p>To write a NodeJS server that listens to all the MQTT sensor traffic on the network and writes it to a database.</p>
-                </div>
+          <div ibox collapse title="Database Lab: Objectives">
+          <!-- Objectives -->
+            <div content-block name="database-objectives" message="Read the Objectives">
+              <p>To write a NodeJS server that listens to all the MQTT sensor traffic on the network and writes it to a database.</p>
             </div>
+          </div>
 
-            <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Create JavaScript Models to represent the Edge Network</h5>
+          <!-- Objectives -->
+          <div ibox collapse title="Create JavaScript Models to represent the Edge Network">
+            <p>
+              Write a NodeJS server that monitors the temperature and publishes it over MQTT.
+            </p>
 
-                    <div ibox-tools></div>
-                </div>
+            <h5>Defining Types for the Edge Network</h5>
 
-                <div class="ibox-content">
-
-                    <div class="tldr">
-                        Write a NodeJS server that monitors the temperature and publishes it over MQTT.
-                    </div>
-
-                    <h5>Defining Types for the Edge Network</h5>
-
-                    <p>As we build our IoT Gateway system, we will need to define the objects and events that we want to track on our edge network.</p>
-                    <p>For this edge network, we will define five types that we will track in the database.</p>
+            <p>As we build our IoT Gateway system, we will need to define the objects and events that we want to track on our edge network.</p>
+            <p>For this edge network, we will define five types that we will track in the database.</p>
 
                     <ul>
                         <li><b>A Sensor</b> - is any edge device that publishes data to the edge network and Intel Iot Gateway</li>
@@ -208,38 +196,29 @@ module.exports = {
   SensorCloudModel: mongoose.model('SensorCloudModel', SensorCloudSchema),
   TriggerModel: mongoose.model('TriggerModel', TriggerSchema),
   ErrorModel: mongoose.model('ErrorModel', ErrorSchema)
-};                 
-                    </ui-codemirror></div>
-                </div>
+};</ui-codemirror>
+                  </div>
             </div>
 
+        <div ibox collapse title="MQTT Sensor Monitoring on the Gateway">
+          <p>Once the sensors on the edge network are publishing data, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
+          <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
+          <p>The <code>edge-sensor-monitor</code> does this by listening to all MQTT sensor topics 'sensors/+/data' that are publishing on the edge network. New sensor data is written to the database.</p>
+          <p>The <code>edge-sensor-monitor</code> also listens to the MQTT <code>announcements</code> topic, which will carry information on new sensors that are deployed on the network.</p>
 
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>MQTT Sensor Monitoring on the Gateway</h5>
+          <p class="callout info">The Intel XDK only deploys to an Intel Edison.  For this project, you will have to upload your project to the Intel IoT Gateway using WinSCP.</p>
 
-                    <div ibox-tools></div>
-                </div>
+          <h5><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h5>
 
-                <div class="ibox-content">
-                    <p>Once the sensors on the edge network are publishing data, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
-                    <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
-                    <p>The <code>edge-sensor-monitor</code> does this by listening to all MQTT sensor topics 'sensors/+/data' that are publishing on the edge network. New sensor data is written to the database.</p>
-                    <p>The <code>edge-sensor-monitor</code> also listens to the MQTT <code>announcements</code> topic, which will carry information on new sensors that are deployed on the network.</p>
-                    
-                    <p class="callout info">The Intel XDK only deploys to an Intel Edison.  For this project, you will have to upload your project to the Intel IoT Gateway using WinSCP.</p>
+          <p>Create a new project named <b>edge-sensor-monitor</b></p>
 
-                    <h5><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h5>
+          <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
+          <p>Please note that the <code>intel-commerical-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
+          <p class="subtitle">Recording MQTT Sensor Activity</p>
+          <p class="label">./package.json</p>
 
-                    <p>Create a new project named <b>edge-sensor-monitor</b></p>
 
-                    <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
-                    <p>Please note that the <code>intel-commerical-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
-                    <p class="subtitle">Recording MQTT Sensor Activity</p>
-                    <p class="label">./package.json</p>
-                    
-
-                    <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
+              <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
 "mqtt": "latest",
 "mongoose": "latest",
 "intel-commerical-edge-network-database-models" : "latest"
@@ -309,7 +288,7 @@ mqttClient.on('message', function (topic, message) {
 };</ui-codemirror>
                             </li>
                         </ol>
-                        <p>In this functionThe MQTT Event Loop implement the following steps:</p>
+                        <p>In this function the MQTT Event Loop implement the following steps:</p>
 
                                 <ol>
                                     <li>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</li>
@@ -323,21 +302,12 @@ mqttClient.on('message', function (topic, message) {
             </div>
         </div>
 
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Additional Resources</h5>
-                
-                <div ibox-tools></div>
-            </div>
-            
-            <div class="ibox-content">
-                
-                <h5>Additional resources</h5>
-                
-                <ul>
-                    <li><a href="http://mongoosejs.com/docs/guide.html">http://mongoosejs.com/docs/guide.html</a></li>
-                </ul>
-            </div>
+
+        <div ibox collapse title="Additional Resources">
+            <ul>
+                <li><a href="http://mongoosejs.com/docs/guide.html">http://mongoosejs.com/docs/guide.html</a></li>
+            </ul>
+          </div>
         </div>
     </div>
 </div>
