@@ -394,7 +394,7 @@ var LCD = require("jsupm_i2clcd");
 // Create a new instance of a Grove Temperature Sensor
 var temp = new groveSensor.GroveTemp(0); // Create a new instance
 of a Grove RGB LCD screen
-var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+var screen = new LCD.Jhd1313m1(0, 0x3E, 0x62);
 
 function monitor() {
   setInterval(function() {
