@@ -12,7 +12,7 @@ function MainCtrl() {
     this.helloText = 'Welcome to the Intel Commercial IoT Workshop';
     this.descriptionText = '';
 
-};
+}
 
 
 /**
@@ -31,4 +31,4 @@ function CodeEditorCtrl($scope) {
 angular
     .module('inspinia')
   .controller('MainCtrl', MainCtrl)
-  .controller('CodeEditorCtrl', CodeEditorCtrl)
+  .controller('CodeEditorCtrl', CodeEditorCtrl);

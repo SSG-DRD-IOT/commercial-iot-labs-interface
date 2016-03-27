@@ -21,27 +21,23 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Objectives</h5>
+          <!-- Objectives -->
+          <div ibox collapse title="Objectives">
+            <div content-block name="automation-objectives" message="Read the Objectives">
+              <p>By the end of this module, you should be able to:</p>
 
-                    <div ibox-tools></div>
-                </div>
+              <ul>
+                <li>Implement your business logic in the form of triggers.</li>
+                <li>Read triggers from the database and evaulate whether any of them should be executed.</li>
+                <li>Write your own Condition Based Monitoring System (CDMS)</li>
+              </ul>
 
-                <div class="ibox-content">
-                    <p>By the end of this module, you should be able to:</p>
-
-                    <ul>
-                        <li>Implement your business logic in the form of triggers.</li>
-                        <li>Read triggers from the database and evaulate whether any of them should be executed.</li>
-                        <li>Write your own Condition Based Monitoring System (CDMS)</li>
-                    </ul>
-
-                </div>
             </div>
+          </div>
 
             <!-- Introduction -->
+            <div ibox collapse title="Introduction">
+              <div content-block name="automation-introduction" message="Read the Introduction">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Introduction</h5>
@@ -160,9 +156,9 @@
   };
  )</ui-codemirror>
 
-            
+
             <h5>Exercises:</h5>
-            
+
             <ol>
                 <li><p>Write a function that changes the LCD backlight to blue and and LCD text to "Warning, too cold!"</p></li>
                 <li><p>Write a function that saves an error condition to the database.</p></li>
@@ -222,7 +218,7 @@ var config = require("./config.json");</ui-codemirror>
 
             <div class="ibox-content collapse">
             <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
-            
+
             <ui-codemirror ui-codemirror-opts="editorOptions">// Connect to the MQTT server
  var mqttClient  = mqtt.connect(self.config.mqtt.uri);
 
@@ -289,7 +285,7 @@ db.once('open', function (callback) {
 
                     <p>If you are interested in the <code>then</code> function.  This is called a promise in JavaScript. The Promise object is used for deferred and asynchronous computations. A Promise represents an operation that hasn't completed yet, but is expected in the future.  Allowing the developer to write asynchronous code in a more synchronous fashion</p>
 
-                    <p>You can read more able Promise in an article entitled <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">JavaScript Promises: There and Back Agin</a></p> by Jake Archibald.</p>
+                    <p>You can read more able Promise in an article entitled <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">JavaScript Promises: There and Back Agin</a> by Jake Archibald.</p>
 
            <ui-codemirror ui-codemirror-opts="editorOptions">// On Server start, read the triggers from the db and store them
 // the triggers array.
@@ -495,7 +491,7 @@ mqttClient.on('message', function (topic, message) {
                                 </div>
 
                                 <div class="ibox-content collapse">
-                                    
+
                                     <p>Remember that triggers can contain computationally expensive operations.  For example, you can complex calculations, map-reduce operations and accessing of externals network services.</p>
 
                                 </div>

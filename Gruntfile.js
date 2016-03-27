@@ -123,9 +123,8 @@ module.exports = function (grunt) {
                             '.htaccess',
                             '*.html',
                             'views/{,*/}*.html',
-                            'views/**/*',
                             'styles/patterns/*.*',
-                            'img/**/*'
+                            'img/{,*/}*.*'
                         ]
                     },
                     {

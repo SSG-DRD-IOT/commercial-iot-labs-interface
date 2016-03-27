@@ -15,8 +15,8 @@ function pageTitle($rootScope, $timeout) {
             };
             $rootScope.$on('$stateChangeStart', listener);
         }
-    }
-};
+    };
+}
 
 /**
  * sideNavigation - Directive for run metsiMenu on sidebar navigation
@@ -31,7 +31,7 @@ function sideNavigation($timeout) {
             });
         }
     };
-};
+}
 
 /**
  * checkbox - Directive for the fancy, dancy checkbox
@@ -51,10 +51,10 @@ function checkbox($timeout) {
         var ibox = $element.closest('section');
         ibox.toggleClass('checkboxFade');
         checkbox.toggleClass('marked');
-      }
+      };
     }
   };
-};
+}
 
 /**
  * ibox -
