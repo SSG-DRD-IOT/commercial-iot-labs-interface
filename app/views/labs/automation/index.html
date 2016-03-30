@@ -22,14 +22,9 @@
         <div class="col-lg-12">
 
             <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Objectives</h5>
 
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content">
+            <div ibox collapse title="Objectives">
+              <div content-block name="Objectives" message="Read the Objectives">
                     <p>By the end of this module, you should be able to:</p>
 
                     <ul>
@@ -42,54 +37,36 @@
             </div>
 
             <!-- Introduction -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Introduction</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content collapse">
+            <div ibox collapse title="Introduction to Automation on the Edge">
                     <p>In this lab, we will walk you through building a NodeJS application that implements conditions based monitoring on an edge network.</p>
 
                     <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, or <em>Edge Network Automation</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The Iot Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
 
                     <p>In the example of a temperature controlled room, the temperature sensor is reporting the temperature to the Intel Iot Gateway and the gateway is responsible for triggering an Iot event. An Iot Event (also called a trigger in this workshop) always has a conditions function and a trigger function. In the case that the temperature is too hot the event may take automatic action to turn on the air conditioning on and send an alert to the person responsible for the room.</p>
-                </div>
+
             </div>
 
             <!-- Steps in this Lab -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Steps in this Lab</h5>
-                    <div ibox-tools></div>
-                </div>
+            <div ibox collapse title="Steps in this Lab">
+              <div content-block name="read-steps-automation" message="Read the Steps in the Automation Lab">
+                <p>In this lab, we will:</p>
 
-                <div class="ibox-content collapse">
-                    <p>In this lab, we will:</p>
+                <ul>
+                  <li><p>Write several triggers.  Develop an understanding of a condition/predicate function. Develop an understanding of trigger functions and their capabilities.</p></li>
+                  <li><p>Add several triggers to the database manually</p></li>
+                  <li><p>Create a new NPM package named "trigger-daemon"</p></li>
+                  <li><p>Create a NodeJS server that listens to all sensor based data</p></li>
+                  <li><p>Reads in the triggers from the MongoDB. We will store the triggers in the Mongo database so that they can be remotely added from the administration interface.</p></li>
+                  <li><p>Compare sensor data to the condition function of each trigger</p></li>
+                  <li><p>If a comparison function evaluates to true then execute the trigger function.</p></li>
+                </ul>
 
-                    <ul>
-                        <li><p>Write several triggers.  Develop an understanding of a condition/predicate function. Develop an understanding of trigger functions and their capabilities.</p></li>
-                        <li><p>Add several triggers to the database manually</p></li>
-                        <li><p>Create a new NPM package named "trigger-daemon"</p></li>
-                        <li><p>Create a NodeJS server that listens to all sensor based data</p></li>
-                        <li><p>Reads in the triggers from the MongoDB. We will store the triggers in the Mongo database so that they can be remotely added from the administration interface.</p></li>
-                        <li><p>Compare sensor data to the condition function of each trigger</p></li>
-                        <li><p>If a comparison function evaluates to true then execute the trigger function.</p></li>
-                    </ul>
-
-                   </div>
+              </div>
             </div>
 
             <!-- Writing the Trigger's Conditional Functions -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Writing the Trigger's Conditional Functions</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content collapse">
+        <div ibox collapse title="Writing the Trigger's Conditional Functions">
+          <div content-block name="write-triggers" message="Practice writing conditional predicates for triggers">
                     <p><b>A conditional predicate function always returns a true or false value.</b>  It has access to all of the sensor data on the edge network.</p>
 
                     <p>For example in JavaScript a predicate function that tests if the temperature is greater than 27 looks like this:</p>
@@ -106,6 +83,8 @@
                     <p>Notice the <span style='font-weight:bold'>parathesis</span> that surround this function.  These are required for the trigger to run correctly.  In JavaScript, these parathesis create a block of executable code called a "closure".  The JavaScript interpreter requires this in order to dynamically evaluate the code.</p>
 
                     <p>Later in this lab, we will implement a associative array called the <b>stash</b>  that contains the last value of each of the sensors on the edge network. Let's build some triggers using the stash now.</p>
+                  </div>
+                  <div content-block name="conditional-function-exercises" message="Read the  predicate function for the light sensor">
                     <h4>Exercises:</h4>
 
                     <p>Write a predicate function that tests if a light sensor has a value less than or equal 15 lumens.</p>
@@ -131,18 +110,12 @@
                 </div>
             </div>
 
-            <!-- Writing Trigger Functions -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Writing Trigger Functions</h5>
-                    <div ibox-tools></div>
-                </div>
+        <!-- Writing Trigger Functions -->
+        <div ibox collapse title="Writing Trigger Functions">
+          <div content-block name="write-trigger-function" message="Understand the idea of trigger functions and complete the excercises">
+          <p>A trigger function is a function that is activated when the predicate function is true.  Trigger functions have access to all of the sensor data on the edge network, as well as, all of the actuators on the network.</p>
 
-                <div class="ibox-content collapse">
-                    <p>A trigger function is a function that is activated when the predicate function is true.  Trigger functions have access to all of the sensor data on the edge network, as well as, all of the actuators on the network.</p>
-
-                    <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network.</p>
-
+          <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network.</p>
 
             <ui-codemirror ui-codemirror-opts="editorOptions">(
   temperature_too_cold = function() {
@@ -160,15 +133,15 @@
   };
  )</ui-codemirror>
 
-            
-            <h5>Exercises:</h5>
-            
+
+            <h5>Exercises</h5>
+
             <ol>
                 <li><p>Write a function that changes the LCD backlight to blue and and LCD text to "Warning, too cold!"</p></li>
                 <li><p>Write a function that saves an error condition to the database.</p></li>
             </ol>
-                </div>
-            </div>
+          </div>
+      </div>
 
             <!-- Dependencies -->
             <div class="ibox float-e-margins">
@@ -222,7 +195,7 @@ var config = require("./config.json");</ui-codemirror>
 
             <div class="ibox-content collapse">
             <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
-            
+
             <ui-codemirror ui-codemirror-opts="editorOptions">// Connect to the MQTT server
  var mqttClient  = mqtt.connect(self.config.mqtt.uri);
 
@@ -495,7 +468,7 @@ mqttClient.on('message', function (topic, message) {
                                 </div>
 
                                 <div class="ibox-content collapse">
-                                    
+
                                     <p>Remember that triggers can contain computationally expensive operations.  For example, you can complex calculations, map-reduce operations and accessing of externals network services.</p>
 
                                 </div>
