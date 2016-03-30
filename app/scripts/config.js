@@ -7,7 +7,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
   });
 
   $stateProvider
-
     .state('index', {
       abstract: true,
       url: "/index",
@@ -16,22 +15,31 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('index.home', {
       url: "/home",
       templateUrl: "views/home.html",
-      data: { pageTitle: 'Home', specialClass: 'landing-page' }
+      data: {
+        pageTitle: 'Home',
+        specialClass: 'landing-page'
+      }
     })
     .state('index.schedule', {
       url: "/schedule",
       templateUrl: "views/schedule.html",
-      data: { pageTitle: 'Schedule' }
+      data: {
+        pageTitle: 'Schedule'
+      }
     })
     .state('index.presentations', {
       url: "/presentations",
       templateUrl: "views/presentations.html",
-      data: { pageTitle: 'Slides View' }
+      data: {
+        pageTitle: 'Slides View'
+      }
     })
     .state('index.videos', {
       url: "/videos",
       templateUrl: "views/videos.html",
-      data: { pageTitle: 'Videos' }
+      data: {
+        pageTitle: 'Videos'
+      }
     })
     .state('labs', {
       abstract: true,
@@ -41,191 +49,192 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     .state('labs.introduction', {
       url: "/introduction",
       templateUrl: "views/labs/intro/index.html",
-      data: { pageTitle: 'Introduction' }
+      data: {
+        pageTitle: 'Introduction'
+      }
     })
     .state('labs.build', {
       url: "/build",
       templateUrl: "views/labs/build/index.html",
-      data: { pageTitle: 'Build an Edge Device' },
+      data: {
+        pageTitle: 'Build an Edge Device'
+      },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
-          return $ocLazyLoad.load([
-            {
-              serie: true,
-              files: [
-                'bower_components/codemirror/lib/codemirror.css',
-                'bower_components/codemirror/theme/ambiance.css',
-                'bower_components/codemirror/lib/codemirror.js',
-                'bower_components/codemirror/mode/javascript/javascript.js'
-              ]
-            },
-            {
-              name: 'ui.codemirror',
-              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-            }
-          ]);
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
         }
       }
     })
     .state('labs.networking', {
       url: "/networking",
       templateUrl: "views/labs/networking/index.html",
-      data: { pageTitle: 'Application Protocols: MQTT and HTTP' },
+      data: {
+        pageTitle: 'Application Protocols: MQTT and HTTP'
+      },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
-          return $ocLazyLoad.load([
-            {
-              serie: true,
-              files: [
-                'bower_components/codemirror/lib/codemirror.css',
-                'bower_components/codemirror/theme/ambiance.css',
-                'bower_components/codemirror/lib/codemirror.js',
-                'bower_components/codemirror/mode/javascript/javascript.js'
-              ]
-            },
-            {
-              name: 'ui.codemirror',
-              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-            }
-          ]);
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
         }
       }
     })
     .state('labs.protocols', {
       url: "/protocols",
       templateUrl: "views/labs/protocols/index.html",
-      data: { pageTitle: 'Using Bluetooth and Zigbee' },
+      data: {
+        pageTitle: 'Using Bluetooth and Zigbee'
+      },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
-          return $ocLazyLoad.load([
-            {
-              serie: true,
-              files: [
-                'bower_components/codemirror/lib/codemirror.css',
-                'bower_components/codemirror/theme/ambiance.css',
-                'bower_components/codemirror/lib/codemirror.js',
-                'bower_components/codemirror/mode/javascript/javascript.js'
-              ]
-            },
-            {
-              name: 'ui.codemirror',
-              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-            }
-          ]);
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
         }
       }
     })
     .state('labs.databases', {
       url: "/databases",
       templateUrl: "views/labs/databases/index.html",
-      data: { pageTitle: 'Build an Edge Device' },
+      data: {
+        pageTitle: 'Build an Edge Device'
+      },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
-          return $ocLazyLoad.load([
-            {
-              serie: true,
-              files: [
-                'bower_components/codemirror/lib/codemirror.css',
-                'bower_components/codemirror/theme/ambiance.css',
-                'bower_components/codemirror/lib/codemirror.js',
-                'bower_components/codemirror/mode/javascript/javascript.js'
-              ]
-            },
-            {
-              name: 'ui.codemirror',
-              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-            }
-          ]);
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
         }
       }
     })
     .state('labs.admin', {
       url: "/admin-interface",
       templateUrl: "views/labs/admin-interface/index.html",
-      data: { pageTitle: 'Custom Administrative Interface' }
+      data: {
+        pageTitle: 'Custom Administrative Interface'
+      }
     })
     .state('labs.automation', {
       url: "/automation",
       templateUrl: "views/labs/automation/index.html",
-      data: { pageTitle: 'Automation on the Internet of Things' },
+      data: {
+        pageTitle: 'Automation on the Internet of Things'
+      },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
-          return $ocLazyLoad.load([
-            {
-              serie: true,
-              files: [
-                'bower_components/codemirror/lib/codemirror.css',
-                'bower_components/codemirror/theme/ambiance.css',
-                'bower_components/codemirror/lib/codemirror.js',
-                'bower_components/codemirror/mode/javascript/javascript.js'
-              ]
-            },
-            {
-              name: 'ui.codemirror',
-              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-            }
-          ]);
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
         }
       }
     })
     .state('labs.security', {
       url: "/security",
       templateUrl: "views/labs/security/index.html",
-      data: { pageTitle: 'Security on the Internet of Things' },
+      data: {
+        pageTitle: 'Security on the Internet of Things'
+      },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
-          return $ocLazyLoad.load([
-            {
-              serie: true,
-              files: [
-                'bower_components/codemirror/lib/codemirror.css',
-                'bower_components/codemirror/theme/ambiance.css',
-                'bower_components/codemirror/lib/codemirror.js',
-                'bower_components/codemirror/mode/javascript/javascript.js'
-              ]
-            },
-            {
-              name: 'ui.codemirror',
-              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-            }
-          ]);
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
         }
       }
     })
     .state('labs.cloud', {
       url: "/cloud",
       templateUrl: "views/labs/cloud/index.html",
-      data: { pageTitle: 'Data Analytics on the Cloud' },
+      data: {
+        pageTitle: 'Data Analytics on the Cloud'
+      },
       resolve: {
-        loadPlugin: function ($ocLazyLoad) {
-          return $ocLazyLoad.load([
-            {
-              serie: true,
-              files: [
-                'bower_components/codemirror/lib/codemirror.css',
-                'bower_components/codemirror/theme/ambiance.css',
-                'bower_components/codemirror/lib/codemirror.js',
-                'bower_components/codemirror/mode/javascript/javascript.js'
-              ]
-            },
-            {
-              name: 'ui.codemirror',
-              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-            }
-          ]);
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
         }
       }
     })
     .state('labs.additional', {
       url: "/more-info",
       templateUrl: "views/labs/more/index.html",
-      data: { pageTitle: 'More Information' }
+      data: {
+        pageTitle: 'More Information'
+      }
     })
     .state('index.faq', {
       url: "/faq",
       templateUrl: "views/faq.html",
-      data: { pageTitle: 'FAQ' }
-    })
+      data: {
+        pageTitle: 'FAQ'
+      }
+    });
 }
 angular
   .module('inspinia')
