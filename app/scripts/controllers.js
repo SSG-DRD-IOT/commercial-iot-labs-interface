@@ -16,8 +16,8 @@ function MainCtrl() {
 
 
 /**
- * codeEditorCtrl - Controller for code editor - Code Mirror
- */
+* codeEditorCtrl - Controller for code editor - Code Mirror
+*/
 function CodeEditorCtrl($scope) {
   $scope.editorOptions = {
     lineNumbers: true,
@@ -29,6 +29,6 @@ function CodeEditorCtrl($scope) {
 
 
 angular
-    .module('inspinia')
+  .module('inspinia')
   .controller('MainCtrl', MainCtrl)
-  .controller('CodeEditorCtrl', CodeEditorCtrl);
+  .controller('CodeEditorCtrl', ['$scope', CodeEditorCtrl]);

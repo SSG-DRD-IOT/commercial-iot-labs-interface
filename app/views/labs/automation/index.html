@@ -38,20 +38,10 @@
             <!-- Introduction -->
             <div ibox collapse title="Introduction">
               <div content-block name="automation-introduction" message="Read the Introduction">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Introduction</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content collapse">
-                    <p>In this lab, we will walk you through building a NodeJS application that implements conditions based monitoring on an edge network.</p>
-
-                    <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, or <em>Edge Network Automation</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The Iot Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
-
-                    <p>In the example of a temperature controlled room, the temperature sensor is reporting the temperature to the Intel Iot Gateway and the gateway is responsible for triggering an Iot event. An Iot Event (also called a trigger in this workshop) always has a conditions function and a trigger function. In the case that the temperature is too hot the event may take automatic action to turn on the air conditioning on and send an alert to the person responsible for the room.</p>
-                </div>
+                <p>In this lab, we will walk you through building a NodeJS application that implements conditions based monitoring on an edge network.</p>
+                <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, or <em>Edge Network Automation</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The Iot Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
+                <p>In the example of a temperature controlled room, the temperature sensor is reporting the temperature to the Intel Iot Gateway and the gateway is responsible for triggering an Iot event. An Iot Event (also called a trigger in this workshop) always has a conditions function and a trigger function. In the case that the temperature is too hot the event may take automatic action to turn on the air conditioning on and send an alert to the person responsible for the room.</p>
+              </div>
             </div>
 
             <!-- Steps in this Lab -->
@@ -479,24 +469,24 @@ mqttClient.on('message', function (topic, message) {
     // After the trigger is run the value used becomes the previous value
     context.stash[sensor_id+"_prev"] = value;
 };</ui-codemirror>
-                            </div>
-                            </div>
-                            <!-- TODO: The trigger eval condition and eval action Functions -->
-                            <!-- TODO: Write a better practice triggers section.  too_hot_condition  too_cold_condition -->
-                            <!--             Spend some time and Creating Your Own Triggers -->
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-title">
-                                    <h5>Spend some time and Creating Your Own Triggers</h5>
-                                    <div ibox-tools></div>
-                                </div>
+              </div>
+              </div>
+              <!-- TODO: The trigger eval condition and eval action Functions -->
+              <!-- TODO: Write a better practice triggers section.  too_hot_condition  too_cold_condition -->
+              <!--             Spend some time and Creating Your Own Triggers -->
+              <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                  <h5>Spend some time and Creating Your Own Triggers</h5>
+                  <div ibox-tools></div>
+                </div>
 
-                                <div class="ibox-content collapse">
+                <div class="ibox-content collapse">
 
-                                    <p>Remember that triggers can contain computationally expensive operations.  For example, you can complex calculations, map-reduce operations and accessing of externals network services.</p>
+                  <p>Remember that triggers can contain computationally expensive operations.  For example, you can complex calculations, map-reduce operations and accessing of externals network services.</p>
 
-                                </div>
-                            </div>
+                </div>
+              </div>
 
-                            </div>
-                            </div>
-                            </div>
+            </div>
+          </div>
+        </div>
