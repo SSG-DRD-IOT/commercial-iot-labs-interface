@@ -35,7 +35,7 @@
           </div>
 
             <!-- Introduction -->
-            <div ibox collapse title="Introduction">
+            <div ibox  title="Introduction">
               <div content-block name="automation-introduction" message="Read the Introduction">
                 <p>In this lab, we will walk you through building a NodeJS application that implements conditions based monitoring on an edge network.</p>
                 <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, or <em>Edge Network Automation</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The Iot Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
@@ -44,7 +44,7 @@
             </div>
 
             <!-- Steps in this Lab -->
-            <div ibox collapse title="Steps in this Lab">
+            <div ibox  title="Steps in this Lab">
               <div content-block name="read-steps-automation" message="Read the Steps in the Automation Lab">
                 <p>In this lab, we will:</p>
 
@@ -62,7 +62,7 @@
             </div>
 
             <!-- Writing the Trigger's Conditional Functions -->
-        <div ibox collapse title="Writing the Trigger's Conditional Functions">
+        <div ibox  title="Writing the Trigger's Conditional Functions">
           <div content-block name="write-triggers" message="Practice writing conditional predicates for triggers">
                     <p><b>A conditional predicate function always returns a true or false value.</b>  It has access to all of the sensor data on the edge network.</p>
 
@@ -108,7 +108,7 @@
             </div>
 
         <!-- Writing Trigger Functions -->
-        <div ibox collapse title="Writing Trigger Functions">
+        <div ibox  title="Writing Trigger Functions">
           <div content-block name="write-trigger-function" message="Understand the idea of trigger functions and complete the excercises">
           <p>A trigger function is a function that is activated when the predicate function is true.  Trigger functions have access to all of the sensor data on the edge network, as well as, all of the actuators on the network.</p>
 
@@ -139,7 +139,7 @@
       </div>
 
             <!-- Dependencies -->
-            <div ibox collapse title="Dependencies">
+            <div ibox  title="Dependencies">
               <p>This lab depends on the following modules and need to be added to <span class="icon file">package.json</span></p>
               <p>Create a new file named <span class="icon file">server.js</span> and add these lines:</p>
               <ui-codemirror ui-codemirror-opts="editorOptions">var mqtt = require('mqtt');
@@ -151,7 +151,7 @@ var config = require("./config.json");</ui-codemirror>
 
 
             <!-- Server Configuration File -->
-            <div ibox collapse title="Server Configuration File">
+            <div ibox  title="Server Configuration File">
                     <p>Create a file named <span class="icon file">config.json.</span></p>
 
                     <p>Use the following configuration to allow us to change the locations of the MQTT and MongoDB servers:</p>
@@ -169,7 +169,7 @@ var config = require("./config.json");</ui-codemirror>
 
 
             <!-- Server Configuration File -->
-            <div ibox collapse title="Setup the MQTT and Mongoose DB connections">
+            <div ibox  title="Setup the MQTT and Mongoose DB connections">
             <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
 
             <ui-codemirror ui-codemirror-opts="editorOptions">// Connect to the MQTT server
@@ -189,7 +189,7 @@ db.once('open', function (callback) {
           </div>
 
             <!-- Set Up a Context Object for the Triggers -->
-          <div ibox collapse title="Set Up a Context Object for the Triggers">
+          <div ibox  title="Set Up a Context Object for the Triggers">
             <p>When the Condition Based Monitoring System evaluates a trigger's condition and action functions, it runs them in a context that we can define.</p>
             <p>This context object is passed into the function that evaluates the trigger's conditional and action function. Any JavaScript Array or object stored in the context below will be accessable in the triggers' functions through the "this" object. For example, if you add <code>http</code> to the context below it will be accessible through <code>this.http</code> in the trigger.</p>
 
@@ -216,7 +216,7 @@ db.once('open', function (callback) {
             </div>
 
             <!-- Retrieve the Triggers from the Database -->
-            <div ibox collapse title="Retrieve the Triggers from the Database">
+            <div ibox  title="Retrieve the Triggers from the Database">
                     <p>Let implement a function to retrieve all of the triggers from the database. Here, we are using MongooseJS to access the database. The find function takes a callback as an argument if there is an error the err argument will have a value.</p>
 
                     <p>If you are interested in the <code>then</code> function.  This is called a promise in JavaScript. The Promise object is used for deferred and asynchronous computations. A Promise represents an operation that hasn't completed yet, but is expected in the future.  Allowing the developer to write asynchronous code in a more synchronous fashion</p>
@@ -246,7 +246,7 @@ retrieveTriggersFromDB();</ui-codemirror>
             </div>
 
             <!-- Start the MQTT Event Loop -->
-            <div ibox collapse title="Start the MQTT Event Loop">
+            <div ibox  title="Start the MQTT Event Loop">
                     <p>The NodeJS MQTT module starts an event loop that will be the main event loop for the program.  We can set callback functions to be called when different event occur.  We will attach two callback functions, one function to the "connect" event and another to the “message” event.</p>
 
             <ui-codemirror ui-codemirror-opts="editorOptions">// On the start of a connection, do the following...
@@ -259,7 +259,7 @@ mqttClient.on('connect', function () {
               <p>When a message is received then parse it and determine if it is a new sensor or if it is new sensor data.</p>
             </div>
 
-            <div ibox collapse title="Start the MQTT Event Loop">
+            <div ibox  title="Start the MQTT Event Loop">
                 <h3>Define a few Helper Functions</h3>
 
                 <p>Before we define the on message function, let's define a couple of helper functions. These will make our code a bit easier to read. The first two function match the <code>topic</code> on the incoming MQTT messages. The third function takes an array for triggers and returns an array with all of the triggers that have a sensor_id that matches the sensor_id that we pass into the function.  This will be useful because when a sensor reading arrives it can only fire a trigger that has a sensor_id matching the data. </p>
@@ -278,7 +278,7 @@ var filter_triggers_by_sensor_id = function(id) {
             </div>
 
             <!-- Helper Functions for the Triggers -->
-            <div ibox collapse title="Helper Functions for the Triggers">
+            <div ibox  title="Helper Functions for the Triggers">
                     <p>The Trigger Model is more than simply a JavaScript object that can access the MongoDB.  It can also hold methods that operate on the database model.  We are going to implement two methods.</p>
 
                     <ul>
@@ -316,7 +316,7 @@ triggerSchema.methods.eval_triggerFunc = function (scope, args) {
 
 
             <!-- Define the On Message Callback Function -->
-            <div ibox collapse title="Define the On Message Callback Function">
+            <div ibox  title="Define the On Message Callback Function">
               <p>There are two types of messages that we will support in our OnMessage function.  The first type is a sensor reading and it is received on the 'sensors/+/data' topic. Remember that the '+' is a wild card character and can stand for 1 or more of any character. Temperature readings would come from the topic 'sensors/temperature/data' and light reading will come from 'sensors/light/data'. Each incoming piece of data has the potential for firing several triggers.  For example, if the temperature sensor sends a temperature reading of 28 degress Celsius then it may fire a trigger. Which triggers will might it fire? The trigger must have a sensor_id of "temperature" which indicates that the condition function of this trigger should be evaluated when a temperature reading arrives.  If the condition function returns a <code>true</code> value then the action function should be run.</p>
 
               <p>The second type of message is a trigger refresh message and is received on the MQTT topic 'triggers/refresh'</p>
@@ -346,7 +346,7 @@ mqttClient.on('message', function (topic, message) {
 
             </div>
             <!--         Trigger Each Rule that Applies to a Particular Incoming Sensor Data -->
-          <div ibox collapse title="Trigger Each Rule that Applies to a Particular Incoming Sensor Data">
+          <div ibox  title="Trigger Each Rule that Applies to a Particular Incoming Sensor Data">
             <h3>Check the Predicate Function for each Trigger and Execute a Trigger Function if true</h3>
 
             <ui-codemirror ui-codemirror-opts="editorOptions">var processSensorData = function(json) {
@@ -384,7 +384,7 @@ mqttClient.on('message', function (topic, message) {
     <!-- TODO: The trigger eval condition and eval action Functions -->
     <!-- TODO: Write a better practice triggers section.  too_hot_condition  too_cold_condition -->
     <!--             Spend some time and Creating Your Own Triggers -->
-    <div ibox collapse title="Spend some time and Creating Your Own Triggers">
+    <div ibox  title="Spend some time and Creating Your Own Triggers">
       <p>Remember that triggers can contain computationally expensive operations.  For example, you can complex calculations, map-reduce operations and accessing of externals network services.</p>
     </div>
   </div>
