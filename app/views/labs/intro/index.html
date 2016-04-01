@@ -22,6 +22,7 @@
       <!-- Objective -->
       <div ibox collapse title="Objectives">
         <div content-block name="read-objectives" message="Read the Objectives">
+          <labels gateway edison windows/>
           <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
 
           <p>By the end of this module, you should be able to:</p>
@@ -37,9 +38,9 @@
       </div>
 
       <!-- Login to your Intel IoT Gateway -->
-      <div ibox title="Connect to your Intel® IoT Gateway from your development computer">
+      <div ibox collapse title="Connect to your Intel® IoT Gateway from your development computer">
         <div content-block name="find-mac-address" message="Find your Gateway's MAC address" image-link="./views/labs/intro/images/gateway-mac-address.jpg">
-          <labels edison xdk/>
+          <labels gateway/>
 
           <p>Establish an SSH connection and login to your Intel® IoT Gateway using <span class="icon windows">PuTTY</span>.</p>
           <p>Check the side of your Intel® IoT Gateway. There is a tab located just next to the power jack. Pull on the tab to expose the gateway's product numbers and MAC address.</p>
@@ -145,9 +146,10 @@
 
       <!-- Setup your Intel® Edison Software -->
       <div ibox collapse title="Setup your Intel® Edison Software">
-        <labels edison windows></labels>
+
 
         <div content-block name="download-software" message="Download the Intel® Edison Software Development Tools" image-link="./views/labs/intro/images/download-installer.png">
+              <labels edison></labels>
           <p>Go to the <a href="https://software.intel.com/en-us/iot/software/installers">software download page</a> for the Intel® Edison. The developer tools are available for Windows, MacOS and Ubuntu. Select the download that corresponds to your computer.</p>
         </div>
 
@@ -248,9 +250,9 @@
 
       <!-- Connect to your Intel® Edison from your development computer using a serial connection  -->
       <div ibox collapse title="Connect to your Intel® Edison from your development computer using a serial connection">
-        <labels edison windows></labels>
-        <div content-block name="connect-edison-intro" message="Read the Introduction to Connecting to the Intel Edison">
 
+        <div content-block name="connect-edison-intro" message="Read the Introduction to Connecting to the Intel Edison">
+          <labels edison></labels>
           <p>This setup document will guide you through establishing a serial connection to either the Intel® Galileo or the Intel® Edison using a Windows computer. </p>
 
           <p>If you need to configure your IoT board, you will need to remotely connect to the Intel® Edison or Intel® Galileo. Once connected to your Intel® IoT board, you have access to the Linux-based Yocto operating system running on the board.</p>
@@ -264,166 +266,120 @@
           </ol>
         </div>
 
+
         <div content-block name="establish-a-serial-connection" message="Establish a serial connection and login to the shell">
 
           <div class="alert alert-info">
-            <p>
-              Use PuTTY to establish a serial connection to the IoT board using the COM # you noted in the previous Identify the COM port section.
-            </p>
+            <p>Use PuTTY to establish a serial connection to the IoT board using the COM # you noted in the previous Identify the COM port section.</p>
           </div>
-
-          <div class="row">
-            <div class="col-sm-6">
-              <p>In PuTTY, double-check that you are in the "Session" screen.</p>
-            </div>
-            <div class="col-sm-6">
-              <img src="./views/labs/intro/images/session.png" />
-            </div>
-          </div>
-
-          <ol>
-            <li>
-
-            </li>
-
-            <li>
-              <p>Select the "Serial" radio button under "Connection type".</p>
-              <img src="./views/labs/intro/images/serial.png" />
-            </li>
-
-            <li>
-              <p>Specify the destination you want to connect to:</p>
-            </li>
-
-            <li>
-              <p>Serial Line: use the COM # (e.g. “COM3”) noted in Identify the COM port</p>
-              <ol>
-                <li>Speed: use "115200" for the baud rate</li>
-                <img src="./views/labs/intro/images/baud.png" />
-              </ol>
-            </li>
-
-            <li>
-              <p>Click “Open” to connect to the board.</p>
-              <img src="./views/labs/intro/images/open.png" />
-            </li>
-
-            <li>
-              <p>When you see a blank screen, press the Enter key. For Intel® Edison: press the Enter key again (so two times in total).</p>
-              <img src="./views/labs/intro/images/type1.png" />
-            </li>
-
-            <li>
-              <p>Once connected you will see a login prompt. Type in <b></b>root</b> for the username and press Enter.</p>
-              <img src="./views/labs/intro/images/type2.png" />
-            </li>
-
-          </ol>
-
         </div>
 
-        <div content-block name="run-first-edison-command" message="Run your first command on the Intel Edison">
-          <p>You are now logged into your IoT board and can run shell commands.For example, in order to output the version number of the firmware running on your board:</p>
-          <code>$ cat /etc/version</code>
+        <div content-block name="intro-session" message="double-check that you are in the Session screen" image-link="./views/labs/intro/images/session.png">
+          <p>In PuTTY, double-check that you are in the "Session" screen.</p>
+        </div>
+
+        <div content-block name="intro-serial" message="Select the Serial radio button under Connection type" image-link="./views/labs/intro/images/serial.png">
+          <p>Select the "Serial" radio button under "Connection type".</p>
+        </div>
+
+        <div content-block name="intro-connection-properties" message="Setup the connection properties" image-link="./views/labs/intro/images/baud.png">
+          <p>Specify the destination you want to connect to:</p>
+          <p>Serial Line: use the COM # (e.g. “COM3”) noted in Identify the COM port</p>
+          <p>Speed: use "115200" for the baud rate</p>
+        </div>
+
+        <div content-block name="intro-open" message="Click Open" image-link="./views/labs/intro/images/open.png">
+          <p>Click “Open” to connect to the board.</p>
+        </div>
+
+        <div content-block name="intro-enter" message="Press Enter" image-link="./views/labs/intro/images/type1.png">
+          <p>When you see a blank screen, press the Enter key. For Intel® Edison: press the Enter key again (so two times in total).</p>
+        </div>
+
+        <div content-block name="intro-prompt" message="Enter your username and password" image-link="./views/labs/intro/images/type2.png">
+          <p>Once connected you will see a login prompt. Type in <b>root</b> for the username and press Enter.</p>
         </div>
       </div>
 
       <!-- Establish serial connection using PuTTY -->
-      <div ibox collapse title="Establish serial connection using PuTTY">
-        <labels edison windows></labels>
+      <div ibox collapse title="Establish a Serial Connection to Intel Edison using PuTTY">
 
-        <ol>
-          <li>
-            <p>Open <span class="icon windows">Device Manager</span> and scroll down to the "Ports (COM &amp; LPT)" section.</p>
-            <div class="side-by-side">
-              <div class="left">
-                <p><strong>Windows 7 and below:</strong></p>
-                <ol>
-                  <li>Open <span class="icon windows">Start</span> menu.</li>
-                  <li>Start typing "device manager" in the search field. </li>
-                  <li>Select "Device Manager" under "Control Panel"</li>
-                </ol>
-                <p><img src="./views/labs/intro/images/step3/image00.jpg"></p>
-              </div>
-              <div class="right">
-                <p><strong>Windows 8:</strong></p>
-                <ol>
-                  <li>Go into <span class="icon windows">Desktop mode</span>.</li>
-                  <li>Right-click on the <span class="icon windows">Start</span> menu button.</li>
-                  <li>Select "Device Manager".</li>
-                </ol>
-                <p><img src="./views/labs/intro/images/step3/image09.png"></p>
-              </div>
-            </div>
-          </li>
+        <div content-block name="intro-device-manager-windows7" message="Open the Device Manager in Windows 7" image-link="./views/labs/intro/images/image00.jpg">
+          <labels edison></labels>
 
-          <li>
-            <p>Make a note of your <strong>COM #</strong> for the "<strong>USB Serial Port</strong>" device.</p>
-            <p><img src="./views/labs/intro/images/step3/image_1.png"></p>
-            <div class="callout warning">
-              <p><strong>Do you have the right COM number?</strong></p>
-              <p>Use the COM # shown in your <span class="icon windows">Device Manager</span>. In the screenshot, it is "COM3" but <strong>your</strong> computer will have unique COM port number assignments and may be different from the screenshot.</p>
-              <p>Do <strong>not</strong> use the COM number for "Intel® Edison USB Composite Device" or "Intel® Edison Virtual Com Port".</p>
-            </div>
-          </li>
+          <p>Open <span class="icon windows">Device Manager</span> and scroll down to the "Ports (COM &amp; LPT)" section.</p>
+          <p><strong>Windows 7 and below:</strong></p>
+          <ol>
+            <li>Open <span class="icon windows">Start</span> menu.</li>
+            <li>Start typing "device manager" in the search field. </li>
+            <li>Select "Device Manager" under "Control Panel"</li>
+          </ol>
+        </div>
 
-          <li>
-            <p>Double-click <span class="icon file">putty.exe</span> on your computer to launch <span class="icon windows">PuTTY</span>.</p>
-            <p><img src="./views/labs/intro/images/step3/image_4.png"></p>
-          </li>
+        <div content-block name="intro-device-manager-windows8" message="Open the Device Manager in Windows 8" image-link="./views/labs/intro/images/image09.png">
+          <p><strong>Windows 8:</strong></p>
+          <ol>
+            <li>Go into <span class="icon windows">Desktop mode</span>.</li>
+            <li>Right-click on the <span class="icon windows">Start</span> menu button.</li>
+            <li>Select "Device Manager".</li>
+          </ol>
+        </div>
 
-          <li>
-            <p>In <span class="icon windows">PuTTY</span>, double-check that you are in the "Session" screen.</p>
-          </li>
+        <div content-block name="intro-note-port" message="Make a note of your USB COM Port" image-link="./views/labs/intro/images/image_1.png">
+          <p>Make a note of your <strong>COM #</strong> for the "<strong>USB Serial Port</strong>" device.</p>
+          <div class="callout warning">
+            <p><strong>Do you have the right COM number?</strong></p>
+            <p>Use the COM # shown in your <span class="icon windows">Device Manager</span>. In the screenshot, it is "COM3" but <strong>your</strong> computer will have unique COM port number assignments and may be different from the screenshot.</p>
+            <p>Do <strong>not</strong> use the COM number for "Intel® Edison USB Composite Device" or "Intel® Edison Virtual Com Port".</p>
+          </div>
+        </div>
 
-          <li>
-            <p><img src="./views/labs/intro/images/step3/image_6.png"></p>
-          </li>
+        <div content-block name="intro-launch-putty" message="Launch Putty" image-link="./views/labs/intro/images/image_4.png">
+          <p>Double-click <span class="icon file">putty.exe</span> on your computer to launch <span class="icon windows">PuTTY</span>.</p>
+        </div>
 
-          <li>
-            <p>Select the "<strong>Serial</strong>" radio button under "Connection type".</p>
-            <p><img src="./views/labs/intro/images/step3/image_7.png"></p>
-          </li>
+        <div content-block name="intro-session" message="Click on Session" image-link="./views/labs/intro/images/image_6.png">
+          <p>In <span class="icon windows">PuTTY</span>, double-check that you are in the "Session" screen.</p>
+        </div>
 
-          <li>
-            <p>Specify the destination you want to connect to:</p>
-            <ul>
-              <li>
-                <p><strong>Serial Line</strong>: use the <strong>COM #</strong> noted previously in step #2 by using <span class="icon windows">Device Manager</span></p>
-              </li>
-              <li>
-                <p><strong>Speed</strong>: use "115200" for the baud rate</p>
-              </li>
-            </ul>
-          </li>
-          <p><img src="./views/labs/intro/images/step3/image_9.png"></p>
+        <div content-block name="intro-connection-type" message="Select the Serial Type" image-link="./views/labs/intro/images/image_7.png">
+          <p>Select the "<strong>Serial</strong>" radio button under "Connection type".</p>
+        </div>
 
-          <li>
-            <p>Click "<strong>Open</strong>" to connect to the board.</p>
-            <p><img src="./views/labs/intro/images/step3/image_10.png"></p>
-          </li>
 
-          <li>
-            <p>When you see a blank screen, <strong>press the Enter key.</strong></p>
-            <p><img src="./views/labs/intro/images/step3/image_11.png"></p>
-          </li>
+        <div content-block name="intro-destination" message="Select connection line and speed" image-link="./views/labs/intro/images/image_9.png">
+          <p>Specify the destination you want to connect to:</p>
+          <ul>
+            <li>
+              <p><strong>Serial Line</strong>: use the <strong>COM #</strong> noted previously in step #2 by using <span class="icon windows">Device Manager</span></p>
+            </li>
+            <li>
+              <p><strong>Speed</strong>: use "115200" for the baud rate</p>
+            </li>
+          </ul>
+        </div>
 
-          <li>
-            <p>Once connected you will see a login prompt.</p>
-            <p>Type in "<strong>root</strong>" for the username and press <strong>Enter</strong>.</p>
-            <p><img src="./views/labs/intro/images/step3/image_12.png"></p>
-          </li>
+        <div content-block name="intro-connect-to-the-board" message="Click Open to connect to the board." image-link="./views/labs/intro/images/image_10.png">
+          <p>Click "<strong>Open</strong>" to connect to the board.</p>
+        </div>
 
-          <li>
+        <div content-block name="intro-blank-screen" message="Press Enter" image-link="./views/labs/intro/images/image_11.png">
+          <p>When you see a blank screen, <strong>press the Enter key.</strong></p>
+        </div>
+
+        <div content-block name="intro-login-prompt" message="Type username 'root' and press enter" image-link="./views/labs/intro/images/image_12.png">
+          <p>Once connected you will see a login prompt.</p>
+          <p>Type in "<strong>root</strong>" for the username and press <strong>Enter</strong>.</p>
+
+          <div class="alert alert-success">
             <p>You are now logged into your IoT board and can run shell commands!</p>
-          </li>
-
-        </ol>
-
+          </div>
+        </div>
       </div>
 
       <!-- Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison -->
-      <div ibox collapse title="Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison">
+      <div ibox title="Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison">
+        <div content-block name="intro-hostname-and-wifi" message="Set Your Password and WiFI">
           <ol>
             <li>
               <p>Set up your board using the <code>configure_edison</code> command with the <code>--setup</code> flag.</p>
@@ -446,7 +402,6 @@
             <li>
               <p>The Intel® Edison will scan for Wi-Fi networks and display a list of available networks when finished.</p>
               <figure>
-                <img class="img-responsive" src="./views/labs/intro/images/step3/image_13.png">
                 <figcaption>If you do not see any networks, try re-scanning by entering "0", or run <code>configure_edison --wifi</code>.</figcaption>
               </figure>
             </li>
@@ -455,14 +410,14 @@
               <p>Locate your Intel® IoT Gateway SSID in the list and enter the <strong>corresponding number</strong> in the prompt. Press Enter.</p>
               <p>To confirm your entry, type "<strong>Y</strong>" and press Enter.</p>
               <figure>
-                <img src="./views/labs/intro/images/step3/image_14.jpg">
+                <img src="./views/labs/intro/images/image_14.jpg">
                 <figcaption>In this example, to connect to "kafka" use the number “16”.</figcaption>
               </figure>
             </li>
 
             <li>
               <p>The network in this example requires a password. Your network might require other information. Enter the appropriate network credentials. Press Enter when finished.</p>
-              <p><img src="./views/labs/intro/images/step3/image_15.jpg"></p>
+              <p><img src="./views/labs/intro/images/image_15.jpg"></p>
             </li>
 
             <li>
@@ -472,14 +427,14 @@
             <li>
               <p>When you see a "Done" message, you are now connected to the Gatewaya Wi-Fi network.</p>
               <p><strong>Note the IP address.</strong> You will need it in <span class="icon bookmark">Deploy sample application with the Intel® XDK IoT Edition</span>.</p>
-              <p><img src="./views/labs/intro/images/step3/image03.png"></p>
+              <p><img src="./views/labs/intro/images/image03.png"></p>
             </li>
           </ol>
 
-          <div id="next-steps" class="callout done">
+          <div class="alert alert-success">
             <p>You should now understand how to gain shell access to your Intel® Edison. And your Intel® Edison should now be connected to your Intel® IoT Gateway.</p>
           </div>
-
+        </div>
       </div>
 
       <!-- Additional Resources -->
