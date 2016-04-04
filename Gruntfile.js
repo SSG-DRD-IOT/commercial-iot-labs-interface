@@ -125,8 +125,15 @@ module.exports = function (grunt) {
                             //'views/{,*/}*.*',
                             'views/**/*.*',
                             'styles/patterns/*.*',
-                            'img/{,*/}*.*'
+                            'img/**/*.*'
                         ]
+                    },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: 'bower_components/fontello/assets',
+                        src: ['embedded_fonts/*.*'],
+                        dest: '<%= inspinia.dist %>'
                     },
                     {
                         expand: true,
@@ -142,6 +149,13 @@ module.exports = function (grunt) {
                         src: ['fonts/*.*'],
                         dest: '<%= inspinia.dist %>'
                     },
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: './',
+                        src: ['bower_components/**/*.*'],
+                        dest: '<%= inspinia.dist %>'
+                    }
                 ]
             },
             styles: {
