@@ -131,9 +131,9 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
-                        cwd: 'bower_components/fontello/assets',
-                        src: ['embedded_fonts/*.*'],
-                        dest: '<%= inspinia.dist %>'
+                        cwd: 'bower_components/fontello/assets/embedded_fonts',
+                        src: ['*.*'],
+                        dest: '<%= inspinia.dist %>/font'
                     },
                     {
                         expand: true,
@@ -170,8 +170,7 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     '<%= inspinia.dist %>/scripts/{,*/}*.js',
-                    '<%= inspinia.dist %>/styles/{,*/}*.css',
-                    '<%= inspinia.dist %>/styles/fonts/*'
+                    '<%= inspinia.dist %>/styles/{,*/}*.css'
                 ]
             }
         },
