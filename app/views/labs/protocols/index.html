@@ -116,17 +116,17 @@ msg.payload = {
 }
 return msg;</ui-codemirror>
 
-                      <div class="alert alert-warning">
-                        <p>Click OK and then click deploy in the top right corner</p>
-                      </div>
-                    </div>
+    <div class="alert alert-warning">
+      <p>Click OK and then click deploy in the top right corner</p>
+    </div>
+  </div>
 
-                      <div content-block name="first-flow" message="Learn to export your Node-Red Flow">
-	                      <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to
-		                        export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import it into your
-		                        work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in. This method provides
-		                        a simple way to share your flows with other developers.</p>
-		                    <ui-codemirror ui-codemirror-opts="editorOptions">[
+  <div content-block name="first-flow" message="Learn to export your Node-Red Flow">
+      <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to
+          export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import it into your
+          work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in. This method provides
+          a simple way to share your flows with other developers.</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions">[
    {
       "id":"f7b5c41d.084a38",
       "type":"grove-lcd",
@@ -180,9 +180,7 @@ return msg;</ui-codemirror>
           <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT">
             <labels gateway/>
             <div content-block name="find-ip-address" message="Login to your Intel IoT Gateway">
-
-              <p>The commands in this section will be run on the Intel® Iot Gateway so SSH into your Intel® Iot Gateway.</p>
-
+              <p>The commands in this section will be run on the Intel® Iot Gateway.</p>
             </div>
 
             <div content-block name="find-ip-address" message="Review useful commands to help you organize your workflow on the Intel IoT Gateway">
