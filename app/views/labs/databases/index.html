@@ -92,7 +92,7 @@
           <pre><code>$ npm install mongoose --save</code></pre>
 
           <p>We've prepared the MongooseJS schemas that you will need to complete this lab.  Install the NPM package below and then you will be able to import the schemas</p>
-          <pre><code>$ npm install intel-commerical-edge-network-database-models --save</code></pre>
+          <pre><code>$ npm install intel-commercial-edge-network-database-models --save</code></pre>
 
         </div>
 
@@ -152,14 +152,14 @@ $ cd monitord</code></pre>
         </li>
         <li>
           <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
-          <p>Please note that the <code>intel-commerical-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
+          <p>Please note that the <code>intel-commercial-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
           <p class="subtitle">Recording MQTT Sensor Activity</p>
           <p class="label">./package.json</p>
 
           <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
   "mqtt": "latest",
   "mongoose": "latest",
-  "intel-commerical-edge-network-database-models" : "latest"
+  "intel-commercial-edge-network-database-models" : "latest"
 }</ui-codemirror>
         </li>
 
@@ -204,8 +204,8 @@ db.once('open', function(callback) {
         <p>Now import and initialize a sensor and a data model.</p>
         <p class="label">./server.js</p>
         <ui-codemirror ui-codemirror-opts="editorOptions">// Import the Database Model Objects
-var DataModel = require('intel-commerical-iot-database-models').DataModel;
-var SensorModel = require('intel-commerical-iot-database-models').SensorModel;</ui-codemirror>
+var DataModel = require('intel-commercial-iot-database-models').DataModel;
+var SensorModel = require('intel-commercial-iot-database-models').SensorModel;</ui-codemirror>
 
         <p>Now that the dependencies are included and the connection code to the MQTT broker and MongoDB database is written. Proceed to create the main loop of the program.</p>
       </div>
@@ -261,7 +261,7 @@ mqttClient.on('message', function(topic, message) {
         json = JSON.parse(message);
       } catch (e) {
         console.log(e);
-      }</ui-codemirror>
+      });</ui-codemirror>
       </li>
     </div>
 

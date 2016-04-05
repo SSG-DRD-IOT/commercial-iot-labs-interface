@@ -31,13 +31,13 @@
       <p>Create a new project named <b>edge-sensor-monitor</b></p>
 
       <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
-      <p>Please note that the <code>intel-commerical-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
+      <p>Please note that the <code>intel-commercial-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
 
       <p class="label">./package.json</p>
       <textarea id="code1" name="code">	"dependencies": {
 "mqtt": "latest",
 "mongoose": "latest",
-"intel-commerical-edge-network-database-models" : "latest"
+"intel-commercial-edge-network-database-models" : "latest"
 }</textarea>
 
 
@@ -76,8 +76,8 @@ console.log("Connection to MongoDB successful");
         <p>Now import and initialize a sensor and a data model.</p>
 	<textarea id="code4" name="code">
 // Import the Database Model Objects
-var DataModel = require('intel-commerical-iot-database-models').DataModel;
-var SensorModel = require('intel-commerical-iot-database-models').SensorModel;</textarea>
+var DataModel = require('intel-commercial-iot-database-models').DataModel;
+var SensorModel = require('intel-commercial-iot-database-models').SensorModel;</textarea>
 
         <h2>The MQTT Event Loop</h2>
         <ol>

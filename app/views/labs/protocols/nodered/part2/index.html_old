@@ -41,7 +41,7 @@
         <li>
           <p>We need an NPM modules for this labs. Add the MQTT NPM package to the dependencies section of the <strong>package.json</strong> file.  The temperature sensor module is already installed on your Intel Edison.</p>
           <p><code>$ npm install mqtt -g</code></p>
-<p><code>$ npm install intel-commerical-edge-network-database-models --save</code></p>
+<p><code>$ npm install intel-commercial-edge-network-database-models --save</code></p>
 	  <p>and in you <code>package.json</code> type in these dependencies</p>
 	  <textarea id="code20" name="code">
 dependencies: {
@@ -56,7 +56,7 @@ dependencies: {
 // Load Grove module
 var groveSensor = require('jsupm_grove');
 var mqtt = require('mqtt');
-var Data = require('intel-commerical-edge-network-database-models').DataModel;
+var Data = require('intel-commercial-edge-network-database-models').DataModel;
           </textarea>
         </div></li>
         <li><p>Initialize the temperature sensor. See the <a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">temperature sensor documentation</a> on the <a href="http://software.intel.com/iot/">Intel Developer Zone</a>.
