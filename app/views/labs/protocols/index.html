@@ -59,7 +59,7 @@
                     <p><code>$ npm install -g node-red</code></p>
 
                     <div class="alert alert-warning">
-                      <p>Installing Node Red will take about 5-8 minutes.</p>
+                      <p>Installing Node Red will take about 5-8 minutes. Often times it seems to fail on the first attempt, but on the second attempt it succeeds.</p>
                     </div>
                 </div>
 
@@ -116,8 +116,10 @@ msg.payload = {
 }
 return msg;</ui-codemirror>
 
-                        <p>Click Deploy in the top right corner</p>
+                      <div class="alert alert-warning">
+                        <p>Click OK and then click deploy in the top right corner</p>
                       </div>
+                    </div>
 
                       <div content-block name="first-flow" message="Learn to export your Node-Red Flow">
 	                      <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to
