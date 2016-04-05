@@ -20,7 +20,7 @@
     <div class="col-lg-12">
 
       <!-- Objective -->
-      <div ibox  title="Objectives">
+      <div ibox title="Objectives">
         <div content-block name="read-objectives" message="Read the Objectives">
           <labels gateway edison windows/>
           <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
@@ -38,7 +38,7 @@
       </div>
 
       <!-- Login to your Intel IoT Gateway -->
-      <div ibox  title="Connect to your Intel® IoT Gateway from your development computer">
+      <div ibox collapse  title="Connect to your Intel® IoT Gateway from your development computer">
         <div content-block name="find-mac-address" message="Find your Gateway's MAC address" image-link="./views/labs/intro/images/gateway-mac-address.jpg">
           <labels gateway/>
 
@@ -84,7 +84,7 @@
       </div>
 
       <!-- Unbox and Setup your Intel® Edison Hardware -->
-      <div ibox  title="Setup your Intel® Edison Hardware">
+      <div ibox collapse  title="Setup your Intel® Edison Hardware">
         <labels edison></labels>
 
         <div content-block name="intro-place-edison" message="Insert the Intel Edison onto the Arduino expansion board" image-link="./views/labs/intro/images/place-edison.png">
@@ -141,7 +141,7 @@
       </div>
 
       <!-- Setup your Intel® Edison Software -->
-      <div ibox  title="Setup your Intel® Edison Software">
+      <div ibox collapse  title="Setup your Intel® Edison Software">
 
 
         <div content-block name="download-software" message="Download the Intel® Edison Software Development Tools" image-link="./views/labs/intro/images/download-installer.png">
@@ -245,7 +245,7 @@
       </div>
 
       <!-- Connect to your Intel® Edison from your development computer using a serial connection  -->
-      <div ibox  title="Connect to your Intel® Edison from your development computer using a serial connection">
+      <div ibox collapse  title="Connect to your Intel® Edison from your development computer using a serial connection">
 
         <div content-block name="connect-edison-intro" message="Read the Introduction to Connecting to the Intel Edison">
           <labels edison></labels>
@@ -261,7 +261,6 @@
             <li>flashing new firmware.</li>
           </ol>
         </div>
-
 
         <div content-block name="establish-a-serial-connection" message="Establish a serial connection and login to the shell">
 
@@ -298,7 +297,7 @@
       </div>
 
       <!-- Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison -->
-      <div ibox title="Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison">
+      <div ibox collapse title="Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison">
         <div content-block name="intro-hostname-and-wifi" message="Set Your Password and WiFI">
           <ol>
             <li>
@@ -358,7 +357,7 @@
       </div>
 
       <!-- Additional Resources -->
-      <div ibox  title="Additional resources">
+      <div ibox collapse  title="Additional resources">
           <ul>
             <li><a href="putty/index.html">Troubleshooting &amp; Tips - Using PuTTY</a></li>
             <li><a href="xdk/index.html">Troubleshooting &amp; Tips - Intel XDK</a></li>
