@@ -130,7 +130,9 @@
         </div>
 
         <div content-block name="intro-green-light" message="Be sure the green light is on" image-link="./views/labs/intro/images/green-light.png">
-          <p>When your computer is plugged in you will see a green light.</p>
+          <div class="alert alert-warning">
+            <p>When your computer is plugged in you will see a green light. <b>Some laptops do not output sufficient power for the Intel Edison. In cases where there is not enough power, the Intel Edison board may start and then reboot in a loop.</b></p>
+          </div>
         </div>
 
         <div content-block name="intro-booting-completed" message="">
