@@ -35,7 +35,7 @@
                 </div>
               </div>
 
-              <div ibox collapse  title="Node-Red Flow: Temperature to LCD">
+              <div ibox   title="Node-Red Flow: Temperature to LCD">
                 <div content-block name="connect-sensors" message="Install the Grove base shield and sensors"
                 image-link="./views/labs/protocols/nodered/part1/image_2.jpg">
                   <ol>
@@ -57,6 +57,10 @@
                     <p>Install Node-Red by running the following command:</p>
 
                     <p><code>$ npm install -g node-red</code></p>
+
+                    <div class="alert alert-warning">
+                      <p>Installing Node Red will take about 5-8 minutes.</p>
+                    </div>
                 </div>
 
                 <div content-block name="run-node-red-modules" message="Install the Intel Edison Node-RED module using NPM">
@@ -81,11 +85,11 @@
                 <div content-block name="first-flow" message="Create a Node-Red Flow that connects your temperature sensor to your LCD"
                 image-link="./views/labs/protocols/nodered/part1/first_flow.png">
 
-                    <p> Create a flow where a grove temp sensor node outputs into a function node which outputs into the grove-lcd node. </p>
+                    <p> Create a flow where a grove temperature sensor node outputs into a function node which outputs into the grove-lcd node. </p>
 
                 </div>
                 <div content-block name="first-flow" message="Customize your Function Node">
-                    <p> Double click on the Temp node and assign A0 as the pin and interval as 1000 to take a temperature reading every 1000ms. Double click the function node and enter the following code:</p>
+                    <p> Double click on the Temperature node and assign A0 as the pin and interval as 1000 to take a temperature reading every 1000ms. Double click the function node and enter the following code:</p>
                     <ui-codemirror ui-codemirror-opts="editorOptions">var r_val = 0;
 var g_val = 0;
 var b_val = 0;
@@ -168,11 +172,10 @@ return msg;</ui-codemirror>
 
 		                    <p> NOTE: if the JSON references any custom nodes those will have to be installed first. </p>
 
-
                 </div>
             </div>
 
-          <div ibox collapse  title="Node-Red Flow: Publish Sensor Data over MQTT">
+          <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT">
             <labels gateway/>
             <div content-block name="find-ip-address" message="Login to your Intel IoT Gateway">
 
@@ -211,32 +214,32 @@ return msg;</ui-codemirror>
             image-link="./views/labs/protocols/nodered/part2/mqtt_flow.png">
               <h5>Create a Node-RED flow</h5>
               <p>Now you will create a new flow in Node-RED in order to send the temperature data up to your MQTT server.<p>
-              <p>Using the "grove temp sensor", "mqtt" output, "mqtt" input, and "debug" nodes create the following flow:</p>
+              <p>Using the "grove temperature sensor", "mqtt" output, "mqtt" input, and "debug" nodes create the following flow:</p>
             </div>
 
-            <div content-block name="create-" message="Create a Node-Red flow that will sends the temperature reading to the MQTT broker"
+            <div content-block name="protocol-assign-pins" message="Configure the temperature pin"
             image-link="./views/labs/protocols/nodered/part2/mqtt_setup.png">
               <ol>
-                <li>Double click the temp node to assign it to pin A0</li>
+                <li>Double click the temperature node to assign it to pin A0</li>
                 <li> Double click the mqtt nodes to configure them.</li>
                 <li>Use the IP address of the gateway as the server and "temp" as the topic</li>
               </ol>
             </div>
 
-            <div content-block name="publish-mqtt" message="Create a Node-Red flow that will sends the temperature reading to the MQTT broker"
+            <div content-block name="protocol-publish-mqtt" message="Deploy the application"
             image-link="./views/labs/protocols/nodered/part2/mqtt_flow_connected.png">
               <p>When you are done configuring the nodes hit deploy</p>
               <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the Edison is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
             </div>
 
 
-            <div content-block name="monitor-mqtt" message="Create a Node-Red flow that will sends the temperature reading to the MQTT broker">
+            <div content-block name="protocol-monitor-mqtt" message="Publish data to the temperature topic">
               <h5>Monitor MQTT Topic on Gateway</h5>
               <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
-              <p>In the SSH terminal to the Gateway create a new screen console (Ctrl-A C) and switch to it (Ctrl-A ").</p>
-              <code>mosquitto_sub -t temp</code>
+              <p>In the SSH terminal to the Gateway create a new screen console run the screen command and then type (Ctrl-A C) and switch to it (Ctrl-A ").</p>
+              <code>mosquitto_sub -t temperature</code>
 
-              <p>You will start to see the data being published to the "temp" topic.</p>
+              <p>You will start to see the data being published to the "temperature" topic.</p>
             </div>
 
 
@@ -264,7 +267,7 @@ return msg;</ui-codemirror>
       "type":"mqtt out",
       "z":"b4234423.4bdcb8",
       "name":"",
-      "topic":"temp",
+      "topic":"temperature",
       "qos":"",
       "retain":"",
       "broker":"",
@@ -279,7 +282,7 @@ return msg;</ui-codemirror>
       "type":"mqtt in",
       "z":"b4234423.4bdcb8",
       "name":"",
-      "topic":"temp",
+      "topic":"temperature",
       "broker":"",
       "x":84,
       "y":138,
@@ -307,7 +310,7 @@ return msg;</ui-codemirror>
                 </div>
             </div>
 
-            <div ibox collapse title="Node-Red Flow: HTTP POST to LCD screen">
+            <div ibox  title="Node-Red Flow: HTTP POST to LCD screen">
               <div content-block name="node-red-http-intro" message="Create Node-RED flow that controls the LCD screen with a web request">
                 <h3>Create Node-RED flow that controls the LCD screen with a web request.</h3>
 
@@ -364,7 +367,7 @@ return msg;</ui-codemirror>
             </div>
 
 
-            <div ibox collapse title="Additional Resources">
+            <div ibox  title="Additional Resources">
               <ul>
                   <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
                   <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
