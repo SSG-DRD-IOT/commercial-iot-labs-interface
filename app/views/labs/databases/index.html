@@ -238,20 +238,13 @@ mqttClient.on('connect', function() {
           <li>
             <p>An MQTT message will be sent to the <b>announcements</b> topic if a new network sensor comes online in the edge network. The new sensor will reponsible for sending it's own MQTT message.</p>
           </li>
-
-          <li>
-              <p>Next, write a handler for the MQTT <code>message</code> event.</p>
-
-              <ui-codemirror ui-codemirror-opts="editorOptions">// A function that runs when MQTT receives a message
-mqttClient.on('message', function (topic, message) {
-
-};</ui-codemirror>
-          </li>
       </ol>
     </div>
 
     <div content-block name="decode-incoming-json" message="Decode the incoming JSON message from MQTT">
-      <li>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</li>
+      <li>
+        <p>Next, write a handler for the MQTT <code>message</code> event.</p>
+        <p>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</p></li>
       <li>
         <ui-codemirror ui-codemirror-opts="editorOptions">// A function that runs when MQTT receives a message
 mqttClient.on('message', function(topic, message) {
