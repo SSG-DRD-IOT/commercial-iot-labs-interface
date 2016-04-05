@@ -22,7 +22,7 @@
     <div class="col-lg-12">
 
       <!-- Database Lab: Objectives -->
-      <div ibox   title="Database Lab: Objectives">
+      <div ibox title="Database Lab: Objectives">
         <!-- Objectives -->
         <div content-block name="database-objectives" message="Read the Objectives">
           <label gateway window apple linux/>
@@ -30,7 +30,6 @@
           <p>The steps to write the MQTT to database service are as follows:</p>
           <ul>
             <li>Install MongoDB and the MongooseJS database bindings</li>
-            <li>Define your database schema using MongooseJS</li>
             <li>Write a NodeJS server that listens to all sensor traffic over MQTT</li>
             <li>Write the collected sensor information to the database.</li>
           </ul>
@@ -38,7 +37,7 @@
       </div>
 
       <!-- Create JavaScript Models to represent the Edge Network -->
-      <div ibox  title="Create JavaScript Models to represent the Edge Network">
+      <div ibox title="Create JavaScript Models to represent the Edge Network">
         <div content-block name="defining-database-types" message="Read and Understand the types that we will Defining Types for the Edge Network">
 
           <h4>Defining Types for the Edge Network</h4>
@@ -65,7 +64,7 @@
           </ul>
 
           <div class="alert alert-info">
-            <p>Our database will store five types: <b>sensors, actuators, data, trigger and error</b>.</p>
+            <p>Our database will store five types: <b>sensors, actuators, data, trigger and error</b>. We've prepared the MongooseJS schemas that you will need to complete this lab.  Install the NPM package below and then you will be able to import the schemas.</p>
           </div>
         </div>
 
@@ -92,155 +91,25 @@
           <p>Install MongooseJS</p>
           <pre><code>$ npm install mongoose --save</code></pre>
 
-          <p>Create a <code>schema</code> directory and change to that directory, <code>cd schema</code>. We will store all of our schema files here. </p>
-          <pre><code>$ mkdir schema</code></pre>
+          <p>We've prepared the MongooseJS schemas that you will need to complete this lab.  Install the NPM package below and then you will be able to import the schemas</p>
+          <pre><code>$ npm install intel-commerical-edge-network-database-models --save</code></pre>
+
         </div>
 
-        <div content-block name="write-mongoosejs-models" message="Define the sensor schema in ./schema/sensor.js">
-          <h4>Write Mongoose JS Models to Access MongoDB</h4>
 
-          <p>MongooseJS is an schema-based solution to model MongoDB database objects.  It allows you to easily create, validate, save, update and remove items from your MongoDB.  Everything in MongooseJS starts with a schema.  After a schema is defined it can be used to create a Model, which is the object you will use in your program to access the database.</p>
 
-          <p>If you have any questions be sure you consult the <a href="http://mongoosejs.com/docs/guide.html">The MongooseJS User Guide</a>.</p>
+        <div ibox title="MQTT Sensor Monitoring on the Gateway">
+          <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
+            <p>In this section of the lab, you will write a server named <b>monitord</b></p>
+            <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
+            <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
+          </div>
 
-          <p>Let's build a schema for a sensor with the following data types:</p>
+          <div content-block name="about-topics" message="Read the Overview on MQTT Topics on the Edge Network">
+            <h4>Overview on MQTT Topics on the Edge Network</h4>
 
-          <ul>
-            <li>id : String</li>
-            <li>name : String</li>
-            <li>description : String</li>
-            <li>maxfrequency : Number</li>
-            <li>active : Boolean</li>
-            <li>ioType String.</li>
-          </ul>
-
-          <div>
-            <p class="label">schema/sensorSchema.js</p>
-            <ui-codemirror ui-codemirror-opts="editorOptions">var mongoose = require('mongoose');
-var sensorSchema = new mongoose.Schema({
-  id: {
-    type: String,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  maxfrequency: {
-    type: Number,
-    required: true
-  },
-  frequency: {
-    type: Number,
-    required: true
-  },
-  active: {
-    type: Boolean,
-    required: true
-  },
-  ioType: {
-    type: String,
-    required: true
-  }
-});
-
-module.exports = sensorSchema;</ui-codemirror></div>
-
-  <p>Save this code in the file <code>sensorSchema.js</code> in the <code>schema</code> directory.</p>
-  </div>
-
-  <div content-block name="schema-actuator" message="Define the actuator schema in ./schema/actuator.js">
-    <p>Here are the rest of the fields for the other types. Please, define them in a similar manner to the <code>sensorSchema</code>.</p>
-    <li>
-      <p>Define an actuator schema in <code>schema/actuatorSchema.js</code></p>
-      <ul>
-        <li>id : String</li>
-        <li>name : String</li>
-        <li>description : String</li>
-        <li>maxfrequency : Number</li>
-        <li>active : Boolean</li>
-        <li>ioType : String</li>
-      </ul>
-    </li>
-  </div>
-
-  <div content-block name="schema-data" message="Define the Data schema in ./schema/data.js ">
-    <li>
-      <p>Define sensor data schema in <code>schema/dataSchema.js</code></p>
-      <ul>
-        <li>sensor_id: String</li>
-        <li>value: Number</li>
-        <li>timestamp: Date</li>
-      </ul>
-    </li>
-  </div>
-
-  <div content-block name="schema-trigger" message="Define the Trigger schema in ./schema/trigger.js ">
-    <li>
-      <p>Define a Trigger schema in <code>schema/triggerSchema.js</code></p>
-      <ul>
-        <li>id: String. Holds a unique value for the iot network event</li>
-        <li>name: String. A name for the iot network event</li>
-        <li>sensor_id: String. A reference to the sensor that will trigger this event</li>
-        <li>actuator_id: String. A reference to the actuator that will be activated</li>
-        <li>condition: String. A JavaScript function that returns true or false</li>
-        <li>triggerFunc: String. A JavaScript function that is executed when the condition is true.</li>
-        <li>active: Boolean. If true this Iot Network Event can be triggered, otherwise it is inactive</li>
-      </ul>
-    </li>
-  </div>
-
-  <div content-block name="schema-error" message="Define the Error schema in ./schema/error.js ">
-    <li>
-      <p>Define a schema for error in <code>schema/errorSchema.js</code></p>
-      <ul>
-        <li>type: String</li>
-        <li>message: String</li>
-        <li>timestamp: Date</li>
-      </ul>
-    </li>
-  </div>
-
-  <div content-block name="create-schema-interface-file" message="Create a Module Interface for the Edge Network Objects">
-    <h4>Create a Module Interface for the Edge Network Objects</h4>
-    <p>In this section there are two goals.  First, we need to package these schemas into a JavaScript module that can be exported and used by other JavaScript Projects. Second, each schema object needs to be coverted into a Model object that can be used to access the database.</p>
-
-    <p>Write this code to <code>/index.js</code> at the root level of this project.</p>
-    <p class="label">./index.js</p>
-    <div><ui-codemirror ui-codemirror-opts="editorOptions">var mongoose = require('mongoose');
-var SensorSchema = require('./schema/sensorSchema.js');
-var ActuatorSchema = require('./schema/actuatorSchema.js');
-var TriggerSchema = require('./schema/triggerSchema.js');
-var DataSchema = require('./schema/dataSchema.js');
-var ErrorSchema = require('./schema/errorSchema.js');
-
-module.exports = {
-  SensorModel: mongoose.model('SensorModel', SensorSchema),
-  ActuatorModel: mongoose.model('ActuatorModel', ActuatorSchema),
-  DataModel: mongoose.model('DataModel', DataSchema),
-  TriggerModel: mongoose.model('TriggerModel', TriggerSchema),
-  ErrorModel: mongoose.model('ErrorModel', ErrorSchema)
-};</ui-codemirror>
-      </div>
-    </div>
-  </div>
-
-    <div ibox title="MQTT Sensor Monitoring on the Gateway">
-      <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
-      <p>In this section of the lab, you will write a server named <b>monitord</b></p>
-      <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
-      <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
-    </div>
-
-    <div content-block name="about-topics" message="Read the Overview on MQTT Topics on the Edge Network">
-      <h4>Overview on MQTT Topics on the Edge Network</h4>
-
-      <div class="alert alert-info">
-        <p>Each sensor is publishing to an MQTT topic that has a three level hierarchy. Here is an example of a possible hierarchy that could be used in an IoT Edge Network.</p>
+            <div class="alert alert-info">
+              <p>Each sensor is publishing to an MQTT topic that has a three level hierarchy. Here is an example of a possible hierarchy that could be used in an IoT Edge Network.</p>
 <pre><code>sensor
     | temperature
         | data
