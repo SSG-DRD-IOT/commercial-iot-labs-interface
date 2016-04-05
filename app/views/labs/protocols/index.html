@@ -22,7 +22,7 @@
         <div class="col-lg-12">
 
             <!-- Objective -->
-            <div ibox  title="Objective">
+            <div ibox title="Objective">
               <div content-block name="read-objectives" message="Read the Objectives">
                 <labels edison />
                   <p>In this lab, we will explore the using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
@@ -35,7 +35,7 @@
                 </div>
               </div>
 
-              <div ibox  title="Node-Red Flow: Temperature to LCD">
+              <div ibox collapse  title="Node-Red Flow: Temperature to LCD">
                 <div content-block name="connect-sensors" message="Install the Grove base shield and sensors"
                 image-link="./views/labs/protocols/nodered/part1/image_2.jpg">
                   <ol>
@@ -172,7 +172,7 @@ return msg;</ui-codemirror>
                 </div>
             </div>
 
-          <div ibox  title="Node-Red Flow: Publish Sensor Data over MQTT">
+          <div ibox collapse  title="Node-Red Flow: Publish Sensor Data over MQTT">
             <labels gateway/>
             <div content-block name="find-ip-address" message="Login to your Intel IoT Gateway">
 
@@ -307,7 +307,7 @@ return msg;</ui-codemirror>
                 </div>
             </div>
 
-            <div ibox title="Node-Red Flow: HTTP POST to LCD screen">
+            <div ibox collapse title="Node-Red Flow: HTTP POST to LCD screen">
               <div content-block name="node-red-http-intro" message="Create Node-RED flow that controls the LCD screen with a web request">
                 <h3>Create Node-RED flow that controls the LCD screen with a web request.</h3>
 
@@ -364,7 +364,7 @@ return msg;</ui-codemirror>
             </div>
 
 
-            <div ibox title="Additional Resources">
+            <div ibox collapse title="Additional Resources">
               <ul>
                   <li><p><a href="http://mqtt.org/">http://mqtt.org/</a></p></li>
                   <li><p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p></li>
