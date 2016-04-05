@@ -195,7 +195,7 @@
         </div>
       </div>
 
-      <div ibox collapse  title="Exercise 1: Temperature Sensor and LCD">
+      <div ibox collapse title="Exercise 1: Temperature Sensor and LCD">
         <div content-block name="read-xdk-intro" message="Plug in the Grove shield, temperature sensor and the LCD" image-link="./views/labs/build/images/temperature-sensors.jpg">
 
           <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
@@ -451,47 +451,75 @@ monitor();</ui-codemirror>
               Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
             </p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions">var digitalAccelerometer = require('jsupm_mma7660'); // Instantiate an MMA7660 on I2C bus 0
-var myDigitalAccelerometer = new digitalAccelerometer.MMA7660(digitalAccelerometer.MMA7660_I2C_BUS, digitalAccelerometer.MMA7660_DEFAULT_I2C_ADDR);
-// place device
-in standby mode so we can write registers myDigitalAccelerometer.setModeStandby();
-// enable 64 samples per second
-myDigitalAccelerometer.setSampleRate(digitalAccelerometer.MMA7660.AUTOSLEEP_64);
-// place device into active mode myDigitalAccelerometer.setModeActive();
-var x, y, z;
-x = digitalAccelerometer.new_intp();
-y = digitalAccelerometer.new_intp();
-z = digitalAccelerometer.new_intp();
-var ax, ay, az;
-ax = digitalAccelerometer.new_floatp();
-ay = digitalAccelerometer.new_floatp();
-az = digitalAccelerometer.new_floatp();
-var outputStr;
-var myInterval = setInterval(function() {
-  myDigitalAccelerometer.getRawValues(x, y, z);
-  outputStr = "Raw values: x = " + digitalAccelerometer.intp_value(x) + " y = " + digitalAccelerometer.intp_value(y) + " z = " + digitalAccelerometer.intp_value(z);
-  console.log(outputStr);
-  myDigitalAccelerometer.getAcceleration(ax, ay, az);
-  outputStr = "Acceleration: x = " + roundNum(digitalAccelerometer.floatp_value(ax), 6) + "g y = " + roundNum(digitalAccelerometer.floatp_value(ay), 6) + "g z = " + roundNum(digitalAccelerometer.floatp_value(az), 6) + "g";
-  console.log(outputStr);
-}, 500);
-// round off output to match C example, which has 6 decimal places
-function roundNum(num, decimalPlaces) {
-  var extraNum = (1 / (Math.pow(10, decimalPlaces) * 1000));
-  return (Math.round((num + extraNum) * (Math.pow(10, decimalPlaces))) / Math.pow(10, decimalPlaces));
-} // When exiting: clear interval and print message
-process.on('SIGINT', function() {
-  clearInterval(myInterval); // clean up memory
-  digitalAccelerometer.delete_intp(x);
-  digitalAccelerometer.delete_intp(y);
-  digitalAccelerometer.delete_intp(z);
-  digitalAccelerometer.delete_floatp(ax);
-  digitalAccelerometer.delete_floatp(ay);
-  digitalAccelerometer.delete_floatp(az);
-  myDigitalAccelerometer.setModeStandby();
-  console.log("Exiting...");
-  process.exit(0);
-});</ui-codemirror>
+            <ui-codemirror ui-codemirror-opts="editorOptions">"use strict";
+
+var accelerometer = require("jsupm_mma7660");
+
+var accel = new accelerometer.MMA7660(0, 76),
+    screen = new (require("jsupm_i2clcd").Jhd1313m1)(6, 0x3E, 0x62);
+
+// enable 64 samples every 10 seconds
+accel.setModeStandby();
+accel.setSampleRate(10);
+accel.setModeActive();
+
+function float() {
+  var val = accelerometer.new_floatp();
+
+  // define dynamic "getter" for float values:
+  function get() { return accelerometer.floatp_value(this); }
+  Object.defineProperty(val, "value", { get: get });
+
+  return val;
+}
+
+function warn() {
+  screen.setColor(255, 0, 0);
+  screen.clear();
+  screen.write("Earthquake!");
+}
+
+function stop() {
+  screen.setColor(255, 255, 255);
+  screen.clear();
+  screen.write("No Earthquake!");
+}
+
+function noAccel(){
+  screen.setColor(255, 255, 255);
+  screen.clear();
+  screen.write("No Accelerometer Detected");
+}
+
+
+
+function monitor() {
+  var x = float(), y = float(), z = float();
+  var prev = false;
+  stop();
+  setInterval(function() {
+    accel.getAcceleration(x, y, z);
+    console.log ("Values of X Y and z are : " +x.value+ " ," +y.value+ " ," +z.value);
+
+    if (x.value == 0 && y.value == 0 && z.value == 0){
+        noAccel();
+    }
+    else{
+        var quake = x.value > 1 || y.value > 1 || z.value > 1;
+        if (quake && !prev) {
+            warn();
+            setTimeout(stop, 15000);
+        }
+        prev = quake;
+    }
+  }, 1000);
+}
+
+function main() {
+  monitor();
+}
+
+main();</ui-codemirror>
 
           </div>
         </div>
