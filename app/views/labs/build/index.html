@@ -22,7 +22,7 @@
     <div class="col-lg-12">
 
       <!-- Objectives -->
-      <div ibox title="Objectives">
+      <div ibox collapse title="Objectives">
         <div content-block name="read-objectives" message="Read the Objectives">
           <labels edison windows apple linux/>
           <p>To learn how to build stand alone IoT devices with Intel® Edison. Learn to use sensors and actuators to gather and respond to data. The devices built during this lab will be extended in later labs to send their data to the Intel® IoT Gateway
@@ -38,7 +38,53 @@
         </div>
       </div>
 
-      <div ibox collapse  title="Deploy sample application with the Intel® XDK IoT Edition">
+      <!-- Three Methods of Deploying Code to the Intel Edison -->
+      <div ibox title="Three Methods of Deploying Code to the Intel Edison">
+
+        <div content-block name="build-deploy-code-with-SSH" message="You can use multiple methods of deploying code to Intel IoT products">
+          <p>There are many ways to transfer source code to the Intel Edison or Intel IoT Gatway. The simplest is to use SSH and secure copy or secure FTP to transfer files. Many IDEs also have the ability to transfer files over SSH.</p>
+
+          <p>In this section, we'll walk through transfering a software project to the Intel Edison using a couple of different methods.</p>
+
+          <ol>
+            <li>Write your source code in any editor and transfer it using secure copy (SCP)</li>
+            <li>Use the Intel XDK to write and deploy your code</li>
+            <li>Use the Atom Editor and the Remote Edit package to write and deploy code</li>
+          </ol>
+
+          <div class="alert alert-info">
+            <p>If you deploy your NodeJS application to the directory /node_app_slot it will autostart at device boot time.</p>
+          </div>
+
+        </div>
+        <div content-block name="build-deploy-with-scp" message="Use SCP to deploy code to the Intel Edison">
+          <p>The step to use SCP are different on Windows based machine then on MacOSX or Linux based machines.</p>
+
+          <p>If you are on Windows:</p>
+          <ul>
+            <li>Go to the <a href="https://winscp.net/eng/download.php">WinSCP site</a>.</li>
+            <li>Launch WinSCP and configure the remote host as <code>192.168.1.1</code> with your username and password</li>
+            <li>You can now drag and drop your source code on to the Intel Edison or Intel IoT Gateway</li>
+          </ul>
+
+          <p>If you on MacOSX or Linux, you can secure copy files from the command line. Assuming the IP address of your Intel Edison is 192.168.1.100, to move files from your home directory to the /node_app_slot directory on the Intel Edison type:</p>
+          <pre><code># scp -rf ~/labs/temperature-sensor/ root@192.168.1.100:/node_app_slot</code></pre>
+        </div>
+
+        <div content-block name="build-use-atom-to-deploy" message="You can use Atom to deploy software to the Intel Edison or Intel IoT Gateway" image-link="./views/labs/build/images/atom.png">
+          <ol>
+            <li>Go to the <a href="https://atom.io/">Atom Editor Homepage</a> and download the Atom Editor.</li>
+            <li>Go the menu bar in Atom and go to <code>Preferences</code>.</li>
+            <li>Click on <code>Install</code> and search for <code>Remote-Edit</code></li>
+            <li>Go to the menu bar <code>Packages -> Remote Edit -> Add New Host (sftp)</code></li>
+            <li>Add the IP address of the Intel Edison or the Intel IoT Gateway</li>
+            <li>Now if you go to <code>Packages -> Remote Edit -> Browse Hosts</code> you will be able to browse and edit the files on the remote host.</li>
+          </ol>
+        </div>
+      </div>
+
+
+      <div ibox collapse title="Deploy sample application with the Intel® XDK IoT Edition">
         <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction" image-link="./views/labs/build/images/xdk-splash.png">
 
           <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel® Edison using any computer OS platform</p>
