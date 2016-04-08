@@ -25,7 +25,7 @@
       <div ibox title="Database Lab: Objectives">
         <!-- Objectives -->
         <div content-block name="database-objectives" message="Read the Objectives">
-          <label gateway window apple linux/>
+          <labels gateway windows apple linux/>
           <p>Write a NodeJS server that listens to all the MQTT sensor traffic on the network and writes it to a database on the gateway.</p>
           <p>The steps to write the MQTT to database service are as follows:</p>
           <ul>
@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <div content-block name="install-mongoosejs" message="Install MongooseJS">
+        <div content-block name="install-mongoosejs" message="Learn about MongooseJS, a library <of></of> JavaScript bindings for MongoDB">
           <h4>Install MongooseJS</h4>
           <!-- TODO We need better instructions for installing mongoose -->
 
@@ -287,9 +287,32 @@ mqttClient.on('message', function(topic, message) {
     }</ui-codemirror>
       </div>
     </div>
+  </div>
 
+      <div ibox collapse title="Lab Solutions">
+        <div content-block name="Clone-the-Solution-from-its-Github-Repository" message="Clone the Solution from it's Github Repository">
+          <p>You can deploy the solution to this lab exercise by cloning a repository from Github.</p>
+          <p>Change to the directory that you would like to download the solution into, and then type:</p>
+          <pre><code>git clone git@github.com:SSG-DRD-IOT-/lab-solution-monitor-daemon.git</code></pre>
+        </div>
 
-        <div ibox   title="Additional Resources">
+        <div content-block name="change-directory" message="Change into the solution's directory and run npm install">
+          <pre><code>cd lab-solution-monitor-daemon</code></pre>
+          <pre><code>npm install</code></pre>
+        </div>
+
+        <div content-block name="database-start-server" message="Be sure that the sensor is publishing data and MongoDB is running, then start the server.">
+          <p>Verify that MongoDB is running. You can do this in two way:</p>
+          <ol>
+            <li>Type <code>ps aux | egrep mongod</code> at the command and verify that a process is displayed.</li>
+            <li>If you are running MongoDB in a screen session, then you can switch to the screen running the MongoDB server by typing <code>Ctrl-a "</code> and selecting the screen that you are running MongoDB in.</li>
+          </ol>
+          <p>Type start the Sensor Monitor type:</p>
+          <pre><code>node server.js</code></pre>
+        </div>
+      </div>
+
+        <div ibox title="Additional Resources">
             <ul>
                 <li>
                   <a href="http://mongoosejs.com/docs/guide.html">Mongoose</a>
