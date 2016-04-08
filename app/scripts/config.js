@@ -221,6 +221,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+    .state('labs.solutions', {
+      url: "/solutions",
+      templateUrl: "views/solutions.html",
+      data: {
+        pageTitle: 'Lab Solutions'
+      }
+    })
     .state('labs.additional', {
       url: "/more-info",
       templateUrl: "views/labs/more/index.html",
