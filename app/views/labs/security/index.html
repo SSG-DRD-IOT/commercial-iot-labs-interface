@@ -289,18 +289,18 @@
 
                 <li>
                   <p>Now try to modify the file by executing the following command.</p>
-                  <p><code>cat /root/test_script.sh</code></p>
+                  <p><code>touch /root/test_script.sh</code></p>
                   <p><img src="./views/labs/security/mec/image_15.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the Permission denied.</p>
-                  <p><code>cat /usr/loca/mcafee/solidcore/log/solidcore.log | tail -n 1</code></p>
+                  <p><code>cat /usr/local/mcafee/solidcore/log/solidcore.log | tail -n 1</code></p>
                   <img src="./views/labs/security/mec/image_16.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
-                  <p>Execute the following command to enabled deny-read and then review the status of the MEC features.</p>
+                  <p>Execute the following command to enable deny-read and then review the status of the MEC features.</p>
                   <p><code>sadmin features enable deny-read</code></p>
                   <p><img src="./views/labs/security/mec/image_17.png" alt="image alt text" /></p>
                   <p>The response indicates that the deny-read feature.</p>
