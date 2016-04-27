@@ -20,7 +20,6 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
-
             <!-- Objective -->
             <div ibox title="Objective">
               <div content-block name="read-objectives" message="Read the Objectives">
@@ -364,18 +363,465 @@ return msg;</ui-codemirror>
                         <li><b>DELETE /lcd/text</b> - Turns the LCD text off</li>
                     </ul>
                 </div>
-            </div>
-
-
-            <div ibox  title="Additional Resources">
-              <ul>
-                  <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
-                  <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
-                  <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p></li>
-              </ul>
-            </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div content-block name="Node-Red-Flow-GET-and-DELETE-APIs-for-LCD" message="Node-Red Flow: GET and DELETE APIs for LCD"
+image-link="./views/labs/protocols/nodered/part3/global_context.png">
+      <h3>Add further restful API functionallity to your LCD</h3>
+
+      <p>In this exercise you will add a GET for retriving the state of the LCD screen and a DELETE
+	  to turn the LCD off.</p>
+
+  		<h2> Create Global Context </h2>
+	  	<p>In order to read the state of the LCD you will create a global context, or global variable, which will
+		contain the LCD state.</p>
+
+	    <p>Starting with the flow from Step 1 add a function node and link it to the POST /LCD node. It is reccomended
+	that you name the node something descriptive ("write to global") to make your flow easier to read. Double click
+	the function node copy in the following code:</p>
+
+<ui-codemirror ui-codemirror-opts="editorOptions">global.set("lcd_r",msg.payload.r);
+global.set("lcd_g",msg.payload.g);
+global.set("lcd_b",msg.payload.b);
+global.set("lcd_text",msg.payload.text);</ui-codemirror>
+
+  	<p>Now when the LCD state is POSTed the global context for r, g, b, and text will be written. </p>
+  </div>
+
+  <div content-block name="protocol-create-GET-API" message="Create GET API"
+  image-link="./views/labs/protocols/nodered/part3/get_api.png">
+	  <h2> Create GET API </h2>
+
+	  <p>You will now add two GETs that will send the global context to the requester. Use the input http, function, template, and http response nodes to create two addiotional node sequences in your flow:</p>
+  </div>
+
+  <div content-block name="protocol-GET-methods" message="Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight." image-link="./views/labs/protocols/nodered/part3/config_get.png">
+  	<p>Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight.</p>
+
+  	<p>Next configure the function nodes to assign the global LCD variables to the response message.</p>
+  	<p>For the request coming from /lcd/text use the following function:
+
+  	<ui-codemirror ui-codemirror-opts="editorOptions">var payload = global.get("lcd_text");
+  	msg.payload = payload;
+  	return msg;</ui-codemirror>
+
+  	<p>For the request coming from /lcd/backlight use the following function:
+
+  	<ui-codemirror ui-codemirror-opts="editorOptions">var r_val = global.get("lcd_r");
+  	var g_val = global.get("lcd_g");
+  	var b_val = global.get("lcd_b");
+
+  	var payload = [r_val,g_val,b_val];
+  	msg.payload = payload;
+  	return msg;</ui-codemirror>
+
+  	<p>The message must have mustache template formatting in order for the http response to properly work.</p>
+  	<p>To do this configure the template node to format msg.payload with {{payload}}:</p>
+  	<p><img src="template.png" alt="" ></p>
+  </div>
+
+
+  <div content-block name="protocol-Create-DELETE-API" message="Create the DELETE API" image-link="./views/labs/protocols/nodered/part3/delete_sequence.png">
+  	<h2> Create DELETE API </h2>
+
+  	<p>The final piece is adding a sequence to deal with DELETE methods. Specifically you will use DELETEs to
+  		turn the backlight and text off</p>
+  	<p>Use the input http, function, grove-lcd, and http response nodes to create the following two sequences to your flow:</p>
+
+  	<p>Configure the first http request to DELETE /lcd/text and the second to DELETE /lcd/backlight.</p>
+  	<p>The function following the DELETE /lcd/text node will overwrite the global lcd text context with blank characters.</p>
+  	<p>To do this copy the following into the function node:</p>
+
+  	<ui-codemirror ui-codemirror-opts="editorOptions">global.set("lcd_text","                             ");
+
+  	var r_val = global.get("lcd_r");
+  	var g_val = global.get("lcd_g");
+  	var b_val = global.get("lcd_b");
+  	var text = global.get("lcd_text");
+
+  	msg.payload = {"r": r_val, "g":g_val, "b":b_val, "text":text}
+  	return msg;</ui-codemirror>
+
+  	<p>Similarly the function following DELETE /lcd/backlight will overwrite the global lcd backlight context with 0 for R, G, and B values.</p>
+  	<p>Copy the following into the second function node:</p>
+
+    <ui-codemirror ui-codemirror-opts="editorOptions">global.set("lcd_r",0);
+  	global.set("lcd_g",0);
+  	global.set("lcd_b",0);
+
+  	var text = global.get("lcd_text");
+
+  	msg.payload = {"r": 0, "g":0, "b":0, "text":text}
+  	return msg;</ui-codemirror>
+  </div>
+
+  <div content-block name="protocol-full-restful-api" message="Create the rest of the Restful API"
+  image-link="./views/labs/protocols/nodered/part3/total_flow.png">
+  	<h2>Full Restful API</h2>
+  	<p>You have now written the complete RESTful API for the LCD screen. The total flow should be:</p>
+  	<p><img src="total_flow.png" alt="" ></p>
+  	<p>If you had any issues building the flow the source code is provided at the end of this page and can be imported into your flow
+  	like in exercise 1</p>
+  </div>
+
+  <div content-block name="protocol-use-the-api" message="Test the API"
+  image-link="./views/labs/protocols/nodered/part3/postman_get.png">
+  	<h2>Use API</h2>
+  	<p>Like in the last step use Postman to test the various web requests.</p>
+  	<p><img src="./views/labs/protocols/nodered/part3/postman_get.png" alt="" ></p>
+  	<p>You can also navigate to your Edison's IP, port 1880 /lcd/text or /lcd/backlight
+  	to get the status of the backlight or text.</p>
+  	<p><img src="./views/labs/protocols/nodered/part3/browser_get.png" alt="" ></p>
+  </div>
+
+  <div content-block name="protocol-flow-source-code" message="Compare your solution to the code here.">
+	  <h3>Flow Source Code:</h3>
+	  <ui-codemirror ui-codemirror-opts="editorOptions">[
+   {
+      "id":"ead378e7.152c88",
+      "type":"http in",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "url":"/lcd/text",
+      "method":"get",
+      "swaggerDoc":"",
+      "x":70,
+      "y":300,
+      "wires":[
+         [
+            "7941069e.86bef8"
+         ]
+      ]
+   },
+   {
+      "id":"7941069e.86bef8",
+      "type":"function",
+      "z":"b4234423.4bdcb8",
+      "name":"read text from global",
+      "func":"var payload = global.get(\"lcd_text\");\nmsg.payload = payload;\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":291,
+      "y":299,
+      "wires":[
+         [
+            "c2e87905.3d1788"
+         ]
+      ]
+   },
+   {
+      "id":"c2e87905.3d1788",
+      "type":"template",
+      "z":"b4234423.4bdcb8",
+      "name":"template",
+      "field":"payload",
+      "fieldType":"msg",
+      "format":"handlebars",
+      "template":"{{payload}}",
+      "x":475,
+      "y":300,
+      "wires":[
+         [
+            "d10be55a.2ef418"
+         ]
+      ]
+   },
+   {
+      "id":"d10be55a.2ef418",
+      "type":"http response",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":619,
+      "y":300,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"3e91312.fc16ece",
+      "type":"http in",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "url":"/lcd/backlight",
+      "method":"get",
+      "swaggerDoc":"",
+      "x":90,
+      "y":400,
+      "wires":[
+         [
+            "6cd0e4f3.932f1c"
+         ]
+      ]
+   },
+   {
+      "id":"6cd0e4f3.932f1c",
+      "type":"function",
+      "z":"b4234423.4bdcb8",
+      "name":"read rgb from global",
+      "func":"var r_val = global.get(\"lcd_r\");\nvar g_val = global.get(\"lcd_g\");\nvar b_val = global.get(\"lcd_b\");\n\nvar payload = [r_val,g_val,b_val];\nmsg.payload = payload; \nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":305,
+      "y":399,
+      "wires":[
+         [
+            "a013a513.5fec58"
+         ]
+      ]
+   },
+   {
+      "id":"a013a513.5fec58",
+      "type":"template",
+      "z":"b4234423.4bdcb8",
+      "name":"template",
+      "field":"payload",
+      "fieldType":"msg",
+      "format":"json",
+      "template":"{{payload}}",
+      "x":486,
+      "y":398,
+      "wires":[
+         [
+            "69b566d4.964a98"
+         ]
+      ]
+   },
+   {
+      "id":"69b566d4.964a98",
+      "type":"http response",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":619,
+      "y":398,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"6e7b4fa.f9184b",
+      "type":"http in",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "url":"/LCD",
+      "method":"post",
+      "swaggerDoc":"",
+      "x":94,
+      "y":148,
+      "wires":[
+         [
+            "687f18fb.9780e8",
+            "66a140f8.995ec",
+            "f31fe208.0ce02",
+            "5606a2f2.a9f95c"
+         ]
+      ]
+   },
+   {
+      "id":"5606a2f2.a9f95c",
+      "type":"grove-lcd",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":273,
+      "y":125,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"687f18fb.9780e8",
+      "type":"http response",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":260,
+      "y":223,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"66a140f8.995ec",
+      "type":"debug",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "active":true,
+      "console":"false",
+      "complete":"false",
+      "x":280,
+      "y":74,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"f31fe208.0ce02",
+      "type":"function",
+      "z":"b4234423.4bdcb8",
+      "name":"write to global",
+      "func":"global.set(\"lcd_r\",msg.payload.r);\nglobal.set(\"lcd_g\",msg.payload.g); \nglobal.set(\"lcd_b\",msg.payload.b); \nglobal.set(\"lcd_text\",msg.payload.text); \n\n",
+      "outputs":"0",
+      "noerr":0,
+      "x":293,
+      "y":170,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"2094340b.df6bcc",
+      "type":"http in",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "url":"/lcd/text",
+      "method":"delete",
+      "swaggerDoc":"",
+      "x":80,
+      "y":480,
+      "wires":[
+         [
+            "c88fc03a.37704",
+            "38cc77ee.c73388"
+         ]
+      ]
+   },
+   {
+      "id":"c88fc03a.37704",
+      "type":"function",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "func":"\nglobal.set(\"lcd_text\",\"                             \"); \n\nvar r_val = global.get(\"lcd_r\");\nvar g_val = global.get(\"lcd_g\");\nvar b_val = global.get(\"lcd_b\");\nvar text = global.get(\"lcd_text\");\n\nmsg.payload = {\"r\": r_val, \"g\":g_val, \"b\":b_val, \"text\":text}\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":270,
+      "y":480,
+      "wires":[
+         [
+            "fc6d4282.0392c"
+         ]
+      ]
+   },
+   {
+      "id":"fc6d4282.0392c",
+      "type":"grove-lcd",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":430,
+      "y":480,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"38cc77ee.c73388",
+      "type":"http response",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":430,
+      "y":540,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"1d7bd885.e28427",
+      "type":"http in",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "url":"/lcd/backlight",
+      "method":"delete",
+      "swaggerDoc":"",
+      "x":100,
+      "y":620,
+      "wires":[
+         [
+            "a8d173a4.572e9",
+            "e8e996ef.171668"
+         ]
+      ]
+   },
+   {
+      "id":"a8d173a4.572e9",
+      "type":"function",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "func":"global.set(\"lcd_r\",0);\nglobal.set(\"lcd_g\",0); \nglobal.set(\"lcd_b\",0); \n\nvar text = global.get(\"lcd_text\");\n\nmsg.payload = {\"r\": 0, \"g\":0, \"b\":0, \"text\":text}\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":270,
+      "y":620,
+      "wires":[
+         [
+            "1253c82f.edac38"
+         ]
+      ]
+   },
+   {
+      "id":"1253c82f.edac38",
+      "type":"grove-lcd",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":430,
+      "y":620,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"e8e996ef.171668",
+      "type":"http response",
+      "z":"b4234423.4bdcb8",
+      "name":"",
+      "x":430,
+      "y":680,
+      "wires":[
+
+      ]
+   }
+]</ui-codemirror>
+  </div>
+      <div ibox  title="Additional Resources">
+        <ul>
+            <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
+            <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
+            <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p></li>
+        </ul>
+      </div>
     </div>
 </div>
