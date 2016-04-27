@@ -13,15 +13,12 @@
             </li>
         </ol>
     </div>
-    <div class="col-lg-2">
-
-    </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
 
-          <div ibox  title="Bluetooth Low Energy (BLE) Lab: Objectives">
+          <div ibox title="Bluetooth Low Energy (BLE) Lab: Objectives">
             <!-- Objectives -->
             <div content-block name="ble-objectives" message="Read the Objectives">
               <labels edison windows apple linux/>
@@ -38,7 +35,7 @@
           </div>
 
 
-          <div ibox  title="Set up Bluetooth">
+          <div ibox title="Set up Bluetooth">
             <!-- Setup Bluetooth -->
             <div content-block name="ble-objectives" message="Enable Bluetooth by running the commands above">
 
@@ -51,7 +48,7 @@
 $ killall bluetoothd
 $ systemctl disable bluetooth
 $ hciconfig hci0 up</code></pre>
-                    <p><img src="./views/labs/networking/setup/commands.png" alt=""></p>
+                    <p><img src="./views/labs/networking/images/commands.png" alt=""></p>
                   </li>
 
                   <li>
@@ -65,7 +62,7 @@ $ hciconfig hci0 up</code></pre>
             <!-- Read sensor data over BLE -->
           <div ibox  title="Read sensor data over Bluetooth Low Energy">
             <div content-block name="read-sensor-data-over-BLE" message="Plug in sensors to the Intel Edison"
-            image-link="./views/labs/networking/temp_sensor/image_2.jpg">
+            image-link="./views/labs/networking/images/image_2.jpg">
               <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Intel® Edison into a BLE peripheral.</p>
 
               <ol>
@@ -347,7 +344,7 @@ function checkTemperature() {
 
 
     <div content-block name="run-the-bleno-program" message="Build, upload and run the program"
-    image-link="./views/labs/networking/temp_sensor/peripheral-result.png">
+    image-link="./views/labs/networking/images/peripheral-result.png">
         <p>Your final <span class="icon file">main.js</span> should look like the <a href="https://github.com/Vaghesh/Bluetooth-Commercial-IoT-Workshop/blob/master/Temperature-Sensor/EdgeDevices-Peripheral/" target="_blank">final solution on Github</a>.</p>
         <p>Make sure your changes have been saved and use the buttons at the bottom of the Intel® XDK to: (1) Build, (2) Upload, and (3) Run the application.</p>
         <p>If successful, you should see the console log output the temperature every 1 second.</p>
@@ -484,7 +481,7 @@ noble.on('disconnect', function() {
   </div>
 
   <div content-block name="run-noble-service" message="Run the BLE service program"
-  image-link="./views/labs/networking/temp_sensor/central-result.png">
+  image-link="./views/labs/networking/images/central-result.png">
     <ol>
         <li>
             <p>Check that your peripheral app is still running on your Intel® Edison. (e.g. It should still be logging temperature values to the Intel®  XDK console.) Restart if needed.</p>
@@ -528,7 +525,7 @@ noble.on('disconnect', function() {
             Click on the + sign at the top left corner which opens a window to add XBee devices. Select the COM port on which the
             XBee device is connected. Leave the settings and click on Finish.
           </p>
-          <p><img src="./views/labs/networking/zigbee/configure/image_1.png" alt="" ></p>
+          <p><img src="./views/labs/networking/images/image_1.png" alt="" ></p>
         </li>
         <li>
           <p>
@@ -536,7 +533,7 @@ noble.on('disconnect', function() {
             Now change the PAN ID to a unique number between 0 and FFFF so that your devices are in a differerent network from others.
             Note that this PAN ID should be the same for both the XBee devices.
           </p>
-          <p><img src="./views/labs/networking/zigbee/configure/image_2.png" alt="" ></p>
+          <p><img src="./views/labs/networking/images/image_2.png" alt="" ></p>
           <p>Next is to create addresses for XBee modules. These values should be unique in you network.
             Assign value 0 for MY 16-bit source address. Since we have only two ZigBee devices we will use 0 and 1 as addresses.</p>
             <p>DH and DL are the destination addresses. Leave DH as 0 and set DL to the MY address of the receiving XBee device i.e., 1 in our case.
@@ -545,18 +542,18 @@ noble.on('disconnect', function() {
 
           <li>
             <p>Now scroll down the parameters and under Serial Interfacing, select API enabled[1]>
-              <p><img src="./views/labs/networking/zigbee/configure/image_3.png" alt="" ></p>
+              <p><img src="./views/labs/networking/images/image_3.png" alt="" ></p>
             </li>
             <li>
               <p>All the changes has to be saved to the device. You can do this either by clicking the pencil icon present
                 at the right of each field or by clicking the pencil icon at the top. Once the changes are saved in the device,
                 the property background will turn from green to blue.</p>
-                <p><img src="./views/labs/networking/zigbee/configure/image_4.png" alt="" ></p>
+                <p><img src="./views/labs/networking/images/image_4.png" alt="" ></p>
               </li>
 
               <li>
                 <p>Follow same steps for configuring the second XBee device.</p>
-                <p><img src="./views/labs/networking/zigbee/configure/image_5.png" alt="" ></p>
+                <p><img src="./views/labs/networking/images/image_5.png" alt="" ></p>
 
                 <p>Here are the example settings for two XBee devices.</p>
                 <table style="width:100%">
@@ -602,7 +599,7 @@ noble.on('disconnect', function() {
               <li>
                 <p> Lets do a quick test to check the configuration. First click on the Console icon at the top
                   right to change the mode from Configuration to Console mode.</p>
-                  <p><img src="./views/labs/networking/zigbee/configure/image_6.png" alt="" ></p>
+                  <p><img src="./views/labs/networking/images/image_6.png" alt="" ></p>
                 </li>
 
                 <li>
@@ -610,11 +607,11 @@ noble.on('disconnect', function() {
                     the serial port. Under send frames click the + button to create a frame.
                     Fill the parameters as shown in the image below and click Ok and Add frame.
                   </p>
-                  <p><img src="./views/labs/networking/zigbee/configure/image_7.png" alt="" ></p>
+                  <p><img src="./views/labs/networking/images/image_7.png" alt="" ></p>
                 </li>
                 <li>
                   <p>Select the added frame and click on Send selected frame. You should see a TX Request sent in the Frames log.</p>
-                  <p><img src="./views/labs/networking/zigbee/configure/image_8.png" alt="" ></p>
+                  <p><img src="./views/labs/networking/images/image_8.png" alt="" ></p>
                 </li>
               </ol>
             </div>

@@ -13,10 +13,8 @@
       </li>
     </ol>
   </div>
-  <div class="col-lg-2">
-
-  </div>
 </div>
+
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
   <div class="row">
     <div class="col-lg-12">
@@ -95,6 +93,7 @@
           <pre><code>$ npm install intel-commercial-edge-network-database-models --save</code></pre>
 
         </div>
+      </div>
 
 
 
@@ -154,6 +153,9 @@ $ cd monitord</code></pre>
           <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
           <p>Please note that the <code>intel-commercial-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
           <p class="subtitle">Recording MQTT Sensor Activity</p>
+
+          <p>Create a packages.json file by running this command.</p>
+          <pre><code>$ npm init</code></pre>
           <p class="label">./package.json</p>
 
           <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
@@ -168,10 +170,6 @@ $ cd monitord</code></pre>
         </li>
       </ol>
     </div>
-
-
-
-
 
     <div content-block name="connect-to-broker-and-database" message="Connect to the MQTT Broker and MongoDB">
       <h4>Connect to the MQTT Broker and MongoDB</h4>
@@ -312,15 +310,15 @@ mqttClient.on('message', function(topic, message) {
         </div>
       </div>
 
-        <div ibox title="Additional Resources">
-            <ul>
-                <li>
-                  <a href="http://mongoosejs.com/docs/guide.html">Mongoose</a>
-                  <a href="http://mqtt.org/">MQTT</a>
-                  <a href="http://www.w3schools.com/js/js_json.asp">JSON</a>
-                </li>
-            </ul>
-        </div>
+      <div ibox title="Additional Resources">
+          <ul>
+              <li>
+                <a href="http://mongoosejs.com/docs/guide.html">Mongoose</a>
+                <a href="http://mqtt.org/">MQTT</a>
+                <a href="http://www.w3schools.com/js/js_json.asp">JSON</a>
+              </li>
+          </ul>
       </div>
+    </div>
   </div>
 </div>
