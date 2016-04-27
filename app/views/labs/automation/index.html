@@ -13,9 +13,6 @@
             </li>
         </ol>
     </div>
-    <div class="col-lg-2">
-
-    </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
@@ -28,7 +25,7 @@
               <p>By the end of this module, you should be able to:</p>
 
               <ul>
-                <li>Implement your business logic in the form of triggers.</li>
+                <li>Implement your business logic in the form of triggers which are automatic rules that run on the edge network.</li>
                 <li>Read triggers from the database and evaulate whether any of them should be executed.</li>
                 <li>Write your own Condition Based Monitoring System (CDMS)</li>
               </ul>
@@ -78,7 +75,7 @@
 )</ui-codemirror>
                     </div>
 
-                    <p>Notice the <span style='font-weight:bold'>parathesis</span> that surround this function.  These are required for the trigger to run correctly.  In JavaScript, these parathesis create a block of executable code called a "closure".  The JavaScript interpreter requires this in order to dynamically evaluate the code.</p>
+                    <p>Notice the <span style='font-weight:bold'>parathesis</span> that surround this function.  These are required for the trigger to run correctly.  In JavaScript, these parathesis create a block of executable code called a <b>closure</b>.  The JavaScript interpreter requires this in order to dynamically evaluate the code.</p>
 
                     <p>Later in this lab, we will implement a associative array called the <b>stash</b>  that contains the last value of each of the sensors on the edge network. Let's build some triggers using the stash now.</p>
                   </div>
@@ -87,8 +84,7 @@
 
                     <p>Write a predicate function that tests if a light sensor has a value less than or equal 15 lumens.</p>
 
-                    <ui-codemirror ui-codemirror-opts="editorOptions">
-(
+                    <ui-codemirror ui-codemirror-opts="editorOptions">(
   function( light ) {
     return stash["light"] &lt;= 15;
   }
