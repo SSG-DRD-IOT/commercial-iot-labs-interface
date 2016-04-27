@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h4>Visualization Cloud</h4>
+    <h4>Data Analytics in the Cloud</h4>
     <ol class="breadcrumb">
       <li>
         <a href="index.html">Home</a>
@@ -28,7 +28,7 @@
 
       <!-- Exercise 1: Introduction to Cloud Services -->
       <div ibox  title="Exercise 1: Introduction to Cloud Services">
-        <div content-block name="private-cloud" message="Read about the Message Format needed to send data to the private cloud" image-link="./views/labs/cloud/part1/image1.png">
+        <div content-block name="private-cloud" message="Read about the Message Format needed to send data to the private cloud" image-link="./views/labs/cloud/images/first_flow.png">
           <labels gateway window apple linux/>
           <p>Private cloud service is provided for data collection and visualization.</p>
 
@@ -43,18 +43,18 @@
           <p>Here Gateway Id and Sensor Id is user dependant. For standarized represenatation of all IoT devices please use Gateway Id as last 4 digit of your wireless Mac address.</p>
 
           <p><b>MQTT Message Format</b></p>
-          <pre><code>{
-            "gateway_id":"E2D0",
-            "sensor_id":"light",
-            "value":90,
-            "timestamp":1457303819281
-          }</code> </pre>
+<ui-codemirror ui-codemirror-opts="editorOptions">{
+  "gateway_id":"E2D0",
+  "sensor_id":"light",
+  "value":90,
+  "timestamp":1457303819281
+}</ui-codemirror>
           <p>This is a standarized representation of message format which is accepted by cloud service.</p>
         </div>
       </div>
 
       <!-- Exercise 2: Node-RED Application on Gateway -->
-      <div ibox title="Exercise 2: Node-RED Application on Gateway">
+      <div ibox  title="Exercise 2: Node-RED Application on Gateway">
         <div content-block message="Read the Objectives"
             name="cloud-objective-node-red">
           <p>Create a node-red application to collect data from sensors, take average of 5 consecutive data and send to cloud service.</p>
@@ -74,7 +74,7 @@
             </p>
         </div>
         <div content-block message="Create following flow using a MQTT node and a function node"
-             name="create-node-red-appliction-on-gateway" image-link="./views/labs/cloud/part2/image1.png">
+             name="create-node-red-appliction-on-gateway" image-link="./views/labs/cloud/images/first_flow.png">
           <h4>Create Node-RED application on gateway</h4>
           <ol>
             <li>
@@ -83,7 +83,7 @@
           </ol>
         </div>
         <div content-block message="Configure the Node-Red Nodes"
-           name="configure-node-red-nodes" image-link="./views/labs/cloud/part2/image2.png">
+           name="configure-node-red-nodes" image-link="./views/labs/cloud/images/edit_mqtt_in_node.png">
           <ol>
             <li>
               <p>Configure mqtt(input) node. Add new Server with server as "localhost" and port number as 1883. (Port 1883 is default assigned MQTT port.) Add topic for mqtt where sensors are publishing data. In this example we have assumed that sensors
@@ -93,7 +93,7 @@
           </ol>
         </div>
         <div content-block message="Write the averaging function"
-             name="cloud-write-function" image-link="./views/labs/cloud/part2/image3.png">
+             name="cloud-write-function" image-link="./views/labs/cloud/images/edit_function_node.png">
         <ol>
           <li>
             <p>Configure Function node in a way that collects the data for 5 consecutive values, find an average out of it and send that reduced average data to cloud. You can also look into following given code.
@@ -104,47 +104,47 @@
 
         <div content-block name="code" message="Copy this code into the function node">
             <ui-codemirror ui-codemirror-opts="editorOptions" id="example1">var totalValues = 5; //define the number of values to average
-            var gatewayId = "1234"; // Enter last 4 digit of your Gateway Wireless Mac Address
-            var payload = JSON.parse(msg.payload); //parse the payload in JSON format
-            var data = payload.value; //Save the sensor value
+var gatewayId = "1234"; // Enter last 4 digit of your Gateway Wireless Mac Address
+var payload = JSON.parse(msg.payload); //parse the payload in JSON format
+var data = payload.value; //Save the sensor value
 
-            context.valueArray = context.valueArray || []; //setup a persistant array and initalise it
-            context.count = context.count || 0; //init the counter and set it to 0 if its not already
+context.valueArray = context.valueArray || []; //setup a persistant array and initalise it
+context.count = context.count || 0; //init the counter and set it to 0 if its not already
 
-            //take whatever came in and add it to the position "context.count" in context.valueArray
+//take whatever came in and add it to the position "context.count" in context.valueArray
 
-            if (msg.payload == "false") {
-              context.valueArray[context.count] = 0;
-            } else {
-              context.valueArray[context.count] = parseInt(data);
-            }
+if (msg.payload == "false") {
+  context.valueArray[context.count] = 0;
+} else {
+  context.valueArray[context.count] = parseInt(data);
+}
 
-            context.count += 1; //add 1 to context count
-            if (context.count == totalValues) { //if this function has been run x times, then we have all x values
-              var value = 0.00; //make a temp variavle and set it to 0
+context.count += 1; //add 1 to context count
+if (context.count == totalValues) { //if this function has been run x times, then we have all x values
+  var value = 0.00; //make a temp variavle and set it to 0
 
-              for (j = 0; j < totalValues; j++) {
-                //add the value of the item at position j in the array to our temp variable
-                value = value + context.valueArray[j];
-              }
-              var average = parseInt(value / totalValues);
+  for (j = 0; j < totalValues; j++) {
+    //add the value of the item at position j in the array to our temp variable
+    value = value + context.valueArray[j];
+  }
+  var average = parseInt(value / totalValues);
 
-              // Create a new message with topic, payload, qos and retain to send in cloud
-              var newMsg = {
-                topic: "gateways/" + gatewayId + "/sensors/" + payload.sensor_id + "/data",
-                payload: {
-                  gateway_id: gatewayId,
-                  sensor_id: payload.sensor_id,
-                  value: average,
-                  timestamp: Date.now()
-                },
-                qos: 0,
-                retain: false
-              };
+  // Create a new message with topic, payload, qos and retain to send in cloud
+  var newMsg = {
+    topic: "gateways/" + gatewayId + "/sensors/" + payload.sensor_id + "/data",
+    payload: {
+      gateway_id: gatewayId,
+      sensor_id: payload.sensor_id,
+      value: average,
+      timestamp: Date.now()
+    },
+    qos: 0,
+    retain: false
+  };
 
-              context.count = 0; //set the counter back to 0 for the next go
-              return [newMsg]; //then shove it out to the next node
-            }
+  context.count = 0; //set the counter back to 0 for the next go
+  return [newMsg]; //then shove it out to the next node
+}
 </ui-codemirror>
           </li>
         </ol>
@@ -152,7 +152,7 @@
 
 
       <div content-block message="Configure MQTT to send data to the private cloud"
-      name="cloud-configure-mqtt" image-link="./views/labs/cloud/part2/image4.png">
+      name="cloud-configure-mqtt" image-link="./views/labs/cloud/images/edit_mqtt_out_node.png">
         <ol>
           <li>
             <p>Configure Mqtt(output) to send data to cloud. Add new Server with server as "198.211.103.31" and port number as 1883. This is server address of our IoT cloud. Leave topic,qos and retain blank because we have already setup all these properties via message properties. That node will look like below image.</p>
@@ -165,7 +165,7 @@
 
 
       <div content-block message="Deploy the Node-Red flow"
-           name="cloud-deploy-the-flow" image-link="./views/labs/cloud/part2/image5.png">
+           name="cloud-deploy-the-flow" image-link="./views/labs/cloud/images/second_flow.png">
         <ol>
           <li>
             <p>The final flow of our configuration will look like below shown image. Names of nodes might differ from what you have assigned.</p>
@@ -181,117 +181,117 @@
         <h4> Node-RED Flow Source </h4>
         <p> Any flow in Node-RED can be exported / imported as a JSON object. The code for the above flow is displayed below. To import it into your work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in.</p>
         <ui-codemirror ui-codemirror-opts="editorOptions" id="example2">[{
-          "id": "2d6882db.d2977e",
-          "type": "mqtt-broker",
-          "z": "173e68b2.e8c197",
-          "broker": "198.211.103.31",
-          "port": "1883",
-          "clientid": "",
-          "usetls": false,
-          "verifyservercert": true,
-          "compatmode": true,
-          "keepalive": "60",
-          "cleansession": true,
-          "willTopic": "",
-          "willQos": "0",
-          "willRetain": null,
-          "willPayload": "",
-          "birthTopic": "",
-          "birthQos": "0",
-          "birthRetain": null,
-          "birthPayload": ""
-        }, {
-          "id": "f6fa250a.0905d8",
-          "type": "mqtt-broker",
-          "z": "173e68b2.e8c197",
-          "broker": "localhost",
-          "port": "1883",
-          "clientid": "",
-          "usetls": false,
-          "verifyservercert": true,
-          "compatmode": true,
-          "keepalive": "60",
-          "cleansession": true,
-          "willTopic": "",
-          "willQos": "0",
-          "willRetain": null,
-          "willPayload": "",
-          "birthTopic": "",
-          "birthQos": "0",
-          "birthRetain": null,
-          "birthPayload": ""
-        }, {
-          "id": "e6cd80fb.19328",
-          "type": "mqtt in",
-          "z": "173e68b2.e8c197",
-          "name": "Incoming MQTT messages from Sensors",
-          "topic": "sensors/temperature/data",
-          "broker": "f6fa250a.0905d8",
-          "x": 366.5,
-          "y": 242,
-          "wires": [
-            [
-              "a7ffb8a4.580048",
-              "3b750487.c48afc"
-            ]
-          ]
-        }, {
-          "id": "a7ffb8a4.580048",
-          "type": "function",
-          "z": "173e68b2.e8c197",
-          "name": "Average of 5 consecutive sensor values",
-          "func": "var totalValues = 5; //define the number of values to average\nvar gatewayId = \"1234\"; // Enter last 4 digit of your Gateway Wireless Mac Address\nvar payload = JSON.parse(msg.payload);\nvar data = payload.value;\n\ncontext.valueArray = context.valueArray || []; //setup a persistant array and initalise it\ncontext.count = context.count || 0; //init the counter and set it to 0 if its not already   \n\n//take whatever came in and add it to the position \"context.count\" in context.valueArray\n\nif (msg.payload ==\"false\") {\n    context.valueArray[context.count] = 0;\n} else {\n    context.valueArray[context.count] = parseInt(data);\n}\n\ncontext.count += 1; //add 1 to context count\nif (context.count == totalValues) { //if this function has been run x times, then we have all x values\n    var value = 0.00; //make a temp variavle and set it to 0\n    \n    for (j=0; j<totalValues; j++) {\n        //add the value of the item at position j in the array to our temp variable\n        value = value + context.valueArray[j];\n    }\n    var average = parseInt(value/totalValues);\n    var newMsg = {\n        topic:\"gateways/\" +gatewayId+ \"/sensors/\" +payload.sensor_id+ \"/data\",\n        payload:\n        {\n            gateway_id:gatewayId,\n            sensor_id: payload.sensor_id,\n            value: average,\n            timestamp: Date.now()\n        },\n        qos:0,\n        retain:false\n    };\n    \n    \n  //  var result = {\"value\": String(average)}; //dump the caluulated average and out temp var out\n    // add all the variables to a second message for debug\n  //  var parsedvalueArray = {\"payload\": \"Array = \" + context.valueArray + \"\\npreAverage = \" + value + \"\\nAverage = \" + average};\n    \n    context.count=0; //set the counter back to 0 for the next go\n    return [newMsg]; //then shove it out to the next node\n}",
-          "outputs": 1,
-          "noerr": 0,
-          "x": 512.5,
-          "y": 368,
-          "wires": [
-            [
-              "c450d142.3baf3",
-              "6569b65d.9a9648"
-            ]
-          ]
-        }, {
-          "id": "c450d142.3baf3",
-          "type": "mqtt out",
-          "z": "173e68b2.e8c197",
-          "name": "Outgoing MQTT message to Cloud",
-          "topic": "",
-          "qos": "",
-          "retain": "",
-          "broker": "2d6882db.d2977e",
-          "x": 857.5,
-          "y": 270,
-          "wires": [
+  "id": "2d6882db.d2977e",
+  "type": "mqtt-broker",
+  "z": "173e68b2.e8c197",
+  "broker": "198.211.103.31",
+  "port": "1883",
+  "clientid": "",
+  "usetls": false,
+  "verifyservercert": true,
+  "compatmode": true,
+  "keepalive": "60",
+  "cleansession": true,
+  "willTopic": "",
+  "willQos": "0",
+  "willRetain": null,
+  "willPayload": "",
+  "birthTopic": "",
+  "birthQos": "0",
+  "birthRetain": null,
+  "birthPayload": ""
+}, {
+  "id": "f6fa250a.0905d8",
+  "type": "mqtt-broker",
+  "z": "173e68b2.e8c197",
+  "broker": "localhost",
+  "port": "1883",
+  "clientid": "",
+  "usetls": false,
+  "verifyservercert": true,
+  "compatmode": true,
+  "keepalive": "60",
+  "cleansession": true,
+  "willTopic": "",
+  "willQos": "0",
+  "willRetain": null,
+  "willPayload": "",
+  "birthTopic": "",
+  "birthQos": "0",
+  "birthRetain": null,
+  "birthPayload": ""
+}, {
+  "id": "e6cd80fb.19328",
+  "type": "mqtt in",
+  "z": "173e68b2.e8c197",
+  "name": "Incoming MQTT messages from Sensors",
+  "topic": "sensors/temperature/data",
+  "broker": "f6fa250a.0905d8",
+  "x": 366.5,
+  "y": 242,
+  "wires": [
+    [
+      "a7ffb8a4.580048",
+      "3b750487.c48afc"
+    ]
+  ]
+}, {
+  "id": "a7ffb8a4.580048",
+  "type": "function",
+  "z": "173e68b2.e8c197",
+  "name": "Average of 5 consecutive sensor values",
+  "func": "var totalValues = 5; //define the number of values to average\nvar gatewayId = \"1234\"; // Enter last 4 digit of your Gateway Wireless Mac Address\nvar payload = JSON.parse(msg.payload);\nvar data = payload.value;\n\ncontext.valueArray = context.valueArray || []; //setup a persistant array and initalise it\ncontext.count = context.count || 0; //init the counter and set it to 0 if its not already   \n\n//take whatever came in and add it to the position \"context.count\" in context.valueArray\n\nif (msg.payload ==\"false\") {\n    context.valueArray[context.count] = 0;\n} else {\n    context.valueArray[context.count] = parseInt(data);\n}\n\ncontext.count += 1; //add 1 to context count\nif (context.count == totalValues) { //if this function has been run x times, then we have all x values\n    var value = 0.00; //make a temp variavle and set it to 0\n    \n    for (j=0; j<totalValues; j++) {\n        //add the value of the item at position j in the array to our temp variable\n        value = value + context.valueArray[j];\n    }\n    var average = parseInt(value/totalValues);\n    var newMsg = {\n        topic:\"gateways/\" +gatewayId+ \"/sensors/\" +payload.sensor_id+ \"/data\",\n        payload:\n        {\n            gateway_id:gatewayId,\n            sensor_id: payload.sensor_id,\n            value: average,\n            timestamp: Date.now()\n        },\n        qos:0,\n        retain:false\n    };\n    \n    \n  //  var result = {\"value\": String(average)}; //dump the caluulated average and out temp var out\n    // add all the variables to a second message for debug\n  //  var parsedvalueArray = {\"payload\": \"Array = \" + context.valueArray + \"\\npreAverage = \" + value + \"\\nAverage = \" + average};\n    \n    context.count=0; //set the counter back to 0 for the next go\n    return [newMsg]; //then shove it out to the next node\n}",
+  "outputs": 1,
+  "noerr": 0,
+  "x": 512.5,
+  "y": 368,
+  "wires": [
+    [
+      "c450d142.3baf3",
+      "6569b65d.9a9648"
+    ]
+  ]
+}, {
+  "id": "c450d142.3baf3",
+  "type": "mqtt out",
+  "z": "173e68b2.e8c197",
+  "name": "Outgoing MQTT message to Cloud",
+  "topic": "",
+  "qos": "",
+  "retain": "",
+  "broker": "2d6882db.d2977e",
+  "x": 857.5,
+  "y": 270,
+  "wires": [
 
-          ]
-        }, {
-          "id": "6569b65d.9a9648",
-          "type": "debug",
-          "z": "173e68b2.e8c197",
-          "name": "Debug Outgoing MQTT message",
-          "active": true,
-          "console": "false",
-          "complete": "true",
-          "x": 827.5,
-          "y": 478,
-          "wires": [
+  ]
+}, {
+  "id": "6569b65d.9a9648",
+  "type": "debug",
+  "z": "173e68b2.e8c197",
+  "name": "Debug Outgoing MQTT message",
+  "active": true,
+  "console": "false",
+  "complete": "true",
+  "x": 827.5,
+  "y": 478,
+  "wires": [
 
-          ]
-        }, {
-          "id": "3b750487.c48afc",
-          "type": "debug",
-          "z": "173e68b2.e8c197",
-          "name": "Debug Incoming MQTT Messages",
-          "active": true,
-          "console": "false",
-          "complete": "payload",
-          "x": 760.5555555555555,
-          "y": 164.44444444444443,
-          "wires": [
+  ]
+}, {
+  "id": "3b750487.c48afc",
+  "type": "debug",
+  "z": "173e68b2.e8c197",
+  "name": "Debug Incoming MQTT Messages",
+  "active": true,
+  "console": "false",
+  "complete": "payload",
+  "x": 760.5555555555555,
+  "y": 164.44444444444443,
+  "wires": [
 
-          ]
-        }]</ui-codemirror>
+  ]
+}]</ui-codemirror>
       </div>
     </div>
 
@@ -302,15 +302,15 @@
         </p>
       </div>
 
-      <div content-block message="Enter your Gateway Id and click on Plot" name="cloud-enter-your-gateway" image-link="./views/labs/cloud/part3/image1.png">
+      <div content-block message="Enter your Gateway Id and click on Plot" name="cloud-enter-your-gateway" image-link="./views/labs/cloud/images/gateway_info.png">
         <h4>Visualize your Realtime Data via Graph and Table </h4>
         <p>Go to cloud service provided at <a href="http://198.211.103.31:8080" target="_blank">http://198.211.103.31:8080</a>. Enter your Gateway Id and click on Plot.
         </p>
       </div>
-      <div content-block message="Visualize Your Data" name="cloud-graph-plotting" image-link="./views/labs/cloud/part3/image2.png">
+      <div content-block message="Visualize Your Data" name="cloud-graph-plotting" image-link="./views/labs/cloud/images//gateway_graph.png">
         <p>You will see your realtime graph plotting for your specified gateway Id.</p>
       </div>
-      <div content-block message="View Your data in table format" name="cloud-data-table" image-link="./views/labs/cloud/part3/image3.png">
+      <div content-block message="View Your data in table format" name="cloud-data-table" image-link="./views/labs/cloud/images/table.png">
         <p>If you scroll down then you can also visualize your data in table format.</p>
       </div>
     </div>
