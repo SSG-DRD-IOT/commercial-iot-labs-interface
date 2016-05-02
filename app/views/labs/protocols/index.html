@@ -323,8 +323,17 @@ return msg;</ui-codemirror>
 
               <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/images/post_flow.png">
                 <h5>Create Node-RED Flow</h5>
-                <p>Use the input http, debug, grove-lcd, and http response nodes to create the flow below:</p>
-                <p>The input http node will listen to a request sent to a specific URL on the local host on port 1880. Once a request is recived this node will pass the payload to the debug colsole, Grove LCD node, and http response node. The http response node will send a response to the sender of the request to let it know that the message was recieved.</p>
+                <p>Create a node-red flow like the one shown here using the:</p>
+                <p><li><b>inject</b> node under the input section, configure the node to send a boolean true signal and check the box for "inject once at start". 
+                The node name will chage to "true". Connect the output from this node to the:</li>
+                <li><b>function</b> node under the fucntion section. Configure the fucntion node to contain:
+                <ui-codemirror ui-codemirror-opts="editorOptions">
+                	global.set("lcd_r",0);
+			global.set("lcd_g",0); 
+			global.set("lcd_b",0); 
+			global.set("lcd_text",""); 
+			</ui-codemirror>
+                </li></p>
               </div>
 
               <div content-block name="configure-http-node" message="Configure the HTTP node" image-link="./views/labs/protocols/images/config_post.png">
