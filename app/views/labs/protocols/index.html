@@ -324,7 +324,7 @@ return msg;</ui-codemirror>
               <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/images/post_flow.png">
                 <h5>Create Node-RED Flow</h5>
                 <p>Create a node-red flow like the one shown here using the:</p>
-                <p><li><b>inject</b> node under the input section, configure the node to send a boolean true signal and check the box for "inject once at start". 
+                <p><ul><li><b>inject</b> node under the input section, configure the node to send a boolean true signal and check the box for "inject once at start". 
                 The node name will chage to "true". Connect the output from this node to the:</li>
                 <li><b>function</b> node under the fucntion section. Configure the fucntion node to contain:
                 <ui-codemirror ui-codemirror-opts="editorOptions">
@@ -333,7 +333,24 @@ return msg;</ui-codemirror>
 			global.set("lcd_b",0); 
 			global.set("lcd_text",""); 
 			</ui-codemirror>
-                </li></p>
+                </li>
+                
+                <li><b>http</b> node under the input section. Configure this node to have "POST" as the method and "/lcd/backlight" as the URL. Connect this node to the:</li>
+                <li><b>http response</b> under the output section. Also connect the http node from the previous step to the:</li>
+                <li><b>function</b> node under the function section. Configure this node to contain:
+                <ui-codemirror ui-codemirror-opts="editorOptions">
+                global.set("lcd_r",msg.payload.r);
+		global.set("lcd_g",msg.payload.g); 
+		global.set("lcd_b",msg.payload.b); 
+		msg.payload.text=global.get("lcd_text");
+		return msg;
+		</ui-codemirror>
+		Connect this node to the:
+                </li>
+                <li><b>grove lcd</b> node under the Intel_gpio section</li>
+                
+                
+                </ul></p>
               </div>
 
               <div content-block name="configure-http-node" message="Configure the HTTP node" image-link="./views/labs/protocols/images/config_post.png">
