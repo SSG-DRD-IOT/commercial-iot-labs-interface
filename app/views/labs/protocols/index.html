@@ -89,8 +89,12 @@
                 <div content-block name="first-flow" message="Create a Node-Red Flow that connects your temperature sensor to your LCD"
                 image-link="./views/labs/protocols/images/first_flow.png">
 
-                    <p> Create a flow where a grove temperature sensor node outputs into a function node which outputs into the grove-lcd node. </p>
-
+                    <p>Create a Node-Red flow like the one show here.</p>
+                    <ol>
+                      <li>Search for the <b>Grove Temp Sensor</b> in the Intel_gpio section and pull one into the workarea.</li>
+                      <li>Search for the <b>Function</b> node in the function Function section and connect it to the Grove Temp Sensor.</li>
+                      <li>Search for the <b>Grove LCD</b> node in the Intel_gpio and connect it to the Function.</li>
+                    </ol>
                 </div>
                 <div content-block name="first-flow" message="Customize your Function Node">
                     <p> Double click on the Temperature node and assign A0 as the pin and interval as 1000 to take a temperature reading every 1000ms. Double click the function node and enter the following code:</p>
@@ -125,60 +129,20 @@ return msg;</ui-codemirror>
     </div>
   </div>
 
+  <div content-block name="protocol-deploy" message="Click the Deploy button and watch the temperature appear on the LCD screen">
+    <p>Click on the Deploy button and Node-Red will activate the flow that was just built.</p>
+  </div>
+
   <div content-block name="first-flow" message="Learn to export your Node-Red Flow">
       <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to
           export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import it into your
           work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in. This method provides
           a simple way to share your flows with other developers.</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions">[
-   {
-      "id":"f7b5c41d.084a38",
-      "type":"grove-lcd",
-      "z":"b4234423.4bdcb8",
-      "name":"",
-      "x":400,
-      "y":60,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"f341d7c2.0cbe28",
-      "type":"function",
-      "z":"b4234423.4bdcb8",
-      "name":"",
-      "func":"var r_val = 0;\nvar g_val = 0;\nvar b_val = 0;\n\nif (msg.payload >= 25){\n    r_val = 255;\n    g_val = 0;\n    b_val = 0;\n}\n\nelse if (msg.payload <= 20){\n    r_val = 0;\n    g_val = 0;\n    b_val = 255;\n    \n}\nelse {\n    r_val = 0;\n    g_val = 255;\n    b_val = 0;\n    \n}\n\nmsg.payload = {\"r\":r_val, \"g\":g_val, \"b\":b_val, \"text\":String(msg.payload) + \" C\"}\nreturn msg;",
-      "outputs":1,
-      "noerr":0,
-      "x":250,
-      "y":60,
-      "wires":[
-         [
-            "f7b5c41d.084a38"
-         ]
-      ]
-   },
-   {
-      "id":"7b901765.846fe8",
-      "type":"grove_temp",
-      "z":"b4234423.4bdcb8",
-      "name":"",
-      "pin":"0",
-      "interval":"1000",
-      "x":90,
-      "y":60,
-      "wires":[
-         [
-            "f341d7c2.0cbe28"
-         ]
-      ]
-   }
-]
-		                    </ui-codemirror>
+      <ui-codemirror ui-codemirror-opts="editorOptions"></ui-codemirror>
 
 		                    <p> NOTE: if the JSON references any custom nodes those will have to be installed first. </p>
 
-                </div>
+          </div>
             </div>
 
           <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT">
