@@ -138,12 +138,45 @@ return msg;</ui-codemirror>
           export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import it into your
           work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in. This method provides
           a simple way to share your flows with other developers.</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions"></ui-codemirror>
+      <ui-codemirror ui-codemirror-opts="editorOptions">[{
+  "id": "5fe40e38.147d3",
+  "type": "grove_temp",
+  "z": "f0e0dcd2.5577",
+  "name": "Temperature Sensor",
+  "pin": "0",
+  "interval": "1000",
+  "x": 116.5,
+  "y": 38,
+  "wires": [
+    ["c436ec9d.6f12"]
+  ]
+}, {
+  "id": "c436ec9d.6f12",
+  "type": "function",
+  "z": "f0e0dcd2.5577",
+  "name": "Set Threshold Levels",
+  "func": "var r_val = 0;\nvar g_val = 0;\nvar b_val = 0;\n\nif (msg.payload >= 25) {\n  r_val = 255;\n  g_val = 0;\n  b_val = 0;\n} else if (msg.payload <= 20) {\n  r_val = 0;\n  g_val = 0;\n  b_val = 255;\n} else {\n  r_val = 0;\n  g_val = 255;\n  b_val = 0;\n}\n\nmsg.payload = {\n  \"r\": r_val,\n  \"g\": g_val,\n  \"b\": b_val,\n  \"text\": String(msg.payload) + \" C\"\n}\nreturn msg;\nreturn msg;",
+  "outputs": 1,
+  "noerr": 0,
+  "x": 364.5,
+  "y": 82,
+  "wires": [
+    ["77419449.eb2d7c"]
+  ]
+}, {
+  "id": "77419449.eb2d7c",
+  "type": "grove-lcd",
+  "z": "f0e0dcd2.5577",
+  "name": "Grove LCD",
+  "x": 608.5,
+  "y": 128,
+  "wires": []
+}]</ui-codemirror>
 
-		                    <p> NOTE: if the JSON references any custom nodes those will have to be installed first. </p>
+          <p> NOTE: if the JSON references any custom nodes those will have to be installed first. </p>
 
           </div>
-            </div>
+        </div>
 
           <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT">
             <labels gateway/>
@@ -288,32 +321,32 @@ return msg;</ui-codemirror>
               <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/images/post_flow.png">
                 <h5>Create Node-RED Flow</h5>
                 <p>Create a node-red flow like the one shown here using the:</p>
-                <p><ul><li><b>inject</b> node under the input section, configure the node to send a boolean true signal and check the box for "inject once at start". 
+                <p><ul><li><b>inject</b> node under the input section, configure the node to send a boolean true signal and check the box for "inject once at start".
                 The node name will chage to "true". Connect the output from this node to the:</li>
                 <li><b>function</b> node under the fucntion section. Configure the fucntion node to contain:
                 <ui-codemirror ui-codemirror-opts="editorOptions">
                 	global.set("lcd_r",0);
-			global.set("lcd_g",0); 
-			global.set("lcd_b",0); 
-			global.set("lcd_text",""); 
+			global.set("lcd_g",0);
+			global.set("lcd_b",0);
+			global.set("lcd_text","");
 			</ui-codemirror>
                 </li>
-                
+
                 <li><b>http</b> node under the input section. Configure this node to have "POST" as the method and "/lcd/backlight" as the URL. Connect this node to the:</li>
                 <li><b>http response</b> under the output section. Also connect the http node from the previous step to the:</li>
                 <li><b>function</b> node under the function section. Configure this node to contain:
                 <ui-codemirror ui-codemirror-opts="editorOptions">
                 global.set("lcd_r",msg.payload.r);
-		global.set("lcd_g",msg.payload.g); 
-		global.set("lcd_b",msg.payload.b); 
+		global.set("lcd_g",msg.payload.g);
+		global.set("lcd_b",msg.payload.b);
 		msg.payload.text=global.get("lcd_text");
 		return msg;
 		</ui-codemirror>
 		Connect this node to the:
                 </li>
                 <li><b>grove lcd</b> node under the Intel_gpio section</li>
-                
-                
+
+
                 </ul></p>
               </div>
 
