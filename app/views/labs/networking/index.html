@@ -77,9 +77,9 @@ $ hciconfig hci0 up</code></pre>
               <ol>
                 <li>
                   <p>Your <span class="fa fa-file">main.js</span> (running on the Intel® Edison) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
-                  <p class="label">./temperature/main.js</p>
                 </li>
               </ol>
+              <p class="label">./temperature/main.js</p>
                 <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
 var LCD = require("jsupm_i2clcd");
@@ -117,8 +117,20 @@ monitor();</ui-codemirror>
     </li>
     <li>
       <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions">"dependencies": {
-  "bleno":"*"
+      <p class="label">./package.json</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions">{
+  "name": "bluetooth-edison-temp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bleno": "^0.4.0"
+  }
 }</ui-codemirror>
     </li>
 
@@ -129,7 +141,7 @@ var groveSensor = require('jsupm_grove');
 var LCD = require("jsupm_i2clcd");
 
 // Include the libraries for BLE
-var bleno = require('bleno'); < /strong>
+var bleno = require('bleno');
 
 // Create a new instance of a Grove Temperature Sensor
 var temp = new groveSensor.GroveTemp(0);
@@ -458,7 +470,7 @@ noble.on('discover', function(peripheral) {
       }
       peripheral.discoverServices([], function(error, services) {
         console.log(services.length, ' services discovered');
-        for (var i = 0, l = services.length; i & lt; l; i++) {
+        for (var i = 0, l = services.length; i < l; i++) {
           var service = services[i];
           if (Service_UUID == service.uuid) {
             noble.stopScanning();

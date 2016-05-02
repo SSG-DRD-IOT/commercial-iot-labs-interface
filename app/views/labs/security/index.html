@@ -75,13 +75,13 @@
             <li>
               <p>Execute the the following command to display the help menu:</p>
               <p><code>sadmin help</code></p>
-              <p><img src="./views/labs/security/mec/image_0.png" alt="image alt text" /></p>
+              <p><img src="./views/labs/security/images/image_0.png" alt="image alt text" /></p>
             </li>
 
             <li>
               <p>Execute the following command to review the list of all application control features and their status (enabled or disabled).</p>
               <p><code>sadmin features</code></p>
-              <p><img src="./views/labs/security/mec/image_1.png" alt="image alt text" /></p>
+              <p><img src="./views/labs/security/images/image_1.png" alt="image alt text" /></p>
               <p>Note the following aspect of the MEC features:</p>
               <ul>
                 <li><p>The feature <strong>script-auth</strong> is like deny-exec, but for scripts - only whitelisted scripts file can execute.</p></li>
@@ -94,7 +94,7 @@
             <li>
               <p>As the MEC administrators, execute the following command to check the status of the McAfee embedded control on your target:</p>
               <p><code>sadmin status</code><p>
-                <p><img src="./views/labs/security/mec/image_2.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_2.png" alt="image alt text" /></p>
                 <p>Observe that the status is Unsolidified.</p>
 
                 <p>The following table describes the fields and their meaning.</p>
@@ -161,7 +161,7 @@
 
               <li>
                 <p><code>sadmin features list</code></p>
-                <p><img src="./views/labs/security/mec/image_3.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_3.png" alt="image alt text" /></p>
               </li>
 
             </ol>
@@ -182,12 +182,12 @@
 
               <li>
                 <p>As the MEC administrator, execute the following command to confirm that MEC created the initial whitelist.  The application control component stores a whitelist for each volume at volume<strong>/.solidcore/scinv</strong></p>
-                <p><img src="./views/labs/security/mec/image_4.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_4.png" alt="image alt text" /></p>
               </li>
 
               <li>
                 <p>Execute the following command to check the status of McAfee embedded control.</p>
-                <p><img src="./views/labs/security/mec/image_5.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_5.png" alt="image alt text" /></p>
                 <p>Observe that the status of the ext3 drive has changed to Solidified.</p>
               </li>
 
@@ -195,7 +195,7 @@
                 <p>As the MEC administrator, execute the following command to enable MEC.</p>
                 <p><code>sadmin enable</code></p>
                 <p>McAfee Solidifier will be enabled on service restart.</p>
-                <p><img src="./views/labs/security/mec/image_6.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_6.png" alt="image alt text" /></p>
               </li>
 
               <li>
@@ -206,7 +206,7 @@
               <li>
                 <p>Execute the following command to verify that MEC is enabled.</p>
                 <p><code>systemctl status scsrvc</code></p>
-                <p><img src="./views/labs/security/mec/image_7.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_7.png" alt="image alt text" /></p>
               </li>
 
             </ol>
@@ -234,14 +234,14 @@
                 <p><code>$ chmod +x /root/test_script.sh</code></p>
                 <p>Then try to execute the script.</p>
                 <p><code>$ /root/test_script.sh</code></p>
-                <p><img src="./views/labs/security/mec/image_8.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_8.png" alt="image alt text" /></p>
                 <p>Note the response Permission denied - MEC did not allow the script to run.</p>
               </li>
 
               <li>
                 <p>Review the log by typing</p>
                 <p><code>cat /usr/local/mcafee/solidcore/log/solidcore.log | tail -n 1</code></p>
-                <p><img src="./views/labs/security/mec/image_9.png" alt="image alt text" /></p>
+                <p><img src="./views/labs/security/images/image_9.png" alt="image alt text" /></p>
                 <p>This response indicates that MEC prevented the script from executing.</p>
                 <ol>
                   <li style="list-style-type:lower-latin;">
@@ -252,7 +252,7 @@
                   <li>
                     <p>Add test_script.sh to the whitelist</p>
                     <p><code>sadmin so /root/test_script.sh</code></p>
-                    <p><img src="./views/labs/security/mec/image_10.png" alt="image alt text" /></p>
+                    <p><img src="./views/labs/security/images/image_10.png" alt="image alt text" /></p>
                   </li>
                   <li>
                     <p>Execute the command again.</p>
@@ -261,7 +261,7 @@
                     </li>
                     <li>
                       <p>Check the MEC log. The script was allowed to execute.</p>
-                      <p><img src="./views/labs/security/mec/image_11.png" alt="image alt text" /></p>
+                      <p><img src="./views/labs/security/images/image_11.png" alt="image alt text" /></p>
                     </li>
                   </ol>
                 </li>
@@ -284,25 +284,25 @@
                 <li>
                   <p>As the MEC administrator, execute the following command to review the MEC configuration file and confirm that you added a rule to write-protect <strong>/root/test_script.sh</strong></p>
                   <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
-                  <p><img src="./views/labs/security/mec/image_14.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_14.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Now try to modify the file by executing the following command.</p>
                   <p><code>touch /root/test_script.sh</code></p>
-                  <p><img src="./views/labs/security/mec/image_15.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_15.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the Permission denied.</p>
                   <p><code>cat /usr/local/mcafee/solidcore/log/solidcore.log | tail -n 1</code></p>
-                  <img src="./views/labs/security/mec/image_16.png" alt="image alt text" /></p>
+                  <img src="./views/labs/security/images/image_16.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Execute the following command to enable deny-read and then review the status of the MEC features.</p>
                   <p><code>sadmin features enable deny-read</code></p>
-                  <p><img src="./views/labs/security/mec/image_17.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_17.png" alt="image alt text" /></p>
                   <p>The response indicates that the deny-read feature.</p>
                 </li>
 
@@ -314,17 +314,17 @@
                 <li>
                   <p>Execute the following command to review the MEC configuration file and confirm that you added read protection for the file /root/test_setup.sh</p>
                   <p><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></p>
-                  <p><img src="./views/labs/security/mec/image_19.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_19.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Now attempt to read the file by printing to the console.</p>
-                  <p><img src="./views/labs/security/mec/image_20.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_20.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the <strong>Permission denied error</strong>.</p>
-                  <p><img src="./views/labs/security/mec/image_21.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_21.png" alt="image alt text" /></p>
                 </li>
 
               </ol>
@@ -339,9 +339,9 @@
 
                 <li>
                   <p>Type this command to cause MEC to go into update mode.</p>
-                  <p><img src="./views/labs/security/mec/image_22.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_22.png" alt="image alt text" /></p>
                   <p>Notice that McAfee is now in Update mode</p>
-                  <p><img src="./views/labs/security/mec/image_23.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_23.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
@@ -349,17 +349,17 @@
                   <p><code># cat /root/test_script.sh</code></p>
                   <p><code># echo "# another comment " >> ./test_script.sh</code></p>
                   <p><code># cat /root/test_script.sh</code></p>
-                  <p><img src="./views/labs/security/mec/image_24.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_24.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Now that you have modified /root/test_script.sh, execute the following command to change the MEC operational mode from update to enable and verify the new status.</p>
-                  <p><img src="./views/labs/security/mec/image_25.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_25.png" alt="image alt text" /></p>
                 </li>
 
                 <li>
                   <p>Execute the following command to test that update mode is closed and write/read protection is working.</p>
-                  <p><img src="./views/labs/security/mec/image_26.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_26.png" alt="image alt text" /></p>
                   <p>The <strong>Permission denied</strong> response confirm that you cannot read or change the file and that MEC protection is working.</p>
                 </li>
 
@@ -374,7 +374,7 @@
                 <li>
                   <p>As the MEC administrator, execute the following command to switch EC to disabled mode to deactivate the features of MEC application control.</p>
                   <p><code>sadmin disable</code></p>
-                  <p><img src="./views/labs/security/mec/image_27.png" alt="image alt text" /></p>
+                  <p><img src="./views/labs/security/images/image_27.png" alt="image alt text" /></p>
                 </li>
               </ol>
 
@@ -406,18 +406,18 @@
               <p>gradm is the grsecurity RBAC administration and policy analysis utility. It allows you to configure and administrate the grsecurity system.</p>
               <p>To display all available command-line switches, run gradm --help.</p>
               <pre><code># gradm</code></pre>
-              <img src="./views/labs/security/grsecurity/gr1.png"></img>
+              <img src="./views/labs/security/images/gr1.png"></img>
 
 
               <h5>Setting up a Role-Based Access</h5>
               <p>Here we will create three roles <b>root</b>, <b>admin</b>, <b>shutdown</b>. Each of these roles will have unique abilities that will be constrained by the by RBAC. You can use any password that you like for each role.</p>
               <pre><code># gradm -P</code></pre>
-              <img src="./views/labs/security/grsecurity/gr0.png"/>
+              <img src="./views/labs/security/images/gr0.png"/>
 
               <pre><code># gradm -P admin</code></pre>
-              <img src="./views/labs/security/grsecurity/gr2.png"/>
+              <img src="./views/labs/security/images/gr2.png"/>
               <pre><code># gradm -P shutdown</code></pre>
-              <img src="./views/labs/security/grsecurity/gr3.png"/>
+              <img src="./views/labs/security/images/gr3.png"/>
 
               <h5>Enable Learning Mode</h5>
               <p>Learning Mode for Role based access – RBAC requires policy to be created to ensure that system is aware of known execution, this can be done by enabling GR-SEC in learning mode or manually updating the policy file.</p>
@@ -432,7 +432,7 @@
                 # date
                 # gradm –D
                 # gradm –F –L /etc/grsec/learning.logs –O /etc/grsec/learning.roles</code></pre>
-                <img src="./views/labs/security/grsecurity/gr4.png"/>
+                <img src="./views/labs/security/images/gr4.png"/>
 
                 <p>You've now created a set of commands that are allowed by grsecurity. Let's now enabled grsecurity and test to see if the learned commands are allowed and all other commands are disallowed.</p>
 
