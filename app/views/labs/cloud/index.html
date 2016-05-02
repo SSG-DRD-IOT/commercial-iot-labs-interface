@@ -32,8 +32,8 @@
           <labels gateway window apple linux/>
           <p>Private cloud service is provided for data collection and visualization.</p>
 
-          <p>There is the private IoT Cloud service provided with MQTT connectivity and broker as part of the IoT Cloud offering. The IP address of cloud is <b>198.211.103.31</b>. You can access the service by clicking on following link <a href="http://198.211.103.31:8080"
-              target="_blank">http://198.211.103.31:8080</a>
+          <p>There is the private IoT Cloud service provided with MQTT connectivity and broker as part of the IoT Cloud offering. The IP address of cloud is <b>13.82.30.162</b>. You can access the service by clicking on following link <a href="http://13.82.30.162:8080"
+              target="_blank">http://13.82.30.162:8080</a>
           </p>
 
           <p>This cloud service needs specific topic structure as well as message format to visualize or analyse data. </p>
@@ -155,7 +155,7 @@ if (context.count == totalValues) { //if this function has been run x times, the
       name="cloud-configure-mqtt" image-link="./views/labs/cloud/images/edit_mqtt_out_node.png">
         <ol>
           <li>
-            <p>Configure Mqtt(output) to send data to cloud. Add new Server with server as "198.211.103.31" and port number as 1883. This is server address of our IoT cloud. Leave topic,qos and retain blank because we have already setup all these properties via message properties. That node will look like below image.</p>
+            <p>Configure Mqtt(output) to send data to cloud. Add new Server with server as "13.82.30.162" and port number as 1883. This is server address of our IoT cloud. Leave topic,qos and retain blank because we have already setup all these properties via message properties. That node will look like below image.</p>
           </li>
           <li>
             The Debug node causes any message to be displayed in the Debug sidebar. By default, it just displays the payload of the message, but it is possible to display the entire message object.
@@ -184,7 +184,7 @@ if (context.count == totalValues) { //if this function has been run x times, the
   "id": "2d6882db.d2977e",
   "type": "mqtt-broker",
   "z": "173e68b2.e8c197",
-  "broker": "198.211.103.31",
+  "broker": "13.82.30.162",
   "port": "1883",
   "clientid": "",
   "usetls": false,
@@ -304,7 +304,7 @@ if (context.count == totalValues) { //if this function has been run x times, the
 
       <div content-block message="Enter your Gateway Id and click on Plot" name="cloud-enter-your-gateway" image-link="./views/labs/cloud/images/gateway_info.png">
         <h4>Visualize your Realtime Data via Graph and Table </h4>
-        <p>Go to cloud service provided at <a href="http://198.211.103.31:8080" target="_blank">http://198.211.103.31:8080</a>. Enter your Gateway Id and click on Plot.
+        <p>Go to cloud service provided at <a href="http://13.82.30.162:8080" target="_blank">http://13.82.30.162:8080</a>. Enter your Gateway Id and click on Plot.
         </p>
       </div>
       <div content-block message="Visualize Your Data" name="cloud-graph-plotting" image-link="./views/labs/cloud/images//gateway_graph.png">
