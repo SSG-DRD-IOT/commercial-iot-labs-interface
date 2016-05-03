@@ -97,7 +97,7 @@
         <ol>
           <li>
             <p>Configure Function node in a way that collects the data for 5 consecutive values, find an average out of it and send that reduced average data to cloud. You can also look into following given code.
-              <strong>Change gatewayId on 2nd line of following code with last 4 digit of your Gaterway Wireless Mac Address.</strong> (i.e Change 1234 to new 4 digit wireless mac address)
+              <div class="alert alert-info"><b>Change gatewayId on 2nd line of following code with last 4 digit of your Gaterway Wireless Mac Address.  (i.e Change 1234 to new 4 digit wireless mac address)</b></div>
             </p>
           </ol>
         </div>
@@ -150,6 +150,10 @@ if (context.count == totalValues) { //if this function has been run x times, the
         </ol>
       </div>
 
+      <div content-block message="Configure MQTT to send data to the private cloud"
+      name="cloud-configure-mqtt" image-link="./views/labs/cloud/images/add_mqtt_broker.png">
+        <div class="alert alert-warning">Be sure that you click on <b>Add New MQTT Broker</b>. Do not edit the existing broker or this will modify all MQTT nodes in the current flow.</div>
+      </div>
 
       <div content-block message="Configure MQTT to send data to the private cloud"
       name="cloud-configure-mqtt" image-link="./views/labs/cloud/images/edit_mqtt_out_node.png">
