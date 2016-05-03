@@ -231,20 +231,26 @@ return msg;</ui-codemirror>
                      <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console in node-red.</p>
             </div>
 
-            <div content-block name="protocol-assign-pins" message="Configure the temperature pin"
-            image-link="./views/labs/protocols/images/mqtt_setup.png">
+            <div content-block name="protocol-assign-pins" message="Configure the nodes"
+            >
 <h2>Configure the nodes in the MQTT flow</h2>
               <ol>
                 <li>Double click the temperature node to assign it to pin A0</li>
                 <li> Double click the mqtt nodes to configure them:</li>
                 <ul>
-                  <li>Select the pencil icon to edit the server settings:</li>
+                  <br>
+                  <li><h3>Select the pencil icon to edit the server settings:</h3></li>
+                  <br>
                   <p><img src="./views/labs/protocols/images/mqtt_edit_1.png" alt="" ></p>
-                  <li>Enter the ip address of the gateway 192.168.1.1 and 1883 as the port:</li>
+                  <br>
+                  <li><h3>Enter the ip address of the gateway 192.168.1.1 and 1883 as the port:</h3></li>
+                  <br>
                   <p><img src="./views/labs/protocols/images/mqtt_edit_2.png" alt="" ></p>
+                  <br>
                 </ul>
-                <li>Double click the function node and add the following code:</li>
+                <li><h3>Double click the function node and add the following code:</h3></li>
               </ol>
+              <br>
               <p>
               <ui-codemirror ui-codemirror-opts="editorOptions">var temp = msg.payload
 msg.payload = {};
@@ -418,13 +424,15 @@ return msg;
   	<p>Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight.</p>
 
   	<p>Next configure the function nodes to assign the global LCD variables to the response message.</p>
+    <br>
   	<p><h3>For the request coming from <b>/lcd/text</b> use the following function:</h3>
-
+      <br>
   	<ui-codemirror ui-codemirror-opts="editorOptions">var payload = global.get("lcd_text");
   	msg.payload = payload;
   	return msg;</ui-codemirror>
-
+    <br>
   	<p><h3>For the request coming from /lcd/backlight use the following function:</h3>
+      <br>
 
   	<ui-codemirror ui-codemirror-opts="editorOptions">var r_val = global.get("lcd_r");
   	var g_val = global.get("lcd_g");
@@ -436,7 +444,9 @@ return msg;
 
 
   	<p>The message must have mustache template formatting in order for the http response to properly work.</p>
-  	<p><h3>Configure the template node to format msg.payload with:</h3></p>
+    <br>
+    <p><h3>Configure the template node to format msg.payload with:</h3></p>
+    <br>
   	<p><img src="./views/labs/protocols/images/template.png" alt="" ></p>
   </div>
 
@@ -524,7 +534,7 @@ return msg;
   </div>
 
   <div content-block name="protocol-flow-source-code" message="Compare your solution to the code here.">
-	  <h3>Flow Source Code:</h3>
+	  <h2>Full RESTful API Flow Source Code:</h2>
 	  <ui-codemirror ui-codemirror-opts="editorOptions">[
    {
       "id":"660ce9c5.663588",
