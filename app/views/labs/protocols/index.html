@@ -56,7 +56,8 @@
                     <p>Install Node-Red by running the following command:</p>
 
                     <p><code>$ npm install -g node-red</code></p>
-
+                    <P>The node-red install will throw some warnings as shown below. The installation will work fine despite these.</p>
+                      <p><img src="./views/labs/protocols/images/node-red-error.jpg" alt="" ></p>
                     <div class="alert alert-warning">
                       <p>Installing Node Red will take about 5-8 minutes. Often times it seems to fail on the first attempt, but on the second attempt it succeeds.</p>
                     </div>
@@ -95,6 +96,7 @@
                       <li>Search for the <b>Function</b> node in the function Function section and connect it to the Grove Temp Sensor.</li>
                       <li>Search for the <b>Grove LCD</b> node in the Intel_gpio and connect it to the Function.</li>
                     </ol>
+                    <p>NOTE: The nodes are listen to the left of the workspace and you will have to scroll down to find all the node you need..</p>
                 </div>
                 <div content-block name="first-flow" message="Customize your Function Node">
                     <p> Double click on the Temperature node and assign A0 as the pin and interval as 1000 to take a temperature reading every 1000ms. Double click the function node and enter the following code:</p>
@@ -186,7 +188,9 @@ return msg;</ui-codemirror>
 
             <div content-block name="find-ip-address" message="Review useful commands to help you organize your workflow on the Intel IoT Gateway">
               <h5>Setup Screen Window Manager</h5>
-
+              <p>Log into your Intel® Iot Gateway. As a refresher: </p>
+              <p>Use Putty or Screen to connect to ip address <b>192.168.1.1</b> and use <b>root</b> as the username and password.</p>
+              <p>For more details refer back to the 3rd section of the introduction lab</p>
               <p>Once you log in the Intel® Iot Gateway, start the <code>screen</code> window manager. </p>
               <p><code>$ screen</code></p>
 
@@ -202,6 +206,9 @@ return msg;</ui-codemirror>
                 <li>
                   <p>Create a user for your Mosquitto.</p>
                   <p><code>$ adduser mosquitto</code></p>
+                </li>
+                <li>
+                  <p>For simplicity use <b>root</b> when asked for the UNIX password</p>
                 </li>
 
                 <li>
@@ -236,10 +243,11 @@ return msg;</ui-codemirror>
 <h2>Configure the nodes in the MQTT flow</h2>
               <ol>
                 <li>Double click the temperature node to assign it to pin A0</li>
-                <li> Double click the mqtt nodes to configure them:</li>
+                <li>Configure <b>both</b> the <b>input mqtt</b> and <b>output mqtt</b> nodes as described below:</li>
+
                 <ul>
                   <br>
-                  <li><h3>Select the pencil icon to edit the server settings:</h3></li>
+                  <li><h3>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic:</h3></li>
                   <br>
                   <p><img src="./views/labs/protocols/images/mqtt_edit_1.png" alt="" ></p>
                   <br>
@@ -268,6 +276,13 @@ return msg;
             image-link="./views/labs/protocols/images/mqtt_flow_connected.png">
               <p>When you are done configuring the nodes hit deploy</p>
               <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the Edison is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
+                <p> If you do not see the output in the debug window:</p>
+                <ul>
+                  <li>Make sure the you can see the debug window - you  might have to expand it by dragging the right side of the workspace to the center.</li>
+                  <li>Make sure that the debug tab is selected in the upper right</li>
+                  <li>Click the tab to the right of the debug node - called msg.payload in your flow</p></li>
+
+
             </div>
 
 
@@ -283,67 +298,185 @@ return msg;
 
             <div content-block name="node-red-flow2-solution" message="Check out the solution to this exercise">
               <h5>Flow Source Code</h5>
-              <ui-codemirror ui-codemirror-opts="editorOptions">
-		  [
+              <ui-codemirror ui-codemirror-opts="editorOptions">[
    {
-      "id":"7b901765.846fe8",
+      "id":"f8e20475.ec4178",
+      "type":"mqtt-broker",
+      "z":"92444f4a.3f6fb",
+      "broker":"test.mosquitto.org",
+      "port":"1883",
+      "clientid":"",
+      "usetls":false,
+      "verifyservercert":true,
+      "compatmode":true,
+      "keepalive":"60",
+      "cleansession":true,
+      "willTopic":"",
+      "willQos":"0",
+      "willRetain":null,
+      "willPayload":"",
+      "birthTopic":"",
+      "birthQos":"0",
+      "birthRetain":null,
+      "birthPayload":""
+   },
+   {
+      "id":"9ccab42f.f5e138",
+      "type":"mqtt-broker",
+      "z":"92444f4a.3f6fb",
+      "broker":"test.mosquitto.org",
+      "port":"1883",
+      "clientid":"",
+      "usetls":false,
+      "verifyservercert":true,
+      "compatmode":true,
+      "keepalive":"60",
+      "cleansession":true,
+      "willTopic":"",
+      "willQos":"0",
+      "willRetain":null,
+      "willPayload":"",
+      "birthTopic":"",
+      "birthQos":"0",
+      "birthRetain":null,
+      "birthPayload":""
+   },
+   {
+      "id":"8a51fc7b.d2649",
       "type":"grove_temp",
-      "z":"b4234423.4bdcb8",
+      "z":"92444f4a.3f6fb",
       "name":"",
       "pin":"0",
       "interval":"1000",
-      "x":90,
-      "y":60,
+      "x":115,
+      "y":131,
       "wires":[
          [
-            "446460f6.bb9ba"
+            "c2552eb3.e9cb2"
          ]
       ]
    },
    {
-      "id":"446460f6.bb9ba",
+      "id":"c2552eb3.e9cb2",
+      "type":"function",
+      "z":"92444f4a.3f6fb",
+      "name":"Create JSON",
+      "func":"var temp = msg.payload\n\nmsg.payload = {};\nmsg.payload.sensor_id = \"grove_temp\";\nmsg.payload.time = Date.now();\nmsg.payload.value = temp;\n\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":347.5,
+      "y":132,
+      "wires":[
+         [
+            "cadc53b7.e6bf7"
+         ]
+      ]
+   },
+   {
+      "id":"cadc53b7.e6bf7",
       "type":"mqtt out",
-      "z":"b4234423.4bdcb8",
+      "z":"92444f4a.3f6fb",
       "name":"",
-      "topic":"temperature",
+      "topic":"sensors/temperature/data",
       "qos":"",
       "retain":"",
-      "broker":"",
-      "x":248,
-      "y":61,
+      "broker":"9ccab42f.f5e138",
+      "x":566,
+      "y":131,
       "wires":[
 
       ]
    },
    {
-      "id":"8010b7b1.7fef48",
+      "id":"eb754d1a.894cd",
       "type":"mqtt in",
-      "z":"b4234423.4bdcb8",
+      "z":"92444f4a.3f6fb",
       "name":"",
-      "topic":"temperature",
-      "broker":"",
-      "x":84,
-      "y":138,
+      "topic":"sensors/temperature/data",
+      "broker":"f8e20475.ec4178",
+      "x":172,
+      "y":302,
       "wires":[
          [
-            "9921221a.66dee"
+            "63fa67a9.bf1ad8"
          ]
       ]
    },
    {
-      "id":"9921221a.66dee",
+      "id":"63fa67a9.bf1ad8",
       "type":"debug",
-      "z":"b4234423.4bdcb8",
+      "z":"92444f4a.3f6fb",
       "name":"",
-      "active":false,
+      "active":true,
       "console":"false",
       "complete":"false",
-      "x":246,
-      "y":137,
+      "x":382,
+      "y":303,
       "wires":[
 
       ]
-   }]</ui-codemirror>
+   },
+   {
+      "id":"562c38c.89818c8",
+      "type":"comment",
+      "z":"92444f4a.3f6fb",
+      "name":"Read Temperature",
+      "info":"\n",
+      "x":157.5,
+      "y":72,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"bab528e3.f8c4a8",
+      "type":"comment",
+      "z":"92444f4a.3f6fb",
+      "name":"Create JSON",
+      "info":"",
+      "x":347.5,
+      "y":74,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"5e9ad648.207ea8",
+      "type":"comment",
+      "z":"92444f4a.3f6fb",
+      "name":"Send to MQTT",
+      "info":"",
+      "x":521,
+      "y":76,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"1b4fe7dc.bff108",
+      "type":"comment",
+      "z":"92444f4a.3f6fb",
+      "name":"Read from MQTT",
+      "info":"",
+      "x":141,
+      "y":237,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"c823f643.d4e018",
+      "type":"comment",
+      "z":"92444f4a.3f6fb",
+      "name":"Print to debug ",
+      "info":"",
+      "x":384,
+      "y":232,
+      "wires":[
+
+      ]
+   }
+]</ui-codemirror>
 
                 </div>
             </div>
