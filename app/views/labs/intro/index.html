@@ -20,7 +20,7 @@
     <div class="col-lg-12">
 
       <!-- Objective -->
-      <div ibox title="Objectives">
+      <div ibox collapse title="Objectives">
         <div content-block name="read-objectives" message="Read the Objectives">
           <labels gateway edison windows/>
           <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
@@ -38,7 +38,7 @@
       </div>
 
       <!-- Login to your Intel IoT Gateway -->
-      <div ibox collapse  title="Connect to your Intel® IoT Gateway from your development computer">
+      <div ibox collapse title="Connect to your development computer to your Intel® IoT Gateway">
         <div content-block name="find-mac-address" message="Find your Gateway's MAC address" image-link="./views/labs/intro/images/gateway-mac-address.jpg">
           <labels gateway/>
 
@@ -84,7 +84,7 @@
       </div>
 
       <!-- Unbox and Setup your Intel® Edison Hardware -->
-      <div ibox collapse  title="Setup your Intel® Edison Hardware">
+      <div ibox collapse title="Setup your Intel® Edison Hardware">
         <labels edison></labels>
 
         <div content-block name="intro-place-edison" message="Insert the Intel Edison onto the Arduino expansion board" image-link="./views/labs/intro/images/place-edison.png">
@@ -93,10 +93,11 @@
 
         <div content-block name="intro-press" message="Be sure that you have pressed the Intel Edison down firmly and felt a click." image-link="./views/labs/intro/images/press-edison.png">
           <p>Press down on the Intel® Edison module just below the words "What will you make?" until you feel a snap.</p>
+          <div class="alert alert-warning">Caution: Unless you make sure your board is seated properly, it may not work or turn on at all. When you turn the attached module and expansion board on their side, both pieces should fit evenly and sit in parallel with each other.</div>
         </div>
 
         <div content-block name="intro-hex-bolts" message="Secure the Intel Edison to the Arduino board with the mini hex bolts" image-link="./views/labs/intro/images/nut-edison.png">
-              <p>Use the two hex nuts to secure the module to the expansion board. Hand tighten (but not too tight) the hex nuts onto the two screws that protrude through the board.</p>
+              <p>Use the two hex nuts to secure the module to the expansion board. Hand tighten (but not too tight).</p>
         </div>
 
         <!-- Install the Spacers -->
@@ -141,7 +142,7 @@
       </div>
 
       <!-- Setup your Intel® Edison Software -->
-      <div ibox collapse  title="Setup your Intel® Edison Software">
+      <div ibox title="Setup your Intel® Edison Software">
 
         <div content-block name="download-software" message="Download the Intel® Edison Software Development Tools" image-link="./views/labs/intro/images/download-installer.png">
               <labels edison></labels>
@@ -160,7 +161,7 @@
 
         </div>
 
-        <div content-block name="installer-options" message="Select the Intel Edison drivers and the Intel XDK development environment." image-link="./views/labs/intro/images/config-options.png">
+        <div content-block name="installer-options" message="Select the Intel® Edison drivers, flash the latest firmware and install the Intel® XDK development environment." image-link="./views/labs/intro/images/setup.png">
           <p>The default settings can be adjusted to your needs, or leave the defaults as is.</p>
           <p>In the component selection screen, check the options you would like to install:</p>
           <ul>
@@ -169,7 +170,7 @@
               Edison firmware.)</li>
             <li>
               <div class="alert alert-info" role="alert">
-                <p>You have the option to install several development environments. In this workshop, we will be using the Intel XDK.</p>
+                <p>You have the option to install several development environments. In this workshop, we will be using the Intel XDK. Feel free to install the others though, if you wish.</p>
               </div>
             </li>
             </ol>
@@ -194,7 +195,7 @@
               <img src="./views/labs/intro/images/win7-device-manager.png"></img>
             </div>
             <div class="col-sm-6">
-              <p>Windows 8:</p>
+              <p>Windows 8 and Windows 10</p>
               <ol>
                 <li>Go into Windows Desktop mode.</li>
                 <li>Right-click on the Start menu button.</li>
@@ -241,122 +242,34 @@
             <img src="./views/labs/intro/images/coms2.png" style="max-width: 50%" />
           </div>
         </div>
-      </div>
 
-      <!-- Connect to your Intel® Edison from your development computer using a serial connection  -->
-      <div ibox collapse  title="Connect to your Intel® Edison from your development computer using a serial connection">
-
-        <div content-block name="connect-edison-intro" message="Read the Introduction to Connecting to the Intel Edison">
-          <labels edison></labels>
-          <p>This setup document will guide you through establishing a serial connection to either the Intel® Galileo or the Intel® Edison using a Windows computer. </p>
-
-          <p>If you need to configure your IoT board, you will need to remotely connect to the Intel® Edison or Intel® Galileo. Once connected to your Intel® IoT board, you have access to the Linux-based Yocto operating system running on the board.</p>
-
-          <p>You can then execute special Linux commands such:</p>
-
-          <ol>
-            <li>changing the hostname and password,</li>
-            <li>setting up Wi-Fi, or</li>
-            <li>flashing new firmware.</li>
-          </ol>
+        <div content-block name="set-a-device-name" message="Set a Device Password and Name" image-link="./views/labs/intro/images/set-a-device-password-and-name.png">
+          <p>
+            Continue to the Password Set and SSH section of the installer.
+            Set a hostname for your Intel Edison.
+          </p>
         </div>
 
-        <div content-block name="establish-a-serial-connection" message="Establish a serial connection and login to the shell">
-
-          <div class="alert alert-info">
-            <p>Use PuTTY to establish a serial connection to the IoT board using the COM # you noted in the previous Identify the COM port section.</p>
-          </div>
+        <div content-block name="set-a-device-password" message="Set a Device Password and Name" image-link="./views/labs/intro/images/ssh-set-password.png">
+          <p>
+            Continue to the Password Set and SSH section of the installer.
+            Set a password for your Intel Edison.
+          </p>
         </div>
 
-        <div content-block name="intro-session" message="double-check that you are in the Session screen" image-link="./views/labs/intro/images/session.png">
-          <p>In PuTTY, double-check that you are in the "Session" screen.</p>
-        </div>
+        <div content-block name="connect-to-wifi" message="Connect the Intel Edison to your Intel IoT Gateway WiFi" image-link="./views/labs/intro/images/setup-options.png">
+          <p>
+            Connect the Intel Edison to the WiFi hotspot from your Intel IoT Gateway.
 
-        <div content-block name="intro-serial" message="Select the Serial radio button under Connection type" image-link="./views/labs/intro/images/serial.png">
-          <p>Select the "Serial" radio button under "Connection type".</p>
-        </div>
-
-        <div content-block name="intro-connection-properties" message="Setup the connection properties" image-link="./views/labs/intro/images/baud.png">
-          <p>Specify the destination you want to connect to:</p>
-          <p>Serial Line: use the COM # (e.g. “COM3”) noted in Identify the COM port</p>
-          <p>Speed: use "115200" for the baud rate</p>
-        </div>
-
-        <div content-block name="intro-open" message="Click Open" image-link="./views/labs/intro/images/open.png">
-          <p>Click “Open” to connect to the board.</p>
-        </div>
-
-        <div content-block name="intro-enter" message="Press Enter" image-link="./views/labs/intro/images/type1.png">
-          <p>When you see a blank screen, press the Enter key. For Intel® Edison: press the Enter key again (so two times in total).</p>
-        </div>
-
-        <div content-block name="intro-prompt" message="Enter your username and password" image-link="./views/labs/intro/images/type2.png">
-          <p>Once connected you will see a login prompt. Type in <b>root</b> for the username and press Enter.</p>
-        </div>
-      </div>
-
-      <!-- Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison -->
-      <div ibox collapse title="Set Your Hostname and Connect Your Wi-Fi on the Intel® Edison">
-        <div content-block name="intro-hostname-and-wifi" message="Set Your Password and WiFI">
-          <ol>
-            <li>
-              <p>Set up your board using the <code>configure_edison</code> command with the <code>--setup</code> flag.</p>
-              <p>You will use these credentials to connect to the board if you need to re-connect the serial connection, or program the board using the Intel® XDK in the next section of this workshop module.</p>
-              <pre><code>configure_edison --setup</code></pre>
-            </li>
-
-            <li>
-              <p>Follow the prompts to set the device password to be "<strong>intel123</strong>".</p>
-            </li>
-
-            <li>
-              <p>Then follow the prompts to give your Intel® Edison device an easy to recognize name.</p>
-            </li>
-
-            <li>
-              <p>When asked if you want to set up wifi, type "<strong>Y</strong>" and press Enter.</p>
-            </li>
-
-            <li>
-              <p>The Intel® Edison will scan for Wi-Fi networks and display a list of available networks when finished.</p>
-              <figure>
-                <figcaption>If you do not see any networks, try re-scanning by entering "0", or run <code>configure_edison --wifi</code>.</figcaption>
-              </figure>
-            </li>
-
-            <li>
-              <p>Locate your Intel® IoT Gateway SSID in the list and enter the <strong>corresponding number</strong> in the prompt. Press Enter.</p>
-              <p>To confirm your entry, type "<strong>Y</strong>" and press Enter.</p>
-              <figure>
-                <img src="./views/labs/intro/images/image_14.jpg">
-                <figcaption>In this example, to connect to "kafka" use the number “16”.</figcaption>
-              </figure>
-            </li>
-
-            <li>
-              <p>Connect to your Intel® IoT Gateway SSID (e.g. IDPDK-22a6) The password should be <b>windriveridp</b> Press Enter when finished.</p>
-              <p><img src="./views/labs/intro/images/image_15.jpg"></p>
-            </li>
-
-            <li>
-              <p>The Intel® Edison will attempt to make a connection to the Intel® IoT Gateway.</p>
-            </li>
-
-            <li>
-              <p>When you see a "Done" message, you are now connected to the Gatewaya Wi-Fi network.</p>
-              <p><strong>Note the IP address.</strong> You will need it in <span class="icon bookmark">Deploy sample application with the Intel® XDK IoT Edition</span>.</p>
-              <p><img src="./views/labs/intro/images/image03.png"></p>
-            </li>
-          </ol>
-
-          <div class="alert alert-success">
-            <p>You should now understand how to gain shell access to your Intel® Edison. And your Intel® Edison should now be connected to your Intel® IoT Gateway.</p>
-          </div>
+            <div class="alert alert-info">
+              Remember that you can find the SSID that your Intel IoT Gateway is broadcasting by looking at the MAC address of your Gateway.
+            </div>
+          </p>
         </div>
       </div>
 
       <!-- Additional Resources -->
-      <div ibox collapse  title="Additional resources">
+      <div ibox collapse title="Additional resources">
           <ul>
             <li><a href="https://software.intel.com/en-us/intel-xdk-iot-edition-troubleshooting-faq">Troubleshooting &amp; Tips - Intel XDK</a></li>
           </ul>
