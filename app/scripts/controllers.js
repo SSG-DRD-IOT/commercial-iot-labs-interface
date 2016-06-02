@@ -1,5 +1,5 @@
 /**
- * INSPINIA - Responsive Admin Theme
+ * LABS - Responsive Admin Theme
  *
  */
 
@@ -29,6 +29,6 @@ function CodeEditorCtrl($scope) {
 
 
 angular
-  .module('inspinia')
+  .module('labs')
   .controller('MainCtrl', MainCtrl)
   .controller('CodeEditorCtrl', ['$scope', CodeEditorCtrl]);

@@ -244,7 +244,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     });
 }
 angular
-  .module('inspinia')
+  .module('labs')
   .config(config)
   .run(function($rootScope, $state) {
     $rootScope.$state = $state;

@@ -1,7 +1,7 @@
 {
-  "name": "INSPINIA",
+  "name": "LABS",
   "version": "2.4.0",
-  "description": "INSPINIA - Responsive Admin Theme",
+  "description": "LABS - Responsive Admin Theme",
   "dependencies": {
     "grunt": "^0.4.5"
   },

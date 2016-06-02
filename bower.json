@@ -1,10 +1,10 @@
 {
-  "name": "INSPINIA",
+  "name": "LABS",
   "version": "2.4",
   "authors": [
     "Damian Dudziak - WebAppLayers"
   ],
-  "description": "INSPINIA - Responsive Admin Theme",
+  "description": "LABS - Responsive Admin Theme",
   "main": "app/index.html",
   "private": true,
   "ignore": [

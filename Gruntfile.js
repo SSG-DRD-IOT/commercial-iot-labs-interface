@@ -17,7 +17,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
         // Project settings
-        inspinia: appConfig,
+        labs: appConfig,
 
         // The grunt server settings
         connect: {
@@ -44,7 +44,7 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     open: true,
-                    base: '<%= inspinia.dist %>'
+                    base: '<%= labs.dist %>'
                 }
             }
         },
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
                 },
             },
             js: {
-                files: ['<%= inspinia.app %>/scripts/{,*/}*.js'],
+                files: ['<%= labs.app %>/scripts/{,*/}*.js'],
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
@@ -81,9 +81,9 @@ module.exports = function (grunt) {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    '<%= inspinia.app %>/**/*.html',
+                    '<%= labs.app %>/**/*.html',
                     '.tmp/styles/{,*/}*.css',
-                    '<%= inspinia.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                    '<%= labs.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
         },
@@ -102,8 +102,8 @@ module.exports = function (grunt) {
                     dot: true,
                     src: [
                         '.tmp',
-                        '<%= inspinia.dist %>/{,*/}*',
-                        '!<%= inspinia.dist %>/.git*'
+                        '<%= labs.dist %>/{,*/}*',
+                        '!<%= labs.dist %>/.git*'
                     ]
                 }]
             },
@@ -116,8 +116,8 @@ module.exports = function (grunt) {
                     {
                         expand: true,
                         dot: true,
-                        cwd: '<%= inspinia.app %>',
-                        dest: '<%= inspinia.dist %>',
+                        cwd: '<%= labs.app %>',
+                        dest: '<%= labs.dist %>',
                         src: [
                             '*.{ico,png,txt}',
                             '.htaccess',
@@ -133,34 +133,34 @@ module.exports = function (grunt) {
                         dot: true,
                         cwd: 'bower_components/fontello/assets/embedded_fonts',
                         src: ['*.*'],
-                        dest: '<%= inspinia.dist %>'
+                        dest: '<%= labs.dist %>'
                     },
                     {
                         expand: true,
                         dot: true,
                         cwd: 'bower_components/fontawesome',
                         src: ['fonts/*.*'],
-                        dest: '<%= inspinia.dist %>'
+                        dest: '<%= labs.dist %>'
                     },
                     {
                         expand: true,
                         dot: true,
                         cwd: 'bower_components/bootstrap',
                         src: ['fonts/*.*'],
-                        dest: '<%= inspinia.dist %>'
+                        dest: '<%= labs.dist %>'
                     },
                     {
                         expand: true,
                         dot: true,
                         cwd: './',
                         src: ['bower_components/**/*.*'],
-                        dest: '<%= inspinia.dist %>'
+                        dest: '<%= labs.dist %>'
                     }
                 ]
             },
             styles: {
                 expand: true,
-                cwd: '<%= inspinia.app %>/styles',
+                cwd: '<%= labs.app %>/styles',
                 dest: '.tmp/styles/',
                 src: '{,*/}*.css'
             }
@@ -169,8 +169,8 @@ module.exports = function (grunt) {
         filerev: {
             dist: {
                 src: [
-                    '<%= inspinia.dist %>/scripts/{,*/}*.js',
-                    '<%= inspinia.dist %>/styles/{,*/}*.css'
+                    '<%= labs.dist %>/scripts/{,*/}*.js',
+                    '<%= labs.dist %>/styles/{,*/}*.css'
                 ]
             }
         },
@@ -185,9 +185,9 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= inspinia.dist %>',
+                    cwd: '<%= labs.dist %>',
                     src: ['*.html', 'views/{,*/}*.html'],
-                    dest: '<%= inspinia.dist %>'
+                    dest: '<%= labs.dist %>'
                 }]
             }
         },

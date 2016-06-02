@@ -1,9 +1,9 @@
 /**
- * INSPINIA - Responsive Admin Theme
+ * LABS - Responsive Admin Theme
  *
  */
 (function () {
-  angular.module('inspinia', [
+  angular.module('labs', [
     'ui.router',                    // Routing
     'ui.bootstrap',                 // Bootstrap
     'oc.lazyLoad'                   // LazyLoading
