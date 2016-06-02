@@ -22,7 +22,7 @@
     <div class="col-lg-12">
 
       <!-- Objectives -->
-      <div ibox  title="Objectives">
+      <div ibox collapse title="Objectives">
         <div content-block name="read-objectives" message="Read the Objectives">
           <labels edison windows apple linux/>
           <p>To learn how to build stand alone IoT devices with Intel® Edison. Learn to use sensors and actuators to gather and respond to data. The devices built during this lab will be extended in later labs to send their data to the Intel® IoT Gateway
@@ -39,7 +39,7 @@
       </div>
 
       <!-- Three Methods of Deploying Code to the Intel Edison -->
-      <div ibox title="Three Methods of Deploying Code to the Intel Edison">
+      <!-- <div ibox title="Three Methods of Deploying Code to the Intel Edison">
 
         <div content-block name="build-deploy-code-with-SSH" message="You can use multiple methods of deploying code to Intel IoT products">
           <p>There are many ways to transfer source code to the Intel Edison or Intel IoT Gatway. The simplest is to use SSH and secure copy or secure FTP to transfer files. Many IDEs also have the ability to transfer files over SSH.</p>
@@ -81,10 +81,15 @@
             <li>Now if you go to <code>Packages -> Remote Edit -> Browse Hosts</code> you will be able to browse and edit the files on the remote host.</li>
           </ol>
         </div>
-      </div>
+      </div> -->
 
 
-      <div ibox  title="Deploy sample application with the Intel® XDK IoT Edition">
+      <div ibox collapse title="Deploy sample application with the Intel® XDK IoT Edition">
+
+        <div content-block name="download-xdk-intro" message="Download the Intel XDK Introduction">
+          <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel XDK IoT Edition.</p>
+        </div>
+
         <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction" image-link="./views/labs/build/images/xdk-splash.png">
 
           <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel® Edison using any computer OS platform</p>
@@ -120,14 +125,12 @@
           <p>A list of templates for developing Node.js applications will be shown. Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
         </div>
 
-        <div content-block name="create-project" message="Name and then Create the New Project">
+        <div content-block name="create-project" message="Name and then Create the New Project" image-link="./views/labs/build/images/image_4.png">
           <p>Choose a directory for your project files, and enter a name for your project.</p>
-          <p> <img src="./views/labs/build/images/image_4.png"></p>
           <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
-          <p> <img src="./views/labs/build/images/image_5.png"></p>
         </div>
 
-        <div content-block name="select-device" message="Select a target IoT device">
+        <div content-block name="select-device" message="Select a target IoT device" image-link="./views/labs/build/images/image_6.png">
           <div class="row">
             <div class="col-sm-7">
               <p>The Intel® XDK IoT Edition will automatically detect Intel® IoT devices on your network and display them in the "IoT Device" drop down list.</p>
@@ -135,10 +138,6 @@
               <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
 
               <p>Select your target Intel® Galileo or Intel® Edison from the list. If there are multiple devices, choose based on the device name and IP address.</p>
-            </div>
-            <div class="col-sm-5">
-              <img src="./views/labs/build/images/image_6.png" />
-              <img src="./views/labs/build/images/image_7.png" />
             </div>
           </div>
         </div>
@@ -159,29 +158,22 @@
         </div>
 
         <div content-block name="establish-connection" message="Establish the connection to the Intel Edison and synchronize the clocks between your development system and your Intel Edison" image-link="./views/labs/build/images/image33.png">
-
-          <p>Wait a moment for the connection to be established. Use the username "<strong>root</strong>" and password "<strong>intel123</strong>" if prompted. A popup window will appear to confirm the connection status.</p>
-
           <p>
             Sync your computer's time with the clock on the target board to avoid timing issues. Do this step any time you connect to a new target IoT device or the device has been powered off.
           </p>
         </div>
 
-        <div content-block name="know-the-toolbar" message="Get to know the Intel XDK Build toolbar.">
+        <div content-block name="know-the-toolbar" message="Get to know the Intel XDK Build toolbar." image-link="./views/labs/build/images/build.png">
           <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
-          <p> <img src="./views/labs/build/images/build.png"></p>
 
           <p>Select "<strong>sync PC time w/ clock on target device</strong>".</p>
           <p>A message in the console log will appear to confirm the update.</p>
         </div>
 
         <div content-block name="build-the-xdk-app" message="Build the application" image-link="./views/labs/build/images/image_10.png">
-
-          <p>The Build button will fetch all of the dependecies listed in the package.json file. It will install them on the Intel Edison board. Run build any time you create a new project, or add/remove Node modules from an existing project.
-          </p>
+          <p>The Build button will fetch all of the dependecies listed in the package.json file. It will install them on the Intel Edison board. Run build any time you create a new project, or add/remove Node modules from an existing project.</p>
 
           <ol>
-
             <li>
               <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
               <p> <img src=></p>
@@ -197,7 +189,7 @@
           </ol>
         </div>
 
-        <div content-block name="build-the-xdk-app" message="Run the application">
+        <div content-block name="build-the-xdk-app" message="Run the application" image-link="./views/labs/build/images/run.png">
 
           <p>
             Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
@@ -206,13 +198,12 @@
           <ol>
             <li>
               <p>In the bottom toolbar, click the "<strong>Run</strong>"<strong> icon</strong> to run the project.</p>
-              <img src="./views/labs/build/images/run.png"></img>
             </li>
 
             <li>
               <p>Keep an eye on the console log bar for any runtime errors.</p>
               <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
-              <div class="callout troubleshooting">
+              <div class="alert alert-warning">
                 <p><strong>Get a "cannot find module mraa" message?</strong></p>
                 <p> <img src="./views/labs/build/images/image25.png"></p>
                 <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
