@@ -23,6 +23,7 @@
       <div ibox title="Database Lab: Objectives">
         <!-- Objectives -->
         <div content-block name="database-objectives" message="Read the Objectives">
+<h2 class="labHidden">Read the Objectives</h2>
           <labels gateway windows apple linux/>
           <p>Write a NodeJS server that listens to all the MQTT sensor traffic on the network and writes it to a database on the gateway.</p>
           <p>The steps to write the MQTT to database service are as follows:</p>
@@ -37,6 +38,7 @@
       <!-- Create JavaScript Models to represent the Edge Network -->
       <div ibox title="Create JavaScript Models to represent the Edge Network">
         <div content-block name="defining-database-types" message="Read and Understand the types that we will Defining Types for the Edge Network">
+<h2 class="labHidden">Read and Understand the types that we will Defining Types for the Edge Network</h2>
 
           <h4>Defining Types for the Edge Network</h4>
 
@@ -67,6 +69,7 @@
         </div>
 
         <div content-block name="database-run-mongodb" message="Create the /data/db directory and run mongod">
+<h2 class="labHidden">Create the /data/db directory and run mongod</h2>
           <p>Create the /data/db</p>
           <pre><code>$ mkdir /data/db</code></pre>
 
@@ -77,6 +80,7 @@
         </div>
 
         <div content-block name="install-mongoosejs" message="Learn about MongooseJS, a library of JavaScript bindings for MongoDB">
+<h2 class="labHidden">Learn about MongooseJS, a library of JavaScript bindings for MongoDB</h2>
           <h4>Install MongooseJS</h4>
           <!-- TODO We need better instructions for installing mongoose -->
 
@@ -92,6 +96,7 @@
         </div>
 
         <div content-block name="create-new-project" message="Create a new project and the project directories">
+<h2 class="labHidden">Create a new project and the project directories</h2>
           <p>Start a new project in a new project directory.</p>
 
           <p>Create a README file and write into it that this project contains the models for the edge network.</p>
@@ -109,12 +114,14 @@
 
         <div ibox title="MQTT Sensor Monitoring on the Gateway">
           <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
+<h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
             <p>In this section of the lab, you will write a server named <b>monitord</b></p>
             <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
             <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
           </div>
 
           <div content-block name="about-topics" message="Read the Overview on MQTT Topics on the Edge Network">
+<h2 class="labHidden">Read the Overview on MQTT Topics on the Edge Network</h2>
             <h4>Overview on MQTT Topics on the Edge Network</h4>
 
             <div class="alert alert-info">
@@ -150,6 +157,7 @@
     </div>
 
     <div content-block name="monitord-new-project" message="Create a New Project and Import NPM Modules">
+<h2 class="labHidden">Create a New Project and Import NPM Modules</h2>
       <h4><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h4>
       <ol>
         <li>
@@ -177,6 +185,7 @@ $ cd monitord</code></pre>
     </div>
 
     <div content-block name="connect-to-broker-and-database" message="Connect to the MQTT Broker and MongoDB">
+<h2 class="labHidden">Connect to the MQTT Broker and MongoDB</h2>
       <h4>Connect to the MQTT Broker and MongoDB</h4>
       <p>Create a file called <code>./server.js</code>.  This will be the main entry point into your monitord.</p>
 
@@ -218,6 +227,7 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
 
 
     <div content-block name="mqtt-event-loop" message="Subscribe to MQTT topics">
+<h2 class="labHidden">Subscribe to MQTT topics</h2>
       <h4>The MQTT Event Loop</h4>
       <ol>
           <li>
@@ -245,6 +255,7 @@ mqttClient.on('connect', function() {
     </div>
 
     <div content-block name="decode-incoming-json" message="Decode the incoming JSON message from MQTT">
+<h2 class="labHidden">Decode the incoming JSON message from MQTT</h2>
       <li>
         <p>Next, write a handler for the MQTT <code>message</code> event.</p>
         <p>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</p></li>
@@ -264,6 +275,7 @@ mqttClient.on('message', function(topic, message) {
 
 
     <div content-block name="is-announcement" message="Log all announcements to the database">
+<h2 class="labHidden">Log all announcements to the database</h2>
       <li>
         <p>Decide whether it is a new piece of sensor data or a new announcement. If it is an annoucement then create a new MongoDB sensor object and save it to the database. Handle any database error by printing the error to the console.</p>
           <ui-codemirror ui-codemirror-opts="editorOptions">if (topic.match(/announcements/)) {
@@ -279,6 +291,7 @@ mqttClient.on('message', function(topic, message) {
     </div>
 
     <div content-block name="is-data" message="Log all sensor readings to the database">
+<h2 class="labHidden">Log all sensor readings to the database</h2>
     <ui-codemirror ui-codemirror-opts="editorOptions">    if (topic.match(/data/)) {
       var value = new DataModel(json);
       value.save(function(err, data) {
@@ -294,17 +307,20 @@ mqttClient.on('message', function(topic, message) {
 
       <div ibox collapse title="Lab Solutions">
         <div content-block name="Clone-the-Solution-from-its-Github-Repository" message="Clone the Solution from it's Github Repository">
+<h2 class="labHidden">Clone the Solution from it's Github Repository</h2>
           <p>You can deploy the solution to this lab exercise by cloning a repository from Github.</p>
           <p>Change to the directory that you would like to download the solution into, and then type:</p>
           <pre><code>git clone git@github.com:SSG-DRD-IOT/lab-solution-monitor-daemon.git</code></pre>
         </div>
 
         <div content-block name="change-directory" message="Change into the solution's directory and run npm install">
+<h2 class="labHidden">Change into the solution's directory and run npm install</h2>
           <pre><code>cd lab-solution-monitor-daemon</code></pre>
           <pre><code>npm install</code></pre>
         </div>
 
         <div content-block name="database-start-server" message="Be sure that the sensor is publishing data and MongoDB is running, then start the server.">
+<h2 class="labHidden">Be sure that the sensor is publishing data and MongoDB is running, then start the server.</h2>
           <p>Verify that MongoDB is running. You can do this in two way:</p>
           <ol>
             <li>Type <code>ps aux | egrep mongod</code> at the command and verify that a process is displayed.</li>

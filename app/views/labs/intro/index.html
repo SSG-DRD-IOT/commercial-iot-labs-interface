@@ -20,8 +20,10 @@
     <div class="col-lg-12">
 
       <!-- Objective -->
-      <div ibox collapse title="Objectives">
+      <div ibox title="Objectives">
         <div content-block name="read-objectives" message="Read the Objectives">
+    <h2 class="labHidden">Read the Objectives</h2>
+
           <labels gateway edison windows/>
           <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
 
@@ -38,8 +40,10 @@
       </div>
 
       <!-- Login to your Intel IoT Gateway -->
-      <div ibox collapse title="Connect to your development computer to your Intel® IoT Gateway">
+      <div ibox  title="Connect to your development computer to your Intel® IoT Gateway">
         <div content-block name="find-mac-address" message="Find your Gateway's MAC address" image-link="./views/labs/intro/images/gateway-mac-address.jpg">
+    <h2 class="labHidden">Find your Gateway's MAC address</h2>
+    <img class="labHidden" src="./views/labs/intro/images/gateway-mac-address.jpg"></img>
           <labels gateway/>
 
           <p>Establish an SSH connection and login to your Intel® IoT Gateway using <span class="icon windows">PuTTY</span>.</p>
@@ -51,6 +55,8 @@
         </div>
 
         <div content-block name="find-gateway-wifi" message="Connect to your Gateway's Wi-Fi Hotspot SSID" image-link="./views/labs/intro/images/wifi-name.png">
+    <h2 class="labHidden">Connect to your Gateway's Wi-Fi Hotspot SSID</h2>
+    <img class="labHidden" src="./views/labs/intro/images/wifi-name.png"></img>
 
           <p>From your development computer, connect to your Gateway's network hotspot. It will start with the letters <b>IDPDK</b> and then end with the last four characters of your MAC address.</p>
 
@@ -60,6 +66,8 @@
         </div>
 
         <div content-block name="find-gateway-wifi" message="Download and connect to your Gateway with a terminal client (PuTTY)" image-link="./views/labs/intro/images/download-putty.png">
+    <h2 class="labHidden">Download and connect to your Gateway with a terminal client (PuTTY)</h2>
+    <img class="labHidden" src="./views/labs/intro/images/download-putty.png"></img>
 
           <labels gateway windows/>
 
@@ -84,24 +92,32 @@
       </div>
 
       <!-- Unbox and Setup your Intel® Edison Hardware -->
-      <div ibox collapse title="Setup your Intel® Edison Hardware">
+      <div ibox title="Setup your Intel® Edison Hardware">
         <labels edison></labels>
 
         <div content-block name="intro-place-edison" message="Insert the Intel Edison onto the Arduino expansion board" image-link="./views/labs/intro/images/place-edison.png">
+    <h2 class="labHidden">Insert the Intel Edison onto the Arduino expansion board</h2>
+    <img class="labHidden" src="./views/labs/intro/images/place-edison.png"></img>
           <p>Place the Intel® Edison module within the white outline on the Arduino expansion board, lining up the holes on the Intel® Edison module with the screws on the expansion board.</p>
         </div>
 
         <div content-block name="intro-press" message="Be sure that you have pressed the Intel Edison down firmly and felt a click." image-link="./views/labs/intro/images/press-edison.png">
+    <h2 class="labHidden">Be sure that you have pressed the Intel Edison down firmly and felt a click.</h2>
+    <img class="labHidden" src="./views/labs/intro/images/press-edison.png"></img>
           <p>Press down on the Intel® Edison module just below the words "What will you make?" until you feel a snap.</p>
           <div class="alert alert-warning">Caution: Unless you make sure your board is seated properly, it may not work or turn on at all. When you turn the attached module and expansion board on their side, both pieces should fit evenly and sit in parallel with each other.</div>
         </div>
 
         <div content-block name="intro-hex-bolts" message="Secure the Intel Edison to the Arduino board with the mini hex bolts" image-link="./views/labs/intro/images/nut-edison.png">
+    <h2 class="labHidden">Secure the Intel Edison to the Arduino board with the mini hex bolts</h2>
+    <img class="labHidden" src="./views/labs/intro/images/nut-edison.png"></img>
               <p>Use the two hex nuts to secure the module to the expansion board. Hand tighten (but not too tight).</p>
         </div>
 
         <!-- Install the Spacers -->
         <div content-block name="install-spacers" message="Install the plastic spacers" image-link="./views/labs/intro/images/spacer.png">
+    <h2 class="labHidden">Install the plastic spacers</h2>
+    <img class="labHidden" src="./views/labs/intro/images/spacer.png"></img>
 
           <p>To add stability to the expansion board and to help avoid accidental short circuits, attach the four plastic spacers supplied in your Intel® Edison box to act as "legs" for the expansion board.</p>
 
@@ -113,6 +129,8 @@
         </div>
 
         <div content-block name="connect-edison" message="Connect 2 USB cables between the Intel Edison and your development computer and boot the Intel Edison" image-link="./views/labs/intro/images/connect-edison.png">
+    <h2 class="labHidden">Connect 2 USB cables between the Intel Edison and your development computer and boot the Intel Edison</h2>
+    <img class="labHidden" src="./views/labs/intro/images/connect-edison.png"></img>
 
           <p>Connect your development computer to the Intel® Edison using the supplied micro-USB cables.</p>
           <p>Connect your Intel® Edison to your computer as described below.</p>
@@ -125,12 +143,16 @@
         </div>
 
         <div content-block name="intro-green-light" message="Be sure the green light is on" image-link="./views/labs/intro/images/green-light.png">
+    <h2 class="labHidden">Be sure the green light is on</h2>
+    <img class="labHidden" src="./views/labs/intro/images/green-light.png"></img>
           <div class="alert alert-warning">
             <p>When your computer is plugged in you will see a green light. <b>Some laptops do not output sufficient power for the Intel Edison. In cases where there is not enough power, the Intel Edison board may start and then reboot in a loop.</b></p>
           </div>
         </div>
 
         <div content-block name="intro-booting-completed" message="Intel Edison has booted">
+    <h2 class="labHidden">Intel Edison has booted</h2>
+
               <p>Wait one minute for the Intel® Edison to finish booting up.</p>
               <div class="alert alert-info" role="alert">
                 <p><strong>How do you know when the board is ready?</strong></p>
@@ -145,11 +167,15 @@
       <div ibox title="Setup your Intel® Edison Software">
 
         <div content-block name="download-software" message="Download the Intel® Edison Software Development Tools" image-link="./views/labs/intro/images/download-installer.png">
+    <h2 class="labHidden">Download the Intel® Edison Software Development Tools</h2>
+    <img class="labHidden" src="./views/labs/intro/images/download-installer.png"></img>
               <labels edison></labels>
           <p>Go to the <a href="https://software.intel.com/en-us/iot/software/installers">software download page</a> for the Intel® Edison. The developer tools are available for Windows, MacOS and Ubuntu. Select the download that corresponds to your computer.</p>
         </div>
 
         <div content-block name="start-installer" message="Double-click on the installer file on your computer to begin installation." image-link="./views/labs/intro/images/installer-splash.png">
+    <h2 class="labHidden">Double-click on the installer file on your computer to begin installation.</h2>
+    <img class="labHidden" src="./views/labs/intro/images/installer-splash.png"></img>
           <p>Start the installation process.</p>
 
           <div class="alert alert-warning">
@@ -162,6 +188,8 @@
         </div>
 
         <div content-block name="installer-options" message="Select the Intel® Edison drivers, flash the latest firmware and install the Intel® XDK development environment." image-link="./views/labs/intro/images/setup.png">
+    <h2 class="labHidden">Select the Intel® Edison drivers, flash the latest firmware and install the Intel® XDK development environment.</h2>
+    <img class="labHidden" src="./views/labs/intro/images/setup.png"></img>
           <p>The default settings can be adjusted to your needs, or leave the defaults as is.</p>
           <p>In the component selection screen, check the options you would like to install:</p>
           <ul>
@@ -179,11 +207,15 @@
         </div>
 
         <div content-block name="restart-computer" message="Restart Your Development Computer" image-link="./views/labs/intro/images/reset.png">
+    <h2 class="labHidden">Restart Your Development Computer</h2>
+    <img class="labHidden" src="./views/labs/intro/images/reset.png"></img>
           <p>To ensure driver installation changes take effect, </b>reboot your Windows computer</b> at this point.</p>
           <p>Based on your version of Windows, select the option to fully shut down and restart your computer.</p>
         </div>
 
         <div content-block name="open-device-manager" message="Open Your Device Manager">
+    <h2 class="labHidden">Open Your Device Manager</h2>
+
           <div class="row">
             <div class="col-sm-6">
               <p>Windows 7 and below:</p>
@@ -207,6 +239,8 @@
         </div>
 
         <div content-block name="confirm-composite-and-virtual-drivers" message="Confirm Intel Edison USB Composite Device and Intel Edison Virtual Com Port.">
+    <h2 class="labHidden">Confirm Intel Edison USB Composite Device and Intel Edison Virtual Com Port.</h2>
+
           <p>In Device Manager, locate and toggle open <b>Ports (COM & LPT)</b>.</p>
           <img style="max-width: 400px" src="./views/labs/intro/images/comport.png"></img>
           <div class="alert alert-info">
@@ -226,6 +260,8 @@
         </div>
 
         <div content-block name="confirm-ftdi-drivers" message="Confirm installation of FTDI serial drivers">
+    <h2 class="labHidden">Confirm installation of FTDI serial drivers</h2>
+
           <p>
             FTDI CDM drivers allow your computer to communicate with USB serial devices, including the Intel® Edison.
           </p>
@@ -244,6 +280,8 @@
         </div>
 
         <div content-block name="set-a-device-name" message="Set a Device Password and Name" image-link="./views/labs/intro/images/set-a-device-password-and-name.png">
+    <h2 class="labHidden">Set a Device Password and Name</h2>
+    <img class="labHidden" src="./views/labs/intro/images/set-a-device-password-and-name.png"></img>
           <p>
             Continue to the Password Set and SSH section of the installer.
             Set a hostname for your Intel Edison.
@@ -251,6 +289,8 @@
         </div>
 
         <div content-block name="set-a-device-password" message="Set a Device Password and Name" image-link="./views/labs/intro/images/ssh-set-password.png">
+    <h2 class="labHidden">Set a Device Password and Name</h2>
+    <img class="labHidden" src="./views/labs/intro/images/ssh-set-password.png"></img>
           <p>
             Continue to the Password Set and SSH section of the installer.
             Set a password for your Intel Edison.
@@ -258,6 +298,8 @@
         </div>
 
         <div content-block name="connect-to-wifi" message="Connect the Intel Edison to your Intel IoT Gateway WiFi" image-link="./views/labs/intro/images/setup-options.png">
+    <h2 class="labHidden">Connect the Intel Edison to your Intel IoT Gateway WiFi</h2>
+    <img class="labHidden" src="./views/labs/intro/images/setup-options.png"></img>
           <p>
             Connect the Intel Edison to the WiFi hotspot from your Intel IoT Gateway.
 
@@ -269,7 +311,7 @@
       </div>
 
       <!-- Additional Resources -->
-      <div ibox collapse title="Additional resources">
+      <div ibox title="Additional resources">
           <ul>
             <li><a href="https://software.intel.com/en-us/intel-xdk-iot-edition-troubleshooting-faq">Troubleshooting &amp; Tips - Intel XDK</a></li>
           </ul>

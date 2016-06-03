@@ -23,6 +23,7 @@
             <!-- Objective -->
             <div ibox title="Objective">
               <div content-block name="read-objectives" message="Read the Objectives">
+<h2 class="labHidden">Read the Objectives</h2>
                 <labels edison />
                   <p>In this lab, we will explore the using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
 
@@ -36,7 +37,10 @@
 
               <div ibox title="Node-Red Flow: Temperature to LCD">
                 <div content-block name="connect-sensors" message="Install the Grove base shield and sensors"
-                image-link="./views/labs/protocols/images/image_2.jpg">
+                image-link="./views/labs/protocols/images/image_2.jpg">s*
+<h2 class="labHidden">Install the Grove base shield and sensors</h2>
+<img class="labHidden" src="./views/labs/protocols/images/image_2.jpg"></img>
+
                   <ol>
                       <li><p>Install the <b>Grove Base Shield</b> onto the Intel® Edison Arduino expansion board.</p></li>
                       <li><p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p></li>
@@ -45,6 +49,7 @@
                 </div>
 
                 <div content-block name="find-ip-address" message="Login to your Intel Edison and find you IP address">
+<h2 class="labHidden">Login to your Intel Edison and find you IP address</h2>
                   <p>Log into the Intel® Edison over serial.</p>
                   <p>First get the ip address of the Edison:</p>
                   <code>$ ifconfig wlan0</code>
@@ -53,6 +58,7 @@
                 </div>
 
                 <div content-block name="run-node-red" message="Install and run Node-RED">
+<h2 class="labHidden">Install and run Node-RED</h2>
                     <p>Install Node-Red by running the following command:</p>
 
                     <p><code>$ npm install -g node-red</code></p>
@@ -64,6 +70,7 @@
                 </div>
 
                 <div content-block name="run-node-red-modules" message="Install the Intel Edison Node-RED module using NPM">
+<h2 class="labHidden">Install the Intel Edison Node-RED module using NPM</h2>
                     <p>Once Node-RED is installed you will have to add the custom nodes that will be used to interact with
                       the temperature sensor and LCD display</p>
 
@@ -75,7 +82,10 @@
                     <p>The Node-Red server will now launch</p>
                 </div>
                 <div content-block name="open-node-red" message="Open the Node-Red Flow Editor"
-                image-link="./views/labs/protocols/images/new_node_red.png">
+                image-link="./views/labs/protocols/images/new_node_red.png">s*
+<h2 class="labHidden">Open the Node-Red Flow Editor</h2>
+<img class="labHidden" src="./views/labs/protocols/images/new_node_red.png"></img>
+
                     <p>Enter <b>http://{Your-Intel-Edison-IP-Address}:1880</b> into your navigation bar. For example, if your Intel Edison has an IP address of <code>10.175.154.190</code> then enter <code>http://10.175.154.190:1880</code></p>
                     <div class="alert alert-warning">
                       <p>Make sure that your laptop is connected to the same WiFi network as your Edison.</p>
@@ -83,7 +93,10 @@
                 </div>
 
                 <div content-block name="first-flow" message="Create a Node-Red Flow that connects your temperature sensor to your LCD"
-                image-link="./views/labs/protocols/images/first_flow.png">
+                image-link="./views/labs/protocols/images/first_flow.png">s*
+<h2 class="labHidden">Create a Node-Red Flow that connects your temperature sensor to your LCD</h2>
+<img class="labHidden" src="./views/labs/protocols/images/first_flow.png"></img>
+
 
                     <p>Create a Node-Red flow like the one show here.</p>
                     <ol>
@@ -94,6 +107,7 @@
                     <p>NOTE: The nodes are listen to the left of the workspace and you will have to scroll down to find all the node you need..</p>
                 </div>
                 <div content-block name="first-flow" message="Customize your Function Node">
+<h2 class="labHidden">Customize your Function Node</h2>
                     <p> Double click on the Temperature node and assign A0 as the pin and interval as 1000 to take a temperature reading every 1000ms. Double click the function node and enter the following code:</p>
                     <ui-codemirror ui-codemirror-opts="editorOptions">var r_val = 0;
 var g_val = 0;
@@ -127,10 +141,12 @@ return msg;</ui-codemirror>
   </div>
 
   <div content-block name="protocol-deploy" message="Click the Deploy button and watch the temperature appear on the LCD screen">
+<h2 class="labHidden">Click the Deploy button and watch the temperature appear on the LCD screen</h2>
     <p>Click on the Deploy button and Node-Red will activate the flow that was just built.</p>
   </div>
 
   <div content-block name="first-flow" message="Learn to export your Node-Red Flow">
+<h2 class="labHidden">Learn to export your Node-Red Flow</h2>
       <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to
           export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import it into your
           work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in. This method provides
@@ -178,10 +194,12 @@ return msg;</ui-codemirror>
           <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT">
             <labels gateway/>
             <div content-block name="find-ip-address" message="Login to your Intel IoT Gateway">
+<h2 class="labHidden">Login to your Intel IoT Gateway</h2>
               <p>The commands in this section will be run on the Intel® Iot Gateway.</p>
             </div>
 
             <div content-block name="find-ip-address" message="Review useful commands to help you organize your workflow on the Intel IoT Gateway">
+<h2 class="labHidden">Review useful commands to help you organize your workflow on the Intel IoT Gateway</h2>
               <h5>Setup Screen Window Manager</h5>
               <p>Log into your Intel® Iot Gateway. As a refresher: </p>
               <p>Use Putty or Screen to connect to ip address <b>192.168.1.1</b> and use <b>root</b> as the username and password.</p>
@@ -214,7 +232,10 @@ return msg;</ui-codemirror>
             </div>
 
             <div content-block name="find-ip-address" message="Create a Node-Red flow that will sends the temperature reading to the MQTT broker"
-            image-link="./views/labs/protocols/images/mqtt_flow.png">
+            image-link="./views/labs/protocols/images/mqtt_flow.png">s*
+<h2 class="labHidden">Create a Node-Red flow that will sends the temperature reading to the MQTT broker</h2>
+<img class="labHidden" src="./views/labs/protocols/images/mqtt_flow.png"></img>
+
               <h5>Create a Node-RED flow</h5>
               <p>Now you will create a new flow in Node-RED in order to send the temperature data up to your MQTT server.<p>
               <p>Use the:
@@ -268,7 +289,10 @@ return msg;
             </div>
 
             <div content-block name="protocol-publish-mqtt" message="Deploy the application"
-            image-link="./views/labs/protocols/images/mqtt_flow_connected.png">
+            image-link="./views/labs/protocols/images/mqtt_flow_connected.png">s*
+<h2 class="labHidden">Deploy the application</h2>
+<img class="labHidden" src="./views/labs/protocols/images/mqtt_flow_connected.png"></img>
+
               <p>When you are done configuring the nodes hit deploy</p>
               <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the Edison is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
                 <p> If you do not see the output in the debug window:</p>
@@ -282,6 +306,7 @@ return msg;
 
 
             <div content-block name="protocol-monitor-mqtt" message="Publish data to the temperature topic">
+<h2 class="labHidden">Publish data to the temperature topic</h2>
               <h5>Monitor MQTT Topic on Gateway</h5>
               <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
               <p>In the SSH terminal to the Gateway create a new screen console run the screen command and then type (Ctrl-A C) and switch to it (Ctrl-A ").</p>
@@ -292,6 +317,7 @@ return msg;
 
 
             <div content-block name="node-red-flow2-solution" message="Check out the solution to this exercise">
+<h2 class="labHidden">Check out the solution to this exercise</h2>
               <h5>Flow Source Code</h5>
               <ui-codemirror ui-codemirror-opts="editorOptions">[
    {
@@ -478,12 +504,16 @@ return msg;
 
             <div ibox  title="Node-Red Flow: RESTful API to control LCD screen">
               <div content-block name="node-red-http-intro" message="Create Node-RED flow that controls the LCD screen with a web request">
+<h2 class="labHidden">Create Node-RED flow that controls the LCD screen with a web request</h2>
                 <h3>Create Node-RED flow that controls the LCD screen with a web request.</h3>
 
                 <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
               </div>
 
-              <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/images/restful_flow_1.png">
+              <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/images/restful_flow_1.png">s*
+<h2 class="labHidden">Create Node-RED flow that controls the LCD screen with a web request</h2>
+<img class="labHidden" src="./views/labs/protocols/images/restful_flow_1.png"></img>
+
                 <h2>Create POST API flow</h2>
                 <p>Create a node-red flow like the one shown here using the:</p>
                 <p><ul><li><b>inject</b> node under the input section, configure the node to send a boolean true signal and check the box for "inject once at start".
@@ -535,7 +565,10 @@ return msg;
 
 
   <div content-block name="protocol-create-GET-API" message="Create GET API"
-  image-link="./views/labs/protocols/images/get_api.png">
+  image-link="./views/labs/protocols/images/get_api.png">s*
+<h2 class="labHidden">Create GET API</h2>
+<img class="labHidden" src="./views/labs/protocols/images/get_api.png"></img>
+
 	  <h2> Create GET API </h2>
 
 	  <p>You will now add two GETs that will send the status of the LCD to the requester. Use the:
@@ -548,7 +581,10 @@ return msg;
          to create two the two addiotional node sequences in your flow seen to the right</p>
   </div>
 
-  <div content-block name="protocol-GET-methods" message="Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight." image-link="./views/labs/protocols/images/config_get.png">
+  <div content-block name="protocol-GET-methods" message="Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight." image-link="./views/labs/protocols/images/config_get.png">s*
+<h2 class="labHidden">Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight.</h2>
+<img class="labHidden" src="./views/labs/protocols/images/config_get.png"></img>
+
   	<p>Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight.</p>
 
   	<p>Next configure the function nodes to assign the global LCD variables to the response message.</p>
@@ -579,7 +615,10 @@ return msg;
   </div>
 
 
-  <div content-block name="protocol-Create-DELETE-API" message="Create the DELETE API" image-link="./views/labs/protocols/images/delete_sequence.png">
+  <div content-block name="protocol-Create-DELETE-API" message="Create the DELETE API" image-link="./views/labs/protocols/images/delete_sequence.png">s*
+<h2 class="labHidden">Create the DELETE API</h2>
+<img class="labHidden" src="./views/labs/protocols/images/delete_sequence.png"></img>
+
   	<h2> Create DELETE API </h2>
 
   	<p>The final piece is adding a sequence to deal with DELETE methods. Specifically you will use DELETEs to
@@ -622,14 +661,20 @@ return msg;
   </div>
 
   <div content-block name="protocol-full-restful-api" message="Create the rest of the Restful API"
-  image-link="./views/labs/protocols/images/total_flow.png">
+  image-link="./views/labs/protocols/images/total_flow.png">s*
+<h2 class="labHidden">Create the rest of the Restful API</h2>
+<img class="labHidden" src="./views/labs/protocols/images/total_flow.png"></img>
+
   	<h2>Full Restful API</h2>
   	<p>You have now written the complete RESTful API for the LCD screen. The total flow should be like the image to the right:</p>
 
   	<p>If you had any issues building the flow the source code is provided at the end of this page and can be imported into your flow
   	like in exercise 1</p>
   </div>
-  <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">
+  <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">s*
+<h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
+<img class="labHidden" src="./views/labs/protocols/images/postman_website.png"></img>
+
     <h5> Install Postman </h5>
     <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
     <p>To send web requests to the Intel® Edison we will be using Postman, a Chrome app designed to send web requests.</p>
@@ -638,7 +683,10 @@ return msg;
             Select Chrome App, and install it following the directions given.</p>
   </div>
 
-    <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/images/postman.png">
+    <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/images/postman.png">s*
+<h2 class="labHidden">Use PostMan to send an HTTP request</h2>
+<img class="labHidden" src="./views/labs/protocols/images/postman.png"></img>
+
         <h5>Use Postman to send web request </h5>
         <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
         <ul>
@@ -652,7 +700,10 @@ return msg;
         </ul>
     </div>
   <div content-block name="protocol-use-the-api" message="Test the API"
-  image-link="./views/labs/protocols/images/postman_get.png">
+  image-link="./views/labs/protocols/images/postman_get.png">s*
+<h2 class="labHidden">Test the API</h2>
+<img class="labHidden" src="./views/labs/protocols/images/postman_get.png"></img>
+
   	<h2>Use API</h2>
   	<p>Like in the last step use Postman to test the various web requests.</p>
   	<p><img src="./views/labs/protocols/images/postman_get.png" alt="" ></p>
@@ -662,6 +713,7 @@ return msg;
   </div>
 
   <div content-block name="protocol-flow-source-code" message="Compare your solution to the code here.">
+<h2 class="labHidden">Compare your solution to the code here.</h2>
 	  <h2>Full RESTful API Flow Source Code:</h2>
 	  <ui-codemirror ui-codemirror-opts="editorOptions">[
    {

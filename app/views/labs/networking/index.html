@@ -21,6 +21,7 @@
           <div ibox title="Bluetooth Low Energy (BLE) Lab: Objectives">
             <!-- Objectives -->
             <div content-block name="ble-objectives" message="Read the Objectives">
+<h2 class="labHidden">Read the Objectives</h2>
               <labels edison windows apple linux/>
               <p>In this module, you will use Bluetooth Low Energy (BLE) to send data between your Intel® Edison and your Intel ®IoT Gateway.</p>
               <p>By the end of this module, you should be able to:</p>
@@ -38,6 +39,7 @@
           <div ibox title="Set up Bluetooth">
             <!-- Setup Bluetooth -->
             <div content-block name="ble-objectives" message="Enable Bluetooth by running the commands above">
+<h2 class="labHidden">Enable Bluetooth by running the commands above</h2>
 
               <p>Run shell commands on <strong>both</strong> your Intel® Edison and Intel® IoT Gateway devices to enable the correct Bluetooth Low Energy (BLE) services.</p>
 
@@ -62,7 +64,10 @@ $ hciconfig hci0 up</code></pre>
             <!-- Read sensor data over BLE -->
           <div ibox  title="Read sensor data over Bluetooth Low Energy">
             <div content-block name="read-sensor-data-over-BLE" message="Plug in sensors to the Intel Edison"
-            image-link="./views/labs/networking/images/image_2.jpg">
+            image-link="./views/labs/networking/images/image_2.jpg">s*
+<h2 class="labHidden">Plug in sensors to the Intel Edison</h2>
+<img class="labHidden" src="./views/labs/networking/images/image_2.jpg"></img>
+
               <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Intel® Edison into a BLE peripheral.</p>
 
               <ol>
@@ -74,6 +79,7 @@ $ hciconfig hci0 up</code></pre>
             </div>
 
             <div content-block name="read-sensor-data-over-BLE" message="Create a New Project and use the code this code in Main.js as a starting point">
+<h2 class="labHidden">Create a New Project and use the code this code in Main.js as a starting point</h2>
               <ol>
                 <li>
                   <p>Your <span class="fa fa-file">main.js</span> (running on the Intel® Edison) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
@@ -110,6 +116,7 @@ monitor();</ui-codemirror>
 </div>
 
 <div content-block name="add-deps-bleno" message="Add the Bleno dependencies to and packages.json and main.js">
+<h2 class="labHidden">Add the Bleno dependencies to and packages.json and main.js</h2>
   <p><a href="https://github.com/sandeepmistry/bleno">Bleno</a> is a JavaScript Bluetooth module that can be used with the Intel® Edison.</p>
   <ol>
     <li>
@@ -154,6 +161,7 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
 </div>
 
 <div content-block name="declare-references" message="Declare references to the bleno BLE classes">
+<h2 class="labHidden">Declare references to the bleno BLE classes</h2>
   <ol>
     <li>
       <p>Declare references to the bleno BLE classes for <code>PrimaryService</code>, <code>Characteristic</code>, <code>Descriptor</code>.</p>
@@ -179,6 +187,7 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
 
 
 <div content-block name="setup-bleno-classes" message="Write classes that Inherit from Bleno">
+<h2 class="labHidden">Write classes that Inherit from Bleno</h2>
 <ol>
   <li>
     <p>You will need to inherit from the bleno BLE classes, so add <code>util</code> to your module imports.</p>
@@ -229,6 +238,7 @@ monitor();</ui-codemirror>
   </div>
 
   <div content-block name="setup-bleno-classes" message="Add listeners for the stateChange and advertisingStart">
+<h2 class="labHidden">Add listeners for the stateChange and advertisingStart</h2>
                         <li>
                             <p>Finally, add event listeners for the <code>stateChange</code> and <code>advertisingStart</code> bleno BLE events.</p>
                             <p>The callback function for the <code>stateChange</code> event implements a <code>setInterval()</code> so remove the <code>monitor();</code> statement and the <code>setInterval()</code> from <code>monitor()</code>.</p>
@@ -269,6 +279,7 @@ bleno.on('advertisingStart', function(err) {
   </div>
 
 <div content-block name="final-step-bleno" message="Your program should look like the file above">
+<h2 class="labHidden">Your program should look like the file above</h2>
 <p>Your final program should look like the code below</p>
 <ui-codemirror ui-codemirror-opts="editorOptions">var bleno = require('bleno');
 var util = require('util');
@@ -356,7 +367,10 @@ function checkTemperature() {
 
 
     <div content-block name="run-the-bleno-program" message="Build, upload and run the program"
-    image-link="./views/labs/networking/images/peripheral-result.png">
+    image-link="./views/labs/networking/images/peripheral-result.png">s*
+<h2 class="labHidden">Build, upload and run the program</h2>
+<img class="labHidden" src="./views/labs/networking/images/peripheral-result.png"></img>
+
         <p>Your final <span class="icon file">main.js</span> should look like the <a href="https://github.com/Vaghesh/Bluetooth-Commercial-IoT-Workshop/blob/master/Temperature-Sensor/EdgeDevices-Peripheral/" target="_blank">final solution on Github</a>.</p>
         <p>Make sure your changes have been saved and use the buttons at the bottom of the Intel® XDK to: (1) Build, (2) Upload, and (3) Run the application.</p>
         <p>If successful, you should see the console log output the temperature every 1 second.</p>
@@ -366,6 +380,7 @@ function checkTemperature() {
 <div ibox  title="Turn the Intel® IoT Gateway into a BLE central module">
   <!-- Objectives -->
   <div content-block name="ble-objectives" message="Read the Objectives">
+<h2 class="labHidden">Read the Objectives</h2>
 
       <p>Use <a href="https://github.com/sandeepmistry/noble">noble</a>, a NodeJS module, to turn the Intel® IoT Gateway into a BLE central module that will read the temperature data broadcasted from a BLE peripheral (i.e. your Intel® Edison).</p>
       <ol>
@@ -405,6 +420,7 @@ function checkTemperature() {
 
 
     <div content-block name="declare-noble-constanst" message="Declare constants for the BLE service">
+<h2 class="labHidden">Declare constants for the BLE service</h2>
       <p>Declare constants for the BLE service.</p>
       <p>These are the <strong>same</strong> UUID's used in the peripheral code that's running on the Intel® Edison.</p>
       <ui-codemirror ui-codemirror-opts="editorOptions">var ServiceName = 'temperature';
@@ -414,6 +430,7 @@ var TemperatureCharacteristic = null;</ui-codemirror>
     </div>
 
     <div content-block name="add-the-temperature-function" message="Add the supplied readTemperature() function to read the temperature value">
+<h2 class="labHidden">Add the supplied readTemperature() function to read the temperature value</h2>
             <p>Add the supplied <code>readTemperature()</code> function to read the temperature value from the buffer.</p>
             <ui-codemirror ui-codemirror-opts="editorOptions">function readTemperature() {
   TemperatureCharacteristic.read(function(error) {
@@ -431,6 +448,7 @@ var TemperatureCharacteristic = null;</ui-codemirror>
     </div>
 
     <div content-block name="handle-service-noble" message="Implement the handleService() function">
+<h2 class="labHidden">Implement the handleService() function</h2>
 
       <p><code>handleService()</code> will loop through the Bluetooth characteristics sent and look for the one that matches <code>Characteristic_UUID</code> or <strong>'ec01'</strong>.</p>
 <ui-codemirror ui-codemirror-opts="editorOptions">function handleService(service) {
@@ -450,6 +468,7 @@ var TemperatureCharacteristic = null;</ui-codemirror>
   </div>
 
   <div content-block name="handle-service-noble" message="Implement the even listener functions stateChange() and discover() and disconnect()">
+<h2 class="labHidden">Implement the even listener functions stateChange() and discover() and disconnect()</h2>
     <p>Finally, add event listeners for the <code>stateChange</code>, <code>discover</code>, and <code>disconnect</code> noble BLE events.</p>
       <ui-codemirror ui-codemirror-opts="editorOptions">noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
@@ -493,7 +512,10 @@ noble.on('disconnect', function() {
   </div>
 
   <div content-block name="run-noble-service" message="Run the BLE service program"
-  image-link="./views/labs/networking/images/central-result.png">
+  image-link="./views/labs/networking/images/central-result.png">s*
+<h2 class="labHidden">Run the BLE service program</h2>
+<img class="labHidden" src="./views/labs/networking/images/central-result.png"></img>
+
     <ol>
         <li>
             <p>Check that your peripheral app is still running on your Intel® Edison. (e.g. It should still be logging temperature values to the Intel®  XDK console.) Restart if needed.</p>

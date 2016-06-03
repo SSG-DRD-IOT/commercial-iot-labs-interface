@@ -21,6 +21,7 @@
           <!-- Objectives -->
           <div ibox title="Objectives">
             <div content-block name="automation-objectives" message="Read the Objectives">
+<h2 class="labHidden">Read the Objectives</h2>
               <labels gateway window apple linux/>
               <p>By the end of this module, you should be able to:</p>
 
@@ -35,6 +36,7 @@
             <!-- Introduction -->
             <div ibox  title="Introduction">
               <div content-block name="automation-introduction" message="Read the Introduction">
+<h2 class="labHidden">Read the Introduction</h2>
                 <p>In this lab, we will walk you through building a NodeJS application that implements conditions based monitoring on an edge network.</p>
                 <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, or <em>Edge Network Automation</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The Iot Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
                 <p>In the example of a temperature controlled room, the temperature sensor is reporting the temperature to the Intel Iot Gateway and the gateway is responsible for triggering an Iot event. An Iot Event (also called a trigger in this workshop) always has a conditions function and a trigger function. In the case that the temperature is too hot the event may take automatic action to turn on the air conditioning on and send an alert to the person responsible for the room.</p>
@@ -44,6 +46,7 @@
             <!-- Steps in this Lab -->
             <div ibox  title="Steps in this Lab">
               <div content-block name="read-steps-automation" message="Read the Steps in the Automation Lab">
+<h2 class="labHidden">Read the Steps in the Automation Lab</h2>
                 <p>In this lab, we will:</p>
 
                 <ul>
@@ -62,6 +65,7 @@
             <!-- Writing the Trigger's Conditional Functions -->
         <div ibox  title="Writing the Trigger's Conditional Functions">
           <div content-block name="write-triggers" message="Practice writing conditional predicates for triggers">
+<h2 class="labHidden">Practice writing conditional predicates for triggers</h2>
                     <p><b>A conditional predicate function always returns a true or false value.</b>  It has access to all of the sensor data on the edge network.</p>
 
                     <p>For example in JavaScript a predicate function that tests if the temperature is greater than 27 looks like this:</p>
@@ -80,6 +84,7 @@
                     <p>Later in this lab, we will implement a associative array called the <b>stash</b>  that contains the last value of each of the sensors on the edge network. Let's build some triggers using the stash now.</p>
                   </div>
                   <div content-block name="conditional-function-exercises" message="Read the  predicate function for the light sensor">
+<h2 class="labHidden">Read the  predicate function for the light sensor</h2>
                     <h4>Exercises:</h4>
 
                     <p>Write a predicate function that tests if a light sensor has a value less than or equal 15 lumens.</p>
@@ -107,6 +112,7 @@
         <!-- Writing Trigger Functions -->
         <div ibox  title="Writing Trigger Functions">
           <div content-block name="write-trigger-function" message="Understand the idea of trigger functions and complete the excercises">
+<h2 class="labHidden">Understand the idea of trigger functions and complete the excercises</h2>
           <p>A trigger function is a function that is activated when the predicate function is true.  Trigger functions have access to all of the sensor data on the edge network, as well as, all of the actuators on the network.</p>
 
           <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network.</p>
