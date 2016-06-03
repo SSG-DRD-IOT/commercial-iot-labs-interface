@@ -1,17 +1,7 @@
 /**
- * LABS - Responsive Admin Theme
- *
- */
-
-/**
  * MainCtrl - controller
  */
 function MainCtrl() {
-
-    this.userName = 'Guest';
-    this.helloText = 'Welcome to the Intel Commercial IoT Workshop';
-    this.descriptionText = '';
-
 }
 
 

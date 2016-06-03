@@ -1,7 +1,3 @@
-/**
- * LABS - Responsive Admin Theme
- *
- */
 (function () {
   angular.module('labs', [
     'ui.router',                    // Routing
