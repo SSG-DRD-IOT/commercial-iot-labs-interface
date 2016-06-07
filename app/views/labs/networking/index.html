@@ -92,15 +92,18 @@ var LCD = require("jsupm_i2clcd");
 
 // Create a new instance of a Grove Temperature Sensor
 var temp = new groveSensor.GroveTemp(0);
+// Create a variable to store temperature value
+var temperatureValue = null;
 
 // Create a new instance of a Grove RGB LCD screen
 var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
 
 function monitor() {
-    setInterval(function() {
 
         // Read the temperature sensor
         var celsius = temp.value();
+        // Read value to global variable
+        temperatureValue = celsius;
         var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
         console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
 
@@ -109,7 +112,6 @@ function monitor() {
         screen.setColor(255, 255, 255);
         screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
 
-    }, 1000);
 }
 
 monitor();</ui-codemirror>
@@ -152,7 +154,7 @@ var bleno = require('bleno');
 
 // Create a new instance of a Grove Temperature Sensor
 var temp = new groveSensor.GroveTemp(0);
-var celsius = null;
+var temperatureValue = null;
 
 // Create a new instance of a Grove RGB LCD screen
 var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
@@ -171,7 +173,7 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
 
   // Create a new instance of a Grove Temperature Sensor
   var temp = new groveSensor.GroveTemp(0);
-  var celsius = null;
+  var temperatureValue = null;
 
   // Create a new instance of a Grove RGB LCD screen
   var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
@@ -235,6 +237,37 @@ function monitor() {
 
 monitor();</ui-codemirror>
     </li>
+    
+    <li>
+    <p>Now add a function <code>onReadRequest</code> to <code>TemperatureReadCharacteristic</code> to send data to Gateway.</p>
+    
+    <ui-codemirror ui-codemirror-opts="editorOptions">function TemperatureReadCharacteristic() {
+  TemperatureReadCharacteristic.super_.call(this, {
+    uuid: 'ec01',
+    properties: ['read'],
+    descriptors: [
+      new BlenoDescriptor({
+        uuid: 'ec02',
+        value: 'Temperature Read'
+      })
+    ]
+  });
+}
+
+TemperatureReadCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  if (offset) {
+    callback(BlenoCharacteristic.RESULT_ATTR_NOT_LONG, null);
+  } else {
+    if (null != temperatureValue) {
+      var buffer = new Buffer(1);
+      buffer.writeUInt8(temperatureValue, 0);
+      callback(BlenoCharacteristic.RESULT_SUCCESS, buffer);
+    }
+  }
+};
+
+</ui-codemirror>
+    </li>
   </div>
 
   <div content-block name="setup-bleno-classes" message="Add listeners for the stateChange and advertisingStart">
@@ -245,6 +278,7 @@ monitor();</ui-codemirror>
                             <ui-codemirror ui-codemirror-opts="editorOptions">function monitor() {
   // Read the temperature sensor
   celsius = temp.value();
+  temperatureValue = celsius;
   var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
   console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
 
@@ -285,22 +319,17 @@ bleno.on('advertisingStart', function(err) {
 var util = require('util');
 var groveSensor = require('jsupm_grove');
 
-
 var BlenoPrimaryService = bleno.PrimaryService;
 var BlenoCharacteristic = bleno.Characteristic;
 var BlenoDescriptor = bleno.Descriptor;
 
-
 util.inherits(TemperatureReadCharacteristic, BlenoCharacteristic);
 util.inherits(TemperatureService, BlenoPrimaryService);
-
 
 var temp = new groveSensor.GroveTemp(0);
 var temperatureValue = null;
 
-
 console.log('Edge Device for Temperature - Peripheral');
-
 
 bleno.on('stateChange', function(state) {
   if (state == 'poweredOn') {
@@ -308,7 +337,7 @@ bleno.on('stateChange', function(state) {
       if (err) {
         console.log(err);
       }
-      setInterval(checkTemperature, 100);
+      setInterval(monitor, 1000);
     });
   } else {
     bleno.stopAdvertising();
@@ -359,10 +388,20 @@ TemperatureReadCharacteristic.prototype.onReadRequest = function(offset, callbac
   }
 };
 
+function monitor() {
+  // Read the temperature sensor
+  celsius = temp.value();
+  temperatureValue = celsius;
+  var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+  console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
 
-function checkTemperature() {
-  temperatureValue = temp.value(); // Temp in Celcius
-}</ui-codemirror>
+  // Update the LCD screen
+  screen.setCursor(0, 0);
+  screen.setColor(255, 255, 255);
+  screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+}
+
+</ui-codemirror>
 </div>
 
 
