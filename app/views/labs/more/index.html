@@ -160,6 +160,84 @@ module.exports = {
 };</pre></ui-codemirror>
               </div>
             </div>
+
+        <!--
+                    <div content-block name="restart-computer" message="Restart Your Development Computer" image-link="./views/labs/intro/images/reset.png">
+                <h2 class="labHidden">Restart Your Development Computer</h2>
+                <img class="labHidden" src="./views/labs/intro/images/reset.png"></img>
+                      <p>To ensure driver installation changes take effect, </b>reboot your Windows computer</b> at this point.</p>
+                      <p>Based on your version of Windows, select the option to fully shut down and restart your computer.</p>
+                    </div>
+        -->
+
+                    <div content-block name="open-device-manager" message="Open Your Device Manager">
+                <h2 class="labHidden">Open Your Device Manager</h2>
+                  <h4>Starting Serial Communication on Intel Edison</h4>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <p>Windows 7 and below:</p>
+                          <ol>
+                            <li>Open Start menu.</li>
+                            <li>Type “device manager” in the search field.</li>
+                            <li>Select "Device Manager" under "Control Panel"</li>
+                          </ol>
+                          <img src="./views/labs/intro/images/win7-device-manager.png"></img>
+                        </div>
+                        <div class="col-sm-6">
+                          <p>Windows 8 and Windows 10</p>
+                          <ol>
+                            <li>Go into Windows Desktop mode.</li>
+                            <li>Right-click on the Start menu button.</li>
+                            <li>Select "Device Manager".</li>
+                          </ol>
+                          <img src="./views/labs/intro/images/win8-device-manager.png"></img>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div content-block name="confirm-composite-and-virtual-drivers" message="Confirm Intel Edison USB Composite Device and Intel Edison Virtual Com Port.">
+                <h2 class="labHidden">Confirm Intel Edison USB Composite Device and Intel Edison Virtual Com Port.</h2>
+
+                      <p>In Device Manager, locate and toggle open <b>Ports (COM & LPT)</b>.</p>
+                      <img style="max-width: 400px" src="./views/labs/intro/images/comport.png"></img>
+                      <div class="alert alert-info">
+                        <p>The Intel® Edison drivers for Windows include several USB drivers in one installer package. These drivers enable important features, such as: </p>
+                        <ul>
+                          <li>Composite Device Class (CDC) for programming the board via the Arduino IDE,</li>
+                          <li>Remote Network Driver Interface Spec (RNDIS) for Ethernet over USB, and</li>
+                          <li>Device Firmware Upgrade (DFU) for updating firmware on devices.</li>
+                        </ul>
+                      </div>
+                      <p>Connect a micro-USB cable to the device mode micro-USB port of the Intel® Edison expansion board, and the other end to your computer.</p>
+                      <img src="./views/labs/intro/images/plug-it-in.png"></img>
+                      <div class="alert alert-success">
+                        <p>If you see both "Intel Edison USB Composite Device" and "Intel Edison Virtual Com Port" items show up in Device Manager under “Ports (COM & LPT)”, the drivers have been successfully installed.</p>
+                        <img style="max-width:50%" src="./views/labs/intro/images/coms.png"></img>
+                      </div>
+                    </div>
+
+                    <div content-block name="confirm-ftdi-drivers" message="Confirm installation of FTDI serial drivers">
+                <h2 class="labHidden">Confirm installation of FTDI serial drivers</h2>
+
+                      <p>
+                        FTDI CDM drivers allow your computer to communicate with USB serial devices, including the Intel® Edison.
+                      </p>
+                      <img src="./views/labs/intro/images/power.png" />
+                      <p>
+                        Power the Intel® Edison via the device mode micro-USB port and/or via the power barrel connector.
+                      </p>
+                      <img src="./views/labs/intro/images/plug-it-in2.png" />
+                      <p>
+                        Connect a micro-USB cable to the serial micro-USB port of the Intel® Edison and the other end to your computer.
+                      </p>
+                      <div class="alert alert-success">
+                        <p>If you see "USB Serial Port" show up in Device Manager under “Ports (COM & LPT)”, the drivers have been successfully installed.</p>
+                        <img src="./views/labs/intro/images/coms2.png" style="max-width: 50%" />
+                      </div>
+                    </div>
+
+
+
           </div>
 
 
