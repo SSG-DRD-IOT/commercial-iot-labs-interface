@@ -86,7 +86,7 @@ $ hciconfig hci0 up</code></pre>
                 </li>
               </ol>
               <p class="label">./temperature/main.js</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
 var LCD = require("jsupm_i2clcd");
 
@@ -112,7 +112,7 @@ function monitor() {
     }, 1000);
 }
 
-monitor();</ui-codemirror>
+monitor();</pre></ui-codemirror>
 </div>
 
 <div content-block name="add-deps-bleno" message="Add the Bleno dependencies to and packages.json and main.js">
@@ -125,7 +125,7 @@ monitor();</ui-codemirror>
     <li>
       <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
       <p class="label">./package.json</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions">{
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
   "name": "bluetooth-edison-temp",
   "version": "1.0.0",
   "description": "",
@@ -138,12 +138,12 @@ monitor();</ui-codemirror>
   "dependencies": {
     "bleno": "^0.4.0"
   }
-}</ui-codemirror>
+}</pre></ui-codemirror>
     </li>
 
     <li>
       <p>In <span class="fa fa-file">main.js</span>, add <code>bleno</code> alongside the rest of your module imports.</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions">// Include the JavaScript UPM libraries
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
 var LCD = require("jsupm_i2clcd");
 
@@ -155,7 +155,7 @@ var temp = new groveSensor.GroveTemp(0);
 var celsius = null;
 
 // Create a new instance of a Grove RGB LCD screen
-var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</pre></ui-codemirror>
     </li>
   </ol>
 </div>
@@ -166,7 +166,7 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
     <li>
       <p>Declare references to the bleno BLE classes for <code>PrimaryService</code>, <code>Characteristic</code>, <code>Descriptor</code>.</p>
 
-        <ui-codemirror ui-codemirror-opts="editorOptions">// Include the libraries for BLE
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the libraries for BLE
   var bleno = require('bleno');
 
   // Create a new instance of a Grove Temperature Sensor
@@ -191,15 +191,15 @@ var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</ui-codemirror>
 <ol>
   <li>
     <p>You will need to inherit from the bleno BLE classes, so add <code>util</code> to your module imports.</p>
-    <ui-codemirror ui-codemirror-opts="editorOptions">// Include the libraries for BLE
+    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the libraries for BLE
 var bleno = require('bleno');
-var util = require('util');</ui-codemirror>
+var util = require('util');</pre></ui-codemirror>
   </li>
 
   <li>
     <p>Use <code>util</code> to extend bleno's <code>PrimaryService</code> and <code>Characteristic</code>.</p>
     <p><code>TemperatureService()</code> and <code>TemperatureReadCharacteristic()</code> have been defined for you below.</p>
-    <ui-codemirror ui-codemirror-opts="editorOptions">// Extend the bleno BLE classes
+    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Extend the bleno BLE classes
 var BlenoPrimaryService = bleno.PrimaryService;
 var BlenoCharacteristic = bleno.Characteristic;
 var BlenoDescriptor = bleno.Descriptor;
@@ -233,7 +233,7 @@ function monitor() {
   //...
 }
 
-monitor();</ui-codemirror>
+monitor();</pre></ui-codemirror>
     </li>
   </div>
 
@@ -242,7 +242,7 @@ monitor();</ui-codemirror>
                         <li>
                             <p>Finally, add event listeners for the <code>stateChange</code> and <code>advertisingStart</code> bleno BLE events.</p>
                             <p>The callback function for the <code>stateChange</code> event implements a <code>setInterval()</code> so remove the <code>monitor();</code> statement and the <code>setInterval()</code> from <code>monitor()</code>.</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions">function monitor() {
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function monitor() {
   // Read the temperature sensor
   celsius = temp.value();
   var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
@@ -274,14 +274,14 @@ bleno.on('advertisingStart', function(err) {
       new TemperatureService()
     ]);
   }
-});</ui-codemirror>
+});</pre></ui-codemirror>
     </li>
   </div>
 
 <div content-block name="final-step-bleno" message="Your program should look like the file above">
 <h2 class="labHidden">Your program should look like the file above</h2>
 <p>Your final program should look like the code below</p>
-<ui-codemirror ui-codemirror-opts="editorOptions">var bleno = require('bleno');
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var bleno = require('bleno');
 var util = require('util');
 var groveSensor = require('jsupm_grove');
 
@@ -362,7 +362,7 @@ TemperatureReadCharacteristic.prototype.onReadRequest = function(offset, callbac
 
 function checkTemperature() {
   temperatureValue = temp.value(); // Temp in Celcius
-}</ui-codemirror>
+}</pre></ui-codemirror>
 </div>
 
 
@@ -423,16 +423,16 @@ function checkTemperature() {
 <h2 class="labHidden">Declare constants for the BLE service</h2>
       <p>Declare constants for the BLE service.</p>
       <p>These are the <strong>same</strong> UUID's used in the peripheral code that's running on the Intel® Edison.</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions">var ServiceName = 'temperature';
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var ServiceName = 'temperature';
 var Service_UUID = 'ec00';
 var Characteristic_UUID = 'ec01';
-var TemperatureCharacteristic = null;</ui-codemirror>
+var TemperatureCharacteristic = null;</pre></ui-codemirror>
     </div>
 
     <div content-block name="add-the-temperature-function" message="Add the supplied readTemperature() function to read the temperature value">
 <h2 class="labHidden">Add the supplied readTemperature() function to read the temperature value</h2>
             <p>Add the supplied <code>readTemperature()</code> function to read the temperature value from the buffer.</p>
-            <ui-codemirror ui-codemirror-opts="editorOptions">function readTemperature() {
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function readTemperature() {
   TemperatureCharacteristic.read(function(error) {
     if (error) {
       clearInterval(readTemperature);
@@ -443,7 +443,7 @@ var TemperatureCharacteristic = null;</ui-codemirror>
     var celsius = value.readUInt8(0);
     console.log('Temperature is ' + celsius + '°C');
   });
-}</ui-codemirror>
+}</pre></ui-codemirror>
             <p>Note that the buffer offset position is the <strong>same</strong> as the buffer position used in the peripheral code. If you recall, you used <code>buffer.writeUInt8(celsius,0);</code> on the Intel® Edison.</p>
     </div>
 
@@ -451,7 +451,7 @@ var TemperatureCharacteristic = null;</ui-codemirror>
 <h2 class="labHidden">Implement the handleService() function</h2>
 
       <p><code>handleService()</code> will loop through the Bluetooth characteristics sent and look for the one that matches <code>Characteristic_UUID</code> or <strong>'ec01'</strong>.</p>
-<ui-codemirror ui-codemirror-opts="editorOptions">function handleService(service) {
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function handleService(service) {
   service.discoverCharacteristics([], function(error, characteristics) {
     characteristics.forEach(function(characteristic) {
       console.log('Found Characteristic:', characteristic.uuid);
@@ -464,13 +464,13 @@ var TemperatureCharacteristic = null;</ui-codemirror>
       }
     });
   });
-}</ui-codemirror>
+}</pre></ui-codemirror>
   </div>
 
   <div content-block name="handle-service-noble" message="Implement the even listener functions stateChange() and discover() and disconnect()">
 <h2 class="labHidden">Implement the even listener functions stateChange() and discover() and disconnect()</h2>
     <p>Finally, add event listeners for the <code>stateChange</code>, <code>discover</code>, and <code>disconnect</code> noble BLE events.</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions">noble.on('stateChange', function(state) {
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
     noble.startScanning();
   } else {
@@ -505,7 +505,7 @@ noble.on('discover', function(peripheral) {
 noble.on('disconnect', function() {
   console.log('Trying to reconnect');
   noble.startScanning();
-});</ui-codemirror>
+});</pre></ui-codemirror>
 
 
       <p>The <code>discover</code> event handler is what looks for the <code>'temperature'</code> service in order to call <code>handleService()</code> when there's a matching service found.</p>
@@ -687,52 +687,52 @@ noble.on('disconnect', function() {
                   <p><code>$ npm install xbee-api --save</code></p>
 
                   <p>the dependencies in your <code>package.json</code> should look like this.</p>
-                  <ui-codemirror ui-codemirror-opts="editorOptions">
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
                     dependencies: {
                       "serialport": "^2.0.6",
                       "xbee-api": "^0.4.0"
-                    }</ui-codemirror>
+                    }</pre></ui-codemirror>
                   </li>
                   <li><p>Import the serialport, xbee-api and the <strong>jsupm_grove</strong> packages with the <strong>require</strong> statement.</p>
 
                     <div>
-                      <ui-codemirror ui-codemirror-opts="editorOptions">                var SerialPort = require('serialport').SerialPort;
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                var SerialPort = require('serialport').SerialPort;
                         var xbee_api = require('xbee-api');
                         var groveSensor = require('jsupm_grove');
-                      </ui-codemirror>
+                      </pre></ui-codemirror>
                     </div></li>
                     <li><p>Initialize the temperature sensor. See the <a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">temperature sensor documentation</a> on the <a href="http://software.intel.com/iot/">Intel Developer Zone</a>.
 
                       <div>
-                        <ui-codemirror ui-codemirror-opts="editorOptions">                  // Create the temperature sensor object using AIO pin 0
+                        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                  // Create the temperature sensor object using AIO pin 0
                           var temp = new groveSensor.GroveTemp(0);
-                        </ui-codemirror>
+                        </pre></ui-codemirror>
                       </div></p></li>
                       <li><p>Set API mode, a frame-based method for sending and receiving data to and from a radio's serial UART. See the <a href="https://www.npmjs.com/package/xbee-api">xbee-api module documentation.</a></p>
                         <div>
-                          <ui-codemirror ui-codemirror-opts="editorOptions">                    // Constants for the the hex-numbers of the frame types, command options, status types
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    // Constants for the the hex-numbers of the frame types, command options, status types
                             var C = xbee_api.constants;
                             // Set API mode
                             var xbeeAPI = new xbee_api.XBeeAPI({
                               api_mode: 1
                             });
-                          </ui-codemirror>
+                          </pre></ui-codemirror>
                         </div>
                       </li>
                       <li>
                         <p>Initialize serial port with baudrate and set the XBeeAPI parser to parse the receiving frames.</p>
                         <div>
-                          <ui-codemirror ui-codemirror-opts="editorOptions">                    var serialport = new SerialPort("/dev/ttyMFD1", {
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    var serialport = new SerialPort("/dev/ttyMFD1", {
                             baudrate: 9600,
                             parser: xbeeAPI.rawParser()
                           });
-                        </ui-codemirror>
+                        </pre></ui-codemirror>
                       </div>
                     </li>
 
                     <li><p>On Serial Port open, call the function <code>sendTemperatureData</code> to send temperature data to the gateway.</p>
 
-                      <ui-codemirror ui-codemirror-opts="editorOptions">                  function sendTemperatureData(){
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                  function sendTemperatureData(){
 
                         var celsius = temp.value();
                         var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
@@ -749,15 +749,15 @@ noble.on('disconnect', function() {
 
                         serialport.write(xbeeAPI.buildFrame(frame_obj)); // Write frame to Serial Port
                       };
-                    </ui-codemirror></li>
+                    </pre></ui-codemirror></li>
 
                     <li><p>On Serial Port open, call the function <code>sendTemperatureData</code> to send temperature data evey 3 secs, to the gateway.</p>
 
-                      <ui-codemirror ui-codemirror-opts="editorOptions">                    serialport.on("open", function() {
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    serialport.on("open", function() {
                         console.log('serial port opened');
                         setInterval(sendTemperatureData, 3000);
                       });
-                    </ui-codemirror></li>
+                    </pre></ui-codemirror></li>
 
                   </ol>
                 </div>
@@ -782,22 +782,22 @@ noble.on('disconnect', function() {
                       <p><code>$ npm install xbee-api --save</code></p>
 
                       <p>the dependencies in your <code>package.json</code> should look like this.</p>
-                      <ui-codemirror ui-codemirror-opts="editorOptions">                    dependencies: {
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    dependencies: {
                         "serialport": "^2.0.6",
                         "xbee-api": "^0.4.0"
-                      }</ui-codemirror>
+                      }</pre></ui-codemirror>
                     </li>
                     <li><p>Import the serialport and xbee-api packages.</p>
 
                       <div>
-                        <ui-codemirror ui-codemirror-opts="editorOptions">                        var SerialPort = require('serialport').SerialPort;
+                        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                        var SerialPort = require('serialport').SerialPort;
                           var xbee_api = require('xbee-api');
-                        </ui-codemirror>
+                        </pre></ui-codemirror>
                       </div></li>
 
                       <li><p>Set API mode and open serial port.</a></p>
                         <div>
-                          <ui-codemirror ui-codemirror-opts="editorOptions">                          // Constants for the the hex-numbers of the frame types, command options, status types
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                          // Constants for the the hex-numbers of the frame types, command options, status types
                             var C = xbee_api.constants;
                             // Set API mode
                             var xbeeAPI = new xbee_api.XBeeAPI({
@@ -808,19 +808,19 @@ noble.on('disconnect', function() {
                               baudrate: 9600,
                               parser: xbeeAPI.rawParser()
                             });
-                          </ui-codemirror>
+                          </pre></ui-codemirror>
                         </div>
                       </li>
                       <li>
                         <p>On <code>frame_object</code>, read the data object from the frame.
                           Convert it to <code>ascii</code> to get the temperature value.</p>
                           <div>
-                            <ui-codemirror ui-codemirror-opts="editorOptions">
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
                               xbeeAPI.on("frame_object", function(frame) {
                                 var temp_value = frame.data.toString('ascii');
                                 console.log("Temperature: ", temp_value, "?F");
                               });
-                            </ui-codemirror>
+                            </pre></ui-codemirror>
                           </div>
                         </li>
 

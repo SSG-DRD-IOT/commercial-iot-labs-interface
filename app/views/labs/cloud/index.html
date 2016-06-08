@@ -47,12 +47,12 @@
           <p>Here Gateway Id and Sensor Id is user dependant. For standarized represenatation of all IoT devices please use Gateway Id as last 4 digit of your wireless Mac address.</p>
 
           <p><b>MQTT Message Format</b></p>
-<ui-codemirror ui-codemirror-opts="editorOptions">{
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
   "gateway_id":"E2D0",
   "sensor_id":"light",
   "value":90,
   "timestamp":1457303819281
-}</ui-codemirror>
+}</pre></ui-codemirror>
           <p>This is a standarized representation of message format which is accepted by cloud service.</p>
         </div>
       </div>
@@ -150,7 +150,7 @@ if (context.count == totalValues) { //if this function has been run x times, the
   context.count = 0; //set the counter back to 0 for the next go
   return [newMsg]; //then shove it out to the next node
 }
-</ui-codemirror>
+</pre></ui-codemirror>
           </li>
         </ol>
       </div>
@@ -300,7 +300,7 @@ if (context.count == totalValues) { //if this function has been run x times, the
   "wires": [
 
   ]
-}]</ui-codemirror>
+}]</pre></ui-codemirror>
       </div>
     </div>
 

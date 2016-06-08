@@ -80,7 +80,6 @@
         <div content-block name="install-mongoosejs" message="Learn about MongooseJS, a library of JavaScript bindings for MongoDB">
 <h2 class="labHidden">Learn about MongooseJS, a library of JavaScript bindings for MongoDB</h2>
           <h4>Install MongooseJS</h4>
-          <!-- TODO We need better instructions for installing mongoose -->
 
           <p>MongooseJS is an Object Data Manager that let’s you build JavaScript objects that can create, read, validate, update and remove entries from a MongoDB.</p>
 
@@ -189,14 +188,14 @@ $ cd monitord</code></pre>
 
       <p>After importing the MQTT module, setup a connection to the MQTT broker. Your gateway's IP address is <code>192.168.1.1</code> by default.</p>
       <p class="label">./server.js</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions">// Require MQTT and setup the connection to the broker
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
-var mqttClient = mqtt.connect('mqtt://192.168.1.1');</ui-codemirror>
+var mqttClient = mqtt.connect('mqtt://192.168.1.1');</pre></ui-codemirror>
 
         <p>Likewise, require the MongooseJS module and setup the connection to the MongoDB server.</p>
 
         <p class="label">./server.js</p>
-        <ui-codemirror ui-codemirror-opts="editorOptions">// Require the MongoDB libraries and connect to the database
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require the MongoDB libraries and connect to the database
 var mongoose = require('mongoose');
 mongoose.connect(config.mongodb.host);
 var db = mongoose.connection;
@@ -207,15 +206,15 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // Log when a connection is established to the MongoDB server
 db.once('open', function(callback) {
   console.log("Connection to MongoDB successful");
-});</ui-codemirror>
+});</pre></ui-codemirror>
 
         <p>Here we are also demonstrating binding a handler to two database events the <code>open</code> and <code>error</code> events.</p>
 
         <p>Now import and initialize a sensor and a data model.</p>
         <p class="label">./server.js</p>
-        <ui-codemirror ui-codemirror-opts="editorOptions">// Import the Database Model Objects
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Import the Database Model Objects
 var DataModel = require('intel-commercial-edge-network-database-models').DataModel;
-var SensorModel = require('intel-commercial-edge-network-database-models').SensorModel;</ui-codemirror>
+var SensorModel = require('intel-commercial-edge-network-database-models').SensorModel;</pre></ui-codemirror>
 
         <p>Now that the dependencies are included and the connection code to the MQTT broker and MongoDB database is written. Proceed to create the main loop of the program.</p>
       </div>
@@ -237,14 +236,14 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
               </ul>
           </li>
           <li>
-            <ui-codemirror ui-codemirror-opts="editorOptions">// MQTT connection function
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// MQTT connection function
 mqttClient.on('connect', function() {
   console.log("Connected to MQTT server");
 
   // Subscribe to the MQTT topics
   mqttClient.subscribe('announcements');
   mqttClient.subscribe('sensors/+/data');
-});</ui-codemirror>
+});</pre></ui-codemirror>
           </li>
           <li>
             <p>An MQTT message will be sent to the <b>announcements</b> topic if a new network sensor comes online in the edge network. The new sensor will reponsible for sending it's own MQTT message.</p>
@@ -258,7 +257,7 @@ mqttClient.on('connect', function() {
         <p>Next, write a handler for the MQTT <code>message</code> event.</p>
         <p>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</p></li>
       <li>
-        <ui-codemirror ui-codemirror-opts="editorOptions">// A function that runs when MQTT receives a message
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// A function that runs when MQTT receives a message
 mqttClient.on('message', function(topic, message) {
       var json;
       // Parse the incoming data
@@ -266,7 +265,7 @@ mqttClient.on('message', function(topic, message) {
         json = JSON.parse(message);
       } catch (e) {
         console.log(e);
-      });</ui-codemirror>
+      });</pre></ui-codemirror>
       </li>
     </div>
 
@@ -276,7 +275,7 @@ mqttClient.on('message', function(topic, message) {
 <h2 class="labHidden">Log all announcements to the database</h2>
       <li>
         <p>Decide whether it is a new piece of sensor data or a new announcement. If it is an annoucement then create a new MongoDB sensor object and save it to the database. Handle any database error by printing the error to the console.</p>
-          <ui-codemirror ui-codemirror-opts="editorOptions">if (topic.match(/announcements/)) {
+          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">if (topic.match(/announcements/)) {
   var sensor = new SensorModel(json);
   sensor.save(function(err, sensor) {
     if (err)
@@ -284,13 +283,13 @@ mqttClient.on('message', function(topic, message) {
     else
       console.log(topic + ":" + message.toString());
   });
-};</ui-codemirror>
+};</pre></ui-codemirror>
       </li>
     </div>
 
     <div content-block name="is-data" message="Log all sensor readings to the database">
 <h2 class="labHidden">Log all sensor readings to the database</h2>
-    <ui-codemirror ui-codemirror-opts="editorOptions">    if (topic.match(/data/)) {
+    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">    if (topic.match(/data/)) {
       var value = new DataModel(json);
       value.save(function(err, data) {
         if (err)
@@ -298,9 +297,35 @@ mqttClient.on('message', function(topic, message) {
         else
           console.log(topic + ":" + message.toString());
       });
-    }</ui-codemirror>
+    }</pre></ui-codemirror>
       </div>
     </div>
+
+    <div ibox title="Lab Solutions">
+    <div content-block name="Clone-the-Solution-from-its-Github-Repository" message="Clone the Solution from it's Github Repository">
+        <h2 class="labHidden">Clone the Solution from it's Github Repository</h2>
+        <p>You can deploy the solution to this lab exercise by cloning a repository from Github.</p>
+        <p>Change to the directory that you would like to download the solution into, and then type:</p>
+        <pre><code>git clone git@github.com:SSG-DRD-IOT/lab-solution-monitor-daemon.git</code></pre>
+    </div>
+
+    <div content-block name="change-directory" message="Change into the solution's directory and run npm install">
+        <h2 class="labHidden">Change into the solution's directory and run npm install</h2>
+        <pre><code>cd lab-solution-monitor-daemon</code></pre>
+        <pre><code>npm install</code></pre>
+    </div>
+
+    <div content-block name="database-start-server" message="Be sure that the sensor is publishing data and MongoDB is running, then start the server.">
+        <h2 class="labHidden">Be sure that the sensor is publishing data and MongoDB is running, then start the server.</h2>
+        <p>Verify that MongoDB is running. You can do this in two way:</p>
+        <ol>
+            <li>Type <code>ps aux | egrep mongod</code> at the command and verify that a process is displayed.</li>
+            <li>If you are running MongoDB in a screen session, then you can switch to the screen running the MongoDB server by typing <code>Ctrl-a "</code> and selecting the screen that you are running MongoDB in.</li>
+        </ol>
+        <p>Type start the Sensor Monitor type:</p>
+        <pre><code>node server.js</code></pre>
+    </div>
+</div>
   </div>
 
       <div ibox  title="Lab Solutions">

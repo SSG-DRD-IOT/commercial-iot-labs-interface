@@ -43,7 +43,7 @@
 
           <div>
             <p class="label">schema/sensorSchema.js</p>
-            <ui-codemirror ui-codemirror-opts="editorOptions">var mongoose = require('mongoose');
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mongoose = require('mongoose');
 var sensorSchema = new mongoose.Schema({
   id: {
     type: String,
@@ -75,7 +75,7 @@ var sensorSchema = new mongoose.Schema({
   }
 });
 
-module.exports = sensorSchema;</ui-codemirror>
+module.exports = sensorSchema;</pre></ui-codemirror>
             </div>
 
               <p>Save this code in the file <code>sensorSchema.js</code> in the <code>schema</code> directory.</p>
@@ -144,7 +144,7 @@ module.exports = sensorSchema;</ui-codemirror>
 
               <p>Write this code to <code>/index.js</code> at the root level of this project.</p>
               <p class="label">./index.js</p>
-              <div><ui-codemirror ui-codemirror-opts="editorOptions">var mongoose = require('mongoose');
+              <div><ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mongoose = require('mongoose');
 var SensorSchema = require('./schema/sensorSchema.js');
 var ActuatorSchema = require('./schema/actuatorSchema.js');
 var TriggerSchema = require('./schema/triggerSchema.js');
@@ -157,7 +157,7 @@ module.exports = {
   DataModel: mongoose.model('DataModel', DataSchema),
   TriggerModel: mongoose.model('TriggerModel', TriggerSchema),
   ErrorModel: mongoose.model('ErrorModel', ErrorSchema)
-};</ui-codemirror>
+};</pre></ui-codemirror>
               </div>
             </div>
           </div>

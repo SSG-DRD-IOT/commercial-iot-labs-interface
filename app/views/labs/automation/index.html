@@ -14,6 +14,7 @@
         </ol>
     </div>
 </div>
+
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
@@ -71,12 +72,12 @@
                     <p>For example in JavaScript a predicate function that tests if the temperature is greater than 27 looks like this:</p>
 
                     <div>
-                        <ui-codemirror ui-codemirror-opts="editorOptions">// The trigger condition function is a predicate function which returns a TRUE or FALSE.
+                        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The trigger condition function is a predicate function which returns a TRUE or FALSE.
 (
   function( temperature ) {
     return stash["temperature"] &gt; 27;
   }
-)</ui-codemirror>
+)</pre></ui-codemirror>
                     </div>
 
                     <p>Notice the <span style='font-weight:bold'>parathesis</span> that surround this function.  These are required for the trigger to run correctly.  In JavaScript, these parathesis create a block of executable code called a <b>closure</b>.  The JavaScript interpreter requires this in order to dynamically evaluate the code.</p>
@@ -89,20 +90,20 @@
 
                     <p>Write a predicate function that tests if a light sensor has a value less than or equal 15 lumens.</p>
 
-                    <ui-codemirror ui-codemirror-opts="editorOptions">(
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">(
   function( light ) {
     return stash["light"] &lt;= 15;
   }
-)</ui-codemirror>
+)</pre></ui-codemirror>
 
 
 
                     <p>Write a predicate function that tests of a light sensor has a value greater than 15 lumens and temperature is greater than 27.</p>
-                    <ui-codemirror ui-codemirror-opts="editorOptions">(
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">(
     function( light_temperature ) {
       return (stash["light"] &gt; 15 &amp;&amp; stash[“temperature”] &gt;= 27;
     }
-)</ui-codemirror>
+)</pre></ui-codemirror>
 
                 <li>Write a predicate function that generates a false condition if there is no data available to process.</li>
 
@@ -117,7 +118,7 @@
 
           <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network.</p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions">(
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">(
   temperature_too_cold = function() {
     var alert = {
       alert: "Cold"
@@ -131,7 +132,7 @@
                 }
     });
   };
- )</ui-codemirror>
+ )</pre></ui-codemirror>
 
           <h5>Exercises</h5>
             <ol>
@@ -145,11 +146,11 @@
             <div ibox  title="Dependencies">
               <p>This lab depends on the following modules and need to be added to <span class="icon file">package.json</span></p>
               <p>Create a new file named <span class="icon file">server.js</span> and add these lines:</p>
-              <ui-codemirror ui-codemirror-opts="editorOptions">var mqtt = require('mqtt');
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mqtt = require('mqtt');
 var mongoose = require('mongoose');
 var http = require('promise-request');
 var _ = require("lodash");
-var config = require("./config.json");</ui-codemirror>
+var config = require("./config.json");</pre></ui-codemirror>
             </div>
 
 
@@ -158,14 +159,14 @@ var config = require("./config.json");</ui-codemirror>
                     <p>Create a file named <span class="icon file">config.json.</span></p>
 
                     <p>Use the following configuration to allow us to change the locations of the MQTT and MongoDB servers:</p>
-                    <ui-codemirror ui-codemirror-opts="editorOptions">{
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
   "mqtt" : {
     "uri" : "mqtt://192.168.1.1"
   },
   "mongodb" : {
     "uri" : "mongodb://192.168.1.1/iotdemo"
   }
-}</ui-codemirror>
+}</pre></ui-codemirror>
             <p>By default, the IP address of your gateway on the edge network is 192.168.1.1</p>
             </div>
 
@@ -175,7 +176,7 @@ var config = require("./config.json");</ui-codemirror>
             <div ibox  title="Setup the MQTT and Mongoose DB connections">
             <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions">// Connect to the MQTT server
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Connect to the MQTT server
  var mqttClient  = mqtt.connect(self.config.mqtt.uri);
 
 // Connect to the MongoDB server
@@ -188,7 +189,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // When a connection to the
 db.once('open', function (callback) {
     console.log("Connection to MongoDB successful");
-});</ui-codemirror>
+});</pre></ui-codemirror>
           </div>
 
             <!-- Set Up a Context Object for the Triggers -->
@@ -199,7 +200,7 @@ db.once('open', function (callback) {
             <p>Let's define the context object and add a couple of items to it. First, we will define two arrays. One array will hold all of the triggers and the second will be treated as an associative array and hold the name of the each sensor and its last published value.</p>
 
             <p>The stash array will be made available to all trigger condition functions and trigger functions.  This make the stash very important because it’s used in all Iot Event triggers as the method of accessing the temperature sensors and any other sensors that are available on the network.</p>
-<ui-codemirror ui-codemirror-opts="editorOptions">var context = {
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var context = {
     // Holds the triggers retrieved from the database
      triggers : [],
 
@@ -214,7 +215,7 @@ db.once('open', function (callback) {
 
     // An object that let's us read and write errors to the database
     ErrorModel: ErrorModel
-};</ui-codemirror>
+};</pre></ui-codemirror>
          </div>
 
 
@@ -226,7 +227,7 @@ db.once('open', function (callback) {
 
                     <p>You can read more able Promise in an article entitled <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">JavaScript Promises: There and Back Agin</a> by Jake Archibald.</p>
 
-           <ui-codemirror ui-codemirror-opts="editorOptions">// On Server start, read the triggers from the db and store them
+           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// On Server start, read the triggers from the db and store them
 // the triggers array.
 var retrieveTriggersFromDB = function() {
     console.log("Retrieving all triggers from the database");
@@ -243,7 +244,7 @@ var retrieveTriggersFromDB = function() {
         });
 };
 
-retrieveTriggersFromDB();</ui-codemirror>
+retrieveTriggersFromDB();</pre></ui-codemirror>
 
               <p>Notice that we call the function as soon as it is defined.  When the Conditional Based Monitoring system starts this will read the triggers from the database.</p>
             </div>
@@ -252,12 +253,12 @@ retrieveTriggersFromDB();</ui-codemirror>
             <div ibox  title="Start the MQTT Event Loop">
                     <p>The NodeJS MQTT module starts an event loop that will be the main event loop for the program.  We can set callback functions to be called when different event occur.  We will attach two callback functions, one function to the "connect" event and another to the “message” event.</p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions">// On the start of a connection, do the following...
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// On the start of a connection, do the following...
 mqttClient.on('connect', function () {
     console.log("Connected to MQTT server");
     mqttClient.subscribe('triggers/refresh');
     mqttClient.subscribe('sensors/+/data');
-});</ui-codemirror>
+});</pre></ui-codemirror>
 
               <p>When a message is received then parse it and determine if it is a new sensor or if it is new sensor data.</p>
             </div>
@@ -267,7 +268,7 @@ mqttClient.on('connect', function () {
 
                 <p>Before we define the on message function, let's define a couple of helper functions. These will make our code a bit easier to read. The first two function match the <code>topic</code> on the incoming MQTT messages. The third function takes an array for triggers and returns an array with all of the triggers that have a sensor_id that matches the sensor_id that we pass into the function.  This will be useful because when a sensor reading arrives it can only fire a trigger that has a sensor_id matching the data. </p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions">var isSensorTopic: function(str) {
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var isSensorTopic: function(str) {
     return str.match(/sensors\/[A-Za-z0-9]{0,32}\/data/);
 }
 
@@ -277,7 +278,7 @@ var isRefreshTopic = function(str) {
 
 var filter_triggers_by_sensor_id = function(id) {
     return _.filter(context.triggers, {sensor_id : id});
-};</ui-codemirror>
+};</pre></ui-codemirror>
             </div>
 
             <!-- Helper Functions for the Triggers -->
@@ -294,7 +295,7 @@ var filter_triggers_by_sensor_id = function(id) {
                     </ul>
 
             <p class="label">./schemas/triggerSchema.js</p>
-            <ui-codemirror ui-codemirror-opts="editorOptions">
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
 triggerSchema.methods.eval_condition = function (scope, args) {
     var result;
 
@@ -314,7 +315,7 @@ triggerSchema.methods.eval_triggerFunc = function (scope, args) {
         throw(e);
     }
     return result;
-};</ui-codemirror>
+};</pre></ui-codemirror>
             </div>
 
 
@@ -324,7 +325,7 @@ triggerSchema.methods.eval_triggerFunc = function (scope, args) {
 
               <p>The second type of message is a trigger refresh message and is received on the MQTT topic 'triggers/refresh'</p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions">// Every time a new message is received, do the following
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Every time a new message is received, do the following
 mqttClient.on('message', function (topic, message) {
     console.log(topic + ":" + message.toString());
     var json;
@@ -345,14 +346,14 @@ mqttClient.on('message', function (topic, message) {
         // Received a message on the Refresh MQTT topic
         retrieveTriggersFromDB();
     }
-});</ui-codemirror>
+});</pre></ui-codemirror>
 
             </div>
             <!--         Trigger Each Rule that Applies to a Particular Incoming Sensor Data -->
           <div ibox  title="Trigger Each Rule that Applies to a Particular Incoming Sensor Data">
             <h3>Check the Predicate Function for each Trigger and Execute a Trigger Function if true</h3>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions">var processSensorData = function(json) {
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var processSensorData = function(json) {
     var sensor_id = json.sensor_id;
     var value = json.value;
 
@@ -381,7 +382,7 @@ mqttClient.on('message', function (topic, message) {
 
     // After the trigger is run the value used becomes the previous value
     context.stash[sensor_id+"_prev"] = value;
-};</ui-codemirror>
+};</pre></ui-codemirror>
             </div>
 
     <!-- TODO: The trigger eval condition and eval action Functions -->
