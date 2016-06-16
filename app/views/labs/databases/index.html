@@ -77,28 +77,20 @@
 
         </div>
 
-        <div content-block name="install-mongoosejs" message="Learn about MongooseJS, a library of JavaScript bindings for MongoDB">
+        <div content-block name="learn-about-mongoosejs" message="Learn about MongooseJS, a library of JavaScript bindings for MongoDB">
 <h2 class="labHidden">Learn about MongooseJS, a library of JavaScript bindings for MongoDB</h2>
-          <h4>Install MongooseJS</h4>
+          <h4>About MongooseJS</h4>
 
           <p>MongooseJS is an Object Data Manager that let’s you build JavaScript objects that can create, read, validate, update and remove entries from a MongoDB.</p>
 
           <p>Read through the documentation on building Mongoose Schemas and Models at <a href="http://mongoosejs.com/docs/guide.html">http://mongoosejs.com/docs/guide.html</a> then start the exercise.</p>
 
-          <div class="alert alert-info">
-            <p>Be sure that you whitelist the <code>/usr/bin/node</code> executable:</p>
-            <code>$ paxctl -Cm /usr/bin/node</code>
-          </div>
-
         </div>
 
-        <div content-block name="create-new-project" message="Create a new project and the project directories">
-<h2 class="labHidden">Create a new project and the project directories</h2>
-          <p>Start a new project in a new project directory.</p>
+        <div content-block name="Install MongooseJS and lab schemas">
+<h2 class="labHidden">Install MongooseJS and Lab Schemas
 
-          <p>Create a README file and write into it that this project contains the models for the edge network.</p>
-
-          <p>Install MongooseJS</p>
+          <p>To install MongooseJS, execute the following commands:</p>
           <pre><code>$ npm install mongoose --save</code></pre>
 
           <p>We've prepared the MongooseJS schemas that you will need to complete this lab.  Install the NPM package below and then you will be able to import the schemas</p>
@@ -156,29 +148,36 @@
     <div content-block name="monitord-new-project" message="Create a New Project and Import NPM Modules">
 <h2 class="labHidden">Create a New Project and Import NPM Modules</h2>
       <h4><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h4>
-      <ol>
-        <li>
+      <p class="alert alert-warning">The Intel XDK only deploys to an Intel Edison.  For this project, you will have to upload your project to the Intel IoT Gateway using WinSCP, or create the files in this project directly on the Intel IoT Gateway.</p>
           <p>Create a new project named <b>monitord</b> and change to that directory.</p>
           <pre><code>$ mkdir monitord
 $ cd monitord</code></pre>
 
-          <p class="alert alert-warning">The Intel XDK only deploys to an Intel Edison.  For this project, you will have to upload your project to the Intel IoT Gateway using WinSCP, or create the files in this project directly on the Intel IoT Gateway.</p>
-        </li>
-        <li>
           <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
-          <p>Please note that the <code>intel-commercial-edge-network-database-models</code> package contains the solutions to the exercise where you defined the MongooseJS schema.  They've been packaged and deployed so that you can easily use them in the rest of the labs.</p>
-          <p class="subtitle">Recording MQTT Sensor Activity</p>
 
           <p>Create a packages.json file by running this command.</p>
           <pre><code>$ npm init</code></pre>
           <pre><code>$ npm install --save mqtt lodash mongoose intel-commercial-edge-network-database-models</code></pre>
           <p class="label">./package.json</p>
-        </li>
+          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+  "name": "monitord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "intel-commercial-edge-network-database-models": "^1.0.9",
+    "lodash": "^4.13.1",
+    "mongoose": "^4.5.0",
+    "mqtt": "^1.11.0"
+  }
+}</pre></ui-codemirror>
 
-        <li>
           <p>When you upload your code to the Intel IoT Gateway, you will need to login to the console and run <code>npm install</code> in the top of you project directory. This will install the external NPM dependencies.</p>
-        </li>
-      </ol>
     </div>
 
     <div content-block name="connect-to-broker-and-database" message="Connect to the MQTT Broker and MongoDB">
@@ -228,7 +227,7 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
       <h4>The MQTT Event Loop</h4>
       <ol>
           <li>
-              <p>Just as you did in the temperature sensor Data Lab create a handler for the MQTT <code>connect</code> event. In this event handler subscribe to the following MQTT topics:</p>
+              <p>In Application Protocol lab, you learned how to create a handler for the MQTT <code>connect</code> event with NodeRed. Here we show how to create such handlers in JavaScript. In this event handler, the handler subscribes to the following MQTT topics:</p>
 
               <ul>
                   <li><code>announcements</code></li>
