@@ -196,7 +196,7 @@ var mqttClient = mqtt.connect('mqtt://192.168.1.1');</pre></ui-codemirror>
         <p class="label">./server.js</p>
         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require the MongoDB libraries and connect to the database
 var mongoose = require('mongoose');
-mongoose.connect(config.mongodb.host);
+mongoose.connect("mongodb://localhost/iotdemo");
 var db = mongoose.connection;
 
 // Report database errors to the console
