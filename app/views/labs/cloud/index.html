@@ -1,330 +1,247 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h4>Data Analytics in the Cloud</h4>
-    <ol class="breadcrumb">
-      <li>
-        <a href="index.html">Home</a>
-      </li>
-      <li>
-        <a>Labs</a>
-      </li>
-      <li class="active">
-        <strong>Data Analytics in the Cloud</strong>
-      </li>
-    </ol>
-  </div>
+    <div class="col-lg-10">
+        <h4>Data Analytics in the Cloud</h4>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>Data Analytics in the Cloud</strong>
+            </li>
+        </ol>
+    </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-  <div class="row">
-    <div class="col-lg-12">
+    <div class="row">
+        <div class="col-lg-12">
 
-      <!-- Objectives -->
-      <div ibox  title="Objectives">
-        <div content-block name="cloud-objectives" message="Read the Objectives">
-<h2 class="labHidden">Read the Objectives</h2>
-          <p>Send data to a private cloud services and visualize the result.</p>
+            <!-- Objectives -->
+            <div ibox title="Objectives">
+                <div content-block name="cloud-objectives" message="Read the Objectives" image-link="./views/labs/cloud/images/dashboard_ex.png">
+                    <h2 class="labHidden">Read the Objectives</h2>
+                    <p>This lab instructs the reader to setup an open source charting and analytics tool named Grafana, an open-source project at <a href="http://grafana.org/">http://grafana.org/</a>. Grafana is a graphical interface with InfluxDB as the data source and Telegraf as the agent that reads data. This is to read the sensor
+                        data from device through gateway and mqtt broker, store it in InfluxDB and display it through the Grafana graphical interface</p>
+                    <p>In this lab, you will do the following:</p>
+                    <ul>
+                        <li>Install a timeseries database named InfluxDB</li>
+                        <li>Configure it to injest the temperature sensor data</li>
+                        <li>Then visualize the data using Grafana, an open source analytics platform.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Install a timeseries database name InfluxDB -->
+            <div ibox title="Download and Install InfluxDB">
+                <div content-block name="influx-db-download" message="Download the pre-compiled 64-bit binary distribution of InfluxDB and unarchive it.">
+                    <h2 class="labHidden">Install a timeseries database name InfluxDB</h2>
+                    <labels gateway window apple linux/>
+
+                    <p>The first step is to download the pre-compiled 64-bit binary distribution of InfluxDB and unarchive it.</p>
+                    <pre><code>wget https://dl.influxdata.com/influxdb/releases/influxdb-0.13.0_linux_amd64.tar.gz</code></pre>
+                    <pre><code>tar zxvf influxdb-0.13.0_linux_amd64.tar.gz</code></pre>
+                </div>
+
+                <div content-block name="influx-db" message="Run the InfluxDB database">
+                    <p>Change directories into the InfluxDB directory that was just unarchived.</p>
+                    <pre><code>cd influxdb-0.13.0-1</code></pre>
+
+                    <p>Run the InfluxDB database.</p>
+                    <pre><code>./usr/bin/influxd --config ./etc/influxdb/influxdb.conf</code></pre>
+                </div>
+              </div>
+
+        <!-- Install the data collector named Telegraf -->
+        <div ibox title="Download and Install Telegraf">
+            <div content-block message="Download 64-bit pre-compiled Telegraf binaries" name="telegraf-download">
+              <p>Telegraf is an open source agent written for collecting metrics and data on the system it's running on or from other services. Telegraf writes data it collects to InfluxDB in the correct format.</p>
+              <p>We will be downloading Telegraf and configuring the MQTT over TLS input consumer.  This will gather sensor data over MQTT TLS and store it in the InfluxDB database.</p>
+              <p>Download the pre-compiled 64-bit binary distribution of Telegraf and unarchive it.</p>
+              <pre><code>wget https://dl.influxdata.com/influxdb/releases/influxdb-0.13.0_linux_amd64.tar.gz</code></pre>
+              <pre><code>tar zxvf influxdb-0.13.0_linux_amd64.tar.gz</code></pre>
+            </div>
+          </div>
+          <div ibox title="Generate Server Certificate Authority, Certificate and Key">
+            <div content-block message="Generate Server Certificate Authority, Certificate and Key" name="telegraf-certs">
+              <p>First, we will need to generate a server certificate authority, certificate and key. These will be used to authenticate and encrypt the MQTT sensor data.</p>
+
+              <p>Run these commands on the gateway console.</p>
+              <div class="alert alert-warning">
+                <p>It is important to note that while generating these, the “Common Name” parameter in step 1 above and step 4 should specify the server address, “localhost”. Otherwise it will not authenticate correctly.</p>
+              </div>
+              <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
+openssl genrsa -des3 -out server.key 2048
+openssl genrsa -out server.key 2048
+openssl req -out server.csr -key server.key -new
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365
+</code></pre>
+
+            </div>
+
+            <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
+              <p>Now move the CA, Certificate and Key file to the MQTT broker's configuration directories</p>
+              <pre><code>mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
+mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
+            </div>
+          </div>
+
+          <div ibox title="Configure Mosquitto to use MQTT over TLS">
+            <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
+              <p>Be sure that your Mosquitto configuration file has all of these options set, particularly the <b>port number 8883, the cafile, and certfile and the keyfile.</b></p>
+              <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
+<ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># Place your local configuration in /etc/mosquitto/conf.d/
+
+pid_file /var/run/mosquitto.pid
+
+bind_address 127.0.0.1
+port 8883
+
+persistence true
+persistence_location /var/lib/mosquitto/
+
+log_dest file /var/log/mosquitto/mosquitto.log
+
+cafile /etc/mosquitto/ca_certificates/ca.crt
+certfile /etc/mosquitto/certs/server.crt
+keyfile /etc/mosquitto/certs/server.key
+
+tls_version tlsv1
+
+include_dir /etc/mosquitto/conf.d</ui-codemirror>
+            </div>
+          </div>
+
+          <div ibox title="Configure Telegraf to use MQTT over TLS">
+            <div content-block message="Configure Telegraf to use an MQTT consumer and an InfluxDB output filter" name="telegraf-configure">
+              <p>Change directories into the newly unarchived telegraf directory with the telegraf binary.</p>
+              <pre><code>cd ./telegraph-0.13.1-1/usr/bin</code></pre>
+
+              <p>Run this command to generate a configuration file with an MQTT consumer and an InfluxDB output filter.</p>
+              <pre><code>telegraf -sample-config --input-filter mqtt_consumer --output-filter influxdb > telegraf-mqtt.conf</code></pre>
+            </div>
+
+            <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
+              <p>Open the telegraf-mqtt.conf file, go the [[outputs.influxdb]]</p>
+              <pre><code>vim telegraf-mqtt.conf</code></pre>
+
+<ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
+###############################################################################
+#                            OUTPUT PLUGINS                                   #
+###############################################################################
+
+# Configuration for influxdb server to send metrics to
+[[outputs.influxdb]]
+## The full HTTP or UDP endpoint URL for your InfluxDB instance.
+## Multiple urls can be specified as part of the same cluster,
+## this means that only ONE of the urls will be written to each interval.
+# urls = ["udp://localhost:8089"] # UDP endpoint example
+urls = ["http://localhost:8086"] # required
+## The target database for metrics (telegraf will create it if not exists).
+database = "telegraf" # required
+## Precision of writes, valid values are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+## note: using "s" precision greatly improves InfluxDB compression.
+precision = "s"
+
+## Retention policy to write to.
+retention_policy = "default"
+## Write consistency (clusters only), can be: "any", "one", "quorom", "all"
+write_consistency = "any"
+
+## Write timeout (for the InfluxDB client), formatted as a string.
+## If not provided, will default to 5s. 0s means no timeout (not recommended).
+timeout = "5s"
+# username = "telegraf"
+# password = "metricsmetricsmetricsmetrics"
+## Set the user agent for HTTP POSTs (can be useful for log differentiation)
+# user_agent = "telegraf"
+## Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
+# udp_payload = 512
+
+## Optional SSL Config
+# ssl_ca = "/etc/telegraf/ca.pem"
+# ssl_cert = "/etc/telegraf/cert.pem"
+# ssl_key = "/etc/telegraf/key.pem"
+## Use SSL but skip chain & host verification
+# insecure_skip_verify = false
+</ui-codemirror>
+            </div>
+
+
+            <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
+              <p>Open the telegraf-mqtt.conf file, go the [[inputs.mqtt_comsumer]]</p>
+<ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">###############################################################################
+#                            SERVICE INPUT PLUGINS                            #
+###############################################################################
+
+# Read metrics from MQTT topic(s)
+[[inputs.mqtt_consumer]]
+servers = ["localhost:8883"]
+qos = 0
+
+topics = [
+   "sensors/temperature/data",
+   "announcements",
+]
+
+persistent_session = false
+client_id = ""
+
+## Optional SSL Config
+ssl_ca = "/etc/mosquitto/ca_certificates/ca.crt"
+ssl_cert = "/etc/mosquitto/certs/server.crt"
+ssl_key = "/etc/mosquitto/certs/server.key"
+insecure_skip_verify = true
+
+data_format = "json"</ui-codemirror>
+
+            <p>The first topic <b>sensors/+/data</b> will comsumer messages that contain new sensor data. In MQTT, topics are heirarchical.  In the heirarchy here the second level is the sensors unqiue identifier. We've used a '+' symbol which is a wild card in MQTT topics.  So this topic represents all the data from sensors on the local network.</p>
+            <p>The second topic <b>sensors/new</b> will consumer messages that announce new sensors on the network.</p>
+
+
+            <p>Next change the data format on line 149 to "json"</p>
+            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">data_format = "json"</ui-codemirror>
+
+            <p>Here topics should point to what we are subscribing to listen on the mqtt connection. Also important to note here is to change the data_format = “json” since the data that we will publish from the sensors will be in json format. If we keep the default data_format which is influx we will see parsing errors.</p>
+          </div>
+
+          <div content-block message="Start the telegraf service" name="telegraf-start">
+            <p>Next start the telegraf service pointing to this conf file:</p>
+            <pre><code>telegraf -config telegraf-mqtt.conf</code></pre>
+          </div>
+          <div content-block message="Start the telegraf service" name="telegraf-start" image-link="./views/labs/cloud/images/telegraf-start.png">
+            <p>We should start getting the readings if they are getting published from the sensors as below:</p>
+            <img class='labHidden' src="./views/labs/cloud/images/telegraf-start.png"></src>
+          </div>
+
         </div>
-      </div>
 
-      <!-- Exercise 1: Introduction to Cloud Services -->
-      <div ibox  title="Exercise 1: Introduction to Cloud Services">
-        <div content-block name="private-cloud" message="Read about the Message Format needed to send data to the private cloud" image-link="./views/labs/cloud/images/first_flow.png">
-<h2 class="labHidden">Read about the Message Format needed to send data to the private cloud</h2>
-<img class="labHidden" src="./views/labs/cloud/images/first_flow.png"></img>
+        <!-- Install the data collector named Telegraf -->
+        <div ibox title="Install Grafana">
+          <div content-block message="Download Grafana" name="grafana-download">
+            <p>Change directories into the InfluxDB directory that was just unarchived.</p>
+            <pre><code>cd grafana*/bin</code></pre>
 
-          <labels gateway window apple linux/>
-          <p>Private cloud service is provided for data collection and visualization.</p>
+            <p>Run the Grafana service</p>
+            <pre><code>./grafana-server</code></pre>
+          </div>
+          <div content-block message="Sign into Grafana" name="grafana-download" image-link="./views/labs/cloud/images/grafana-login.png">
 
-          <p>There is the private IoT Cloud service provided with MQTT connectivity and broker as part of the IoT Cloud offering. The IP address of cloud is <b>13.82.30.162</b>. You can access the service by clicking on following link <a href="http://13.82.30.162:8080"
-              target="_blank">http://13.82.30.162:8080</a>
-          </p>
+            <p>Start Grafana from browser:</p>
+            <pre><code>http://localhost:3000</code></pre>
 
-          <p>This cloud service needs specific topic structure as well as message format to visualize or analyse data. </p>
+            <div class="alert alert-info">
+              <p>You can sign up or just sign in with</p>
+              <pre>Login: <b>admin</b>
+Password: <b>admin</b></pre>
+            </div>
+          </div>
 
-          <p><b>MQTT Topic to send date</b></p>
-          <p><code>gateways/<b>{Gateway Id}</b>/sensors/<b>{Sensor Id}</b>/data </code> </p>
-          <p>Here Gateway Id and Sensor Id is user dependant. For standarized represenatation of all IoT devices please use Gateway Id as last 4 digit of your wireless Mac address.</p>
-
-          <p><b>MQTT Message Format</b></p>
-<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
-  "gateway_id":"E2D0",
-  "sensor_id":"light",
-  "value":90,
-  "timestamp":1457303819281
-}</pre></ui-codemirror>
-          <p>This is a standarized representation of message format which is accepted by cloud service.</p>
-        </div>
-      </div>
-
-      <!-- Exercise 2: Node-RED Application on Gateway -->
-      <div ibox  title="Exercise 2: Node-RED Application on Gateway">
-        <div content-block message="Read the Objectives"
-            name="cloud-objective-node-red">
-          <p>Create a node-red application to collect data from sensors, take average of 5 consecutive data and send to cloud service.</p>
-        </div>
-        <div content-block message="Install and Run Node-RED on Gateway"
-             name="install-node-red-on-gateway" >
-          <h4>Install and Run Node-RED on Gateway </h4>
-          <p>If you have already installed Node-RED on your gateway then you can skip installation step and directly run node-red.</p>
-          <p>SSH into your gateway. For more information on steps to Login gateway you can check Step 3 of Module 1 </p>
-
-          <p>Install Node-RED with,
-            <code>$ npm install -g node-red</code>
-          </p>
-          <p> You should now run the Node-RED server by typing,
-            <code>$ node-red</code> </p>
-            <p> To access Node-RED in your browser, click on <a href="http://192.168.1.1:1880" target="_blank">http://192.168.1.1:1880</a>
-            </p>
-        </div>
-        <div content-block message="Create following flow using a MQTT node and a function node"
-             name="create-node-red-appliction-on-gateway" image-link="./views/labs/cloud/images/first_flow.png">
-          <h4>Create Node-RED application on gateway</h4>
-          <ol>
-            <li>
-              <p>Create following flow using mqtt (input), debug, function and mqtt (output).</p>
-            </li>
-          </ol>
-        </div>
-        <div content-block message="Configure the Node-Red Nodes"
-           name="configure-node-red-nodes" image-link="./views/labs/cloud/images/edit_mqtt_in_node.png">
-          <ol>
-            <li>
-              <p>Configure mqtt(input) node. Add new Server with server as "localhost" and port number as 1883. (Port 1883 is default assigned MQTT port.) Add topic for mqtt where sensors are publishing data. In this example we have assumed that sensors
-                are publishing data on topic <code>sensors/<b>{Sensor Id}</b>/data</code> (i.e sensors/temperature/data where temperature is Sensor Id.)
-              </p>
-            </li>
-          </ol>
-        </div>
-        <div content-block message="Write the averaging function"
-             name="cloud-write-function" image-link="./views/labs/cloud/images/edit_function_node.png">
-        <ol>
-          <li>
-            <p>Configure Function node in a way that collects the data for 5 consecutive values, find an average out of it and send that reduced average data to cloud. You can also look into following given code.
-              <div class="alert alert-info"><b>Change gatewayId on 2nd line of following code with last 4 digit of your Gaterway Wireless Mac Address.  (i.e Change 1234 to new 4 digit wireless mac address)</b></div>
-            </p>
-          </ol>
         </div>
 
-        <div content-block name="code" message="Copy this code into the function node">
-<h2 class="labHidden">Copy this code into the function node</h2>
-            <ui-codemirror ui-codemirror-opts="editorOptions" id="example1">var totalValues = 5; //define the number of values to average
-var gatewayId = "1234"; // Enter last 4 digit of your Gateway Wireless Mac Address
-var payload = JSON.parse(msg.payload); //parse the payload in JSON format
-var data = payload.value; //Save the sensor value
 
-context.valueArray = context.valueArray || []; //setup a persistant array and initalise it
-context.count = context.count || 0; //init the counter and set it to 0 if its not already
-
-//take whatever came in and add it to the position "context.count" in context.valueArray
-
-if (msg.payload == "false") {
-  context.valueArray[context.count] = 0;
-} else {
-  context.valueArray[context.count] = parseInt(data);
-}
-
-context.count += 1; //add 1 to context count
-if (context.count == totalValues) { //if this function has been run x times, then we have all x values
-  var value = 0.00; //make a temp variavle and set it to 0
-
-  for (j = 0; j < totalValues; j++) {
-    //add the value of the item at position j in the array to our temp variable
-    value = value + context.valueArray[j];
-  }
-  var average = parseInt(value / totalValues);
-
-  // Create a new message with topic, payload, qos and retain to send in cloud
-  var newMsg = {
-    topic: "gateways/" + gatewayId + "/sensors/" + payload.sensor_id + "/data",
-    payload: {
-      gateway_id: gatewayId,
-      sensor_id: payload.sensor_id,
-      value: average,
-      timestamp: Date.now()
-    },
-    qos: 0,
-    retain: false
-  };
-
-  context.count = 0; //set the counter back to 0 for the next go
-  return [newMsg]; //then shove it out to the next node
-}
-</pre></ui-codemirror>
-          </li>
-        </ol>
-      </div>
-
-      <div content-block message="Configure MQTT to send data to the private cloud"
-      name="cloud-configure-mqtt" image-link="./views/labs/cloud/images/add_mqtt_broker.png">
-        <div class="alert alert-warning">Be sure that you click on <b>Add New MQTT Broker</b>. Do not edit the existing broker or this will modify all MQTT nodes in the current flow.</div>
-      </div>
-
-      <div content-block message="Configure MQTT to send data to the private cloud"
-      name="cloud-configure-mqtt" image-link="./views/labs/cloud/images/edit_mqtt_out_node.png">
-        <ol>
-          <li>
-            <p>Configure Mqtt(output) to send data to cloud. Add new Server with server as "13.82.30.162" and port number as 1883. This is server address of our IoT cloud. Leave topic,qos and retain blank because we have already setup all these properties via message properties. That node will look like below image.</p>
-          </li>
-          <li>
-            The Debug node causes any message to be displayed in the Debug sidebar. By default, it just displays the payload of the message, but it is possible to display the entire message object.
-          </li>
-        </ol>
-      </div>
-
-
-      <div content-block message="Deploy the Node-Red flow"
-           name="cloud-deploy-the-flow" image-link="./views/labs/cloud/images/second_flow.png">
-        <ol>
-          <li>
-            <p>The final flow of our configuration will look like below shown image. Names of nodes might differ from what you have assigned.</p>
-          </li>
-
-          <li>
-            <p>Click the Deploy button to deploy this flow to your gateway. The button to the right of the node will toggle its output on and off so you can de-clutter the debug window.</p>
-          </li>
-        </ol>
-      </div>
-
-      <div content-block message="cloud-import" name="If you need the solution, you can import it.">
-        <h4> Node-RED Flow Source </h4>
-        <p> Any flow in Node-RED can be exported / imported as a JSON object. The code for the above flow is displayed below. To import it into your work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in.</p>
-        <ui-codemirror ui-codemirror-opts="editorOptions" id="example2">[{
-  "id": "2d6882db.d2977e",
-  "type": "mqtt-broker",
-  "z": "173e68b2.e8c197",
-  "broker": "13.82.30.162",
-  "port": "1883",
-  "clientid": "",
-  "usetls": false,
-  "verifyservercert": true,
-  "compatmode": true,
-  "keepalive": "60",
-  "cleansession": true,
-  "willTopic": "",
-  "willQos": "0",
-  "willRetain": null,
-  "willPayload": "",
-  "birthTopic": "",
-  "birthQos": "0",
-  "birthRetain": null,
-  "birthPayload": ""
-}, {
-  "id": "f6fa250a.0905d8",
-  "type": "mqtt-broker",
-  "z": "173e68b2.e8c197",
-  "broker": "localhost",
-  "port": "1883",
-  "clientid": "",
-  "usetls": false,
-  "verifyservercert": true,
-  "compatmode": true,
-  "keepalive": "60",
-  "cleansession": true,
-  "willTopic": "",
-  "willQos": "0",
-  "willRetain": null,
-  "willPayload": "",
-  "birthTopic": "",
-  "birthQos": "0",
-  "birthRetain": null,
-  "birthPayload": ""
-}, {
-  "id": "e6cd80fb.19328",
-  "type": "mqtt in",
-  "z": "173e68b2.e8c197",
-  "name": "Incoming MQTT messages from Sensors",
-  "topic": "sensors/temperature/data",
-  "broker": "f6fa250a.0905d8",
-  "x": 366.5,
-  "y": 242,
-  "wires": [
-    [
-      "a7ffb8a4.580048",
-      "3b750487.c48afc"
-    ]
-  ]
-}, {
-  "id": "a7ffb8a4.580048",
-  "type": "function",
-  "z": "173e68b2.e8c197",
-  "name": "Average of 5 consecutive sensor values",
-  "func": "var totalValues = 5; //define the number of values to average\nvar gatewayId = \"1234\"; // Enter last 4 digit of your Gateway Wireless Mac Address\nvar payload = JSON.parse(msg.payload);\nvar data = payload.value;\n\ncontext.valueArray = context.valueArray || []; //setup a persistant array and initalise it\ncontext.count = context.count || 0; //init the counter and set it to 0 if its not already   \n\n//take whatever came in and add it to the position \"context.count\" in context.valueArray\n\nif (msg.payload ==\"false\") {\n    context.valueArray[context.count] = 0;\n} else {\n    context.valueArray[context.count] = parseInt(data);\n}\n\ncontext.count += 1; //add 1 to context count\nif (context.count == totalValues) { //if this function has been run x times, then we have all x values\n    var value = 0.00; //make a temp variavle and set it to 0\n    \n    for (j=0; j<totalValues; j++) {\n        //add the value of the item at position j in the array to our temp variable\n        value = value + context.valueArray[j];\n    }\n    var average = parseInt(value/totalValues);\n    var newMsg = {\n        topic:\"gateways/\" +gatewayId+ \"/sensors/\" +payload.sensor_id+ \"/data\",\n        payload:\n        {\n            gateway_id:gatewayId,\n            sensor_id: payload.sensor_id,\n            value: average,\n            timestamp: Date.now()\n        },\n        qos:0,\n        retain:false\n    };\n    \n    \n  //  var result = {\"value\": String(average)}; //dump the caluulated average and out temp var out\n    // add all the variables to a second message for debug\n  //  var parsedvalueArray = {\"payload\": \"Array = \" + context.valueArray + \"\\npreAverage = \" + value + \"\\nAverage = \" + average};\n    \n    context.count=0; //set the counter back to 0 for the next go\n    return [newMsg]; //then shove it out to the next node\n}",
-  "outputs": 1,
-  "noerr": 0,
-  "x": 512.5,
-  "y": 368,
-  "wires": [
-    [
-      "c450d142.3baf3",
-      "6569b65d.9a9648"
-    ]
-  ]
-}, {
-  "id": "c450d142.3baf3",
-  "type": "mqtt out",
-  "z": "173e68b2.e8c197",
-  "name": "Outgoing MQTT message to Cloud",
-  "topic": "",
-  "qos": "",
-  "retain": "",
-  "broker": "2d6882db.d2977e",
-  "x": 857.5,
-  "y": 270,
-  "wires": [
-
-  ]
-}, {
-  "id": "6569b65d.9a9648",
-  "type": "debug",
-  "z": "173e68b2.e8c197",
-  "name": "Debug Outgoing MQTT message",
-  "active": true,
-  "console": "false",
-  "complete": "true",
-  "x": 827.5,
-  "y": 478,
-  "wires": [
-
-  ]
-}, {
-  "id": "3b750487.c48afc",
-  "type": "debug",
-  "z": "173e68b2.e8c197",
-  "name": "Debug Incoming MQTT Messages",
-  "active": true,
-  "console": "false",
-  "complete": "payload",
-  "x": 760.5555555555555,
-  "y": 164.44444444444443,
-  "wires": [
-
-  ]
-}]</pre></ui-codemirror>
-      </div>
-    </div>
-
-    <div ibox  title="Exercise 3: Visualize Data in Cloud">
-      <div content-block name="cloud-exercise-3" message="Complete Exercise 3: Visualize Data in Cloud">
-<h2 class="labHidden">Complete Exercise 3: Visualize Data in Cloud</h2>
-        <p>
-          Visualize and analyze your Data which you are sending from gateway in cloud.
-        </p>
-      </div>
-
-      <div content-block message="Enter your Gateway Id and click on Plot" name="cloud-enter-your-gateway" image-link="./views/labs/cloud/images/gateway_info.png">
-        <h4>Visualize your Realtime Data via Graph and Table </h4>
-        <p>Go to cloud service provided at <a href="http://13.82.30.162:8080" target="_blank">http://13.82.30.162:8080</a>. Enter your Gateway Id and click on Plot.
-        </p>
-      </div>
-      <div content-block message="Visualize Your Data" name="cloud-graph-plotting" image-link="./views/labs/cloud/images//gateway_graph.png">
-        <p>You will see your realtime graph plotting for your specified gateway Id.</p>
-      </div>
-      <div content-block message="View Your data in table format" name="cloud-data-table" image-link="./views/labs/cloud/images/table.png">
-        <p>If you scroll down then you can also visualize your data in table format.</p>
-      </div>
-    </div>
-
-    </div>
+    
   </div>
 </div>
