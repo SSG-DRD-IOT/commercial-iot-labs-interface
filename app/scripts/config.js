@@ -52,6 +52,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         pageTitle: 'Introduction'
       }
     })
+    .state('labs.introduction-nuc', {
+      url: "/introduction-nuc",
+      templateUrl: "views/labs/intro-nuc/index.html",
+      data: {
+        pageTitle: 'Introduction'
+      }
+    })
     .state('labs.build', {
       url: "/build",
       templateUrl: "views/labs/build/index.html",
