@@ -157,7 +157,7 @@
 
                     <p>When working with the Gateway and Arduino 101, "MRAA loads the Arduino 101* board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
                     <p>Locate the code:</p>
-                    <code></code>var myOnboardLed = new mraa.Gpio(13);</code>
+                    <code>var myOnboardLed = new mraa.Gpio(13);</code>
                     <p>And replace it for:</p>
                     <code>var myOnboardLed = new mraa.Gpio(525); </code>
                 </div>
