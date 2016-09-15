@@ -151,6 +151,16 @@
                     <p>Choose a directory for your project files, and enter a name for your project.</p>
                     <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
                 </div>
+                <div content-block name="change-io" message="Adjust the code to this setup" image-link="./views/labs/build-nuc/images/image_4.png">
+                    <h2 class="labHidden">Adjust the code to this setup</h2>
+                    <p><img class="labHidden" alt="" data-fid="503897" src="https://software.intel.com/sites/default/files/managed/cb/f7/image_4.png" typeof="foaf:Image"></p>
+
+                    <p>When working with the Gateway and Arduino 101, "MRAA loads the Arduino 101* board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
+                    <p>Locate the code:</p>
+                    <code></code>var myOnboardLed = new mraa.Gpio(13);</code>
+                    <p>And replace it for:</p>
+                    <code>var myOnboardLed = new mraa.Gpio(525); </code>
+                </div>
 
                 <div content-block name="select-device" message="Select a target IoT device" image-link="./views/labs/build-nuc/images/image_6.png">
                     <h2 class="labHidden">Select a target IoT device</h2>
