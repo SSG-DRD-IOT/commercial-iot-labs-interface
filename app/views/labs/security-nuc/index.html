@@ -1,0 +1,683 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Security</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>Security</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+            <div ibox title="Objectives">
+                <div content-block name="security-objectives" message="Read the Objectives">
+                    <h2 class="labHidden">Read the Objectives</h2>
+                    <labels gateway window apple linux/>
+                    <p>By the end of this module, you should be able to:</p>
+
+                    <!-- <ul>
+                        <li>Use McAfee® Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
+                        <li>Have an understanding of the core MEC features, including code and application protection, write and read protection and dynamic whitelisting.</li>
+                        <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li>
+                        <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li>
+                        <li>Ensuring IoT Gateways so that only trusted modules, Files can Read / Write, Modify & execute.</li>
+                        <li>Ability to log the IoT gateway usage and changes</li>
+                    </ul> -->
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div ibox collapse title="Section 1: McAfee® Embedded Control Orientation">
+                <div content-block name="security-objectives" message="Complete the McAfee® Embedded Control Exercises">
+                    <h2 class="labHidden">Complete the McAfee® Embedded Control Exercises</h2>
+                    <h5>Lab Overview</h5>
+
+                    <p>The Intel Iot Gateway provides a McAfee layer that lets you configure McAfee embedded products for the Wind River Linux target platform. McAfee® Embedded Control for the Intel® Security product offering—maintains the integrity of your system by only allowing authorized code to run and only authorized changes to be made to a system. It automatically creates a dynamic whitelist of the “authorized code” on the embedded system. Once the whitelist is created and enabled, the system is locked down to the current, known good baseline and no program or code snippet outside the authorized set can run and no unauthorized changes can be made. McAfee® Embedded Control (MEC) provides the following capabilities in Wind River Linux platforms:</p>
+
+                    <ul>
+                        <li>
+                            <p>code and application protection, which only lets whitelisted programs (binary executables, scripts) run. Any program that does not appear in the whitelist cannot run. This stops malicious programs from installing and functioning on the system.</p>
+                        </li>
+                        <li>
+                            <p>tamper proofing for whitelisted programs so the files cannot be modified on the disk, directories or volumes</p>
+                        </li>
+                        <li>
+                            <p>dynamic whitelisting, which eliminates the need to manually maintain the inventory list of authorized applications. This features let you manage and update whitelisted files.</p>
+                        </li>
+                    </ul>
+              </div>
+
+              <div content-block name="security-mec-verify" message="Verify setup of McAfee® Embedded Control Exercises">
+                <h5>1. Exploring McAfee® Embedded Control</h5>
+
+                <p>In this section you will explore how McAfee® Embedded Control integrates into Wind River Linux and how MEC manages the inventory of executables, configurations, operating modes and logging.</p>
+
+                <p>On the Intel Iot Gateway, open a terminal window and execute the following command to confirm that the McAfee® Embedded Control (MEC) rpm is installed:</p>
+                <pre><code># rpm -qa | egrep solidcore&#13;&#10;solidcores3-6.6.0_145-r0.0.intel_baytrail_64</code></pre>
+                <p>You should see the name of the Solid Core rpm appear. This verifies that it is installed.</p>
+              </div>
+
+              <div content-block name="security-features-list" message="Verify features of McAfee® Embedded Control Exercises">
+
+                    <p>Next let's verify which version of McAfee® Embedded Control is installed on your gateway</p>
+                    <pre><code># sadmin features list&#13;&#10;MEC Essential</code></pre>
+                    <p class="alert alert-info">If you see MEC Essential installed, then you have the minimal McAfee® Embedded Control installation.  This version has a reduced feature set and is available with the free version of your Wind River Linux operating system.</p>
+
+                    <p>Next let's next verify which features are enabled with your version of McAfee® Embedded Control</p>
+                    <pre><code># sadmin features list&#13;&#10;checksum&#9;&#9;Enabled&#13;&#10;integrity&#9;&#9;Enabled</code></pre>
+                    <pre><code>sadmin features</code></pre>
+
+                    <p>Note the following aspect of the MEC features:</p>
+                    <ul>
+                      <li>
+                          <p>The feature <strong>integrity</strong> Based on your setup, Embedded Control gives you the flexibility to configure access to the protected systems. You can lock down systems to prevent even administrators from changing what is authorized to run on a system, unless presented with an authentication key.</p>
+                      </li>
+                      <li>
+                        <strong>checksum</strong> With this release, we have added support for SHA256 to calculate checksum values of inventory items. SHA256 offers improved security as compared to SHA1. Although we continue to support SHA1, checksum values of inventory items will be calculated using SHA256. If you use SHA256 as the hash algorithm, we compute both SHA1 and SHA256 values while creating the whitelist. However, decision making is primarily based on SHA256 values.
+                      </li>
+                      <li>
+                          <p>The feature <strong>script-auth</strong> is like deny-exec, but for scripts - only whitelisted scripts file can execute.</p>
+                      </li>
+                      <li>
+                          <p>The feature <strong>deny-write</strong> provides tamper-proofing to protect data file ( for example configuration file). Unlike the deny-exec and script-auth features (which rely on a whitelist), the deny-write feature is rules-based. The MEC configuration file (solidcore.conf) records the rules.</p>
+                      </li>
+                      <li>
+                          <p>The feature <strong>deny-read</strong> provides tamper-proofing to prevent reading of critical files. The feature <strong>deny-read</strong> is alos rule based (like deny-write) - The MEC configuration file (solidcore.conf)
+                              records the rules. The feature is disabled by default.</p>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div content-block name="security-mec-help" message="Observe the list of possible commands in the help of McAfee® Embedded Control ">
+                    <p>Execute the following command to display the help menu:</p>
+                    <pre><code>sadmin help</code></pre>
+                    <img src="./views/labs/security-nuc/images/sadmin-help.png" alt="image alt text" />
+                  </div>
+
+                  <div content-block name="security-mec-status" message="Find the current status of McAfee® Embedded Control ">
+                    <p>As the MEC administrators, execute the following command to check the status of the McAfee® Embedded Control on your target:</p>
+                    <pre><code>sadmin status</code>
+                    <img alt="" src="./views/labs/security-nuc/images/sadmin-status.png">
+                                    <p>Observe that the status is Unsolidified.</p>
+
+                                    <p>The following table describes the fields and their meaning.</p>
+                                    <table>
+                                        <tr>
+                                            <th style="width: 140px;">Field</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>McAfee Solidifier</td>
+                                            <td>specifies the operation mode of the application control</td>
+                                        </tr>
+                                        <tr>
+                                            <td>McAfee Solidifier on reboot</td>
+                                            <td>specifies the operation mode of the application control after a system restart</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ePO Managed</td>
+                                            <td>displays the connectivity status of application control with McAfee ePO. In a standalone configuration, this status is No.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Local CLI Access</td>
+                                            <td>displays the statue (lockdown or recovered) of the local CLI. In standalone configuration, this status is Recovered.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>fstype</td>
+                                            <td>displays the supported file systems for a volume</td>
+                                        </tr>
+                                        <tr>
+                                            <td>status</td>
+                                            <td>displays the current whitelist status for all the supported volumes on a system. If a volume name is specified, only the whitelist status for the volume displays.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>driver status</td>
+                                            <td>displays whether the application control driver is loaded on a volume. If the driver is loaded, the status is attached; otherwise the status is unattached.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>volume</td>
+                                            <td>displays the volume name</td>
+                                        </tr>
+                                    </table>
+                        </div>
+
+                        <div content-block name="security-mec-status" message="Look at the SolidCore log files for  McAfee® Embedded Control">
+
+                            <p>Execute the following command to display the log file:</p>
+                            <pre><code>cat /usr/local/mcafee/solidcore/log/solidcore.log</code></pre >
+                        </div>
+
+                        <div content-block name="security-mec-status" message="Look at the configurations files for McAfee® Embedded Control">
+                          <p>Execute the following command to display the configuration file:</p>
+                          <pre><code>less /etc/mcafee/solidcore/solidcore.conf</code></pre>
+                          <p>Observe that the file includes the following rules and configurations:</p>
+                          <ul>
+                              <li>
+                                  <p>the run-time mode</p>
+                              </li>
+                              <li>
+                                  <p>the run-time mode on next reboot</p>
+                              </li>
+                              <li>
+                                  <p>the license</p>
+                              </li>
+                              <li>
+                                  <p>the features installed</p>
+                              </li>
+                              <li>
+                                  <p>the features enabled</p>
+                              </li>
+                              <li>
+                                  <p>write protect, read protect, and monitoring rules</p>
+                              </li>
+                              <li>
+                                  <p>the installation directory</p>
+                              </li>
+                              <li>
+                                  <p>the log file directory</p>
+                              </li>
+                          </ul>
+                        </div>
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div ibox collapse title="Section 2: McAfee® Embedded Control Generating the White List">
+                  <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect.">
+                    <h5>Enabling McAfee® Embedded Control</h5>
+
+                    <p>In this section you will generate an initial whitelist, enable MEC, and restart the McAfee solidifier service.</p>
+
+                    <p>Dynamic whitelisting is a core feature of MEC. The whitelist (or inventory) enumerates the set of programs (called authorized or solidified program code) that are allowed to run on the host computer. Any programs not in the whitelist are considered unauthorized - they cannot execute, and MEC logs their failed attempt to execute. Whitelisting does not change the files listed in the inventory.</p>
+
+                    <p>As the MEC administrator, execute the following command to create the initial whitelist.</p>
+                    <pre><code>sadmin solidify /bin /boot /etc /lib /lib64 /opt /root /sbin /usr /www</code></pre>
+                    <p>This command may take a few minutes to complete.</p>
+
+                    <p>As the MEC administrator, execute the following command to confirm that MEC created the initial whitelist. The application control component stores a whitelist for each volume at volume</p>
+                    <pre><code>ls -l /.solidcore/scinv</code></pre>
+                    <img alt=""  src="./views/labs/security-nuc/images/solidcore-index.png">
+                  </div>
+
+                  <div content-block name="security-test-restart" message="Run 'sadmin status' and observe the results.">
+                    <p>Execute the following command to check the status of McAfee® Embedded Control.</p>
+                    <pre><code>sadmin status</code></pre>
+                    <img alt=""  src="./views/labs/security-nuc/images/sadmin-status-solidify-enabled.png"/>
+                    <p>Observe that the status of the ext4 drive has changed to Solidified.</p>
+                  </div>
+
+                  <div content-block name="security-test-restart" message="Enable and Restart the McAfee® Embedded Control service">
+                    <p>As the MEC administrator, execute the following command to enable MEC.</p>
+                    <pre><code>sadmin enable</code></pre>
+                    <p>McAfee Solidifier will be enabled on service restart.</p>
+                    <img alt=""  src="./views/labs/security-nuc/images/sadmin-enable2.png"/>
+                  </div>
+
+                  <div content-block name="security-test-restart" message="Restart the McAfee® Embedded Control Service">
+                    <p>As the MEC admin, execute this command to restart the McAfee service</p>
+                    <pre><code>systemctl restart scsrvc</code></pre>
+                    <img alt=""  src="./views/labs/security-nuc/images/systemctl-status.png"/>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <!-- <h5>3. Verifying MEC Code and Application Protection</h5>
+
+                    <p>In this section you will create a script and observe how MEC code and application protection works.</p>
+
+                    <p>MEC only lets whitelisted programs (binaries, executables, or scripts) run - any program not in the whitelist cannot run.</p>
+
+                    <ol>
+
+                        <li>
+                            <p>Create the script by typing</p>
+                            <pre><code># vi /root/test_script.sh</code></pre>
+                            <p>Type "i" to enter insert mode and then type</p>
+                            <pre><code>#!/bin/bash
+                  echo "Hello, World"
+                </code></pre>
+                            <p><b>Then press "ESC" and type “:wq”  This will save and quit the vi editor.</b></p>
+                        </li>
+
+                        <li>
+                            <p>Give the script execute permissions</p>
+                            <pre><code>$ chmod +x /root/test_script.sh</code></pre>
+                            <p>Then try to execute the script.</p>
+                            <pre><code>$ /root/test_script.sh</code></pre>
+                            <p><img alt="" data-fid="504132" src="https://software.intel.com/sites/default/files/managed/25/9c/image_8.png" typeof="foaf:Image"></p>
+                            <p>Note the response Permission denied - MEC did not allow the script to run.</p>
+                        </li>
+
+                        <li>
+                            <p>Review the log by typing</p>
+                            <pre><code>cat /usr/local/mcafee/solidcore/log/solidcore.log | tail -n 1</code></pre>
+                            <p><img alt="" data-fid="504133" src="https://software.intel.com/sites/default/files/managed/e9/67/image_9.png" typeof="foaf:Image"></p>
+                            <p>This response indicates that MEC prevented the script from executing.</p>
+                            <ol>
+                                <li style="list-style-type:lower-latin;">
+                                    <p>Check if the script is on the whitelist</p>
+                                    <pre><code>sadmin list-solidified | grep /root/test_script.sh</code></pre>
+                                    <p>Not out displays - this confirms that test_script.sh is not on the whitelist.</p>
+                                </li>
+                                <li>
+                                    <p>Add test_script.sh to the whitelist</p>
+                                    <pre><code>sadmin so /root/test_script.sh</code></pre>
+                                    <p><img alt="" data-fid="504134" src="https://software.intel.com/sites/default/files/managed/b7/27/image_10.png" typeof="foaf:Image"></p>
+                                </li>
+                                <li>
+                                    <p>Execute the command again.</p>
+                                    <pre><code>/root/test_script.sh
+                      Hello, World</code></pre>
+                                </li>
+                                <li>
+                                    <p>Check the MEC log. The script was allowed to execute.</p>
+                                    <p><img alt="" data-fid="504135" src="https://software.intel.com/sites/default/files/managed/c8/10/image_11.png" typeof="foaf:Image"></p>
+                                </li>
+                            </ol>
+                        </li>
+
+                    </ol>
+                  </div>
+
+                    <h5>4. Verifying MEC Write/Read Protection</h5>
+
+                    <p>In this section you will implement write and read protection to the file /root/test_script.sh</p>
+
+                    <p>MEC not only protects executable files, but also data files (including configuration files). The MEC write/read protection feature provides tamper-proofing for all kinds of files. Unlike the code and application protection feature
+                        is rule-based, with the rules recorded in the MEC configuration file).</p>
+
+                    <ol>
+
+                        <li>
+                            <p>Execute the following command to set write protection for the file.</p>
+                            <pre><code>sadmin wp -i /root/test_script.sh</code></pre>
+                        </li>
+
+                        <li>
+                            <p>As the MEC administrator, execute the following command to review the MEC configuration file and confirm that you added a rule to write-protect <strong>/root/test_script.sh</strong></p>
+                            <pre><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></pre>
+                            <p><img alt="" data-fid="504136" src="https://software.intel.com/sites/default/files/managed/93/44/image_14.png" typeof="foaf:Image"></p>
+                        </li>
+
+                        <li>
+                            <p>Now try to modify the file by executing the following command.</p>
+                            <pre><code>touch /root/test_script.sh</code></pre>
+                            <p><img alt="" data-fid="504137" src="https://software.intel.com/sites/default/files/managed/cd/d1/image_15.png" typeof="foaf:Image"></p>
+                        </li>
+
+                        <li>
+                            <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the Permission denied.</p>
+                            <pre><code>cat /usr/local/mcafee/solidcore/log/solidcore.log | tail -n 1</code></pre>
+                            <p><img alt="" data-fid="504138" src="https://software.intel.com/sites/default/files/managed/d6/17/image_16.png" typeof="foaf:Image"></p>
+                        </li>
+
+                        <li>
+                            <p>Execute the following command to enable deny-read and then review the status of the MEC features.</p>
+                            <pre><code>sadmin features enable deny-read</code></pre>
+                            <p><img alt="" data-fid="504140" src="https://software.intel.com/sites/default/files/managed/5c/74/image_17.png" typeof="foaf:Image"></p>
+                            <p>The response indicates that the deny-read feature.</p>
+                        </li>
+
+                        <li>
+                            <p>Execute the following command to set read protection for the file.</p>
+                            <pre><code>sadmin rp -i /root/test_script.sh</code></pre>
+                        </li>
+
+                        <li>
+                            <p>Execute the following command to review the MEC configuration file and confirm that you added read protection for the file /root/test_setup.sh</p>
+                            <pre><code>cat /etc/mcafee/solidcore/solidcore.conf | more</code></pre>
+                            <p><img alt="" data-fid="504141" src="https://software.intel.com/sites/default/files/managed/ad/89/image_19.png" typeof="foaf:Image"></p>
+                        </li>
+
+                        <li>
+                            <p>Now attempt to read the file by printing to the console.</p>
+                            <p><img alt="" data-fid="504142" src="https://software.intel.com/sites/default/files/managed/0d/13/image_20.png" typeof="foaf:Image"></p>
+                        </li>
+
+                        <li>
+                            <p>Execute the following command to review the messages in the log file solidcore.log so you can determine the reason for the <strong>Permission denied error</strong>.</p>
+                            <p><img alt="" data-fid="504144" src="https://software.intel.com/sites/default/files/managed/0d/54/image_21.png" typeof="foaf:Image"></p>
+                        </li>
+
+                    </ol>
+                    -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div ibox collapse title="Section 3: McAfee® Embedded Control - Configure Checksum Calculation">
+        <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-nuc/images/sadmin-config-show.png">
+          <p>McAfee® Embedded Control can be configured use a variety of algorithms to verify the integrity of solidified system files.</p>
+          <p>Type the following to find which algorithm is currently being used:</p>
+          <pre><code>sadmin config show</code></pre>
+          <p>Or if you'd like a less cluttered view then type:</p>
+          <pre><code>sadmin config show | egrep HashAlgorithm</code></pre>
+          <img src="./views/labs/security-nuc/images/sadmin-config-show-egrep.png" alt="" />
+        </div>
+
+        <div content-block name="security-objectives" message="Configure the Hashing Algorithm">
+          <p>To change the hash algorithm used to calculate checksum, first make sure the software is in Disabled mode.</p>
+          <p class="alert alert-info">If the software is not in Disabled mode, type the # sadmin disable command and reboot the system.</p>
+
+          <p>Configure checksum calculation.</p>
+          <pre><code># sadmin config set HashAlgorithm=SHA256 </code></pre>
+          <p>"sha value" represents the hash function to use for checksum calculation and can be SHA1 or SHA256.</p>
+          <p>If you are switching from SHA1 to SHA256, the command might take a few minutes to compute new checksum values.</p>
+          <p>Enable the software.</p>
+          <pre><code># sadmin enable</code></pre>
+          <p>Restart the McAfee Solidifier service.</p>
+          <pre><code># service scsrvc restart</code></pre>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div ibox collapse title="Section 4: McAfee® Embedded Control - Configure Checksum Calculation">
+        <div content-block name="security-objectives" message="Verify that authorized applications can run">
+          <p>On a protected system, only authorized applications or programs are allowed to run.</p>
+
+          <p>To verify that authorized application can run, run any application.</p>
+          <pre><code># ls</code></pre>
+
+          <p>You can get a list of all authorized applications and shared libraries by typing:</p>
+          <pre><code># sadmin ls</code></pre>
+        </div>
+
+
+        <div content-block name="security-objectives" message="Verify that unauthorized applications can't run">
+          <p>To verify that an unauthorized application is not able to run, we need to first create an unauthorized application.<p>
+          <pre><code># cp /usr/sbin/useradd /usr/sbin/myuseradd</code></pre>
+          <p>Now try to run the new program.</p>
+          <pre><code>#/usr/sbin/myuseradd</code></pre>
+          <img src="./views/labs/security-nuc/images/denied.png" alt="" />
+        </div>
+
+        <div content-block name="security-objectives" message="Verify that the unauthorized binary fails to run">
+          <p>Verify that the modification attempt fails.</p>
+          <p>Review the solidcore.log file placed in the /usr/local/mcafee/solidcore/log directory.</p>
+          <p>This entry is added to the log file:</p>
+          <p>McAfee Solidifier prevented an attempt to modify file "filename" by process "processname" (Process Id:"PID", User:"user_name")</p>
+        </div>
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div ibox title="Section 5: McAfee® Embedded Control Updating A Solidified Box">
+  <div content-block name="security-objectives" message="Set McAffee Embedded Control Into Update Mode" image-link="./views/labs/security-nuc/images/sadmin-bu.png">
+    <h5>Using the Update Mode</h5>
+
+    <p>When MEC is in update mode it allows all changes on a protected system. You can use update mode to complete maintenance tasks, such as installing patches or upgrading software and data files.</p>
+
+    <p>Type this command to cause MEC to go into update mode.</p>
+    <p>Notice that McAfee is now in Update mode.</p>
+
+  </div>
+  <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect." image-link="./views/labs/security-nuc/images/myuseradd.png">
+    <p>Run the unauthorize command that we created in the previous section: </p>
+    <pre><code># /usr/sbin/myuseradd</code></pre>
+  </div>
+
+  <div content-block name="security-objectives" message="When you are done with the Update Mode switch back to protected mode" image-link="./views/labs/security-nuc/images/sadmin-eu.png">
+    <p>This command ends the Update mode.</p>
+  </div>
+
+<div content-block name="security-objectives" message="Disable the MEC feature to return your target to the standard configuration" image-link="./views/labs/security-nuc/images/sadmin-disable.png">
+    <h5>Disable Application Control</h5>
+
+    <p>In this section, you will disable the MEC feature to return your target to the standard configuration.</p>
+
+    <p>As the MEC administrator, execute the following command to switch EC to disabled mode to deactivate the features of MEC application control.</p>
+    <pre><code>sadmin disable</code></pre>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+            <div ibox title="Exercise 2: Role Based Security and Memory Protection with GrSecurity">
+                <div content-block name="grsecurity-objectives" message="Exercise 2: Role Based Security and Memory Protection with GrSecurity">
+                    <h2 class="labHidden">Exercise 2: Role Based Security and Memory Protection with GrSecurity</h2>
+
+                    <h5>Lab Overview</h5>
+
+                    <p><b>GRSecurity</b> is a set of software patches released under the GNU GPL for the Linux kernel to enhance the system security. It allows the system administrator to, among other things, define a minimum privilege policy for the system,
+                        in which every process and user have only the lowest privileges necessary to function. GRSecurity has 2 primary features, the RBAC (Rules Based Access Control) and the PaX.</p>
+                    <p><b>gradm</b>, the administration utility for the role-based access control system, is a powerful tool that parses your ACLs (Access Control Lists), performs the enforcement of a secure base policy, optimizes the ACLs, as well as handles
+                        parsing of the learning logs, merges them with your ACL set and outputs the final ACLs.</p>
+
+
+                    <h5>Disable McAfee® Embedded Control</h5>
+
+                    <p>By design, <b>McAfee® Embedded Control</b> will protect your system from changes. So let's turn it off now.</p>
+                    <pre><code># sadmin disable</code></pre>
+
+                    <h5>The gradm command</h5>
+                    <p>gradm is the grsecurity RBAC administration and policy analysis utility. It allows you to configure and administrate the grsecurity system.</p>
+                    <p>To display all available command-line switches, run gradm --help.</p>
+                    <pre><code># gradm</code></pre>
+                    <pre><code># gradm</code> <img alt="" data-fid="504152" src="https://software.intel.com/sites/default/files/managed/85/2c/gr1.png" typeof="foaf:Image"></p>
+
+
+                    <h5>Setting up a Role-Based Access</h5>
+                    <p>Here we will create three roles <b>root</b>, <b>admin</b>, <b>shutdown</b>. Each of these roles will have unique abilities that will be constrained by the by RBAC. You can use any password that you like for each role.</p>
+                    <pre><code># gradm -P</code></pre>
+                    <p><img alt="" data-fid="504153" src="https://software.intel.com/sites/default/files/managed/cb/2b/gr0.png" typeof="foaf:Image"></p>
+
+                    <pre><code># gradm -P admin</code></pre>
+                    <p><img alt="" data-fid="504154" src="https://software.intel.com/sites/default/files/managed/d6/9b/gr2.png" typeof="foaf:Image"></p>
+                    <pre><code># gradm -P shutdown</code></pre>
+                    <p><img alt="" data-fid="504155" src="https://software.intel.com/sites/default/files/managed/b2/31/gr3.png" typeof="foaf:Image"></p>
+
+                    <h5>Enable Learning Mode</h5>
+                    <p>Learning Mode for Role based access – RBAC requires policy to be created to ensure that system is aware of known execution, this can be done by enabling GR-SEC in learning mode or manually updating the policy file.</p>
+                    <p>Grsecurity's learning mode can be used on a per-subject or per-role basis, as well as system-wide. When using the learning mode on a single process or role, the rest of the system remains protected as defined by the policy. The learning
+                        mode can learn all things that the RBAC system supports: files, capabilities, resources, what IP addresses make use of each role, and socket usage. The learning system performs intelligent reduction of filesystem and network access
+                        to reduce policy size, increase readability, and reduce the amount of manual tweaking needed later. Furthermore, the learning system enforces a secure base that is configurable. Once it learning mode GR-sec will log all the activities
+                        of system.</p>
+                    <p>To enable full system learning, run gradm as root with the following options:</p>
+                    <p>Please run few commands. In actual environment learning mode is usually 24-48 hours.</p>
+                    <pre><code># gradm –S
+                # gradm –F –L /etc/grsec/learning.logs
+
+                # ls
+                # pwd
+                # date
+                # gradm –D
+                # gradm –F –L /etc/grsec/learning.logs –O /etc/grsec/learning.roles</code></pre>
+                    <p><img alt="" data-fid="504156" src="https://software.intel.com/sites/default/files/managed/75/0c/gr4.png" typeof="foaf:Image"></p>
+
+                    <p>You've now created a set of commands that are allowed by grsecurity. Let's now enabled grsecurity and test to see if the learned commands are allowed and all other commands are disallowed.</p>
+
+                    <h5>Enabling Grsecurity with Learned Rules</h5>
+
+                    <p>First backup the current policy file.</p>
+                    <pre><code># cp /etc/grsec/policy /etc/grsec/policy.bak
+                  # cp /etc/grsec/learning.roles /etc/grsec/policy</code></pre>
+
+                    <p>Now enable grsecurity.</p>
+                    <pre><code># gradm -E</code></pre>
+
+                    <h5>Test the Learned Rules</h5>
+                    <pre><code># ls
+                    # pwd
+                    # cat
+                    # ifconfig
+                    # date
+                    # gradm -D</code></pre>
+
+                </div>
+            </div>
+
+
+            <div ibox title="Exercise 3: Node-RED with HTTPS">
+                <div content-block name="grsecurity-objectives" message="Exercise 3: Node-RED with HTTPS">
+                    <h2 class="labHidden">Exercise 3: Node-RED with HTTPS</h2>
+                    <p>HTTPS provides SSL encyption for all data passed between client and server. Below you will learn how to secure your Node-RED server, and all web requests to it, with HTTPS. More info can be found at <a href="https://nodejs.org/api/https.html">https://nodejs.org/api/https.html</a>                        </p>
+
+
+                    <h5>Generate Certificates</h5>
+
+
+                    <p>First you will generate a private key and certificate using openssl.</p>
+                    <p>Make a serial connection to your Edison and enter in the following commands:</p>
+                    <code>$	cd ~ </code>
+                    <br>
+                    <br>
+                    <code>$ openssl req
+                        -newkey rsa:2048 -nodes -keyout privatekey.pem
+                        -x509 -days 365 -out certificate.pem </code>
+
+                    <p>Answer the prompts with your info, or hit enter to leave as blank.</p>
+                    <p>you now have a private key and certificate in your home directory. </p>
+
+                    <h5>Edit Node-RED Settings</h5>
+                    <p>In order to enable HTTPS on your Node-RED server you must edit the settings file.</p>
+                    <p>Edit settings.js in user Node-RED user directory:</p>
+                    <code>$ vi ~/.node-red/settings.js</code>
+                    <br>
+                    <br>
+
+                    <li>Hit "a" to enable editing</li>
+                    <li>On line 19 remove the "//" to uncomment the line.</li>
+                    <li>On lines 107-110 remove the "//" at the start of each line to uncomment the lines.</li>
+                    <li>Hit Esc, type :wq, and hit enter to save and exit vi.</li>
+
+
+                    <p><img alt="settings" data-fid="504157" src="https://software.intel.com/sites/default/files/managed/08/65/vi_settings.png" title="settings" typeof="foaf:Image"></p>
+
+
+                    <h5>Run Node-RED server</h5>
+                    <p>Launch Node-RED with:</p>
+                    <code>$ cd ~</code>
+                    <br>
+                    <br>
+                    <code>$ node-red</code>
+                    <p>Navigate to the Node-RED server in your browser at https://edison-ip:1880 , note that you must replace edison-ip with the actual ip address of your Edison.</p>
+
+                    <p><img alt="sll warning" data-fid="504158" src="https://software.intel.com/sites/default/files/managed/bd/5d/sll_warning.png" title="sll warning" typeof="foaf:Image"></p>
+
+                    <p>Since the SSL certifiacte you are using is self signed your browser will throw a warning. Click advanced and select "Proceed to xx.xx.xx (unsafe)"</p>
+
+
+                    <p><img alt="HTTPS" data-fid="504159" src="https://software.intel.com/sites/default/files/managed/5c/75/https_box.png" title="HTTPS" typeof="foaf:Image"></p>
+                    <p>Your Node-RED server now uses TLS 1.2 to secure the connection.</p>
+
+                    <div class="callout done has-goto-button">
+                        <p>You should now have a Node-RED HTTPS server running.</p>
+                        <p><a href="../index.html" class="link-button centered">Back Home</a></p>
+                    </div>
+
+                    <h3>References</h3>
+
+                    <ul>
+                        <li>
+                            <p><a href="https://www.openssl.org/">https://www.openssl.org/</a></p>
+                            <p><a href="http://www.intel.com/content/dam/support/us/en/documents/motherboards/server/sb/g21682003_tpm_hwug.pdf">Trusted Platform Technology</a></p>
+                        </li>
+
+                    </ul>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

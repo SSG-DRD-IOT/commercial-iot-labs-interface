@@ -227,6 +227,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+  .state('labs.security-nuc', {
+    url: "/security-nuc",
+    templateUrl: "views/labs/security-nuc/index.html",
+    data: {
+      pageTitle: 'Security on the Internet of Things'
+    },
+    resolve: {
+      loadPlugin: function($ocLazyLoad) {
+        return $ocLazyLoad.load([{
+          serie: true,
+          files: [
+            'bower_components/codemirror/lib/codemirror.css',
+            'bower_components/codemirror/theme/ambiance.css',
+            'bower_components/codemirror/lib/codemirror.js',
+            'bower_components/codemirror/mode/javascript/javascript.js'
+          ]
+        }, {
+          name: 'ui.codemirror',
+          files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+        }]);
+      }
+    }
+  })
     .state('labs.cloud', {
       url: "/cloud",
       templateUrl: "views/labs/cloud/index.html",
