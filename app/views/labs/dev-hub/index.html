@@ -97,6 +97,8 @@ develop your apps. When development is complete, you can save a hardened OS imag
                   </div>
               </div>
 
+
+
 <!--  Helix App Cloud ---->
               <div ibox title="Helix App Cloud">
 
@@ -160,10 +162,20 @@ develop your apps. When development is complete, you can save a hardened OS imag
 
                       <div content-block name="view-console-output" message="View the Console Output" image-link="./views/labs/dev-hub/images/10.png">
                           <h2 class="labHidden">View the Console Output</h2>
-                          <p>areat the bottom of the screen, you can view the console output.</p>
+                          <p>At the bottom of the screen, you can view the console output.</p>
                       </div>
 
                 </div>
+
+<!--   Sensor Management ---->
+              <div ibox title="Sensor Management">
+
+                  <div content-block name="package-management" message="Package Management">
+                      <h2 class="labHidden">Download the Intel XDK Introduction</h2>
+
+                  </div>
+
+              </div>
 
 <!--   Package Management ---->
               <div ibox title="Package Management">
@@ -186,14 +198,76 @@ develop your apps. When development is complete, you can save a hardened OS imag
 <!---   Cloud Commander ---->
               <div ibox title="Cloud Commander">
 
-                  <div content-block name="cloud-commander" message="Cloud Commander">
-                      <h2 class="labHidden">Cloud Commander</h2>
-
+                  <div content-block name="cloud-commander-overview" message="Overview of Cloud Commander">
+                      <h2 class="labHidden">Overview of Cloud Commander</h2>
+                      <p>Cloud Commander* is a web based file manager with console and editor.
+                        Using Cloud Commander, you can work with files, directories and programs via your browser from any computer, mobile or tablet.
+                        It's a quick and easy way to take an application you've developed locally, upload it to your gateway, and test, edit, iterate directly from the Intel® IoT Gateway Developer Hub on your IoT Gateway that uses Intel® IoT Gateway Technology. </p>
                   </div>
+
+                  <div content-block name="access-cloud-commander" message="Access Cloud Commander" image-link="./views/labs/dev-hub/images/11.png">
+                      <h2 class="labHidden">Access Cloud Commander</h2>
+                      <p>You can access Cloud commander from the Intel IoT Developer hub.</p>
+                      <p>Click on the <b>Administration</b> Icon and then click on <b>Launch</b> button under folder icon. </p>
+                      <p>If dialog box opens up for authentication then enter root in username and password text box.</p>
+                  </div>
+
+                  <div content-block name="get-started-cloud-commander" message="Get Started with Cloud Commander" image-link="./views/labs/dev-hub/images/12.png">
+                      <h2 class="labHidden">Get Started with Cloud Commander</h2>
+                      <p>There are two sections showing the folder listing on your IoT gateway. From here you can navigate to any folder or file on your IoT gateway just by clicking on the folder name. </p>
+                      <p>Here are the primary features of Cloud Commander.</p>
+                      <ul>
+                        <li> F1 Opens a Help screen</li>
+                        <li>F2 Renames a file</li>
+                        <li>F3 Views a file</li>
+                        <li>F4 Edits a file</li>
+                        <li>F5 Copies a file. You will be prompted for the location to copy to. By default it will be whatever location you are in on the right side file / folder browser.</li>
+                        <li>F6 Moves a file.You will be prompted for the location to copy to. By default it will be whatever location you are in on the right side file / folder browser.</li>
+                        <li>F7 Create a new folder</li>
+                        <li>F8 Delete a file (you will be prompted to confirm)</li>
+                        <li>F9 Opens a menu of these options including extras such as Pack and Extract which uses Tar). You can also open this menu or a subset by right clicking on a file, folder, or blank space.</li>
+                        <li>F10 Opens a settings menu for Cloud Commander</li>
+                        <li>>_~ Opens a web based terminal to your IoT gateway. Very powerful way to quickly execute a command or commands directly on your IoT gateway from the web browser</li>
+                      </ul>
+                      <p> To copy files to/from your local system, just drag them to/from the Cloud Commander interface.
+                        You can also right click in Cloud Commander and choose Upload or right click on a file in Cloud Command and choose download.
+                        By right clicking, you'll also see Upload to Cloud or Upload From Cloud. This is just like coping to/from your local system but supports directly accessing common cloud locations such as Dropbox, Google Drive, Box, and Amazon Cloud.</p>
+                   </div>
+
+
+
+              <div content-block name="create-hello-world" message="Create Hello World File" image-link="./views/labs/dev-hub/images/13.png">
+                  <h2 class="labHidden">Create Hello World File</h2>
+                  <p>Navigate to <code>/home/root/</code> directory in the right side bar.</p>
+                  <p>Right click on the empty white area and navigate to <b>New</b> and then click on <b>File</b></p>
+                  <p>Enter name of New File as <code>hello-world.py</code></p>
+                  <p>Then Click on <b>OK</b> </p>
+                  <p>This will create a blank python file in the /home/root directory. In the next step we will edit the file using cloud commander.</p>
+
               </div>
 
+              <div content-block name="edit-hello-world" message="Edit Hello World File" image-link="./views/labs/dev-hub/images/14.png">
+                  <h2 class="labHidden">Edit Hello World File</h2>
+                  <p>Right click on <code>hello-world.py</code> file. </p>
+                  <p>Click on <b>"Edit"</b></p>
+                  <p>This will open a text editor in the browser itself. You can write your code, modify it or delete your code from browser.</p>
+                  <p>Type <code>print "Hello World" </code> in the editor.</p>
+                  <p>Right click in empty space and click on <b>"Save"</b> to save the edited file.</p>
+                  <p>After editing, close the editor.</p>
 
 
+              </div>
+
+              <div content-block name="run-hello-world" message="Open web based terminal" image-link="./views/labs/dev-hub/images/15.png">
+                  <h2 class="labHidden">Run Hello World File</h2>
+                  <p>Click on</p>
+              </div>
+
+              <div content-block name="run-hello-world" message="Run Hello World File" image-link="./views/labs/dev-hub/images/16.png">
+                  <h2 class="labHidden">Run Hello World File</h2>
+                  <p>Click on</p>
+              </div>
+        </div>
 
     </div>
   </div>
