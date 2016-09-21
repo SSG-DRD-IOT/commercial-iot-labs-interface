@@ -21,9 +21,10 @@
 
             <!-- Objectives -->
             <div ibox title="Objectives">
+              <labels gateway windows apple/>
                 <div content-block name="read-objectives" message="Read the Objectives">
-                    <h2 class="labHidden">Read the Objectives</h2>
-                    <labels gateway windows apple/>
+                    <h2 class="labHidden">Read the Objectives </h2>
+
                     <p> The Intel® IoT Developer Hub is a web-based service running on the gateway that allows you to have a hands-on sensor-to-cloud experience in a very short time period. It has built-in tutorials to teach you about tools like the
 visual programming interface called Node-RED* and the Wind River Helix App Cloud, including sample code to develop the app in the cloud.
 The Intel® IoT Developer Hub provides ways to easily manage the administrative settings of the gateway.
@@ -33,7 +34,7 @@ develop your apps. When development is complete, you can save a hardened OS imag
                   <p>By the end of this module, you should be able to:</p>
 
                     <ul>
-                        <li>Connect gateway with Helix App Cloud which is cloud based IDE</li>
+                        <li>Connect gateway with Helix App Cloud</li>
                         <li>Create graphical view of Sensor data </li>
                         <li>Access repositories and manage packages on gateway</li>
                         <li>Access Gateway Administration tools and resources</li>
@@ -44,21 +45,125 @@ develop your apps. When development is complete, you can save a hardened OS imag
 
 <!--   Introduction to Intel IoT Dev Hub ---->
               <div ibox title="Introduction">
-
-                  <div content-block name="intro-dev-hub" message="Introduction to Intel Iot Dev Hub">
+                <labels gateway windows apple/>
+                  <div content-block name="access-dev-hub" message="Accessing Intel Iot Dev Hub" image-link="./views/labs/dev-hub/images/1.png">
                       <h2 class="labHidden">Introduction to Intel Iot Dev Hub</h2>
-                      <p>Intel® IoT Developer Hub gives you these advantages: </p>
+                      <img class="labHidden" src="./views/labs/dev-hub/images/1.png"></img>
+                      <ol class="ng-scope">
+                          <li>Open your browser and go to IP address of your gateway to access IoT Developer Hub.</li>
+                          <li>Login to the Intel® IoT Gateway Developer Hub using root for both the username and the password.</li>
+                          <li>Use the Intel® IoT Gateway Developer Hub to explore and extend the basic capabilities of the Gateway.</li>
+                        </ol>
+                  </div>
+
+                  <div content-block name="intro-dev-hub" message="Advantages of using Intel IoT Dev Hub">
+                    <labels  windows apple/>
+                      <h2 class="labHidden">Advantages of using Intel IoT Dev Hub </h2>
+                      <p>The advantages of using Intel IOT Developer Hub gives you,</p>
+                      <ul class="ng-scope">
+                          <li>Live Dashboard
+                            <ul class="ng-scope">
+                              <li>Summary view of gateway information</li>
+                              <li>Graphical view of sensor data</li>
+                              <li>Notification of available OS updates</li>
+                            </ul>
+                          </li>
+                            <li>Plug and play sensors
+                              <ul class="ng-scope">
+                                <li>Shows live data from connected sensors</li>
+                                <li>Easy management of connected sensors via Node-RED</li>
+                              </ul>
+                            </li>
+                            <li>Simple access to repositories and management of popular package
+                              <ul class="ng-scope">
+                                <li>Simple to add or remove online package repositories</li>
+                                <li>Easily list installed packages</li>
+                                <li>Quickly add, update, or uninstall packages as needed</li>
+                              </ul>
+                            </li>
+                            <li>Gateway administration tools and resources
+                              <ul class="ng-scope">
+                                <li>One-touch buttons for gateway actions including: restart, factory reset, upgrade to Pro, update OS, and change password</li>
+                                <li>Step-by-step wizard for creating a deployable gateway image</li>
+                                <li>Direct access to popular development tools including: Node-RED, LuCI*, Cloud Commander*, and Wind River Helix App Cloud*</li>
+                              </ul>
+                            </li>
+                            <li>Clear and simple documentation
+                              <ul class="ng-scope">
+                                <li>One location to find how-to tutorials and videos, and quick links to key online content</li>
+                              </ul>
+                            </li>
+                        </ul>
                   </div>
               </div>
 
 <!--  Helix App Cloud ---->
               <div ibox title="Helix App Cloud">
 
-                  <div content-block name="helix-app-cloud" message="Helix App Cloud">
-                      <h2 class="labHidden">Helix App Cloud</h2>
-
+                  <div content-block name="overview-hac" message="Overview">
+                      <h2 class="labHidden">Helix App Cloud Overview</h2>
+                      <p>Helix App Cloud provides an eloquent way to develop applications against the gateway from the cloud. It creates a connection between the gateway and the cloud so you can seamlessly develop, execute and debug code on the gateway from the cloud.</p>
                   </div>
-              </div>
+
+
+                  <div content-block name="launch-hac" message="Launch Helix App Cloud" image-link="./views/labs/dev-hub/images/2.png">
+                      <h2 class="labHidden">Launch Helix App Cloud</h2>
+                      <p>From the administration section of the Intel IoT Developer Hub, click the Launch button under the Helix App Cloud Icon </p>
+                  </div>
+
+                  <div content-block name="copy-registration-code" message="Copy Registration Code" image-link="./views/labs/dev-hub/images/3.png">
+                      <h2 class="labHidden">Copy Registration Code</h2>
+                      <p><b>Copy the Unique ID</b> that is provided into your clipboard (ctrl + c). This Unique ID is used to associate your gateway with the Helix App Cloud service. It will be used after you sign-up, and log back in to verify your email. </p>
+                      <p>Then Click on <b>"Continue to Helix App Cloud"</b> </p>
+                  </div>
+
+                  <div content-block name="register-and-verify-hac-account" message="Register and Verify an HAC Account" image-link="./views/labs/dev-hub/images/4.png">
+                      <h2 class="labHidden">Register and Verify an HAC Account</h2>
+                      <p>Follow the registration steps on Helix App Cloud (if you do not already have an account). </p>
+                      <p>If you already have an account with Windriver or Intel then skip registration step and directly sign in.</p>
+                    <p>It is important that you verify your email within 20 minutes of copying the code, as it will expire. Please verify your email account at this point.</p>
+                    </div>
+
+                    <div content-block name="add-new-device" message="Add New Device" image-link="./views/labs/dev-hub/images/5.png">
+                        <h2 class="labHidden">Add New Device</h2>
+                        <p>In Helix App Cloud, click <b>"New Device"</b> in the top right corner to add a new device.</p>
+                        <p>Click <b>"Register an existing device using its Registration ID"</b> </p>
+                        <p><b>Paste in the Unique ID</b>. (previously copied into clipboard). <b>Enter a device name</b>, then click <b>"Register Device"</b>. </p>
+                    </div>
+
+                    <div content-block name="hac-dashboard" message="Helix App Cloud Dashboard" image-link="./views/labs/dev-hub/images/6.png">
+                        <h2 class="labHidden">Helix App Cloud Dashboard</h2>
+                        <p>On the Helix App Cloud deshboard, you can check your device is online or offline at the top of the page.</p>
+                        <p>There is cloud based chart available to monitor CPU and Memory of IoT Gateway.</p>
+                        <p> Device Shell will provide an interface to connect your device and provide command line access. </p>
+                    </div>
+
+                      <div content-block name="hac-new-project" message="Create New Project" image-link="./views/labs/dev-hub/images/7.png">
+                          <h2 class="labHidden">Create New Project</h2>
+                          <p>Once your gateway is registered you will be able to create a new project. Click, <b>"Create new project"</b>.</p>
+                      </div>
+
+                      <div content-block name="create-new-project" message="Choose the project template and name the project" image-link="./views/labs/dev-hub/images/8.png">
+                          <h2 class="labHidden">Choose the project template and name the project</h2>
+                          <p>Once your gateway is registered you will be able to create a new project. Click, <b>"Create new project"</b>.</p>
+                          <p> Enter your <b>Project Name</b> </p>
+                          <p>Select <b>JavaScript Hello World: Console Hello World in Javascript</b> </p>
+                      </div>
+
+                      <div content-block name="open-new-project" message="Open the Project" image-link="./views/labs/dev-hub/images/9.png">
+                          <h2 class="labHidden">Open the Project</h2>
+                          <p>Click <b>"Open"</b> on the new project that was created.</p>
+                          <p>The new tab will open with Cloud9 code editor </p>
+                          <p>Double click on <b>hello.js</b> from the left side bar.</p>
+                          <p>Click <b>Run </b> on the menu bar to execute JavaScript code on the gateway </p>
+                      </div>
+
+                      <div content-block name="view-console-output" message="View the Console Output" image-link="./views/labs/dev-hub/images/10.png">
+                          <h2 class="labHidden">View the Console Output</h2>
+                          <p>areat the bottom of the screen, you can view the console output.</p>
+                      </div>
+
+                </div>
 
 <!--   Package Management ---->
               <div ibox title="Package Management">
