@@ -91,7 +91,7 @@
             <div ibox title="Deploy sample application with the Intel® XDK IoT Edition">
                 <div content-block name="download-xdk-intro" message="Download the Intel XDK Introduction">
                     <h2 class="labHidden">Download the Intel XDK Introduction</h2>
-                    <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel XDK IoT Edition.</p>
+                    <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and download a copy of the Intel XDK IoT Edition.</p>
                 </div>
 
                 <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction" image-link="./views/labs/build-nuc/images/xdk-splash.png">
@@ -134,7 +134,7 @@
 
                     <p>Create a project</p>
 
-                    <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the lefthand menu, select "<strong>Templates</strong>".</p>
+                    <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the left hand menu, select "<strong>Templates</strong>".</p>
                 </div>
 
                 <div content-block name="select-led-blink-template" message="Select the LED Blink Template" image-link="./views/labs/build-nuc/images/image_3.png">
@@ -156,6 +156,7 @@
                     <p><img class="labHidden" alt="" data-fid="503897" src="https://software.intel.com/sites/default/files/managed/cb/f7/image_4.png" typeof="foaf:Image"></p>
 
                     <p>When working with the Gateway and Arduino 101, "MRAA loads the Arduino 101* board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
+                    <p>Note: MRAA is a C/C++ library with bindings to Python, Javascript and Java to interface with the I/O on Galileo, Edison and other platforms, with a structured and sane API where port names/numbering matches the board that you are on</p>
                     <p>Locate the code:</p>
                     <code>var myOnboardLed = new mraa.Gpio(13);</code>
                     <p>And replace it for:</p>
@@ -256,9 +257,9 @@
                                 <p><img class="labHidden" alt="" data-fid="503912" src="https://software.intel.com/sites/default/files/managed/24/f0/image25.png" typeof="foaf:Image"></p>
                                 <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
                                 <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
-                                <pre><code>$ echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
+                                <pre><code>$ echo "src mraa-upm http://iotdk.intel.com/repos/3.5/intelgalactic/opkg/i586" > /etc/opkg/mraa-upm.conf
 $ opkg update
-$ opkg install libmraa0</code></pre>
+$ opkg install mraa</code></pre>
                                 <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
                                 <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
                             </div>
@@ -348,7 +349,8 @@ $ opkg install libmraa0</code></pre>
                         </li>
 
                         <li>
-                          <p>When connecting the Intel Iot Gateway to an Arduino 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101
+                          <p>When connecting the Intel Iot Gateway to an Arduino 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101.
+<p>Firmata is a generic protocol for communicating with microcontrollers from software on a host computer. It is intended to work with any host computer software package.Basically, this firmware establishes a protocol for talking to the Arduino from the host software.</p>
                         <li>
                             <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
                             <p><code>var temp = new groveSensor.GroveTemp(0 + OFFSET);</code></p>
@@ -490,10 +492,10 @@ monitor();</pre></ui-codemirror>
                             <p>Below is an example of the final solution.</p>
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
-var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove Temperature Sensor
-var temp = new groveSensor.GroveTemp(512); // Create
-a new instance of a Grove RGB LCD screen
-var screen = new LCD.Jhd1313m1(512, 0x3E, 0x62);
+var OFFSET = 512
+var temp = new groveSensor.GroveTemp(0 + OFFSET); // Create a new instance of a Grove Temperature Sensor
+var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(0 + OFFSET, 0x3E, 0x62);
 
 function monitor() {
     setInterval(function() { // Read the temperature sensor
