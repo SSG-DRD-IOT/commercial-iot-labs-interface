@@ -22,8 +22,7 @@
             <div ibox title="Objective">
                 <div content-block name="read-objectives" message="Read the Objectives">
                     <h2 class="labHidden">Read the Objectives</h2>
-                    <labels edison />
-                    <p>In this lab, we will explore the using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
+                    <p>In this lab, we will explore using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
 
                     <ol>
                         <li>Build a data flow that sends information from the temperature sensors to the LCD screen. Dataflow is entirely on the edge device</li>
@@ -34,13 +33,13 @@
             </div>
 
             <div ibox title="Node-Red Flow: Temperature to LCD">
-                <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/image_2.jpg">
+                <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/build-nuc/images/temperature-sensors.jpg">
                     <h2 class="labHidden">Install the Grove base shield and sensors</h2>
                     <img class="labHidden" src="https://software.intel.com/sites/default/files/managed/d9/66/image_2.jpg"></img>
 
                     <ol>
                         <li>
-                            <p>Install the <b>Grove Base Shield</b> onto the Intel® Edison Arduino expansion board.</p>
+                            <p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
@@ -51,10 +50,10 @@
                     </ol>
                 </div>
 
-                <div content-block name="find-ip-address" message="Login to your Intel Edison and find you IP address">
-                    <h2 class="labHidden">Login to your Intel Edison and find you IP address</h2>
-                    <p>Log into the Intel® Edison over serial.</p>
-                    <p>First get the ip address of the Edison:</p>
+                <div content-block name="find-ip-address" message="Login to your Intel IoT device and find you IP address">
+                    <h2 class="labHidden">Login to your Intel IoT device and find you IP address</h2>
+                    <p>Log into the Intel IoT device over serial.</p>
+                    <p>First get the ip address of the IoT device:</p>
                     <code>$ ifconfig wlan0</code>
                     <p><img class="labHidden" alt="" data-fid="503930" src="https://software.intel.com/sites/default/files/managed/6b/ae/ifconfig.png" typeof="foaf:Image"></p>
                     <p>The ip address is the address following inet addr. In the case above it is: <code>10.175.154.190</code>, however yours will be different. Remeber this address for the following step.</p>
@@ -65,15 +64,15 @@
                     <p>Install Node-Red by running the following command:</p>
 
                     <p><code>$ npm install -g node-red</code></p>
-                    <P>The node-red install will throw some warnings as shown below. The installation will work fine despite these.</p>
+                    <P>The node-red install might throw some warnings but the installation will work fine despite these.</p>
                     <p><img class="labHidden" alt="Node Red" data-fid="503931" src="https://software.intel.com/sites/default/files/managed/ea/dd/new_node_red.png" title="Node Red" typeof="foaf:Image"></p>
                     <div class="alert alert-warning">
                         <p>Installing Node Red will take about 5-8 minutes. Often times it seems to fail on the first attempt, but on the second attempt it succeeds.</p>
                     </div>
                 </div>
 
-                <div content-block name="run-node-red-modules" message="Install the Intel Edison Node-RED module using NPM">
-                    <h2 class="labHidden">Install the Intel Edison Node-RED module using NPM</h2>
+                <div content-block name="run-node-red-modules" message="Install the Intel IoT device Node-RED module using NPM">
+                    <h2 class="labHidden">Install the Intel IoT device Node-RED module using NPM</h2>
                     <p>Once Node-RED is installed you will have to add the custom nodes that will be used to interact with the temperature sensor and LCD display</p>
 
                     <p>To install the Node-RED nodes needed use:</p>
@@ -90,9 +89,9 @@
                     <h2 class="labHidden">Open the Node-Red Flow Editor</h2>
                     <p><img class="labHidden" alt="Node Red" data-fid="503931" src="https://software.intel.com/sites/default/files/managed/ea/dd/new_node_red.png" title="Node Red" typeof="foaf:Image"></p>
 
-                    <p>Enter <b>http://{Your-Intel-Edison-IP-Address}:1880</b> into your navigation bar. For example, if your Intel Edison has an IP address of <code>10.175.154.190</code> then enter <code>http://10.175.154.190:1880</code></p>
+                    <p>Enter <b>http://{Your-Intel-IoT-Device-IP-Address}:1880</b> into your navigation bar. For example, if your Intel IoT device has an IP address of <code>10.175.154.190</code> then enter <code>http://10.175.154.190:1880</code></p>
                     <div class="alert alert-warning">
-                        <p>Make sure that your laptop is connected to the same WiFi network as your Edison.</p>
+                        <p>Make sure that your laptop is connected to the same WiFi network as your IoT device.</p>
                     </div>
                 </div>
 
@@ -101,13 +100,13 @@
                     <p><img class="labHidden" alt="first flow" data-fid="503932" src="https://software.intel.com/sites/default/files/managed/6a/6d/first_flow.png" title="first flow" typeof="foaf:Image"></p>
 
 
-                    <p>Create a Node-Red flow like the one show here.</p>
+                    <p>Create a Node-Red flow like the one shown here.</p>
                     <ol>
                         <li>Search for the <b>Grove Temp Sensor</b> in the Intel_gpio section and pull one into the workarea.</li>
                         <li>Search for the <b>Function</b> node in the function Function section and connect it to the Grove Temp Sensor.</li>
                         <li>Search for the <b>Grove LCD</b> node in the Intel_gpio and connect it to the Function.</li>
                     </ol>
-                    <p>NOTE: The nodes are listen to the left of the workspace and you will have to scroll down to find all the node you need..</p>
+                    <p>NOTE: The nodes are listed to the left of the workspace and you will have to scroll down to find all the nodes you need..</p>
                 </div>
                 <div content-block name="first-flow" message="Customize your Function Node">
                     <h2 class="labHidden">Customize your Function Node</h2>
@@ -315,7 +314,7 @@ return msg;
 <p><img class="labHidden" alt="mqtt flow connected" data-fid="503936" src="https://software.intel.com/sites/default/files/managed/a6/3f/mqtt_flow_connected.png" title="mqtt flow connected" typeof="foaf:Image"></p>
 
               <p>When you are done configuring the nodes hit deploy</p>
-              <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the Edison is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
+              <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the IoT device is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
                 <p> If you do not see the output in the debug window:</p>
                 <ul>
                   <li>Make sure the you can see the debug window - you  might have to expand it by dragging the right side of the workspace to the center.</li>
@@ -661,7 +660,7 @@ return msg;</pre></ui-codemirror>
 
                     <h5> Install Postman </h5>
                     <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
-                    <p>To send web requests to the Intel® Edison we will be using Postman, a Chrome app designed to send web requests.</p>
+                    <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
 
                     <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
                 </div>
@@ -673,7 +672,7 @@ return msg;</pre></ui-codemirror>
                     <h5>Use Postman to send web request </h5>
                     <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
                     <ul>
-                        <li>Select post from the dropdown menu and enter the IP address of your Intel® Edison port 1880 with the URL specified above. In this case it is <code>10.175.152.15:1880/LCD</code></li>
+                        <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 1880 with the URL specified above. In this case it is <code>10.175.152.15:1880/LCD</code></li>
                         <li>The /lcd/backlight and /lcd/text require specific JSON objects to control the LCD screen. /lcd/backlight requires JSON with:
                             <b>{"r":r_value,"g":g_value,"b":b_value}</b> where r_value, g_value, and b_value are the the r,g,b values from 0-255. /lcd/text requires a JSON with: <b>{"text":"your text here"}</b></li>
 
@@ -688,8 +687,8 @@ return msg;</pre></ui-codemirror>
                     <h2>Use API</h2>
                     <p>Like in the last step use Postman to test the various web requests.</p>
                     <p><img class="labHidden" alt="postman get" data-fid="503947" src="https://software.intel.com/sites/default/files/managed/95/dd/postman_get.png" title="postman get" typeof="foaf:Image"></p>
-                    <p>You can also navigate to your Edison's IP, port 1880 /lcd/text or /lcd/backlight to get the status of the backlight or text.</p>
-                    <p><img class="labHidden" alt="browser get" data-fid="503948" src="https://software.intel.com/sites/default/files/managed/eb/1d/browser_get.png" title="browser get" typeof="foaf:Image"></p>j
+                    <p>You can also navigate to your IoT device's IP, port 1880 /lcd/text or /lcd/backlight to get the status of the backlight or text.</p>
+                    <p><img class="labHidden" alt="browser get" data-fid="503948" src="https://software.intel.com/sites/default/files/managed/eb/1d/browser_get.png" title="browser get" typeof="foaf:Image"></p>
                 </div>
 
                 <div content-block name="protocol-flow-source-code" message="Compare your solution to the code here.">
