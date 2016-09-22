@@ -182,6 +182,150 @@ develop your apps. When development is complete, you can save a hardened OS imag
 <!--   Sensor Management ---->
               <div ibox title="Sensor Management">
 
+                <div content-block name="open-node-red" message="Open Node-Red in Intel IoT Developer Hub" image-link="./views/labs/dev-hub/images/25.png">
+                    <h2 class="labHidden">Open Node-Red in Intel IoT Developer Hub</h2>
+                    <h4>Open Node-Red in Intel IoT Developer Hub</h4>
+                    <p>Connect a sensor to the gateway and use Node-Red to automatically read temperature in Node-Red application. </p>
+                    <p>Enter root as username and password, if required.</p>
+                    <p class="alert alert-warning">Connect Temperature Sensor from Sensor kit to A1 pin of base shield connected to Arduino 101.</p>
+                </div>
+                <div content-block name="open-node-red" message="Create Node-Red Flow" image-link="./views/labs/dev-hub/images/26.png">
+                    <h2 class="labHidden">Create Node-Red Flow</h2>
+                    <h4>Create Node-Red Flow</h4>
+                    <p>Open new Node-Red Flow. To open new node-red flow click on plus button situated on the bar with flow name, or go to <b>Menu bar > Flows > Add </b></p>
+                    <p>Drag <b>Grove Temperature</b> node from UPM_Sensors located in left side-bar</p>
+                    <ul>
+                      <li>Name:Grove Temperature</li>
+                      <li>Platform: Firmata</li>
+                      <li>Pin: A1</li>
+                      <li>Unit: Celsius</li>
+                      <li>Interval(ms): 1000</li>
+                    </ul>
+                    <p>Drag <b>chart tag</b> node from function and connect input with the output of Grove Temperature node</p>
+                    <ul>
+                      <li>Title: Temperature Sensor</li>
+                      <li>Type: Gauge</li>
+                      <li>Priority: &lt;Leave Blank&gt;</li>
+                      <li>Units: &lt;Leave Blank&gt;</li>
+                      <li>Range: &lt;Leave Blank&gt;</li>
+                      <li>Target: &lt;Leave Blank&gt;</li>
+                      <li>Points: 50</li>
+                      <li>TTL(seconds): 60</li>
+                      <li>Source: Local</li>
+                      <li>Source Priority: &lt;Leave Blank&gt;</li>
+                    </ul>
+                    <p>Drag <b>mqtt</b> node from output and connect input with the output of chart tag node</p>
+                    <ul>
+                      <li>Server: localhost:1883</li>
+                      <li>Topic: /sensors</li>
+                      <li>QoS: &lt;Leave Blank&gt;</li>
+                      <li>Retain: &lt;Leave Blank&gt;</li>
+                      <li>Name: Chart</li>
+                    </ul>
+                    <p>Verify your flow with the given image.</p>
+                </div>
+                <div content-block name="open-node-red" message="Import Node-Red Flow" image-link="./views/labs/dev-hub/images/27.png">
+                    <h2 class="labHidden">Import Node-Red Flow</h2>
+                    <h4>Import Node-Red Flow"</h4>
+                    <p>This step is optional if you have already created node-red Flow </p>
+                    <p>Import the flow directly with below given json object. Open <b>Menu bar > Import > Clipboard</b></p>
+                    <p>Copy the code and paste in the node-red clipboard</p>
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
+   {
+      "id":"1dc1405c.26a96",
+      "type":"mqtt-broker",
+      "z":"",
+      "broker":"localhost",
+      "port":"1883",
+      "clientid":"",
+      "usetls":false,
+      "verifyservercert":true,
+      "compatmode":true,
+      "keepalive":"60",
+      "cleansession":true,
+      "willTopic":"",
+      "willQos":"0",
+      "willRetain":null,
+      "willPayload":"",
+      "birthTopic":"",
+      "birthQos":"0",
+      "birthRetain":null,
+      "birthPayload":""
+   },
+   {
+      "id":"eed51b89.844b88",
+      "type":"upm-grove-temperature",
+      "z":"c87ba7b2.42d3d8",
+      "name":"Grove Temperature",
+      "platform":"512",
+      "unit":"C",
+      "pin":"1",
+      "interval":1000,
+      "x":396.5,
+      "y":278,
+      "wires":[
+         [
+            "de678f6b.5a0ae"
+         ]
+      ]
+   },
+   {
+      "id":"de678f6b.5a0ae",
+      "type":"chart tag",
+      "z":"c87ba7b2.42d3d8",
+      "title":"Temperature Sensor",
+      "chartType":"gauge",
+      "dataSource":"Local",
+      "units":"",
+      "min":"",
+      "max":"",
+      "targetLow":"",
+      "targetHigh":"",
+      "priority":"",
+      "sourcePriority":"",
+      "ttl":60,
+      "points":50,
+      "x":647.5,
+      "y":278,
+      "wires":[
+         [
+            "50995050.f5eb"
+         ]
+      ]
+   },
+   {
+      "id":"50995050.f5eb",
+      "type":"mqtt out",
+      "z":"c87ba7b2.42d3d8",
+      "name":"",
+      "topic":"/sensors",
+      "qos":"",
+      "retain":"",
+      "broker":"1dc1405c.26a96",
+      "x":881.5,
+      "y":278,
+      "wires":[
+
+      ]
+   }
+]</pre></ui-codemirror>
+
+                <p> Drag the flow to desired space in node-red editor. </p>
+                </div>
+                <div content-block name="open-node-red" message="Deploy Node-Red Flow" image-link="./views/labs/dev-hub/images/28.png">
+                    <h2 class="labHidden">Deploy Node-Red Flow</h2>
+                    <h4>Deploy Node-Red Flow</h4>
+                    <p>Click on red <b>Deploy button </b>situated on the top right corner.</p>
+                    <p>The message will pop up showing successfully deployed on the top bar.</p>
+                </div>
+                <div content-block name="view-dev-hub" message="View on Developer Hub" image-link="./views/labs/dev-hub/images/29.png">
+                    <h2 class="labHidden">View on Developer Hub</h2>
+                    <h4>View on Developer Hub</h4>
+                    <p>View the Intel IoT Developer Hub Dashboard to see the Temperature gauge is now included and displays temperature data.<p>
+                    <p>Test the sensor by gently touching it. The temperature values will change immediately.</p>
+                </div>
+
+
 
               </div>
 
