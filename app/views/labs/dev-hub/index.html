@@ -240,23 +240,62 @@ develop your apps. When development is complete, you can save a hardened OS imag
                 <div content-block name="one-touch-gateway-actions" message="One Touch Gateway Actions" image-link="./views/labs/dev-hub/images/22.png">
                     <h2 class="labHidden">One Touch Gateway Actions</h2>
                     <h4>One Touch Gateway Actions</h4>
-                    <p>Install OS Updates</p>
-                    <p>Upgrade to Pro </p>
-                    <p>Restart OS</p>
-                    <p>Change Password </p>
-                    <p>Restore to Factory OS </p>
-                    <p>Enabling Secure Protocol for DevHub </p>
-                    <p>Proxy Management </p>
+                    <p>Many gateway actions are developed in the Intel IoT Developer Hub which can be easily accomplished by clicking on the action situated in the Administrative page.</p>
+                    <p>Here are few listed actions which are integrated in Intel IoT Developer Hub, </p>
+                    <ul>
+                    <li>Install OS Updates</li>
+                    <li>Upgrade to Pro </li>
+                    <li>Restart OS</li>
+                    <li>Change Password </li>
+                    <li>Restore to Factory OS </li>
+                    <li>Enabling Secure Protocol for DevHub </li>
+                    <li>Proxy Management </li>
+                  </ul>
                 </div>
 
                 <div content-block name="deployable-gateway-image" message="Creating Deployable Gateway Image" image-link="./views/labs/dev-hub/images/23.png">
                     <h2 class="labHidden">Creating Deployable Gateway Image</h2>
                     <h4>Creating Deployable Gateway Image </h4>
+                    <p>Create a deployable OS Image for production use based on the OS and software running on this gateway.</p>
+                      <p>The deployment OS image includes all applications, data files, and OS updates from the running gateway, but changes can be made to the OS settings and some configuration files to harden the OS to provide better security in a deployment environment.</p>
+                      <p>The OS image is hardened and saved to a USB drive while leaving the development gateway OS unchanged.</p>
+                      <p>The replicated image can quickly be deployed onto another system for evaluation & testing. This enables validation of an IOT system prior to field deployment.</p>
                 </div>
 
                 <div content-block name="luci-interface" message="LuCI - Network COnfiguration Interface" image-link="./views/labs/dev-hub/images/24.png">
                     <h2 class="labHidden">LuCI - Network Configuration Interface</h2>
                     <h4>LuCI - Network Configuration Interface </h4>
+                    <p>LuCI is an open-source administrative tool for managing Linux system settings, network information, logs, processes, and more.</p>
+                    <p>Use a Web browser to navigate to the Gateway IP address. For example, type <strong>https://Gateway_IP_Address</strong> in the URL box, where Gateway_IP_Address is the IP address for your Gateway in the format 123.456.1.1</p>
+                    <p class="alert alert-warning">Make sure to add https for the LuCI interface </p>
+
+                    <p>The Status menu shows the Overview option that displays an operating system configuration summary and other information. Following functionalities available under Status Menu </p>
+                    <ul>
+                      <li>Up-time since last boot</li>
+                      <li>Memory usage</li>
+                      <li>Network and wireless settings</li>
+                      <li>Real-time graphs for performance Review</li>
+                      <li>Log files</li>
+                      </ul>
+
+                        <p>The System menu provides access to screens that manage common Gateway settings such as the hostname, system time, password, backup/restore, and more. Following functionalities available under System Menu </p>
+                        <ul>
+                          <li>Change the Date and Time</li>
+                          <li>Change the Name (Hostname)</li>
+                          <li>Change the Root User Password</li>
+                          <li>Manage Systemd Units (Services, Resources, etc.)</li>
+                          </ul>
+
+                          <p>Gateways that use Intel® IoT Gateway Technology may use wired Ethernet and wireless connections, Bluetooths, and other network interfaces. Use the Network menu to manage and troubleshoot networking functions. Following functionalities available under Network Menu </p>
+                          <ul>
+                            <li>Changing Wireless Network Settings</li>
+                            <li>Change the Wireless SSID, Channel, and Visibility</li>
+                            <li>Set up the Gateway as a Client or an Access Point</li>
+                            <li>Change the Wireless Encryption Type</li>
+                            <li>Changing the Wireless SSID Password (Key)</li>
+                            <li>Change the LAN and WAN Interfaces for DHCP and Static Addressing</li>
+                            </ul>
+                    <p>The interface was created to support the Unified Configuration Interface (UCI), which is covered in detail at <a href="http://luci.subsignal.org/trac/wiki/Documentation">Luci Documentation</a> and <a href="http://luci.subsignal.org/trac/wiki/Documentation">UCI Wiki</a> </p>
                 </div>
               </div>
 
