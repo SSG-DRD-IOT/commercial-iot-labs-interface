@@ -27,7 +27,7 @@
 
 
 
-            <div ibox collapse title="Objectives">
+            <div ibox title="Objectives">
                 <div content-block name="security-objectives" message="Read the Objectives">
                     <h2 class="labHidden">Read the Objectives</h2>
                     <labels gateway window apple linux/>
@@ -64,7 +64,7 @@
 
 
 
-            <div ibox collapse title="Section 1: McAfee® Embedded Control Orientation">
+            <div ibox title="McAfee® Embedded Control Orientation">
                 <div content-block name="security-objectives" message="Complete the McAfee® Embedded Control Exercises">
                     <h2 class="labHidden">Complete the McAfee® Embedded Control Exercises</h2>
                     <h5>Lab Overview</h5>
@@ -230,7 +230,7 @@
 
 
 
-                <div ibox collapse title="Section 2: McAfee® Embedded Control Generating the White List">
+                <div ibox title="McAfee® Embedded Control Generating the White List">
                   <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect.">
                     <h5>Enabling McAfee® Embedded Control</h5>
 
@@ -412,7 +412,7 @@
 
 
 
-      <div ibox collapse title="Section 3: McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox title="McAfee® Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-nuc/images/sadmin-config-show.png">
           <p>McAfee® Embedded Control can be configured use a variety of algorithms to verify the integrity of solidified system files.</p>
           <p>Type the following to find which algorithm is currently being used:</p>
@@ -449,7 +449,7 @@
 
 
 
-      <div ibox collapse title="Section 4: McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox title="McAfee® Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Verify that authorized applications can run">
           <p>On a protected system, only authorized applications or programs are allowed to run.</p>
 
@@ -503,7 +503,7 @@
 
 
 
-<div ibox collapse title="Section 5: McAfee® Embedded Control Updating A Solidified Box">
+<div ibox title="McAfee® Embedded Control Updating A Solidified Box">
   <div content-block name="security-objectives" message="Set McAffee Embedded Control Into Update Mode" image-link="./views/labs/security-nuc/images/sadmin-bu.png">
     <h5>Using the Update Mode</h5>
 
@@ -533,6 +533,89 @@
   </div>
 </div>
 
+
+<div ibox title="How To Use Systemctl to Manage Systemd Services and Units">
+  <div content-block name="" message="Introduction to Service Management" image-link="">
+    <p>Wind River Linux uses Systemd to manage the Intel IoT Gateway system services. Systemd is a widely used in the Linux community and understanding how it works is essential for securing your gateway for deployment.</p>
+    <p>In this lab, you will be using the systemctl command, which is the administrative command line tool for controlling the init system. You will cover how to disable unused services, check statuses, change system states, and modify configuration files.</p>
+    <p>Systemd labels services that it controls as "units".  A unit configuration file that describes how to manage a system resource.  Systemd defines a number of types of services. In this lab, you will be managing services with the aim of reducing the attack surface of your gateway.</p>
+  </div>
+  <div content-block name="" message="Starting and Stopping Services" image-link="">
+    <p>To start a service use the <strong>start</strong> command.  You will need to be the root user or use the sudo command.</p>
+    <pre><code>sudo systemctl start application.service</code></pre>
+    <p>Try starting the <strong>node-red-experience</strong></p>
+    <pre><code>sudo systemctl start node-red-experience.service</code></pre>
+    <p>or you can simply drop the <strong>.service</strong> and type:
+    <pre><code>sudo systemctl start node-red-experience</code></pre>
+    <p>Try stopping the <strong>node-red-experience</strong></p>
+    <p>Likewise, you can stop a system service by typing:</p>
+    <pre><code>sudo systemctl stop application.service</code></pre>
+  </div>
+  <div content-block name="" message="Restarting and Reloading" image-link="">
+    <p>Restarting a currently running service is simple with the <strong>restart</strong> command. This will terminate the process and then relaunch it.</p>
+    <pre><code>sudo systemctl restart application.service</code></pre>
+    <p>If the service is able to reload its configuration files without terminating first, then you can use the <strong>reload</strong> command.</p>
+    <pre><code>sudo systemctl reload application.service</code></pre>
+    <p>If you are unsure whether the service is able to reload its own configuration files, you can use the <strong>reload-or-restart</strong> command. This will reload the configuration if possbile. Otherwise, it will restart the service.</p>
+    <pre><code>sudo systemctl reload-or-restart application.service</code></pre>
+  </div>
+  <div content-block name="" message="Enabling and Disabling Services" image-link="">
+    <p>Enabling and disabling refers to whether a service is started at boot (enabled) or not (disabled).</p>
+    <p>If you want a service to start when the system next boots type the follow:</p>
+    <pre><code>sudo systemctl enable application.service</code></pre>
+    <p>To make sure that the system does not start a service at boot, type the following:</p>
+    <pre><code>sudo systemctl disable application.service</code></pre>
+  </div>
+  <div content-block name="" message="Checking the Status of Services" image-link="">
+    <p>The <strong>status</strong> command will report whether the service is running or not and if there is a failure condition.</p>
+    <pre><code>systemctl status application.service</code></pre>
+    <p>Let's see if what the current status is of the <strong>node-red-experience</strong>.
+    <pre><code>systemctl status node-red-experience</code></pre>
+    <p>There are functions which determine the current status of a service</p>
+    <pre><code>systemctl is-active application.service</code></pre>
+    <p>This will return the current unit state, which is usually active or inactive. The exit code will be "0" if it is active, making the result simpler to parse programatically.</p>
+    <pre><code>systemctl is-enabled application.service</code></pre>
+    <pre><code>systemctl is-failed application.service</code></pre>
+  </div>
+  <div content-block name="" message="System State Overview" image-link="">
+    <p>The next set of commands will help to determine the state of the entire system.</p>
+    <pre><code>systemctl list-units</code></pre>
+    <p>This command will show you a list of all of the units on the system whether they are active or not.</p>
+    <pre><code>systemctl list-units --all</code></pre>
+
+    <p>The output has the following columns:</p>
+    <ul>
+      <li>UNIT: The name of the systemd </li>
+      <li>LOAD: This value is true if systemd parse the configuration files for this unit</li>
+      <li>ACTIVE: A summary state about whether the unit is active.</li>
+      <li>SUB: This is a level state that indicates more detailed information about the unit. This often varies by unit type, state, and the actual method in which the unit runs.</li>
+      <li>DESCRIPTION: A short description of the unit.</li>
+    </ul>
+    <p>You can also display all units in the inactive state</p>
+    <pre><code>systemctl list-units --all --state=inactive</code></pre>
+    <p>Lastly, it's very useful to filter the results to include only the <strong>service</strong> type.
+    <pre><code>systemctl list-units --type=service</code></pre>
+  </div>
+  <div content-block name="" message="Unit Management - Displaying a Unit File" image-link="">
+    <p>The cat command will display the unit file that was used to configure a given process.</p>
+    <pre><code>systemctl cat atd.service</code></pre>
+  </div>
+  <div content-block name="" message="Displaying Dependencies" image-link="">
+    <p>To display the heirarchy of units that must successfully become active before a given unit can run.</p>
+    <pre><code>systemctl list-dependencies sshd.service</code></pre>
+    <p>To show the units that list a given unit as a dependency type:</p>
+    <pre><code>systemctl list-dependencies --reverse sshd.service</code></pre>
+    <pre><code>systemctl show sshd.service -p Conflicts</code></pre>
+    <pre><code></code></pre>
+  </div>
+  <div content-block name="" message="Masking and Unmasking Units" image-link="">
+    <p>Earily we showed you how to stop a service. Systemd has another mechanism for stopping a service from running called <strong>masking</strong>. When masking a service systemd creates a symlink between the service's configuration files in /etc/systemd/ and /dev/null.  This stops the service from being triggers as a dependencies of another service.  It also prevents the service from being activated manually.</p>
+    <pre><code>sudo systemctl mask nginx.service</code></pre>
+    <p>You can see a list of masked units by typing the following:</p>
+    <pre><code>systemctl list-unit-files</code></pre>
+    <pre><code>sudo systemctl start nginx.service</code></pre>
+  </div>
+</div>
 
 
 
