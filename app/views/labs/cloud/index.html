@@ -84,6 +84,7 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out s
 
             <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
               <p>Now move the CA, Certificate and Key file to the MQTT broker's configuration directories</p>
+              <p>Note: If the directories ca_certificates and certs are not there manually create them</p>
               <pre><code>mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
 mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
             </div>
@@ -95,15 +96,8 @@ mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
               <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
 <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># Place your local configuration in /etc/mosquitto/conf.d/
 
-pid_file /var/run/mosquitto.pid
-
 bind_address 127.0.0.1
-port 8883
-
-persistence true
-persistence_location /var/lib/mosquitto/
-
-log_dest file /var/log/mosquitto/mosquitto.log
+listener 8883
 
 cafile /etc/mosquitto/ca_certificates/ca.crt
 certfile /etc/mosquitto/certs/server.crt
@@ -111,7 +105,6 @@ keyfile /etc/mosquitto/certs/server.key
 
 tls_version tlsv1
 
-include_dir /etc/mosquitto/conf.d</ui-codemirror>
             </div>
           </div>
 
@@ -213,7 +206,8 @@ data_format = "json"</ui-codemirror>
             <pre><code>telegraf -config telegraf-mqtt.conf</code></pre>
           </div>
           <div content-block message="Start the telegraf service" name="telegraf-start" image-link="./views/labs/cloud/images/telegraf-start.png">
-            <p>We should start getting the readings if they are getting published from the sensors as below:</p>
+            <p>We should start getting the readings if they are getting published from the sensors as shown in the figure</p>
+            <p>For sensors/temperature/data topic to be published make sure that the Node red flow which you implemented in lab "Application Protocols: MQTT and HTPP" is executing</p>
             <img class='labHidden' src="./views/labs/cloud/images/telegraf-start.png"></src>
           </div>
 
@@ -233,13 +227,26 @@ data_format = "json"</ui-codemirror>
           <div content-block message="Sign into Grafana" name="grafana-download" image-link="./views/labs/cloud/images/grafana-login.png">
 
             <p>Start Grafana from browser:</p>
-            <pre><code>http://localhost:3000</code></pre>
+            <pre><code>http://{Your Gateway IP address}:3000</code></pre>
 
             <div class="alert alert-info">
               <p>You can sign up or just sign in with</p>
               <pre>Login: <b>admin</b>
 Password: <b>admin</b></pre>
             </div>
+          </div>
+          <div content-block message="Setup Database in Grafana" name="grafana-database" image-link="./views/labs/cloud/images/telegraf-database.png">
+            <p>Click on the top left Grafana icon and select "Data Sources"</p>
+            <p>Setup the influxdb data source with parameters as shown in figure. Make sure to replace "localhost" with your gateway IP address</p>
+          </div>
+          <div content-block message="Setup Dashboard in Grafana" name="grafana-dashboard" image-link="./views/labs/cloud/images/Metrics-dashboard.PNG">
+            <p>Click on the top left Grafana icon and select "Dashboards"->"New"</p>
+            <p>Next click on the small green bar on the left hand of the blank page that comes up after you select new dashboard</p>
+            <p>In that select "Add Panel" -> "Graph"</p>
+            <p>This will create a default Panel. Now first select "Panel data source" as "myInfluxDB" instead of default</p>
+            <p>Next set up the Metrics panel by clicking on "A" icon and filling up the parameters as shown in figure</p>
+            <p>To get continous readings click on the top right corner with a clock icon and chose "Last 5 minutes" and "Refreshing every:" setting as 5 s. This will ensure continous data on the graph</p>
+            <p>Finally you can play around with other tabs like Axes, Legend and Display to change graph properties</p>
           </div>
 
         </div>
