@@ -108,7 +108,10 @@ certfile /etc/mosquitto/certs/server.crt
 keyfile /etc/mosquitto/certs/server.key
 
 tls_version tlsv1
-
+</ui-codemirror>
+             <p>Make sure to stop and start mosquitto service after this change</p>
+              <pre><code>systemctl stop mosquitto</code></pre>
+              <pre><code>systemctl start mosquitto</code></pre>
             </div>
           </div>
 
