@@ -35,6 +35,58 @@
         </div>
       </div>
 
+      <!-- Install MongoDB -->
+      <div ibox title="Install MongoDB">
+        <div content-block name="" message="Insert and Mount Your USB Drive" image-link="./views/labs/databases/images/df.png">
+          <h2 class="labHidden">Insert and Mount Your USB Drive</h2>
+
+          <p>This Intel IoT Gateway comes with a reduced partition on it's internal SDD. Therefore, we will add disk space my installing the MongoDB data files on an external USB Drive.</p>
+
+          <p>Be sure that you insert it in the USB3 slot which is blue and on the front of your Intel IoT Gateway.</p>
+
+          <p class="alert alert-warning">Be sure that the USB drive that you inserted in mounted by the operating system.</p>
+
+          <p>To check if the USB drive is mounted, type:</p>
+          <pre><code>df -h | egrep sda</code></pre>
+          <p>You should see this.</p>
+          <pre><code>/dev/sda1       29G   11M   29G   1% /media/sda1</code></pre>
+          <p>If you don't see any text output from the previous command then you will need to mount the USB drive manually.</p>
+          <pre><code>mkdir -p /media/sda1; mount /dev/sda1 /media/sda1</code></pre>
+          <p>Now you are ready to download and install MongoDB.</p>
+        </div>
+
+        <div content-block name="" message="Download and Install MongoDB" image-link="./views/labs/databases/images/mongodb.png">
+          <h2 class="labHidden">Download and Install MongoDB</h2>
+          <p>Change directories to the USB drive.</p>
+          <pre><code>cd /media/sda1</code></pre>
+          <p>Then download MongoDB.</p>
+          <pre><code>wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</code></pre>
+          <p>Unarchive the downloaded file and change directories into the newly created mongodb directory.<p>
+          <pre><code>tar zxvf mongodb-linux-x86_64-3.2.9.tgz&#13;&#10;cd mongodb-linux-x86_64-3.2.9</code></pre>
+
+        </div>
+
+
+        <div content-block name="" message="Create a directory to store the MongoDB data files">
+          <p>Create a directory to store the MongoDB data files</p>
+          <pre><code>mkdir -p /media/sda1/data/db</code></pre>
+        </div>
+
+        <div content-block name="" message="Change directories to the mongod binary and run it with a flag to modify the data path">
+          <p>Change directories to the MongoDB server binary.</p>
+          <pre><code>cd /media/sda1/mongodb-linux-x86_64-3.2.9/bin</code></pre>
+
+          <p>Run the mongod. The mongod process will continue to run while you are working on the rest of the labs.  You may wish to open a new console and run the mongod process there.</p>
+
+          <pre><code>./mongod --dbpath=/media/sda1/data/db</code></pre>
+        </div>
+
+
+
+
+
+      </div>
+
       <!-- Create JavaScript Models to represent the Edge Network -->
       <div ibox title="Defining Types for the Edge Network">
         <div content-block name="defining-database-types" message="Read and Understand the types that we will Defining Types for the Edge Network">
@@ -66,19 +118,9 @@
           </div>
         </div>
 
-        <div content-block name="database-run-mongodb" message="Create the /data/db directory and run mongod">
-<h2 class="labHidden">Create the /data/db directory and run mongod</h2>
-          <p>Create the /data/db</p>
-          <pre><code>$ mkdir /data/db</code></pre>
-
-          <p>Run the mongod.  The mongod process will continue to run while you are working on the rest of the labs.  You may wish to open a new console and run the mongod process there.</p>
-          <pre><code>$ mongod</code></pre>
-
-
-        </div>
 
         <div content-block name="learn-about-mongoosejs" message="Learn about MongooseJS, a library of JavaScript bindings for MongoDB">
-<h2 class="labHidden">Learn about MongooseJS, a library of JavaScript bindings for MongoDB</h2>
+          <h2 class="labHidden">Learn about MongooseJS, a library of JavaScript bindings for MongoDB</h2>
           <h4>About MongooseJS</h4>
 
           <p>MongooseJS is an Object Data Manager that let’s you build JavaScript objects that can create, read, validate, update and remove entries from a MongoDB.</p>
@@ -86,25 +128,14 @@
           <p>Read through the documentation on building Mongoose Schemas and Models at <a href="http://mongoosejs.com/docs/guide.html">http://mongoosejs.com/docs/guide.html</a> then start the exercise.</p>
 
         </div>
-
-        <div content-block name="Install MongooseJS and lab schemas">
-<h2 class="labHidden">Install MongooseJS and Lab Schemas
-
-          <p>To install MongooseJS, execute the following commands:</p>
-          <pre><code>$ npm install mongoose --save</code></pre>
-
-          <p>We've prepared the MongooseJS schemas that you will need to complete this lab.  Install the NPM package below and then you will be able to import the schemas</p>
-          <pre><code>$ npm install intel-commercial-edge-network-database-models --save</code></pre>
-
-        </div>
       </div>
+
 
 
 
         <div ibox title="MQTT Sensor Monitoring on the Gateway">
           <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
 <h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
-            <p>In this section of the lab, you will write a server named <b>monitord</b></p>
             <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
             <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
           </div>
@@ -150,14 +181,16 @@
       <h4><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h4>
       <p class="alert alert-warning">The Intel XDK only deploys to an Intel Edison.  For this project, you will have to upload your project to the Intel IoT Gateway using WinSCP, or create the files in this project directly on the Intel IoT Gateway.</p>
           <p>Create a new project named <b>monitord</b> and change to that directory.</p>
-          <pre><code>$ mkdir monitord
-$ cd monitord</code></pre>
+          <pre><code>cd ~&#13;&#10;mkdir monitord&#13;&#10;cd monitord</code></pre>
 
-          <p>Import the MQTT and Mongoose NPM packages by adding them to the package.json file.</p>
+          <p>Next generate an NPM package file which holds the metadata associated with this project.</p>
+          <pre><code>npm init</code></pre>
+          <p>You will need to answer a few questions to generate the file. However, the defaults that are provided are excellent and you can, if you wish, just hit enter to move through the questions.</p>
+          <p>To install MongooseJS, MQTT and the Mongoose schemas that we've prepared for you, execute the following commands:</p>
+          <pre><code>npm install --save mqtt lodash mongoose intel-commercial-edge-network-database-models</code></pre>
 
-          <p>Create a packages.json file by running this command.</p>
-          <pre><code>$ npm init</code></pre>
-          <pre><code>$ npm install --save mqtt lodash mongoose intel-commercial-edge-network-database-models</code></pre>
+          <p>The package.json file should look like this now.</p>
+
           <p class="label">./package.json</p>
           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
   "name": "monitord",
@@ -177,11 +210,13 @@ $ cd monitord</code></pre>
   }
 }</pre></ui-codemirror>
 
+          <p>You should also change the <strong>main</strong> property to "server.js"</p>
+
           <p>When you upload your code to the Intel IoT Gateway, you will need to login to the console and run <code>npm install</code> in the top of you project directory. This will install the external NPM dependencies.</p>
-    </div>
+      </div>
 
     <div content-block name="connect-to-broker-and-database" message="Connect to the MQTT Broker and MongoDB">
-<h2 class="labHidden">Connect to the MQTT Broker and MongoDB</h2>
+      <h2 class="labHidden">Connect to the MQTT Broker and MongoDB</h2>
       <h4>Connect to the MQTT Broker and MongoDB</h4>
       <p>Create a file called <code>./server.js</code>.  This will be the main entry point into your monitord.</p>
 
@@ -189,7 +224,7 @@ $ cd monitord</code></pre>
       <p class="label">./server.js</p>
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
-var mqttClient = mqtt.connect('mqtt://192.168.1.1');</pre></ui-codemirror>
+var mqttClient = mqtt.connect('mqtt://localhost');</pre></ui-codemirror>
 
         <p>Likewise, require the MongooseJS module and setup the connection to the MongoDB server.</p>
 
@@ -296,7 +331,8 @@ mqttClient.on('message', function(topic, message) {
         else
           console.log(topic + ":" + message.toString());
       });
-    });</pre></ui-codemirror>
+    }
+  });</pre></ui-codemirror>
       </div>
     </div>
 
