@@ -63,6 +63,10 @@
               <pre><code>wget https://dl.influxdata.com/telegraf/releases/telegraf-0.13.1_linux_amd64.tar.gz
 </code></pre>
               <pre><code>tar zxvf telegraf-0.13.1_linux_amd64.tar.gz</code></pre>
+              <div class="alert alert-warning">
+                <p>If you are running from an external drive and see an error try below command:</p>
+                <p><code>tar zxvf telegraf-0.13.1_linux_amd64.tar.gz --no-same-owner</code></p>
+              </div>
             </div>
           </div>
           <div ibox title="Generate Server Certificate Authority, Certificate and Key">
@@ -114,7 +118,7 @@ tls_version tlsv1
               <pre><code>cd ./telegraph-0.13.1-1/usr/bin</code></pre>
 
               <p>Run this command to generate a configuration file with an MQTT consumer and an InfluxDB output filter.</p>
-              <pre><code>telegraf -sample-config --input-filter mqtt_consumer --output-filter influxdb > telegraf-mqtt.conf</code></pre>
+              <pre><code>./telegraf -sample-config --input-filter mqtt_consumer --output-filter influxdb > telegraf-mqtt.conf</code></pre>
             </div>
 
             <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
