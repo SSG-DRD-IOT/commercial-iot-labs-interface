@@ -21,26 +21,21 @@
 
 
 
-
-
-
-
-
-
-            <div ibox title="Objectives">
+            <div ibox collapse title="Objectives">
                 <div content-block name="security-objectives" message="Read the Objectives">
                     <h2 class="labHidden">Read the Objectives</h2>
                     <labels gateway window apple linux/>
                     <p>By the end of this module, you should be able to:</p>
 
-                    <!-- <ul>
+                    <ul>
                         <li>Use McAfee® Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
                         <li>Have an understanding of the core MEC features, including code and application protection, write and read protection and dynamic whitelisting.</li>
-                        <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li>
-                        <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li>
+                        <!-- <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li> -->
+                        <!-- <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li> -->
                         <li>Ensuring IoT Gateways so that only trusted modules, Files can Read / Write, Modify & execute.</li>
                         <li>Ability to log the IoT gateway usage and changes</li>
-                    </ul> -->
+                        <li>Learn to configure and lock down system services using Systemd</li>
+                    </ul>
                 </div>
             </div>
 
@@ -64,7 +59,7 @@
 
 
 
-            <div ibox title="McAfee® Embedded Control Orientation">
+            <div ibox collapse title="McAfee® Embedded Control Orientation">
                 <div content-block name="security-objectives" message="Complete the McAfee® Embedded Control Exercises">
                     <h2 class="labHidden">Complete the McAfee® Embedded Control Exercises</h2>
                     <h5>Lab Overview</h5>
@@ -90,19 +85,18 @@
                 <p>In this section you will explore how McAfee® Embedded Control integrates into Wind River Linux and how MEC manages the inventory of executables, configurations, operating modes and logging.</p>
 
                 <p>On the Intel Iot Gateway, open a terminal window and execute the following command to confirm that the McAfee® Embedded Control (MEC) rpm is installed:</p>
-                <pre><code># rpm -qa | egrep solidcore&#13;&#10;solidcores3-6.6.0_145-r0.0.intel_baytrail_64</code></pre>
+                <pre><code>rpm -qa | egrep solidcore&#13;&#10;solidcores3-6.6.0_145-r0.0.intel_baytrail_64</code></pre>
                 <p>You should see the name of the Solid Core rpm appear. This verifies that it is installed.</p>
               </div>
 
               <div content-block name="security-features-list" message="Verify features of McAfee® Embedded Control Exercises">
 
                     <p>Next let's verify which version of McAfee® Embedded Control is installed on your gateway</p>
-                    <pre><code># sadmin features list&#13;&#10;MEC Essential</code></pre>
+                    <pre><code>sadmin license list&#13;&#10;MEC Essential</code></pre>
                     <p class="alert alert-info">If you see MEC Essential installed, then you have the minimal McAfee® Embedded Control installation.  This version has a reduced feature set and is available with the free version of your Wind River Linux operating system.</p>
 
                     <p>Next let's next verify which features are enabled with your version of McAfee® Embedded Control</p>
-                    <pre><code># sadmin features list&#13;&#10;checksum&#9;&#9;Enabled&#13;&#10;integrity&#9;&#9;Enabled</code></pre>
-                    <pre><code>sadmin features</code></pre>
+                    <pre><code>sadmin features list&#13;&#10;checksum&#9;&#9;Enabled&#13;&#10;integrity&#9;&#9;Enabled</code></pre>
 
                     <p>Note the following aspect of the MEC features:</p>
                     <ul>
@@ -131,51 +125,51 @@
                     <img src="./views/labs/security-nuc/images/sadmin-help.png" alt="image alt text" />
                   </div>
 
-                  <div content-block name="security-mec-status" message="Find the current status of McAfee® Embedded Control ">
+                  <div content-block name="security-mec-status" message="Find the current status of McAfee® Embedded Control" image-link="./views/labs/security-nuc/images/sadmin-status.png">
                     <p>As the MEC administrators, execute the following command to check the status of the McAfee® Embedded Control on your target:</p>
-                    <pre><code>sadmin status</code>
-                    <img alt="" src="./views/labs/security-nuc/images/sadmin-status.png">
-                                    <p>Observe that the status is Unsolidified.</p>
+                    <pre><code>sadmin status</code></pre>
+                    <img class="labHidden" alt="" src="./views/labs/security-nuc/images/sadmin-status.png">
+                          <p>Observe that the status is Unsolidified.</p>
 
-                                    <p>The following table describes the fields and their meaning.</p>
-                                    <table>
-                                        <tr>
-                                            <th style="width: 140px;">Field</th>
-                                            <th>Description</th>
-                                        </tr>
-                                        <tr>
-                                            <td>McAfee Solidifier</td>
-                                            <td>specifies the operation mode of the application control</td>
-                                        </tr>
-                                        <tr>
-                                            <td>McAfee Solidifier on reboot</td>
-                                            <td>specifies the operation mode of the application control after a system restart</td>
-                                        </tr>
-                                        <tr>
-                                            <td>ePO Managed</td>
-                                            <td>displays the connectivity status of application control with McAfee ePO. In a standalone configuration, this status is No.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Local CLI Access</td>
-                                            <td>displays the statue (lockdown or recovered) of the local CLI. In standalone configuration, this status is Recovered.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>fstype</td>
-                                            <td>displays the supported file systems for a volume</td>
-                                        </tr>
-                                        <tr>
-                                            <td>status</td>
-                                            <td>displays the current whitelist status for all the supported volumes on a system. If a volume name is specified, only the whitelist status for the volume displays.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>driver status</td>
-                                            <td>displays whether the application control driver is loaded on a volume. If the driver is loaded, the status is attached; otherwise the status is unattached.</td>
-                                        </tr>
-                                        <tr>
-                                            <td>volume</td>
-                                            <td>displays the volume name</td>
-                                        </tr>
-                                    </table>
+                          <p>The following table describes the fields and their meaning.</p>
+                          <table>
+                              <tr>
+                                  <th style="width: 140px;">Field</th>
+                                  <th>Description</th>
+                              </tr>
+                              <tr>
+                                  <td>McAfee Solidifier</td>
+                                  <td>specifies the operation mode of the application control</td>
+                              </tr>
+                              <tr>
+                                  <td>McAfee Solidifier on reboot</td>
+                                  <td>specifies the operation mode of the application control after a system restart</td>
+                              </tr>
+                              <tr>
+                                  <td>ePO Managed</td>
+                                  <td>displays the connectivity status of application control with McAfee ePO. In a standalone configuration, this status is No.</td>
+                              </tr>
+                              <tr>
+                                  <td>Local CLI Access</td>
+                                  <td>displays the statue (lockdown or recovered) of the local CLI. In standalone configuration, this status is Recovered.</td>
+                              </tr>
+                              <tr>
+                                  <td>fstype</td>
+                                  <td>displays the supported file systems for a volume</td>
+                              </tr>
+                              <tr>
+                                  <td>status</td>
+                                  <td>displays the current whitelist status for all the supported volumes on a system. If a volume name is specified, only the whitelist status for the volume displays.</td>
+                              </tr>
+                              <tr>
+                                  <td>driver status</td>
+                                  <td>displays whether the application control driver is loaded on a volume. If the driver is loaded, the status is attached; otherwise the status is unattached.</td>
+                              </tr>
+                              <tr>
+                                  <td>volume</td>
+                                  <td>displays the volume name</td>
+                              </tr>
+                          </table>
                         </div>
 
                         <div content-block name="security-mec-status" message="Look at the SolidCore log files for  McAfee® Embedded Control">
@@ -230,7 +224,7 @@
 
 
 
-                <div ibox title="McAfee® Embedded Control Generating the White List">
+                <div ibox collapse title="McAfee® Embedded Control Generating the White List">
                   <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect.">
                     <h5>Enabling McAfee® Embedded Control</h5>
 
@@ -289,7 +283,7 @@
 
                         <li>
                             <p>Create the script by typing</p>
-                            <pre><code># vi /root/test_script.sh</code></pre>
+                            <pre><code>vi /root/test_script.sh</code></pre>
                             <p>Type "i" to enter insert mode and then type</p>
                             <pre><code>#!/bin/bash
                   echo "Hello, World"
@@ -412,7 +406,7 @@
 
 
 
-      <div ibox title="McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox collapse title="McAfee® Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-nuc/images/sadmin-config-show.png">
           <p>McAfee® Embedded Control can be configured use a variety of algorithms to verify the integrity of solidified system files.</p>
           <p>Type the following to find which algorithm is currently being used:</p>
@@ -427,13 +421,16 @@
           <p class="alert alert-info">If the software is not in Disabled mode, type the # sadmin disable command and reboot the system.</p>
 
           <p>Configure checksum calculation.</p>
-          <pre><code># sadmin config set HashAlgorithm=SHA256 </code></pre>
+          <pre><code>sadmin config set HashAlgorithm=SHA256 </code></pre>
           <p>"sha value" represents the hash function to use for checksum calculation and can be SHA1 or SHA256.</p>
           <p>If you are switching from SHA1 to SHA256, the command might take a few minutes to compute new checksum values.</p>
+
+          <p class="alert alert-warning">Notice that with the McAfee Essentials license the <strong>sadmin config set</strong> command is not available. In fact, if you type <strong>sadmin help config</strong> you will notice that the only config command available is the <strong>sadmin config show</strong> command.</p>
+
           <p>Enable the software.</p>
-          <pre><code># sadmin enable</code></pre>
+          <pre><code>sadmin enable</code></pre>
           <p>Restart the McAfee Solidifier service.</p>
-          <pre><code># service scsrvc restart</code></pre>
+          <pre><code>service scsrvc restart</code></pre>
         </div>
       </div>
 
@@ -449,31 +446,31 @@
 
 
 
-      <div ibox title="McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox collapse title="McAfee® Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Verify that authorized applications can run">
           <p>On a protected system, only authorized applications or programs are allowed to run.</p>
 
-          <p>To verify that authorized application can run, run any application.</p>
-          <pre><code># ls</code></pre>
+          <p>To verify that authorized application can run, run any application. For example you can simple run the <strong>ls</strong> application.</p>
+          <pre><code>ls</code></pre>
 
           <p>You can get a list of all authorized applications and shared libraries by typing:</p>
-          <pre><code># sadmin ls</code></pre>
+          <pre><code>sadmin ls</code></pre>
         </div>
 
 
         <div content-block name="security-objectives" message="Verify that unauthorized applications can't run">
           <p>To verify that an unauthorized application is not able to run, we need to first create an unauthorized application.<p>
-          <pre><code># cp /usr/sbin/useradd /usr/sbin/myuseradd</code></pre>
+          <pre><code>cp /bin/ls /bin/myls</code></pre>
           <p>Now try to run the new program.</p>
-          <pre><code>#/usr/sbin/myuseradd</code></pre>
+          <pre><code>/bin/myls</code></pre>
           <img src="./views/labs/security-nuc/images/denied.png" alt="" />
         </div>
 
         <div content-block name="security-objectives" message="Verify that the unauthorized binary fails to run">
-          <p>Verify that the modification attempt fails.</p>
-          <p>Review the solidcore.log file placed in the /usr/local/mcafee/solidcore/log directory.</p>
+          <p>Verify that the modification attempt fails by reviewing the solidcore.log file placed in the /usr/local/mcafee/solidcore/log directory. This command will let you view the last line of the log file.</p>
+          <pre><code>tail -n 1 /usr/local/mcafee/solidcore/log/solidcore.log</code></pre>
           <p>This entry is added to the log file:</p>
-          <p>McAfee Solidifier prevented an attempt to modify file "filename" by process "processname" (Process Id:"PID", User:"user_name")</p>
+          <pre><code>U.16951.16994: Sep 25 2016:16:38:27.659:   ERROR: evt.c: 1240: McAfee Solidifier prevented unauthorized execution of '/bin/myls' by process sh (Process Id: 17583, User: root).</code></pre>
         </div>
 
       </div>
@@ -503,7 +500,7 @@
 
 
 
-<div ibox title="McAfee® Embedded Control Updating A Solidified Box">
+<div ibox collapse title="McAfee® Embedded Control Updating A Solidified Box">
   <div content-block name="security-objectives" message="Set McAffee Embedded Control Into Update Mode" image-link="./views/labs/security-nuc/images/sadmin-bu.png">
     <h5>Using the Update Mode</h5>
 
@@ -515,7 +512,7 @@
   </div>
   <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect." image-link="./views/labs/security-nuc/images/myuseradd.png">
     <p>Run the unauthorize command that we created in the previous section: </p>
-    <pre><code># /usr/sbin/myuseradd</code></pre>
+    <pre><code>/bin/myls</code></pre>
   </div>
 
   <div content-block name="security-objectives" message="When you are done with the Update Mode switch back to protected mode" image-link="./views/labs/security-nuc/images/sadmin-eu.png">
@@ -535,49 +532,47 @@
 
 
 <div ibox title="How To Use Systemctl to Manage Systemd Services and Units">
-  <div content-block name="" message="Introduction to Service Management" image-link="">
+  <div content-block name="" message="Introduction to Service Management">
     <p>Wind River Linux uses Systemd to manage the Intel IoT Gateway system services. Systemd is a widely used in the Linux community and understanding how it works is essential for securing your gateway for deployment.</p>
     <p>In this lab, you will be using the systemctl command, which is the administrative command line tool for controlling the init system. You will cover how to disable unused services, check statuses, change system states, and modify configuration files.</p>
     <p>Systemd labels services that it controls as "units".  A unit configuration file that describes how to manage a system resource.  Systemd defines a number of types of services. In this lab, you will be managing services with the aim of reducing the attack surface of your gateway.</p>
   </div>
-  <div content-block name="" message="Starting and Stopping Services" image-link="">
+  <div content-block name="" message="Starting and Stopping Services" image-link="./views/labs/security-nuc/images/systemctl-start.png">
     <p>To start a service use the <strong>start</strong> command.  You will need to be the root user or use the sudo command.</p>
-    <pre><code>sudo systemctl start application.service</code></pre>
     <p>Try starting the <strong>node-red-experience</strong></p>
-    <pre><code>sudo systemctl start node-red-experience.service</code></pre>
+    <pre><code>systemctl start node-red-experience.service</code></pre>
     <p>or you can simply drop the <strong>.service</strong> and type:
-    <pre><code>sudo systemctl start node-red-experience</code></pre>
+    <pre><code>systemctl start node-red-experience</code></pre>
     <p>Try stopping the <strong>node-red-experience</strong></p>
     <p>Likewise, you can stop a system service by typing:</p>
-    <pre><code>sudo systemctl stop application.service</code></pre>
+    <pre><code>systemctl stop node-red-experience.service</code></pre>
   </div>
-  <div content-block name="" message="Restarting and Reloading" image-link="">
+  <div content-block name="" message="Restarting and Reloading" image-link="./views/labs/security-nuc/images/system-status.png">
     <p>Restarting a currently running service is simple with the <strong>restart</strong> command. This will terminate the process and then relaunch it.</p>
-    <pre><code>sudo systemctl restart application.service</code></pre>
+    <pre><code>systemctl restart node-red-experience.service</code></pre>
     <p>If the service is able to reload its configuration files without terminating first, then you can use the <strong>reload</strong> command.</p>
-    <pre><code>sudo systemctl reload application.service</code></pre>
+    <pre><code>systemctl reload node-red-experience.service</code></pre>
     <p>If you are unsure whether the service is able to reload its own configuration files, you can use the <strong>reload-or-restart</strong> command. This will reload the configuration if possbile. Otherwise, it will restart the service.</p>
-    <pre><code>sudo systemctl reload-or-restart application.service</code></pre>
+    <pre><code>systemctl reload-or-restart node-red-experience.service</code></pre>
   </div>
-  <div content-block name="" message="Enabling and Disabling Services" image-link="">
+  <div content-block name="" message="Enabling and Disabling Services" image-link="./views/labs/security-nuc/images/systemctl-enable-disable.png">
     <p>Enabling and disabling refers to whether a service is started at boot (enabled) or not (disabled).</p>
     <p>If you want a service to start when the system next boots type the follow:</p>
-    <pre><code>sudo systemctl enable application.service</code></pre>
+    <pre><code>systemctl enable node-red-experience.service</code></pre>
     <p>To make sure that the system does not start a service at boot, type the following:</p>
-    <pre><code>sudo systemctl disable application.service</code></pre>
+    <pre><code>systemctl disable node-red-experience.service</code></pre>
   </div>
-  <div content-block name="" message="Checking the Status of Services" image-link="">
+  <div content-block name="" message="Checking the Status of Services" image-link="./views/labs/security-nuc/images/systemctl-is-active.png">
     <p>The <strong>status</strong> command will report whether the service is running or not and if there is a failure condition.</p>
-    <pre><code>systemctl status application.service</code></pre>
     <p>Let's see if what the current status is of the <strong>node-red-experience</strong>.
     <pre><code>systemctl status node-red-experience</code></pre>
     <p>There are functions which determine the current status of a service</p>
-    <pre><code>systemctl is-active application.service</code></pre>
+    <pre><code>systemctl is-active node-red-experience.service</code></pre>
     <p>This will return the current unit state, which is usually active or inactive. The exit code will be "0" if it is active, making the result simpler to parse programatically.</p>
-    <pre><code>systemctl is-enabled application.service</code></pre>
-    <pre><code>systemctl is-failed application.service</code></pre>
+    <pre><code>systemctl is-enabled node-red-experience.service</code></pre>
+    <pre><code>systemctl is-failed node-red-experience.service</code></pre>
   </div>
-  <div content-block name="" message="System State Overview" image-link="">
+  <div content-block name="" message="System State Overview" image-link="./views/labs/security-nuc/images/systemctl-list-units.png">
     <p>The next set of commands will help to determine the state of the entire system.</p>
     <pre><code>systemctl list-units</code></pre>
     <p>This command will show you a list of all of the units on the system whether they are active or not.</p>
@@ -596,24 +591,23 @@
     <p>Lastly, it's very useful to filter the results to include only the <strong>service</strong> type.
     <pre><code>systemctl list-units --type=service</code></pre>
   </div>
-  <div content-block name="" message="Unit Management - Displaying a Unit File" image-link="">
+  <div content-block name="" message="Unit Management - Displaying a Unit File" image-link="./views/labs/security-nuc/images/systemctl-cat.png">
     <p>The cat command will display the unit file that was used to configure a given process.</p>
-    <pre><code>systemctl cat atd.service</code></pre>
+    <pre><code>systemctl cat node-red-experience.service</code></pre>
   </div>
-  <div content-block name="" message="Displaying Dependencies" image-link="">
+  <div content-block name="" message="Displaying Dependencies" image-link="./views/labs/security-nuc/images/systemctl-list-deps.png">
     <p>To display the heirarchy of units that must successfully become active before a given unit can run.</p>
-    <pre><code>systemctl list-dependencies sshd.service</code></pre>
+    <pre><code>systemctl list-dependencies node-red-experience.service</code></pre>
     <p>To show the units that list a given unit as a dependency type:</p>
-    <pre><code>systemctl list-dependencies --reverse sshd.service</code></pre>
-    <pre><code>systemctl show sshd.service -p Conflicts</code></pre>
-    <pre><code></code></pre>
+    <pre><code>systemctl list-dependencies --reverse node-red-experience.service</code></pre>
+    <pre><code>systemctl show node-red-experience.service -p Conflicts</code></pre>
   </div>
-  <div content-block name="" message="Masking and Unmasking Units" image-link="">
+  <div content-block name="" message="Masking and Unmasking Units" image-link="./views/labs/security-nuc/images/systemctl-mask.png">
     <p>Earily we showed you how to stop a service. Systemd has another mechanism for stopping a service from running called <strong>masking</strong>. When masking a service systemd creates a symlink between the service's configuration files in /etc/systemd/ and /dev/null.  This stops the service from being triggers as a dependencies of another service.  It also prevents the service from being activated manually.</p>
-    <pre><code>sudo systemctl mask nginx.service</code></pre>
+    <pre><code>systemctl mask nginx.service</code></pre>
     <p>You can see a list of masked units by typing the following:</p>
     <pre><code>systemctl list-unit-files</code></pre>
-    <pre><code>sudo systemctl start nginx.service</code></pre>
+    <pre><code>systemctl start nginx.service</code></pre>
   </div>
 </div>
 
@@ -638,23 +632,23 @@
                     <h5>Disable McAfee® Embedded Control</h5>
 
                     <p>By design, <b>McAfee® Embedded Control</b> will protect your system from changes. So let's turn it off now.</p>
-                    <pre><code># sadmin disable</code></pre>
+                    <pre><code>sadmin disable</code></pre>
 
                     <h5>The gradm command</h5>
                     <p>gradm is the grsecurity RBAC administration and policy analysis utility. It allows you to configure and administrate the grsecurity system.</p>
                     <p>To display all available command-line switches, run gradm --help.</p>
-                    <pre><code># gradm</code></pre>
-                    <pre><code># gradm</code> <img alt="" data-fid="504152" src="https://software.intel.com/sites/default/files/managed/85/2c/gr1.png" typeof="foaf:Image"></p>
+                    <pre><code>gradm</code></pre>
+                    <pre><code>gradm</code> <img alt="" data-fid="504152" src="https://software.intel.com/sites/default/files/managed/85/2c/gr1.png" typeof="foaf:Image"></p>
 
 
                     <h5>Setting up a Role-Based Access</h5>
                     <p>Here we will create three roles <b>root</b>, <b>admin</b>, <b>shutdown</b>. Each of these roles will have unique abilities that will be constrained by the by RBAC. You can use any password that you like for each role.</p>
-                    <pre><code># gradm -P</code></pre>
+                    <pre><code>gradm -P</code></pre>
                     <p><img alt="" data-fid="504153" src="https://software.intel.com/sites/default/files/managed/cb/2b/gr0.png" typeof="foaf:Image"></p>
 
-                    <pre><code># gradm -P admin</code></pre>
+                    <pre><code>gradm -P admin</code></pre>
                     <p><img alt="" data-fid="504154" src="https://software.intel.com/sites/default/files/managed/d6/9b/gr2.png" typeof="foaf:Image"></p>
-                    <pre><code># gradm -P shutdown</code></pre>
+                    <pre><code>gradm -P shutdown</code></pre>
                     <p><img alt="" data-fid="504155" src="https://software.intel.com/sites/default/files/managed/b2/31/gr3.png" typeof="foaf:Image"></p>
 
                     <h5>Enable Learning Mode</h5>
@@ -665,7 +659,7 @@
                         of system.</p>
                     <p>To enable full system learning, run gradm as root with the following options:</p>
                     <p>Please run few commands. In actual environment learning mode is usually 24-48 hours.</p>
-                    <pre><code># gradm –S
+                    <pre><code>gradm –S
                 # gradm –F –L /etc/grsec/learning.logs
 
                 # ls
@@ -680,14 +674,14 @@
                     <h5>Enabling Grsecurity with Learned Rules</h5>
 
                     <p>First backup the current policy file.</p>
-                    <pre><code># cp /etc/grsec/policy /etc/grsec/policy.bak
+                    <pre><code>cp /etc/grsec/policy /etc/grsec/policy.bak
                   # cp /etc/grsec/learning.roles /etc/grsec/policy</code></pre>
 
                     <p>Now enable grsecurity.</p>
-                    <pre><code># gradm -E</code></pre>
+                    <pre><code>gradm -E</code></pre>
 
                     <h5>Test the Learned Rules</h5>
-                    <pre><code># ls
+                    <pre><code>ls
                     # pwd
                     # cat
                     # ifconfig
