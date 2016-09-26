@@ -33,73 +33,17 @@
                 <div content-block name="read-objectives" message="Read the Objectives">
                     <h2 class="labHidden">Read the Objectives</h2>
                     <labels Arduino 101 windows apple linux/>
-                    <p>To learn how to build stand alone IoT devices with Intel® IoT Gateway and Arduino 101. Learn to use sensors and actuators to gather and respond to data.</p>
+                    <p>In this lab you will learn how to use the Intel IoT Developer Kit to developer and deploy software to your Intel IoT Gateway and Arduino 101. You will also learn use the hardware in the starter kit to build stand alone IoT devices.</p>
 
                     <p>By the end of this module, you should be able to:</p>
 
                     <ul>
                         <li>Connect Grove Kit sensors and actuators to your Arduino 101.</li>
                         <li>Use the JavaScript UPM libraries to control actuators and read data from sensors.</li>
-                        <li>Create a NodeJS server to configure and analyze the Grove components as "edge devices" — devices triggered over a network instead of directly on the board.</li>
+                        <li>Use the Intel® XDK IoT Edition to deploy an IoT application to your gateway</li>
                     </ul>
                 </div>
               </div>
-
-
-            <!-- Three Methods of Deploying Code to the Arduino 101 -->
-            <!-- <div ibox title="Three Methods of Deploying Code to the Arduino 101">
-
-        <div content-block name="build-deploy-code-with-SSH" message="You can use multiple methods of deploying code to Intel IoT products">
-<h2 class="labHidden">You can use multiple methods of deploying code to Intel IoT products</h2>
-          <p>There are many ways to transfer source code to the Arduino 101 or Intel IoT Gatway. The simplest is to use SSH and secure copy or secure FTP to transfer files. Many IDEs also have the ability to transfer files over SSH.</p>
-
-          <p>In this section, we'll walk through transfering a software project to the Arduino 101 using a couple of different methods.</p>
-
-          <ol>
-            <li>Write your source code in any editor and transfer it using secure copy (SCP)</li>
-            <li>Use the Intel XDK to write and deploy your code</li>
-            <li>Use the Atom Editor and the Remote Edit package to write and deploy code</li>
-          </ol>
-
-          <div class="alert alert-info">
-            <p>If you deploy your NodeJS application to the directory /node_app_slot it will autostart at device boot time.</p>
-          </div>
-
-        </div>
-        <div content-block name="build-deploy-with-scp" message="Use SCP to deploy code to the Arduino 101">
-<h2 class="labHidden">Use SCP to deploy code to the Arduino 101</h2>
-          <p>The step to use SCP are different on Windows based machine then on MacOSX or Linux based machines.</p>
-
-          <p>If you are on Windows:</p>
-          <ul>
-            <li>Go to the <a href="https://winscp.net/eng/download.php">WinSCP site</a>.</li>
-            <li>Launch WinSCP and configure the remote host as <code>192.168.1.1</code> with your username and password</li>
-            <li>You can now drag and drop your source code on to the Arduino 101 or Intel IoT Gateway</li>
-          </ul>
-
-          <p>If you on MacOSX or Linux, you can secure copy files from the command line. Assuming the IP address of your Arduino 101 is 192.168.1.100, to move files from your home directory to the /node_app_slot directory on the Arduino 101 type:</p>
-          <pre><code># scp -rf ~/labs/temperature-sensor/ root@192.168.1.100:/node_app_slot</code></pre>
-        </div>
-
-        <div content-block name="build-use-atom-to-deploy" message="You can use Atom to deploy software to the Arduino 101 or Intel IoT Gateway" image-link="./views/labs/build-nuc/images/atom.png">
-<h2 class="labHidden">You can use Atom to deploy software to the Arduino 101 or Intel IoT Gateway</h2>
-<img class="labHidden" src="./views/labs/build-nuc/images/atom.png"></img>
-
-          <ol>
-            <li>Go to the <a href="https://atom.io/">Atom Editor Homepage</a> and download the Atom Editor.</li>
-            <li>Go the menu bar in Atom and go to <code>Preferences</code>.</li>
-            <li>Click on <code>Install</code> and search for <code>Remote-Edit</code></li>
-            <li>Go to the menu bar <code>Packages -> Remote Edit -> Add New Host (sftp)</code></li>
-            <li>Add the IP address of the Arduino 101 or the Intel IoT Gateway</li>
-            <li>Now if you go to <code>Packages -> Remote Edit -> Browse Hosts</code> you will be able to browse and edit the files on the remote host.</li>
-          </ol>
-        </div>
-      </div> -->
-
-
-
-
-
 
 
 
@@ -117,12 +61,9 @@
 
                     <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel Gateway using any computer OS platform</p>
 
-                    <p>
-                        Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
-                    </p>
+                    <p>Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.</p>
 
-                    <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The
-                        IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
+                    <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
                 </div>
 
                 <div content-block name="launch-xdk" message="Launch and Sign In to the Intel XDK" image-link="./views/labs/build-nuc/images/image_0.png">
@@ -139,7 +80,6 @@
                 <div content-block name="xdk-signup" message="Create an account and sign in to the Intel XDK" image-link="./views/labs/build-nuc/images/image_1.png">
                     <h2 class="labHidden">Create an account and sign in to the Intel XDK</h2>
                     <p><img class="labHidden" alt="" data-fid="503893" src="https://software.intel.com/sites/default/files/managed/9b/68/image_1.png" typeof="foaf:Image"></p>
-
 
                     <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-existing account.</p>
                 </div>
@@ -371,12 +311,19 @@ $ opkg install mraa</code></pre>
 
                         <li>
                             <p>Include the JS UPM library for the basic Grove sensors.</p>
-                            <p><code>var groveSensor = require('jsupm_grove');</code></p>
+                            <p><code>var groveSensor = require('jsupm_grove');</code></pre>
                         </li>
 
                         <li>
-                          <p>When connecting the Intel Iot Gateway to an Arduino 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101.
-<p>Firmata is a generic protocol for communicating with microcontrollers from software on a host computer. It is intended to work with any host computer software package.Basically, this firmware establishes a protocol for talking to the Arduino from the host software.</p>
+                          <p>When connecting the Intel Iot Gateway to an Arduino 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101.</p>
+                          <p>Firmata is a generic protocol for communicating with microcontrollers from software on a host computer. It is intended to work with any host computer software package.Basically, this firmware establishes a protocol for talking to the Arduino from the host software.</p>
+                          <p class="alert alert-info">However, when communicating to the subplatform all analog, digital and I2C pins require a 512 bit offset.</p>
+                        </li>
+
+                        <li>
+                          <p>Create a const variable named OFFSET and set it equal to 512</p>
+                          <pre><code>const OFFSET = 512</code></pre>
+                        </li>
                         <li>
                             <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
                             <p><code>var temp = new groveSensor.GroveTemp(0 + OFFSET);</code></p>
@@ -384,7 +331,9 @@ $ opkg install mraa</code></pre>
 
                         <li>
                             <p>Read the value of the <code>GroveTemp</code> object you just created.</p>
-                            <p><code>var celsius = temp.value();</code></p>
+                            <p class="alert alert-warning">There is a BUG in the way the voltage on the temperature sensor is reported.  The LCD screen operates at 5 volts.  However, the temperature sensors is made to operate at 3.3 volts. In this project you must set the voltage to 5V to be able to see the text in the LCD.  However this means that the temperature sensor will over estimate the value of the current temperature. However, this can be fixed in software. Just multiply time 3.3 and divide by 5 to obtain the correct value.</p>
+                            <p><code>var wrongValueTemp = temp.value();</code></p>
+                            <p><code>var celsius = wrongValueTemp * 3.3 / 5;</code></p>
                         </li>
 
                         <li>
@@ -437,8 +386,8 @@ monitor();</pre></ui-codemirror>
                 </div>
 
 
-                <div content-block name="repeat-sensor-reading" message="Bring the SetInterval and Sensor Reading code together.">
-                    <h2 class="labHidden">Bring the SetInterval and Sensor Reading code together.</h2>
+                <div content-block name="repeat-sensor-reading" message="Bring the setInterval and sensor reading code together and print the temperature on the console.">
+                    <h2 class="labHidden">Bring the SetInterval and Sensor Reading code together and print the temperature on the console.</h2>
                     <ol>
 
                         <li>
@@ -449,11 +398,13 @@ monitor();</pre></ui-codemirror>
                             <p>
                                 With polling, the exercise code should look like this:</p>
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var groveSensor = require('jsupm_grove');
+const OFFSET = 512;
 var temp = new groveSensor.GroveTemp(0 + OFFSET);
 
 function monitor() {
     setInterval(function() {
-        var celsius = temp.value();
+        var wrongValueTemp = temp.value();
+        var celsius = wrongValueTemp * 3.3 / 5;
         var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
         console.log(celsius +
             "° Celsius, or " + fahrenheit + "° Fahrenheit ");
@@ -462,12 +413,12 @@ function monitor() {
 monitor();</pre></ui-codemirror>
 
                         </li>
-
                     </ol>
                 </div>
 
                 <div content-block name="repeat-sensor-reading" message="Add the LCD Screen.">
                     <h2 class="labHidden">Add the LCD Screen.</h2>
+                    <p>Next we will add the LCD screen to the project and print the temperature value on it.</p>
                     <p>Update <span class="icon file">main.js</span> to output the value from the temperature sensor to the LCD display.</p>
 
                     <p>Below are the general steps to complete the exercise.</p>
@@ -483,7 +434,7 @@ monitor();</pre></ui-codemirror>
                             <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
                             <dl>
                                 <dt>I2C bus (Number)</dt>
-                                <dd>For the Arduino 101, <strong>use <code>0</code></strong>.</dd>
+                                <dd>For the Arduino 101, <strong>use <code>0 + OFFSET</code></strong>.</dd>
 
                                 <dt>lcdAddress (Number)</dt>
                                 <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
@@ -525,7 +476,8 @@ var screen = new LCD.Jhd1313m1(0 + OFFSET, 0x3E, 0x62);
 
 function monitor() {
     setInterval(function() { // Read the temperature sensor
-        var celsius = temp.value();
+        var wrongValueTemp = temp.value();
+        var celsius = wrongValueTemp * 3.3 / 5;
         var fahrenheit = Math.round(celsius *
             9.0 / 5.0 + 32.0);
         console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit"); // Update the LCD screen

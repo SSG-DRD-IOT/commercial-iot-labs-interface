@@ -25,7 +25,7 @@
                     <p>In this lab, we will explore using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
 
                     <ol>
-                        <li>Build a data flow that sends information from the temperature sensors to the LCD screen. Dataflow is entirely on the edge device</li>
+                        <li>Build a data flow that sends information from the temperature sensors to the LCD screen.</li>
                         <li>Build a data flow that sends information from the temperature sensor to an MQTT broker on the gateway</li>
                         <li>Build a data flow that receives Restful HTTP requests and changes the state of the LCD screen</li>
                     </ol>
@@ -48,15 +48,6 @@
                             <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
                         </li>
                     </ol>
-                </div>
-
-                <div content-block name="find-ip-address" message="Login to your Intel IoT device and find you IP address">
-                    <h2 class="labHidden">Login to your Intel IoT device and find you IP address</h2>
-                    <p>Log into the Intel IoT device over serial.</p>
-                    <p>First get the ip address of the IoT device:</p>
-                    <code>$ ifconfig eth0</code>
-                    <p><img class="labHidden" alt="" data-fid="503930" src="https://software.intel.com/sites/default/files/managed/6b/ae/ifconfig.png" typeof="foaf:Image"></p>
-                    <p>The ip address is the address following inet addr. In the case above it is: <code>10.175.154.190</code>, however yours will be different. Remeber this address for the following step.</p>
                 </div>
 
                 <div content-block name="run-node-red" message="Install and run Node-RED">
