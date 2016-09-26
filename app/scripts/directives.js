@@ -122,7 +122,7 @@ function labels($timeout) {
     scope: true,
     templateUrl: 'views/common/labels.html',
     link: function(scope, element, attrs){
-      scope.edison = 'edison' in attrs;
+      scope.arduino = 'arduino' in attrs;
       scope.gateway = 'gateway' in attrs;
       scope.xdk = 'xdk' in attrs;
       scope.nodered = 'nodered' in attrs;

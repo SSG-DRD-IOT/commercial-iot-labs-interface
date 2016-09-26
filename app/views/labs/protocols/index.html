@@ -54,7 +54,7 @@
                     <h2 class="labHidden">Login to your Intel IoT device and find you IP address</h2>
                     <p>Log into the Intel IoT device over serial.</p>
                     <p>First get the ip address of the IoT device:</p>
-                    <code>$ ifconfig wlan0</code>
+                    <code>$ ifconfig eth0</code>
                     <p><img class="labHidden" alt="" data-fid="503930" src="https://software.intel.com/sites/default/files/managed/6b/ae/ifconfig.png" typeof="foaf:Image"></p>
                     <p>The ip address is the address following inet addr. In the case above it is: <code>10.175.154.190</code>, however yours will be different. Remeber this address for the following step.</p>
                 </div>
@@ -71,17 +71,6 @@
                     </div>
                 </div>
 
-                <div content-block name="run-node-red-modules" message="Install the Intel IoT device Node-RED module using NPM">
-                    <h2 class="labHidden">Install the Intel IoT device Node-RED module using NPM</h2>
-                    <p>Once Node-RED is installed you will have to add the custom nodes that will be used to interact with the temperature sensor and LCD display</p>
-
-                    <p>To install the Node-RED nodes needed use:</p>
-                    <code>$ npm install -g node-red-contrib-grove-sensors-edison </code>
-
-                    <p> You should now run the Node-RED server by typing:</p>
-                    <code>$ node-red</code>
-                    <p>The Node-Red server will now launch</p>
-                </div>
                 <div class="alert alert-warning">
                     <p>If you would like to run it as a daemon, include a "&" at the end of the command: <code>$ node-red&</code></p>
                 </div>
@@ -116,6 +105,9 @@
 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var r_val = 0;
 var g_val = 0;
 var b_val = 0;
+
+// Ask the instructor about a bug in the voltage reading on the temperature sensor
+msg.payload = 3.3/5 * msg.payload
 
 if (msg.payload &gt;= 25) {
   r_val = 255;
@@ -218,7 +210,7 @@ return msg;</pre></ui-codemirror>
               <p>The commands in this section will be run on the Intel® Iot Gateway.</p>
             </div>
 
-            <div content-block name="find-ip-address " message="Review useful commands to help you organize your workflow on the Intel IoT Gateway ">
+            <!-- <div content-block name="find-ip-address " message="Review useful commands to help you organize your workflow on the Intel IoT Gateway ">
 <h2 class="labHidden ">Review useful commands to help you organize your workflow on the Intel IoT Gateway</h2>
               <h5>Setup Screen Window Manager</h5>
               <p>Log into your Intel® Iot Gateway. As a refresher: </p>
@@ -249,63 +241,53 @@ return msg;</pre></ui-codemirror>
                   <p><code>$ mosquitto</code></p>
                 </li>
               </ol>
-            </div>
+            </div> -->
 
             <div content-block name="find-ip-address " message="Create a Node-Red flow that will sends the temperature reading to the MQTT broker "
             image-link="./views/labs/protocols/images/mqtt_flow.png ">
-<h2 class="labHidden ">Create a Node-Red flow that will sends the temperature reading to the MQTT broker</h2>
-<p><img class="labHidden" alt="mqtt flow" data-fid="503933" src="https://software.intel.com/sites/default/files/managed/8a/d4/mqtt_flow.png" title="mqtt flow" typeof="foaf:Image"><strong> </strong></p>
+              <h2 class="labHidden ">Create a Node-Red flow that will sends the temperature reading to the MQTT broker</h2>
+              <p><img class="labHidden" alt="mqtt flow" data-fid="503933" src="https://software.intel.com/sites/default/files/managed/8a/d4/mqtt_flow.png" title="mqtt flow" typeof="foaf:Image"><strong> </strong></p>
 
               <h5>Create a Node-RED flow</h5>
               <p>Now you will create a new flow in Node-RED in order to send the temperature data up to your MQTT server.<p>
               <p>Use the:
-                <ul>
-                  <li> <b>grove temp sensor</b> from the Intel-gpio section connected to:</li>
-                  <li><b>function</b> node from the function section connected to:</li>
-                  <li><b>mqtt</b> node from the output section</li>
-                </ul>
-                <p> This creates a sequence that will send temperature data over MQTT to a broker.</p>
+              <ul>
+                <li><b>grove temp sensor</b> from the Intel-gpio section connected to:</li>
+                <li><b>function</b> node from the function section connected to:</li>
+                <li><b>mqtt</b> node from the output section</li>
+              </ul>
+              <p>This creates a sequence that will send temperature data over MQTT to a broker.</p>
 
-                  <p>Use the
-                    <ul>
-                      <li><b>mqtt</b> node from the input section connected to the:</li>
-                      <li><b>debug</b> node from the output section</li>
-                    </ul>
-                     <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console in node-red.</p>
+              <p>Use the
+              <ul>
+                <li><b>mqtt</b> node from the input section connected to the:</li>
+                <li><b>debug</b> node from the output section</li>
+              </ul>
+              <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console in node-red.</p>
             </div>
 
-            <div content-block name="protocol-assign-pins " message="Configure the nodes "
-            >
-<h2>Configure the nodes in the MQTT flow</h2>
+            <div content-block name="protocol-assign-pins" message="Configure the nodes">
+              <h2 class="labHidden">Configure the nodes in the MQTT flow</h2>
               <ol>
                 <li>Double click the temperature node to assign it to pin A0</li>
                 <li>Configure <b>both</b> the <b>input mqtt</b> and <b>output mqtt</b> nodes as described below:</li>
 
                 <ul>
-                  <br>
-                  <li><h3>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic:</h3></li>
-                  <br>
+                  <li>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic:</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="https://software.intel.com/sites/default/files/managed/4b/6c/mqtt_edit_1.png" title="mqtt edit" typeof="foaf:Image"></p>
-                  <br>
-                  <li><h3>Enter the ip address of the gateway 192.168.1.1 and 1883 as the port:</h3></li>
-                  <br>
+                  <li>Enter the ip address of the gateway 192.168.1.1 and 1883 as the port:</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="https://software.intel.com/sites/default/files/managed/0f/e7/mqtt_edit_2.png" title="mqtt edit" typeof="foaf:Image"></p>
-                  <br>
                 </ul>
-                <li><h3>Double click the function node and add the following code:</h3></li>
+                <li>Double click the function node and add the following code:</li>
               </ol>
-              <br>
               <p>
               <ui-codemirror ui-codemirror-opts="editorOptions ">var temp = msg.payload
 msg.payload = {};
 msg.payload.sensor_id = "grove_temp ";
 msg.payload.time = Date.now();
 msg.payload.value = temp;
-return msg;
-		  </pre></ui-codemirror>
+return msg;</pre></ui-codemirror>
 </p>
-
-
             </div>
 
             <div content-block name="protocol-publish-mqtt " message="Deploy the application "
@@ -326,166 +308,199 @@ return msg;
 
 
             <div content-block name="protocol-monitor-mqtt " message="Publish data to the temperature topic ">
-<h2 class="labHidden ">Publish data to the temperature topic</h2>
+              <h2 class="labHidden ">Publish data to the temperature topic</h2>
               <h5>Monitor MQTT Topic on Gateway</h5>
               <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
               <p>In the SSH terminal to the Gateway create a new screen console run the screen command and then type (Ctrl-A C) and switch to it (Ctrl-A ").</p>
-                            <code>mosquitto_sub -t temperature</code>
-
-                            <p>You will start to see the data being published to the "temperature" topic.</p>
-                </div>
+              <code>mosquitto_sub -t sensors/temperature/data</code>
+              <p>You will start to see the data being published to the "temperature" topic.</p>
+            </div>
 
 
                 <div content-block name="node-red-flow2-solution" message="Check out the solution to this exercise">
                     <h2 class="labHidden">Check out the solution to this exercise</h2>
                     <h5>Flow Source Code</h5>
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[{
-    "id": "f8e20475.ec4178",
-    "type": "mqtt-broker",
-    "z": "92444f4a.3f6fb",
-    "broker": "192.168.1.1",
-    "port": "1883",
-    "clientid": "",
-    "usetls": false,
-    "verifyservercert": true,
-    "compatmode": true,
-    "keepalive": "60",
-    "cleansession": true,
-    "willTopic": "",
-    "willQos": "0",
-    "willRetain": null,
-    "willPayload": "",
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthRetain": null,
-    "birthPayload": ""
-}, {
-    "id": "9ccab42f.f5e138",
-    "type": "mqtt-broker",
-    "z": "92444f4a.3f6fb",
-    "broker": "192.168.1.1",
-    "port": "1883",
-    "clientid": "",
-    "usetls": false,
-    "verifyservercert": true,
-    "compatmode": true,
-    "keepalive": "60",
-    "cleansession": true,
-    "willTopic": "",
-    "willQos": "0",
-    "willRetain": null,
-    "willPayload": "",
-    "birthTopic": "",
-    "birthQos": "0",
-    "birthRetain": null,
-    "birthPayload": ""
-}, {
-    "id": "8a51fc7b.d2649",
-    "type": "grove_temp",
-    "z": "92444f4a.3f6fb",
-    "name": "",
-    "pin": "0",
-    "interval": "1000",
-    "x": 115,
-    "y": 131,
-    "wires": [
-        ["c2552eb3.e9cb2"]
-    ]
-}, {
-    "id": "c2552eb3.e9cb2",
-    "type": "function",
-    "z": "92444f4a.3f6fb",
-    "name": "Create JSON",
-    "func": "var temp = msg.payload\n\nmsg.payload = {};\nmsg.payload.sensor_id = \"grove_temp\";\nmsg.payload.time = Date.now();\nmsg.payload.value = temp;\n\nreturn msg;",
-    "outputs": 1,
-    "noerr": 0,
-    "x": 347.5,
-    "y": 132,
-    "wires": [
-        ["cadc53b7.e6bf7"]
-    ]
-}, {
-    "id": "cadc53b7.e6bf7",
-    "type": "mqtt out",
-    "z": "92444f4a.3f6fb",
-    "name": "",
-    "topic": "sensors/temperature/data",
-    "qos": "",
-    "retain": "",
-    "broker": "9ccab42f.f5e138",
-    "x": 566,
-    "y": 131,
-    "wires": []
-}, {
-    "id": "eb754d1a.894cd",
-    "type": "mqtt in",
-    "z": "92444f4a.3f6fb",
-    "name": "",
-    "topic": "sensors/temperature/data",
-    "broker": "f8e20475.ec4178",
-    "x": 172,
-    "y": 302,
-    "wires": [
-        ["63fa67a9.bf1ad8"]
-    ]
-}, {
-    "id": "63fa67a9.bf1ad8",
-    "type": "debug",
-    "z": "92444f4a.3f6fb",
-    "name": "",
-    "active": true,
-    "console": "false",
-    "complete": "false",
-    "x": 382,
-    "y": 303,
-    "wires": []
-}, {
-    "id": "562c38c.89818c8",
-    "type": "comment",
-    "z": "92444f4a.3f6fb",
-    "name": "Read Temperature",
-    "info": "\n",
-    "x": 157.5,
-    "y": 72,
-    "wires": []
-}, {
-    "id": "bab528e3.f8c4a8",
-    "type": "comment",
-    "z": "92444f4a.3f6fb",
-    "name": "Create JSON",
-    "info": "",
-    "x": 347.5,
-    "y": 74,
-    "wires": []
-}, {
-    "id": "5e9ad648.207ea8",
-    "type": "comment",
-    "z": "92444f4a.3f6fb",
-    "name": "Send to MQTT",
-    "info": "",
-    "x": 521,
-    "y": 76,
-    "wires": []
-}, {
-    "id": "1b4fe7dc.bff108",
-    "type": "comment",
-    "z": "92444f4a.3f6fb",
-    "name": "Read from MQTT",
-    "info": "",
-    "x": 141,
-    "y": 237,
-    "wires": []
-}, {
-    "id": "c823f643.d4e018",
-    "type": "comment",
-    "z": "92444f4a.3f6fb",
-    "name": "Print to debug ",
-    "info": "",
-    "x": 384,
-    "y": 232,
-    "wires": []
-}]
-                    </pre></ui-codemirror>
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
+   {
+      "id":"41376f1f.02b56",
+      "type":"mqtt-broker",
+      "z":"d3eb236.19d9ce",
+      "broker":"192.168.1.1",
+      "port":"1883",
+      "clientid":"",
+      "usetls":false,
+      "verifyservercert":true,
+      "compatmode":true,
+      "keepalive":"60",
+      "cleansession":true,
+      "willTopic":"",
+      "willQos":"0",
+      "willRetain":null,
+      "willPayload":"",
+      "birthTopic":"",
+      "birthQos":"0",
+      "birthRetain":null,
+      "birthPayload":""
+   },
+   {
+      "id":"87b17587.c324a8",
+      "type":"mqtt-broker",
+      "z":"d3eb236.19d9ce",
+      "broker":"192.168.1.1",
+      "port":"1883",
+      "clientid":"",
+      "usetls":false,
+      "verifyservercert":true,
+      "compatmode":true,
+      "keepalive":"60",
+      "cleansession":true,
+      "willTopic":"",
+      "willQos":"0",
+      "willRetain":null,
+      "willPayload":"",
+      "birthTopic":"",
+      "birthQos":"0",
+      "birthRetain":null,
+      "birthPayload":""
+   },
+   {
+      "id":"fdb4463e.82fb68",
+      "type":"function",
+      "z":"d3eb236.19d9ce",
+      "name":"Create JSON",
+      "func":"var temp = msg.payload\n\nmsg.payload = {};\nmsg.payload.sensor_id = \"grove_temp\";\nmsg.payload.time = Date.now();\nmsg.payload.value = temp;\n\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":502.5,
+      "y":209.9999898672104,
+      "wires":[
+         [
+            "15b81913.09d657"
+         ]
+      ]
+   },
+   {
+      "id":"15b81913.09d657",
+      "type":"mqtt out",
+      "z":"d3eb236.19d9ce",
+      "name":"",
+      "topic":"sensors/temperature/data",
+      "qos":"",
+      "retain":"",
+      "broker":"87b17587.c324a8",
+      "x":721,
+      "y":208.9999898672104,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"678b14df.dc43ec",
+      "type":"mqtt in",
+      "z":"d3eb236.19d9ce",
+      "name":"",
+      "topic":"sensors/temperature/data",
+      "broker":"41376f1f.02b56",
+      "x":327,
+      "y":379.9999898672104,
+      "wires":[
+         [
+            "3d49ae65.88c2d2"
+         ]
+      ]
+   },
+   {
+      "id":"3d49ae65.88c2d2",
+      "type":"debug",
+      "z":"d3eb236.19d9ce",
+      "name":"",
+      "active":true,
+      "console":"false",
+      "complete":"false",
+      "x":537,
+      "y":380.9999898672104,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"c869f823.d0ea78",
+      "type":"comment",
+      "z":"d3eb236.19d9ce",
+      "name":"Read Temperature",
+      "info":"\n",
+      "x":312.5,
+      "y":149.9999898672104,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"44ecdd6a.a5d4e4",
+      "type":"comment",
+      "z":"d3eb236.19d9ce",
+      "name":"Create JSON",
+      "info":"",
+      "x":502.5,
+      "y":151.9999898672104,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"46194f6e.f1e6e",
+      "type":"comment",
+      "z":"d3eb236.19d9ce",
+      "name":"Send to MQTT",
+      "info":"",
+      "x":677.6666564941406,
+      "y":148.99999046325684,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"c5ac1b7d.bcd838",
+      "type":"comment",
+      "z":"d3eb236.19d9ce",
+      "name":"Read from MQTT",
+      "info":"",
+      "x":296,
+      "y":314.9999898672104,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"6f7fc51e.83a70c",
+      "type":"comment",
+      "z":"d3eb236.19d9ce",
+      "name":"Print to debug ",
+      "info":"",
+      "x":539,
+      "y":309.9999898672104,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"6264c554.4767dc",
+      "type":"upm-grove-temperature",
+      "z":"d3eb236.19d9ce",
+      "name":"",
+      "platform":"512",
+      "unit":"C",
+      "pin":"0",
+      "interval":1000,
+      "x":303.3333282470703,
+      "y":209.99999237060547,
+      "wires":[
+         [
+            "fdb4463e.82fb68"
+         ]
+      ]
+   }
+]</pre></ui-codemirror>
 
                 </div>
             </div>
@@ -516,7 +531,7 @@ global.set("lcd_text", "");
                                 </pre></ui-codemirror>
                             </li>
                         </ul>
-                        <br>
+
                         <p>Now you will create the POST method for the LCD backlight control.</p>
                         <ul>
                             <li><b>http</b> node under the input section. Configure this node to have "POST" as the method and "/lcd/backlight" as the URL. Connect this node to the:</li>
@@ -555,16 +570,16 @@ return msg;</pre></ui-codemirror>
                     <h2 class="labHidden">Create GET API</h2>
                     <p><img class="labHidden" alt="GET API" data-fid="503938" src="https://software.intel.com/sites/default/files/managed/70/fa/get_api.png" title="GET API" typeof="foaf:Image"></p>
 
-                    <h2> Create GET API </h2>
+                    <h2 class="labHidden"> Create GET API </h2>
 
-                    <p>You will now add two GETs that will send the status of the LCD to the requester. Use the:
+                    <p>You will now add two GETs that will send the status of the LCD to the requester. Use the to create two the two addiotional node sequences in your flow seen to the right</p>
 
-                        <ul>
-                            <li> <b>http</b> node under the input section connected to:</li>
-                            <li><b>function</b> node under the function section connected to:</li>
-                            <li><b>template</b> node under the function section connected to:
-                                <li><b>http response</b> node under the output section</li>
-                                to create two the two addiotional node sequences in your flow seen to the right</p>
+                    <ul>
+                      <li> <b>http</b> node under the input section connected to:</li>
+                      <li><b>function</b> node under the function section connected to:</li>
+                      <li><b>template</b> node under the function section connected to:
+                      <li><b>http response</b> node under the output section</li>
+                    </ul>
                 </div>
 
                 <div content-block name="protocol-GET-methods" message="Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight." image-link="./views/labs/protocols/images/config_get.png">
@@ -574,17 +589,14 @@ return msg;</pre></ui-codemirror>
                     <p>Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight.</p>
 
                     <p>Next configure the function nodes to assign the global LCD variables to the response message.</p>
-                    <br>
                     <p>
                         <h3>For the request coming from <b>/lcd/text</b> use the following function:</h3>
-                        <br>
                         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var payload = global.get("lcd_text");
 msg.payload = payload;
 return msg;</pre></ui-codemirror>
-                        <br>
                         <p>
                             <h3>For the request coming from /lcd/backlight use the following function:</h3>
-                            <br>
+
 
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var r_val = global.get("lcd_r");
 var g_val = global.get("lcd_g");
@@ -593,12 +605,12 @@ var payload = [r_val,g_val,b_val];
 msg.payload = payload;
 return msg;</pre></ui-codemirror>
 
-                            <p>The message must have mustache template formatting in order for the http response to properly work.</p>
-                            <br>
-                            <p>
-                                <h3>Configure the template node to format msg.payload with:</h3></p>
-                            <br>
-                            <p><img class="labHidden" alt="Template" data-fid="503940" src="https://software.intel.com/sites/default/files/managed/cb/96/template.png" title="Template" typeof="foaf:Image"></p>
+                  <p>The message must have mustache template formatting in order for the http response to properly work.</p>
+
+                  <p>
+                  <h3>Configure the template node to format msg.payload with:</h3></p>
+
+                  <p><img class="labHidden" alt="Template" data-fid="503940" src="https://software.intel.com/sites/default/files/managed/cb/96/template.png" title="Template" typeof="foaf:Image"></p>
                 </div>
 
 

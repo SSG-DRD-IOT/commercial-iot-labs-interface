@@ -23,14 +23,14 @@
             <div ibox title="Objectives">
                 <div content-block name="read-objectives" message="Read the Objectives">
                     <h2 class="labHidden">Read the Objectives</h2>
-                    <labels edison windows apple linux/>
-                    <p>To learn how to build stand alone IoT devices with Intel® Edison. Learn to use sensors and actuators to gather and respond to data. The devices built during this lab will be extended in later labs to send their data to the Intel® IoT
+                    <labels arduino windows apple linux/>
+                    <p>To learn how to build stand alone IoT devices with Arduino* 101. Learn to use sensors and actuators to gather and respond to data. The devices built during this lab will be extended in later labs to send their data to the Intel® IoT
                         Gateway and to the cloud</p>
 
                     <p>By the end of this module, you should be able to:</p>
 
                     <ul>
-                        <li>Connect Grove Kit sensors and actuators to your Intel® Edison.</li>
+                        <li>Connect Grove Kit sensors and actuators to your Arduino* 101.</li>
                         <li>Use the JavaScript UPM libraries to control actuators and read data from sensors.</li>
                         <li>Create a NodeJS server to configure and analyze the Grove components as "edge devices" — devices triggered over a network instead of directly on the board.</li>
                     </ul>
@@ -100,7 +100,7 @@
                     <p><img class="labHidden" alt="XDK Splash" data-fid="503891" src="https://software.intel.com/sites/default/files/managed/35/a6/xdk-splash.png" title="XDK Splash" typeof="foaf:Image"></p>
 
 
-                    <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel® Edison using any computer OS platform</p>
+                    <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Arduino* 101 using any computer OS platform</p>
 
                     <p>
                         Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
@@ -163,7 +163,7 @@
 
                             <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
 
-                            <p>Select your target Intel® Galileo or Intel® Edison from the list. If there are multiple devices, choose based on the device name and IP address.</p>
+                            <p>Select your target Arduino* 101 from the list. If there are multiple devices, choose based on the device name and IP address.</p>
                         </div>
                     </div>
                 </div>
@@ -177,7 +177,7 @@
                         <p>From the "IoT Device" menu, instead choose "<strong>Add Manual Connection</strong>".</p>
 
                         <ul>
-                            <li>For <strong>Address</strong>, enter the IP address of your Intel® Edison Board that you saw in <span class="icon bookmark">Step 3: Login to your Intel® Edison</span>. e.g. 192.168.0.2</li>
+                            <li>For <strong>Address</strong>, enter the IP address of your Arduino* 101 Board that you saw in <span class="icon bookmark">Step 3: Login to your Arduino* 101</span>. e.g. 192.168.0.2</li>
                             <li>For <strong>Port</strong>, keep at the default "58888". </li>
                             <li>For <strong>User</strong> Name, use "root"</li>
                             <li>For <strong>Password</strong>, use the password you set up.</li>
@@ -281,12 +281,12 @@
                     <p><img class="labHidden" alt="temperature sensor" data-fid="503915" src="https://software.intel.com/sites/default/files/managed/21/f9/temperature-sensors.jpg" title="temperature sensor" typeof="foaf:Image"></p>
 
 
-                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Intel® Edison. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
+                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Arduino* 101. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
                         on the LCD.</p>
 
                     <ol>
                         <li>
-                            <p>Install the Grove Base Shield onto the Intel® Edison Arduino expansion board.</p>
+                            <p>Install the Grove Base Shield onto the Arduino* 101 Arduino expansion board.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
@@ -369,7 +369,7 @@
                         <li>
                             <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel® XDK to:
                                 <br> (1) Build your application,
-                                <br> (2) Upload it to Intel® Edison, and
+                                <br> (2) Upload it to Arduino* 101, and
                                 <br> (3) Run the application.</p>
                         </li>
 

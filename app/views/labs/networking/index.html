@@ -22,14 +22,14 @@
             <!-- Objectives -->
             <div content-block name="ble-objectives" message="Read the Objectives">
 <h2 class="labHidden">Read the Objectives</h2>
-              <labels edison windows apple linux/>
-              <p>In this module, you will use Bluetooth Low Energy (BLE) to send data between your Intel® Edison and your Intel ®IoT Gateway.</p>
+              <labels arduino windows apple linux/>
+              <p>In this module, you will use Bluetooth Low Energy (BLE) to send data between your Arduino* 101 and your Intel ®IoT Gateway.</p>
               <p>By the end of this module, you should be able to:</p>
 
               <ul>
                   <li>Enable the Bluetooth Low Energy (BLE) services on Linux.</li>
                   <li>Turn the Intel® IoT Gateway into a BLE central module using the <strong>noble</strong> NodeJS library.</li>
-                  <li>Turn the Intel® Edison into a BLE perphiphal using the <strong>bleno</strong> NodeJS library.</li>
+                  <li>Turn the Arduino* 101 into a BLE perphiphal using the <strong>bleno</strong> NodeJS library.</li>
                   <li>Send and receive a single sensor data value over BLE.</li>
               </ul>
             </div>
@@ -41,11 +41,11 @@
             <div content-block name="ble-objectives" message="Enable Bluetooth by running the commands above">
 <h2 class="labHidden">Enable Bluetooth by running the commands above</h2>
 
-              <p>Run shell commands on <strong>both</strong> your Intel® Edison and Intel® IoT Gateway devices to enable the correct Bluetooth Low Energy (BLE) services.</p>
+              <p>Run shell commands on <strong>both</strong> your Arduino* 101 and Intel® IoT Gateway devices to enable the correct Bluetooth Low Energy (BLE) services.</p>
 
               <ol>
                 <li>
-                  <p>Shell into your Intel® Edison and run the following commands:</p>
+                  <p>Shell into your Arduino* 101 and run the following commands:</p>
                   <pre><code>$ rfkill unblock bluetooth
 $ killall bluetoothd
 $ systemctl disable bluetooth
@@ -63,12 +63,12 @@ $ hciconfig hci0 up</code></pre>
 
             <!-- Read sensor data over BLE -->
           <div ibox  title="Read sensor data over Bluetooth Low Energy">
-            <div content-block name="read-sensor-data-over-BLE" message="Plug in sensors to the Intel Edison"
+            <div content-block name="read-sensor-data-over-BLE" message="Plug in sensors to the Intel Arduino* 101"
             image-link="./views/labs/networking/images/image_2.jpg">
-<h2 class="labHidden">Plug in sensors to the Intel Edison</h2>
+<h2 class="labHidden">Plug in sensors to the Intel Arduino* 101</h2>
 <img class="labHidden" src="./views/labs/networking/images/image_2.jpg"></img>
 
-              <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Intel® Edison into a BLE peripheral.</p>
+              <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Arduino* 101 into a BLE peripheral.</p>
 
               <ol>
                 <li>
@@ -82,7 +82,7 @@ $ hciconfig hci0 up</code></pre>
 <h2 class="labHidden">Create a New Project and use the code this code in Main.js as a starting point</h2>
               <ol>
                 <li>
-                  <p>Your <span class="fa fa-file">main.js</span> (running on the Intel® Edison) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
+                  <p>Your <span class="fa fa-file">main.js</span> (running on the Arduino* 101) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
                 </li>
               </ol>
               <p class="label">./temperature/main.js</p>
@@ -117,7 +117,7 @@ monitor();</pre></ui-codemirror>
 
 <div content-block name="add-deps-bleno" message="Add the Bleno dependencies to and packages.json and main.js">
 <h2 class="labHidden">Add the Bleno dependencies to and packages.json and main.js</h2>
-  <p><a href="https://github.com/sandeepmistry/bleno">Bleno</a> is a JavaScript Bluetooth module that can be used with the Intel® Edison.</p>
+  <p><a href="https://github.com/sandeepmistry/bleno">Bleno</a> is a JavaScript Bluetooth module that can be used with the Arduino* 101.</p>
   <ol>
     <li>
       <p>In your Intel XDK project, open <span class="icon file">package.json</span> and locate the <code>dependencies</code> configuration.</p>
@@ -126,7 +126,7 @@ monitor();</pre></ui-codemirror>
       <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
       <p class="label">./package.json</p>
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
-  "name": "bluetooth-edison-temp",
+  "name": "bluetooth-arduino-101-temp",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -382,7 +382,7 @@ function checkTemperature() {
   <div content-block name="ble-objectives" message="Read the Objectives">
 <h2 class="labHidden">Read the Objectives</h2>
 
-      <p>Use <a href="https://github.com/sandeepmistry/noble">noble</a>, a NodeJS module, to turn the Intel® IoT Gateway into a BLE central module that will read the temperature data broadcasted from a BLE peripheral (i.e. your Intel® Edison).</p>
+      <p>Use <a href="https://github.com/sandeepmistry/noble">noble</a>, a NodeJS module, to turn the Intel® IoT Gateway into a BLE central module that will read the temperature data broadcasted from a BLE peripheral (i.e. your Arduino* 101).</p>
       <ol>
         <li>
             <p>Log into your Intel® IoT Gateway.</p>
@@ -422,7 +422,7 @@ function checkTemperature() {
     <div content-block name="declare-noble-constanst" message="Declare constants for the BLE service">
 <h2 class="labHidden">Declare constants for the BLE service</h2>
       <p>Declare constants for the BLE service.</p>
-      <p>These are the <strong>same</strong> UUID's used in the peripheral code that's running on the Intel® Edison.</p>
+      <p>These are the <strong>same</strong> UUID's used in the peripheral code that's running on the Arduino* 101.</p>
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var ServiceName = 'temperature';
 var Service_UUID = 'ec00';
 var Characteristic_UUID = 'ec01';
@@ -444,7 +444,7 @@ var TemperatureCharacteristic = null;</pre></ui-codemirror>
     console.log('Temperature is ' + celsius + '°C');
   });
 }</pre></ui-codemirror>
-            <p>Note that the buffer offset position is the <strong>same</strong> as the buffer position used in the peripheral code. If you recall, you used <code>buffer.writeUInt8(celsius,0);</code> on the Intel® Edison.</p>
+            <p>Note that the buffer offset position is the <strong>same</strong> as the buffer position used in the peripheral code. If you recall, you used <code>buffer.writeUInt8(celsius,0);</code> on the Arduino* 101.</p>
     </div>
 
     <div content-block name="handle-service-noble" message="Implement the handleService() function">
@@ -518,7 +518,7 @@ noble.on('disconnect', function() {
 
     <ol>
         <li>
-            <p>Check that your peripheral app is still running on your Intel® Edison. (e.g. It should still be logging temperature values to the Intel®  XDK console.) Restart if needed.</p>
+            <p>Check that your peripheral app is still running on your Arduino* 101. (e.g. It should still be logging temperature values to the Intel®  XDK console.) Restart if needed.</p>
         </li>
 
         <li>
@@ -527,7 +527,7 @@ noble.on('disconnect', function() {
         </li>
 
         <li>
-            <p>If successful, you should see the Intel® IoT Gateway scan for matching Bluetooth services. When the Intel® Edison is found, it will read the temperature value and output it to the terminal window.</p>
+            <p>If successful, you should see the Intel® IoT Gateway scan for matching Bluetooth services. When the Arduino* 101 is found, it will read the temperature value and output it to the terminal window.</p>
         </li>
 
     </ol>
@@ -536,14 +536,14 @@ noble.on('disconnect', function() {
 
 
 
-        <p>Building off of the <span class="icon bookmark"><a href="../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Intel® Edison into a BLE peripheral.</p>
+        <p>Building off of the <span class="icon bookmark"><a href="../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Arduino* 101 into a BLE peripheral.</p>
 
       </div>
     </div>
 
 <!--
     <div ibox  title="Zigbee Communication">
-      <p>In this module, you will learn how to use ZigBee radios to transfer data between your Intel® Edison and your Intel® IoT Gateway.</p>
+      <p>In this module, you will learn how to use ZigBee radios to transfer data between your Arduino* 101 and your Intel® IoT Gateway.</p>
       <p>We will be using XBee's Series 1 (also called XBee 802.15.4) based radios and xbee-api node module to establish communication with XBee devices.</p>
     </div>
 
