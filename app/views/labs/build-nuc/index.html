@@ -208,17 +208,6 @@
                         <li>
                             <p>Keep an eye on the console log bar for any runtime errors.</p>
                             <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
-                            <div class="alert alert-warning">
-                                <p><strong>Get a "cannot find module mraa" message?</strong></p>
-                                <p><img class="labHidden" alt="" data-fid="503912" src="https://software.intel.com/sites/default/files/managed/24/f0/image25.png" typeof="foaf:Image"></p>
-                                <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
-                                <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
-                                <pre><code>$ echo "src mraa-upm http://iotdk.intel.com/repos/3.5/intelgalactic/opkg/i586" > /etc/opkg/mraa-upm.conf
-$ opkg update
-$ opkg install mraa</code></pre>
-                                <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
-                                <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
-                            </div>
                         </li>
                     </ol>
                 </div>
@@ -352,9 +341,10 @@ $ opkg install mraa</code></pre>
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">/*jslint node:true, vars:true, bitwise:true, unparam:true */
 /*jshint unused:true */
 var groveSensor = require('jsupm_grove');
-var OFFSET = 512
+var OFFSET = 512;
 var temp = new groveSensor.GroveTemp(0 + OFFSET);
-var celsius = temp.value();
+var wrongValueTemp = temp.value();
+var celsius = wrongValueTemp * 3.3 / 5;
 var fahrenheit = Math.round(celsius *
     9.0 / 5.0 + 32.0);
 console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</pre></ui-codemirror>
