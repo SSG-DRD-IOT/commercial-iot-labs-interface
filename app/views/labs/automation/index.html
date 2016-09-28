@@ -180,10 +180,10 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
             <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
 
             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Connect to the MQTT server
- var mqttClient  = mqtt.connect(self.config.mqtt.uri);
+ var mqttClient  = mqtt.connect(config.mqtt.uri);
 
 // Connect to the MongoDB server
-var db = mongoose.connect(self.config.mongodb.uri);
+var db = mongoose.connect(config.mongodb.uri);
 mongoose.connect(config.mongodb.uri);
 var db = mongoose.connection;
 
