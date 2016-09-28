@@ -184,7 +184,7 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
 
 // Connect to the MongoDB server
 var db = mongoose.connect(config.mongodb.uri);
-mongoose.connect(config.mongodb.uri);
+//mongoose.connect(config.mongodb.uri);
 var db = mongoose.connection;
 
 // Bind db errors to the console
