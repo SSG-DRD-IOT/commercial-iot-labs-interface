@@ -44,8 +44,6 @@
 
           <p>Be sure that you insert it in the USB3 slot which is blue and on the front of your Intel IoT Gateway.</p>
 
-          <p class="alert alert-warning">Be sure that the USB drive that you inserted in mounted by the operating system.</p>
-
           <p>To check if the USB drive is mounted, type:</p>
           <pre><code>df -h | egrep sda</code></pre>
           <p>You should see this.</p>
@@ -220,7 +218,7 @@
       <h4>Connect to the MQTT Broker and MongoDB</h4>
       <p>Create a file called <code>./server.js</code>.  This will be the main entry point into your monitord.</p>
 
-      <p>After importing the MQTT module, setup a connection to the MQTT broker. Your gateway's IP address is <code>192.168.1.1</code> by default.</p>
+      <p>After importing the MQTT module, setup a connection to the MQTT broker. Your gateway's IP address is <code>192.168.1.x - Your IP <address>  </address></code> by default.</p>
       <p class="label">./server.js</p>
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
@@ -258,7 +256,7 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
 
 
     <div content-block name="mqtt-event-loop" message="Subscribe to MQTT topics">
-<h2 class="labHidden">Subscribe to MQTT topics</h2>
+      <h2 class="labHidden">Subscribe to MQTT topics</h2>
       <h4>The MQTT Event Loop</h4>
       <ol>
           <li>
