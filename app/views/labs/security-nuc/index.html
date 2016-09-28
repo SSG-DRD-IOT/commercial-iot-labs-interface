@@ -21,7 +21,7 @@
 
 
 
-            <div ibox collapse title="Objectives">
+            <div ibox  title="Objectives">
                 <div content-block name="security-objectives" message="Read the Objectives">
                     <h2 class="labHidden">Read the Objectives</h2>
                     <labels gateway window apple linux/>
@@ -59,7 +59,7 @@
 
 
 
-            <div ibox collapse title="McAfee® Embedded Control Orientation">
+            <div ibox  title="McAfee® Embedded Control Orientation">
                 <div content-block name="security-objectives" message="Complete the McAfee® Embedded Control Exercises">
                     <h2 class="labHidden">Complete the McAfee® Embedded Control Exercises</h2>
                     <h5>Lab Overview</h5>
@@ -224,7 +224,7 @@
 
 
 
-                <div ibox collapse title="McAfee® Embedded Control Generating the White List">
+                <div ibox  title="McAfee® Embedded Control Generating the White List">
                   <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect.">
                     <h5>Enabling McAfee® Embedded Control</h5>
 
@@ -406,7 +406,7 @@
 
 
 
-      <div ibox collapse title="McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox  title="McAfee® Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-nuc/images/sadmin-config-show.png">
           <p>McAfee® Embedded Control can be configured use a variety of algorithms to verify the integrity of solidified system files.</p>
           <p>Type the following to find which algorithm is currently being used:</p>
@@ -430,7 +430,7 @@
           <p>Enable the software.</p>
           <pre><code>sadmin enable</code></pre>
           <p>Restart the McAfee Solidifier service.</p>
-          <pre><code>service scsrvc restart</code></pre>
+          <pre><code>systemctl restart scsrvc</code></pre>
         </div>
       </div>
 
@@ -446,7 +446,7 @@
 
 
 
-      <div ibox collapse title="McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox  title="McAfee® Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Verify that authorized applications can run">
           <p>On a protected system, only authorized applications or programs are allowed to run.</p>
 
@@ -500,7 +500,7 @@
 
 
 
-<div ibox collapse title="McAfee® Embedded Control Updating A Solidified Box">
+<div ibox  title="McAfee® Embedded Control Updating A Solidified Box">
   <div content-block name="security-objectives" message="Set McAffee Embedded Control Into Update Mode" image-link="./views/labs/security-nuc/images/sadmin-bu.png">
     <h5>Using the Update Mode</h5>
 
