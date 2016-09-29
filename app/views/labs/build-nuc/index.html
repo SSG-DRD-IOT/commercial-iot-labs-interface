@@ -236,7 +236,14 @@
 
 
 
-
+<div ibox title="Stop node-red before continuing">
+    <div content-block name="stop-node-red" message="Stop node-red before continuing">
+        <div class="alert alert-warning"><p>To execute this exercise, we need to stop node-red. The reason is node-red is currently blocking access to the temperature sensor and the LCD. To use those with another software, we first need to stop node-red thus freeing the resources.
+        </p>
+            <p>In a terminal connected to your Gateway, type the command `systemctl stop node-red-experience`</p>
+        </div>
+    </div>
+        </div>
 
 
             <div ibox title="Exercise 1: Temperature Sensor and LCD">
@@ -300,8 +307,7 @@
 
                         <li>
                             <p>Include the JS UPM library for the basic Grove sensors.</p>
-                            <p><code>var groveSensor = require('jsupm_grove');</code></pre>
-                        </li>
+                            <p><code>var groveSensor = require('jsupm_grove');</code></li>
 
                         <li>
                           <p>When connecting the Intel Iot Gateway to an Arduino 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101.</p>
