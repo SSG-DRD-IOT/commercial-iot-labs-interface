@@ -52,7 +52,7 @@
                             <p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p>
                         </li>
                         <li>
-                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
+                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
@@ -60,27 +60,27 @@
                     </ol>
                 </div>
 
-                <div content-block name="first-flow" message="Create a Node-Red Flow that connects your temperature sensor to your LCD" image-link="./views/labs/protocols/images/first_flow.png">
+                <div content-block name="first-flow" message="Create a Node-Red Flow that connects your temperature sensor to your LCD" image-link="./views/labs/protocols/images/31.png">
                     <h2 class="labHidden">Create a Node-Red Flow that connects your temperature sensor to your LCD</h2>
                     <p><img class="labHidden" alt="first flow" data-fid="503932" src="https://software.intel.com/sites/default/files/managed/6a/6d/first_flow.png" title="first flow" typeof="foaf:Image"></p>
 
                     <p>Open the Node-Red Editor</p>
 
-                    <p>Create a Node-Red flow like the one shown here.</p>
+                    <p>Change a Node-Red flow like the one shown here.</p>
                     <ol>
-                        <li>Search for the <b>Grove Temp Sensor</b> in the UPM_sensors section and pull one into the workarea.</li>
+                        <li>Use the existing <b>Grove Temp Sensor</b> node from the previous exercises.</li>
                         <li>Search for the <b>Function</b> node in the function Function section and connect it to the Grove Temp Sensor.</li>
-                        <li>Search for the <b>Grove LCD</b> node in the UPM_sensors and connect it to the Function.</li>
+                        <li>Use the existing <b>Grove LCD</b> node and connect it to the Function.</li>
                     </ol>
                     <p>NOTE: The nodes are listed to the left of the workspace and you will have to scroll down to find all the nodes you need..</p>
                 </div>
 
                 <div content-block name="first-flow" message="Configure your Grove Temperature Node">
-                  <p>Configure you temperature node with the following parameters:</p>
+                  <p>Assure your temperature node has the following parameters:</p>
                   <ul>
                     <li>Name:Grove Temperature</li>
                     <li>Platform: Firmata</li>
-                    <li>Pin: A0</li>
+                    <li>Pin: A1</li>
                     <li>Unit: Celsius</li>
                     <li>Interval(ms): 1000</li>
                   </ul>
@@ -121,11 +121,12 @@ msg.lcdColor = {
 }
 
 msg.lcdCursor = {
-    row: 0,
-    column: 0,
+    row: 1,
+    column: 1,
 }
 
-return msg;</pre></ui-codemirror>
+return msg;
+</pre></ui-codemirror>
 
                             <div class="alert alert-warning">
                                 <p>Click OK and then click deploy in the top right corner</p>
@@ -160,7 +161,7 @@ return msg;</pre></ui-codemirror>
       "name":"",
       "platform":"512",
       "unit":"F",
-      "pin":"0",
+      "pin":"1",
       "interval":1000,
       "x":108.5,
       "y":240,
@@ -210,8 +211,8 @@ return msg;</pre></ui-codemirror>
       "r":0,
       "g":0,
       "b":"0",
-      "row":0,
-      "column":0,
+      "row":1,
+      "column":1,
       "x":640.5,
       "y":465,
       "wires":[
