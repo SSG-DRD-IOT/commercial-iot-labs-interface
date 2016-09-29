@@ -253,7 +253,7 @@
                             <p>Install the Grove Base Shield onto the Arduino 101.</p>
                         </li>
                         <li>
-                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
+                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
@@ -314,8 +314,8 @@
                           <pre><code>const OFFSET = 512</code></pre>
                         </li>
                         <li>
-                            <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
-                            <p><code>var temp = new groveSensor.GroveTemp(0 + OFFSET);</code></p>
+                            <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 1.</p>
+                            <p><code>var temp = new groveSensor.GroveTemp(1 + OFFSET);</code></p>
                         </li>
 
                         <li>
@@ -342,7 +342,7 @@
 /*jshint unused:true */
 var groveSensor = require('jsupm_grove');
 var OFFSET = 512;
-var temp = new groveSensor.GroveTemp(0 + OFFSET);
+var temp = new groveSensor.GroveTemp(1 + OFFSET);
 var wrongValueTemp = temp.value();
 var celsius = wrongValueTemp * 3.3 / 5;
 var fahrenheit = Math.round(celsius *
@@ -389,7 +389,7 @@ monitor();</pre></ui-codemirror>
                                 With polling, the exercise code should look like this:</p>
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var groveSensor = require('jsupm_grove');
 const OFFSET = 512;
-var temp = new groveSensor.GroveTemp(0 + OFFSET);
+var temp = new groveSensor.GroveTemp(1 + OFFSET);
 
 function monitor() {
     setInterval(function() {
@@ -460,7 +460,7 @@ monitor();</pre></ui-codemirror>
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
 var OFFSET = 512
-var temp = new groveSensor.GroveTemp(0 + OFFSET); // Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(1 + OFFSET); // Create a new instance of a Grove Temperature Sensor
 var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove RGB LCD screen
 var screen = new LCD.Jhd1313m1(0 + OFFSET, 0x3E, 0x62);
 
