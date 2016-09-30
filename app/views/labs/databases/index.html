@@ -23,7 +23,7 @@
       <div ibox title="Database Lab: Objectives">
         <!-- Objectives -->
         <div content-block name="database-objectives" message="Read the Objectives">
-<h2 class="labHidden">Read the Objectives</h2>
+          <h2 class="labHidden">Read the Objectives</h2>
           <labels gateway windows apple linux/>
           <p>Write a NodeJS server that listens to all the MQTT sensor traffic on the network and writes it to a database on the gateway.</p>
           <p>The steps to write the MQTT to database service are as follows:</p>
@@ -175,22 +175,21 @@
     </div>
 
     <div content-block name="monitord-new-project" message="Create a New Project and Import NPM Modules">
-<h2 class="labHidden">Create a New Project and Import NPM Modules</h2>
+      <h2 class="labHidden">Create a New Project and Import NPM Modules</h2>
       <h4><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h4>
-      <p class="alert alert-warning">The Intel XDK only deploys to an Arduino* 101.  For this project, you will have to upload your project to the Intel IoT Gateway using WinSCP, or create the files in this project directly on the Intel IoT Gateway.</p>
-          <p>Create a new project named <b>monitord</b> and change to that directory.</p>
-          <pre><code>cd ~&#13;&#10;mkdir monitord&#13;&#10;cd monitord</code></pre>
+      <p>Create a new project named <b>monitord</b> and change to that directory.</p>
+      <pre><code>cd ~&#13;&#10;mkdir monitord&#13;&#10;cd monitord</code></pre>
 
-          <p>Next generate an NPM package file which holds the metadata associated with this project.</p>
-          <pre><code>npm init</code></pre>
-          <p>You will need to answer a few questions to generate the file. However, the defaults that are provided are excellent and you can, if you wish, just hit enter to move through the questions.</p>
-          <p>To install MongooseJS, MQTT and the Mongoose schemas that we've prepared for you, execute the following commands:</p>
-          <pre><code>npm install --save mqtt lodash mongoose intel-commercial-edge-network-database-models</code></pre>
+      <p>Next generate an NPM package file which holds the metadata associated with this project.</p>
+      <pre><code>npm init</code></pre>
+      <p>You will need to answer a few questions to generate the file. However, the defaults that are provided are excellent and you can, if you wish, just hit enter to move through the questions.</p>
+      <p>To install MongooseJS, MQTT and the Mongoose schemas that we've prepared for you, execute the following commands:</p>
+      <pre><code>npm install --save mqtt lodash mongoose intel-commercial-edge-network-database-models</code></pre>
 
-          <p>The package.json file should look like this now.</p>
+      <p>The package.json file should look like this now.</p>
 
-          <p class="label">./package.json</p>
-          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+      <p class="label">./package.json</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
   "name": "monitord",
   "version": "1.0.0",
   "description": "",
