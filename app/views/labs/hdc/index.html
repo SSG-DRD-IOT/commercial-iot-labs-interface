@@ -13,430 +13,299 @@
             </li>
         </ol>
     </div>
-    <div class="col-lg-2">
-
-    </div>
 </div>
+
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-12">
 
-            <!-- Objectives -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Objectives</h5>
+      <div ibox title="Objectives">
+        <div content-block name="" message="Read the Objectives">
+          <h2 class="labHidden">Read the Objectives</h2>
+          <labels gateway window apple linux/>
 
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content">
-                    <p>To become familar with the Helix Device Cloud suite and use it to register and monitor a remote gateway</p>
-                </div>
-            </div>
-
-            <!-- Exercise 1: Overview of the Helix Device Cloud System Tree -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 1: Overview of the Helix Device Cloud System Tree</h5>
-                    <!-- <p>Learn how to login and navigate the features of the Helix Device Cloud.</p> -->
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content ">
-                    <h1>Introduction to the Helix Device Cloud System Tree</h1>
-
-                    <!-- Connecting to Cloud Server -->
-                    <section>
-                        <h5> Connecting to Cloud Server </h5>
-                        <ol>
-                            <li>
-                                <p>Connect to the device management console, by entering the following URL in a browser.</p>
-                                <p> ePO URL: <code> https://www.helixdevicecloud.com:8443 </code> </p>
-                            </li>
-                            <li>
-                                <p> On first connection to the ePO server, the following security pop-up will appear, at least when using Google Chrome as your web browser:</p>
-                                <img src="./views/labs/hdc/epo-introduction/./image_2.png" alt="Security Certificate Verification 1"/>
-                            </li>
-                            <li>
-                                <p> Click on <b>'Advanced'</b>, and then <b>'Proceed to www.helixdevicecloud.com (unsafe)'</b>. </p>
-                                <img src="./views/labs/hdc/epo-introduction/./image_3.png" alt="Security Certificate Verification 2"/>
-                            </li>
-                            <li>
-                                <p> Enter your Login Credentials </p>
-                                <p>User name: <code>Tenant Dependent</code><br>
-                                    Password: <code>User Dependant</code></p>
-                                <img src="./views/labs/hdc/epo-introduction/./image_4.png" alt="User credentials"/>
-                            </li>
-                            <li>
-                                <p>The main screen of ePO server will appear.</p>
-                                <img src="./views/labs/hdc/epo-introduction/./image_5.png" alt="ePO Main Screen"/>
-                            </li>
-                        </ol>
-                    </section>
-
-                    <!-- The System Tree -->
-                    <section>
-                        <h5>The System Tree</h5>
-                        <p>The System Tree is a hierarchical structure that organizes the systems in your network into groups and subgroups.
-                            The default System Tree structure includes these groups:</p>
-                        <ol>
-                            <li>My Organization — The root of your System Tree.</li>
-                            <li>My Group — The default group added from the Getting Started initial software installation.</li>
-                            <li>This group name could have been changed from the default during the initial software installation.</li>
-                            <li>Lost&Found — The catch-all for any systems that have not or could not be added to other groups in your System Tree.</li>
-                        </ol>
-
-                        <img src="./views/labs/hdc/epo-introduction/systemtree.png"/>
-
-                        <h5>The My Organization group</h5>
-                        <p>The My Organization group, the root of your System Tree, contains all systems added to or detected on your network (manually or automatically). Until you create your own structure, all systems are added by default to My Group.</p>
-                        <p>The My Group name could have been changed from the default during the initial software installation.</p>
-                        <p>The My Organization group has these characteristics:</p>
-                        <ol>
-                            <li>It can't be deleted.</li>
-                            <li>It can't be renamed.</li>
-                        </ol>
-
-                        <h5>The lost and found group</h5>
-                        <p>The Lost&Found group is a subgroup of the My Organization group.</p>
-                        <p>Depending on the methods you specify when creating and maintaining the System Tree, the server uses different characteristics to determine where to place systems. The Lost&Found group stores systems whose locations could not be determined.</p>
-                        <p>The Lost&Found group has these characteristics:</p>
-                        <ol>
-                            <li>It can't be deleted.</li>
-                            <li>It can't be renamed.</li>
-                            <li>Its sorting criteria can't be changed from being a catch-all group, although you can provide sorting criteria for the subgroups you create within it.</li>
-                            <li>It always appears last in the System Tree list and is not alphabetized among its peers.</li>
-                            <li>Users must be granted permissions to the Lost&Found group to see its contents.</li>
-                            <li>When a system is sorted into Lost&Found, it is placed in a subgroup named for the system’s domain. If no such group exists, one is created.</li>
-                        </ol>
-
-                        <h5>System Tree groups</h5>
-                        <p>System Tree groups represent a collection of systems and deciding which systems to group together depends on the unique needs of your network and business. You can group systems based on machine-type (for example, laptops, servers, or desktops), geography (for example, North America or Europe), political boundaries (for example, Finance or Development), or any other criteria that supports your needs. Groups can include both systems and other groups (subgroups).</p>
-                        <p>Groups have these characteristics:</p>
-                        <ol>
-                            <li>They are created by administrators or users with the appropriate permissions.</li>
-                            <li>They can include both systems and other groups (subgroups).</li>
-                            <li>They are administered by an administrator or a user with appropriate permissions.</li>
-                            <li>Grouping systems with similar properties or requirements into these units allows you to manage policies for systems in one place, rather than setting policies for each system individually.</li>
-                            <li>As part of the planning process, consider the best way to organize systems into groups before building the System Tree.</li>
-                        </ol>
-
-                        <h5>Inheritance</h5>
-                        <p>Inheritance is an important property that simplifies policy and task administration. Because of inheritance, child groups in the System Tree hierarchy inherit policies set at their parent groups.</p>
-                        <p>For example:</p>
-                        <ol>
-                            <li>Policies set at the My Organization level of the System Tree are inherited by groups below it.</li>
-                            <li>Group policies are inherited by subgroups or individual systems within that group.</li>
-                            <li>Inheritance is enabled by default for all groups and individual systems that you add to the System Tree. This allows you to set policies and schedule client tasks in fewer places.</li>
-                            <li>To allow for customization, inheritance can be broken by applying a new policy at any location of the System Tree. You can lock policy assignments to preserve inheritance.</li>
-                        </ol>
-                    </section>
-
-                    <!-- Create and populate System Tree Groups  -->
-                    <section>
-                        <h5>Create and Populate System Tree Groups</h5>
-
-                        <p>There is no single way to organize a System Tree, and because every network is different, your System Tree organization can be as unique as your network layout. Although you won’t use each method offered, you can use more than one.</p>
-                        <p>The Helix Device Cloud will place your device in the <b>Lost & Found</b> group by default.</p>
-
-                        <ol>
-                            <li>Go the Main menu in the upper, left side of the console.</li>
-                            <li>Click on <b>System Tree</b> <img src="./views/labs/hdc/epo-introduction/systemtreemenu.png"/></li>
-                            <li>In the left side bar click on <b>Lost & Found</b> and then locate your device. You'll be able to identify it by it IP address. <img src="./views/labs/hdc/epo-introduction/findyoursystem.png"/></li>
-                            <li>Click on your device to show the device details screen. <img src="./views/labs/hdc/epo-introduction/devicedetails.png"/></li>
-                            <li>Then in the lower left corner goto the <b>Actions menu -> Directory Management -> Move Systems</b> <img src="./views/labs/hdc/epo-introduction/movesystem.png"></li>
-                            <li>Select the Group in which you'd like to move your device. Press OK. <img src="./views/labs/hdc/epo-introduction/selectgroup.png"/></li>
-                            <li>You have move your device into a System Group</li>
-                        </ol>
-
-                    </section>
-
-                </div>
-            </div>
-
-
-            <!-- Exercise 2: Agent to Cloud Communications -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 2: Agent to Cloud Communications</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content ">
-                    <section>
-                        <h5>How agent-server communication works</h5>
-                        <p>Helix Device Cloud Agent communicates with the Helix Device Cloud cloud periodically to send events and, ensure all settings are up-to-date.</p>
-                        <p>These communications are referred to as agent-server communication. During each agent-server communication, Helix Device Cloud Agent collects its current system properties, as well as events that have not yet been sent, and sends them to the server. The server sends new or changed policies and tasks to Helix Device Cloud Agent, and the repository list if it has changed since the last agent-server communication. Helix Device Cloud Agent enforces the new policies locally on the managed system and applies any task or repository changes.</p>
-                        <p>The Helix Device Cloud server uses an industry-standard Transport Layer Security (TLS) network protocol for secure network transmissions.</p>
-
-                        <p>When the Helix Device Cloud Agent is first installed, it calls in to the server within few seconds. Thereafter, the Helix Device Cloud Agent calls in whenever one of the following occurs:</p>
-                        <ul>
-                            <li>The agent-server communication interval (ASCI) elapses.</li>
-                            <li>Helix Device Cloud Agent wake-up calls are sent from the Helix Device Cloud server or Agent Handlers.</li>
-                            <li>A scheduled wake-up task runs on the client systems.</li>
-                            <li>Communication is initiated manually from the managed system (using Agent Status monitor or command line).</li>
-                            <li>Helix Device Cloud Agent wake-up calls sent from the Helix Device Cloud server.</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h5>Agent-to-Server Communication Interval</h5>
-                        <p>The Agent-to-Server Communication Interval (ASCI) determines how often the Helix Device Cloud Agent calls into the Helix Device Cloud ePO server.</p>
-                        <p>The Agent-to-Server Communication Interval is set on the General tab of the Helix Device Cloud Agent policy page. The default setting of 60 minutes means that Helix Device Cloud Agent contacts the Helix Device Cloud ePO server once every hour. When deciding whether to modify the interval, consider that Helix Device Cloud Agent performs each of the following actions at each ASCI:</p>
-                        <ul>
-                            <li>Collects and sends its properties.</li>
-                            <li>Sends non-priority events that have occurred since the last agent-server communication.</li>
-                            <li>Receives new policies and tasks. This action might trigger other resource-consuming action based on tasks, and or schedules received.</li>
-                            <li>Enforces policies.</li>
-                            <li>Although these activities do not burden any one computer, a number of factors can cause the cumulative demand on the network or Helix Device Cloud ePO servers, or on Agent Handlers to be significant, including:</li>
-                            <li>How many systems are managed by the Helix Device Cloud server</li>
-                            <li>If your organization has stringent threat response requirements.</li>
-                            <li>If the network or physical location of clients in relation to servers or Agent Handlers is highly distributed</li>
-                            <li>If there is inadequate available bandwidth</li>
-                            <li>In general, if your environment includes these variables, you want to perform agent-server communications less often. For individual clients with critical functions, you might want to set a more frequent interval.</li>
-                        </ul>
-                    </section>
-
-                    <section>
-                        <h5>Wake-up calls and tasks</h5>
-                        <p>A Helix Device Cloud Agent wake-up call triggers an immediate agent-server communication rather than waiting for the current Agent-Server Communication Interval (ASCI) to elapse.</p>
-                        <p>Use System Tree actions to wake-up Helix Device Cloud Agent. There are two ways to issue a wake-up call:</p>
-                        <ul>
-                            <li><b>Manually from the server</b> — This is the most common approach and requires Helix Device Cloud Agent wake-up communication port be open.</li>
-                            <li><b>On a schedule set by the administrator</b> — This approach is useful when manual agent-server communication is disabled by policy. The administrator can create and deploy a wake-up task, which wakes up Helix Device Cloud Agent and initiates agent-server Communication.</li>
-                        </ul>
-
-                        <p>Some reasons for issuing a wake-up call are:</p>
-                        <ul>
-                            <li>You make a policy change that you want to enforce immediately, without waiting for the scheduled ASCI to expire.</li>
-                            <li>You created a new task that you want to run immediately. The Run Task Now option creates a task, then assigns it to specified client systems and sends wake-up calls.</li>
-                            <li>A query generated a report indicating that a client is out of compliance, and you want to test its status as part of a troubleshooting procedure.</li>
-                        </ul>
-
-                    </section>
-
-                </div>
-            </div>
-
-            <!-- Exercise 3: Register your device to ePO Server -->
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 3: Register your device to ePO Server</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content ">
-
-                    <section>
-                        <h1>Helix device Cloud</h1>
-                        <p class="subtitle">Part 1: Register your device to ePO Server</p>
-                        <div class="tldr">
-                            Every gateway contains startup.bin file needed to register and authenticate to the ePO server. This step will make your Device to “register” with Helix Device Cloud, hosted by an ePO server. Every tenant has unique startup binary file that connects your device.
-                        </div>
-                    </section>
-
-                    <section>
-                        <h2>Connect to Cloud Server</h2>
-                        <p>In this exercise, you will connect your gateway to the Helix Device Cloud and enable the HDC agent.</p>
-                    </section>
-
-                    <section>
-                        <h2> Connecting to a Network Port </h2>
-                        <ol>
-                            <li>  <p> Identify the IP address assigned to gateway with</p>
-                                <p><code>$ ifconfig </code> </p>
-                                <img src="./views/labs/hdc/register-device/./image_1.png" alt="Ifconfig"/>
-                            </li>
-                            <li>
-                                <p>To find the IP address of the board while connected via Ethernet, look beside eth0, then “inet addr:”.</p>
-                            </li>
-                            <li>
-                                <p>In the above screenshot the IP address of the gateway target Ethernet controller is 192.168.0.2</p>
-                            </li>
-                        </ol>
-                    </section>
-
-                    <section>
-                        <h2> Connecting to Cloud Server </h2>
-                        <ol>
-                            <li>
-                                <p>Connect to the device management console, by entering the following URL in a browser.</p>
-                                <p> ePO URL: <code> https://www.helixdevicecloud.com:8443 </code> </p>
-                            </li>
-                            <li>
-                                <p> On first connection to the ePO server, the following security pop-up will appear, at least when using Google Chrome as your web browser:</p>
-                                <img src="./views/labs/hdc/register-device/./image_2.png" alt="Security Certificate Verification 1"/>
-                            </li>
-                            <li>
-                                <p> Click on <b>'Advanced'</b>, and then <b>'Proceed to www.helixdevicecloud.com (unsafe)'</b>. </p>
-                                <img src="./views/labs/hdc/register-device/./image_3.png" alt="Security Certificate Verification 2"/>
-                            </li>
-                            <li>
-                                <p> Enter your Login Credentials </p>
-                                <p>User name: <code>Tenant Dependent</code><br>
-                                    Password: <code>User Dependant</code></p>
-                                <img src="./views/labs/hdc/register-device/./image_4.png" alt="User credentials"/>
-                            </li>
-                            <li>
-                                <p>The main screen of ePO server will appear.</p>
-                                <img src="./views/labs/hdc/register-device/./image_5.png" alt="ePO Main Screen"/>
-                            </li>
-                        </ol>
-                    </section>
-
-                    <section>
-                        <h2> Locating your Device </h2>
-                        <ol>
-                            <li>
-                                <p> In the top menu bar, click on <b>Systems</b> to get the list of registered assets. You will see screen similar to below given image.
-                                    Find your device looking at the ip address which we got from step 1. You can sort the assets using the 5th column (IP address) to see if new device appears,based on its IP address.
-                                    Device ID shown in Device console (e.g. root@WR-IDP-8660) also represents the System Name from ePO perspective (WR-IDP-8660).
-                                    The last 4 digits of this naming convention corresponds to the last 4 digits of the Ethernet device MAC address, as you can see from the output of 'ifconfig' done previously.
-                                </p>
-                                <img src="./views/labs/hdc/register-device/./image_6.png" alt="Systems"/>
-                            </li>
-                            <li>
-                                <p> If you found your device then click on the device and move to step 4.
-                                    If you are still searching for your device then open the menu by clicking on Top Left icon (i.e small icon with four horizontal lines).
-                                    And click on <b>System Tree</b> under <b>Systems</b>.
-                                </p>
-                                <img src="./views/labs/hdc/register-device/./image_7.png" alt="System Trees"/>
-                            </li>
-                            <li>
-                                <p>Click on <b>Lost and Found</b> under <b>System Tree</b>.
-                                    Locate your device from list of registered devices and click on that.
-                                    If you are still unable to find the device then there might be a problem with internet connection of your device or "startup.bin" might be of different tenant.</p>
-                                <img src="./views/labs/hdc/register-device/./image_8.png" alt="Locating device"/>
-                            </li>
-                            <li>
-                                <p> This will show system information for your device which includes IP Address, Device Address, Serial Number, OS version etc.  </p>
-                                <img src="./views/labs/hdc/register-device/./image_9.png" alt="Device Information"/>
-                            </li>
-                            <li>
-                                <p> To verify that your device is connected or not connected, you can click on <b>DXL status</b>.
-                                    The 'DXL Status' pane should indicate as below, an active DXL connection between the asset agent and the ePO server.
-                                </p>
-                                <img src="./views/labs/hdc/register-device/./image_10.png" alt="Connection Status"/>
-                            </li>
-                        </ol>
-                    </section>
-
-                    <section>
-                        <h2> Enabling/Disabling Device Agent Remotely</h2>
-                        <ol>
-                            <li>
-                                <p> Click on the <b>Actions</b> button at the bottom left corner of the screen to display all the action groups, and point to the <b>device_manager 1.0</b> group to access all the corresponding actions.
-                                    You'll notice that all the actions are greyed-out, except for <b>agent_enable</b>.
-                                    This is simply because on first boot of an asset the agent does connect to the cloud backend and does register, but it cannot send telemetry data or accept actions until specifically enabled via the corresponding action.
-                                    This needs to be done only once; on subsequent reboot of the asset the agent will remain enabled, unless specifically disabled via <b>agent_disable</b> </p>
-                                <img src="./views/labs/hdc/register-device/./image_11.png" alt="Enable Device Agent"/>
-                            </li>
-                            <li>
-                                <p> To disable device agent click on <b>Actions</b> then <b>device_manager 1.0</b> and <b>agent_disable</b></p>
-                                <img src="./views/labs/hdc/register-device/./image_12.png" alt="Disable Device Agent"/>
-                            </li>
-                            <li>
-                                <p>To factory reset device agent click on <b>Actions</b> then <b>device_manager 1.0</b> and <b>agent_factory_reset</b> </p>
-                                <img src="./views/labs/hdc/register-device/./image_13.png" alt="Factory Reset Device Agent"/>
-                            </li>
-                        </ol>
-
-                    </section>
-
-                    <section>
-                        <h2> Rebooting Device Remotely</h2>
-                        <ol>
-                            <li>
-                                <p> Click on the <b>Actions</b> button at the bottom left corner of the screen to display all the action groups, and point to the <b>device_manager 1.0</b> group.
-                                    Click on <b>device_reboot</b>.
-                                </p>
-                                <img src="./views/labs/hdc/register-device/./image_14.png" alt="Reboot Device"/>
-                            </li>
-                            <li>
-                                <p> Your gateway will start the process of rebooting. This is a sample action which shows one of the feature of helix device cloud for device management.
-                                </p>
-                            </li>
-                        </ol>
-                    </section>
-
-                    <h2>Note </h2>
-                    <p> That page does not get refreshed automatically when the action completes; simply refresh the page manually to verify the action completed.</p>
-
-                    <h2>References</h2>
-
-                    <ul>
-                        <li><p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p></li>
-                        <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a></p></li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Exercise 4: Send Pseudo Sensor Data to the HDC</h5>
-
-                    <div ibox-tools></div>
-                </div>
-
-                <div class="ibox-content ">
-                    <p>A sample HDC application is provided which sends telemetry data from the device to the helix device cloud.</p>
-
-                    <article>
-                        <h5> Running the pseudo-telemetry Application on Gateway</h5>
-                        <ol>
-                            <li>
-                                <p> Go to <b>ePO dashboard</b> from your browser, and select the <b>Systems Information</b> page of the device to which you want to connect.
-                                    Switch to the <b>Data Source</b> pane. It should be empty if you never ran application pushing telemetry data to the Cloud on that particular asset.
-                                </p>
-                                <img src="./views/labs/hdc/pseudo-data/./image_2.png" alt="ePO dashboard"/>
-                            </li>
-                            <li>
-                                <p>On the gateway switch to the wra user (this is not necessary, as the application can be executed as root as well, but still it is good practice). Execute the following command to change user. </p>
-                                <code>$ su wra</code>
-                            </li>
-                            <li>
-                                <p>Execute the following command to execute the sample pseudo telemetry application </p>
-                                <code>$ /opt/nova-apps/bin/pseudo-telemetry &</code>
-                            </li>
-                            <li>
-                                <p>You will see temperature and light telemetry data display on the serial console.</p>
-                                <img src="./views/labs/hdc/pseudo-data/./image_1.png" alt="Terminal output of pseudo telemetry data"/>
-                            </li>
-                            <li>
-                                <p>If you refresh your browser you will see something similar to the following, with temperature and light telemetry data displayed in the asset 'Data Source' pane. </p>
-                                <img src="./views/labs/hdc/pseudo-data/./image_3.png" alt="Checking data on hdc cloud"/>
-                            </li>
-                        </ol>
-                    </article>
-
-                    <article>
-                        <h5>Notes </h5>
-                        <ol>
-                            <li>
-                                <p>The temperature and light telemetry data are not coming from real sensors, but instead generated by s/w, therefore do not be surprise if the values displayed do not match the environment of the board. </p>
-                            </li>
-                            <li>
-                                <p>The current version of the 'Data Source' pane only display live telemetry data values. In addition, the page need to be refreshed manually to display the latest values pushed by the asset
-                            </li>
-                        </ol>
-                    </article>
-
-                    <h5>References</h5>
-
-                    <ul>
-                        <li><p><a href="https://www.npmjs.com/package/express">https://www.npmjs.com/package/express</a></p></li>
-                        <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">https://en.wikipedia.org/wiki/Representational_state_transfer</a></p></li>
-                    </ul>
-
-                </div>
-            </div>
-
-
-
+              <!-- <div>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The trigger condition function is a predicate function which returns a TRUE or FALSE.
+  (
+    function( temperature ) {
+      return stash["temperature"] &gt; 27;
+    }
+  )</pre></ui-codemirror>
+              </div> -->
 
         </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Device Configuration -->
+    <div ibox title="Device Configuration">
+      <div content-block name="" message="Boot the target device (in our case Intel NUC)." image-link="./views/labs/hdc/images/1.png">
+        <h2 class="labHidden">Boot the target device</h2>
+        <p>Boot the target device (in our case Intel NUC). Ensure that it is connected to network and has an assigned IP address</p>
+      </div>
+
+      <div content-block name="" message="Study the Agent Connection Diagram" image-link="./views/labs/hdc/images/2.png">
+        <h2 class="labHidden">Study the Agent Connection Diagram</h2>
+        <p>The following figure shows the components in the end-to-end IoT solution and the basic device-side software architecture. The Wind River Host Tools enable you to develop your application on your host computer</p>
+
+        <p>The device initiates the connection with the server and sends device registration information, capabilities, and configuration to the server. The configuration information enables two-way authentication between the server and the device. The server response provides acknowledgment of the device to a specified tenant account. Devices can reregister to advertise updated device capabilities.</p>
+
+        <p>The agent on the device communicates with the server using the DXL (Data Exchange Layer) publish and subscribe message protocol secured with TLS 1.2.</p>
+
+      </div>
+
+      <div content-block name="" message="Check for the HDC Agent Files">
+        <h2 class="labHidden">Check for the HDC Agent Files</h2>
+
+        <p>To ensure the right components are on your device go to folder /opt/intel/ubroker/bin and check contents there. You should see following files there:</p>
+        <ul>
+          <li>agentguid.bin</li>
+          <li>dxlpolicy.bin</li>
+          <li>startup.bin</li>
+          <li>ubroker</li>
+        </ul>
+      </div>
+
+      <div content-block name="" message="Helix Device Cloud Configuration">
+        <h2 class="labHidden">Helix Device Cloud Configuration</h2>
+
+        <p>Log on to https://www.helixdevicecloud.com/ with below credentials.</p>
+        <pre><code>Login: lab_user&#13;&#10;Password: intel123</code></pre>
+        <ul>
+          <li>Verify your device is registered in HDC UI – use MAC address to locate your device</li>
+          <li>Edit the device details to assign a friendly name as shown in the figure</li>
+          <li>Make sure that the device shows online in Status (a tick mark in green)</li>
+          <li>If the agent is not already enabled, go to “Custom Actions” option and select “Enable”</li>
+          <li>Click on the Device ID to get more details on the device properties like the Firmware version, OS version, the telemetry metrics it supports etc. This can be useful during debugging.</li>
+        </ul>
+      </div>
+
+      <div content-block name="" message="Enable the Agent" image-link="./views/labs/hdc/images/3.png">
+        <h2 class="labHidden">Enable the Agent</h2>
+        <ul>
+          <li>If the agent is not already enabled, go to “Custom Actions” option and select “Enable”</li>
+          <li>Click on the Device ID to get more details on the device properties like the Firmware version, OS version, the telemetry metrics it supports etc. This can be useful during debugging.</li>
+        </ul>
+      </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Monitor">
+      <div content-block name="" message="Monitor Device Status" image-link="./views/labs/hdc/images/6.png">
+        <h2 class="labHidden">Monitor Device Status</h2>
+
+        <ul>
+          <li>Initiate remote login sessions from the HDC Portal. You can also connect to the device through a ssh session using it’s IP address.</li>
+
+          <li>To connect to remote login select your device in “DEVICES” tab and then go to “CUSTOM ACTIONS” and select “Remote Login”. This should open another browser where you will see your device prompt.</li>
+        </ul>
+      </div>
+
+      <div content-block name="" message="Monitor Device Status">
+        <h2 class="labHidden">Monitor Device Status</h2>
+        <p>Monitor agent traffic</p>
+        <pre><code>journalctl -u udm-agent -f</code></pre>
+        <pre><code>% ^c (ctrl + c) to exit</code></pre>
+        <p>Diagnostic Tools</p>
+        <pre><code>journalctl -u ubroker -e</code></pre>
+        <pre><code>journalctl -u udm-agent –e</code></pre>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Telemetry Data and Actions">
+      <div content-block name="" message="Monitor Device Status" image-link="./views/labs/hdc/images/6.png">
+        <h2 class="labHidden">Monitor Device Status</h2>
+        <p>This session explains how to send Telemetry and expose device actions on the cloud. We will run the sample fake-boiler-app which is part one of the HDC apps that simulates a real boiler app kind of scenario and sends telemetry data such as temperature, fan status, boiler status etc. to the cloud.</p>
+      </div>
+
+      <div content-block name="" message="Run the Sample Boiler Plate Application to begin generating data">
+        <h2 class="labHidden">Run the Sample Boiler Plate Application to begin generating data</h2>
+        <p>Initiate the remote login and run the sample app from location</p>
+        <pre><code>/opt/hdc-apps/bin/fake-boiler-app</code></pre>
+      </div>
+
+      <div content-block name="" message="Observe the device details" image-link="./views/labs/hdc/images/7.png">
+        <h2 class="labHidden">Run the Sample Boiler Plate Application to begin generating data</h2>
+        <p>On the HDC UI click on the Device ID and below the “Device Details” click on Telemetry Data as shown below. The fake_boiler_datasource lists all the telemetry data that this app exposes to the cloud.</p>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Helix Device Cloud Rules and Alerts">
+      <div content-block name="" message="Objectives">
+        <h2 class="labHidden">Objectives</h2>
+        <p>Create a rule to generate an alert when temperature crosses a certain threshold using the fake boiler app.</p>
+        <ul>
+          <li>The fake boiler app increments the temperature value up to 60 simulating the heating scenario and then decrements it back to 0 to simulate cooling case.</li>
+          <li>Make sure your app is running on the device before you start creating the rule.</li>
+          <li>We will create a simple rule to generate an alert when temperature crosses 55</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Create a New Rule" image-link="./views/labs/hdc/images/8.png">
+        <ul>
+          <li>Go to “RULES” tab and click on “Create New Rule”</li>
+          <li>Give a rule name, for e.g. “temperature alert”</li>
+          <li>Choose your device in option “Apply Rule to these devices” – make sure you select only your device</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Add a condition to the rule" image-link="./views/labs/hdc/images/9.png">
+        <p>Next in section “Add rule conditions” we will add a condition which in our case is temperature exceeding 55. In “Select a telemetry metric” drop down choose “temp”, in “Select operator” drop down choose “greater than” and enter 55 in “Value” box</p>
+
+        <div class="alert alert-info">
+          <p>The “Select a telemetry metric” field will not be available if the fake boiler app is not running on the device!</p>
+        </div>
+
+        <p>Next in section “Add rule responses” there are multiple options on how to respond to a condition. Here we will select option “CREATE AN ALERT”</p>
+        <p>Give Alert Name as “temperature alert”, Priority as “HIGH” and Description as “Temperature above threshold!”</p>
+      </div>
+      <div content-block name="" message="Add a response to the rule" image-link="./views/labs/hdc/images/10.png">
+        <p>Next in section “Add rule responses” there are multiple options on how to respond to a condition. Here we will select option <b>CREATE AN ALERT</b></p>
+        <p>Give Alert Name as “temperature alert”, Priority as “HIGH” and Description as “Temperature above threshold!”</p>
+      </div>
+      <div content-block name="" message="Save the rule" image-link="./views/labs/hdc/images/11.png">
+        <p>Finally click on “SAVE AND ENABLE” to save the Rule.</p>
+
+        <p>The rule which we just created can be seen in “RULES” tab next to “DEVICES” as shown below. It will show the name of the rule, when it was created/modified, affected devices and the actions. Make sure that the Rule Status is “ON”</p>
+      </div>
+      <div content-block name="" message="Watch for new alerts" image-link="./views/labs/hdc/images/12.png">
+        <p>When the temperature goes beyond 55 the Alert gets triggered and you can see in the notification on the top right corner icon as shown below.</p>
+      </div>
+      <div content-block name="" message="View the alert history" image-link="./views/labs/hdc/images/13.png">
+        <p>Going to the “ALERTS” tab also shows the pending alert notifications as shown below.</p>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Service">
+      <div content-block name="" message="Objectives">
+        <h2 class="labHidden">Objectives</h2>
+        <p>We will demonstrate how to send/receive a file to/from the device to your cloud account</p>
+      </div>
+      <div content-block name="" message="Send File to device" image-link="./views/labs/hdc/images/15.png">
+        <ul>
+          <li>To send a dummy file, create a dummy test.txt file on your host machine.</li>
+          <li>On the HDC UI main page go to “DEVICES” tab and check your device box</li>
+          <li>Then go to “STANDARD ACTIONS” drop down and select “Send Files” option</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Select the dummy test.txt file which you created and upload" image-link="./views/labs/hdc/images/16.png">
+        <p>Select the dummy test.txt file which you created and upload it as shown below</p>
+      </div>
+      <div content-block name="" message="Click Send Files" image-link="./views/labs/hdc/images/17.png">
+        <ul>
+          <li>Click “SEND FILES” to send the test.txt file to the device</li>
+          <li>You will immediately see a notification of “Sending Files…” pop up in your notification</li>
+          <li>Then click on the notification icon in right most corner, it should show that the file was transferred successfully to the device</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Check for the presences of the test.txt file">
+        <p>To check if the file is present on the device, on the remote shell, go to folder /opt/hdc/var/download where you should see the test.txt file</p>
+      </div>
+      <div content-block name="" message="Receive File from device" image-link="./views/labs/hdc/images/18.png">
+        <ul>
+          <li>To receive a file from device first put the file, for e.g. sample.txt that needs to be sent to cloud in /opt/hdc/var/upload directory. In our case use the vi editor to generate a dummy file sample.txt in this directory</li>
+
+          <li>Make sure that the file has right permission by doing the following:
+            <pre><code>chmod 644 sample.txt</code></pre>
+          </li>
+
+          <li>Now go to “STANDARD ACTIONS” drop down and select “Retrieve Files” option using which you should be able to receive the file and see in the notification window.</li>
+
+          <li>To download the file to your PC just click on the notification and it will download the tar file. Unzipping it will give the file that you wanted to receive from the device.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div ibox title="Manage the Device from Cloud">
+      <div content-block name="" message="Objectives">
+        <p>Manage the device remotely from cloud</p>
+        <ul>
+          <li>It is possible to perform few standard actions and also some custom actions on the device from cloud</li>
+          <li>We have already inspected in earlier lab couple of standard actions like Send/Retrieve files. You can also perform actions like Shutdown/Restart of the device from “STANDARD ACTIONS” drop down in DEVICES tab after selecting your device.</li>
+          <li>To view the list of custom actions for your device select “CUSTOM ACTIONS” drop down in DEVICES tab, one of the actions you will see is “Remote Login”</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Manage the software installed on the device">
+        <!-- 4.2	Manage the software installed on the device
+        Objective: monitor update traffic between the agent and the cloud -->
+        <ul>
+          <li>Login to the device either doing a ssh from your host PC or through the “Remote Login” window</li>
+          <li>Execute this command: <pre><code>journalctl -u udm-agent –f</code></pre></li>
+          <li>Keep this handy for the next exercise</li>
+        </ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
 </div>
