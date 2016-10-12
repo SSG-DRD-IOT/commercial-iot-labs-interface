@@ -19,7 +19,7 @@
   <div class="row">
     <div class="col-lg-12">
 
-      <div ibox title="Objectives">
+      <div ibox collapse title="Objectives">
         <div content-block name="" message="Read the Objectives">
           <h2 class="labHidden">Read the Objectives</h2>
           <labels gateway window apple linux/>
@@ -47,7 +47,7 @@
 
 
     <!-- Device Configuration -->
-    <div ibox title="Device Configuration">
+    <div ibox collapse title="Device Configuration">
       <div content-block name="" message="Boot the target device (in our case Intel NUC)." image-link="./views/labs/hdc/images/1.png">
         <h2 class="labHidden">Boot the target device</h2>
         <p>Boot the target device (in our case Intel NUC). Ensure that it is connected to network and has an assigned IP address</p>
@@ -110,7 +110,7 @@
 
 
 
-    <div ibox title="Monitor">
+    <div ibox collapse title="Monitor">
       <div content-block name="" message="Monitor Device Status" image-link="./views/labs/hdc/images/6.png">
         <h2 class="labHidden">Monitor Device Status</h2>
 
@@ -143,7 +143,7 @@
 
 
 
-    <div ibox title="Telemetry Data and Actions">
+    <div ibox collapse title="Telemetry Data and Actions">
       <div content-block name="" message="Monitor Device Status" image-link="./views/labs/hdc/images/6.png">
         <h2 class="labHidden">Monitor Device Status</h2>
         <p>This session explains how to send Telemetry and expose device actions on the cloud. We will run the sample fake-boiler-app which is part one of the HDC apps that simulates a real boiler app kind of scenario and sends telemetry data such as temperature, fan status, boiler status etc. to the cloud.</p>
@@ -171,7 +171,7 @@
 
 
 
-    <div ibox title="Helix Device Cloud Rules and Alerts">
+    <div ibox collapse title="Helix Device Cloud Rules and Alerts">
       <div content-block name="" message="Objectives">
         <h2 class="labHidden">Objectives</h2>
         <p>Create a rule to generate an alert when temperature crosses a certain threshold using the fake boiler app.</p>
@@ -235,7 +235,7 @@
 
 
 
-    <div ibox title="Service">
+    <div ibox collapse title="Service">
       <div content-block name="" message="Objectives">
         <h2 class="labHidden">Objectives</h2>
         <p>We will demonstrate how to send/receive a file to/from the device to your cloud account</p>
@@ -276,7 +276,36 @@
     </div>
 
 
-    <div ibox title="Manage the Device from Cloud">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox collapse title="Manage the Device from Cloud">
       <div content-block name="" message="Objectives">
         <p>Manage the device remotely from cloud</p>
         <ul>
@@ -297,6 +326,95 @@
     </div>
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div ibox collapse title="Update the Gateway">
+    <div content-block name="" message="Objectives" image-link="./views/labs/hdc/images/20.png">
+      <p>To perform s/w updates to the device remotely from HDC utility</p>
+    </div>
+    <div content-block name="" message="Remote Software Updates">
+      <p>There are two files in a package:</p>
+      <ul>
+        <li>ota_manifest.spec</li>
+        <li>system-update.tar.gz</li>
+      </ul>
+
+      <p>The manifest file has the information on the additional packages which are part of the update and these are in the system-update file.</p>
+
+      <p>These two are combined together to form the myupdate.tar.gz which is the actual file that will be downloaded and then installed on the device.</p>
+
+      <p>Once the package myupdate.tar.gz is available upload it to the HDC server by first selecting your device in DEVICES and then going to “UPDATES” and selecting “Upload Update Files”</p>
+    </div>
+
+    <div content-block name="" message="Select the software update package" image-link="./views/labs/hdc/images/21.png">
+      <p>In the dialog box, select the <b>myupdate.tar.gz</b> file and it will start uploading</p>
+    </div>
+
+    <div content-block name="" message="Verify that the update has been updated and click DONE." image-link="./views/labs/hdc/images/22.png">
+      <p>Once it is uploaded it will show the new version package, click DONE to complete the upload</p>
+    </div>
+
+    <div content-block name="" message="Activate the update on a device" image-link="./views/labs/hdc/images/23.png">
+      <p>Next go back to “UPDATES” and select “Update Device”. If the device is not disabled it will ask to disable the device before doing the update. Click on Disable device to disable it first.</p>
+    </div>
+
+    <div content-block name="" message="Apply the update" image-link="./views/labs/hdc/images/24.png">
+      <p>Next select the update NUC_3.0.0 from “Select an update” drop down and click “APPLY UPDATE”.</p>
+    </div>
+
+    <div content-block name="" message="Notice the Alert indictating that the update has succeeded" image-link="./views/labs/hdc/images/25.png">
+      <p>There will be an alert when the device update is successful.</p>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div ibox title="Decommission">
+    <div content-block name="" message="Disable and Shutdown Your Device" image-link="./views/labs/hdc/images/26.png">
+      <p>In the UI, select your device from the device list and do the following:</p>
+      <ul>
+        <li>Custom Actions -> Disable</li>
+        <li>Custom Actions -> Shutdown</li>
+      </ul>
+    </div>
+    <div content-block name="" message="Disable and Shutdown Your Device" image-link="./views/labs/hdc/images/27.png">
+      <p>Delete the rules you created:</p>
+      <pre><code>Rules -> ‘My Rule’ -> Delete</code></pre>
+
+      <p>The device can be decommissioned by going to “CUSTOM ACTIONS” and selecting decommission_device. After that you will see a notification of success and the device will then reboot.</p>
+    </div>
+  </div>
 
 
 
