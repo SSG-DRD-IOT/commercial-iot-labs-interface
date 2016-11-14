@@ -93,11 +93,11 @@
                     <p>Under the "<strong>Internet of Things Embedded Application</strong>" option in the left hand menu, select "<strong>Templates</strong>".</p>
                 </div>
 
-                <div content-block name="select-led-blink-template" message="Select the LED Blink Template" image-link="./views/labs/build-nuc/images/image_3.png">
-                    <h2 class="labHidden">Select the LED Blink Template</h2>
-                    <p><img class="labHidden" alt="" data-fid="503895" src="https://software.intel.com/sites/default/files/managed/49/28/image_3.png" typeof="foaf:Image"></p>
+                <div content-block name="select-blank-template" message="Select Blank Template" image-link="./views/labs/build-nuc/images/image_34.png">
+                    <h2 class="labHidden">Select Blank Template</h2>
+                    <p><img class="labHidden" alt="" data-fid="503895" src="https://software.intel.com/sites/default/files/managed/49/28/image_34.png" typeof="foaf:Image"></p>
 
-                    <p>A list of templates for developing Node.js applications will be shown. Select "<strong>Onboard LED Blink</strong>" template, then click "<strong>Continue</strong>".</p>
+                    <p>A list of templates for developing Node.js applications will be shown. Select "<strong>Blank</strong>" template, then click "<strong>Continue</strong>".</p>
                 </div>
 
                 <div content-block name="create-project" message="Name and then Create the New Project" image-link="./views/labs/build-nuc/images/image_4.png">
@@ -107,16 +107,29 @@
                     <p>Choose a directory for your project files, and enter a name for your project.</p>
                     <p>Click "<strong>Create</strong>" in the bottom right corner.</p>
                 </div>
-                <div content-block name="change-io" message="Adjust the code to this setup" image-link="./views/labs/build-nuc/images/image_4.png">
-                    <h2 class="labHidden">Adjust the code to this setup</h2>
-                    <p><img class="labHidden" alt="" data-fid="503897" src="https://software.intel.com/sites/default/files/managed/cb/f7/image_4.png" typeof="foaf:Image"></p>
 
+                <div content-block name="change-io" message="Write code for Blink LED" image-link="./views/labs/build-nuc/images/image_35.png">
+                    <h2 class="labHidden">Write code for Blink LED</h2>
+                    <p><img class="labHidden" alt="" data-fid="503897" src="https://software.intel.com/sites/default/files/managed/cb/f7/image_35.png" typeof="foaf:Image"></p>
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require('mraa'); //require mraa
+console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the Intel XDK console
+
+
+var myOnboardLed = new mraa.Gpio(525); //LED hooked up to digital pin 13
+myOnboardLed.dir(mraa.DIR_OUT); //set the gpio direction to output
+var ledState = true; //Boolean to hold the state of Led
+
+periodicActivity(); //call the periodicActivity function
+
+function periodicActivity()
+{
+  myOnboardLed.write(ledState?1:0); //if ledState is true then write a '1' (high) otherwise write a '0' (low)
+  ledState = !ledState; //invert the ledState
+  setTimeout(periodicActivity,1000); //call the indicated function after 1 second (1000 milliseconds)
+} </pre> </ui-codemirror><br>
                     <p>When working with the Gateway and Arduino 101, "MRAA loads the Arduino 101* board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
                     <p>Note: MRAA is a C/C++ library with bindings to Python, Javascript and Java to interface with the I/O on Galileo, Edison and other platforms, with a structured and sane API where port names/numbering matches the board that you are on</p>
-                    <p>Locate the code:</p>
-                    <code>var myOnboardLed = new mraa.Gpio(13);</code>
-                    <p>And replace it for:</p>
-                    <code>var myOnboardLed = new mraa.Gpio(525); </code>
+
                 </div>
 
                 <div content-block name="select-device" message="Select a target IoT device" image-link="./views/labs/build-nuc/images/image_6.png">
