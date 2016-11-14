@@ -179,6 +179,53 @@ develop your apps. When development is complete, you can save a hardened OS imag
 
                 </div>
 
+<!--   Package Management ---->
+              <div ibox title="Package Management">
+
+                  <div content-block name="package-management-overview" message="Package Management Overview" image-link="./views/labs/dev-hub/images/17.png">
+                      <h2 class="labHidden">Package Management Overview</h2>
+                      <h4>Package Management Overview </h4>
+                      <p>As periodic updates are released, it is important to ensure that you are keeping your gateway development environment up to date.</p>
+                      <p>  The Developer Hub interface provides an easy mechanism to perform these package updates. </p>
+                  </div>
+
+                  <div content-block name="list-packages" message="List Packages" image-link="./views/labs/dev-hub/images/18.png">
+                      <h2 class="labHidden">List Packages</h2>
+                      <h4>List Packages </h4>
+                      <p>The update indicator in the top right corner shows the number of updates needs to be installed.</p>
+                      <p>Before clicking to update, it is important that you first update the Developer Hub itself.</p>
+                      <p>This will ensure that the Developer Hub has the latest code to deal with the rest of the updates since it is performing the updates. </p>
+                  </div>
+
+                  <div content-block name="update-repositories" message="Update Repositories" image-link="./views/labs/dev-hub/images/19.png">
+                      <h2 class="labHidden">Update Repositories</h2>
+                      <h4>Update Repositories </h4>
+                      <p>Click on the <b>Add Repo</b> button. It will ensure we that all latest packages to be updated. Intel_Repository will be located by default.</p>
+                        <p>Click on the <b>Update Repositories</b> button.</p>
+                        <p>After a minute or so, the button text will change to Updated.</p>
+                        <p>Now close the window and there will be updated list of packages under the packages tab.</p>
+                  </div>
+
+                  <div content-block name="update-node-red-experience-devkit-package" message="Update Node Red Experience Devkit Package " image-link="./views/labs/dev-hub/images/20.png">
+                      <h2 class="labHidden">Update Node Red Experience Devkit Package</h2>
+                      <h4>Update Node Red Experience Devkit Package </h4>
+                      <p>Now click on <b>node-red-experience-devkit</b> package from the list and a new screen will allow you to update or uninstall that package.</p>
+                        <p>Proceed to update the node-red-experience-devkit package. </p>
+                          <p>Click on <b>Update</b> button</p>
+                        <p>As the dialog box indicates, this will take a few minutes. It has to download the package update from the internet and install it.</p>
+                  </div>
+
+                  <div content-block name="update-all-packages" message="Update all packages" image-link="./views/labs/dev-hub/images/21.png">
+                      <h2 class="labHidden">Package Management Overview</h2>
+                      <h4>Package Management Overview [Optional Step]</h4>
+                      <p class="alert alert-warning">This is optional step as updating all the packages will be time-consuming and also depends on the bandwidth available. </p>
+                      <p>It is ready to update the rest of the packages. To do this, click on the <b>Install Updates</b> button under the packages tab.</p>
+                      <p>It will update the rest of the packages in one action. </p>
+
+                  </div>
+
+              </div>
+
 <!--   Sensor Management ---->
               <div ibox title="Sensor Management">
 
@@ -329,54 +376,7 @@ develop your apps. When development is complete, you can save a hardened OS imag
 
               </div>
 
-<!--   Package Management ---->
-              <div ibox title="Package Management">
 
-                  <div content-block name="package-management-overview" message="Package Management Overview" image-link="./views/labs/dev-hub/images/17.png">
-                      <h2 class="labHidden">Package Management Overview</h2>
-                      <h4>Package Management Overview </h4>
-                      <p>As periodic updates are released, it is important to ensure that you are keeping your gateway development environment up to date.</p>
-                      <p>  The Developer Hub interface provides an easy mechanism to perform these package updates. </p>
-                  </div>
-
-                  <div content-block name="list-packages" message="List Packages" image-link="./views/labs/dev-hub/images/18.png">
-                      <h2 class="labHidden">List Packages</h2>
-                      <h4>List Packages </h4>
-                      <p>The update indicator in the top right corner shows the number of updates needs to be installed.</p>
-                      <p>Before clicking to update, it is important that you first update the Developer Hub itself.</p>
-                      <p>This will ensure that the Developer Hub has the latest code to deal with the rest of the updates since it is performing the updates. </p>
-                  </div>
-
-                  <div content-block name="update-repositories" message="Update Repositories" image-link="./views/labs/dev-hub/images/19.png">
-                      <h2 class="labHidden">Update Repositories</h2>
-                      <h4>Update Repositories </h4>
-                      <p>Click on the <b>Add Repo</b> button. It will ensure we that all latest packages to be updated. Intel_Repository will be located by default.</p>
-                        <p>Click on the <b>Update Repositories</b> button.</p>
-                        <p>After a minute or so, the button text will change to Updated.</p>
-                        <p>Now close the window and there will be updated list of packages under the packages tab.</p>
-                  </div>
-
-                  <div content-block name="update-dev-hub-package" message="Update Developer Hub Package" image-link="./views/labs/dev-hub/images/20.png">
-                      <h2 class="labHidden">Update Developer Hub Package</h2>
-                      <h4>Update Developer Hub Package </h4>
-                      <p>Now click on <b>iot-developer-hub</b> package from the list and a new screen will allow you to update or uninstall that package.</p>
-                        <p>Proceed to update the iot-developer-hub package. </p>
-                          <p>Click on <b>Update</b> button</p>
-                        <p>As the dialog box indicates, this will take a few minutes. It has to download the package update from the internet and install it (which restarts the Developer Hub Interface).</p>
-                        <p>This all takes some time, but once it is finished, you can refresh the browser tab pointing to the gateway IP address and see the Developer Hub up and running again.</p>
-                        <p>If required, log in again to developer hub and click on Packages tab.
-                  </div>
-
-                  <div content-block name="update-all-packages" message="Update all packages" image-link="./views/labs/dev-hub/images/21.png">
-                      <h2 class="labHidden">Package Management Overview</h2>
-                      <h4>Package Management Overview </h4>
-                      <p class="alert alert-warning">This is optional step as updating all the packages will be time-consuming and also depends on the bandwidth available. </p>
-                      <p>It is ready to update the rest of the packages. To do this, click on the <b>Install Updates</b> button under the packages tab.</p>
-                      <p>It will update the rest of the packages in one action. </p>
-
-                  </div>
-
-              </div>
 
   <!---   Gateway Administration Tools and Resources ---->
               <div ibox title="Gateway Administrative Tools and Resources">
