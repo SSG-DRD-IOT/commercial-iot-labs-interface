@@ -118,10 +118,11 @@ tls_version tlsv1
           <div ibox title="Configure Telegraf to use MQTT over TLS">
             <div content-block message="Configure Telegraf to use an MQTT consumer and an InfluxDB output filter" name="telegraf-configure">
               <p>Change directories into the newly unarchived telegraf directory with the telegraf binary.</p>
-              <pre><code>cd ./telegraph-0.13.1-1/usr/bin</code></pre>
+              <pre><code>cd telegraph-0.13.1-1/usr/bin</code></pre>
 
               <p>Run this command to generate a configuration file with an MQTT consumer and an InfluxDB output filter.</p>
               <pre><code>./telegraf -sample-config --input-filter mqtt_consumer --output-filter influxdb > telegraf-mqtt.conf</code></pre>
+              <p>InfluxDB process is being executed. <strong>Open new SSH terminal for next step.</strong></p>
             </div>
 
             <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">

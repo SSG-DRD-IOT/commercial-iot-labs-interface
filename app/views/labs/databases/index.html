@@ -36,7 +36,8 @@
       </div>
 
       <!-- Install MongoDB -->
-      <div ibox title="Install MongoDB">
+    <!--
+    <div ibox title="Install MongoDB">
         <div content-block name="" message="Insert and Mount Your USB Drive" image-link="./views/labs/databases/images/df.png">
           <h2 class="labHidden">Insert and Mount Your USB Drive</h2>
 
@@ -52,31 +53,30 @@
           <pre><code>mkdir -p /media/sda1; mount /dev/sda1 /media/sda1</code></pre>
           <p>Now you are ready to download and install MongoDB.</p>
         </div>
-
+-->
+  <div ibox title="Install MongoDB">
         <div content-block name="" message="Download and Install MongoDB" image-link="./views/labs/databases/images/mongodb.png">
           <h2 class="labHidden">Download and Install MongoDB</h2>
-          <p>Change directories to the USB drive.</p>
-          <pre><code>cd /media/sda1</code></pre>
           <p>Then download MongoDB.</p>
           <pre><code>wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</code></pre>
           <p>Unarchive the downloaded file and change directories into the newly created mongodb directory.<p>
           <pre><code>tar zxvf mongodb-linux-x86_64-3.2.9.tgz&#13;&#10;cd mongodb-linux-x86_64-3.2.9</code></pre>
-
+        
         </div>
 
 
         <div content-block name="" message="Create a directory to store the MongoDB data files">
           <p>Create a directory to store the MongoDB data files</p>
-          <pre><code>mkdir -p /media/sda1/data/db</code></pre>
+          <pre><code>mkdir -p /data/db</code></pre>
         </div>
 
         <div content-block name="" message="Change directories to the mongod binary and run it with a flag to modify the data path">
           <p>Change directories to the MongoDB server binary.</p>
-          <pre><code>cd /media/sda1/mongodb-linux-x86_64-3.2.9/bin</code></pre>
+          <pre><code>cd ~/mongodb-linux-x86_64-3.2.9/bin</code></pre>
 
           <p>Run the mongod. The mongod process will continue to run while you are working on the rest of the labs.  You may wish to open a new console and run the mongod process there.</p>
 
-          <pre><code>./mongod --dbpath=/media/sda1/data/db</code></pre>
+          <pre><code>./mongod --dbpath=/data/db</code></pre>
         </div>
 
 
