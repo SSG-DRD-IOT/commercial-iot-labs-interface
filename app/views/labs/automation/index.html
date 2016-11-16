@@ -125,12 +125,12 @@
     };
     self.mqttClient.publish('sensors/temperature/alerts', JSON.stringify(alert) );
 
-    this.http.get('http://lightandlamp:10010/action?deviceId=light&amp;action=on', function (err, res) {
-      if (err) {
-        console.log("Unable to turn light on");
-                console.log(err);
-                }
-    });
+    //this.http.get('http://lightandlamp:10010/action?deviceId=light&amp;action=on', function (err, res) {
+      //if (err) {
+      //  console.log("Unable to turn light on");
+        //        console.log(err);
+        //        }
+  //  });
   };
  )</pre></ui-codemirror>
 
@@ -387,6 +387,112 @@ mqttClient.on('message', function (topic, message) {
     context.stash[sensor_id+"_prev"] = value;
 };</pre></ui-codemirror>
             </div>
+
+            <div ibox  title="Download Automation code from Github">
+              <p>If you have not followed the steps given above then you can download automation code directly from github following below steps.</p><br>
+              <code>$ git clone https://github.com/SSG-DRD-IOT/lab-solution-automation</code><br>
+              <code>$ cd lab-solution-automation</code><br>
+              <code>$ npm install</code><br>
+              <code>$ node server.js</code><br>
+            </div>
+
+
+            <div ibox title="Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts" image-link="./views/labs/automation/images/image_1.png">
+                <div content-block name="unbox-kit" message="Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts" image-link="./views/labs/automation/images/image_1.png">
+              <p>To verify triggers are working properly we can create a node red flow with mqtt subscriber on topic /sensors/temperature/alerts</p><br>
+              <p>Open Node-red flow editor and import the following json object.</p>
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
+   {
+      "id":"1dc1405c.26a96",
+      "type":"mqtt-broker",
+      "z":"",
+      "broker":"localhost",
+      "port":"1883",
+      "clientid":"",
+      "usetls":false,
+      "verifyservercert":true,
+      "compatmode":true,
+      "keepalive":"60",
+      "cleansession":true,
+      "willTopic":"",
+      "willQos":"0",
+      "willRetain":null,
+      "willPayload":"",
+      "birthTopic":"",
+      "birthQos":"0",
+      "birthRetain":null,
+      "birthPayload":""
+   },
+   {
+      "id":"4a90206f.9f94e",
+      "type":"upm-grove-rgb-lcd",
+      "z":"723eface.a4fa44",
+      "name":"",
+      "platform":"512",
+      "r":0,
+      "g":0,
+      "b":255,
+      "row":0,
+      "column":0,
+      "x":817,
+      "y":259,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"89e95692.f31f68",
+      "type":"function",
+      "z":"723eface.a4fa44",
+      "name":"FormatOutput",
+      "func":"if(msg.payload.alert == \"Cold\")\n   msg.lcdColor = {r: 0, g: 200, b: 150};\nelse\n   msg.lcdColor = {r: 230, g: 0, b: 0};\n    \nmsg.lcdCursor = {row: 1, column: 0};\nmsg.payload = msg.payload.text;\nreturn msg;",
+      "outputs":1,
+      "noerr":0,
+      "x":583.5,
+      "y":353,
+      "wires":[
+         [
+            "4a90206f.9f94e",
+            "2519fcc0.c2b884"
+         ]
+      ]
+   },
+   {
+      "id":"2519fcc0.c2b884",
+      "type":"debug",
+      "z":"723eface.a4fa44",
+      "name":"",
+      "active":true,
+      "console":"false",
+      "complete":"false",
+      "x":810,
+      "y":387,
+      "wires":[
+
+      ]
+   },
+   {
+      "id":"f9985c33.773ab",
+      "type":"mqtt in",
+      "z":"723eface.a4fa44",
+      "name":"",
+      "topic":"sensors/temperature/alerts",
+      "broker":"1dc1405c.26a96",
+      "x":289,
+      "y":356,
+      "wires":[
+         [
+            "89e95692.f31f68"
+         ]
+      ]
+   }
+]</pre></ui-codemirror>
+
+          <p>LCD will change color and text according to alerts received on the mqtt topic.</p>
+            </div>
+            </div>
+
+
 
     <!-- TODO: The trigger eval condition and eval action Functions -->
     <!-- TODO: Write a better practice triggers section.  too_hot_condition  too_cold_condition -->

@@ -209,6 +209,14 @@ data_format = "json"</ui-codemirror>
             <p>Here topics should point to what we are subscribing to listen on the mqtt connection. Also important to note here is to change the data_format = “json” since the data that we will publish from the sensors will be in json format. If we keep the default data_format which is influx we will see parsing errors.</p>
           </div>
 
+<!-- Dowload and copy Telegraph MQTT Configuration file -->
+          <div content-block message="Download and copy Telegraph MQTT Configuration file" name="download-copy-telegrap-mqtt-configuration-file">
+            <p>If you ave already edited the telegraph-mqtt.conf file then skip this step.</p>
+            <p>Here we will direcly download the configuration file of telegraph and mqtt and replace with already exist in gateway.</p>
+            <pre><code>wget https://raw.githubusercontent.com/SSG-DRD-IOT/grafana-telegraph-mqtt-conf/master/telegraf-mqtt.conf </code></pre>
+          </div>
+
+
           <div content-block message="Start the telegraf service" name="telegraf-start">
             <p>Next start the telegraf service pointing to this conf file:</p>
             <pre><code>telegraf -config telegraf-mqtt.conf</code></pre>
