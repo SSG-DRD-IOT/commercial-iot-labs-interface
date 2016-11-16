@@ -61,7 +61,7 @@
           <pre><code>wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</code></pre>
           <p>Unarchive the downloaded file and change directories into the newly created mongodb directory.<p>
           <pre><code>tar zxvf mongodb-linux-x86_64-3.2.9.tgz&#13;&#10;cd mongodb-linux-x86_64-3.2.9</code></pre>
-        
+
         </div>
 
 
@@ -77,6 +77,9 @@
           <p>Run the mongod. The mongod process will continue to run while you are working on the rest of the labs.  You may wish to open a new console and run the mongod process there.</p>
 
           <pre><code>./mongod --dbpath=/data/db</code></pre>
+          <p>Wait till below message is displayed. </p>
+          <p><code>[initandlisten] waiting for connections on port 27017</code></p>
+            <p>Now Mongodb is executed and display all the messages on that terminal. For next step open new SSH terminal.</p>
         </div>
 
 
@@ -360,6 +363,7 @@ mqttClient.on('message', function(topic, message) {
 </div>
   </div>
 
+<!-- Duplicate Instructions
       <div ibox  title="Lab Solutions">
         <div content-block name="Clone-the-Solution-from-its-Github-Repository" message="Clone the Solution from it's Github Repository">
 <h2 class="labHidden">Clone the Solution from it's Github Repository</h2>
@@ -385,7 +389,7 @@ mqttClient.on('message', function(topic, message) {
           <pre><code>node server.js</code></pre>
         </div>
       </div>
-
+-->
       <div ibox title="Additional Resources">
           <ul>
               <li>
