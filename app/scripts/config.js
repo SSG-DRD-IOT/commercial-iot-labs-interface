@@ -59,57 +59,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         pageTitle: 'Introduction'
       }
     })
-    .state('labs.build', {
-      url: "/build",
-      templateUrl: "views/labs/build/index.html",
-      data: {
-        pageTitle: 'Build an Edge Device'
-      },
-      resolve: {
-        loadPlugin: function($ocLazyLoad) {
-          return $ocLazyLoad.load([{
-            serie: true,
-            files: [
-              'bower_components/codemirror/lib/codemirror.css',
-              'bower_components/codemirror/theme/ambiance.css',
-              'bower_components/codemirror/lib/codemirror.js',
-              'bower_components/codemirror/mode/javascript/javascript.js'
-            ]
-          }, {
-            name: 'ui.codemirror',
-            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-          }]);
-        }
-      }
-    })
     .state('labs.hdc', {
       url: "/hdc",
       templateUrl: "views/labs/hdc/index.html",
       data: {
         pageTitle: 'The Helix Device Cloud'
-      },
-      resolve: {
-        loadPlugin: function($ocLazyLoad) {
-          return $ocLazyLoad.load([{
-            serie: true,
-            files: [
-              'bower_components/codemirror/lib/codemirror.css',
-              'bower_components/codemirror/theme/ambiance.css',
-              'bower_components/codemirror/lib/codemirror.js',
-              'bower_components/codemirror/mode/javascript/javascript.js'
-            ]
-          }, {
-            name: 'ui.codemirror',
-            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-          }]);
-        }
-      }
-    })
-    .state('labs.build-nuc', {
-      url: "/build-nuc",
-      templateUrl: "views/labs/build-nuc/index.html",
-      data: {
-        pageTitle: 'Build an Edge Device'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -273,6 +227,98 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       }
     }
   })
+  .state('labs.sensors-c', {
+    url: "/sensors-c",
+    templateUrl: "views/labs/sensors-c/index.html",
+    data: {
+      pageTitle: 'Build an Edge Device'
+    },
+    resolve: {
+      loadPlugin: function($ocLazyLoad) {
+        return $ocLazyLoad.load([{
+          serie: true,
+          files: [
+            'bower_components/codemirror/lib/codemirror.css',
+            'bower_components/codemirror/theme/ambiance.css',
+            'bower_components/codemirror/lib/codemirror.js',
+            'bower_components/codemirror/mode/javascript/javascript.js'
+          ]
+        }, {
+          name: 'ui.codemirror',
+          files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+        }]);
+      }
+    }
+  })
+  .state('labs.sensors-javascript', {
+      url: "/sensors-javascript",
+      templateUrl: "views/labs/sensors-javascript/index.html",
+      data: {
+        pageTitle: 'Build an Edge Device'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })  .state('labs.sensors-java', {
+        url: "/sensors-java",
+        templateUrl: "views/labs/sensors-java/index.html",
+        data: {
+          pageTitle: 'Build an Edge Device'
+        },
+        resolve: {
+          loadPlugin: function($ocLazyLoad) {
+            return $ocLazyLoad.load([{
+              serie: true,
+              files: [
+                'bower_components/codemirror/lib/codemirror.css',
+                'bower_components/codemirror/theme/ambiance.css',
+                'bower_components/codemirror/lib/codemirror.js',
+                'bower_components/codemirror/mode/javascript/javascript.js'
+              ]
+            }, {
+              name: 'ui.codemirror',
+              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }]);
+          }
+        }
+      })
+      .state('labs.sensors-node-red', {
+        url: "/sensors-node-red",
+        templateUrl: "views/labs/sensors-node-red/index.html",
+        data: {
+          pageTitle: 'Build an Edge Device'
+        },
+        resolve: {
+          loadPlugin: function($ocLazyLoad) {
+            return $ocLazyLoad.load([{
+              serie: true,
+              files: [
+                'bower_components/codemirror/lib/codemirror.css',
+                'bower_components/codemirror/theme/ambiance.css',
+                'bower_components/codemirror/lib/codemirror.js',
+                'bower_components/codemirror/mode/javascript/javascript.js'
+              ]
+            }, {
+              name: 'ui.codemirror',
+              files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }]);
+          }
+        }
+      })
+
     .state('labs.cloud', {
       url: "/cloud",
       templateUrl: "views/labs/cloud/index.html",
