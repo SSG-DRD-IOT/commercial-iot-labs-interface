@@ -279,75 +279,62 @@
 
 
   <div ibox title="Update the Gateway">
-    <div content-block name="" message="Objectives" image-link="./views/labs/hdc/images/20.png">
+    <div content-block name="" message="Objectives and Prerequisites" image-link="./views/labs/hdc/images/20.png">
       <p>To perform s/w updates to the device remotely from HDC utility</p>
-    </div>
-    <div content-block name="" message="Remote Software Updates">
-      <p>There are two files in a package:</p>
-      <ul>
-        <li>ota_manifest.spec</li>
-        <li>system-update.tar.gz</li>
-      </ul>
-
-      <p>The manifest file has the information on the additional packages which are part of the update and these are in the system-update file.</p>
-
-      <p>These two are combined together to form the myupdate.tar.gz which is the actual file that will be downloaded and then installed on the device.</p>
-
-      <p>Once the package myupdate.tar.gz is available upload it to the HDC server by first selecting your device in DEVICES and then going to “UPDATES” and selecting “Upload Update Files”</p>
+      <p>An update package includes the instructions to install software on the device and if applicable, contains the files to install on the device</p>
+      <p>For this section we will do a simple update of transfering a script <b>simple_update.sh</b> and a sample test file <b>test.txt</b> to the device. The script will create a folder and copy the file to that folder</p>
+      <p>Copy the <b>simple_update.sh</b> and <b>test.txt</b> from USB drive folder hdc_update_files to your local host PC</p>
     </div>
 
-    <div content-block name="" message="Select the software update package" image-link="./views/labs/hdc/images/21.png">
-      <p>In the dialog box, select the <b>myupdate.tar.gz</b> file and it will start uploading</p>
+    <div content-block name="" message="Select the software update package" image-link="./views/labs/hdc/images/hdc-update_1.png">
+      <p>Click on the "UPDATE" tab on top of the HDC page</p>
+      <p>On the Software Updates page, click "Available Packages" and then click "CREATE NEW UPDATE PACKAGE"</p>
+      <p>Give a short name in "Package Name" and a version number in "Version" box as shown in figure. You can put in a description if you want</p>
+      <p>Next specify the criteria to select compatible devices. In our case we will chose Firmware version and value as 2.2. This lets you choose which devices you want to update based on the criteria</p>
     </div>
 
-    <div content-block name="" message="Verify that the update has been updated and click DONE." image-link="./views/labs/hdc/images/22.png">
-      <p>Once it is uploaded it will show the new version package, click DONE to complete the upload</p>
+    <div content-block name="" message="Select the Package files and SAVE" image-link="./views/labs/hdc/images/hdc-update_2.png">
+      <p>As shown in the figure in the Package Files area, drag the required files into the window. When the file upload completes successfully, the progress bar shows Success</p>
+      <p>In the "Install Commands" section enter the below command in "Install Command" area. Leave the Pre-Install, Post-Install and other boxes empty</p>
+      <pre><code>sh simple_update.sh</code></pre>
+      <p>Click "SAVE"</p>
+      <p>Once you save your package it will show in the list of "Available Packages" in the unpublished state and is ready to deploy</p>
     </div>
 
-    <div content-block name="" message="Activate the update on a device" image-link="./views/labs/hdc/images/23.png">
-      <p>Next go back to “UPDATES” and select “Update Device”. If the device is not disabled it will ask to disable the device before doing the update. Click on Disable device to disable it first.</p>
+    <div content-block name="" message="Prepare to Deploy the Package" image-link="./views/labs/hdc/images/hdc-update_4.png">
+      <p>On "Available Packages" find your package and click "DEPLOY"</p>
+      <p>Give a name to your deployment and a description</p>
+      <p>Your package information will be available under "Package Information" section. Note that there will be additional Package Files (update.json and manifest.spec) which the system puts in your package</p>
     </div>
 
-    <div content-block name="" message="Apply the update" image-link="./views/labs/hdc/images/24.png">
-      <p>Next select the update NUC_3.0.0 from “Select an update” drop down and click “APPLY UPDATE”.</p>
+    <div content-block name="" message="Deploy the Package to the NUC" image-link="./views/labs/hdc/images/hdc-update_5.png">
+      <p>At the bottom of the page, you will see list of devices compatible for your package. This is based on the criteria we selected earlier for compatible devices, which is the Firmware Version in our case</p>
+      <p>You will see all the devices with 2.2 Firmware (it will list all the devices in the workshop since they are based on 2.2)</p>
+      <p>Check mark your device based on your ID and MAC address and press "ADD DEVICES". This will then list your device in section "Devices selected for deployment"</p>
+      <p>Click "DEPLOY"</p>
     </div>
 
-    <div content-block name="" message="Notice the Alert indictating that the update has succeeded" image-link="./views/labs/hdc/images/25.png">
-      <p>There will be an alert when the device update is successful.</p>
+    <div content-block name="" message="Verify Package was Deployed and Installed" image-link="./views/labs/hdc/images/hdc-update_6.png">
+      <p>As shown in the figure you will see your deploy status change from In Progress to Completed</p>
+      <p>To verify that our script got installed and all steps completed successfully go to <b>/var/lib/iot/upload</b> directory and view the file <b>iot_install_updates.log</b></p>
+      <p>This will give you step by step procedure of how the install happened. In the section "Executing command 'sh simple_update'" you will see the traces that we put in the script</p>
+      <p>To verify that it succeeded check if testfolder was created in /root/testfolder and it should also have the file test.txt in there</p>
+      <p>This was a simple example, in a similar way a number of scripts and files can be deployed on the device to perform an update</p>
     </div>
   </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <div ibox title="Decommission">
-    <div content-block name="" message="Disable and Shutdown Your Device" image-link="./views/labs/hdc/images/26.png">
-      <p>In the UI, select your device from the device list and do the following:</p>
-      <ul>
-        <li>Custom Actions -> Disable</li>
-        <li>Custom Actions -> Shutdown</li>
-      </ul>
+    <div content-block name="" message="Objective" image-link="./views/labs/hdc/images/26.png">
+      <p>The device can be decommisioned from HDC</p>
+      <p>Once the device is decommisioned it cannot be managed from HDC</p>
     </div>
     <div content-block name="" message="Disable and Shutdown Your Device" image-link="./views/labs/hdc/images/27.png">
       <p>Delete the rules you created:</p>
       <pre><code>Rules -> ‘My Rule’ -> Delete</code></pre>
 
       <p>The device can be decommissioned by going to “CUSTOM ACTIONS” and selecting decommission_device. After that you will see a notification of success and the device will then reboot.</p>
+      <p>On boot up the device will show offline in HDC and none of the operations can be performed on it</p>
     </div>
   </div>
 
