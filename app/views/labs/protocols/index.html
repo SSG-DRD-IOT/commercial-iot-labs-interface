@@ -312,7 +312,7 @@ return msg;
               <p>Double click the function node and name is <strong>JSONify</strong> and add the following code:</p>
               <ui-codemirror ui-codemirror-opts="editorOptions ">msg.payload = {
     sensor_id: "temperature",
-    value: String(Math.floor(msg.payload) * 3/5),
+    value: Math.floor(msg.payload) * 3/5,
     timestamp: Date.now(),
 }
 return msg;</pre></ui-codemirror>
