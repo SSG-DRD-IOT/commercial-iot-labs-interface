@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h4>Data Analytics in the Cloud</h4>
+        <h4>Data Analytics</h4>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -9,7 +9,7 @@
                 <a>Labs</a>
             </li>
             <li class="active">
-                <strong>Data Analytics in the Cloud</strong>
+                <strong>Data Analytics</strong>
             </li>
         </ol>
     </div>
@@ -58,7 +58,8 @@
         <div ibox title="Download and Install Telegraf">
             <div content-block message="Download 64-bit pre-compiled Telegraf binaries" name="telegraf-download">
               <p>Telegraf is an open source agent written for collecting metrics and data on the system it's running on or from other services. Telegraf writes data it collects to InfluxDB in the correct format.</p>
-              <p>We will be downloading Telegraf and configuring the MQTT over TLS input consumer.  This will gather sensor data over MQTT TLS and store it in the InfluxDB database.</p>
+              <p>We will be downloading Telegraf and configuring the MQTT over TLS (Transport Layer Security) input consumer.  TLS and SSL (Secure Sockets Layer) provide a secure communication channel between a client and server.This will gather sensor data over MQTT TLS and store it in the InfluxDB database.</p>
+              <p>Since we are using SSL encryption we will be generating and using those certificates for authentication. MQTT uses port 8883 for secure connection hence we will have to change the MQTT port in our earlier node-red flow which generates temperature data</p>
               <p>Download the pre-compiled 64-bit binary distribution of Telegraf and unarchive it.</p>
               <pre><code>wget https://dl.influxdata.com/telegraf/releases/telegraf-0.13.1_linux_amd64.tar.gz
 </code></pre>
@@ -112,6 +113,8 @@ tls_version tlsv1
              <p>Make sure to stop and start mosquitto service after this change</p>
               <pre><code>systemctl stop mosquitto</code></pre>
               <pre><code>systemctl start mosquitto</code></pre>
+            <p>Check to make sure mosquitto service is running properly with below command. The status should be "active (running)"</p>
+              <pre><code>systemctl status mosquitto</code></pre>
             </div>
           </div>
 
@@ -185,7 +188,7 @@ qos = 0
 
 topics = [
    "sensors/temperature/data",
-   "announcements",
+   "sensors/new",
 ]
 
 persistent_session = false
@@ -199,8 +202,8 @@ insecure_skip_verify = true
 
 data_format = "json"</ui-codemirror>
 
-            <p>The first topic <b>sensors/+/data</b> will comsumer messages that contain new sensor data. In MQTT, topics are heirarchical.  In the heirarchy here the second level is the sensors unqiue identifier. We've used a '+' symbol which is a wild card in MQTT topics.  So this topic represents all the data from sensors on the local network.</p>
-            <p>The second topic <b>sensors/new</b> will consumer messages that announce new sensors on the network.</p>
+            <p>The first topic <b>sensors/+/data</b> will comsume messages that contain new sensor data. In MQTT, topics are heirarchical.  In the heirarchy here the second level is the sensors unqiue identifier. We've used a '+' symbol which is a wild card in MQTT topics.  So this topic represents all the data from sensors on the local network.</p>
+            <p>The second topic <b>sensors/new</b> will consume messages that announce new sensors on the network.</p>
 
 
             <p>Next change the data format on line 149 to "json"</p>
@@ -216,6 +219,11 @@ data_format = "json"</ui-codemirror>
             <pre><code>wget https://raw.githubusercontent.com/SSG-DRD-IOT/grafana-telegraph-mqtt-conf/master/telegraf-mqtt.conf -O telegraf-mqtt.conf</code></pre>
           </div>
 
+          <div content-block message="Modify the MQTT ports in Node-Red Flow" name="modify-mqtt-node">
+            <p>Before we start telegraf service we need to make some changes in the node-red flow we did in lab "Application Protocols: MQTT and HTPP"</p>
+            <p>In the mqtt input and output nodes for topic sensors/temperature/data change the MQTT port to <b>8883</b></p>
+            <p>Click deploy and ensure that the node is connected and topic is getting published</p>
+          </div>
 
           <div content-block message="Start the telegraf service" name="telegraf-start">
             <p>Next start the telegraf service pointing to this conf file:</p>
@@ -223,7 +231,7 @@ data_format = "json"</ui-codemirror>
           </div>
           <div content-block message="Start the telegraf service" name="telegraf-start" image-link="./views/labs/cloud/images/telegraf-start.png">
             <p>We should start getting the readings if they are getting published from the sensors as shown in the figure</p>
-            <p>For sensors/temperature/data topic to be published make sure that the Node red flow which you implemented in lab "Application Protocols: MQTT and HTPP" is executing</p>
+            <p>For sensors/temperature/data topic to be published make sure that the Node red flow which you implemented in lab "Application Protocols: MQTT and HTPP" is modified with MQTT port as 8883 and is executing</p>
             <img class='labHidden' src="./views/labs/cloud/images/telegraf-start.png"></src>
           </div>
 
