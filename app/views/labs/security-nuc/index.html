@@ -104,7 +104,7 @@
                           <p>The feature <strong>integrity</strong> Based on your setup, Embedded Control gives you the flexibility to configure access to the protected systems. You can lock down systems to prevent even administrators from changing what is authorized to run on a system, unless presented with an authentication key.</p>
                       </li>
                       <li>
-                        <strong>checksum</strong> With this release, we have added support for SHA256 to calculate checksum values of inventory items. SHA256 offers improved security as compared to SHA1. Although we continue to support SHA1, checksum values of inventory items will be calculated using SHA256. If you use SHA256 as the hash algorithm, we compute both SHA1 and SHA256 values while creating the whitelist. However, decision making is primarily based on SHA256 values.
+                          <p><strong>checksum</strong> With this release, we have added support for SHA256 to calculate checksum values of inventory items. SHA256 offers improved security as compared to SHA1. Although we continue to support SHA1, checksum values of inventory items will be calculated using SHA256. If you use SHA256 as the hash algorithm, we compute both SHA1 and SHA256 values while creating the whitelist. However, decision making is primarily based on SHA256 values.</p>
                       </li>
                       <li>
                           <p>The feature <strong>script-auth</strong> is like deny-exec, but for scripts - only whitelisted scripts file can execute.</p>
@@ -113,7 +113,7 @@
                           <p>The feature <strong>deny-write</strong> provides tamper-proofing to protect data file ( for example configuration file). Unlike the deny-exec and script-auth features (which rely on a whitelist), the deny-write feature is rules-based. The MEC configuration file (solidcore.conf) records the rules.</p>
                       </li>
                       <li>
-                          <p>The feature <strong>deny-read</strong> provides tamper-proofing to prevent reading of critical files. The feature <strong>deny-read</strong> is alos rule based (like deny-write) - The MEC configuration file (solidcore.conf)
+                          <p>The feature <strong>deny-read</strong> provides tamper-proofing to prevent reading of critical files. The feature <strong>deny-read</strong> is also rule based (like deny-write) - The MEC configuration file (solidcore.conf)
                               records the rules. The feature is disabled by default.</p>
                       </li>
                     </ul>
@@ -248,17 +248,19 @@
                     <p>Observe that the status of the ext4 drive has changed to Solidified.</p>
                   </div>
 
-                  <div content-block name="security-test-restart" message="Enable and Restart the McAfee® Embedded Control service">
+                  <div content-block name="security-test-restart" message="Restart the McAfee® Embedded Control service to enable MEC">
                     <p>As the MEC administrator, execute the following command to enable MEC.</p>
                     <pre><code>sadmin enable</code></pre>
                     <p>McAfee Solidifier will be enabled on service restart.</p>
-                    <img alt=""  src="./views/labs/security-nuc/images/sadmin-enable2.png"/>
-                  </div>
-
-                  <div content-block name="security-test-restart" message="Restart the McAfee® Embedded Control Service">
                     <p>As the MEC admin, execute this command to restart the McAfee service</p>
                     <pre><code>systemctl restart scsrvc</code></pre>
                     <img alt=""  src="./views/labs/security-nuc/images/systemctl-status.png"/>
+                  </div>
+
+                  <div content-block name="security-test-restart" message="Enable MEC">
+                    <p>Now enable MEC with below command</p>
+                    <pre><code>sadmin enable</code></pre>
+                    <img alt=""  src="./views/labs/security-nuc/images/sadmin-enable2.png"/>
                   </div>
                 </div>
 
@@ -408,7 +410,7 @@
 
       <div ibox  title="McAfee® Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-nuc/images/sadmin-config-show.png">
-          <p>McAfee® Embedded Control can be configured use a variety of algorithms to verify the integrity of solidified system files.</p>
+          <p>McAfee® Embedded Control can be configured to use a variety of algorithms to verify the integrity of solidified system files.</p>
           <p>Type the following to find which algorithm is currently being used:</p>
           <pre><code>sadmin config show</code></pre>
           <p>Or if you'd like a less cluttered view then type:</p>
@@ -417,7 +419,8 @@
         </div>
 
         <div content-block name="security-objectives" message="Configure the Hashing Algorithm">
-          <p>To change the hash algorithm used to calculate checksum, first make sure the software is in Disabled mode.</p>
+          <p>To change the hash algorithm used to calculate checksum, first make sure the software is in Disabled mode. This can be checked with below command</p>
+          <pre><code>sadmin status</code></pre>
           <p class="alert alert-info">If the software is not in Disabled mode, type the # sadmin disable command and reboot the system.</p>
 
           <p>Configure checksum calculation.</p>
@@ -463,7 +466,7 @@
           <pre><code>cp /bin/ls /bin/myls</code></pre>
           <p>Now try to run the new program.</p>
           <pre><code>/bin/myls</code></pre>
-          <img src="./views/labs/security-nuc/images/denied.png" alt="" />
+          <p>The application will not run and you will get a "Permission denied" error</p>
         </div>
 
         <div content-block name="security-objectives" message="Verify that the unauthorized binary fails to run">
@@ -509,11 +512,10 @@
     <p>Type this command to cause MEC to go into update mode.</p>
     <pre><code>sadmin bu</code></pre>
     <p>Notice that McAfee is now in Update mode.</p>
-
-  </div>
-  <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect." image-link="./views/labs/security-nuc/images/myuseradd.png">
-    <p>Run the unauthorize command that we created in the previous section: </p>
+    <p>Run the unauthorized command that we created in the previous section: </p>
     <pre><code>/bin/myls</code></pre>
+    <p>This command will now run without any errors in update mode</p>
+
   </div>
 
   <div content-block name="security-objectives" message="When you are done with the Update Mode switch back to protected mode" image-link="./views/labs/security-nuc/images/sadmin-eu.png">
@@ -528,6 +530,7 @@
 
     <p>As the MEC administrator, execute the following command to switch EC to disabled mode to deactivate the features of MEC application control.</p>
     <pre><code>sadmin disable</code></pre>
+    <p>Reboot your board for this to take effect</p>
 
   </div>
 </div>
@@ -547,32 +550,34 @@
     <pre><code>systemctl start node-red-experience</code></pre>
     <p>Try stopping the <strong>node-red-experience</strong></p>
     <p>Likewise, you can stop a system service by typing:</p>
-    <pre><code>systemctl stop node-red-experience.service</code></pre>
+    <pre><code>systemctl stop node-red-experience</code></pre>
   </div>
   <div content-block name="" message="Restarting and Reloading" image-link="./views/labs/security-nuc/images/system-status.png">
     <p>Restarting a currently running service is simple with the <strong>restart</strong> command. This will terminate the process and then relaunch it.</p>
-    <pre><code>systemctl restart node-red-experience.service</code></pre>
+    <pre><code>systemctl restart node-red-experience</code></pre>
     <p>If the service is able to reload its configuration files without terminating first, then you can use the <strong>reload</strong> command.</p>
-    <pre><code>systemctl reload node-red-experience.service</code></pre>
+    <pre><code>systemctl reload node-red-experience</code></pre>
     <p>If you are unsure whether the service is able to reload its own configuration files, you can use the <strong>reload-or-restart</strong> command. This will reload the configuration if possbile. Otherwise, it will restart the service.</p>
-    <pre><code>systemctl reload-or-restart node-red-experience.service</code></pre>
+    <pre><code>systemctl reload-or-restart node-red-experience</code></pre>
+    <p>You can check the status of your service <strong>node-red-experience</strong> with following command, it will display current status as shown in figure.</p>
+    <pre><code>systemctl status node-red-experience</code></pre>
   </div>
   <div content-block name="" message="Enabling and Disabling Services" image-link="./views/labs/security-nuc/images/systemctl-enable-disable.png">
     <p>Enabling and disabling refers to whether a service is started at boot (enabled) or not (disabled).</p>
     <p>If you want a service to start when the system next boots type the follow:</p>
-    <pre><code>systemctl enable node-red-experience.service</code></pre>
+    <pre><code>systemctl enable node-red-experience</code></pre>
     <p>To make sure that the system does not start a service at boot, type the following:</p>
-    <pre><code>systemctl disable node-red-experience.service</code></pre>
+    <pre><code>systemctl disable node-red-experience</code></pre>
   </div>
   <div content-block name="" message="Checking the Status of Services" image-link="./views/labs/security-nuc/images/systemctl-is-active.png">
     <p>The <strong>status</strong> command will report whether the service is running or not and if there is a failure condition.</p>
     <p>Let's see if what the current status is of the <strong>node-red-experience</strong>.
     <pre><code>systemctl status node-red-experience</code></pre>
     <p>There are functions which determine the current status of a service</p>
-    <pre><code>systemctl is-active node-red-experience.service</code></pre>
+    <pre><code>systemctl is-active node-red-experience</code></pre>
     <p>This will return the current unit state, which is usually active or inactive. The exit code will be "0" if it is active, making the result simpler to parse programatically.</p>
-    <pre><code>systemctl is-enabled node-red-experience.service</code></pre>
-    <pre><code>systemctl is-failed node-red-experience.service</code></pre>
+    <pre><code>systemctl is-enabled node-red-experience</code></pre>
+    <pre><code>systemctl is-failed node-red-experience</code></pre>
   </div>
   <div content-block name="" message="System State Overview" image-link="./views/labs/security-nuc/images/systemctl-list-units.png">
     <p>The next set of commands will help to determine the state of the entire system.</p>
@@ -605,11 +610,14 @@
     <pre><code>systemctl show node-red-experience.service -p Conflicts</code></pre>
   </div>
   <div content-block name="" message="Masking and Unmasking Units" image-link="./views/labs/security-nuc/images/systemctl-mask.png">
-    <p>Earily we showed you how to stop a service. Systemd has another mechanism for stopping a service from running called <strong>masking</strong>. When masking a service systemd creates a symlink between the service's configuration files in /etc/systemd/ and /dev/null.  This stops the service from being triggers as a dependencies of another service.  It also prevents the service from being activated manually.</p>
-    <pre><code>systemctl mask nginx.service</code></pre>
+    <p>Earlier we showed you how to stop a service. Systemd has another mechanism for stopping a service from running called <strong>masking</strong>. When masking a service systemd creates a symlink between the service's configuration files in /etc/systemd/ and /dev/null.  This stops the service from being triggered as a dependency of another service.  It also prevents the service from being activated manually.</p>
+    <pre><code>systemctl mask nginx</code></pre>
     <p>You can see a list of masked units by typing the following:</p>
     <pre><code>systemctl list-unit-files</code></pre>
-    <pre><code>systemctl start nginx.service</code></pre>
+    <p>To unmask the service so that it is enabled again type the following</p>
+    <pre><code>systemctl unmask nginx</code></pre>
+    <p>You can see that this service is enable again when you check the list</p>
+    <pre><code>systemctl list-unit-files</code></pre>
   </div>
 </div>
 
