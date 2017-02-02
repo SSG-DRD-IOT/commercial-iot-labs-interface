@@ -1,0 +1,429 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>The Helix Device Cloud</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>The Helix Device Cloud</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div ibox title="Objectives">
+        <div content-block name="" message="Read the Objectives">
+          <h2 class="labHidden">Read the Objectives</h2>
+          <labels gateway window apple linux/>
+
+              <!-- <div>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The trigger condition function is a predicate function which returns a TRUE or FALSE.
+  (
+    function( temperature ) {
+      return stash["temperature"] &gt; 27;
+    }
+  )</pre></ui-codemirror>
+              </div> -->
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Device Configuration -->
+    <div ibox title="Device Configuration">
+      <div content-block name="" message="Boot the target device (in our case Intel NUC)." image-link="./views/labs/hdc/images/1.png">
+        <h2 class="labHidden">Boot the target device</h2>
+        <p>Boot the target device (in our case Intel NUC). Ensure that it is connected to network and has an assigned IP address</p>
+      </div>
+
+      <div content-block name="" message="Study the Agent Connection Diagram" image-link="./views/labs/hdc/images/2.png">
+        <h2 class="labHidden">Study the Agent Connection Diagram</h2>
+        <p>The following figure shows the components in the end-to-end IoT solution and the basic device-side software architecture. The Wind River Host Tools enable you to develop your application on your host computer</p>
+
+        <p>The device initiates the connection with the server and sends device registration information, capabilities, and configuration to the server. The configuration information enables two-way authentication between the server and the device. The server response provides acknowledgment of the device to a specified tenant account. Devices can reregister to advertise updated device capabilities.</p>
+
+        <p>The agent on the device communicates with the server using the DXL (Data Exchange Layer) publish and subscribe message protocol secured with TLS 1.2.</p>
+
+      </div>
+
+      <div content-block name="" message="Check for the HDC Agent Files">
+        <h2 class="labHidden">Check for the HDC Agent Files</h2>
+
+        <p>To ensure the right components are on your device go to folder /opt/intel/ubroker/bin and check contents there. You should see following files there:</p>
+        <ul>
+          <li>agentguid.bin</li>
+          <li>dxlpolicy.bin</li>
+          <li>startup.bin</li>
+          <li>ubroker</li>
+        </ul>
+      </div>
+
+      <div content-block name="" message="Helix Device Cloud Configuration">
+        <h2 class="labHidden">Helix Device Cloud Configuration</h2>
+
+        <p>Log on to https://www.helixdevicecloud.com/ with below credentials.</p>
+        <pre><code>Login: lab_user&#13;&#10;Password: intel123</code></pre>
+        <ul>
+          <li>Verify your device is registered in HDC UI – use MAC address to locate your device</li>
+          <li>Edit the device details to assign a friendly name as shown in the figure</li>
+          <li>Make sure that the device shows online in Status (a tick mark in green)</li>
+          <li>If the agent is not already enabled, go to “Custom Actions” option and select “Enable”</li>
+          <li>Click on the Device ID to get more details on the device properties like the Firmware version, OS version, the telemetry metrics it supports etc. This can be useful during debugging.</li>
+        </ul>
+      </div>
+
+      <div content-block name="" message="Enable the Agent" image-link="./views/labs/hdc/images/3.png">
+        <h2 class="labHidden">Enable the Agent</h2>
+        <ul>
+          <li>If the agent is not already enabled, go to “Custom Actions” option and select “Enable”</li>
+          <li>Click on the Device ID to get more details on the device properties like the Firmware version, OS version, the telemetry metrics it supports etc. This can be useful during debugging.</li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Monitor">
+      <div content-block name="" message="Monitor Device Status" image-link="./views/labs/hdc/images/6.png">
+        <h2 class="labHidden">Monitor Device Status</h2>
+
+        <ul>
+          <li>Initiate remote login sessions from the HDC Portal. You can also connect to the device through a ssh session using it’s IP address.</li>
+
+          <li>To connect to remote login select your device in “DEVICES” tab and then go to “CUSTOM ACTIONS” and select “Remote Login”. This should open another browser where you will see your device prompt.</li>
+        </ul>
+      </div>
+
+      <div content-block name="" message="Monitor Device Status">
+        <h2 class="labHidden">Monitor Device Status</h2>
+        <p>Monitor agent traffic</p>
+        <pre><code>journalctl -u udm-agent -f</code></pre>
+        <pre><code>% ^c (ctrl + c) to exit</code></pre>
+        <p>Diagnostic Tools</p>
+        <pre><code>journalctl -u ubroker -e</code></pre>
+        <pre><code>journalctl -u udm-agent –e</code></pre>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Telemetry Data and Actions">
+      <div content-block name="" message="Monitor Device Status" image-link="./views/labs/hdc/images/6.png">
+        <h2 class="labHidden">Monitor Device Status</h2>
+        <p>This session explains how to send Telemetry and expose device actions on the cloud. We will run the sample fake-boiler-app which is part one of the HDC apps that simulates a real boiler app kind of scenario and sends telemetry data such as temperature, fan status, boiler status etc. to the cloud.</p>
+      </div>
+
+      <div content-block name="" message="Run the Sample Boiler Plate Application to begin generating data">
+        <h2 class="labHidden">Run the Sample Boiler Plate Application to begin generating data</h2>
+        <p>Initiate the remote login and run the sample app from location</p>
+        <pre><code>/opt/hdc-apps/bin/fake-boiler-app</code></pre>
+      </div>
+
+      <div content-block name="" message="Observe the device details" image-link="./views/labs/hdc/images/7.png">
+        <h2 class="labHidden">Run the Sample Boiler Plate Application to begin generating data</h2>
+        <p>On the HDC UI click on the Device ID and below the “Device Details” click on Telemetry Data as shown below. The fake_boiler_datasource lists all the telemetry data that this app exposes to the cloud.</p>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Helix Device Cloud Rules and Alerts">
+      <div content-block name="" message="Objectives">
+        <h2 class="labHidden">Objectives</h2>
+        <p>Create a rule to generate an alert when temperature crosses a certain threshold using the fake boiler app.</p>
+        <ul>
+          <li>The fake boiler app increments the temperature value up to 60 simulating the heating scenario and then decrements it back to 0 to simulate cooling case.</li>
+          <li>Make sure your app is running on the device before you start creating the rule.</li>
+          <li>We will create a simple rule to generate an alert when temperature crosses 55</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Create a New Rule" image-link="./views/labs/hdc/images/8.png">
+        <ul>
+          <li>Go to “RULES” tab and click on “Create New Rule”</li>
+          <li>Give a rule name, for e.g. “temperature alert”</li>
+          <li>Choose your device in option “Apply Rule to these devices” – make sure you select only your device</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Add a condition to the rule" image-link="./views/labs/hdc/images/9.png">
+        <p>Next in section “Add rule conditions” we will add a condition which in our case is temperature exceeding 55. In “Select a telemetry metric” drop down choose “temp”, in “Select operator” drop down choose “greater than” and enter 55 in “Value” box</p>
+
+        <div class="alert alert-info">
+          <p>The “Select a telemetry metric” field will not be available if the fake boiler app is not running on the device!</p>
+        </div>
+
+        <p>Next in section “Add rule responses” there are multiple options on how to respond to a condition. Here we will select option “CREATE AN ALERT”</p>
+        <p>Give Alert Name as “temperature alert”, Priority as “HIGH” and Description as “Temperature above threshold!”</p>
+      </div>
+      <div content-block name="" message="Add a response to the rule" image-link="./views/labs/hdc/images/10.png">
+        <p>Next in section “Add rule responses” there are multiple options on how to respond to a condition. Here we will select option <b>CREATE AN ALERT</b></p>
+        <p>Give Alert Name as “temperature alert”, Priority as “HIGH” and Description as “Temperature above threshold!”</p>
+      </div>
+      <div content-block name="" message="Save the rule" image-link="./views/labs/hdc/images/11.png">
+        <p>Finally click on “SAVE AND ENABLE” to save the Rule.</p>
+
+        <p>The rule which we just created can be seen in “RULES” tab next to “DEVICES” as shown below. It will show the name of the rule, when it was created/modified, affected devices and the actions. Make sure that the Rule Status is “ON”</p>
+      </div>
+      <div content-block name="" message="Watch for new alerts" image-link="./views/labs/hdc/images/12.png">
+        <p>When the temperature goes beyond 55 the Alert gets triggered and you can see in the notification on the top right corner icon as shown below.</p>
+      </div>
+      <div content-block name="" message="View the alert history" image-link="./views/labs/hdc/images/13.png">
+        <p>Going to the “ALERTS” tab also shows the pending alert notifications as shown below.</p>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Service">
+      <div content-block name="" message="Objectives">
+        <h2 class="labHidden">Objectives</h2>
+        <p>We will demonstrate how to send/receive a file to/from the device to your cloud account</p>
+      </div>
+      <div content-block name="" message="Send File to device" image-link="./views/labs/hdc/images/15.png">
+        <ul>
+          <li>To send a dummy file, create a dummy test.txt file on your host machine.</li>
+          <li>On the HDC UI main page go to “DEVICES” tab and check your device box</li>
+          <li>Then go to “STANDARD ACTIONS” drop down and select “Send Files” option</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Select the dummy test.txt file which you created and upload" image-link="./views/labs/hdc/images/16.png">
+        <p>Select the dummy test.txt file which you created and upload it as shown below</p>
+      </div>
+      <div content-block name="" message="Click Send Files" image-link="./views/labs/hdc/images/17.png">
+        <ul>
+          <li>Click “SEND FILES” to send the test.txt file to the device</li>
+          <li>You will immediately see a notification of “Sending Files…” pop up in your notification</li>
+          <li>Then click on the notification icon in right most corner, it should show that the file was transferred successfully to the device</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Check for the presences of the test.txt file">
+        <p>To check if the file is present on the device, on the remote shell, go to folder /opt/hdc/var/download where you should see the test.txt file</p>
+      </div>
+      <div content-block name="" message="Receive File from device" image-link="./views/labs/hdc/images/18.png">
+        <ul>
+          <li>To receive a file from device first put the file, for e.g. sample.txt that needs to be sent to cloud in /opt/hdc/var/upload directory. In our case use the vi editor to generate a dummy file sample.txt in this directory</li>
+
+          <li>Make sure that the file has right permission by doing the following:
+            <pre><code>chmod 644 sample.txt</code></pre>
+          </li>
+
+          <li>Now go to “STANDARD ACTIONS” drop down and select “Retrieve Files” option using which you should be able to receive the file and see in the notification window.</li>
+
+          <li>To download the file to your PC just click on the notification and it will download the tar file. Unzipping it will give the file that you wanted to receive from the device.</li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div ibox title="Manage the Device from Cloud">
+      <div content-block name="" message="Objectives">
+        <p>Manage the device remotely from cloud</p>
+        <ul>
+          <li>It is possible to perform few standard actions and also some custom actions on the device from cloud</li>
+          <li>We have already inspected in earlier lab couple of standard actions like Send/Retrieve files. You can also perform actions like Shutdown/Restart of the device from “STANDARD ACTIONS” drop down in DEVICES tab after selecting your device.</li>
+          <li>To view the list of custom actions for your device select “CUSTOM ACTIONS” drop down in DEVICES tab, one of the actions you will see is “Remote Login”</li>
+        </ul>
+      </div>
+      <div content-block name="" message="Manage the software installed on the device">
+        <!-- 4.2	Manage the software installed on the device
+        Objective: monitor update traffic between the agent and the cloud -->
+        <ul>
+          <li>Login to the device either doing a ssh from your host PC or through the “Remote Login” window</li>
+          <li>Execute this command: <pre><code>journalctl -u udm-agent –f</code></pre></li>
+          <li>Keep this handy for the next exercise</li>
+        </ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div ibox title="Update the Gateway">
+    <div content-block name="" message="Objectives" image-link="./views/labs/hdc/images/20.png">
+      <p>To perform s/w updates to the device remotely from HDC utility</p>
+    </div>
+    <div content-block name="" message="Remote Software Updates">
+      <p>There are two files in a package:</p>
+      <ul>
+        <li>ota_manifest.spec</li>
+        <li>system-update.tar.gz</li>
+      </ul>
+
+      <p>The manifest file has the information on the additional packages which are part of the update and these are in the system-update file.</p>
+
+      <p>These two are combined together to form the myupdate.tar.gz which is the actual file that will be downloaded and then installed on the device.</p>
+
+      <p>Once the package myupdate.tar.gz is available upload it to the HDC server by first selecting your device in DEVICES and then going to “UPDATES” and selecting “Upload Update Files”</p>
+    </div>
+
+    <div content-block name="" message="Select the software update package" image-link="./views/labs/hdc/images/21.png">
+      <p>In the dialog box, select the <b>myupdate.tar.gz</b> file and it will start uploading</p>
+    </div>
+
+    <div content-block name="" message="Verify that the update has been updated and click DONE." image-link="./views/labs/hdc/images/22.png">
+      <p>Once it is uploaded it will show the new version package, click DONE to complete the upload</p>
+    </div>
+
+    <div content-block name="" message="Activate the update on a device" image-link="./views/labs/hdc/images/23.png">
+      <p>Next go back to “UPDATES” and select “Update Device”. If the device is not disabled it will ask to disable the device before doing the update. Click on Disable device to disable it first.</p>
+    </div>
+
+    <div content-block name="" message="Apply the update" image-link="./views/labs/hdc/images/24.png">
+      <p>Next select the update NUC_3.0.0 from “Select an update” drop down and click “APPLY UPDATE”.</p>
+    </div>
+
+    <div content-block name="" message="Notice the Alert indictating that the update has succeeded" image-link="./views/labs/hdc/images/25.png">
+      <p>There will be an alert when the device update is successful.</p>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div ibox title="Decommission">
+    <div content-block name="" message="Disable and Shutdown Your Device" image-link="./views/labs/hdc/images/26.png">
+      <p>In the UI, select your device from the device list and do the following:</p>
+      <ul>
+        <li>Custom Actions -> Disable</li>
+        <li>Custom Actions -> Shutdown</li>
+      </ul>
+    </div>
+    <div content-block name="" message="Disable and Shutdown Your Device" image-link="./views/labs/hdc/images/27.png">
+      <p>Delete the rules you created:</p>
+      <pre><code>Rules -> ‘My Rule’ -> Delete</code></pre>
+
+      <p>The device can be decommissioned by going to “CUSTOM ACTIONS” and selecting decommission_device. After that you will see a notification of success and the device will then reboot.</p>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>

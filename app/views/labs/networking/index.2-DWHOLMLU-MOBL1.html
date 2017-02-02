@@ -1,0 +1,843 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Networking Protocols: WIFI, Bluetooth*, Zigbee*</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>Networking Protocols: WIFI, Bluetooth*, Zigbee*</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+
+          <div ibox title="Bluetooth Low Energy (BLE) Lab: Objectives">
+            <!-- Objectives -->
+            <div content-block name="ble-objectives" message="Read the Objectives">
+<h2 class="labHidden">Read the Objectives</h2>
+              <labels arduino windows apple linux/>
+              <p>In this module, you will use Bluetooth Low Energy (BLE) to send data between your Arduino* 101 and your Intel ®IoT Gateway.</p>
+              <p>By the end of this module, you should be able to:</p>
+
+              <ul>
+                  <li>Enable the Bluetooth Low Energy (BLE) services on Linux.</li>
+                  <li>Turn the Intel® IoT Gateway into a BLE central module using the <strong>noble</strong> NodeJS library.</li>
+                  <li>Turn the Arduino* 101 into a BLE perphiphal using the <strong>bleno</strong> NodeJS library.</li>
+                  <li>Send and receive a single sensor data value over BLE.</li>
+              </ul>
+            </div>
+          </div>
+
+
+          <div ibox title="Set up Bluetooth">
+            <!-- Setup Bluetooth -->
+            <div content-block name="ble-objectives" message="Enable Bluetooth by running the commands above">
+<h2 class="labHidden">Enable Bluetooth by running the commands above</h2>
+
+              <p>Run shell commands on <strong>both</strong> your Arduino* 101 and Intel® IoT Gateway devices to enable the correct Bluetooth Low Energy (BLE) services.</p>
+
+              <ol>
+                <li>
+                  <p>Shell into your Arduino* 101 and run the following commands:</p>
+                  <pre><code>$ rfkill unblock bluetooth
+$ killall bluetoothd
+$ systemctl disable bluetooth
+$ hciconfig hci0 up</code></pre>
+                    <p><img src="./views/labs/networking/images/commands.png" alt=""></p>
+                  </li>
+
+                  <li>
+                    <p>Shell into your Intel® IoT Gateway and run the same commands as above on your Gateway.</p>
+                  </li>
+
+                </ol>
+              </div>
+            </div>
+
+            <!-- Read sensor data over BLE -->
+          <div ibox  title="Read sensor data over Bluetooth Low Energy">
+            <div content-block name="read-sensor-data-over-BLE" message="Plug in sensors to the Intel Arduino* 101"
+            image-link="./views/labs/networking/images/image_2.jpg">
+<h2 class="labHidden">Plug in sensors to the Intel Arduino* 101</h2>
+<img class="labHidden" src="./views/labs/networking/images/image_2.jpg"></img>
+
+              <p>Building off of the <span class="icon bookmark"><a href="../../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Arduino* 101 into a BLE peripheral.</p>
+
+              <ol>
+                <li>
+                  <p>The <strong>Grove Temperature Sensor</strong> should be connected to analog pin <strong>A0</strong>.</p>
+                  <p>And the <strong>Grove LCD</strong> should be connected to any <strong>I2C</strong> pin.</p>
+                </li>
+              </ol>
+            </div>
+
+            <div content-block name="read-sensor-data-over-BLE" message="Create a New Project and use the code this code in Main.js as a starting point">
+<h2 class="labHidden">Create a New Project and use the code this code in Main.js as a starting point</h2>
+              <ol>
+                <li>
+                  <p>Your <span class="fa fa-file">main.js</span> (running on the Arduino* 101) from <span class="icon bookmark">Temperature Sensor and LCD</span> should look like this:</p>
+                </li>
+              </ol>
+              <p class="label">./temperature/main.js</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
+
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+
+function monitor() {
+    setInterval(function() {
+
+        // Read the temperature sensor
+        var celsius = temp.value();
+        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+        // Update the LCD screen
+        screen.setCursor(0, 0);
+        screen.setColor(255, 255, 255);
+        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+
+    }, 1000);
+}
+
+monitor();</pre></ui-codemirror>
+</div>
+
+<div content-block name="add-deps-bleno" message="Add the Bleno dependencies to and packages.json and main.js">
+<h2 class="labHidden">Add the Bleno dependencies to and packages.json and main.js</h2>
+  <p><a href="https://github.com/sandeepmistry/bleno">Bleno</a> is a JavaScript Bluetooth module that can be used with the Arduino* 101.</p>
+  <ol>
+    <li>
+      <p>In your Intel XDK project, open <span class="icon file">package.json</span> and locate the <code>dependencies</code> configuration.</p>
+    </li>
+    <li>
+      <p>Add the <code>bleno</code> NodeJS module to the dependencies list.</p>
+      <p class="label">./package.json</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+  "name": "bluetooth-arduino-101-temp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bleno": "^0.4.0"
+  }
+}</pre></ui-codemirror>
+    </li>
+
+    <li>
+      <p>In <span class="fa fa-file">main.js</span>, add <code>bleno</code> alongside the rest of your module imports.</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_i2clcd");
+
+// Include the libraries for BLE
+var bleno = require('bleno');
+
+// Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0);
+var celsius = null;
+
+// Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);</pre></ui-codemirror>
+    </li>
+  </ol>
+</div>
+
+<div content-block name="declare-references" message="Declare references to the bleno BLE classes">
+<h2 class="labHidden">Declare references to the bleno BLE classes</h2>
+  <ol>
+    <li>
+      <p>Declare references to the bleno BLE classes for <code>PrimaryService</code>, <code>Characteristic</code>, <code>Descriptor</code>.</p>
+
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the libraries for BLE
+  var bleno = require('bleno');
+
+  // Create a new instance of a Grove Temperature Sensor
+  var temp = new groveSensor.GroveTemp(0);
+  var celsius = null;
+
+  // Create a new instance of a Grove RGB LCD screen
+  var screen = new LCD.Jhd1313m1(6, 0x3E, 0x62);
+
+  // Extend the bleno BLE classes
+  var BlenoPrimaryService = bleno.PrimaryService;
+  var BlenoCharacteristic = bleno.Characteristic;
+  var BlenoDescriptor = bleno.Descriptor;
+      </code></pre>
+    </li>
+  </ol>
+</div>
+
+
+<div content-block name="setup-bleno-classes" message="Write classes that Inherit from Bleno">
+<h2 class="labHidden">Write classes that Inherit from Bleno</h2>
+<ol>
+  <li>
+    <p>You will need to inherit from the bleno BLE classes, so add <code>util</code> to your module imports.</p>
+    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the libraries for BLE
+var bleno = require('bleno');
+var util = require('util');</pre></ui-codemirror>
+  </li>
+
+  <li>
+    <p>Use <code>util</code> to extend bleno's <code>PrimaryService</code> and <code>Characteristic</code>.</p>
+    <p><code>TemperatureService()</code> and <code>TemperatureReadCharacteristic()</code> have been defined for you below.</p>
+    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Extend the bleno BLE classes
+var BlenoPrimaryService = bleno.PrimaryService;
+var BlenoCharacteristic = bleno.Characteristic;
+var BlenoDescriptor = bleno.Descriptor;
+
+util.inherits(TemperatureReadCharacteristic, BlenoCharacteristic);
+util.inherits(TemperatureService, BlenoPrimaryService);
+
+function TemperatureService() {
+  TemperatureService.super_.call(this, {
+    uuid: 'ec00',
+    characteristics: [
+      new TemperatureReadCharacteristic()
+    ]
+  });
+}
+
+function TemperatureReadCharacteristic() {
+  TemperatureReadCharacteristic.super_.call(this, {
+    uuid: 'ec01',
+    properties: ['read'],
+    descriptors: [
+      new BlenoDescriptor({
+        uuid: 'ec02',
+        value: 'Temperature Read'
+      })
+    ]
+  });
+}
+
+function monitor() {
+  //...
+}
+
+monitor();</pre></ui-codemirror>
+    </li>
+  </div>
+
+  <div content-block name="setup-bleno-classes" message="Add listeners for the stateChange and advertisingStart">
+<h2 class="labHidden">Add listeners for the stateChange and advertisingStart</h2>
+                        <li>
+                            <p>Finally, add event listeners for the <code>stateChange</code> and <code>advertisingStart</code> bleno BLE events.</p>
+                            <p>The callback function for the <code>stateChange</code> event implements a <code>setInterval()</code> so remove the <code>monitor();</code> statement and the <code>setInterval()</code> from <code>monitor()</code>.</p>
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function monitor() {
+  // Read the temperature sensor
+  celsius = temp.value();
+  var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+  console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+  // Update the LCD screen
+  screen.setCursor(0, 0);
+  screen.setColor(255, 255, 255);
+  screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+}
+
+bleno.on('stateChange', function(state) {
+  if (state == 'poweredOn') {
+    bleno.startAdvertising('temperature', [], function(err) {
+      if (err) {
+        console.log(err);
+      }
+      setInterval(monitor, 1000);
+    });
+  } else {
+    bleno.stopAdvertising();
+  }
+});
+
+bleno.on('advertisingStart', function(err) {
+  if (!err) {
+    console.log('Advertising...');
+    bleno.setServices([
+      new TemperatureService()
+    ]);
+  }
+});</pre></ui-codemirror>
+    </li>
+  </div>
+
+<div content-block name="final-step-bleno" message="Your program should look like the file above">
+<h2 class="labHidden">Your program should look like the file above</h2>
+<p>Your final program should look like the code below</p>
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var bleno = require('bleno');
+var util = require('util');
+var groveSensor = require('jsupm_grove');
+
+
+var BlenoPrimaryService = bleno.PrimaryService;
+var BlenoCharacteristic = bleno.Characteristic;
+var BlenoDescriptor = bleno.Descriptor;
+
+
+util.inherits(TemperatureReadCharacteristic, BlenoCharacteristic);
+util.inherits(TemperatureService, BlenoPrimaryService);
+
+
+var temp = new groveSensor.GroveTemp(0);
+var temperatureValue = null;
+
+
+console.log('Edge Device for Temperature - Peripheral');
+
+
+bleno.on('stateChange', function(state) {
+  if (state == 'poweredOn') {
+    bleno.startAdvertising('temperature', [], function(err) {
+      if (err) {
+        console.log(err);
+      }
+      setInterval(checkTemperature, 100);
+    });
+  } else {
+    bleno.stopAdvertising();
+  }
+});
+
+bleno.on('advertisingStart', function(err) {
+  if (!err) {
+    console.log('Advertising...');
+    bleno.setServices([
+      new TemperatureService()
+    ]);
+  }
+});
+
+
+function TemperatureService() {
+  TemperatureService.super_.call(this, {
+    uuid: 'ec00',
+    characteristics: [
+      new TemperatureReadCharacteristic()
+    ]
+  });
+}
+
+function TemperatureReadCharacteristic() {
+  TemperatureReadCharacteristic.super_.call(this, {
+    uuid: 'ec01',
+    properties: ['read'],
+    descriptors: [
+      new BlenoDescriptor({
+        uuid: 'ec02',
+        value: 'Temperature Read'
+      })
+    ]
+  });
+}
+
+TemperatureReadCharacteristic.prototype.onReadRequest = function(offset, callback) {
+  if (offset) {
+    callback(BlenoCharacteristic.RESULT_ATTR_NOT_LONG, null);
+  } else {
+    if (null != temperatureValue) {
+      var buffer = new Buffer(1);
+      buffer.writeUInt8(temperatureValue, 0);
+      callback(BlenoCharacteristic.RESULT_SUCCESS, buffer);
+    }
+  }
+};
+
+
+function checkTemperature() {
+  temperatureValue = temp.value(); // Temp in Celcius
+}</pre></ui-codemirror>
+</div>
+
+
+    <div content-block name="run-the-bleno-program" message="Build, upload and run the program"
+    image-link="./views/labs/networking/images/peripheral-result.png">
+<h2 class="labHidden">Build, upload and run the program</h2>
+<img class="labHidden" src="./views/labs/networking/images/peripheral-result.png"></img>
+
+        <p>Your final <span class="icon file">main.js</span> should look like the <a href="https://github.com/Vaghesh/Bluetooth-Commercial-IoT-Workshop/blob/master/Temperature-Sensor/EdgeDevices-Peripheral/" target="_blank">final solution on Github</a>.</p>
+        <p>Make sure your changes have been saved and use the buttons at the bottom of the Intel® XDK to: (1) Build, (2) Upload, and (3) Run the application.</p>
+        <p>If successful, you should see the console log output the temperature every 1 second.</p>
+  </div>
+</div>
+
+<div ibox  title="Turn the Intel® IoT Gateway into a BLE central module">
+  <!-- Objectives -->
+  <div content-block name="ble-objectives" message="Read the Objectives">
+<h2 class="labHidden">Read the Objectives</h2>
+
+      <p>Use <a href="https://github.com/sandeepmistry/noble">noble</a>, a NodeJS module, to turn the Intel® IoT Gateway into a BLE central module that will read the temperature data broadcasted from a BLE peripheral (i.e. your Arduino* 101).</p>
+      <ol>
+        <li>
+            <p>Log into your Intel® IoT Gateway.</p>
+        </li>
+
+        <li>
+            <p>Create a new project directory.</p>
+            <p><code>mkdir ble-central</code></p>
+            <p>And change into it.</p>
+            <p><code>cd ble-central</code></p>
+        </li>
+
+        <li>
+            <p>Install <code>noble</code> using NPM.</p>
+            <p><code>npm install noble --save</code></p>
+        </li>
+
+        <li>
+            <p>Create a Node application and name the file <span class="icon file">main.js</span>.</p>
+            <p><code>touch main.js</code></p>
+        </li>
+
+        <li>
+            <p>Use vi to edit <span class="icon file">main.js</span>.</p>
+            <p><code>vi main.js</code></p>
+        </li>
+
+        <li>
+            <p>Press <code>i</code> to insert code using vi.</p>
+            <p>Include the <code>noble</code> NodeJS module at the top of the file.</p>
+            <p><code>var noble = require('noble');</code></p>
+        </li>
+      </ol>
+    </div>
+
+
+    <div content-block name="declare-noble-constanst" message="Declare constants for the BLE service">
+<h2 class="labHidden">Declare constants for the BLE service</h2>
+      <p>Declare constants for the BLE service.</p>
+      <p>These are the <strong>same</strong> UUID's used in the peripheral code that's running on the Arduino* 101.</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var ServiceName = 'temperature';
+var Service_UUID = 'ec00';
+var Characteristic_UUID = 'ec01';
+var TemperatureCharacteristic = null;</pre></ui-codemirror>
+    </div>
+
+    <div content-block name="add-the-temperature-function" message="Add the supplied readTemperature() function to read the temperature value">
+<h2 class="labHidden">Add the supplied readTemperature() function to read the temperature value</h2>
+            <p>Add the supplied <code>readTemperature()</code> function to read the temperature value from the buffer.</p>
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function readTemperature() {
+  TemperatureCharacteristic.read(function(error) {
+    if (error) {
+      clearInterval(readTemperature);
+      console.log(error);
+    }
+  });
+  TemperatureCharacteristic.once('read', function(value) {
+    var celsius = value.readUInt8(0);
+    console.log('Temperature is ' + celsius + '°C');
+  });
+}</pre></ui-codemirror>
+            <p>Note that the buffer offset position is the <strong>same</strong> as the buffer position used in the peripheral code. If you recall, you used <code>buffer.writeUInt8(celsius,0);</code> on the Arduino* 101.</p>
+    </div>
+
+    <div content-block name="handle-service-noble" message="Implement the handleService() function">
+<h2 class="labHidden">Implement the handleService() function</h2>
+
+      <p><code>handleService()</code> will loop through the Bluetooth characteristics sent and look for the one that matches <code>Characteristic_UUID</code> or <strong>'ec01'</strong>.</p>
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function handleService(service) {
+  service.discoverCharacteristics([], function(error, characteristics) {
+    characteristics.forEach(function(characteristic) {
+      console.log('Found Characteristic:', characteristic.uuid);
+      for (var i = 0, l = characteristics.length; i < l; i++) {
+        if (characteristics[i].uuid === Characteristic_UUID) {
+          TemperatureCharacteristic = characteristics[i];
+          setInterval(readTemperature, 1000);
+          break;
+        }
+      }
+    });
+  });
+}</pre></ui-codemirror>
+  </div>
+
+  <div content-block name="handle-service-noble" message="Implement the even listener functions stateChange() and discover() and disconnect()">
+<h2 class="labHidden">Implement the even listener functions stateChange() and discover() and disconnect()</h2>
+    <p>Finally, add event listeners for the <code>stateChange</code>, <code>discover</code>, and <code>disconnect</code> noble BLE events.</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">noble.on('stateChange', function(state) {
+  if (state === 'poweredOn') {
+    noble.startScanning();
+  } else {
+    noble.stopScanning();
+  }
+});
+
+noble.on('discover', function(peripheral) {
+  console.log('Peripheral Name is: ', peripheral.advertisement.localName);
+  if (peripheral.advertisement.localName == ServiceName) {
+    noble.stopScanning();
+    peripheral.connect(function(error) {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      peripheral.discoverServices([], function(error, services) {
+        console.log(services.length, ' services discovered');
+        for (var i = 0, l = services.length; i < l; i++) {
+          var service = services[i];
+          if (Service_UUID == service.uuid) {
+            noble.stopScanning();
+            console.log('Specific service found: ', service.uuid);
+            handleService(service);
+          }
+        }
+      });
+    });
+  }
+});
+
+noble.on('disconnect', function() {
+  console.log('Trying to reconnect');
+  noble.startScanning();
+});</pre></ui-codemirror>
+
+
+      <p>The <code>discover</code> event handler is what looks for the <code>'temperature'</code> service in order to call <code>handleService()</code> when there's a matching service found.</p>
+  </div>
+
+  <div content-block name="run-noble-service" message="Run the BLE service program"
+  image-link="./views/labs/networking/images/central-result.png">
+<h2 class="labHidden">Run the BLE service program</h2>
+<img class="labHidden" src="./views/labs/networking/images/central-result.png"></img>
+
+    <ol>
+        <li>
+            <p>Check that your peripheral app is still running on your Arduino* 101. (e.g. It should still be logging temperature values to the Intel®  XDK console.) Restart if needed.</p>
+        </li>
+
+        <li>
+            <p>Run the BLE central module on the Intel® IoT Gateway as a Node application.</p>
+            <p><code>$ node main.js</code></p>
+        </li>
+
+        <li>
+            <p>If successful, you should see the Intel® IoT Gateway scan for matching Bluetooth services. When the Arduino* 101 is found, it will read the temperature value and output it to the terminal window.</p>
+        </li>
+
+    </ol>
+
+    <!-- <h2>References</h2> -->
+
+
+
+        <p>Building off of the <span class="icon bookmark"><a href="../connect-edge-devices/sensors/index.html">Temperature Sensor and LCD</a></span> Intel® Commercial IoT Workshop exercise, turn your Arduino* 101 into a BLE peripheral.</p>
+
+      </div>
+    </div>
+
+<!--
+    <div ibox  title="Zigbee Communication">
+      <p>In this module, you will learn how to use ZigBee radios to transfer data between your Arduino* 101 and your Intel® IoT Gateway.</p>
+      <p>We will be using XBee's Series 1 (also called XBee 802.15.4) based radios and xbee-api node module to establish communication with XBee devices.</p>
+    </div>
+
+  <div ibox  title="Configuring the XBee devices">
+    <div class="tldr">
+      Before you plug the USB explorer to your computer, make sure you’ve plugged the XBee module on to it.
+    </div>
+    <div>
+      <ol>
+        <li>
+          <p>
+            Launch X-CTU application in your machine.
+            Click on the + sign at the top left corner which opens a window to add XBee devices. Select the COM port on which the
+            XBee device is connected. Leave the settings and click on Finish.
+          </p>
+          <p><img src="./views/labs/networking/images/image_1.png" alt="" ></p>
+        </li>
+        <li>
+          <p>
+            Select the newly loaded module from the left pan and wait for the parameters to load in the right pane.
+            Now change the PAN ID to a unique number between 0 and FFFF so that your devices are in a differerent network from others.
+            Note that this PAN ID should be the same for both the XBee devices.
+          </p>
+          <p><img src="./views/labs/networking/images/image_2.png" alt="" ></p>
+          <p>Next is to create addresses for XBee modules. These values should be unique in you network.
+            Assign value 0 for MY 16-bit source address. Since we have only two ZigBee devices we will use 0 and 1 as addresses.</p>
+            <p>DH and DL are the destination addresses. Leave DH as 0 and set DL to the MY address of the receiving XBee device i.e., 1 in our case.
+            </p>
+          </li>
+
+          <li>
+            <p>Now scroll down the parameters and under Serial Interfacing, select API enabled[1]>
+              <p><img src="./views/labs/networking/images/image_3.png" alt="" ></p>
+            </li>
+            <li>
+              <p>All the changes has to be saved to the device. You can do this either by clicking the pencil icon present
+                at the right of each field or by clicking the pencil icon at the top. Once the changes are saved in the device,
+                the property background will turn from green to blue.</p>
+                <p><img src="./views/labs/networking/images/image_4.png" alt="" ></p>
+              </li>
+
+              <li>
+                <p>Follow same steps for configuring the second XBee device.</p>
+                <p><img src="./views/labs/networking/images/image_5.png" alt="" ></p>
+
+                <p>Here are the example settings for two XBee devices.</p>
+                <table style="width:100%">
+                  <tr>
+                    <th>Setting</th>
+                    <th>Acronym</th>
+                    <th>XBee1</th>
+                    <th>XBee2</th>
+                  </tr>
+                  <tr>
+                    <td>Channel</td>
+                    <td>CH</td>
+                    <td>C</td>
+                    <td>C</td>
+                  </tr>
+                  <tr>
+                    <td>PAN ID</td>
+                    <td>ID</td>
+                    <td>5563</td>
+                    <td>5563</td>
+                  </tr>
+                  <tr>
+                    <td>Destination Address High</td>
+                    <td>DH</td>
+                    <td>0</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>Destination Address Low</td>
+                    <td>DL</td>
+                    <td>1</td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>16-bit Source Address</td>
+                    <td>MY</td>
+                    <td>0</td>
+                    <td>1</td>
+                  </tr>
+                </table>
+              </li>
+
+              <li>
+                <p> Lets do a quick test to check the configuration. First click on the Console icon at the top
+                  right to change the mode from Configuration to Console mode.</p>
+                  <p><img src="./views/labs/networking/images/image_6.png" alt="" ></p>
+                </li>
+
+                <li>
+                  <p>Select the first XBee device and in the console window, click on open to open
+                    the serial port. Under send frames click the + button to create a frame.
+                    Fill the parameters as shown in the image below and click Ok and Add frame.
+                  </p>
+                  <p><img src="./views/labs/networking/images/image_7.png" alt="" ></p>
+                </li>
+                <li>
+                  <p>Select the added frame and click on Send selected frame. You should see a TX Request sent in the Frames log.</p>
+                  <p><img src="./views/labs/networking/images/image_8.png" alt="" ></p>
+                </li>
+              </ol>
+            </div>
+            <p> Now lets write some to send sensor data over XBee.</p>
+
+          </div>
+
+
+
+
+          <div ibox  title="Write an application to send sensor data over ZigBee">
+
+            <p>
+              Write a NodeJS app that reads the temperature value and sends it over ZigBee.
+            </p>
+
+            <p>This application is to be run on an edge device to broadcast the sensor data to the devices in the same ZigBee network.
+            </p>
+
+            <p>
+              In this exercise, you will write a node application that communicates to ZigBee device over serial port.
+              Be sure that you go to the links in the reference section, they'll provide you with the information to do the lab.
+            </p>
+
+            <p>Here are the steps in this exercise:</p>
+
+            <ol>
+              <li>
+                <p>The <strong>Grove Temperature Sensor</strong> should be connected to analog pin <strong>A0</strong>.</p>
+              </li>
+              <li>
+                <p>Create a project named <code>sendDataZigBee</code>.</p>
+              </li>
+              <li>
+                <p>We need to install serialport and xbee-api NPM modules add them to the dependencies section of the <strong>package.json</strong> file.
+                  You can do that using the following commands.</p>
+                  <p><code>$ npm install serialport --save</code></p>
+
+                  <p><code>$ npm install xbee-api --save</code></p>
+
+                  <p>the dependencies in your <code>package.json</code> should look like this.</p>
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
+                    dependencies: {
+                      "serialport": "^2.0.6",
+                      "xbee-api": "^0.4.0"
+                    }</pre></ui-codemirror>
+                  </li>
+                  <li><p>Import the serialport, xbee-api and the <strong>jsupm_grove</strong> packages with the <strong>require</strong> statement.</p>
+
+                    <div>
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                var SerialPort = require('serialport').SerialPort;
+                        var xbee_api = require('xbee-api');
+                        var groveSensor = require('jsupm_grove');
+                      </pre></ui-codemirror>
+                    </div></li>
+                    <li><p>Initialize the temperature sensor. See the <a href="https://software.intel.com/en-us/iot/hardware/sensors/grove-temperature-sensor">temperature sensor documentation</a> on the <a href="http://software.intel.com/iot/">Intel Developer Zone</a>.
+
+                      <div>
+                        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                  // Create the temperature sensor object using AIO pin 0
+                          var temp = new groveSensor.GroveTemp(0);
+                        </pre></ui-codemirror>
+                      </div></p></li>
+                      <li><p>Set API mode, a frame-based method for sending and receiving data to and from a radio's serial UART. See the <a href="https://www.npmjs.com/package/xbee-api">xbee-api module documentation.</a></p>
+                        <div>
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    // Constants for the the hex-numbers of the frame types, command options, status types
+                            var C = xbee_api.constants;
+                            // Set API mode
+                            var xbeeAPI = new xbee_api.XBeeAPI({
+                              api_mode: 1
+                            });
+                          </pre></ui-codemirror>
+                        </div>
+                      </li>
+                      <li>
+                        <p>Initialize serial port with baudrate and set the XBeeAPI parser to parse the receiving frames.</p>
+                        <div>
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    var serialport = new SerialPort("/dev/ttyMFD1", {
+                            baudrate: 9600,
+                            parser: xbeeAPI.rawParser()
+                          });
+                        </pre></ui-codemirror>
+                      </div>
+                    </li>
+
+                    <li><p>On Serial Port open, call the function <code>sendTemperatureData</code> to send temperature data to the gateway.</p>
+
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                  function sendTemperatureData(){
+
+                        var celsius = temp.value();
+                        var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);
+
+                        console.log('Temperature - ', celsius, '°C or ', fahrenheit,'°F');
+
+                        var frame_obj = { // AT Request to be sent to
+                          type: C.FRAME_TYPE.TX_REQUEST_16, // 0x01: TX (Transmit) Request: 16-bit address (802.15.4)
+                          id: 0x01, // optional, nextFrameId() is called per default
+                          destination16: "0000", // MY address of the receiving ZigBee device
+                          options: 0x00, // optional
+                          data: fahrenheit.toString() // Convert Temperature value to ASCII
+                        };
+
+                        serialport.write(xbeeAPI.buildFrame(frame_obj)); // Write frame to Serial Port
+                      };
+                    </pre></ui-codemirror></li>
+
+                    <li><p>On Serial Port open, call the function <code>sendTemperatureData</code> to send temperature data evey 3 secs, to the gateway.</p>
+
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    serialport.on("open", function() {
+                        console.log('serial port opened');
+                        setInterval(sendTemperatureData, 3000);
+                      });
+                    </pre></ui-codemirror></li>
+
+                  </ol>
+                </div>
+
+                  <div ibox >Write an application to read sensor data over ZigBee
+
+                  <div class="tldr">
+                    Write a NodeJS app that reads the temperature value over ZigBee.
+                  </div>
+
+                  <p>This application is to be run on an Intel IoT Gateway to read the sensor data using ZigBee device.
+                  </p>
+
+                  <ol>
+                    <li>
+                      <p>Create a project named <code>readDataZigBee</code>.</p>
+                    </li>
+                    <li>
+                      <p>We need the same serialport and xbee-api NPM modules here.</p>
+                      <p><code>$ npm install serialport --save</code></p>
+
+                      <p><code>$ npm install xbee-api --save</code></p>
+
+                      <p>the dependencies in your <code>package.json</code> should look like this.</p>
+                      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                    dependencies: {
+                        "serialport": "^2.0.6",
+                        "xbee-api": "^0.4.0"
+                      }</pre></ui-codemirror>
+                    </li>
+                    <li><p>Import the serialport and xbee-api packages.</p>
+
+                      <div>
+                        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                        var SerialPort = require('serialport').SerialPort;
+                          var xbee_api = require('xbee-api');
+                        </pre></ui-codemirror>
+                      </div></li>
+
+                      <li><p>Set API mode and open serial port.</a></p>
+                        <div>
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">                          // Constants for the the hex-numbers of the frame types, command options, status types
+                            var C = xbee_api.constants;
+                            // Set API mode
+                            var xbeeAPI = new xbee_api.XBeeAPI({
+                              api_mode: 1
+                            });
+
+                            var serialport = new SerialPort("/dev/ttyMFD1", {
+                              baudrate: 9600,
+                              parser: xbeeAPI.rawParser()
+                            });
+                          </pre></ui-codemirror>
+                        </div>
+                      </li>
+                      <li>
+                        <p>On <code>frame_object</code>, read the data object from the frame.
+                          Convert it to <code>ascii</code> to get the temperature value.</p>
+                          <div>
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
+                              xbeeAPI.on("frame_object", function(frame) {
+                                var temp_value = frame.data.toString('ascii');
+                                console.log("Temperature: ", temp_value, "?F");
+                              });
+                            </pre></ui-codemirror>
+                          </div>
+                        </li>
+
+                      </div> -->
+
+            <div ibox title="Additional Resources">
+              <ul>
+                  <li>
+                    <a href="https://www.npmjs.com/package/noble">Noble Node Package</a>
+                    <a href="http://mqtt.org/">Bleno Node Package</a>
+                    <a href="https://learn.adafruit.com/introduction-to-bluetooth-low-energy/introduction">BLE</a>
+                    <a href="https://learn.sparkfun.com/tutorials/exploring-xbees-and-xctu">Explore XBee</a>
+                    <a href="https://www.npmjs.com/package/xbee-api">XBee Node API</a>
+                    <a href="http://www.digi.com/products/xbee-rf-solutions/xctu-software/xctu">XCTU Software</a>
+                  </li>
+              </ul>
+          </div>
+        </div>
+    </div>
+</div>

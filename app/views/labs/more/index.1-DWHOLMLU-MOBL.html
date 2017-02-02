@@ -1,0 +1,168 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Additional Information</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a>Labs</a>
+      </li>
+      <li class="active">
+        <strong>Additional Information</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <!-- Objective -->
+      <div ibox title="Objective">
+
+        <div content-block name="write-mongoosejs-models" message="Define the sensor schema in ./schema/sensor.js">
+<h2 class="labHidden">Define the sensor schema in ./schema/sensor.js</h2>
+          <h4>Write Mongoose JS Models to Access MongoDB</h4>
+
+          <p>MongooseJS is an schema-based solution to model MongoDB database objects.  It allows you to easily create, validate, save, update and remove items from your MongoDB.  Everything in MongooseJS starts with a schema.  After a schema is defined it can be used to create a Model, which is the object you will use in your program to access the database.</p>
+
+          <p>If you have any questions be sure you consult the <a href="http://mongoosejs.com/docs/guide.html">The MongooseJS User Guide</a>.</p>
+
+          <p>Let's build a schema for a sensor with the following data types:</p>
+
+          <ul>
+            <li>id : String</li>
+            <li>name : String</li>
+            <li>description : String</li>
+            <li>maxfrequency : Number</li>
+            <li>active : Boolean</li>
+            <li>ioType String.</li>
+          </ul>
+
+          <div>
+            <p class="label">schema/sensorSchema.js</p>
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mongoose = require('mongoose');
+var sensorSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  maxfrequency: {
+    type: Number,
+    required: true
+  },
+  frequency: {
+    type: Number,
+    required: true
+  },
+  active: {
+    type: Boolean,
+    required: true
+  },
+  ioType: {
+    type: String,
+    required: true
+  }
+});
+
+module.exports = sensorSchema;</pre></ui-codemirror>
+            </div>
+
+              <p>Save this code in the file <code>sensorSchema.js</code> in the <code>schema</code> directory.</p>
+            </div>
+
+            <div content-block name="schema-actuator" message="Define the actuator schema in ./schema/actuator.js">
+<h2 class="labHidden">Define the actuator schema in ./schema/actuator.js</h2>
+              <p>Here are the rest of the fields for the other types. Please, define them in a similar manner to the <code>sensorSchema</code>.</p>
+              <li>
+                <p>Define an actuator schema in <code>schema/actuatorSchema.js</code></p>
+                <ul>
+                  <li>id : String</li>
+                  <li>name : String</li>
+                  <li>description : String</li>
+                  <li>maxfrequency : Number</li>
+                  <li>active : Boolean</li>
+                  <li>ioType : String</li>
+                </ul>
+              </li>
+            </div>
+
+            <div content-block name="schema-data" message="Define the Data schema in ./schema/data.js ">
+<h2 class="labHidden">Define the Data schema in ./schema/data.js </h2>
+              <li>
+                <p>Define sensor data schema in <code>schema/dataSchema.js</code></p>
+                <ul>
+                  <li>sensor_id: String</li>
+                  <li>value: Number</li>
+                  <li>timestamp: Date</li>
+                </ul>
+              </li>
+            </div>
+
+            <div content-block name="schema-trigger" message="Define the Trigger schema in ./schema/trigger.js ">
+<h2 class="labHidden">Define the Trigger schema in ./schema/trigger.js </h2>
+              <li>
+                <p>Define a Trigger schema in <code>schema/triggerSchema.js</code></p>
+                <ul>
+                  <li>id: String. Holds a unique value for the iot network event</li>
+                  <li>name: String. A name for the iot network event</li>
+                  <li>sensor_id: String. A reference to the sensor that will trigger this event</li>
+                  <li>actuator_id: String. A reference to the actuator that will be activated</li>
+                  <li>condition: String. A JavaScript function that returns true or false</li>
+                  <li>triggerFunc: String. A JavaScript function that is executed when the condition is true.</li>
+                  <li>active: Boolean. If true this Iot Network Event can be triggered, otherwise it is inactive</li>
+                </ul>
+              </li>
+            </div>
+
+            <div content-block name="schema-error" message="Define the Error schema in ./schema/error.js ">
+<h2 class="labHidden">Define the Error schema in ./schema/error.js </h2>
+              <li>
+                <p>Define a schema for error in <code>schema/errorSchema.js</code></p>
+                <ul>
+                  <li>type: String</li>
+                  <li>message: String</li>
+                  <li>timestamp: Date</li>
+                </ul>
+              </li>
+            </div>
+
+            <div content-block name="create-schema-interface-file" message="Create a Module Interface for the Edge Network Objects">
+<h2 class="labHidden">Create a Module Interface for the Edge Network Objects</h2>
+              <h4>Create a Module Interface for the Edge Network Objects</h4>
+              <p>In this section there are two goals.  First, we need to package these schemas into a JavaScript module that can be exported and used by other JavaScript Projects. Second, each schema object needs to be coverted into a Model object that can be used to access the database.</p>
+
+              <p>Write this code to <code>/index.js</code> at the root level of this project.</p>
+              <p class="label">./index.js</p>
+              <div><ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mongoose = require('mongoose');
+var SensorSchema = require('./schema/sensorSchema.js');
+var ActuatorSchema = require('./schema/actuatorSchema.js');
+var TriggerSchema = require('./schema/triggerSchema.js');
+var DataSchema = require('./schema/dataSchema.js');
+var ErrorSchema = require('./schema/errorSchema.js');
+
+module.exports = {
+  SensorModel: mongoose.model('SensorModel', SensorSchema),
+  ActuatorModel: mongoose.model('ActuatorModel', ActuatorSchema),
+  DataModel: mongoose.model('DataModel', DataSchema),
+  TriggerModel: mongoose.model('TriggerModel', TriggerSchema),
+  ErrorModel: mongoose.model('ErrorModel', ErrorSchema)
+};</pre></ui-codemirror>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>

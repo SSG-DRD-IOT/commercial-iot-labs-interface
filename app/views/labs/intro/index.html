@@ -1,0 +1,315 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Introduction to the Intel® IoT Gateway</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a>Labs</a>
+      </li>
+      <li class="active">
+        <strong>Introduction</strong>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <!-- Objective -->
+      <div ibox title="Objectives">
+        <div content-block name="read-objectives" message="Read the Objectives">
+          <h2 class="labHidden">Read the Objectives</h2>
+
+          <labels gateway edison windows/>
+          <p>Get off to a good start by making sure your computer, Intel® Edison, and Intel® IoT Gateway are ready for IoT development.</p>
+
+          <p>By the end of this module, you should be able to:</p>
+
+          <ul>
+            <li>Connect to your Intel® IoT Gateway from your development computer</li>
+            <li>Unbox and setup your Intel® Edison Hardware</li>
+            <li>Connect to your Intel® Edison from your development computer using a serial connection.</li>
+            <li>Connect your Intel® Edison to your Intel® IoT Gateway's hotspot</li>
+            <li>Deploy an application to your Intel® Edison using the Intel® XDK</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Login to your Intel IoT Gateway -->
+      <div ibox  title="Connect to your development computer to your Intel® IoT Gateway">
+        <div content-block name="find-mac-address" message="Find your Gateway's MAC address" image-link="./views/labs/intro/images/gateway-mac-address.jpg">
+    <h2 class="labHidden">Find your Gateway's MAC address</h2>
+    <img class="labHidden" src="./views/labs/intro/images/gateway-mac-address.jpg"></img>
+          <labels gateway/>
+
+          <p>Establish an SSH connection and login to your Intel® IoT Gateway using <span class="icon windows">PuTTY</span>.</p>
+          <p>Check the side of your Intel® IoT Gateway. There is a tab located just next to the power jack. Pull on the tab to expose the gateway's product numbers and MAC address.</p>
+
+          <div class="alert alert-warning" role="alert">
+            <span>The last four characters of the WIRELESS MAC address will be used in the gatway's network SSID</span>
+          </div>
+        </div>
+
+        <div content-block name="find-gateway-wifi" message="Connect to your Gateway's Wi-Fi Hotspot SSID" image-link="./views/labs/intro/images/wifi-name.png">
+    <h2 class="labHidden">Connect to your Gateway's Wi-Fi Hotspot SSID</h2>
+    <img class="labHidden" src="./views/labs/intro/images/wifi-name.png"></img>
+
+          <p>From your development computer, connect to your Gateway's network hotspot. It will start with the letters <b>IDPDK</b> and then end with the last four characters of your MAC address.</p>
+
+          <div class="alert alert-info" role="alert">
+            <p>The default password to your Wi-Fi network is <b>windriveridp</b></p>
+          </div>
+        </div>
+
+        <div content-block name="find-gateway-wifi" message="Download and connect to your Gateway with a terminal client (PuTTY)" image-link="./views/labs/intro/images/download-putty.png">
+    <h2 class="labHidden">Download and connect to your Gateway with a terminal client (PuTTY)</h2>
+    <img class="labHidden" src="./views/labs/intro/images/download-putty.png"></img>
+
+          <labels gateway windows/>
+
+          <div class="alert alert-warning" role="alert">
+            <p>Windows does not come with a built-in terminal emulator so download and use the PuTTY client.</p>
+          </div>
+
+          <ol>
+            <li>Visit the <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY download page</a>.</li>
+            <li>Under the "For Windows on Intel x86" heading, click on the "putty.exe" link to download the latest release version to your computer.</li>
+
+            <li>Double-click <span class="icon file">putty.exe</span> on your computer to launch <span class="icon windows">PuTTY</span>.</p>
+              <p>The IP address of the Intel IoT Gateway is <code>192.168.1.1</code>.</li>
+
+
+            <li>You can login with the username <b>root</b> and the password <b>root</b>.</li>
+          </ol>
+          <div id="next-steps" class="alert alert-success">
+            <p>You should now be logged into the Intel® IoT Gateway.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unbox and Setup your Intel® Edison Hardware -->
+      <div ibox title="Setup your Intel® Edison Hardware">
+        <labels edison></labels>
+
+        <div content-block name="intro-place-edison" message="Insert the Intel Edison onto the Arduino expansion board" image-link="./views/labs/intro/images/place-edison.png">
+    <h2 class="labHidden">Insert the Intel Edison onto the Arduino expansion board</h2>
+    <img class="labHidden" src="./views/labs/intro/images/place-edison.png"></img>
+          <p>Place the Intel® Edison module within the white outline on the Arduino expansion board, lining up the holes on the Intel® Edison module with the screws on the expansion board.</p>
+        </div>
+
+        <div content-block name="intro-press" message="Be sure that you have pressed the Intel Edison down firmly and felt a click." image-link="./views/labs/intro/images/press-edison.png">
+    <h2 class="labHidden">Be sure that you have pressed the Intel Edison down firmly and felt a click.</h2>
+    <img class="labHidden" src="./views/labs/intro/images/press-edison.png"></img>
+          <p>Press down on the Intel® Edison module just below the words "What will you make?" until you feel a snap.</p>
+          <div class="alert alert-warning">Caution: Unless you make sure your board is seated properly, it may not work or turn on at all. When you turn the attached module and expansion board on their side, both pieces should fit evenly and sit in parallel with each other.</div>
+        </div>
+
+        <div content-block name="intro-hex-bolts" message="Secure the Intel Edison to the Arduino board with the mini hex bolts" image-link="./views/labs/intro/images/nut-edison.png">
+    <h2 class="labHidden">Secure the Intel Edison to the Arduino board with the mini hex bolts</h2>
+    <img class="labHidden" src="./views/labs/intro/images/nut-edison.png"></img>
+              <p>Use the two hex nuts to secure the module to the expansion board. Hand tighten (but not too tight).</p>
+        </div>
+
+        <!-- Install the Spacers -->
+        <div content-block name="install-spacers" message="Install the plastic spacers" image-link="./views/labs/intro/images/spacer.png">
+    <h2 class="labHidden">Install the plastic spacers</h2>
+    <img class="labHidden" src="./views/labs/intro/images/spacer.png"></img>
+
+          <p>To add stability to the expansion board and to help avoid accidental short circuits, attach the four plastic spacers supplied in your Intel® Edison box to act as "legs" for the expansion board.</p>
+
+          <ol>
+            <li>In one of the four holes in the corner of the Arduino expansion board, insert a screw through the top.</li>
+            <li>Twist and tighten one of the white plastic spacers onto the screw. The spacer should be on the bottom of the expansion board to act as legs.</li>
+            <li>Repeat for the remaining three screws and spacers.</li>
+          </ol>
+        </div>
+
+        <div content-block name="connect-edison" message="Connect 2 USB cables between the Intel Edison and your development computer and boot the Intel Edison" image-link="./views/labs/intro/images/connect-edison.jpg">
+    <h2 class="labHidden">Connect the cables between the Intel Edison and your development computer and boot the Intel Edison</h2>
+    <img class="labHidden" src="https://software.intel.com/sites/default/files/did_feeds_images/ede08869-dd67-4ac5-a530-3078328837d4/ede08869-dd67-4ac5-a530-3078328837d4-imageId=e87270b4-c56c-4f38-8c71-5ebe0d335358.jpg"></img>
+
+          <p>Connect your development computer to the Intel® Edison using the supplied micro-USB cables.</p>
+          <p>Connect your Intel® Edison to your computer as described below.</p>
+            <ol>
+              <li>(1) <strong>microswitch</strong> in "USB device mode" (i.e. toggled <strong><em>down</em></strong> towards the micro-USB ports)</li>
+              <li>(2) <strong>device mode micro-USB cable</strong> plugged into your computer</li>
+              <li>(3) <strong>UART/serial micro-USB cable</strong> plugged into your computer</li>
+              <li>(4) <strong>External power supply connected</strong> plugged in the power outlet</li>
+              <li>The Arduino expansion board for Intel® Edison can be powered via the DC power jack, the device mode micro-USB port, or both. Since we will be using actuators that demand more power from the board than the USB is likely to provide, we will be using the external supply.</li>
+            </ol>
+        </div>
+
+        <div content-block name="intro-green-light" message="Be sure the green light is on" image-link="./views/labs/intro/images/green-light.png">
+    <h2 class="labHidden">Be sure the green light is on</h2>
+    <img class="labHidden" src="./views/labs/intro/images/green-light.png"></img>
+          <div class="alert alert-warning">
+            <p>When your computer is plugged in you will see a green light. <b>Some laptops do not output sufficient power for the Intel Edison. In cases where there is not enough power, the Intel Edison board may start and then reboot in a loop.</b></p>
+          </div>
+        </div>
+
+        <div content-block name="intro-booting-completed" message="Intel Edison has booted">
+    <h2 class="labHidden">Intel Edison has booted</h2>
+
+              <p>Wait one minute for the Intel® Edison to finish booting up.</p>
+              <div class="alert alert-info" role="alert">
+                <p><strong>How do you know when the board is ready?</strong></p>
+                <p>You will know that the Intel® Edison is fully initialized when your computer mounts a new drive (much like inserting a SD card into your computer).</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Setup your Intel® Edison Software -->
+      <div ibox title="Setup your Intel® Edison Software">
+
+        <div content-block name="download-software" message="Download the Intel® Edison Software Development Tools" image-link="./views/labs/intro/images/download-installer.png">
+    <h2 class="labHidden">Download the Intel® Edison Software Development Tools</h2>
+    <img class="labHidden" src="./views/labs/intro/images/download-installer.png"></img>
+              <labels edison></labels>
+          <p>Go to the <a href="https://software.intel.com/en-us/iot/software/installers">software download page</a> for the Intel® Edison. The developer tools are available for Windows, MacOS and Ubuntu. Select the download that corresponds to your computer.</p>
+        </div>
+
+        <div content-block name="start-installer" message="Double-click on the installer file on your computer to begin installation." image-link="./views/labs/intro/images/installer-splash.png">
+    <h2 class="labHidden">Double-click on the installer file on your computer to begin installation.</h2>
+    <img class="labHidden" src="./views/labs/intro/images/installer-splash.png"></img>
+          <p>Start the installation process.</p>
+
+        </div>
+
+        <div content-block name="installer-options" message="Select the Intel® Edison drivers, flash the latest firmware and install the Intel® XDK development environment." image-link="./views/labs/intro/images/setup.png">
+    <h2 class="labHidden">Select the Intel® Edison drivers, flash the latest firmware and install the Intel® XDK development environment.</h2>
+    <img class="labHidden" src="./views/labs/intro/images/setup.png"></img>
+          <p>The default settings can be adjusted to your needs, or leave the defaults as is.</p>
+          <p>In the component selection screen, check the options you would like to install:</p>
+          <ul>
+            <li>Drivers: Installs the Intel® Edison drivers and FTDI serial drivers for Windows.</li>
+            <li>Update image: Flashes the latest firmware image directly on your Intel® Edison. (Note: You will not be able to use this option until after you have installed the drivers. Re-run the integrated installer if you wish to use it to flash Intel®
+              Edison firmware.)</li>
+            <li>
+              <div class="alert alert-info" role="alert">
+                <p>You have the option to install several development environments. In this workshop, we will be using the Intel XDK. Feel free to install the others though, if you wish.</p>
+              </div>
+            </li>
+            </ol>
+            <p>When done, click “Finish” to close the installation wizard.</p>
+            <p>If there are any errors during installation, you will need to resolve them manually.</p>
+        </div>
+
+        <div content-block name="restart-computer" message="Restart Your Development Computer" image-link="./views/labs/intro/images/reset.png">
+    <h2 class="labHidden">Restart Your Development Computer</h2>
+    <img class="labHidden" src="./views/labs/intro/images/reset.png"></img>
+          <p>To ensure driver installation changes take effect, </b>reboot your Windows computer</b> at this point.</p>
+          <p>Based on your version of Windows, select the option to fully shut down and restart your computer.</p>
+        </div>
+
+        <div content-block name="open-device-manager" message="Open Your Device Manager">
+    <h2 class="labHidden">Open Your Device Manager</h2>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Windows 7 and below:</p>
+              <ol>
+                <li>Open Start menu.</li>
+                <li>Type “device manager” in the search field.</li>
+                <li>Select "Device Manager" under "Control Panel"</li>
+              </ol>
+              <img src="./views/labs/intro/images/win7-device-manager.png"></img>
+            </div>
+            <div class="col-sm-6">
+              <p>Windows 8 and Windows 10</p>
+              <ol>
+                <li>Go into Windows Desktop mode.</li>
+                <li>Right-click on the Start menu button.</li>
+                <li>Select "Device Manager".</li>
+              </ol>
+              <img src="./views/labs/intro/images/win8-device-manager.png"></img>
+            </div>
+          </div>
+        </div>
+
+        <div content-block name="confirm-composite-and-virtual-drivers" message="Confirm Intel Edison USB Composite Device and Intel Edison Virtual Com Port.">
+    <h2 class="labHidden">Confirm Intel Edison USB Composite Device and Intel Edison Virtual Com Port.</h2>
+
+          <p>In Device Manager, locate and toggle open <b>Ports (COM & LPT)</b>.</p>
+          <img style="max-width: 400px" src="./views/labs/intro/images/comport.png"></img>
+          <div class="alert alert-info">
+            <p>The Intel® Edison drivers for Windows include several USB drivers in one installer package. These drivers enable important features, such as: </p>
+            <ul>
+              <li>Composite Device Class (CDC) for programming the board via the Arduino IDE,</li>
+              <li>Remote Network Driver Interface Spec (RNDIS) for Ethernet over USB, and</li>
+              <li>Device Firmware Upgrade (DFU) for updating firmware on devices.</li>
+            </ul>
+          </div>
+          <p>Connect a micro-USB cable to the device mode micro-USB port of the Intel® Edison expansion board, and the other end to your computer.</p>
+          <img src="./views/labs/intro/images/plug-it-in.png"></img>
+          <div class="alert alert-success">
+            <p>If you see both "Intel Edison USB Composite Device" and "Intel Edison Virtual Com Port" items show up in Device Manager under “Ports (COM & LPT)”, the drivers have been successfully installed.</p>
+            <img style="max-width:50%" src="./views/labs/intro/images/coms.png"></img>
+          </div>
+        </div>
+
+        <div content-block name="confirm-ftdi-drivers" message="Confirm installation of FTDI serial drivers">
+    <h2 class="labHidden">Confirm installation of FTDI serial drivers</h2>
+
+          <p>
+            FTDI CDM drivers allow your computer to communicate with USB serial devices, including the Intel® Edison.
+          </p>
+          <img src="./views/labs/intro/images/power.png" />
+          <p>
+            Power the Intel® Edison via the device mode micro-USB port and/or via the power barrel connector.
+          </p>
+          <img src="./views/labs/intro/images/plug-it-in2.png" />
+          <p>
+            Connect a micro-USB cable to the serial micro-USB port of the Intel® Edison and the other end to your computer.
+          </p>
+          <div class="alert alert-success">
+            <p>If you see "USB Serial Port" show up in Device Manager under “Ports (COM & LPT)”, the drivers have been successfully installed.</p>
+            <img src="./views/labs/intro/images/coms2.png" style="max-width: 50%" />
+          </div>
+        </div>
+
+        <div content-block name="set-a-device-name" message="Set a Device Password and Name" image-link="./views/labs/intro/images/set-a-device-password-and-name.png">
+    <h2 class="labHidden">Set a Device Password and Name</h2>
+    <img class="labHidden" src="./views/labs/intro/images/set-a-device-password-and-name.png"></img>
+          <p>
+            Continue to the Password Set and SSH section of the installer.
+            Set a hostname for your Intel Edison.
+          </p>
+        </div>
+
+        <div content-block name="set-a-device-password" message="Set a Device Password and Name" image-link="./views/labs/intro/images/ssh-set-password.png">
+    <h2 class="labHidden">Set a Device Password and Name</h2>
+    <img class="labHidden" src="./views/labs/intro/images/ssh-set-password.png"></img>
+          <p>
+            Continue to the Password Set and SSH section of the installer.
+            Set a password for your Intel Edison.
+          </p>
+        </div>
+
+        <div content-block name="connect-to-wifi" message="Connect the Intel Edison to your Intel IoT Gateway WiFi" image-link="./views/labs/intro/images/setup-options.png">
+    <h2 class="labHidden">Connect the Intel Edison to your Intel IoT Gateway WiFi</h2>
+    <img class="labHidden" src="./views/labs/intro/images/setup-options.png"></img>
+          <p>
+            Connect the Intel Edison to the WiFi hotspot from your Intel IoT Gateway.
+
+            <div class="alert alert-info">
+              Remember that you can find the SSID that your Intel IoT Gateway is broadcasting by looking at the MAC address of your Gateway.
+            </div>
+          </p>
+        </div>
+      </div>
+
+      <!-- Additional Resources -->
+      <div ibox title="Additional resources">
+          <ul>
+            <li><a href="https://software.intel.com/en-us/intel-xdk-iot-edition-troubleshooting-faq">Troubleshooting &amp; Tips - Intel XDK</a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
