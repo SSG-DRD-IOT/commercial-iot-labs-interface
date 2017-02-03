@@ -31,18 +31,35 @@
                 </div>
             </div>
 
-            <div ibox title="Start node-red before continuing">
-              <div content-block name="start-node-red" message="Start node-red before continuing">
-                <div class="alert alert-warning"><p>In the previous exercise, we have stopped Node-red. We should now restart it to continue,</p>
-                    <p>In a terminal connected to your Gateway, type the command `systemctl start node-red-experience`</p>
+            <div ibox title="Overview of Node-Red Service on the Intel IoT Gateway">
+              <div content-block name="start-node-red" message="Be sure that you know how to start and stop the node-red-experience service" image-link="./views/labs/protocols/images/node-red-experience-running.png">
+                <div class="alert alert-info">
+                  <p>Knowing how to start and stop the node-red-experience service will help tremendously in troubleshooting problems that may arise while developing.</p>
                 </div>
+                <p>Open a console to the Intel IoT Gateway and type the following:</p>
+                <pre><code>systemctl status node-red-experience</code></pre>
+                <p>If you see green text that says, "active (running)" then the Node-Red service is running</p>
+                <p>If Node-Red is not running on your gateway then type: </p>
+                <pre><code>systemctl start node-red-experience</code></pre>
+                <p>This will begin the node-red service.</p>
+              </div>
+
+              <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols/images/node-red-experience-off.png">
+                <div class="alert alert-info">
+                  <p>If you are developing using the Intel XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
+                  <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I2C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
+
+                </div>
+                <pre><code>systemctl stop node-red-experience</code></pre>
+                <p>This will turn off the node-red service.</p>
               </div>
             </div>
 
+
             <div ibox title="Node-Red Flow: Temperature to LCD">
-                <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/build-nuc/images/temperature-sensors.jpg">
+                <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/temperature-sensors.jpg">
                     <h2 class="labHidden">Install the Grove base shield and sensors</h2>
-                    <img class="labHidden" src="https://software.intel.com/sites/default/files/managed/d9/66/image_2.jpg"></img>
+                    <img class="labHidden" src=""></img>
 
                     <ol>
                         <li>
@@ -56,170 +73,7 @@
                         </li>
                     </ol>
                 </div>
-
-                <div content-block name="first-flow" message="Create a Node-Red Flow that connects your temperature sensor to your LCD" image-link="./views/labs/dev-hub/images/31.png">
-                    <h2 class="labHidden">Create a Node-Red Flow that connects your temperature sensor to your LCD</h2>
-                    <p><img class="labHidden" alt="first flow" data-fid="503932" src="https://software.intel.com/sites/default/files/managed/6a/6d/first_flow.png" title="first flow" typeof="foaf:Image"></p>
-
-                    <p>Open the Node-Red Editor</p>
-
-                    <p>Change a Node-Red flow like the one shown here.</p>
-                    <ol>
-                        <li>Use the existing <b>Grove Temp Sensor</b> node from the previous exercises.</li>
-                        <li>Search for the <b>Function</b> node in the function Function section and connect it to the Grove Temp Sensor.</li>
-                        <li>Use the existing <b>Grove LCD</b> node and connect it to the Function.</li>
-                    </ol>
-                    <p>NOTE: The nodes are listed to the left of the workspace and you will have to scroll down to find all the nodes you need..</p>
-                </div>
-
-                <div content-block name="first-flow" message="Configure your Grove Temperature Node">
-                  <p>Assure your temperature node has the following parameters:</p>
-                  <ul>
-                    <li>Name:Grove Temperature</li>
-                    <li>Platform: Firmata</li>
-                    <li>Pin: A1</li>
-                    <li>Unit: Celsius</li>
-                    <li>Interval(ms): 1000</li>
-                  </ul>
-                </div>
-
-                <div content-block name="first-flow" message="Customize your Function Node">
-                    <h2 class="labHidden">Customize your Function Node</h2>
-                    <p>Double click the function node and enter the following code:</p>
-
-
-<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var r_val = 0;
-var r_val = 0;
-var g_val = 0;
-var b_val = 0;
-
-// Ask the instructor about a bug in the voltage reading on the temperature sensor
-msg.payload = 3/5 * msg.payload
-
-if (msg.payload >= 25) {
-  r_val = 255;
-  g_val = 0;
-  b_val = 0;
-} else if (msg.payload <= 20) {
-  r_val = 0;
-  g_val = 0;
-  b_val = 255;
-} else {
-  r_val = 0;
-  g_val = 255;
-  b_val = 0;
-}
-
-msg.payload = String(Math.round(msg.payload)) + " C"
-msg.lcdColor = {
-  "r": r_val,
-  "g": g_val,
-  "b": b_val,
-}
-
-msg.lcdCursor = {
-    row: 1,
-    column: 1,
-}
-
-return msg;
-</pre></ui-codemirror>
-
-                            <div class="alert alert-warning">
-                                <p>Click OK and then click deploy in the top right corner</p>
-                            </div>
-                </div>
-
-                <div content-block name="first-flow" message="Configure your Grove LCD Node">
-                  <p>Configure you LCD node with the following parameters:</p>
-                  <ul>
-
-                    <li>Name - Blank</li>
-                    <li>Platform - Firmata</li>
-                    <li>R,G,B, Cursor Row, Cursor Column - Leave these blank</li>
-                  </ul>
-                </div>
-
-
-                <div content-block name="protocol-deploy" message="Click the Deploy button and watch the temperature appear on the LCD screen">
-                    <h2 class="labHidden">Click the Deploy button and watch the temperature appear on the LCD screen</h2>
-                    <p>Click on the Deploy button and Node-Red will activate the flow that was just built.</p>
-                </div>
-
-                <div content-block name="first-flow" message="Learn to export your Node-Red Flow">
-                    <h2 class="labHidden">Learn to export your Node-Red Flow</h2>
-                    <p>Any flow in Node-RED can be exported / imported as a JSON object. To create the JSON, select the nodes you wish to export, and select Export -> Clipboard from the drop down menu. The code for the above flow is displayed below. To import
-                        it into your work space copy the text, hit Ctrl-I in the Node-RED workspace and paste the text in. This method provides a simple way to share your flows with other developers.</p>
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
-   {
-      "id":"bb262fa2.18c21",
-      "type":"upm-grove-temperature",
-      "z":"4072485.59502b8",
-      "name":"",
-      "platform":"512",
-      "unit":"F",
-      "pin":"1",
-      "interval":1000,
-      "x":108.5,
-      "y":240,
-      "wires":[
-         [
-            "a83804b3.09f158"
-         ]
-      ]
-   },
-   {
-      "id":"fdb1ed02.95f0f",
-      "type":"debug",
-      "z":"4072485.59502b8",
-      "name":"",
-      "active":true,
-      "console":"false",
-      "complete":"false",
-      "x":561.5,
-      "y":270,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"a83804b3.09f158",
-      "type":"function",
-      "z":"4072485.59502b8",
-      "name":"Switch Color on Temperature",
-      "func":"var r_val = 0;\nvar g_val = 0;\nvar b_val = 0;\n\n// Ask the instructor about a bug in the voltage reading on the temperature sensor\nmsg.payload = 3/5 * msg.payload\n\nif (msg.payload >= 25) {\n  r_val = 255;\n  g_val = 0;\n  b_val = 0;\n} else if (msg.payload <= 20) {\n  r_val = 0;\n  g_val = 0;\n  b_val = 255;\n} else {\n  r_val = 0;\n  g_val = 255;\n  b_val = 0;\n}\n\nmsg.payload = String(Math.round(msg.payload)) + \" C\"\nmsg.lcdColor = {\n  \"r\": r_val,\n  \"g\": g_val,\n  \"b\": b_val, \n}\n\nmsg.lcdCursor = {\n    row: 0,\n    column: 0,\n}\n\nreturn msg;",
-      "outputs":1,
-      "noerr":0,
-      "x":336.5,
-      "y":334,
-      "wires":[
-         [
-            "635f249e.4799dc",
-            "fdb1ed02.95f0f"
-         ]
-      ]
-   },
-   {
-      "id":"635f249e.4799dc",
-      "type":"upm-grove-rgb-lcd",
-      "z":"4072485.59502b8",
-      "name":"",
-      "platform":"512",
-      "r":0,
-      "g":0,
-      "b":"0",
-      "row":1,
-      "column":1,
-      "x":640.5,
-      "y":465,
-      "wires":[
-
-      ]
-   }
-]</pre></ui-codemirror>
-
-          </div>
-        </div>
+              </div>
 
           <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT ">
             <labels gateway/>
@@ -279,6 +133,9 @@ return msg;
                 <li><b>debug</b> node from the output section</li>
               </ul>
               <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console in node-red.</p>
+              <div class="alert alert-warning">
+                <p>In the next section, we will be build a Restful HTTP service that will control the output of the LCD screen.  At that point, we will delete the flow on the bottom that uses MQTT to update the LCD screeen.</p>
+              </div>
             </div>
 
             <div content-block name="protocol-assign-pins" message="Configure the nodes">
@@ -289,14 +146,14 @@ return msg;
 
                 <ul>
                   <li>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic:</li>
-                  <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="https://software.intel.com/sites/default/files/managed/4b/6c/mqtt_edit_1.png" title="mqtt edit" typeof="foaf:Image"></p>
-                  <li>Enter the ip address of the gateway 192.168.1.1 and 1883 as the port:</li>
-                  <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="https://software.intel.com/sites/default/files/managed/0f/e7/mqtt_edit_2.png" title="mqtt edit" typeof="foaf:Image"></p>
+                  <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="" title="mqtt edit" typeof="foaf:Image"></p>
+                  <li>Enter the ip address of the gateway 192.168.1.1 and 1880 is the port number if you are using MQTT. If you are using MQTT-TLS then the port number should be 1883.</li>
+                  <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="" title="mqtt edit" typeof="foaf:Image"></p>
                 </ul>
-
+              </ol>
             </div>
             <div content-block name="" message="Take Note of the JSON format that you will need to create for this and future labs.">
-              <h2>Configure a Function Node to create the JSON format for the labs</h2>
+              <h2 class="labHidden">Configure a Function Node to create the JSON format for the labs</h2>
 
               <div class="alert alert-info">
                 <p>For future labs, it is very important that the JSON that we create has the correct properties.  The JSON format should have 3 properties.</p>
@@ -312,7 +169,7 @@ return msg;
               <p>Double click the function node and name is <strong>JSONify</strong> and add the following code:</p>
               <ui-codemirror ui-codemirror-opts="editorOptions ">msg.payload = {
     sensor_id: "temperature",
-    value: Math.floor(msg.payload) * 3/5,
+    value: Math.floor(msg.payload),
     timestamp: Date.now(),
 }
 return msg;</pre></ui-codemirror>
@@ -398,7 +255,7 @@ return msg;</pre></ui-codemirror>
       "type":"mqtt-broker",
       "z":"",
       "broker":"localhost",
-      "port":"1883",
+      "port":"1880",
       "clientid":"",
       "usetls":false,
       "verifyservercert":true,
@@ -436,7 +293,7 @@ return msg;</pre></ui-codemirror>
       "type":"function",
       "z":"4072485.59502b8",
       "name":"JSONify",
-      "func":"msg.payload = {\n    sensor_id: \"temperature\",\n    value: String(Math.floor(msg.payload) * 3/5),\n    timestamp: Date.now(),\n}\nreturn msg;",
+      "func":"msg.payload = {\n    sensor_id: \"temperature\",\n    value: Math.floor(msg.payload)),\n    timestamp: Date.now(),\n}\nreturn msg;",
       "outputs":1,
       "noerr":0,
       "x":366.5,
@@ -533,9 +390,8 @@ return msg;</pre></ui-codemirror>
 <!-- Restful API -->
 
             <div ibox title="Node-Red Flow: RESTful API to control LCD screen">
-                <div content-block name="node-red-http-intro" message="Create Node-RED flow that controls the LCD screen with a web request">
-                    <h2 class="labHidden">Create Node-RED flow that controls the LCD screen with a web request</h2>
-                    <h3>Create Node-RED flow that controls the LCD screen with a web request.</h3>
+                <div content-block name="node-red-http-intro" message="Create Node-RED flow that creates a Restful HTTP API to control the LCD screen">
+                    <h2 class="labHidden">Create Node-RED flow that creates a Restful HTTP API to control the LCD screen</h2>
 
                     <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
                 </div>

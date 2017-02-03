@@ -80,7 +80,7 @@
               </div>
             </div>
 
-            <div ibox collapse title="Create the Temperature on LCD sample in the Intel® System Studio IoT Edition">
+            <div ibox title="Create the Temperature on LCD sample in the Intel® System Studio IoT Edition">
               <div content-block name="iss-new-project" message="Create a new Intel IoT Project" image-link="./views/labs/sensors-c/images/iss-new-project.png">
                 <p>Open Intel System Studio and click on New -> Intel Project for IoT</p>
               </div>
@@ -95,6 +95,10 @@
 
               <div content-block name="iss-new-project-64" message="Select Intel IoT C/C++ project" image-link="./views/labs/sensors-c/images/iss-new-project-language.png">
                 <p>Select the Intel IoT C/C++ Project</p>
+              </div>
+
+              <div content-block name="iss-new-project-ip" message="Select Intel IoT C/C++ project" image-link="./views/labs/sensors-c/images/iss-new-project-ip.png">
+                <p>Enter the IP address or the hostname of you Intel IoT Gateway.</p>
               </div>
 
               <div content-block name="iss-new-project-64" message="Select the sample temperature on LCD application" image-link="./views/labs/sensors-c/images/iss-new-project-sample.png">
@@ -126,6 +130,22 @@
                   <li>Click on the Add button that is to the right</li>
                   <li>type <b>upm-jhd1313m1</b></li>
                   <li>Press <b>OK</b> until you are back at the main interface</li>
+                </ol>
+              </div>
+
+              <div content-block name="iss-new-project-gateway-platform" message="Add the LCD Driver library to the project" image-link="./views/labs/sensors-c/images/iss-new-project-gateway-platform.png">
+                <p>Even thought this sample project is generate for a menu of example programs, there are a couple of changes that we need to make to get it running on the gateway.</p>
+                <p>First, we need to add the Intel IoT Gateway to the list of platforms that are checked in the beginning of this program.</p>
+                <p><b>Replace lines 124-131 with the following code.</b></p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// check that we are running on Galileo or Edison
+  mraa::Platform platform = mraa::getPlatformType();
+  if ((platform != mraa::INTEL_GALILEO_GEN1) &&
+      (platform != mraa::INTEL_GALILEO_GEN2) &&
+      (platform != mraa::INTEL_EDISON_FAB_C) &&
+      (platform != mraa::INTEL_DE3815)) {
+    std::cerr << "Unsupported platform, exiting" << std::endl;
+    return mraa::ERROR_INVALID_PLATFORM;
+  }</pre></ui-codemirror>
               </div>
 
               <div content-block name="iss-new-project-64" message="Clean and Build the Project" image-link="./views/labs/sensors-c/images/iss-new-project-build.png">
