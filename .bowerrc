@@ -1,5 +1,3 @@
 {
-  "directory": "bower_components",
-  "proxy": "http://proxy-jf.intel.com:911",
-  "https-proxy":"http://proxy-jf.intel.com:911"
+  "directory": "bower_components"
 }
