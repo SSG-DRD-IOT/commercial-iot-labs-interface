@@ -423,7 +423,7 @@ monitor();</pre></ui-codemirror>
 
                         <li>
                             <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
-                            <p><code>var LCD = require('jsupm_i2clcd');</code></p>
+                            <p><code>var LCD = require('jsupm_jhd1313m1');</code></p>
                         </li>
 
                         <li>
@@ -465,7 +465,7 @@ monitor();</pre></ui-codemirror>
                             <p>Below is an example of the final solution.</p>
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
-var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove Temperature Sensor
+var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove Temperature Sensor
 var temp = new groveSensor.GroveTemp(0); // Create a new instance of a Grove RGB LCD screen
 var screen = new LCD.Jhd1313m1(0, 0x3E, 0x62);
 
@@ -532,7 +532,7 @@ monitor();</pre></ui-codemirror>
                     <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">"use strict";
 var accelerometer = require("jsupm_mma7660");
 var accel = new accelerometer.MMA7660(0, 76),
-    screen = new(require("jsupm_i2clcd").Jhd1313m1)(6, 0x3E, 0x62); // enable 64 samples every 10 seconds
+    screen = new(require("jsupm_jhd1313m1").Jhd1313m1)(6, 0x3E, 0x62); // enable 64 samples every 10 seconds
 accel.setModeStandby();
 accel.setSampleRate(10);
 accel.setModeActive();
@@ -680,87 +680,70 @@ main();</pre></ui-codemirror>
                 </div>
             </div>
 
-            <div ibox title="Additional resources">
+            <div ibox collapse title="Additional resources">
+                <p>Information, community forums, articles, tutorials and more can be found at the <a href="https://software.intel.com/iot">Intel Developer Zone</a>.</p>
                 <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
 
-                <h4>Grove Temperature Sensor</h4>
-
+                <h4>Sensors and Actuators APIs - UPM API Doxygen Reference</h4>
                 <ul>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a>
-                    </li>
-                    <li>
-                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a>
-                    </li>
+                  <li><a href="https://iotdk.intel.com/docs/master/upm/">C++ Sensor/Actuator API libmraa (v1.5.1) and UPM (v1.0.2)</a></li>
+                  <li><a href="https://iotdk.intel.com/docs/master/upm/java/">Java Sensor/Actuator API libmraa (v1.5.1) and UPM (v1.0.2)</a></li>
+                  <li><a href="https://iotdk.intel.com/docs/master/upm/python/">Python Sensor/Actuator API libmraa (v1.5.1) and UPM (v1.0.2)</a></li>
+                  <li><a href="https://iotdk.intel.com/docs/master/upm/node/">NodeJS Sensor/Actuator API libmraa (v1.5.1) and UPM (v1.0.2)</a></li>
+                </ul>
+
+
+                <h4>Information on Sensors and Actuators</h4>
+                <ul>
+                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2">Seeed Studio Wiki: Grove Temperature Sensor</a></li>
+                  <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods">UPM API - GroveTemp</a></li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/c%2B%2B/grovetemp.cxx">UPM C++ example: Grove Temperature Sensor</a></li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js">UPM JavaScript example: Grove Temperature Sensor</a></li>
+                </ul>
+
+
+                <h4>Grove Temperature Sensor</h4>
+                <ul>
+                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" >Seeed Studio Wiki: Grove Temperature Sensor</a></li>
+                  <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" >UPM API - GroveTemp</a></li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/c%2B%2B/grovetemp.cxx" >UPM C++ example: Grove Temperature Sensor</a></li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" >UPM JavaScript example: Grove Temperature Sensor</a></li>
                 </ul>
 
                 <h4>Grove LCD RGB Backlight</h4>
-
                 <ul>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" target="_blank">Seeed Studio Wiki: LCD RGB Backlight</a>
-                    </li>
-                    <li>
-                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">UPM API - i2clcd</a>
-                    </li>
-                    <li>
-                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">UPM API - Jhd1313m1</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/jhd1313m1-lcd.js" target="_blank">UPM JavaScript example: RGB LCD</a>
-                    </li>
+                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" ``>Seeed Studio Wiki: LCD RGB Backlight</a></li>
+                  <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" >UPM API - i2clcd</a></li>
+                  <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" >UPM API Doxygen - Jhd1313m1</a></li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/c%2B%2B/jhd1313m1-lcd.cxx" >UPM API - Jhd1313m1</a></li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/jhd1313m1-lcd.js" >C++ example: RGB LCD</a></li>
                 </ul>
-
+            <!--
                 <h4>Accelerometer</h4>
                 <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js">UPM JavaScript example: Accelerometer</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_3-Axis_Digital_Accelerometer(%C2%B11.5g)">Seeed Studio Wiki: 3-Axis Digital Accelerometer</a>
-                    </li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/c%2B%2B/mma7660.cxx">UPM C++ example: Accelerometer</a></li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js">UPM JavaScript example: Accelerometer</a></li>
+                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_3-Axis_Digital_Accelerometer(%C2%B11.5g)">Seeed Studio Wiki: 3-Axis Digital Accelerometer</a></li>
                 </ul>
 
                 <h4>Rotary Angle Sensor</h4>
                 <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">UPM JavaScript example: Rotary Angle Sensor</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">Seeed Studio Wiki: Rotary Angle Sensor</a>
-                    </li>
-                </ul>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">UPM JavaScript example: Rotary Angle Sensor</a></li>
+                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">Seeed Studio Wiki: Rotary Angle Sensor</a><li>
+                </ul> -->
 
                 <h4>Grove Button</h4>
                 <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">UPM JavaScript example: Grove Button</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Button">Seeed Studio Wiki: Grove Button</a>
-                    </li>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">UPM JavaScript example: Grove Button</a></li>
+                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Button">Seeed Studio Wiki: Grove Button</a></li>
                 </ul>
 
-                <h4>Grove Buzzer</h4>
+                <!-- <h4>Grove Buzzer</h4>
                 <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">UPM JavaScript example: Buzzer</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">Seeed Studio Wiki: Grove Buzzer</a>
-                    </li>
-                </ul>
-
-                <h4>JavaScript Libraries</h4>
-                <ul>
-                    <li><a href="http://expressjs.com/starter/hello-world.html">Express Hello World</a></li>
-                    <li><a href="http://momentjs.com/docs/">MomentJS</a></li>
-                </ul>
-            </div>
-        </div>
+                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">UPM JavaScript example: Buzzer</a></li>
+                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">Seeed Studio Wiki: Grove Buzzer</a></li>
+                </ul> -->
+            </div>        </div>
     </div>
   </div>
 </div>
