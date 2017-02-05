@@ -390,154 +390,29 @@ return msg;</pre></ui-codemirror>
 <!-- Restful API -->
 
             <div ibox title="Node-Red Flow: RESTful API to control LCD screen">
-                <div content-block name="node-red-http-intro" message="Create Node-RED flow that creates a Restful HTTP API to control the LCD screen">
-                    <h2 class="labHidden">Create Node-RED flow that creates a Restful HTTP API to control the LCD screen</h2>
+              <div content-block name="node-red-http-intro" message="Read the objective of this section of the lab">
+                <h2 class="labHidden">Create Node-RED flow that creates a Restful HTTP API to control the LCD screen</h2>
 
-                    <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
-                </div>
+                <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
+              </div>
 
-                <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create a new flow" image-link="./views/labs/protocols/images/http-text-color-apis.png">
-                    <h2 class="labHidden">Open Node Red Flow Editor and create a new flow</h2>
+              <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create a new flow" image-link="./views/labs/protocols/images/http-text-color-apis.png">
+                <h2 class="labHidden">Open Node Red Flow Editor and create a new flow</h2>
 
-                    <p>The
-                    <h3>Open Node Red Flow Editor and create a new flow</h3>
+                <p>The
+                <h3>Open Node Red Flow Editor and create a new flow</h3>
 
-                    <p>Each API defined in this new Node-Red flow will contains the following nodes:</p>
-                    <ul>
-                      <li>http input</li>
-                      <li>function</li>
-                      <li>http output</li>
-                      <li>debug</li>
-                      <li>Grove RGB LCD</li>
-                    </ul>
-                </div>
+                <p>Each API defined in this new Node-Red flow will contains the following nodes:</p>
+                <ul>
+                  <li>http input</li>
+                  <li>function</li>
+                  <li>http output</li>
+                  <li>debug</li>
+                  <li>Grove RGB LCD</li>
+                </ul>
+              </div>
 
-                <div content-block name="restful-api-edit-node-red-flow" message="Configure Node Red modules" image-link="./views/labs/protocols/images/image_4.png ">
-                    <h2 class="labHidden">Configure Node Red modules</h2>
-                    <h3>Configure Node Red modules</h3>
 
-                    <p>Configure Node Red modules for http input to read POST request and display on LCD. As a response we will send LCD text message back.</p>
-                    <ul>
-                      <li><strong>http input</strong>
-                        <ul>
-                          <li>Method - POST</li>
-                          <li>URL - /lcd</li>
-                          <li>Name - http-request </li>
-                        </ul>
-                      </li>
-                      <li><strong>function</strong>
-                        <ul>
-                          <li>Name - FormatOutput</li>
-                          <li>Function - <code>msg.lcdColor = {r: msg.payload.r, g: msg.payload.g, b: msg.payload.b};</code><br>
-                            <code>msg.lcdCursor = {row: 1, column: 0};</code><br>
-                            <code>msg.payload = msg.payload.text;</code><br>
-                            <code>return msg;</code>
-                          </li>
-                          <li>Outputs - 1</li>
-                        </ul>
-                      </li>
-                      <li><strong>http output</strong>
-                        <ul>
-                          <li>Name - http-response</li>
-                        </ul>
-                      </li>
-
-                      <li><strong>debug</strong>
-                      </li>
-                      <li><strong>Grove RGB LCD</strong>
-                        <ul>
-                          <li>Name - Grove LCD</li>
-                          <li>Platform -  Firmata</li>
-                          <li>R - 0 </li>
-                          <li>G - 0</li>
-                          <li>B - 0</li>
-                          <li>Cursor Row - 0 </li>
-                          <li>Cursor Platform - 0</li>
-                        </ul>
-                      </li>
-                    </ul>
-                    <p> After configuration click on Deploy button on top right corner.</p>
-                    <p>You can also import the following json object to Node-Red flow Editor if you don't want to configure each node.
-                       Copy following json object, open Menu > Import > Library and paste in dialog box. And then you will see the node-red flow and click on Deploy.</p>
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
-   {
-      "id":"325d98a.77aba68",
-      "type":"function",
-      "z":"762907d1.3f20b8",
-      "name":"FormatOutput",
-      "func":"msg.lcdColor = {r: msg.payload.r, g: msg.payload.g, b: msg.payload.b};\nmsg.lcdCursor = {row: 1, column: 0};\nmsg.payload = msg.payload.text;\nreturn msg;",
-      "outputs":1,
-      "noerr":0,
-      "x":304.5,
-      "y":262,
-      "wires":[
-         [
-            "d0d1cae3.521868",
-            "4a3a09d3.a796a8",
-            "5e30ae27.7341e"
-         ]
-      ]
-   },
-   {
-      "id":"93f0dc83.71764",
-      "type":"http in",
-      "z":"762907d1.3f20b8",
-      "name":"http-request",
-      "url":"/lcd",
-      "method":"post",
-      "swaggerDoc":"",
-      "x":75,
-      "y":261,
-      "wires":[
-         [
-            "325d98a.77aba68"
-         ]
-      ]
-   },
-   {
-      "id":"d0d1cae3.521868",
-      "type":"upm-grove-rgb-lcd",
-      "z":"762907d1.3f20b8",
-      "name":"",
-      "platform":"512",
-      "r":0,
-      "g":0,
-      "b":255,
-      "row":0,
-      "column":0,
-      "x":549,
-      "y":169,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"4a3a09d3.a796a8",
-      "type":"debug",
-      "z":"762907d1.3f20b8",
-      "name":"",
-      "active":true,
-      "console":"false",
-      "complete":"false",
-      "x":562,
-      "y":274,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"5e30ae27.7341e",
-      "type":"http response",
-      "z":"762907d1.3f20b8",
-      "name":"http-response",
-      "x":566,
-      "y":402,
-      "wires":[
-
-      ]
-   }
-]</pre> </ui-codemirror>
-                </div>
 
                 <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">
                     <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
