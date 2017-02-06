@@ -1,79 +1,72 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Application Protocols: MQTT and HTTP</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a>Labs</a>
-            </li>
-            <li class="active">
-                <strong>Application Protocols: MQTT and HTTP</strong>
-            </li>
-        </ol>
-    </div>
+   <div class="col-lg-10">
+      <h2>Application Protocols: MQTT and HTTP</h2>
+      <ol class="breadcrumb">
+         <li>
+            <a href="index.html">Home</a>
+         </li>
+         <li>
+            <a>Labs</a>
+         </li>
+         <li class="active">
+            <strong>Application Protocols: MQTT and HTTP</strong>
+         </li>
+      </ol>
+   </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <!-- Objective -->
-            <div ibox title="Objective">
-                <div content-block name="read-objectives" message="Read the Objectives">
-                    <h2 class="labHidden">Read the Objectives</h2>
-                    <p>In this lab, we will explore using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
-                    <ol>
-                      <li>Build a data flow that sends information from the temperature sensors to the LCD screen.</li>
-                      <li>Build a data flow that sends information from the temperature sensor to an MQTT broker on the gateway</li>
-                      <li>Build a data flow that receives Restful HTTP requests and changes the state of the LCD screen</li>
-                    </ol>
-                </div>
+   <div class="row">
+      <div class="col-lg-12">
+         <!-- Objective -->
+         <div ibox title="Objective">
+            <div content-block name="read-objectives" message="Read the Objectives">
+               <h2 class="labHidden">Read the Objectives</h2>
+               <p>In this lab, we will explore using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
+               <ol>
+                  <li>Build a data flow that sends information from the temperature sensors to the LCD screen.</li>
+                  <li>Build a data flow that sends information from the temperature sensor to an MQTT broker on the gateway</li>
+                  <li>Build a data flow that receives Restful HTTP requests and changes the state of the LCD screen</li>
+               </ol>
             </div>
+         </div>
 
-            <div ibox title="Overview of Node-Red Service on the Intel IoT Gateway">
-              <div content-block name="start-node-red" message="Be sure that you know how to start and stop the node-red-experience service" image-link="./views/labs/protocols/images/node-red-experience-running.png">
-                <div class="alert alert-info">
-                  <p>Knowing how to start and stop the node-red-experience service will help tremendously in troubleshooting problems that may arise while developing.</p>
-                </div>
-                <p>Open a console to the Intel IoT Gateway and type the following:</p>
-                <pre><code>systemctl status node-red-experience</code></pre>
-                <p>If you see green text that says, "active (running)" then the Node-Red service is running</p>
-                <p>If Node-Red is not running on your gateway then type: </p>
-                <pre><code>systemctl start node-red-experience</code></pre>
-                <p>This will begin the node-red service.</p>
-              </div>
 
-              <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols/images/node-red-experience-off.png">
-                <div class="alert alert-info">
-                  <p>If you are developing using the Intel XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
-                  <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I2C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
-
-                </div>
-                <pre><code>systemctl stop node-red-experience</code></pre>
-                <p>This will turn off the node-red service.</p>
-              </div>
+        <div ibox title="Overview of Node-Red Service on the Intel IoT Gateway">
+          <div content-block name="start-node-red" message="Be sure that you know how to start and stop the node-red-experience service" image-link="./views/labs/protocols/images/node-red-experience-running.png">
+            <div class="alert alert-info">
+              <p>Knowing how to start and stop the node-red-experience service will help tremendously in troubleshooting problems that may arise while developing.</p>
             </div>
+            <p>Open a console to the Intel IoT Gateway and type the following:</p>
+            <pre><code>systemctl status node-red-experience</code></pre>
+            <p>If you see green text that says, "active (running)" then the Node-Red service is running</p>
+            <p>If Node-Red is not running on your gateway then type: </p>
+            <pre><code>systemctl start node-red-experience</code></pre>
+            <p>This will begin the node-red service.</p>
+          </div>
+
+          <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols/images/node-red-experience-off.png">
+            <div class="alert alert-info">
+              <p>If you are developing using the Intel XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
+              <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I2C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
+
+            </div>
+            <pre><code>systemctl stop node-red-experience</code></pre>
+            <p>This will turn off the node-red service.</p>
+          </div>
+        </div>
 
 
-            <div ibox title="Node-Red Flow: Temperature to LCD">
-                <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/temperature-sensors.jpg">
-                    <h2 class="labHidden">Install the Grove base shield and sensors</h2>
-                    <img class="labHidden" src=""></img>
+        <div ibox title="Node-Red Flow: Temperature to LCD">
+          <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/temperature-sensors.jpg">
 
-                    <ol>
-                        <li>
-                            <p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p>
-                        </li>
-                        <li>
-                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
-                        </li>
-                        <li>
-                            <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
-                        </li>
-                    </ol>
-                </div>
-              </div>
+            <ol>
+              <li><p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p></li>
+              <li><p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p></li>
+              <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p></li>
+            </ol>
+          </div>
+        </div>
 
           <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT ">
             <labels gateway/>
@@ -226,13 +219,12 @@ return msg;</pre></ui-codemirror>
 
               <p>When you are done configuring the nodes hit deploy</p>
               <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the IoT device is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
-                <p> If you do not see the output in the debug window:</p>
-                <ul>
-                  <li>Make sure the you can see the debug window - you  might have to expand it by dragging the right side of the workspace to the center.</li>
-                  <li>Make sure that the debug tab is selected in the upper right</li>
-                  <li>Click the tab to the right of the debug node - called msg.payload in your flow</p></li>
-
-
+              <p> If you do not see the output in the debug window:</p>
+              <ul>
+                <li>Make sure the you can see the debug window - you  might have to expand it by dragging the right side of the workspace to the center.</li>
+                <li>Make sure that the debug tab is selected in the upper right</li>
+                <li>Click the tab to the right of the debug node - called msg.payload in your flow</p></li>
+              </ul>
             </div>
 
 
@@ -246,10 +238,10 @@ return msg;</pre></ui-codemirror>
             </div>
 
 
-                <div content-block name="node-red-flow2-solution" message="Check out the solution to this exercise">
-                    <h2 class="labHidden">Check out the solution to this exercise</h2>
-                    <h5>Flow Source Code</h5>
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
+            <div content-block name="node-red-flow2-solution" message="Check out the solution to this exercise">
+                <h2 class="labHidden">Check out the solution to this exercise</h2>
+                <h5>Flow Source Code</h5>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
    {
       "id":"1dc1405c.26a96",
       "type":"mqtt-broker",
@@ -394,14 +386,23 @@ return msg;</pre></ui-codemirror>
                 <h2 class="labHidden">Create Node-RED flow that creates a Restful HTTP API to control the LCD screen</h2>
 
                 <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
+                <p>The Restful API will define 6 API endpoints that will allow you to control the display on the LCD</p>
+
+                <div class="alert alert-info">
+                  <p>The six APIs are defined as follows:</p>
+                  <table class="table-mail">
+                    <tr><td><b>GET</b></td><td>/lcd/color</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
+                    <tr><td><b>POST</b></td><td>/lcd/color</td><td>Set a new color to display on the LCD</td></tr>
+                    <tr><td><b>DELETE</b></td><td>/lcd/color</td><td>Turn the LCD backlight off</td></tr>
+                    <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
+                    <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new color to display on the LCD</td></tr>
+                    <tr><td><b>DELETE</b></td><td>/lcd/text</td><td>Clear text on LCD</td></tr>
+                  </table>
+                </div>
               </div>
 
-              <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create a new flow" image-link="./views/labs/protocols/images/http-text-color-apis.png">
-                <h2 class="labHidden">Open Node Red Flow Editor and create a new flow</h2>
-
-                <p>The
-                <h3>Open Node Red Flow Editor and create a new flow</h3>
-
+              <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create 6 new flows" image-link="./views/labs/protocols/images/http-text-color-apis.png">
+                <p>Note that the picture on the left only shows the 3 flows for the LCD COLOR API.  You need to create an additional 3 flows for the LCD TEXT API.</p>
                 <p>Each API defined in this new Node-Red flow will contains the following nodes:</p>
                 <ul>
                   <li>http input</li>
@@ -412,262 +413,77 @@ return msg;</pre></ui-codemirror>
                 </ul>
               </div>
 
+              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols/images/lcdcolor.png">
+                <p>Open the <b>HTTP Input</b> node in the first three flows and set the URL to /lcd/color</p>
+              </div>
+
+              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols/images/lcd-firmata.png">
+                <p>Open the <b>Grove RGB LCD</b> node and set the platform to <b>firmata</b>.</p>
+              </div>
+
+              <div content-block message="Insert code into the GET /lcd/color flow's function node">
+                <p>Open the <b>Function</b> node in the GET /lcd/color flow and insert the following code:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+              </div>
+
+              <div content-block message="Insert code into the POST /lcd/color flow's function node">
+                <p>Open the <b>Function</b> node in the POST /lcd/color flow and insert the following code:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+              </div>
+
+              <div content-block message="Insert code into the DELETE /lcd/color flow's function node">
+                <p>Open the <b>Function</b> node in the DELETE /lcd/color flow and insert the following code:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+              </div>
+
+              <div content-block message="Insert code into the GET /lcd/text flow's function node">
+                <p>Open the <b>Function</b> node in the GET /lcd/text flow and insert the following code:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+              </div>
+
+              <div content-block message="Insert code into the POST /lcd/text flow's function node">
+                <p>Open the <b>Function</b> node in the POST /lcd/text flow and insert the following code:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+              </div>
+
+              <div content-block message="Insert code into the DELETE /lcd/text flow's function node">
+                <p>Open the <b>Function</b> node in the DELETE /lcd/text flow and insert the following code:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+              </div>
+            </div>
 
 
-                <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">
-                    <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
-                    <p><img class="labHidden" alt="postman website" data-fid="503944" src="https://software.intel.com/sites/default/files/managed/96/7a/postman_website.png" title="postman website" typeof="foaf:Image"></p>
+          <div ibox title="Testing Your Restful HTTP API">
+            <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">
+                <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
+                <p><img class="labHidden" alt="postman website" data-fid="503944" src="https://software.intel.com/sites/default/files/managed/96/7a/postman_website.png" title="postman website" typeof="foaf:Image"></p>
 
-                    <h5> Install Postman </h5>
-                    <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
-                    <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
+                <h5> Install Postman </h5>
+                <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
+                <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
 
-                    <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
-                </div>
-
-                <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/images/image_5.png">
-                    <h2 class="labHidden">Use PostMan to send an HTTP request</h2>
-                    <p><img class="labHidden" alt="postman" data-fid="503945" src="https://software.intel.com/sites/default/files/managed/d7/9f/postman.png" title="postman" typeof="foaf:Image"></p>
-
-                    <h5>Use Postman to send web request </h5>
-                    <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
-                    <ul>
-                        <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 1880 with the URL specified above. In this case it is <code>192.168.11.4:1880/lcd</code></li>
-                        <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and your gateway password in Password field. </li>
-                        <li>The /lcd  require specific JSON objects to control the LCD screen. /lcd requires JSON with:
-                            <b>{"r":"r_value","g":"g_value","b":"b_value","text":"LCD_Text"}</b> where r_value, g_value, and b_value are the the r,g,b values from 0-255. LCD_Text is the text which should be displayed on LCD.
-
-                        <li>To have Postman send a request with this syntax slect the "Body" tab, click the "raw" radial button, and select JSON from the dropdown menu. Now enter the JSON specifed above entering the color values and message you wish to display.
-                            When you are ready hit "Send". The example to the right shows how to send a r=0,g=255,b=0,text=Hello  JSON to /lcd.</li>
-
-                    </ul>
-                </div>
+                <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
+            </div>
 
 
+            <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/images/postman.png">
+                <h5>Use Postman to send web request </h5>
+                <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
+                <ul>
+                  <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 1880 with the URL specified above.</li>
+                  <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and enter your gateway password in Password field. </li>
+                  <li>The /lcd/color API  can be passed a RGB value like this.
+                    <pre><code>http://{{hostname}}:1880/lcd/color?r=128&g=255&b=255</code></pre>
+                  </li>
+                </ul>
+            </div>
 
-
-<!--
-            <div ibox title="Node-Red Flow: RESTful API to control LCD screen">
-                <div content-block name="node-red-http-intro" message="Create Node-RED flow that controls the LCD screen with a web request">
-                    <h2 class="labHidden">Create Node-RED flow that controls the LCD screen with a web request</h2>
-                    <h3>Create Node-RED flow that controls the LCD screen with a web request.</h3>
-
-                    <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
-                </div>
-
-                <div content-block name="create-http-flow" message="Create Node-RED flow that controls the LCD screen with a web request" image-link="./views/labs/protocols/images/restful_flow_1.png">
-                    <h2 class="labHidden">Create Node-RED flow that controls the LCD screen with a web request</h2>
-                    <p><img class="labHidden" alt="restful flow" data-fid="503937" src="https://software.intel.com/sites/default/files/managed/5d/ef/restful_flow_1.png" title="restful flow" typeof="foaf:Image"></p>
-
-                    <h2>Create POST API flow</h2>
-                    <p>Create a node-red flow like the one shown here using the:</p>
-                    <p>
-                        <ul>
-                            <li><b>inject</b> node under the input section, configure the node to send a boolean true signal and check the box for "inject once at start". The node name will chage to "true". Connect the output from this node to the:</li>
-                            <li><b>function</b> node under the fucntion section. Configure the fucntion node to contain:
-
-                                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">global.set("lcd_r", 0);
-global.set("lcd_g", 0);
-global.set("lcd_b", 0);
-global.set("lcd_text", "");
-                                </pre></ui-codemirror>
-                            </li>
-                        </ul>
-
-                        <p>Now you will create the POST method for the LCD backlight control.</p>
-                        <ul>
-                            <li><b>http</b> node under the input section. Configure this node to have "POST" as the method and "/lcd/backlight" as the URL. Connect this node to the:</li>
-                            <li><b>http response</b> under the output section. Also connect the http node from the previous step to the:</li>
-                            <li><b>function</b> node under the function section. Configure this node to contain:
-                                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">global.set("lcd_r", msg.payload.r);
-global.set("lcd_g", msg.payload.g);
-global.set("lcd_b", msg.payload.b);
-msg.payload.text = global.get("lcd_text");
-return msg;</pre></ui-codemirror>
-                                Connect this node to the:
-                            </li>
-                            <li><b>grove lcd</b> node under the Intel_gpio section</li>
-                        </ul>
-                    </p>
-
-                    <p>Now you will create the POST method for the LCD text control.</p>
-                    <ul>
-                        <li><b>http</b> node under the input section. Configure this node to have "POST" as the method and "/lcd/text" as the URL. Connect this node to the:</li>
-                        <li><b>http response</b> under the output section. Also connect the http node from the previous step to the:</li>
-                        <li><b>function</b> node under the function section. Configure this node to contain:
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">global.set("lcd_text", msg.payload.text);
-msg.payload.r = global.get("lcd_r");
-msg.payload.g = global.get("lcd_g");
-msg.payload.b = global.get("lcd_b");
-return msg;</pre></ui-codemirror>
-                            Connect this node to the:
-                        </li>
-                        <li><b>grove lcd</b> node under the Intel_gpio section</li>
-                    </ul>
-                    </p>
-                </div>
-
-
-                <div content-block name="protocol-create-GET-API" message="Create GET API" image-link="./views/labs/protocols/images/get_api.png">
-                    <h2 class="labHidden">Create GET API</h2>
-                    <p><img class="labHidden" alt="GET API" data-fid="503938" src="https://software.intel.com/sites/default/files/managed/70/fa/get_api.png" title="GET API" typeof="foaf:Image"></p>
-
-                    <h2 class="labHidden"> Create GET API </h2>
-
-                    <p>You will now add two GETs that will send the status of the LCD to the requester. Use the to create two the two addiotional node sequences in your flow seen to the right</p>
-
-                    <ul>
-                      <li> <b>http</b> node under the input section connected to:</li>
-                      <li><b>function</b> node under the function section connected to:</li>
-                      <li><b>template</b> node under the function section connected to:
-                      <li><b>http response</b> node under the output section</li>
-                    </ul>
-                </div>
-
-                <div content-block name="protocol-GET-methods" message="Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight." image-link="./views/labs/protocols/images/config_get.png">
-                    <h2 class="labHidden">Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight.</h2>
-                    <p><img class="labHidden" alt="Config GET" data-fid="503939" src="https://software.intel.com/sites/default/files/managed/90/be/config_get.png" title="Config GET" typeof="foaf:Image"></p>
-
-                    <p>Configure the first input http node to GET methods to /lcd/text and second to handle GET methods to /lcd/backlight.</p>
-
-                    <p>Next configure the function nodes to assign the global LCD variables to the response message.</p>
-                    <p>
-                        <h3>For the request coming from <b>/lcd/text</b> use the following function:</h3>
-                        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var payload = global.get("lcd_text");
-msg.payload = payload;
-return msg;</pre></ui-codemirror>
-                        <p>
-                            <h3>For the request coming from /lcd/backlight use the following function:</h3>
-
-
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var r_val = global.get("lcd_r");
-var g_val = global.get("lcd_g");
-var b_val = global.get("lcd_b");
-var payload = [r_val,g_val,b_val];
-msg.payload = payload;
-return msg;</pre></ui-codemirror>
-
-                  <p>The message must have mustache template formatting in order for the http response to properly work.</p>
-
-                  <p>
-                  <h3>Configure the template node to format msg.payload with:</h3></p>
-
-                  <p><img class="labHidden" alt="Template" data-fid="503940" src="https://software.intel.com/sites/default/files/managed/cb/96/template.png" title="Template" typeof="foaf:Image"></p>
-                </div>
-
-
-                <div content-block name="protocol-Create-DELETE-API" message="Create the DELETE API" image-link="./views/labs/protocols/images/delete_sequence.png">
-                    <h2 class="labHidden">Create the DELETE API</h2>
-                    <p><img class="labHidden" alt="delete sequence" data-fid="503941" src="https://software.intel.com/sites/default/files/managed/9f/3b/delete_sequence.png" title="delete sequence" typeof="foaf:Image"></p>
-
-                    <h2> Create DELETE API </h2>
-
-                    <p>The final piece is adding a sequence to deal with DELETE methods. Specifically you will use DELETEs to turn the backlight and text off</p>
-                    <p>Use the:
-                        <ul>
-                            <li><b>http</b> node from the input section connected to the:</li>
-                            <li><b>function</b> node from the function section connected to the:</li>
-                            <li><b>grove lcd</b> from the Intel-gpio section</li>
-                            <li>Connect the <b>http response</b> node from the output section to the <b>http</b> node.</li>
-                    </p>
-                    </ul>
-
-                    <p> to create the two node sequences to the right </p>
-
-                    <p>Configure the first http request to DELETE /lcd/text and the second to DELETE /lcd/backlight.</p>
-                    <p>The function following the DELETE /lcd/text node will overwrite the global lcd text context with blank characters.</p>
-                    <p>
-                        <h3>Copy the following into the function node connected to /lcd/text: </h3></p>
-
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">global.set("lcd_text"," ");
-var r_val = global.get("lcd_r");
-var g_val = global.get("lcd_g");
-var b_val = global.get("lcd_b");
-var text = global.get("lcd_text");
-msg.payload = {"r": r_val, "g":g_val, "b":b_val, "text":text}
-return msg;</pre></ui-codemirror>
-
-                    <p>Similarly the function following DELETE /lcd/backlight will overwrite the global lcd backlight context with 0 for R, G, and B values.</p>
-                    <p>
-                        <h3>Copy the following into the function node connected to /lcd/backlight:</h3></p>
-
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">global.set("lcd_r",0);
-global.set("lcd_g",0);
-global.set("lcd_b",0);
-var text = global.get("lcd_text");
-msg.payload = {"r": 0, "g":0, "b":0, "text":text}
-return msg;</pre></ui-codemirror>
-                </div>
-
-                <div content-block name="protocol-full-restful-api" message="Create the rest of the Restful API" image-link="./views/labs/protocols/images/total_flow.png">
-                    <h2 class="labHidden">Create the rest of the Restful API</h2>
-                    <p><img class="labHidden" alt="total flow" data-fid="503942" src="https://software.intel.com/sites/default/files/managed/18/18/total_flow.png" title="total flow" typeof="foaf:Image"></p>
-
-                    <h2>Full Restful API</h2>
-                    <p>You have now written the complete RESTful API for the LCD screen. The total flow should be like the image to the right:</p>
-
-                    <p>If you had any issues building the flow the source code is provided at the end of this page and can be imported into your flow like in exercise 1</p>
-                </div>
-                <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">
-                    <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
-                    <p><img class="labHidden" alt="postman website" data-fid="503944" src="https://software.intel.com/sites/default/files/managed/96/7a/postman_website.png" title="postman website" typeof="foaf:Image"></p>
-
-                    <h5> Install Postman </h5>
-                    <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
-                    <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
-
-                    <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
-                </div>
-
-                <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/images/postman.png">
-                    <h2 class="labHidden">Use PostMan to send an HTTP request</h2>
-                    <p><img class="labHidden" alt="postman" data-fid="503945" src="https://software.intel.com/sites/default/files/managed/d7/9f/postman.png" title="postman" typeof="foaf:Image"></p>
-
-                    <h5>Use Postman to send web request </h5>
-                    <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
-                    <ul>
-                        <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 1880 with the URL specified above. In this case it is <code>10.175.152.15:1880/LCD</code></li>
-                        <li>The /lcd/backlight and /lcd/text require specific JSON objects to control the LCD screen. /lcd/backlight requires JSON with:
-                            <b>{"r":r_value,"g":g_value,"b":b_value}</b> where r_value, g_value, and b_value are the the r,g,b values from 0-255. /lcd/text requires a JSON with: <b>{"text":"your text here"}</b></li>
-
-                        <li>To have Postman send a request with this syntax slect the "Body" tab, click the "raw" radial button, and select JSON from the dropdown menu. Now enter the JSON specifed above entering the color values and message you wish to display.
-                            When you are ready hit "Send". The example to the right shows how to send a r=0,g=255,b=0 color JSON to /lcd/backlight.</li>
-                    </ul>
-                </div>
-                <div content-block name="protocol-use-the-api" message="Test the API" image-link="./views/labs/protocols/images/postman_get.png">
-                    <h2 class="labHidden">Test the API</h2>
-                    <p><img class="labHidden" alt="Postman get" data-fid="503946" src="https://software.intel.com/sites/default/files/managed/0f/ca/postman_get.png" title="Postman get" typeof="foaf:Image"></p>
-
-                    <h2>Use API</h2>
-                    <p>Like in the last step use Postman to test the various web requests.</p>
-                    <p><img class="labHidden" alt="postman get" data-fid="503947" src="https://software.intel.com/sites/default/files/managed/95/dd/postman_get.png" title="postman get" typeof="foaf:Image"></p>
-                    <p>You can also navigate to your IoT device's IP, port 1880 /lcd/text or /lcd/backlight to get the status of the backlight or text.</p>
-                    <p><img class="labHidden" alt="browser get" data-fid="503948" src="https://software.intel.com/sites/default/files/managed/eb/1d/browser_get.png" title="browser get" typeof="foaf:Image"></p>
-                </div>
-
-                <div content-block name="protocol-flow-source-code" message="Compare your solution to the code here.">
-                    <h2 class="labHidden">Compare your solution to the Node-Red flow below.</h2>
-                    <h2>Full RESTful API Flow Source Code:</h2>
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
-
-
-
-                    </pre></ui-codemirror>
-                </div>
-
-              -->
-                <div ibox title="Additional Resources">
-                    <ul>
-                        <li>
-                            <p><a href="http://mqtt.org/">MQTT</a></p>
-                        </li>
-                        <li>
-                            <p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p>
-                        </li>
-                        <li>
-                            <p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p>
-                        </li>
-                    </ul>
-                </div>
+            <div ibox title="Additional Resources">
+              <ul>
+                <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
+                <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
+                <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p></li>
+              </ul>
             </div>
         </div>
+    </div>
