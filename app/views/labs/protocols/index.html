@@ -423,32 +423,146 @@ return msg;</pre></ui-codemirror>
 
               <div content-block message="Insert code into the GET /lcd/color flow's function node">
                 <p>Open the <b>Function</b> node in the GET /lcd/color flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the color from the global context
+// If color is not defined then the default is to turn the LCD off
+var color = flow.get('color') || {r:0, g:0, b:0};
+
+// Pass it along in the payload
+msg.payload = color;
+return msg;</pre></ui-codemirror>
               </div>
 
               <div content-block message="Insert code into the POST /lcd/color flow's function node">
                 <p>Open the <b>Function</b> node in the POST /lcd/color flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// isInt
+function isInt(value) {
+  return !isNaN(value) &&
+         parseInt(Number(value)) == value &&
+         !isNaN(parseInt(value, 10));
+}
+
+var validateHTTPParameters = function(params) {
+    return (
+      (params.hasOwnProperty('r')
+        && params.hasOwnProperty('g')
+        && params.hasOwnProperty('b'))
+      &&
+      (isInt(params.r)
+            && isInt(params.g)
+            && isInt(params.b))
+      &&
+        ((params.r >= 0 && params.r <= 255)
+           && (params.g >= 0 && params.g <= 255)
+           && (params.b >= 0 && params.b <= 255)));
+}
+
+// Declare variables
+var message = flow.get('message') || "";
+var color = {};
+
+// Check if the HTTP query contains r,g,b properties
+if (validateHTTPParameters(msg.req.query) === true) {
+
+    // Only the r, g and b properties should be copied
+    // to the color variable.
+    color =  {
+        r: msg.req.query.r,
+        g: msg.req.query.g,
+        b: msg.req.query.b
+    };
+
+    // Store the Color variable in the Node-Red Global Context
+    flow.set('color', color);
+
+    // Insert the message and color into the payload
+    msg.payload = message;
+    msg.lcdColor = color;
+
+    msg.statusCode = 201;  // HTTP Code 201 - Object Successfully Created
+} else {;
+    msg.statusCode = 400;  // HTTP Code 400 - Bad Request Format
+}
+return msg;</pre></ui-codemirror>
               </div>
 
               <div content-block message="Insert code into the DELETE /lcd/color flow's function node">
                 <p>Open the <b>Function</b> node in the DELETE /lcd/color flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current message from the global context
+var message = flow.get('message') || "";
+
+// This will turn the LCD backlight off
+var color = {r:0, g:0, b:0};
+
+// Store the blank color in the Node-Red global context
+flow.set('color', color);
+
+msg.payload = message;
+msg.lcdColor = color
+return msg;</pre></ui-codemirror>
               </div>
 
               <div content-block message="Insert code into the GET /lcd/text flow's function node">
                 <p>Open the <b>Function</b> node in the GET /lcd/text flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the color from the global context
+// If color is not defined then the default is to turn the LCD off
+var message = flow.get('message') || "";
+
+// Pass it along in the payload
+msg.payload = message;
+return msg;</pre></ui-codemirror>
               </div>
 
               <div content-block message="Insert code into the POST /lcd/text flow's function node">
                 <p>Open the <b>Function</b> node in the POST /lcd/text flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// isString
+function isString(value) {
+  return (typeof value === 'string' || value instanceof String);
+}
+
+var validateHTTPParameters = function(params) {
+    return params.hasOwnProperty('lcdtext')
+            && isString(params.lcdtext);
+}
+
+// Declare variables
+var message = "";
+var color = flow.get('color') || {r:0, g:0, b:0} ;
+
+// Check if the HTTP query contains r,g,b properties
+if (validateHTTPParameters(msg.req.query) === true) {
+
+    // Only the r, g and b properties should be copied
+    // to the color variable.
+    message = msg.req.query.lcdtext
+
+    // Store the Color variable in the Node-Red Global Context
+    flow.set('message', message);
+
+    // Insert the message and color into the payload
+    msg.payload = message;
+    msg.lcdColor = color;
+
+    msg.statusCode = 201;  // HTTP Code 201 - Object Successfully Created
+} else {;
+    msg.statusCode = 400;  // HTTP Code 400 - Bad Request Format
+}
+return msg;</pre></ui-codemirror>
               </div>
 
               <div content-block message="Insert code into the DELETE /lcd/text flow's function node">
                 <p>Open the <b>Function</b> node in the DELETE /lcd/text flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"></pre></ui-codemirror>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current message from the global context
+var message = "                 ";
+
+// This will turn the LCD backlight off
+var color = flow.get('color');
+
+// Store the blank color in the Node-Red global context
+flow.set('message', message);
+
+msg.payload = message;
+msg.lcdColor = color
+return msg;</pre></ui-codemirror>
               </div>
             </div>
 
