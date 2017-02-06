@@ -57,7 +57,7 @@
   <div ibox title="Install MongoDB">
         <div content-block name="" message="Download and Install MongoDB" image-link="./views/labs/databases/images/mongodb.png">
           <h2 class="labHidden">Download and Install MongoDB</h2>
-          <p>Then download MongoDB.</p>
+          <p>Open a ssh terminal to your gateway and download MongoDB with following command:</p>
           <pre><code>wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</code></pre>
           <p>Unarchive the downloaded file and change directories into the newly created mongodb directory.<p>
           <pre><code>tar zxvf mongodb-linux-x86_64-3.2.9.tgz&#13;&#10;cd mongodb-linux-x86_64-3.2.9</code></pre>
@@ -84,13 +84,11 @@
 
 
 
-
-
       </div>
 
       <!-- Create JavaScript Models to represent the Edge Network -->
       <div ibox title="Defining Types for the Edge Network">
-        <div content-block name="defining-database-types" message="Read and Understand the types that we will Defining Types for the Edge Network">
+        <div content-block name="defining-database-types" message="Read and Understand the types of objects that we will track on our Edge network">
           <h2 class="labHidden">Defining Types for the Edge Network</h2>
 
           <p>As we build our Internet of Things system, we will need to define the objects and events that we want to track on our edge network.</p>
@@ -137,6 +135,14 @@
         <div ibox title="MQTT Sensor Monitoring on the Gateway">
           <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
 <h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
+            <p>Before we start monitoring sensor data, let's make sure the sensors are publishing the data. We saw two ways to do this:</p>
+            <ul>
+              <li><p>Using the node-red flow for temperature sensor that we did in "Application Protocols: MQTT and HTTP". However this needs a small change where we have to change the mqtt output and input nodes to use port <b>8883</b> instead of 1883 and re-deploy</p></li>
+              <li><p>Second is by running the virtual-sensor-secure.js program in "virtual-sensor" folder we downloaded in "Security and the Internet of Things" lab with command "node virtual-sensor-secure.js" which publishes random temperature data on port <b>8883</b></li></p>
+            </ul>
+            <div class="alert alert-info">
+              <p>Ensure that sensor data is published using any one of the above two methods.</p>
+            </div>
             <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
             <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
           </div>
@@ -177,10 +183,10 @@
       <p>The <code>monitord</code> also listens to the MQTT <code>announcements</code> topic, which will carry information on new sensors that are deployed on the network.</p>
     </div>
 
-    <div content-block name="monitord-new-project" message="Create a New Project and Import NPM Modules">
-      <h2 class="labHidden">Create a New Project and Import NPM Modules</h2>
-      <h4><a name="sensorMonitor">Create a New Project and Import NPM Modules</a></h4>
-      <p>Create a new project named <b>monitord</b> and change to that directory.</p>
+    <div content-block name="monitord-new-project" message="Create monitord Project and Import NPM Modules">
+      <h2 class="labHidden">Create "monitord" Project and Import NPM Modules</h2>
+      <h4><a name="sensorMonitor">Create "monitord" Project and Import NPM Modules</a></h4>
+      <p>Open a new console to your gateway and create a project named <b>monitord</b> and change to that directory.</p>
       <pre><code>cd ~&#13;&#10;mkdir monitord&#13;&#10;cd monitord</code></pre>
 
       <p>Next generate an NPM package file which holds the metadata associated with this project.</p>
@@ -210,21 +216,42 @@
   }
 }</pre></ui-codemirror>
 
-          <p>You should also change the <strong>main</strong> property to "server.js"</p>
-
-          <p>When you upload your code to the Intel IoT Gateway, you will need to login to the console and run <code>npm install</code> in the top of you project directory. This will install the external NPM dependencies.</p>
+          <p>You should also change the <strong>main</strong> property to <b>"server.js"</b> instead of "index.js"</p>
+          <p>You can again run "npm install" to confirm all the dependencies are installed</p>
       </div>
 
     <div content-block name="connect-to-broker-and-database" message="Connect to the MQTT Broker and MongoDB">
       <h2 class="labHidden">Connect to the MQTT Broker and MongoDB</h2>
       <h4>Connect to the MQTT Broker and MongoDB</h4>
-      <p>Create a file called <code>./server.js</code>.  This will be the main entry point into your monitord.</p>
+      <p>Create a file called <code>server.js</code> in your monitord folder. This will be the main entry point into your monitord.</p>
 
-      <p>After importing the MQTT module, setup a connection to the MQTT broker. Your gateway's IP address is <code>192.168.1.x - Your IP <address>  </address></code> by default.</p>
+      <p>After importing the MQTT module, setup a connection to the MQTT broker with changes as below</p>
+      <p>The "options" variable is to set up a secure connection using SSL and TLS properties as described earlier in "Security and the Internet of Things" lab</p>
       <p class="label">./server.js</p>
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
-var mqttClient = mqtt.connect('mqtt://localhost');</pre></ui-codemirror>
+var fs = require('fs');
+var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+
+var PORT = 8883;
+var HOST = 'localhost';
+
+var options = {
+  port: PORT,
+  host: HOST,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
+};
+var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
 
         <p>Likewise, require the MongooseJS module and setup the connection to the MongoDB server.</p>
 
@@ -290,7 +317,6 @@ mqttClient.on('connect', function() {
       <li>
         <p>Next, write a handler for the MQTT <code>message</code> event.</p>
         <p>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</p></li>
-      <li>
         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// A function that runs when MQTT receives a message
 mqttClient.on('message', function(topic, message) {
       var json;
@@ -300,9 +326,7 @@ mqttClient.on('message', function(topic, message) {
       } catch (e) {
         console.log(e);
       };</pre></ui-codemirror>
-      </li>
     </div>
-
 
 
     <div content-block name="is-announcement" message="Log all announcements to the database">
@@ -334,12 +358,24 @@ mqttClient.on('message', function(topic, message) {
     }
   });</pre></ui-codemirror>
       </div>
+      <div content-block name="database-start-server" message="Be sure that the sensor is publishing data and MongoDB is running, then start the server.">
+          <h2 class="labHidden">Be sure that the sensor is publishing data and MongoDB is running, then start the server.</h2>
+          <p>Verify that MongoDB is running. You can do this in two ways:</p>
+          <ol>
+              <li>Type <code>ps aux | egrep mongod</code> at the command and verify that a process is displayed.</li>
+              <li>If you are running MongoDB in a screen session, then you can switch to the screen running the MongoDB server by typing <code>Ctrl-a "</code> and selecting the screen that you are running MongoDB in.</li>
+          </ol>
+          <p>Start the server to monitor sensor data:</p>
+          <pre><code>node server.js</code></pre>
+          <p>You should start seeing prints of data that is monitored by this monitord server:</p>
+          <pre><code>sensors/temperature/data:{"sensor_id": "temperature", "value": 29, "timestamp": 1486420487851}&#13;&#10;sensors/temperature/data:{"sensor_id": "temperature", "value": 18, "timestamp": 1486420487854}</code></pre>
+      </div>
     </div>
 
     <div ibox title="Lab Solutions">
     <div content-block name="Clone-the-Solution-from-its-Github-Repository" message="Clone the Solution from it's Github Repository">
         <h2 class="labHidden">Clone the Solution from it's Github Repository</h2>
-        <p>You can deploy the solution to this lab exercise by cloning a repository from Github.</p>
+        <p>The code described above in this lab can also be downloaded and deployed by cloning a repository from Github.</p>
         <p>Change to the directory that you would like to download the solution into, and then type:</p>
         <pre><code>git clone https://github.com/SSG-DRD-IOT/lab-solution-monitor-daemon.git</code></pre>
     </div>
@@ -357,8 +393,9 @@ mqttClient.on('message', function(topic, message) {
             <li>Type <code>ps aux | egrep mongod</code> at the command and verify that a process is displayed.</li>
             <li>If you are running MongoDB in a screen session, then you can switch to the screen running the MongoDB server by typing <code>Ctrl-a "</code> and selecting the screen that you are running MongoDB in.</li>
         </ol>
-        <p>Type start the Sensor Monitor type:</p>
+        <p>Start the server:</p>
         <pre><code>node server.js</code></pre>
+        <p>You should start seeing prints of data that is monitored by this server and written to the database</p>
     </div>
 </div>
   </div>
