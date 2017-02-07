@@ -27,7 +27,7 @@
                     <p>By the end of this module, you should be able to:</p>
 
                     <ul>
-                        <li>A web-based administrative interface deployed on your Intel® IoT Gateway.</li>
+                        <li>Deploy a web-based administrative interface on your Intel® IoT Gateway.</li>
                         <li>Have an understanding of how you could build your own web-based monitoring system.</li>
                     </ul>
 
@@ -36,7 +36,6 @@
                     <ol>
                         <li>
                             <p>Download the <a href="https://drive.google.com/open?id=0B2ywC78pxngCWDY5OFhhNlNrbVk">admin-interface.zip</a>.</p>
-                            <img src="./views/labs/admin-interface/images/download-admin-interface.png"/>
                         </li>
 
                         <li>
@@ -58,23 +57,32 @@
                         </li>
 
                         <li>
-                            <p>Populate this sample interface by copying the <a href="https://github.com/SSG-DRD-IOT/lab-solution-monitor-daemon/blob/master/initialize/initialize-db.js">initialize-db.js</a> script from the lab-solution-monitor-daemon repository.</p>
-                            <p>Note that this initialization script requires you to exit it by pressing <code>Ctrl-C</code>.
-                                <p>This is create an LCD actuator, a temperature sensor and a couple of basic automatic rules. In the next lab, you will write most complex automatic rules and a rules engine to the run these rules on an edge network.</p>
-                        </li>
-
-                        <li>
                             <p>Run <span class="icon file">server.js</span> as a <strong>Node</strong> process.</p>
                             <pre><code>node server.js</code></pre>
                             <p>This will start a NodeJS HTTP server that will provide the front end user interface.</p>
                         </li>
 
                         <li>
-                            <p>Visit <a href="http://localhost:3000">http://localhost:3000</a> in your development computer's web browser.</p>
+                            <p>Visit "http://{Your Gateway IP address}:3000" in your development computer's web browser.</p>
                         </li>
 
                         <li>
-                            <p>This is a simple, sample web based interface that will allow you to create, edit and delete automatic actions (triggers). Explore the interface for condition based monitoring triggers, record system errors.</p>
+                            <p>It will show you in a browser a simple, sample web based interface that will allow you to create, edit and delete automatic actions (triggers)</p>
+                            <img src="./views/labs/admin-interface/images/dashboard-default.png"/>
+                            <p>Before we explore more options let's populate this interface with some static data</p>
+                        </li>
+
+                        <li>
+                            <p>Populate this sample interface by running initialize-db.js script from the lab-solution-monitor-daemon repository downloaded in previous "Databases at the Edge" lab</p>
+                            <p>Open a new console to your Gateway and give the following commands:</p>
+                            <pre><code>cd ~/lab-solution-monitor-daemon&#13;&#10;cd initialize</pre></code>
+                            <pre><code>npm install</pre></code>
+                            <pre><code>node initialize-db.js</pre></code>
+                            <p>Note that once it runs this initialization script requires you to exit it by pressing <code>Ctrl-C</code>.</p>
+                            <p>This will create an LCD actuator, a temperature sensor and a couple of basic automatic rules. Refresh your browser on your computer to see these on the admin interface web page</p>
+                            <img src="./views/labs/admin-interface/images/dashboard.png"/>
+                            <p>Explore the interface for condition based monitoring triggers, record system errors.</p>
+                            <p>In the next lab, you will write most complex automatic rules and a rules engine to the run these rules on an edge network.</p>
                         </li>
 
                     </ol>
