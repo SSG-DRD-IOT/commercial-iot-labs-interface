@@ -102,19 +102,22 @@ ls</code></pre>
       <div content-block name="" message="Monitor Device Status" image-link="./views/labs/hdc/images/6.png">
         <h2 class="labHidden">Monitor Device Status</h2>
 
-        <li>Initiate remote login sessions from the HDC Portal. You can also connect to the device through a ssh session using it’s IP address.</li>
-        <li>To connect to remote login select your device in “DEVICES” tab and then go to “CUSTOM ACTIONS” and select “Remote Login”. This should open another browser where you will see your device prompt.</li>
+        <li><p>Initiate remote login sessions from the HDC Portal. You can also connect to the device through a ssh session using it’s IP address.</p></li>
+        <li><p>To connect to remote login select your device in “DEVICES” tab and then go to “CUSTOM ACTIONS” and select “Remote Login”. This should open another browser where you will see your device prompt.</p></li>
+        <div class="alert alert-info">
+          <p>If the remote login window does not come up, make sure you disable pop-up blocker for this site on your browser and try agian<p>
+        </div>
 
-        <p>Monitor agent traffic</p>
+        <li><p>Monitor agent traffic</p></li>
         <pre><code>journalctl -u iot -n</code></pre>
         <pre><code>% ^c (ctrl + c) to exit</code></pre>
-        <p>Diagnostic Options</p>
+        <li><p>Diagnostic Options</p></li>
         <p>In case the device connectivity is lost, make sure that "iot" and "ccg" services are running.The output of below commands should show active(running)</p>
         <pre><code>systemctl status iot</code></pre>
         <pre><code>systemctl status ccg</code></pre>
         <p>If either service is not running, start the affected service and verify it starts properly</p>
-        <pre><code>systemctl start serviceName</code></pre>
-        <pre><code>systemctl status serviceName</code></pre>
+        <pre><code>systemctl start serviceName (Here serviceName will be either iot or ccg)</code></pre>
+        <pre><code>systemctl status serviceName (Here serviceName will be either iot or ccg)</code></pre>
         <p>If the services are running but device is still not connected, check connectivity to server by running the above command again</p>
         <pre><code>journalctl -u iot -n</code></pre>
         <p>If the output shows Waiting for Mosquitto and the ccg service is running, the device may not be connected to network or there might be network connectivity issue</p>
@@ -136,10 +139,9 @@ ls</code></pre>
     <div ibox title="Telemetry Data and Actions">
       <div content-block name="" message="Understand about Telemtry Data and Actions">
         <h2 class="labHidden">Monitor Device Status</h2>
-        <p>This session explains how to send Telemetry and expose device actions on the cloud.</p>
-        <p>We will run one of the sample apps "iot-app-simple-telemetry" which is included as one of the sample HDC apps in /usr/bin</p>
-        <p>This app registers 13 telemetry metrics and an action to start and stop transmitting telemetry data to the cloud.</p>
-        <p>Later we will use one of the telemetry data (temp) to set up alert rules</p>
+        <li><p>This session explains how to send Telemetry and expose device actions on the cloud.</p></li>
+        <li><p>We will run one of the sample apps "iot-app-simple-telemetry" which is included as one of the sample HDC apps in /usr/bin. This app registers 13 telemetry metrics and an action to start and stop transmitting telemetry data to the cloud.</p></li>
+        <li><p>Later we will use one of the telemetry data (temp) to set up alert rules</p></li>
       </div>
 
       <div content-block name="" message="Run the sample telemetry application to begin generating data" image-link="./views/labs/hdc/images/hdc_app.png">
@@ -150,16 +152,16 @@ ls</code></pre>
 
       <div content-block name="" message="turn ON telemetry data from HDC" image-link="./views/labs/hdc/images/hdc_tel.png">
         <h2 class="labHidden">turn ON telemetry data from HDC</h2>
-        <p>To start seeing the telemetry data on HDC, go to your NUC device page and in "CUSTOM ACTIONS" tab select "telemetry_ON_OFF" as highlighted in figure</p>
-        <p>This will allow HDC to start receiving telemetry data. The highlighted part in Device Details will show this in "Available actions" and "Available Telemetry Metrics"</p>
-        <p>This may take a little while to reflect, to refresh the device data click the icon on left side as shown in figure</p>
+        <li><p>To start seeing the telemetry data on HDC, go to your NUC device page and in "CUSTOM ACTIONS" tab select "telemetry_ON_OFF" as highlighted in figure</p></li>
+        <li><p>This will allow HDC to start receiving telemetry data. The highlighted part in Device Details will show this in "Available actions" and "Available Telemetry Metrics"</p></li>
+        <li><p>This may take a little while to reflect, to refresh the device data click the icon on left side as shown in figure</p></li>
       </div>
 
       <div content-block name="" message="Observe the telemetry data from HDC" image-link="./views/labs/hdc/images/hdc_tel_data.png">
         <h2 class="labHidden">Observe the telemetry data from HDC</h2>
-        <p>Telemetry data for your device can be observed by clicking on "Telemetry data" tab at the bottom of the page in Device Details as shown in figure</p>
-        <p>In case of our example all the sample telemetry metrics can be seen as individual entries</p>
-        <p>Each entry can be expanded further to see a graph of values over a period of time as shown in figure</p>
+        <li><p>Telemetry data for your device can be observed by clicking on "Telemetry data" tab at the bottom of the page in Device Details as shown in figure</p></li>
+        <li><p>In case of our example all the sample telemetry metrics can be seen as individual entries</p></li>
+        <li><p>Each entry can be expanded further to see a graph of values over a period of time as shown in figure</p></li>
       </div>
     </div>
 
@@ -178,34 +180,32 @@ ls</code></pre>
         </ul>
       </div>
       <div content-block name="" message="Create a New Rule" image-link="./views/labs/hdc/images/8.png">
-        <ul>
-          <li>Go to “RULES” tab and click on “Create New Rule”</li>
-          <li>Give a rule name, for e.g. “temperature alert”</li>
-          <li>Choose your device in option “Apply Rule to these devices” – make sure you select only your device</li>
-        </ul>
+        <li><p>Go to “RULES” tab and click on “Create New Rule”</p></li>
+        <li><p>Give a rule name, for e.g. “temperature alert”</p></li>
+        <li><p>Choose your device in option “Apply Rule to these devices” – make sure you select only your device</p></li>
       </div>
       <div content-block name="" message="Add a condition to the rule" image-link="./views/labs/hdc/images/9.png">
-        <p>Next in section “Add rule conditions” we will add a condition which in our case is temperature exceeding 35. In “Select a telemetry metric” drop down choose “temp”, in “Select operator” drop down choose “greater than” and enter 35 in “Value” box</p>
+        <li><p>Next in section “Add rule conditions” we will add a condition which in our case is temperature exceeding 35. In “Select a telemetry metric” drop down choose “temp”, in “Select operator” drop down choose “greater than” and enter 35 in “Value” box</p></li>
 
         <div class="alert alert-info">
           <p>The “Select a telemetry metric” field will not be available if iot-app-complete app is not running on the device!</p>
         </div>
       </div>
       <div content-block name="" message="Add a response to the rule" image-link="./views/labs/hdc/images/10.png">
-        <p>Next in section “Add rule responses” there are multiple options on how to respond to a condition. Here we will select option <b>CREATE AN ALERT</b></p>
-        <p>Give Alert Name as “temperature alert”, Priority as P1, "Severity" as "Critical" and Description as “Temperature above threshold!”</p>
-        <p>You can also try "SEND AN EMAIL" option which will send you an email when alert gets triggered. For this enter the recepient email address, Subject and Body Text</p>
-        <p>Finally click on “SAVE AND ENABLE” to save the Rule.</p>
+        <li><p>Next in section “Add rule responses” there are multiple options on how to respond to a condition. Here we will select option <b>CREATE AN ALERT</b></p></li>
+        <li><p>Give Alert Name as “temperature alert”, Priority as P1, "Severity" as "Critical" and Description as “Temperature above threshold!”</p></li>
+        <li><p>You can also try "SEND AN EMAIL" option which will send you an email when alert gets triggered. For this enter the recepient email address, Subject and Body Text</p></li>
+        <li><p>Finally click on “SAVE AND ENABLE” to save the Rule.</p></li>
       </div>
       <div content-block name="" message="View the rule" image-link="./views/labs/hdc/images/11.png">
-              <p>The rule which we just created can be seen in “RULES” tab next to “DEVICES” as shown in the figure. It will show the name of the rule, when it was created/modified, affected devices and the actions. Make sure that the Rule Status is “ON”</p>
+        <li><p>The rule which we just created can be seen in “RULES” tab next to “DEVICES” as shown in the figure. It will show the name of the rule, when it was created/modified, affected devices and the actions. Make sure that the Rule Status is “ON”</p></li>
       </div>
       <div content-block name="" message="Watch for new alerts" image-link="./views/labs/hdc/images/12.png">
-        <p>When the temperature goes beyond 35 the Alert gets triggered and you can see in the notification on the top right corner icon as shown in the figure.</p>
-        <p>If you have set up email trigger you will also receive an email for the alert</p>
+        <li><p>When the temperature goes beyond 35 the Alert gets triggered and you can see in the notification on the top right corner icon as shown in the figure.</p></li>
+        <li><p>If you have set up email trigger you will also receive an email for the alert</p></li>
       </div>
       <div content-block name="" message="View the alert history" image-link="./views/labs/hdc/images/13.png">
-        <p>Going to the “ALERTS” tab also shows the pending alert notifications as shown in the figure.</p>
+        <li><p>Going to the “ALERTS” tab also shows the pending alert notifications as shown in the figure.</p></li>
       </div>
     </div>
 
@@ -216,37 +216,28 @@ ls</code></pre>
         <p>We will demonstrate how to send/receive a file to/from the device to your cloud account</p>
       </div>
       <div content-block name="" message="Send File to device" image-link="./views/labs/hdc/images/15.png">
-        <ul>
-          <li>To send a dummy file, create a dummy test.txt file on your host machine.</li>
-          <li>On the HDC UI main page go to “DEVICES” tab and check your device box</li>
-          <li>Then go to “STANDARD ACTIONS” drop down and select “Send Files” option</li>
-        </ul>
+        <li><p>To send a dummy file, create a dummy test.txt file on your host machine.</p></li>
+        <li><p>On the HDC UI main page go to “DEVICES” tab and check your device box</p></li>
+        <li><p>Then go to “STANDARD ACTIONS” drop down and select “Send Files” option</p></li>
       </div>
       <div content-block name="" message="Select the dummy test.txt file which you created and upload" image-link="./views/labs/hdc/images/16.png">
-        <p>Select the dummy test.txt file which you created and upload it as shown in the figure</p>
+        <li><p>Select the dummy test.txt file which you created and upload it as shown in the figure</p></li>
       </div>
       <div content-block name="" message="Click Send Files" image-link="./views/labs/hdc/images/17.png">
-        <ul>
-          <li>Click “SEND FILES” to send the test.txt file to the device</li>
-          <li>You will immediately see a notification of “Sending Files…” pop up in your notification</li>
-          <li>Then click on the notification icon in right most corner, it should show that the file was transferred successfully to the device</li>
-        </ul>
+        <li><p>Click “SEND FILES” to send the test.txt file to the device</li></p>
+        <li><p>You will immediately see a notification of “Sending Files…” pop up in your notification</li></p>
+        <li><p>Then click on the notification icon in right most corner, it should show that the file was transferred successfully to the device</li></p>
       </div>
       <div content-block name="" message="Check for the presence of the test.txt file">
-        <p>To check if the file is present on the device, on the remote shell, go to folder /var/lib/iot/download where you should see the test.txt file</p>
+        <li><p>To check if the file is present on the device, on the remote shell, go to folder /var/lib/iot/download where you should see the test.txt file</p></li>
       </div>
       <div content-block name="" message="Receive File from device" image-link="./views/labs/hdc/images/18.png">
-        <ul>
-          <li>To receive a file from device first put the file, for e.g. sample.txt that needs to be sent to cloud in /var/lib/iot/upload directory. In our case use the vi editor to generate a dummy file sample.txt in this directory</li>
-
-          <li>Make sure that the file has right permission by doing the following:
+        <li><p>To receive a file from device first put the file, for e.g. sample.txt that needs to be sent to cloud in /var/lib/iot/upload directory. In our case use the vi editor to generate a dummy file sample.txt in this directory</li></p>
+        <li><p>Make sure that the file has right permission by doing the following:
             <pre><code>chmod 644 sample.txt</code></pre>
-          </li>
-
-          <li>Now go to “STANDARD ACTIONS” drop down and select “Retrieve Files” option using which you should be able to receive the file and see in the notification window.</li>
-
-          <li>To download the file to your PC just click on the notification and it will download the tar file. Unzipping it will give the file that you wanted to receive from the device.</li>
-        </ul>
+        </li></p>
+        <li><p>Now go to “STANDARD ACTIONS” drop down and select “Retrieve Files” option using which you should be able to receive the file and see in the notification window.</li></p>
+        <li><p>To download the file to your PC just click on the notification and it will download the tar file. Unzipping it will give the file that you wanted to receive from the device.</li></p>
       </div>
     </div>
 
@@ -264,11 +255,9 @@ ls</code></pre>
       <div content-block name="" message="Manage the software installed on the device">
         <!-- 4.2	Manage the software installed on the device
         Objective: monitor update traffic between the agent and the cloud -->
-        <ul>
-          <li>Login to the device either doing a ssh from your host PC or through the “Remote Login” window</li>
-          <li>Execute this command: <pre><code>journalctl -u iot -f</code></pre></li>
-          <li>Keep this handy for the next exercise</li>
-        </ul>
+        <li><p>Login to the device either doing a ssh from your host PC or through the “Remote Login” window</li></p>
+        <li><p>Execute this command: <pre><code>journalctl -u iot -f</code></pre></li></p>
+        <li><p>Keep this handy for the next exercise</li></p>
 
     </div>
   </div>
@@ -276,61 +265,63 @@ ls</code></pre>
 
   <div ibox title="Update the Gateway">
     <div content-block name="" message="Objectives and Prerequisites" image-link="./views/labs/hdc/images/20.png">
-      <p>To perform s/w updates to the device remotely from HDC utility</p>
-      <p>An update package includes the instructions to install software on the device and if applicable, contains the files to install on the device</p>
-      <p>For this section we will do a simple update of transfering a script <b>simple_update.sh</b> and a sample test file <b>test.txt</b> to the device. The script will create a folder and copy the file to that folder</p>
-      <p>Copy the <b>simple_update.sh</b> and <b>test.txt</b> from USB drive folder hdc_update_files to your local host PC</p>
+    <ul>
+      <li>To perform s/w updates to the device remotely from HDC utility</li>
+      <li>An update package includes the instructions to install software on the device and if applicable, contains the files to install on the device</li>
+      <li>For this section we will do a simple update of transfering a script <b>simple_update.sh</b> and a sample test file <b>test.txt</b> to the device. The script will create a folder and copy the file to that folder</li>
+      <li>Copy the <b>simple_update.sh</b> and <b>test.txt</b> from USB drive folder hdc_update_files to your local host PC</li>
+    </ul>
     </div>
 
     <div content-block name="" message="Select the software update package" image-link="./views/labs/hdc/images/hdc-update_1.png">
-      <p>Click on the "UPDATE" tab on top of the HDC page</p>
-      <p>On the Software Updates page, click "Available Packages" and then click "CREATE NEW UPDATE PACKAGE"</p>
-      <p>Give a short name in "Package Name" and a version number in "Version" box as shown in figure. You can put in a description if you want</p>
-      <p>Next specify the criteria to select compatible devices. In our case we will chose Firmware version and value as 2.2. This lets you choose which devices you want to update based on the criteria</p>
+      <li><p>Click on the "UPDATE" tab on top of the HDC page</p></li>
+      <li><p>On the Software Updates page, click "Available Packages" and then click "CREATE NEW UPDATE PACKAGE"</p></li>
+      <li><p>Give a short name in "Package Name" and a version number in "Version" box as shown in figure. You can put in a description if you want</p></li>
+      <li><p>Next specify the criteria to select compatible devices. In our case we will chose Firmware version and value as 2.2. This lets you choose which devices you want to update based on the criteria</p></li>
     </div>
 
     <div content-block name="" message="Select the Package files and SAVE" image-link="./views/labs/hdc/images/hdc-update_2.png">
-      <p>As shown in the figure in the Package Files area, drag the required files into the window. When the file upload completes successfully, the progress bar shows Success</p>
-      <p>In the "Install Commands" section enter the below command in "Install Command" area. Leave the Pre-Install, Post-Install and other boxes empty</p>
+      <li><p>As shown in the figure in the Package Files area, drag the required files into the window. When the file upload completes successfully, the progress bar shows Success</p></li>
+      <li><p>In the "Install Commands" section enter the below command in "Install Command" area. Leave the Pre-Install, Post-Install and other boxes empty</p></li>
       <pre><code>sh simple_update.sh</code></pre>
-      <p>Click "SAVE"</p>
-      <p>Once you save your package it will show in the list of "Available Packages" in the unpublished state and is ready to deploy</p>
+      <li><p>Click "SAVE"</p></li>
+      <li><p>Once you save your package it will show in the list of "Available Packages" in the unpublished state and is ready to deploy</p></li>
     </div>
 
     <div content-block name="" message="Prepare to Deploy the Package" image-link="./views/labs/hdc/images/hdc-update_4.png">
-      <p>On "Available Packages" find your package and click "DEPLOY"</p>
-      <p>Give a name to your deployment and a description</p>
-      <p>Your package information will be available under "Package Information" section. Note that there will be additional Package Files (update.json and manifest.spec) which the system puts in your package</p>
+      <li><p>On "Available Packages" find your package and click "DEPLOY"</p></li>
+      <li><p>Give a name to your deployment and a description</p></li>
+      <li><p>Your package information will be available under "Package Information" section. Note that there will be additional Package Files (update.json and manifest.spec) which the system puts in your package</p></li>
     </div>
 
     <div content-block name="" message="Deploy the Package to the NUC" image-link="./views/labs/hdc/images/hdc-update_5.png">
-      <p>At the bottom of the page, you will see list of devices compatible for your package. This is based on the criteria we selected earlier for compatible devices, which is the Firmware Version in our case</p>
-      <p>You will see all the devices with 2.2 Firmware (it will list all the devices in the workshop since they are based on 2.2)</p>
-      <p>Check mark your device based on your ID and MAC address and press "ADD DEVICES". This will then list your device in section "Devices selected for deployment"</p>
-      <p>Click "DEPLOY"</p>
+      <li><p>At the bottom of the page, you will see list of devices compatible for your package. This is based on the criteria we selected earlier for compatible devices, which is the Firmware Version in our case</p></li>
+      <li><p>You will see all the devices with 2.2 Firmware (it will list all the devices in the workshop since they are based on 2.2)</p></li>
+      <li><p>Check mark your devie based on your ID and MAC address and press "ADD DEVICES". This will then list your device in section "Devices selected for deployment"</p></li>
+      <li><p>Click "DEPLOY"</p></li>
     </div>
 
     <div content-block name="" message="Verify Package was Deployed and Installed" image-link="./views/labs/hdc/images/hdc-update_6.png">
-      <p>As shown in the figure you will see your deploy status change from In Progress to Completed</p>
-      <p>To verify that our script got installed and all steps completed successfully go to <b>/var/lib/iot/upload</b> directory and view the file <b>iot_install_updates.log</b></p>
-      <p>This will give you step by step procedure of how the install happened. In the section "Executing command 'sh simple_update'" you will see the traces that we put in the script</p>
-      <p>To verify that it succeeded check if testfolder was created in /root/testfolder and it should also have the file test.txt in there</p>
-      <p>This was a simple example, in a similar way a number of scripts and files can be deployed on the device to perform an update</p>
+      <li><p>As shown in the figure you will see your deploy status change from In Progress to Completed</p></li>
+      <li><p>To verify that our script got installed and all steps completed successfully go to <b>/var/lib/iot/upload</b> directory and view the file <b>iot_install_updates.log</b></p></li>
+      <li><p>This will give you step by step procedure of how the install happened. In the section "Executing command 'sh simple_update'" you will see the traces that we put in the script</p></li>
+      <li><p>To verify that it succeeded check if testfolder was created in /root/testfolder and it should also have the file test.txt in there</p></li>
+      <li><p>This was a simple example, in a similar way a number of scripts and files can be deployed on the device to perform an update</p></li>
     </div>
   </div>
 
 
   <div ibox title="Decommission">
     <div content-block name="" message="Objective" image-link="./views/labs/hdc/images/26.png">
-      <p>The device can be decommisioned from HDC</p>
-      <p>Once the device is decommisioned it cannot be managed from HDC</p>
+      <li><p>The device can be decommisioned from HDC</p></li>
+      <li><p>Once the device is decommisioned it cannot be managed from HDC</p></li>
     </div>
     <div content-block name="" message="Disable and Shutdown Your Device" image-link="./views/labs/hdc/images/27.png">
-      <p>Delete the rules you created:</p>
+      <li><p>Delete the rules you created:</p></li>
       <pre><code>Rules -> ‘My Rule’ -> Delete</code></pre>
 
-      <p>The device can be decommissioned by going to “CUSTOM ACTIONS” and selecting decommission_device. After that you will see a notification of success and the device will then reboot.</p>
-      <p>On boot up the device will show offline in HDC and none of the operations can be performed on it</p>
+      <li><p>The device can be decommissioned by going to “CUSTOM ACTIONS” and selecting decommission_device. After that you will see a notification of success and the device will then reboot.</p></li>
+      <li><p>On boot up the device will show offline in HDC and none of the operations can be performed on it</p></li>
     </div>
   </div>
 
