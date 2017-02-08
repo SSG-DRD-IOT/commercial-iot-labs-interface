@@ -35,10 +35,10 @@
 
       <div ibox title="Steps to Install HDC">
         <p>1. Insert the USB drive to your NUC and copy the top level folder "hdc_2.2_conf_files" to /root folder and go to that folder</p>
-        <pre><code>cd /root&#13;&#10;cp -r /media/sda1/hdc_2.2_conf_files&#13;&#10;cd /root/hdc_2.2_conf_files</code></pre>
+        <pre><code>cd /root&#13;&#10;cp -r /media/sda1/HDC/hdc_2.2_conf_files /root&#13;&#10;cd /root/hdc_2.2_conf_files</code></pre>
         <p>2. Run the shell script</p>
         <pre><code>./hdc_2.2.0_install.sh</code></pre>
-        <p>3. Wait for the script to complete, at the end it will reboot the gateway</p>
+        <p>3. Wait for the script to complete, at the end it will reboot the gateway. This step will take upto 5 minutes.</p>
         <div content-block name="" message="Install HDC">
           <h2 class="labHidden">Read the Objectives</h2>
           <labels gateway window apple linux/>
@@ -67,7 +67,10 @@
       <div content-block name="" message="Check for the HDC Agent Files">
         <h2 class="labHidden">Check for the HDC Agent Files</h2>
 
-        <p>To ensure the right components are on your device go to folder /opt/intel/ccg/bin and check contents there. You should see following files there:</p>
+        <p>To ensure the right components are on your device go to folder /opt/intel/ccg/bin and check contents there.</p>
+        <pre><code>cd /opt/intel/ccg/bin/
+ls</code></pre>
+        <p> You should see following binary files.</p>
         <ul>
           <li>agentguid.bin</li>
           <li>dxlpolicy.bin</li>
@@ -78,7 +81,7 @@
       <div content-block name="" message="Helix Device Cloud Configuration" image-link="./views/labs/hdc/images/3.png">
         <h2 class="labHidden">Helix Device Cloud Configuration</h2>
 
-        <p>Log on to https://www.helixdevicecloud.com/ with below credentials.</p>
+        <p>Log on to <a href="https://www.helixdevicecloud.com/" target="_blank">https://www.helixdevicecloud.com/</a> with below credentials.</p>
         <pre><code>Login: lab_user&#13;&#10;Password: intel123</code></pre>
         <ul>
           <li>Verify your device is registered in HDC UI – use MAC address to locate your device</li>
