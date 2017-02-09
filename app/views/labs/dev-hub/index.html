@@ -26,7 +26,7 @@
                     <h2 class="labHidden">Read the Objectives </h2>
 
                     <p> The Intel® IoT Developer Hub is a web-based service running on the gateway that allows you to have a hands-on sensor-to-cloud experience in a very short time period. It has built-in tutorials to teach you about tools like the
-visual programming interface called Node-RED* and the Wind River Helix App Cloud, including sample code to develop the app in the cloud.
+visual programming interface called Node-RED and the Wind River Helix App Cloud, including sample code to develop the app in the cloud.
 The Intel® IoT Developer Hub provides ways to easily manage the administrative settings of the gateway.
 The Intel® IoT Developer Hub lets you, as the developer, add packages and
 develop your apps. When development is complete, you can save a hardened OS image onto a USB flash drive.</p>
@@ -51,7 +51,7 @@ develop your apps. When development is complete, you can save a hardened OS imag
                       <h4> Introduction to Intel Iot Dev Hub</h4>
                       <img class="labHidden" src="./views/labs/dev-hub/images/1.png"></img>
                       <ol class="ng-scope">
-                          <li>Open your browser and go to IP address of your gateway to access IoT Developer Hub.</li>
+                          <li>Open your browser and enter the IP address of your gateway to access IoT Developer Hub.</li>
                           <li>Login to the Intel® IoT Gateway Developer Hub using root for both the username and the password.</li>
                           <li>Use the Intel® IoT Gateway Developer Hub to explore and extend the basic capabilities of the Gateway.</li>
                         </ol>
@@ -135,9 +135,11 @@ develop your apps. When development is complete, you can save a hardened OS imag
                     <div content-block name="add-new-device" message="Add New Device" image-link="./views/labs/dev-hub/images/5.png">
                         <h2 class="labHidden">Add New Device</h2>
                         <h4>Add New Device </h4>
-                        <p>In Helix App Cloud, click <b>"New Device"</b> in the top right corner to add a new device.</p>
-                        <p>Click <b>"Register an existing device using its Registration ID"</b> </p>
-                        <p><b>Paste in the Unique ID</b>. (previously copied into clipboard). <b>Enter a device name</b>, then click <b>"Register Device"</b>. </p>
+                        <ul>
+                          <li><p>In Helix App Cloud, click <b>"New Device"</b> in the top right corner to add a new device.</p></li>
+                          <li><p>Click <b>"Register an existing device using its Registration ID"</b> </p></li>
+                          <li><p><b>Paste in the Unique ID</b>. (previously copied into clipboard). <b>Click 'Next' and enter a device name</b>, then click <b>"Register Device"</b>. </p></li>
+                        <ul>
                     </div>
 
                     <div content-block name="hac-dashboard" message="Helix App Cloud Dashboard" image-link="./views/labs/dev-hub/images/6.png">
@@ -157,18 +159,22 @@ develop your apps. When development is complete, you can save a hardened OS imag
                       <div content-block name="create-new-project" message="Choose the project template and name the project" image-link="./views/labs/dev-hub/images/8.png">
                           <h2 class="labHidden">Choose the project template and name the project</h2>
                           <h4>Choose the project template and name the project </h4>
-                          <p>Once your gateway is registered you will be able to create a new project. Click, <b>"Create new project"</b>.</p>
-                          <p> Enter your <b>Project Name</b> </p>
-                          <p>Select <b>JavaScript Hello World: Console Hello World in Javascript</b> </p>
+                          <ul>
+                            <li><p>Once your gateway is registered you will be able to create a new project. Click, <b>"Create new project"</b>.</p></li>
+                            <li><p> Enter your <b>Project Name</b> </p></li>
+                            <li><p>Select <b>JavaScript Hello World: Console Hello World in Javascript</b> </p></li>
+                          </ul>
                       </div>
 
                       <div content-block name="open-new-project" message="Open the Project" image-link="./views/labs/dev-hub/images/9.png">
                           <h2 class="labHidden">Open the Project</h2>
                           <h4>Open the Project </h4>
-                          <p>Click <b>"Open"</b> on the new project that was created.</p>
-                          <p>The new tab will open with Cloud9 code editor </p>
-                          <p>Double click on <b>hello.js</b> from the left side bar.</p>
-                          <p>Click <b>Run </b> on the menu bar to execute JavaScript code on the gateway </p>
+                          <ul>
+                            <li><p>Click <b>"Open"</b> on the new project that was created.</p></li>
+                            <li><p>The new tab will open with Cloud9 code editor </p></li>
+                            <li><p>Double click on <b>hello.js</b> from the left side bar.</p></li>
+                            <li><p>Click <b>Run </b> on the menu bar to execute JavaScript code on the gateway </p></li>
+                          </ul>
                       </div>
 
                       <div content-block name="view-console-output" message="View the Console Output" image-link="./views/labs/dev-hub/images/10.png">
@@ -186,42 +192,36 @@ develop your apps. When development is complete, you can save a hardened OS imag
                       <h2 class="labHidden">Package Management Overview</h2>
                       <h4>Package Management Overview </h4>
                       <p>As periodic updates are released, it is important to ensure that you are keeping your gateway development environment up to date.</p>
-                      <p>  The Developer Hub interface provides an easy mechanism to perform these package updates. </p>
+                      <p>The Developer Hub interface provides an easy mechanism to perform these package updates. </p>
                   </div>
 
                   <div content-block name="list-packages" message="List Packages" image-link="./views/labs/dev-hub/images/18.png">
                       <h2 class="labHidden">List Packages</h2>
                       <h4>List Packages </h4>
-                      <p>The update indicator in the top right corner shows the number of updates needs to be installed.</p>
-                      <p>Before clicking to update, it is important that you first update the Developer Hub itself.</p>
-                      <p>This will ensure that the Developer Hub has the latest code to deal with the rest of the updates since it is performing the updates. </p>
+                      <ul>
+                        <li><p>The update indicator in the top right corner shows the number of updates needs to be installed.</p></li>
+                        <li><p>Before an update, it is important that you first update the Developer Hub itself.</p></li>
+                        <li><p>This will ensure that the Developer Hub has the latest code to deal with the rest of the updates since it is performing the updates. </p></li>
+                      </ul>
                   </div>
 
                   <div content-block name="update-repositories" message="Update Repositories" image-link="./views/labs/dev-hub/images/19.png">
                       <h2 class="labHidden">Update Repositories</h2>
                       <h4>Update Repositories </h4>
-                      <p>Click on the <b>Add Repo</b> button. It will ensure we that all latest packages to be updated. Intel_Repository will be located by default.</p>
-                        <p>Click on the <b>Update Repositories</b> button.</p>
-                        <p>After a minute or so, the button text will change to Updated.</p>
-                        <p>Now close the window and there will be updated list of packages under the packages tab.</p>
-                  </div>
-
-                  <div content-block name="update-node-red-experience-devkit-package" message="Update Node Red Experience Devkit Package " image-link="./views/labs/dev-hub/images/20.png">
-                      <h2 class="labHidden">Update Node Red Experience Devkit Package</h2>
-                      <h4>Update Node Red Experience Devkit Package </h4>
-                      <p>Now click on <b>node-red-experience-devkit</b> package from the list and a new screen will allow you to update or uninstall that package.</p>
-                        <p>Proceed to update the node-red-experience-devkit package. </p>
-                          <p>Click on <b>Update</b> button</p>
-                        <p>As the dialog box indicates, this will take a few minutes. It has to download the package update from the internet and install it.</p>
+                      <ul>
+                        <li><p>Click on the <b>Add Repo</b> button. Intel_Repository will be located by default.</p></li>
+                        <li><p>Click on the <b>Update Repositories</b> button.</p></li>
+                        <li><p>After a minute or so, the button text will change to Updated.</p></li>
+                        <li><p>Now close the window and there will be updated list of packages under the packages tab.</p></li>
+                        <li><p>Selectively a package can be updated. To update a package click on its name and it will pop up another dialog box which has an option to either update or unistall</p></li>
+                      </ul>
                   </div>
 
                   <div content-block name="update-all-packages" message="Update all packages" image-link="./views/labs/dev-hub/images/21.png">
                       <h2 class="labHidden">Package Management Overview</h2>
                       <h4>Package Management Overview [Optional Step]</h4>
-                      <p class="alert alert-warning">This is optional step as updating all the packages will be time-consuming and also depends on the bandwidth available. </p>
-                      <p>It is ready to update the rest of the packages. To do this, click on the <b>Install Updates</b> button under the packages tab.</p>
-                      <p>It will update the rest of the packages in one action. </p>
-
+                      <p class="alert alert-warning">Please <b>do not</b> click on "Install Updates" since updating all the packages will be time-consuming and also depends on the bandwidth available. </p>
+                      <p>With the above changes the system is ready to update the rest of the packages. Clicking on the <b>Install Updates</b> button under the packages tab will update all the packages. However we will skip this at it takes a long time</p>
                   </div>
 
               </div>
@@ -232,15 +232,18 @@ develop your apps. When development is complete, you can save a hardened OS imag
                 <div content-block name="open-node-red" message="Open Node-Red in Intel IoT Developer Hub" image-link="./views/labs/dev-hub/images/25.png">
                     <h2 class="labHidden">Open Node-Red in Intel IoT Developer Hub</h2>
                     <h4>Open Node-Red in Intel IoT Developer Hub</h4>
-                    <p>Connect a sensor to the gateway and use Node-Red to automatically read temperature in Node-Red application. </p>
-                    <p>Enter root as username and password, if required.</p>
-                    <p class="alert alert-warning">Connect Temperature Sensor from Sensor kit to A1 pin of base shield connected to Arduino 101.</p>
+                    <ul>
+                      <li><p>Open Node-Red application from IoT Developer Hub as shown in figure</p></li>
+                      <li><p>Enter root as username and password, if required.</p></li>
+                      <li><p>Next we will connect a temperature sensor to the gateway and use Node-Red flows read temperature in Node-Red application.</p></li>
+                    </ul>
+                    <p class="alert alert-warning">Connect the temperature sensor from sensor kit to pin A1 on the base shield of Arduino 101</p>
                 </div>
                 <div content-block name="open-node-red" message="Create Node-Red Flow" image-link="./views/labs/dev-hub/images/33.png">
                     <h2 class="labHidden">Create Node-Red Flow</h2>
                     <h4>Change Node-Red Flow</h4>
                     <p>You can see there is already one Node-red flow running. This flow is what is showing the IP address in the LCD. Let's modify it to add more information to the display.</p>
-                    <p>Drag <b>Grove Temperature</b> node from UPM_Sensors located in left side-bar</p>
+                    <p>Drag <b>Grove Temperature</b> node from "UPM_Sensors" located in left side-bar</p>
                     <ul>
                       <li>Name:Grove Temperature</li>
                       <li>Platform: Firmata</li>
@@ -248,7 +251,7 @@ develop your apps. When development is complete, you can save a hardened OS imag
                       <li>Unit: Celsius</li>
                       <li>Interval(ms): 1000</li>
                     </ul>
-                    <p>Drag <b>chart tag</b> node from function and connect input with the output of Grove Temperature node</p>
+                    <p>Drag <b>chart tag</b> node from "function" located in left side bar and connect it's input with the output of Grove Temperature node</p>
                     <ul>
                       <li>Title: Temperature Sensor</li>
                       <li>Type: Gauge</li>
@@ -261,22 +264,17 @@ develop your apps. When development is complete, you can save a hardened OS imag
                       <li>Source: Local</li>
                       <li>Source Priority: &lt;Leave Blank&gt;</li>
                     </ul>
-                    <p>Connect to the <b>Charts</b> node in the flow. That node is a <b>mqtt</b> node from output section. Connect input with the output of chart tag node</p>
-                    <ul>
-                      <li>Server: localhost:1883</li>
-                      <li>Topic: /sensors</li>
-                      <li>QoS: &lt;Leave Blank&gt;</li>
-                      <li>Retain: &lt;Leave Blank&gt;</li>
-                      <li>Name: Chart</li>
-                    </ul>
+                    <p>Connect the output of "Temperature Sensor" chart tag to the input of <b>Charts</b> node which is already existing in the flow. That node is a <b>mqtt</b> node from output section</p>
                     <p>Verify your flow with the given image.</p>
                 </div>
                 <div content-block name="open-node-red" message="Import Node-Red Flow" image-link="./views/labs/dev-hub/images/27.png">
                     <h2 class="labHidden">Import Node-Red Flow</h2>
-                    <h4>Import Node-Red Flow"</h4>
-                    <p>This step is optional if you have already created node-red Flow </p>
-                    <p>Import the flow directly with below given json object. Open <b>Menu bar > Import > Clipboard</b></p>
-                    <p>Copy the code and paste in the node-red clipboard</p>
+                    <h4>Import Node-Red Flow (Optional)</h4>
+                    <ul>
+                      <li><p>This step is optional if you have already created the above temperature node-red flow </p></li>
+                      <li><p>Import the flow directly with below given json object. Start a new flow by clicking on the "+" icon in the same line as "Flow 1" tab. Then open <b>Menu bar > Import > Clipboard</b></p></li>
+                      <li><p>Copy the code and paste in the node-red clipboard</p></li>
+                    </ul>
                     <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
    {
       "id":"1dc1405c.26a96",
@@ -362,17 +360,19 @@ develop your apps. When development is complete, you can save a hardened OS imag
                 <div content-block name="open-node-red" message="Deploy Node-Red Flow" image-link="./views/labs/dev-hub/images/28.png">
                     <h2 class="labHidden">Deploy Node-Red Flow</h2>
                     <h4>Deploy Node-Red Flow</h4>
-                    <p>Click on red <b>Deploy button </b>situated on the top right corner.</p>
-                    <p>The message will pop up showing successfully deployed on the top bar.</p>
+                    <ul>
+                      <li><p>Click on red <b>Deploy button </b>situated on the top right corner.</p></li>
+                      <li><p>The message will pop up showing successfully deployed on the top bar.</p></li>
+                    </ul>
                 </div>
                 <div content-block name="view-dev-hub" message="View Temperature Sensor on Developer Hub" image-link="./views/labs/dev-hub/images/29.png">
-                    <h2 class="labHidden">View on Temperature Sensor Developer Hub</h2>
-                    <h4>View on Temperature Sensor Developer Hub</h4>
-                    <p>View the Intel IoT Developer Hub Dashboard to see the Temperature gauge is now included and displays temperature data.<p>
-                    <p>Test the sensor by gently touching it. The temperature values will change immediately.</p>
+                    <h2 class="labHidden">View Temperature Sensor on IoT Developer Hub</h2>
+                    <h4>View Temperature Sensor on IoT Developer Hub</h4>
+                    <ul>
+                      <li><p>View the Intel IoT Developer Hub Dashboard to see the Temperature gauge is now included and displays temperature data.<p></li>
+                      <li><p>Test the sensor by gently touching it. The temperature values will change immediately.</p></li>
+                    </ul>
                 </div>
-
-
 
               </div>
 
@@ -400,19 +400,22 @@ develop your apps. When development is complete, you can save a hardened OS imag
                 <div content-block name="deployable-gateway-image" message="Creating Deployable Gateway Image" image-link="./views/labs/dev-hub/images/23.png">
                     <h2 class="labHidden">Creating Deployable Gateway Image</h2>
                     <h4>Creating Deployable Gateway Image </h4>
-                    <p>Create a deployable OS Image for production use based on the OS and software running on this gateway.</p>
-                      <p>The deployment OS image includes all applications, data files, and OS updates from the running gateway, but changes can be made to the OS settings and some configuration files to harden the OS to provide better security in a deployment environment.</p>
-                      <p>The OS image is hardened and saved to a USB drive while leaving the development gateway OS unchanged.</p>
-                      <p>The replicated image can quickly be deployed onto another system for evaluation & testing. This enables validation of an IOT system prior to field deployment.</p>
+                    <p class="alert alert-warning">Please note <b>do not</b> try this option in lab since it takes a while to deploy an image on USB drive</p>
+                    <ul>
+                      <li><p>Create a deployable OS Image for production use based on the OS and software running on this gateway.</p></li>
+                      <li><p>The deployment OS image includes all applications, data files, and OS updates from the running gateway, but changes can be made to the OS settings and some configuration files to harden the OS to provide better security in a deployment environment.</p></li>
+                      <li><p>The OS image is hardened and saved to a USB drive while leaving the development gateway OS unchanged.</p></li>
+                      <li><p>The replicated image can quickly be deployed onto another system for evaluation & testing. This enables validation of an IOT system prior to field deployment.</p></li>
+                    </ul>
                 </div>
 
                 <div content-block name="luci-interface" message="LuCI - Network COnfiguration Interface" image-link="./views/labs/dev-hub/images/24.png">
                     <h2 class="labHidden">LuCI - Network Configuration Interface</h2>
                     <h4>LuCI - Network Configuration Interface </h4>
                     <p>LuCI is an open-source administrative tool for managing Linux system settings, network information, logs, processes, and more.</p>
-                    <p>Use a Web browser to navigate to the Gateway IP address. For example, type <strong>https://Gateway_IP_Address</strong> in the URL box, where Gateway_IP_Address is the IP address for your Gateway in the format 123.456.1.1</p>
+                    <p>Use a Web browser to navigate to the Gateway IP address. For example, type <strong>https://Gateway_IP_Address</strong> in the URL box, where Gateway_IP_Address is the IP address for your Gateway.</p>
                     <p class="alert alert-warning">Make sure to add https for the LuCI interface </p>
-
+                    <p>Login with username as root and your password (if you did not change your password default will be root)
                     <p>The Status menu shows the Overview option that displays an operating system configuration summary and other information. Following functionalities available under Status Menu </p>
                     <ul>
                       <li>Up-time since last boot</li>
@@ -457,9 +460,11 @@ develop your apps. When development is complete, you can save a hardened OS imag
                   <div content-block name="access-cloud-commander" message="Access Cloud Commander" image-link="./views/labs/dev-hub/images/11.png">
                       <h2 class="labHidden">Access Cloud Commander</h2>
                       <h4>Access Cloud Commander </h4>
-                      <p>You can access Cloud commander from the Intel IoT Developer hub.</p>
-                      <p>Click on the <b>Administration</b> Icon and then click on <b>Launch</b> button under folder icon. </p>
-                      <p>If dialog box opens up for authentication then enter root in username and password text box.</p>
+                      <ul>
+                        <li><p>You can access Cloud commander from the Intel IoT Developer hub.</p></li>
+                        <li><p>Click on the <b>Administration</b> Icon and then click on <b>Launch</b> button under folder icon. </p></li>
+                        <li><p>If dialog box opens up for authentication then enter root in username and password text box.</p></li>
+                      </ul>
                   </div>
 
                   <div content-block name="get-started-cloud-commander" message="Get Started with Cloud Commander" image-link="./views/labs/dev-hub/images/12.png">
@@ -490,38 +495,44 @@ develop your apps. When development is complete, you can save a hardened OS imag
               <div content-block name="create-hello-world" message="Create Hello World File" image-link="./views/labs/dev-hub/images/13.png">
                   <h2 class="labHidden">Create Hello World File</h2>
                   <h4>Create Hello World File </h4>
-                  <p>Navigate to <code>/home/root/</code> directory in the right side bar.</p>
-                  <p>Right click on the empty white area and navigate to <b>New</b> and then click on <b>File</b></p>
-                  <p>Enter name of New File as <code>hello-world.py</code></p>
-                  <p>Then Click on <b>OK</b> </p>
-                  <p>This will create a blank python file in the /home/root directory. In the next step we will edit the file using cloud commander.</p>
-
+                  <ul>
+                    <li><p>Navigate to <code>/home/root/</code> directory in the right side bar.</p></li>
+                    <li><p>Right click on the empty white area and navigate to <b>New</b> and then click on <b>File</b></p></li>
+                    <li><p>Enter name of New File as <code>hello-world.py</code></p></li>
+                    <li><p>Then Click on <b>OK</b> </p></li>
+                    <li><p>This will create a blank python file in the /home/root directory. In the next step we will edit the file using cloud commander.</p></li>
+                  </ul>
               </div>
 
               <div content-block name="edit-hello-world" message="Edit Hello World File" image-link="./views/labs/dev-hub/images/14.png">
                   <h2 class="labHidden">Edit Hello World File</h2>
                   <h4>Edit Hello World File </h4>
-                  <p>Right click on <code>hello-world.py</code> file. </p>
-                  <p>Click on <b>"Edit"</b></p>
-                  <p>This will open a text editor in the browser itself. You can write your code, modify it or delete your code from browser.</p>
-                  <p>Type <code>print "Hello World" </code> in the editor.</p>
-                  <p>Right click in empty space and click on <b>"Save"</b> to save the edited file.</p>
-                  <p>After editing, close the editor.</p>
-
+                  <ul>
+                    <li><p>Right click on <code>hello-world.py</code> file. </p></li>
+                    <li><p>Click on <b>"Edit"</b></p></li>
+                    <li><p>This will open a text editor in the browser itself. You can write your code, modify it or delete your code from browser.</p></li>
+                    <li><p>Type <code>print "Hello World" </code> in the editor.</p></li>
+                    <li><p>Right click in empty space and click on <b>"Save"</b> to save the edited file.</p></li>
+                    <li><p>After editing, close the editor.</p></li>
+                  </ul>
 
               </div>
 
               <div content-block name="open-web-terminal" message="Open web based terminal" image-link="./views/labs/dev-hub/images/15.png">
                   <h2 class="labHidden">Open web based terminal</h2>
                   <h4>Open web based terminal</h4>
-                  <p>Click on <b>>_~</b> button located at bottom right of the page to open web based terminal.</p>
+                  <ul>
+                    <li><p>Click on <b>>_~</b> button located at bottom right of the page to open web based terminal.</p></li>
+                  </ul>
               </div>
 
               <div content-block name="run-hello-world" message="Run Hello World File" image-link="./views/labs/dev-hub/images/16.png">
                   <h2 class="labHidden">Run Hello World File</h2>
                   <h4>Run Hello World File </h4>
-                  <p>Once the web based terminal is open, enter <code>cd /home/root/</code> in the terminal to open directory. </p>
-                  <p>Now, enter <code>python hello-world.py</code> to execute the code.</p>
+                  <ul>
+                    <li><p>Once the web based terminal is open, enter <code>cd /home/root/</code> in the terminal to open directory. </p></li>
+                    <li><p>Now, enter <code>python hello-world.py</code> to execute the code.</p></li>
+                  </ul>
               </div>
         </div>
 
