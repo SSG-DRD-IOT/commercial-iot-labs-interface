@@ -92,7 +92,7 @@
 
                 <div content-block name="download-xdk-intro" message="Download the Intel XDK Introduction">
                     <h2 class="labHidden">Download the Intel XDK Introduction</h2>
-                    <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel XDK IoT Edition.</p>
+                    <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide" target="_blank">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel XDK IoT Edition.</p>
                 </div>
 
                 <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction" image-link="./views/labs/sensors-javascript/images/xdk-splash.png">
@@ -106,7 +106,7 @@
                         Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.
                     </p>
 
-                    <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The
+                    <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide" target="_blank">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The
                         IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
                 </div>
 
@@ -122,6 +122,17 @@
                     <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-existing account.</p>
                     <div class="alert alert-info">
                         If you clicked the <b>later</b> on the sign in page then you will not see this step.</div>
+                </div>
+
+                <div content-block name="disable-node-red" message="Disable Node-Red service">
+                  <p><b>  Disable Node-Red service running on your Gateway</b></p>
+                  <ul>
+                    <li><p>In previous lab we were executing few Node-Red flows which made use of system resources like (sensors, GPIOs, I2C etc.). Since in this lab we will be using the same resources to avoid any contention we will disable the node-red service during this exercise</li></p>
+                    <li><p>Open a terminal to your Gateway and give following command:</li></p>
+                    <pre><code>systemctl stop node-red-experience</pre></code>
+                    <li><p>Check that service has stopped</li></p>
+                    <pre><code>systemctl status node-red-experience</pre></code>
+                  </ul>
                 </div>
 
                 <div content-block name="click-on-templates" message="Click on Templates" image-link="./views/labs/sensors-javascript/images/image_2.png">
@@ -195,19 +206,37 @@
                     <p>A message in the console log will appear to confirm the update.</p>
                 </div>
 
-                <div content-block name="build-the-xdk-app" message="Build the application" image-link="./views/labs/sensors-javascript/images/image_10.png">
-                    <h2 class="labHidden">Build the application</h2>
+
+                <div content-block name="modify-the-xdk-app" message="Modify LED blink code for NUC Gateway" image-link="./views/labs/sensors-javascript/images/led-xdk-NUC.png">
+                  <li><p>The default LED blinky app does not have support for Arduino 101 connected through NUC. We will make some minor changes to the code.</li></p>
+                  <li><p>Open <b>cfg-app-platform.js</b> file and make below changes in the functions indicated in comments (also shown in figure) and save the file</li></p>
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">//Change in cfg.int = function()
+case cfg.mraa.INTEL_DE3815:               // NUC
+	io = opt.altPin ? io : 525 ;            // use alternate pin
+	break ;                                 // GPIO pin 13 + 512 is Firmata offset
+
+//Change in cfg.test = function()
+case cfg.mraa.INTEL_GALILEO_GEN1:           // Gallileo Gen 1
+case cfg.mraa.INTEL_GALILEO_GEN2:           // Gallileo Gen 2
+case cfg.mraa.INTEL_EDISON_FAB_C:           // Edison
+case cfg.mraa.INTEL_DE3815:                 // NUC Gateway
+	checkNode = checkNodeVersion("4.0") ;
+	checkMraa = checkMraaVersion("1.0.0") ;
+                  </pre></ui-codemirror>
+                </div>
+                <div content-block name="build-the-xdk-app" message="Upload the application" image-link="./views/labs/sensors-javascript/images/image_10.png">
+                    <h2 class="labHidden">Upload the application</h2>
                     <p><img class="labHidden" alt="" data-fid="503910" src="https://software.intel.com/sites/default/files/managed/16/d8/image_10.png" typeof="foaf:Image"></p>
 
-                    <p>The Build button will fetch all of the dependecies listed in the package.json file. It will install them on the Intel Edison board. Run build any time you create a new project, or add/remove Node modules from an existing project.</p>
+                    <p>The Upload button will fetch all of the dependecies listed in the package.json file and it will install them on the device. Run it any time you create a new project, or add/remove Node modules from an existing project.</p>
 
                     <ol>
                         <li>
-                            <p>In the bottom toolbar, click the "<strong>Install/Build</strong>" icon.</p>
+                            <p>In the bottom toolbar, click the "<strong>Upload</strong>" icon.</p>
                         </li>
 
                         <li>
-                            <p>Wait a moment for the packages to download and install. You will see a confirmation message in the console log.</p>
+                            <p>Wait a moment for the packages to download on the device and install. You will see a confirmation message in the console log.</p>
                             <figure>
                                 <figcaption>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</figcaption>
                             </figure>
@@ -222,7 +251,7 @@
 
 
                     <p>
-                        Upload the project files to the IoT device and run it. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
+                        Once upload is finished to the IoT device run the application. Remember that every time you make changes to files and you want to see the changes: (1) save the file, (2) upload, (3) run.
                     </p>
 
                     <ol>
@@ -233,28 +262,16 @@
                         <li>
                             <p>Keep an eye on the console log bar for any runtime errors.</p>
                             <p>Click the "Toggle console window" icon if you see any messages and the console is not already expanded.</p>
-                            <div class="alert alert-warning">
-                                <p><strong>Get a "cannot find module mraa" message?</strong></p>
-                                <p><img class="labHidden" alt="" data-fid="503912" src="https://software.intel.com/sites/default/files/managed/24/f0/image25.png" typeof="foaf:Image"></p>
-                                <p>If you see this error message, your board is missing libmraa, a library for GPIO communication on Linux platforms.</p>
-                                <p>Connect to your IoT board via serial or SSH. Then run the following commands:</p>
-                                <pre><code>echo "src mraa-upm http://iotdk.intel.com/repos/1.1/intelgalactic" > /etc/opkg/mraa-upm.conf
-opkg update
-opkg install libmraa0</code></pre>
-                                <p>The first command will edit the mraa-upm config file on the board. The last two commands use the board's built-in Opkg package manager to download and update the missing library</p>
-                                <p>After updating the MRAA libraries, return to the Intel® XDK. Click the "Run" icon again to re-run the project on the device</p>
-                            </div>
                         </li>
                     </ol>
                 </div>
 
-                <div content-block name="blink-the-light" message="Congratulations, you just ran your first Intel® XDK application!" image-link="./views/labs/sensors-javascript/images/image28.png">
+                <div content-block name="blink-the-light" message="Congratulations, you just ran your first Intel® XDK application!" image-link="./views/labs/sensors-javascript/images/image_arduino_led.png">
                     <h2 class="labHidden">Congratulations, you just ran your first Intel® XDK application!</h2>
-                    <p><img class="labHidden" alt="" data-fid="503913" src="https://software.intel.com/sites/default/files/managed/61/94/image28.png" typeof="foaf:Image"></p>
-
+                    <p><img class="labHidden" alt="" data-fid="503913" src="https://software.intel.com/sites/default/files/managed/61/94/image_arduino_led.png" typeof="foaf:Image"></p>
 
                     <p>Look at your Intel® IoT board for a blinking light.</p>
-                    <p> The LED is located near the center of the board.</p>
+                    <p> The LED is located near the center of the board as shown in the figure</p>
 
                     <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
 
@@ -279,7 +296,7 @@ opkg install libmraa0</code></pre>
                             <p>Install the Grove Base Shield onto the Arduino* 101 Arduino expansion board.</p>
                         </li>
                         <li>
-                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
+                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
@@ -325,13 +342,18 @@ opkg install libmraa0</code></pre>
                     <ol>
 
                         <li>
+                            <p>Create an offset var of 512. This offset is required since we use Firmata to connect Arduino* 101 with NUC gateway which needs this conversion for all the I/O pins</p>
+                            <p><code>var OFFSET = 512;</code></p>
+                        </li>
+
+                        <li>
                             <p>Include the JS UPM library for the basic Grove sensors.</p>
                             <p><code>var groveSensor = require('jsupm_grove');</code></p>
                         </li>
 
                         <li>
-                            <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 0.</p>
-                            <p><code>var temp = new groveSensor.GroveTemp(0);</code></p>
+                            <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 1 and add the offset. Here 0.66 is a scaling factor, the grove temp sensor is designed to read value at 3.3V however since we are using 5.5V we need this conversion factor</p>
+                            <p><code>var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66);</code></p>
                         </li>
 
                         <li>
@@ -352,29 +374,31 @@ opkg install libmraa0</code></pre>
                         <li>
                             <p>The final code should look like this:</p>
 
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var groveSensor = require('jsupm_grove');
-var temp = new groveSensor.GroveTemp(0);
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var OFFSET = 512;
+var groveSensor = require('jsupm_grove');
+var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66);
 var celsius = temp.value();
 var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
 console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");  </li>
 
                         <li>
                             <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel® XDK to:
-                                <br> (1) Build your application,
-                                <br> (2) Upload it to Arduino* 101, and
-                                <br> (3) Run the application.</p>
+                                <br> (1) Upload it to Arduino* 101, and
+                                <br> (2) Run the application.</p>
                         </li>
 
                         <li>
                             <p>If successful, you should see the temperature output in the Intel® XDK console.</p>
                         </li>
-
                     </ol>
+                    <div class="alert alert-warning">
+                      <p>Sometimes a single reading from the temperature sensor might be garbled, ignore this. Once we write a loop to read data continuously from sensor we should not get this garbled value</p>
+                    </div>
                 </div>
 
                 <div content-block name="repeat-sensor-reading" message="Make the sensor reading repeat once per second">
                     <h2 class="labHidden">Make the sensor reading repeat once per second</h2>
-                    <p>Currently the temperature sensor is only read on application start. Add a JavaScript <code>setInterval</code> to regularly poll the sensor every second (1000 miliseconds).</p>
+                    <p>Currently the temperature sensor is only read once on application start. Add a JavaScript <code>setInterval</code> to regularly poll the sensor every second (1000 miliseconds).</p>
                     <p>If you are not familiar with JavaScript, the format should look similar to this:</p>
                     <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function monitor() {
     setInterval(function() {
@@ -396,8 +420,9 @@ monitor();</pre></ui-codemirror>
                         <li>
                             <p>
                                 With polling, the exercise code should look like this:</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var groveSensor = require('jsupm_grove');
-var temp = new groveSensor.GroveTemp(0);
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var OFFSET = 512;
+var groveSensor = require('jsupm_grove');
+var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66);
 
 function monitor() {
     setInterval(function() {
@@ -430,7 +455,7 @@ monitor();</pre></ui-codemirror>
                             <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
                             <dl>
                                 <dt>I2C bus (Number)</dt>
-                                <dd>For the Intel Edison, <strong>use <code>0</code></strong>.</dd>
+                                <dd>For the Intel Edison, <strong>use <code>0</code></strong> with an offset of <strong>use <code>512</code></strong>.</dd>
 
                                 <dt>lcdAddress (Number)</dt>
                                 <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
@@ -463,11 +488,12 @@ monitor();</pre></ui-codemirror>
 
                         <li>
                             <p>Below is an example of the final solution.</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var OFFSET = 512;
+// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
 var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove Temperature Sensor
-var temp = new groveSensor.GroveTemp(0); // Create a new instance of a Grove RGB LCD screen
-var screen = new LCD.Jhd1313m1(0, 0x3E, 0x62);
+var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove RGB LCD screen
+var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
 
 function monitor() {
     setInterval(function() { // Read the temperature sensor
@@ -500,7 +526,7 @@ monitor();</pre></ui-codemirror>
 
 
 
-            <div ibox title="Exercise 2: Earthquake Detector">
+        <!--    <div ibox title="Exercise 2: Earthquake Detector">
                 <div content-block name="earthquake-sensor-intro" message="Read the introduction to the Earthquake Detector Exercise">
                     <h2 class="labHidden">Read the introduction to the Earthquake Detector Exercise</h2>
 
@@ -678,7 +704,7 @@ main();</pre></ui-codemirror>
                     </ol>
 
                 </div>
-            </div>
+            </div> -->
 
             <div ibox collapse title="Additional resources">
                 <p>Information, community forums, articles, tutorials and more can be found at the <a href="https://software.intel.com/iot">Intel Developer Zone</a>.</p>

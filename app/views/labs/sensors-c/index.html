@@ -36,22 +36,29 @@
                 </div>
             </div>
 
-            <div ibox collapse title="Install Intel® System Studio IoT Edition">
+            <div ibox title="Install Intel® System Studio IoT Edition">
               <div content-block name="download-iss-intro" message="Download Intel System Studio Iot Edition" image-link="./views/labs/sensors-c/images/IoT-ISS-SysStudio.png">
                 <h2 class="labHidden">Download Intel System Studio Iot Edition</h2>
-                <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel System Studio IoT Edition.</p>
+                <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide" target="_blank">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and download a copy of the Intel System Studio IoT Edition.</p>
 
                 <div class="alert alert-warning">
                   <p>Intel System Studio Iot Edition has several dependencies. Please be sure to install these before lauching the Intel System Studio installer.</p>
                   <ul>
-                    <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Oracle Java 8 SDK</a></li>
-                    <li><a href="https://www.docker.com/">Docker Tools</a></li>
+                    <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">Oracle Java 8 SDK</a></li>
+                    <li><a href="https://www.docker.com/" target="_blank">Docker Tools</a></li>
                   </ul>
+                </div>
+                <div class="alert alert-warning">
+                  <p>There are some prerequisites for installing Docker and Intel System Studio explained in below link. Please make sure you go through the Docker installation so that both Hyper-V and Docker are running properly before your Intel System Studio installation else you will get errors<p>
+                    <ul>
+                      <li><a href="https://software.intel.com/en-us/installing-the-intel-system-studio-iot-edition" target="_blank">Docker and Intel® System Studio Installation Prerequisites</a>
+                    </ul>
                 </div>
               </div>
 
-              <div content-block name="iss-images" message="Select the Intel IoT Gateway 64-bit image" image-link="./views/labs/sensors-c/images/iss-images.png">
-                  <h2 class="labHidden">Select the Intel IoT Gateway 64-bit image</h2>
+              <div content-block name="iss-images" message="Start your installation and select the Intel IoT Gateway 64-bit image" image-link="./views/labs/sensors-c/images/iss-images.png">
+                  <h2 class="labHidden">Start your installation and select the Intel IoT Gateway 64-bit image</h2>
+                  <p>Start your ISS installation and go through the Welcome and License pages</p>
                   <p>Your Intel IoT Gateway is has a 64-bit processor and operating system. Please be sure to install the Intel IoT Gateway 64-bit image.</p>
                   <p>This operating system image is installed locally to your development computer and run within a Docker container. Intel System Studio IoT Edition will compile against.
               </div>
@@ -62,7 +69,7 @@
               </div>
             </div>
 
-            <div ibox collapse title="Connect the Hardware for your IoT Device">
+            <div ibox title="Connect the Hardware for your IoT Device">
               <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/sensors-c/images/temperature-sensors.jpg">
                 <h2 class="labHidden">Install the Grove base shield and sensors</h2>
 
@@ -78,8 +85,17 @@
                   </li>
                 </ol>
               </div>
+              <div content-block name="connect-sensors" message="Disable Node-Red service">
+                <p><b>Disable Node-Red service running on your Gateway</b></p>
+                <ul>
+                  <li><p>In previous lab we were executing few Node-Red flows which made use of system resources like (sensors, GPIOs, I2C etc.). Since in this lab we will be using the same resources to avoid any contention we will disable the node-red service during this exercise</li></p>
+                  <li><p>Open a terminal to your Gateway and give following command:</li></p>
+                  <pre><code>systemctl stop node-red-experience</pre></code>
+                  <li><p>Check that service has stopped</li></p>
+                  <pre><code>systemctl status node-red-experience</pre></code>
+                </ul>
+              </div>
             </div>
-
             <div ibox title="Create the Temperature on LCD sample in the Intel® System Studio IoT Edition">
               <div content-block name="iss-new-project" message="Create a new Intel IoT Project" image-link="./views/labs/sensors-c/images/iss-new-project.png">
                 <p>Open Intel System Studio and click on New -> Intel Project for IoT</p>
@@ -97,8 +113,8 @@
                 <p>Select the Intel IoT C/C++ Project</p>
               </div>
 
-              <div content-block name="iss-new-project-ip" message="Select Intel IoT C/C++ project" image-link="./views/labs/sensors-c/images/iss-new-project-ip.png">
-                <p>Enter the IP address or the hostname of you Intel IoT Gateway.</p>
+              <div content-block name="iss-new-project-ip" message="Enter the IP address of your Intel IoT Gateway" image-link="./views/labs/sensors-c/images/iss-new-project-ip.png">
+                <p>Enter the IP address or the hostname of your Intel IoT Gateway.</p>
               </div>
 
               <div content-block name="iss-new-project-64" message="Select the sample temperature on LCD application" image-link="./views/labs/sensors-c/images/iss-new-project-sample.png">
@@ -111,12 +127,12 @@
               </div>
 
               <div content-block name="iss-new-project-64" message="Click on the Problems tab and then open the Errors in the table displayed." image-link="./views/labs/sensors-c/images/iss-temperature-sample-errors.png">
-                <p>Notice that there are some unresolved linker dependencies.  <b>This is because the UPM library is divided into smaller libraries, usually one library will correspond with a single sensor or actuator.</b></p>
+                <li><p>Notice that there are some unresolved linker dependencies. These can be seen on the "Problems" tab at the bottom. <b>This is because the UPM library is divided into smaller libraries, usually one library will correspond with a single sensor or actuator.</b></p></li>
 
-                <p>UPM supports more than 300 types of sensors and actuators and it is an active open source project available on Github.</p>
+                <li><p>UPM supports more than 300 types of sensors and actuators and it is an active open source project available on Github.</p></li>
 
-                <p>Here is the link to the source code for <a href="https://github.com/intel-iot-devkit/upm">UPM on Github</a>.</p>
-                <p class="alert alert-warning">The UPM source code repository has many <a href="https://github.com/intel-iot-devkit/upm/tree/master/examples">examples</a> for many sensors and actuators. Examples are given in C, C++, JavaScript, Java and Python.</p>
+                <li><p>Here is the link to the source code for <a href="https://github.com/intel-iot-devkit/upm" target="_blank">UPM on Github</a>.</p></li>
+                <p class="alert alert-warning">The UPM source code repository has many <a href="https://github.com/intel-iot-devkit/upm/tree/master/examples" target="_blank">examples</a> for many sensors and actuators. Examples are given in C, C++, JavaScript, Java and Python.</p>
               </div>
 
               <div content-block name="iss-new-project-64" message="Go to the Project Properties" image-link="./views/labs/sensors-c/images/iss-new-project-properties.png">
@@ -126,17 +142,17 @@
               <div content-block name="iss-new-project-64" message="Add the LCD Driver library to the project" image-link="./views/labs/sensors-c/images/iss-new-project-add-lib-after.png">
                 <ol>
                   <li>Go to <b>C/C++ General</b> --> <b>Paths and Symbols</b></li>
-                  <li>Then click on the <b>Libraries</b> tab.</p></li>
+                  <li>Then click on the <b>Libraries</b> tab.</li>
                   <li>Click on the Add button that is to the right and type <b>upm-jhd1313m1</b></li>
                   <li>Next, be sure to delete the upm-i2clcd driver</li>
                   <li>Press <b>OK</b> until you are back at the main interface</li>
                 </ol>
               </div>
 
-              <div content-block name="iss-new-project-gateway-platform" message="Add the LCD Driver library to the project" image-link="./views/labs/sensors-c/images/iss-new-project-gateway-platform.png">
-                <p>Even thought this sample project is generate for a menu of example programs, there are a couple of changes that we need to make to get it running on the gateway.</p>
-                <p>First, we need to add the Intel IoT Gateway to the list of platforms that are checked in the beginning of this program.</p>
-                <p><b>Replace lines 124-131 with the following code.</b></p>
+              <div content-block name="iss-new-project-gateway-platform" message="Changes for Intel NUC Gateway" image-link="./views/labs/sensors-c/images/iss-new-project-gateway-platform.png">
+                <li><p>Even though this sample project is generated for a menu of example programs, there are a couple of changes that we need to make to get it running on the gateway.</p></li>
+                <li><p>First, we need to add the Intel IoT Gateway to the list of platforms that are checked in the beginning of this program.</p></li>
+                <li><p><b>Replace lines 124-131 with the following code.</b></p></li>
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// check that we are running on Galileo or Edison
   mraa::Platform platform = mraa::getPlatformType();
   if ((platform != mraa::INTEL_GALILEO_GEN1) &&
@@ -148,15 +164,21 @@
   }</pre></ui-codemirror>
               </div>
 
+              <div content-block name="iss-new-project-64" message="Modify example to use Firmata Offset" image-link="./views/labs/sensors-c/images/iss-c-offset.png">
+                <li><p>If you are using an Arduino 101 that is attached to an Intel IoT Gateway with a USB cable then you are using Firmata and we need to modify the GPIO pins with an offset.</p></li>
+                <li><p>Add an OFFSET of 512 to the pins shown in the figure</p></li>
+                <li><p> Also change the temperature sensor pin from 0 to '1' since we are connected to <b>A1</b>. The 0.66F value added as additional parameter to temperature sensor API is a correction factor. This is required since we are using Arduino with 5V whereas the default values are calculated base on 3.3V</p></li>
+              </div>
+
               <div content-block name="iss-new-project-64" message="Clean and Build the Project" image-link="./views/labs/sensors-c/images/iss-new-project-build.png">
                 <p>Clean and Build the Project</p>
               </div>
 
               <div content-block name="iss-new-project-64" message="Run the Temperature on LCD application" image-link="./views/labs/sensors-c/images/iss-new-project-run.png">
-                <p>Click on the menu Run --> </p>
+                <p>Click on the menu <b>Run --> Run</b></p>
               </div>
 
-              <div content-block name="iss-new-project-64" message="Read the current temperature from you LCD screen" image-link="./views/labs/sensors-c/images/iss-new-project-lcd.jpg">
+              <div content-block name="iss-new-project-64" message="Read the current temperature from your LCD screen" image-link="./views/labs/sensors-c/images/iss-new-project-lcd.jpg">
                 <p>You now should have a program deployed to your Intel IoT Gateway.</p>
               </div>
             </div>
@@ -199,7 +221,7 @@
                   <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/c%2B%2B/jhd1313m1-lcd.cxx" >UPM API - Jhd1313m1</a></li>
                   <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/jhd1313m1-lcd.js" >C++ example: RGB LCD</a></li>
                 </ul>
-<!-- 
+<!--
                 <h4>Accelerometer</h4>
                 <ul>
                   <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/c%2B%2B/mma7660.cxx">UPM C++ example: Accelerometer</a></li>
