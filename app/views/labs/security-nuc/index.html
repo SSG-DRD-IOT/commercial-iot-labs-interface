@@ -28,7 +28,7 @@
                     <p>By the end of this module, you should be able to:</p>
 
                     <ul>
-                        <li>Use McAfee® Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
+                        <li>Use McAfee&reg; Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
                         <li>Have an understanding of the core MEC features, including code and application protection, write and read protection and dynamic whitelisting.</li>
                         <!-- <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li> -->
                         <!-- <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li> -->
@@ -43,12 +43,12 @@
 
 
 
-            <div ibox  title="McAfee® Embedded Control Orientation">
-                <div content-block name="security-objectives" message="Complete the McAfee® Embedded Control Exercises">
-                    <h2 class="labHidden">Complete the McAfee® Embedded Control Exercises</h2>
+            <div ibox  title="McAfee&reg; Embedded Control Orientation">
+                <div content-block name="security-objectives" message="Complete the McAfee&reg; Embedded Control Exercises">
+                    <h2 class="labHidden">Complete the McAfee&reg; Embedded Control Exercises</h2>
                     <h5>Lab Overview</h5>
 
-                    <p>The Intel Iot Gateway provides a McAfee layer that lets you configure McAfee embedded products for the Wind River Linux target platform. McAfee® Embedded Control for the Intel® Security product offering—maintains the integrity of your system by only allowing authorized code to run and only authorized changes to be made to a system. It automatically creates a dynamic whitelist of the “authorized code” on the embedded system. Once the whitelist is created and enabled, the system is locked down to the current, known good baseline and no program or code snippet outside the authorized set can run and no unauthorized changes can be made. McAfee® Embedded Control (MEC) provides the following capabilities in Wind River Linux platforms:</p>
+                    <p>The Intel&reg; IoT Gateway provides a McAfee layer that lets you configure McAfee embedded products for the Wind River Linux target platform. McAfee&reg; Embedded Control for the Intel&reg; Security product offering—maintains the integrity of your system by only allowing authorized code to run and only authorized changes to be made to a system. It automatically creates a dynamic whitelist of the “authorized code” on the embedded system. Once the whitelist is created and enabled, the system is locked down to the current, known good baseline and no program or code snippet outside the authorized set can run and no unauthorized changes can be made. McAfee&reg; Embedded Control (MEC) provides the following capabilities in Wind River Linux platforms:</p>
 
                     <ul>
                         <li>
@@ -63,23 +63,23 @@
                     </ul>
               </div>
 
-              <div content-block name="security-mec-verify" message="Verify setup of McAfee® Embedded Control Exercises">
-                <h5>1. Exploring McAfee® Embedded Control</h5>
+              <div content-block name="security-mec-verify" message="Verify setup of McAfee&reg; Embedded Control Exercises">
+                <h5>1. Exploring McAfee&reg; Embedded Control</h5>
 
-                <p>In this section you will explore how McAfee® Embedded Control integrates into Wind River Linux and how MEC manages the inventory of executables, configurations, operating modes and logging.</p>
+                <p>In this section you will explore how McAfee&reg; Embedded Control integrates into Wind River Linux and how MEC manages the inventory of executables, configurations, operating modes and logging.</p>
 
-                <p>On the Intel Iot Gateway, open a terminal window and execute the following command to confirm that the McAfee® Embedded Control (MEC) rpm is installed:</p>
+                <p>On the Intel&reg; IoT Gateway, open a terminal window and execute the following command to confirm that the McAfee&reg; Embedded Control (MEC) rpm is installed:</p>
                 <pre><code>rpm -qa | egrep solidcore&#13;&#10;solidcores3-6.6.0_145-r0.0.intel_baytrail_64</code></pre>
                 <p>You should see the name of the Solid Core rpm appear. This verifies that it is installed.</p>
               </div>
 
-              <div content-block name="security-features-list" message="Verify features of McAfee® Embedded Control Exercises">
+              <div content-block name="security-features-list" message="Verify features of McAfee&reg; Embedded Control Exercises">
 
-                    <p>Next let's verify which version of McAfee® Embedded Control is installed on your gateway</p>
+                    <p>Next let's verify which version of McAfee&reg; Embedded Control is installed on your gateway</p>
                     <pre><code>sadmin license list&#13;&#10;MEC Essential</code></pre>
-                    <p class="alert alert-info">If you see MEC Essential installed, then you have the minimal McAfee® Embedded Control installation.  This version has a reduced feature set and is available with the free version of your Wind River Linux operating system.</p>
+                    <p class="alert alert-info">If you see MEC Essential installed, then you have the minimal McAfee&reg; Embedded Control installation.  This version has a reduced feature set and is available with the free version of your Wind River Linux operating system.</p>
 
-                    <p>Next let's next verify which features are enabled with your version of McAfee® Embedded Control</p>
+                    <p>Next let's next verify which features are enabled with your version of McAfee&reg; Embedded Control</p>
                     <pre><code>sadmin features list&#13;&#10;checksum&#9;&#9;Enabled&#13;&#10;integrity&#9;&#9;Enabled</code></pre>
 
                     <p>Note the following aspect of the MEC features:</p>
@@ -103,14 +103,14 @@
                     </ul>
                   </div>
 
-                  <div content-block name="security-mec-help" message="Observe the list of possible commands in the help of McAfee® Embedded Control ">
+                  <div content-block name="security-mec-help" message="Observe the list of possible commands in the help of McAfee&reg; Embedded Control ">
                     <p>Execute the following command to display the help menu:</p>
                     <pre><code>sadmin help</code></pre>
                     <img src="./views/labs/security-nuc/images/sadmin-help.png" alt="image alt text" />
                   </div>
 
-                  <div content-block name="security-mec-status" message="Find the current status of McAfee® Embedded Control" image-link="./views/labs/security-nuc/images/sadmin-status.png">
-                    <p>As the MEC administrators, execute the following command to check the status of the McAfee® Embedded Control on your target:</p>
+                  <div content-block name="security-mec-status" message="Find the current status of McAfee&reg; Embedded Control" image-link="./views/labs/security-nuc/images/sadmin-status.png">
+                    <p>As the MEC administrators, execute the following command to check the status of the McAfee&reg; Embedded Control on your target:</p>
                     <pre><code>sadmin status</code></pre>
                     <img class="labHidden" alt="" src="./views/labs/security-nuc/images/sadmin-status.png">
                           <p>Observe that the status is Unsolidified.</p>
@@ -156,13 +156,13 @@
                           </table>
                         </div>
 
-                        <div content-block name="security-mec-status" message="Look at the SolidCore log files for  McAfee® Embedded Control">
+                        <div content-block name="security-mec-status" message="Look at the SolidCore log files for  McAfee&reg; Embedded Control">
 
                             <p>Execute the following command to display the log file:</p>
                             <pre><code>cat /usr/local/mcafee/solidcore/log/solidcore.log</code></pre >
                         </div>
 
-                        <div content-block name="security-mec-status" message="Look at the configurations files for McAfee® Embedded Control">
+                        <div content-block name="security-mec-status" message="Look at the configurations files for McAfee&reg; Embedded Control">
                           <p>Execute the following command to display the configuration file:</p>
                           <pre><code>less /etc/mcafee/solidcore/solidcore.conf</code></pre>
                           <p>Observe that the file includes the following rules and configurations:</p>
@@ -200,9 +200,9 @@
 
 
 
-                <div ibox  title="McAfee® Embedded Control Generating the White List">
+                <div ibox  title="McAfee&reg; Embedded Control Generating the White List">
                   <div content-block name="security-objectives" message="Run the solidfy command on the directories that you wish to protect.">
-                    <h5>Enabling McAfee® Embedded Control</h5>
+                    <h5>Enabling McAfee&reg; Embedded Control</h5>
 
                     <p>In this section you will generate an initial whitelist, enable MEC, and restart the McAfee solidifier service.</p>
 
@@ -218,13 +218,13 @@
                   </div>
 
                   <div content-block name="security-test-restart" message="Run 'sadmin status' and observe the results.">
-                    <p>Execute the following command to check the status of McAfee® Embedded Control.</p>
+                    <p>Execute the following command to check the status of McAfee&reg; Embedded Control.</p>
                     <pre><code>sadmin status</code></pre>
                     <img alt=""  src="./views/labs/security-nuc/images/sadmin-status-solidify-enabled.png"/>
                     <p>Observe that the status of the ext4 drive has changed to Solidified.</p>
                   </div>
 
-                  <div content-block name="security-test-restart" message="Restart the McAfee® Embedded Control service to enable MEC">
+                  <div content-block name="security-test-restart" message="Restart the McAfee&reg; Embedded Control service to enable MEC">
                     <p>As the MEC administrator, execute the following command to enable MEC.</p>
                     <pre><code>sadmin enable</code></pre>
                     <p>McAfee Solidifier will be enabled on service restart.</p>
@@ -368,9 +368,9 @@
 
 
 
-      <div ibox  title="McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox  title="McAfee&reg; Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-nuc/images/sadmin-config-show.png">
-          <p>McAfee® Embedded Control can be configured to use a variety of algorithms to verify the integrity of solidified system files.</p>
+          <p>McAfee&reg; Embedded Control can be configured to use a variety of algorithms to verify the integrity of solidified system files.</p>
           <p>Type the following to find which algorithm is currently being used:</p>
           <pre><code>sadmin config show</code></pre>
           <p>Or if you'd like a less cluttered view then type:</p>
@@ -400,7 +400,7 @@
 
 
 
-      <div ibox  title="McAfee® Embedded Control - Configure Checksum Calculation">
+      <div ibox  title="McAfee&reg; Embedded Control - Configure Checksum Calculation">
         <div content-block name="security-objectives" message="Verify that authorized applications can run">
           <p>On a protected system, only authorized applications or programs are allowed to run.</p>
 
@@ -430,7 +430,7 @@
       </div>
 
 
-<div ibox  title="McAfee® Embedded Control Updating A Solidified Box">
+<div ibox  title="McAfee&reg; Embedded Control Updating A Solidified Box">
   <div content-block name="security-objectives" message="Set McAffee Embedded Control Into Update Mode" image-link="./views/labs/security-nuc/images/sadmin-bu.png">
     <h5>Using the Update Mode</h5>
 
@@ -465,7 +465,7 @@
 
 <div ibox title="How To Use Systemctl to Manage Systemd Services and Units">
   <div content-block name="" message="Introduction to Service Management">
-    <p>Wind River Linux uses Systemd to manage the Intel IoT Gateway system services. Systemd is a widely used in the Linux community and understanding how it works is essential for securing your gateway for deployment.</p>
+    <p>Wind River Linux uses Systemd to manage the Intel&reg; IoT Gateway system services. Systemd is a widely used in the Linux community and understanding how it works is essential for securing your gateway for deployment.</p>
     <p>In this lab, you will be using the systemctl command, which is the administrative command line tool for controlling the init system. You will cover how to disable unused services, check statuses, change system states, and modify configuration files.</p>
     <p>Systemd labels services that it controls as "units".  A unit configuration file that describes how to manage a system resource.  Systemd defines a number of types of services. In this lab, you will be managing services with the aim of reducing the attack surface of your gateway.</p>
   </div>
@@ -647,9 +647,9 @@ tls_version tlsv1
                         parsing of the learning logs, merges them with your ACL set and outputs the final ACLs.</p>
 
 
-                    <h5>Disable McAfee® Embedded Control</h5>
+                    <h5>Disable McAfee&reg; Embedded Control</h5>
 
-                    <p>By design, <b>McAfee® Embedded Control</b> will protect your system from changes. So let's turn it off now.</p>
+                    <p>By design, <b>McAfee&reg; Embedded Control</b> will protect your system from changes. So let's turn it off now.</p>
                     <pre><code>sadmin disable</code></pre>
 
                     <h5>The gradm command</h5>
@@ -718,7 +718,7 @@ tls_version tlsv1
 
       <div content-block name="grsecurity-objectives" message="Generate and Install HTTPS Certificates in Node-Red" image-link="./views/labs/security-nuc/images/openssl-create-key.png">
           <p>First you will generate a private key and certificate using openssl.</p>
-          <p>Open a console on the Intel IoT Gateway and enter in the following commands:</p>
+          <p>Open a console on the Intel&reg; IoT Gateway and enter in the following commands:</p>
           <pre><code>$ cd /home/gwuser/.node-red/ </code></pre>
           <pre><code>$ openssl req -newkey rsa:2048 -nodes -keyout privatekey.pem -x509 -days 365 -out certificate.pem </code></pre>
 

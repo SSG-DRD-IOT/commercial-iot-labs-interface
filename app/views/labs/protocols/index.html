@@ -22,7 +22,7 @@
          <div ibox title="Objective">
             <div content-block name="read-objectives" message="Read the Objectives">
                <h2 class="labHidden">Read the Objectives</h2>
-               <p>In this lab, we will explore using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel® IoT Gateway.</p>
+               <p>In this lab, we will explore using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel&reg; IoT Gateway.</p>
                <ol>
                   <li>Build a data flow that sends information from the temperature sensors to the LCD screen.</li>
                   <li>Build a data flow that sends information from the temperature sensor to an MQTT broker on the gateway</li>
@@ -32,12 +32,12 @@
          </div>
 
 
-        <div ibox title="Overview of Node-Red Service on the Intel IoT Gateway">
+        <div ibox title="Overview of Node-Red Service on the Intel&reg; IoT Gateway">
           <div content-block name="start-node-red" message="Be sure that you know how to start and stop the node-red-experience service" image-link="./views/labs/protocols/images/node-red-experience-running.png">
             <div class="alert alert-info">
               <p>Knowing how to start and stop the node-red-experience service will help tremendously in troubleshooting problems that may arise while developing.</p>
             </div>
-            <p>Open a console to the Intel IoT Gateway and type the following:</p>
+            <p>Open a console to the Intel&reg; IoT Gateway and type the following:</p>
             <pre><code>systemctl status node-red-experience</code></pre>
             <p>If you see green text that says, "active (running)" then the Node-Red service is running</p>
             <p>If Node-Red is not running on your gateway then type: </p>
@@ -47,7 +47,7 @@
 
           <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols/images/node-red-experience-off.png">
             <div class="alert alert-info">
-              <p>If you are developing using the Intel XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
+              <p>If you are developing using the Intel&reg; XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
               <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I2C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
 
             </div>
@@ -72,13 +72,13 @@
             <labels gateway/>
 
 
-            <!-- <div content-block name="find-ip-address " message="Review useful commands to help you organize your workflow on the Intel IoT Gateway ">
-<h2 class="labHidden ">Review useful commands to help you organize your workflow on the Intel IoT Gateway</h2>
+            <!-- <div content-block name="find-ip-address " message="Review useful commands to help you organize your workflow on the Intel&reg; IoT Gateway ">
+<h2 class="labHidden ">Review useful commands to help you organize your workflow on the Intel&reg; IoT Gateway</h2>
               <h5>Setup Screen Window Manager</h5>
-              <p>Log into your Intel® Iot Gateway. As a refresher: </p>
+              <p>Log into your Intel&reg; Iot Gateway. As a refresher: </p>
               <p>Use Putty or Screen to connect to ip address <b>192.168.1.1</b> and use <b>root</b> as the username and password.</p>
               <p>For more details refer back to the 3rd section of the introduction lab</p>
-              <p>Once you log in the Intel® Iot Gateway, start the <code>screen</code> window manager. </p>
+              <p>Once you log in the Intel&reg; Iot Gateway, start the <code>screen</code> window manager. </p>
               <p><code>$ screen</code></p>
 
               <p>You can open multiple console windows, name them and switch between them using screen.  There will be many times when you will want to run several processes at the same time and <code>screen</code> will be very useful to launch them in separate windows.  The another alternative is to simply SSH into the server multiple times.  Of course, in production you will want to launch most processes at boot time using Systemd.</p>

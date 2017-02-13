@@ -22,47 +22,47 @@
         <div ibox title="Objectives">
           <div content-block name="read-objectives" message="Read the Objectives">
             <h2 class="labHidden">Read the Objectives</h2>
-            <labels Arduino 101 windows apple linux/>
-            <p>In this lab you will learn how to use the Intel IoT Developer Kit to developer and deploy software to your Intel IoT Gateway and Arduino 101. You will also learn use the hardware in the starter kit to build stand alone IoT devices.</p>
+            <labels Arduino* 101 windows apple linux/>
+            <p>In this lab you will learn how to use the Intel IoT Developer Kit to developer and deploy software to your Intel&reg; IoT Gateway and Arduino* 101. You will also learn use the hardware in the starter kit to build stand alone IoT devices.</p>
 
             <p>By the end of this module, you should be able to:</p>
 
             <ul>
-              <li>Connect Grove Kit sensors and actuators to your Arduino 101.</li>
+              <li>Connect Grove Kit sensors and actuators to your Arduino* 101.</li>
               <li>Use the Node-Red to control actuators and read data from sensors.</li>
             </ul>
           </div>
         </div>
 
 
-        <div ibox title="Deploy sample application with the Intel® XDK IoT Edition">
-          <div content-block name="download-xdk-intro" message="Download the Intel XDK Introduction">
-            <h2 class="labHidden">Download the Intel XDK Introduction</h2>
-            <p>Go to the <a href="https://software.intel.com/en-us/iot/tools-ide/ide">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and download a copy of the Intel XDK IoT Edition.</p>
+        <div ibox title="Deploy sample application with the Intel&reg; XDK IoT Edition">
+          <div content-block name="download-xdk-intro" message="Download the Intel&reg; XDK Introduction">
+            <h2 class="labHidden">Download the Intel&reg; XDK Introduction</h2>
+            <p>Go to the <a href="https://software.intel.com/en-us/iot/tools-ide/ide">Intel&reg; IoT Developer Kit Integrated Development Environments Download Page</a> and download a copy of the Intel&reg; XDK IoT Edition.</p>
           </div>
 
-                <div content-block name="read-xdk-intro" message="Read the Intel XDK Introduction" image-link="./views/labs/build-nuc/images/xdk-splash.png">
-                    <h2 class="labHidden">Read the Intel XDK Introduction</h2>
+                <div content-block name="read-xdk-intro" message="Read the Intel&reg; XDK Introduction" image-link="./views/labs/build-nuc/images/xdk-splash.png">
+                    <h2 class="labHidden">Read the Intel&reg; XDK Introduction</h2>
                     <p><img class="labHidden" alt="XDK Splash" data-fid="503891" src="https://software.intel.com/sites/default/files/managed/35/a6/xdk-splash.png" title="XDK Splash" typeof="foaf:Image"></p>
 
 
                     <p class="subtitle">This initial lesson will enable you to deploy a JavaScript program to the Intel Gateway using any computer OS platform</p>
 
-                    <p>Create and run a Hello Word project (blinking the onboard LED) on your Intel® IoT board based on the "Onboard LED Blink" starter template.</p>
+                    <p>Create and run a Hello Word project (blinking the onboard LED) on your Intel&reg; IoT board based on the "Onboard LED Blink" starter template.</p>
 
-                    <p>The <a href="https://software.intel.com/en-us/intel-xdk">Intel® XDK IoT Edition</a> lets you create and test applications on Intel® IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
+                    <p>The <a href="https://software.intel.com/en-us/intel-xdk">Intel&reg; XDK IoT Edition</a> lets you create and test applications on Intel&reg; IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
                 </div>
 
-                <div content-block name="launch-xdk" message="Launch and Sign In to the Intel XDK" image-link="./views/labs/build-nuc/images/image_0.png">
-                    <h2 class="labHidden">Launch and Sign In to the Intel XDK</h2>
-                    <p><img class="labHidden" alt="Intel XDK" data-fid="503892" src="https://software.intel.com/sites/default/files/managed/4f/a4/image_0.png" title="Intel XDK" typeof="foaf:Image"></p>
+                <div content-block name="launch-xdk" message="Launch and Sign In to the Intel&reg; XDK" image-link="./views/labs/build-nuc/images/image_0.png">
+                    <h2 class="labHidden">Launch and Sign In to the Intel&reg; XDK</h2>
+                    <p><img class="labHidden" alt="Intel&reg; XDK" data-fid="503892" src="https://software.intel.com/sites/default/files/managed/4f/a4/image_0.png" title="Intel&reg; XDK" typeof="foaf:Image"></p>
 
-                    <p>Begin by launching the Intel XDK</p>
+                    <p>Begin by launching the Intel&reg; XDK</p>
                 </div>
 
-                <div content-block name="xdk-signup" message="Skip the sign up or create an account and sign in to the Intel XDK" image-link="./views/labs/build-nuc/images/image_1.png">
+                <div content-block name="xdk-signup" message="Skip the sign up or create an account and sign in to the Intel&reg; XDK" image-link="./views/labs/build-nuc/images/image_1.png">
                     <p class="alert alert-info">If you are at an Intel CIOT Workshop, you may wish to click on the <b>Later</b> button which bypasses the normal login process.</p>
-                    <p>Follow the on-screen instructions to sign up for an Intel® XDK account, or log in to a pre-existing account.</p>
+                    <p>Follow the on-screen instructions to sign up for an Intel&reg; XDK account, or log in to a pre-existing account.</p>
                 </div>
 
                 <div content-block name="click-on-templates" message="Click on Templates" image-link="./views/labs/build-nuc/images/image_2.png">
@@ -93,7 +93,7 @@
                     <h2 class="labHidden">Write code for Blink LED</h2>
                     <p><img class="labHidden" alt="" data-fid="503897" src="https://software.intel.com/sites/default/files/managed/cb/f7/image_35.png" typeof="foaf:Image"></p>
 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require('mraa'); //require mraa
-console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the Intel XDK console
+console.log('MRAA Version: ' + mraa.getVersion()); //write the mraa version to the Intel&reg; XDK console
 
 
 var myOnboardLed = new mraa.Gpio(525); //LED hooked up to digital pin 13
@@ -108,7 +108,7 @@ function periodicActivity()
   ledState = !ledState; //invert the ledState
   setTimeout(periodicActivity,1000); //call the indicated function after 1 second (1000 milliseconds)
 } </pre> </ui-codemirror><br>
-                    <p>When working with the Gateway and Arduino 101, "MRAA loads the Arduino 101* board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
+                    <p>When working with the Gateway and Arduino* 101, "MRAA loads the Arduino* 101* board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
                     <p>Note: MRAA is a C/C++ library with bindings to Python, Javascript and Java to interface with the I/O on Galileo, Edison and other platforms, with a structured and sane API where port names/numbering matches the board that you are on</p>
 
                 </div>
@@ -119,9 +119,9 @@ function periodicActivity()
 
                     <div class="row">
                         <div class="col-sm-7">
-                            <p>The Intel® XDK IoT Edition will automatically detect Intel® IoT devices on your network and display them in the "IoT Device" drop down list.</p>
+                            <p>The Intel&reg; XDK IoT Edition will automatically detect Intel&reg; IoT devices on your network and display them in the "IoT Device" drop down list.</p>
 
-                            <p>In the bottom left corner of the Intel® XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
+                            <p>In the bottom left corner of the Intel&reg; XDK, click the "<strong>IoT Device</strong>" drop down list which currently indicates "<strong>- Select a Device -</strong>".</p>
 
                             <p>Select your target Gateway from the list. If there are multiple devices, choose based on the device name and IP address.</p>
                         </div>
@@ -145,7 +145,7 @@ function periodicActivity()
                     </div>
                 </div>
 
-                <div content-block name="establish-connection" message="Establish the connection to the Gateway and synchronize the clocks between your development system and your Arduino 101" image-link="./views/labs/build-nuc/images/image33.png">
+                <div content-block name="establish-connection" message="Establish the connection to the Gateway and synchronize the clocks between your development system and your Arduino* 101" image-link="./views/labs/build-nuc/images/image33.png">
                     <h2 class="labHidden">Establish the connection to the Gateway and synchronize the clocks between your development system and it</h2>
                     <p><img class="labHidden" alt="" data-fid="503907" src="https://software.intel.com/sites/default/files/managed/fe/8f/image33.png" typeof="foaf:Image"></p>
 
@@ -154,8 +154,8 @@ function periodicActivity()
                     </p>
                 </div>
 
-                <div content-block name="know-the-toolbar" message="Get to know the Intel XDK Build toolbar." image-link="./views/labs/build-nuc/images/build.png">
-                    <h2 class="labHidden">Get to know the Intel XDK Build toolbar.</h2>
+                <div content-block name="know-the-toolbar" message="Get to know the Intel&reg; XDK Build toolbar." image-link="./views/labs/build-nuc/images/build.png">
+                    <h2 class="labHidden">Get to know the Intel&reg; XDK Build toolbar.</h2>
                     <p><img class="labHidden" alt="" data-fid="503909" src="https://software.intel.com/sites/default/files/managed/6a/61/build.png" typeof="foaf:Image"></p>
 
                     <p>In the bottom toolbar, click the "<strong>Manage your daemon/IoT device</strong>" icon.</p>
@@ -206,18 +206,18 @@ function periodicActivity()
                     </ol>
                 </div>
 
-                <div content-block name="blink-the-light" message="Congratulations, you just ran your first Intel® XDK application!" image-link="./views/labs/build-nuc/images/image28.jpg">
-                    <h2 class="labHidden">Congratulations, you just ran your first Intel® XDK application!</h2>
+                <div content-block name="blink-the-light" message="Congratulations, you just ran your first Intel&reg; XDK application!" image-link="./views/labs/build-nuc/images/image28.jpg">
+                    <h2 class="labHidden">Congratulations, you just ran your first Intel&reg; XDK application!</h2>
                     <p><img class="labHidden" alt="" data-fid="503913" src="https://software.intel.com/sites/default/files/managed/61/94/image28.png" typeof="foaf:Image"></p>
 
 
-                    <p>Look at your Intel® IoT board for a blinking light.</p>
+                    <p>Look at your Intel&reg; IoT board for a blinking light.</p>
                     <p> The LED is located near the center of the board.</p>
 
-                    <p><strong>Congratulations, you just ran your first Intel® XDK application!</strong></p>
+                    <p><strong>Congratulations, you just ran your first Intel&reg; XDK application!</strong></p>
 
                     <div id="next-steps" class="callout done">
-                        <p>You should now be able to build and deploy projects using the Intel® XDK. An LED should be blinking on your Intel® IoT board.</p>
+                        <p>You should now be able to build and deploy projects using the Intel&reg; XDK. An LED should be blinking on your Intel&reg; IoT board.</p>
                     </div>
 
                 </div>
@@ -246,12 +246,12 @@ function periodicActivity()
                     <p><img class="labHidden" alt="temperature sensor" data-fid="503915" src="https://software.intel.com/sites/default/files/managed/21/f9/temperature-sensors.jpg" title="temperature sensor" typeof="foaf:Image"></p>
 
 
-                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Arduino 101. Write code for NodeJS using the Intel® XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
+                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Arduino* 101. Write code for NodeJS using the Intel&reg; XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
                         on the LCD.</p>
 
                     <ol>
                         <li>
-                            <p>Install the Grove Base Shield onto the Arduino 101.</p>
+                            <p>Install the Grove Base Shield onto the Arduino* 101.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
@@ -263,16 +263,16 @@ function periodicActivity()
 
                 </div>
 
-                <div content-block name="read-xdk-intro" message="Start a new project in the Intel® XDK using a blank template." image-link="./views/labs/build-nuc/images/new-project.png">
-                    <h2 class="labHidden">Start a new project in the Intel® XDK using a blank template.</h2>
+                <div content-block name="read-xdk-intro" message="Start a new project in the Intel&reg; XDK using a blank template." image-link="./views/labs/build-nuc/images/new-project.png">
+                    <h2 class="labHidden">Start a new project in the Intel&reg; XDK using a blank template.</h2>
                     <p><img class="labHidden" alt="new project" data-fid="503916" src="https://software.intel.com/sites/default/files/managed/e1/57/new-project.png" title="new project" typeof="foaf:Image"></p>
 
                     <ol>
                         <li>
-                            <p>Start a new project in the Intel® XDK using a blank template.</p>
+                            <p>Start a new project in the Intel&reg; XDK using a blank template.</p>
                         </li>
                         <li>
-                            <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
+                            <p>If you have an Intel&reg; XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
                         </li>
                     </ol>
 
@@ -288,7 +288,7 @@ function periodicActivity()
                     <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
 
 
-                    <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
+                    <p>The Intel&reg; XDK will create and open <span class="icon file">main.js</span> for you.</p>
                 </div>
 
                 <div content-block name="read-xdk-intro" message="Write the Code to Read the Temperature Sensor.">
@@ -304,7 +304,7 @@ function periodicActivity()
                             <p><code>var groveSensor = require('jsupm_grove');</code></li>
 
                         <li>
-                          <p>When connecting the Intel Iot Gateway to an Arduino 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101.</p>
+                          <p>When connecting the Intel&reg; IoT Gateway to an Arduino* 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino* 101.</p>
                           <p>Firmata is a generic protocol for communicating with microcontrollers from software on a host computer. It is intended to work with any host computer software package.Basically, this firmware establishes a protocol for talking to the Arduino from the host software.</p>
                           <p class="alert alert-info">However, when communicating to the subplatform all analog, digital and I2C pins require a 512 bit offset.</p>
                         </li>
@@ -351,14 +351,14 @@ console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</pre></
                         </li>
 
                         <li>
-                            <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel® XDK to:
+                            <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel&reg; XDK to:
                                 <br> (1) Build your application,
-                                <br> (2) Upload it to Arduino 101, and
+                                <br> (2) Upload it to Arduino* 101, and
                                 <br> (3) Run the application.</p>
                         </li>
 
                         <li>
-                            <p>If successful, you should see the temperature output in the Intel® XDK console.</p>
+                            <p>If successful, you should see the temperature output in the Intel&reg; XDK console.</p>
                         </li>
 
                     </ol>
@@ -424,7 +424,7 @@ monitor();</pre></ui-codemirror>
                             <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
                             <dl>
                                 <dt>I2C bus (Number)</dt>
-                                <dd>For the Arduino 101, <strong>use <code>0 + OFFSET</code></strong>.</dd>
+                                <dd>For the Arduino* 101, <strong>use <code>0 + OFFSET</code></strong>.</dd>
 
                                 <dt>lcdAddress (Number)</dt>
                                 <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
@@ -594,7 +594,7 @@ main();</pre></ui-codemirror>
             <div ibox title="Exercise 3: Smart Alarm Clock">
                 <div content-block name="alarm-intro" message="Read the project introduction">
                     <h2 class="labHidden">Read the project introduction</h2>
-                    <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Arduino 101. Set the alarm time using a web page served directly
+                    <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Arduino* 101. Set the alarm time using a web page served directly
                         from the gateway itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.</p>
                 </div>
 
@@ -639,7 +639,7 @@ main();</pre></ui-codemirror>
                         <p>Now, add your server side code in <span class="icon file">main.js</span>:</p>
                         <ul>
                             <li>
-                                <p>Create a web server on the Arduino 101 using express in NodeJS.</p>
+                                <p>Create a web server on the Arduino* 101 using express in NodeJS.</p>
                             </li>
                             <li>
                                 <p>Remember to edit your <span class="icon file">package.json</span> to include the <em>express</em>, <em>moment</em>, and <em>superagent</em> npm modules.</p>
@@ -704,7 +704,7 @@ main();</pre></ui-codemirror>
         </li>
       </ul>
 
-      <p>There are also tutorials that integrate the Intel IoT Gateway with 3rd party products and services.</p>
+      <p>There are also tutorials that integrate the Intel&reg; IoT Gateway with 3rd party products and services.</p>
       <ul>
         <li>
           <a href="https://github.com/intel-iot-devkit/Intel-IoT-Gateway/tree/master/Getting%20Started%20With%20Node-Red%20and%20Nest">Getting Started With Node-RED and the Nest* thermostat</a>
@@ -726,7 +726,7 @@ main();</pre></ui-codemirror>
         </li>
       </ul>
 
-      <p>Examples that connect the Intel IoT Gateway to a 3rd party cloud provider</p>
+      <p>Examples that connect the Intel&reg; IoT Gateway to a 3rd party cloud provider</p>
       <ul>
         <li>
           <a href="https://github.com/intel-iot-devkit/Intel-IoT-Gateway/tree/master/Getting%20Started%20With%20Node-Red%20and%20AWS%20IoT">Getting Started with Node-Red and AWS IoT</a>

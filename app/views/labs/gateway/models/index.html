@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Intel® Commercial IoT Workshop</title>
+    <title>Intel&reg; Commercial IoT Workshop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/main.css">
 
@@ -30,8 +30,8 @@
       <p>For this edge network, we will define five types that we will track in the database.</p>
 
       <ul>
-        <li><b>A Sensor</b> - is any edge device that publishes data to the edge network and Intel Iot Gateway</li>
-        <li><b>An Actuator</b> - is an edge device that performs an action and can be triggered by the Intel Iot Gateway.  For example, an LCD screen can have text sent to it to be displayed, a servo motor can be told to rotate a certain number of degrees, or a buzzer may be told to activate.  Any device that performs an action is considered an actuator.  Note that actuators usually do not publish sensor data to the network but they may be queried for the current status.</li>
+        <li><b>A Sensor</b> - is any edge device that publishes data to the edge network and Intel&reg; IoT Gateway</li>
+        <li><b>An Actuator</b> - is an edge device that performs an action and can be triggered by the Intel&reg; IoT Gateway.  For example, an LCD screen can have text sent to it to be displayed, a servo motor can be told to rotate a certain number of degrees, or a buzzer may be told to activate.  Any device that performs an action is considered an actuator.  Note that actuators usually do not publish sensor data to the network but they may be queried for the current status.</li>
         <li><b>A Sensor Data Reading</b> - A piece of data from a sensor</li>
         <li><b>Conditionally Triggered System Event (triggers)</b> - Triggers have a four important aspects: a name, a sensor that it watches, a condition function (a predicate) that returns TRUE or FALSE and a trigger function that performs an action when the predicate function is true.  For example, in the Condition Based Monitoring lab, you will define a trigger named <code>temperature_too_hot</code>. It will watch data coming from a temperature sensor. Its predicate function will evaluate if the temperature is greater than 27 degrees, and its action function will send an alert, log a system error and send text to the LCD screen.</li>
         <li><b>System errors</b> - a text string and a timestamp describing the errors on the edge network.</li>

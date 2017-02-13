@@ -24,25 +24,25 @@
                 <div content-block name="read-objectives" message="Read the Objectives">
                     <h2 class="labHidden">Read the Objectives</h2>
                     <labels gateway windows apple linux/>
-                    <p>Learn how to build IoT devices that use sensors and actuators with an Arduino* 101. The devices built during this lab will be extended in later labs to send their data to the Intel® IoT
+                    <p>Learn how to build IoT devices that use sensors and actuators with an Arduino* 101. The devices built during this lab will be extended in later labs to send their data to the Intel&reg; IoT
                         Gateway and to the cloud</p>
 
                     <p>By the end of this module, you should be able to:</p>
                     <ul>
                         <li>Connect Grove Kit sensors and actuators to your Arduino* 101</li>
-                        <li>Install Intel System Studio IoT Edition</li>
-                        <li>Use the Intel System Studio IoT Edition to write software to control actuators and read data from sensors</li>
+                        <li>Install Intel&reg; System Studio IoT Edition</li>
+                        <li>Use the Intel&reg; System Studio IoT Edition to write software to control actuators and read data from sensors</li>
                     </ul>
                 </div>
             </div>
 
-            <div ibox title="Install Intel® System Studio IoT Edition">
-              <div content-block name="download-iss-intro" message="Download Intel System Studio Iot Edition" image-link="./views/labs/sensors-c/images/IoT-ISS-SysStudio.png">
-                <h2 class="labHidden">Download Intel System Studio Iot Edition</h2>
-                <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide" target="_blank">Intel® IoT Developer Kit Integrated Development Environments Download Page</a> and download a copy of the Intel System Studio IoT Edition.</p>
+            <div ibox title="Install Intel&reg; System Studio IoT Edition">
+              <div content-block name="download-iss-intro" message="Download Intel&reg; System Studio IoT Edition" image-link="./views/labs/sensors-c/images/IoT-ISS-SysStudio.png">
+                <h2 class="labHidden">Download Intel&reg; System Studio IoT Edition</h2>
+                <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide" target="_blank">Intel&reg; IoT Developer Kit Integrated Development Environments Download Page</a> and download a copy of the Intel&reg; System Studio IoT Edition.</p>
 
                 <div class="alert alert-warning">
-                  <p>Intel System Studio Iot Edition has several dependencies. Please be sure to install these before lauching the Intel System Studio installer.</p>
+                  <p>Intel&reg; System Studio IoT Edition has several dependencies. Please be sure to install these before lauching the Intel System Studio installer.</p>
                   <ul>
                     <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">Oracle Java 8 SDK</a></li>
                     <li><a href="https://www.docker.com/" target="_blank">Docker Tools</a></li>
@@ -51,20 +51,20 @@
                 <div class="alert alert-warning">
                   <p>There are some prerequisites for installing Docker and Intel System Studio explained in below link. Please make sure you go through the Docker installation so that both Hyper-V and Docker are running properly before your Intel System Studio installation else you will get errors<p>
                     <ul>
-                      <li><a href="https://software.intel.com/en-us/installing-the-intel-system-studio-iot-edition" target="_blank">Docker and Intel® System Studio Installation Prerequisites</a>
+                      <li><a href="https://software.intel.com/en-us/installing-the-intel-system-studio-iot-edition" target="_blank">Docker and Intel&reg; System Studio Installation Prerequisites</a>
                     </ul>
                 </div>
               </div>
 
-              <div content-block name="iss-images" message="Start your installation and select the Intel IoT Gateway 64-bit image" image-link="./views/labs/sensors-c/images/iss-images.png">
-                  <h2 class="labHidden">Start your installation and select the Intel IoT Gateway 64-bit image</h2>
+              <div content-block name="iss-images" message="Start your installation and select the Intel&reg; IoT Gateway 64-bit image" image-link="./views/labs/sensors-c/images/iss-images.png">
+                  <h2 class="labHidden">Start your installation and select the Intel&reg; IoT Gateway 64-bit image</h2>
                   <p>Start your ISS installation and go through the Welcome and License pages</p>
-                  <p>Your Intel IoT Gateway is has a 64-bit processor and operating system. Please be sure to install the Intel IoT Gateway 64-bit image.</p>
-                  <p>This operating system image is installed locally to your development computer and run within a Docker container. Intel System Studio IoT Edition will compile against.
+                  <p>Your Intel&reg; IoT Gateway is has a 64-bit processor and operating system. Please be sure to install the Intel&reg; IoT Gateway 64-bit image.</p>
+                  <p>This operating system image is installed locally to your development computer and run within a Docker container. Intel&reg; System Studio IoT Edition will compile against.
               </div>
 
-              <div content-block name="launch-xdk" message="Complete the Installation of Intel System Studio IoT Edition" image-link="./views/labs/sensors-c/images/iss-install-done.png">
-                  <h2 class="labHidden">Complete the Installation of Intel System Studio IoT Edition</h2>
+              <div content-block name="launch-xdk" message="Complete the Installation of Intel&reg; System Studio IoT Edition" image-link="./views/labs/sensors-c/images/iss-install-done.png">
+                  <h2 class="labHidden">Complete the Installation of Intel&reg; System Studio IoT Edition</h2>
                   <p>If you have problems with the installation please raise you hand and let one of the instructors know.</p>
               </div>
             </div>
@@ -96,7 +96,7 @@
                 </ul>
               </div>
             </div>
-            <div ibox title="Create the Temperature on LCD sample in the Intel® System Studio IoT Edition">
+            <div ibox title="Create the Temperature on LCD sample in the Intel&reg; System Studio IoT Edition">
               <div content-block name="iss-new-project" message="Create a new Intel IoT Project" image-link="./views/labs/sensors-c/images/iss-new-project.png">
                 <p>Open Intel System Studio and click on New -> Intel Project for IoT</p>
               </div>
@@ -113,8 +113,8 @@
                 <p>Select the Intel IoT C/C++ Project</p>
               </div>
 
-              <div content-block name="iss-new-project-ip" message="Enter the IP address of your Intel IoT Gateway" image-link="./views/labs/sensors-c/images/iss-new-project-ip.png">
-                <p>Enter the IP address or the hostname of your Intel IoT Gateway.</p>
+              <div content-block name="iss-new-project-ip" message="Enter the IP address of your Intel&reg; IoT Gateway" image-link="./views/labs/sensors-c/images/iss-new-project-ip.png">
+                <p>Enter the IP address or the hostname of your Intel&reg; IoT Gateway.</p>
               </div>
 
               <div content-block name="iss-new-project-64" message="Select the sample temperature on LCD application" image-link="./views/labs/sensors-c/images/iss-new-project-sample.png">
@@ -151,7 +151,7 @@
 
               <div content-block name="iss-new-project-gateway-platform" message="Changes for Intel NUC Gateway" image-link="./views/labs/sensors-c/images/iss-new-project-gateway-platform.png">
                 <li><p>Even though this sample project is generated for a menu of example programs, there are a couple of changes that we need to make to get it running on the gateway.</p></li>
-                <li><p>First, we need to add the Intel IoT Gateway to the list of platforms that are checked in the beginning of this program.</p></li>
+                <li><p>First, we need to add the Intel&reg; IoT Gateway to the list of platforms that are checked in the beginning of this program.</p></li>
                 <li><p><b>Replace lines 124-131 with the following code.</b></p></li>
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// check that we are running on Galileo or Edison
   mraa::Platform platform = mraa::getPlatformType();
@@ -165,7 +165,7 @@
               </div>
 
               <div content-block name="iss-new-project-64" message="Modify example to use Firmata Offset" image-link="./views/labs/sensors-c/images/iss-c-offset.png">
-                <li><p>If you are using an Arduino 101 that is attached to an Intel IoT Gateway with a USB cable then you are using Firmata and we need to modify the GPIO pins with an offset.</p></li>
+                <li><p>If you are using an Arduino* 101 that is attached to an Intel&reg; IoT Gateway with a USB cable then you are using Firmata and we need to modify the GPIO pins with an offset.</p></li>
                 <li><p>Add an OFFSET of 512 to the pins shown in the figure</p></li>
                 <li><p> Also change the temperature sensor pin from 0 to '1' since we are connected to <b>A1</b>. The 0.66F value added as additional parameter to temperature sensor API is a correction factor. This is required since we are using Arduino with 5V whereas the default values are calculated base on 3.3V</p></li>
               </div>
@@ -179,7 +179,7 @@
               </div>
 
               <div content-block name="iss-new-project-64" message="Read the current temperature from your LCD screen" image-link="./views/labs/sensors-c/images/iss-new-project-lcd.jpg">
-                <p>You now should have a program deployed to your Intel IoT Gateway.</p>
+                <p>You now should have a program deployed to your Intel&reg; IoT Gateway.</p>
               </div>
             </div>
 

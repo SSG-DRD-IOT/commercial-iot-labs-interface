@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Intel® Commercial IoT Workshop</title>
+    <title>Intel&reg; Commercial IoT Workshop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../..//css/main.css">
   </head>
   <body>  
     <header>
-      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel® logo" width="52" height="35"></a>
+      <a href="../../../index.html"><img src="../../../img/intel_logo.png" alt="Intel&reg; logo" width="52" height="35"></a>
     </header>
     <div class="content">
 
@@ -17,15 +17,15 @@
 
       <p class="subtitle">Part 1: Set up a MQTT and MongoDB Server</p>
 
-      <h2>Login to your Intel® Iot Gateway</h2>
+      <h2>Login to your Intel&reg; Iot Gateway</h2>
 
-      <p>The commands in this section will be run on the Intel® Iot Gateway so SSH into your Intel® Iot Gateway.</p>
+      <p>The commands in this section will be run on the Intel&reg; Iot Gateway so SSH into your Intel&reg; Iot Gateway.</p>
 
-      <p>If you need a reminder, look at <span class="icon bookmark"><a href="/intro/step1/index.html">Step 1: Login to your Intel® Iot Gateway</a></span> from the <em>Intel® Commercial IoT Workshop Intro Module</em>.</p>
+      <p>If you need a reminder, look at <span class="icon bookmark"><a href="/intro/step1/index.html">Step 1: Login to your Intel&reg; Iot Gateway</a></span> from the <em>Intel&reg; Commercial IoT Workshop Intro Module</em>.</p>
 
       <h2>Setup Screen Window Manager</h2>
 
-      <p>Once you log in the Intel® Iot Gateway, start the <code>screen</code> window manager. </p>
+      <p>Once you log in the Intel&reg; Iot Gateway, start the <code>screen</code> window manager. </p>
       <p><code>$ screen</code></p>
 
       <p>You can open multiple console windows, name them and switch between them using screen.  There will be many times when you will want to run several processes at the same time and <code>screen</code> will be very useful to launch them in separate windows.  The another alternative is to simply SSH into the server multiple times.  Of course, in production you will want to launch most processes at boot time using Systemd.</p>
@@ -52,7 +52,7 @@
 
       </ol>
 
-      <h2>Set up MongoDB on the Intel® Iot Gateway</h2>
+      <h2>Set up MongoDB on the Intel&reg; Iot Gateway</h2>
 
       <ol>
 
@@ -74,7 +74,7 @@
         </li>
 
         <li>
-          <p>The Intel Iot Gateway is enabled with <strong>grsecurity</strong> which by default prevents the execution of processes that are not added to a white list.</p>
+          <p>The Intel&reg; IoT Gateway is enabled with <strong>grsecurity</strong> which by default prevents the execution of processes that are not added to a white list.</p>
           <p>Add the MongoDB daemon (<code>mongod</code>)and the Mongo Client (<code>mongo</code>) to the whitelist type:</p>
           <pre><code>$ paxctl -Cm /usr/bin/mongod</code></pre>
           <pre><code>$ paxctl -Cm /usr/bin/mongo</code></pre>
@@ -98,7 +98,7 @@
       </ol>
 
       <div class="callout done has-goto-button">
-        <p>You should now have a Mosquitto MQTT Broker and MongoDB running on the Intel® IoT Gateway.</p>
+        <p>You should now have a Mosquitto MQTT Broker and MongoDB running on the Intel&reg; IoT Gateway.</p>
         <p><a href="../sensors/index.html" class="link-button centered">Continue to the next step »</a></p>
       </div>
 
