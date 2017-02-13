@@ -36,17 +36,23 @@
               </div>
           </div>
 
-          <div ibox collapse title="Install Intel&reg; System Studio IoT Edition">
+          <div ibox title="Install Intel&reg; System Studio IoT Edition">
             <div content-block name="download-iss-intro" message="Download Intel&reg; System Studio IoT Edition" image-link="./views/labs/sensors-java/images/IoT-ISS-SysStudio.png">
               <h2 class="labHidden">Download Intel&reg; System Studio IoT Edition</h2>
-              <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide">Intel&reg; IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel&reg; System Studio IoT Edition.</p>
+              <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide" target="_blank">Intel&reg; IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel&reg; System Studio IoT Edition.</p>
 
               <div class="alert alert-warning">
                 <p>Intel&reg; System Studio IoT Edition has several dependencies. Please be sure to install these before lauching the Intel System Studio installer.</p>
                 <ul>
-                  <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">Oracle Java 8 SDK</a></li>
-                  <li><a href="https://www.docker.com/">Docker Tools</a></li>
+                  <li><a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank">Oracle Java 8 SDK</a></li>
+                  <li><a href="https://www.docker.com/" target="_blank">Docker Tools</a></li>
                 </ul>
+              </div>
+              <div class="alert alert-warning">
+                <p>There are some prerequisites for installing Docker and Intel System Studio explained in below link. Please make sure you go through the Docker installation so that it is running properly before your Intel System Studio installation else you will get errors<p>
+                  <ul>
+                    <li><a href="https://software.intel.com/en-us/installing-the-intel-system-studio-iot-edition" target="_blank">Docker and Intel&reg; System Studio Installation Prerequisites</a>
+                  </ul>
               </div>
             </div>
 
@@ -62,7 +68,7 @@
             </div>
           </div>
 
-          <div ibox collapse title="Connect the Hardware for your IoT Device">
+          <div ibox title="Connect the Hardware for your IoT Device">
             <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/sensors-java/images/temperature-sensors.jpg">
               <h2 class="labHidden">Install the Grove base shield and sensors</h2>
 
@@ -78,9 +84,19 @@
                 </li>
               </ol>
             </div>
+            <div content-block name="connect-sensors" message="Disable Node-Red service">
+              <p><b>Disable Node-Red service running on your Gateway</b></p>
+              <ul>
+                <li><p>In previous lab we were executing few Node-Red flows which made use of system resources like (sensors, GPIOs, I2C etc.). Since in this lab we will be using the same resources to avoid any contention we will disable the node-red service during this exercise</li></p>
+                <li><p>Open a terminal to your Gateway and give following command:</li></p>
+                <pre><code>systemctl stop node-red-experience</pre></code>
+                <li><p>Check that service has stopped</li></p>
+                <pre><code>systemctl status node-red-experience</pre></code>
+              </ul>
+            </div>
           </div>
 
-          <div ibox collapse title="Create the Temperature on LCD sample in the Intel&reg; System Studio IoT Edition">
+          <div ibox title="Create the Temperature on LCD sample in the Intel&reg; System Studio IoT Edition">
             <div content-block name="iss-new-project" message="Create a new Intel IoT Project" image-link="./views/labs/sensors-java/images/iss-new-project.png">
               <p>Open Intel System Studio and click on New -> Intel Project for IoT</p>
             </div>
@@ -132,7 +148,7 @@
 
               <p>UPM supports more than 300 types of sensors and actuators and it is an active open source project available on Github.</p>
 
-              <p>Here is the link to the source code for <a href="https://github.com/intel-iot-devkit/upm">UPM on Github</a>.</p> 
+              <p>Here is the link to the source code for <a href="https://github.com/intel-iot-devkit/upm">UPM on Github</a>.</p>
               <p class="alert alert-warning">The UPM source code repository has many <a href="https://github.com/intel-iot-devkit/upm/tree/master/examples">examples</a> for many sensors and actuators. Examples are given in C, C++, JavaScript, Java and Python.</p>
             </div>
 
@@ -143,10 +159,11 @@
             <div content-block name="iss-new-project-64" message="Add the LCD Driver library to the project" image-link="./views/labs/sensors-java/images/iss-new-project-add-lib-after.png">
               <ol>
                 <li>Go to <b>C/C++ General</b> --> <b>Paths and Symbols</b></li>
-                <li>Then click on the <b>Libraries</b> tab.</p></li>
-                <li>Click on the Add button that is to the right</li>
-                <li>type <b>upm-jhd1313m1</b></li>
+                <li>Then click on the <b>Libraries</b> tab.</li>
+                <li>Click on the Add button that is to the right and type <b>upm-jhd1313m1</b></li>
+                <li>Next, be sure to delete the upm-i2clcd driver</li>
                 <li>Press <b>OK</b> until you are back at the main interface</li>
+              </ol>
             </div>
 
             <div content-block name="iss-new-project-64" message="Clean and Build the Project" image-link="./views/labs/sensors-java/images/iss-new-project-build.png">
@@ -154,7 +171,7 @@
             </div>
 
             <div content-block name="iss-new-project-64" message="Run the Temperature on LCD application" image-link="./views/labs/sensors-java/images/iss-new-project-run.png">
-              <p>Click on the menu Run --> </p>
+              <p>Click on the menu <b>Run --> Run</b></p>
             </div>
 
             <div content-block name="iss-new-project-64" message="Read the current temperature from you LCD screen" image-link="./views/labs/sensors-java/images/iss-new-project-lcd.jpg">
@@ -162,7 +179,7 @@
             </div>
           </div>
 
-          <div ibox collapse title="Additional resources">
+          <div ibox title="Additional resources">
               <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
 
               <h4>Grove Temperature Sensor</h4>
