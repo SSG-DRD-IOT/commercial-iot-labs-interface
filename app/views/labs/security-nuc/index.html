@@ -28,6 +28,7 @@
                     <p>By the end of this module, you should be able to:</p>
 
                     <ul>
+                        <li>Generate server and client certificates to enable MQTT-TLS communication</li>
                         <li>Use McAfee&reg; Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
                         <li>Have an understanding of the core MEC features, including code and application protection, write and read protection and dynamic whitelisting.</li>
                         <!-- <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li> -->
@@ -36,11 +37,81 @@
                         <li>Ability to log the IoT gateway usage and changes</li>
                         <li>Learn to configure and lock down system services using Systemd</li>
                     </ul>
-                    <p>Also at the end of the lab we will configure the NUC for secure connection using TLS with MQTT</p>
                 </div>
             </div>
 
 
+
+            <div ibox title="Configure Secure MQTT connection with SSL & TLS">
+              <div content-block message="Objectives" name="configure-secure-mqtt">
+                <ul>
+                  <p><li>We will see how to configure  NUC gateway for secure MQTT connection with SSL & TLS</li></p>
+                  <p>TLS (Transport Layer Security) and SSL (Secure Sockets Layer) provide a secure communication channel between a client and server</p>
+                  <p><li>Since we are using SSL encryption we will generate certificates which will be used for authentication. MQTT uses port 8883 for secure connection hence we will make some changes in MQTT broker (mosquitto in our case) configuration file</li></p>
+                  <p><li>To validate the secure connection we will use a virtual-sensor program that will generate random temperature values and publish this data on a secure MQTT port</li></p>
+                  <p><li>Finally we will listen for this data using mosquitto_sub tool</li></p>
+                </ul>
+              </div>
+            </div>
+
+            <div ibox title="Generate Server Certificate Authority, Certificate and Key">
+              <div content-block message="Generate Server Certificate Authority, Certificate and Key" name="telegraf-certs">
+                <p>First, we will need to generate a server certificate authority, certificate and key. These will be used to authenticate and encrypt the MQTT sensor data.</p>
+
+                <p>Run these commands on the gateway console.</p>
+                <div class="alert alert-warning">
+                  <p>It is important to note that while generating these, the “Common Name” parameter in step 1 above and step 3 should specify the server address, “localhost”. Otherwise it will not authenticate correctly.</p>
+                </div>
+                <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
+openssl genrsa -out server.key 2048
+openssl req -out server.csr -key server.key -new
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365</code></pre>
+              </div>
+
+              <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
+                <p>Now move the CA, Certificate and Key file to the MQTT broker's configuration directories</p>
+                <div class="alert alert-warning">
+                  <p>Note: If the directories <b>ca_certificates</b> and <b>certs</b> are not there manually create them</p>
+                </div>
+                <pre><code>mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
+mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
+              </div>
+            </div>
+
+            <div ibox title="Configure Mosquitto to use MQTT over TLS">
+              <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
+                <p>Be sure that your Mosquitto configuration file has all of these options set, particularly the <b>port number 8883, the cafile, and certfile and the keyfile.</b></p>
+                <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
+            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># Place your local configuration in /etc/mosquitto/conf.d/
+
+bind_address 127.0.0.1
+port 8883
+
+cafile /etc/mosquitto/ca_certificates/ca.crt
+certfile /etc/mosquitto/certs/server.crt
+keyfile /etc/mosquitto/certs/server.key
+
+tls_version tlsv1</ui-codemirror>
+               <p>Make sure to stop and start mosquitto service after this change</p>
+                <pre><code>systemctl stop mosquitto</code></pre>
+                <pre><code>systemctl start mosquitto</code></pre>
+              <p>Check to make sure mosquitto service is running properly with below command. The status should be "active (running)"</p>
+                <pre><code>systemctl status mosquitto</code></pre>
+              </div>
+            </div>
+
+            <div ibox title="Download & Configure virtual sensor">
+              <div content-block message="Download & Configure virtual sensor" name="configure-virtual-sensor">
+                <p>Open a ssh terminal to your NUC gateway, at the root directory download and run virtual sensor program using the below commands</p>
+                <pre><code>git clone https://github.com/SSG-DRD-IOT/virtual-sensor.git</code></pre>
+                <pre><code>cd virtual-sensor</code></pre>
+                <pre><code>npm install</code></pre>
+                <pre><code>node virtual-sensor-secure.js</code></pre>
+                <p>You should start seeing sensor data being published like below</p>
+                <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
+                <p>Keep this running in a separate shell as we will use this to capture this data in Data Analytics lab too</p>
+              </div>
+            </div>
 
 
             <div ibox  title="McAfee&reg; Embedded Control Orientation">
@@ -545,79 +616,6 @@
     <pre><code>systemctl unmask nginx</code></pre>
     <p>You can see that this service is enable again when you check the list</p>
     <pre><code>systemctl list-unit-files</code></pre>
-  </div>
-</div>
-
-<div ibox title="Configure Secure MQTT connection with SSL & TLS">
-  <div content-block message="Objectives" name="configure-secure-mqtt">
-    <ul>
-      <p><li>We will see how to configure  NUC gateway for secure MQTT connection with SSL & TLS</li></p>
-      <p>TLS (Transport Layer Security) and SSL (Secure Sockets Layer) provide a secure communication channel between a client and server</p>
-      <p><li>Since we are using SSL encryption we will generate certificates which will be used for authentication. MQTT uses port 8883 for secure connection hence we will make some changes in MQTT broker (mosquitto in our case) configuration file</li></p>
-      <p><li>To validate the secure connection we will use a virtual-sensor program that will generate random temperature values and publish this data on a secure MQTT port</li></p>
-      <p><li>Finally we will listen for this data using mosquitto_sub tool</li></p>
-    </ul>
-  </div>
-</div>
-
-<div ibox title="Generate Server Certificate Authority, Certificate and Key">
-  <div content-block message="Generate Server Certificate Authority, Certificate and Key" name="telegraf-certs">
-    <p>First, we will need to generate a server certificate authority, certificate and key. These will be used to authenticate and encrypt the MQTT sensor data.</p>
-
-    <p>Run these commands on the gateway console.</p>
-    <div class="alert alert-warning">
-      <p>It is important to note that while generating these, the “Common Name” parameter in step 1 above and step 3 should specify the server address, “localhost”. Otherwise it will not authenticate correctly.</p>
-    </div>
-    <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
-openssl genrsa -out server.key 2048
-openssl req -out server.csr -key server.key -new
-openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365
-</code></pre>
-  </div>
-
-  <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
-    <p>Now move the CA, Certificate and Key file to the MQTT broker's configuration directories</p>
-    <div class="alert alert-warning">
-      <p>Note: If the directories <b>ca_certificates</b> and <b>certs</b> are not there manually create them</p>
-    </div>
-    <pre><code>mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
-mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
-  </div>
-</div>
-
-<div ibox title="Configure Mosquitto to use MQTT over TLS">
-  <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
-    <p>Be sure that your Mosquitto configuration file has all of these options set, particularly the <b>port number 8883, the cafile, and certfile and the keyfile.</b></p>
-    <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
-<ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># Place your local configuration in /etc/mosquitto/conf.d/
-
-bind_address 127.0.0.1
-port 8883
-
-cafile /etc/mosquitto/ca_certificates/ca.crt
-certfile /etc/mosquitto/certs/server.crt
-keyfile /etc/mosquitto/certs/server.key
-
-tls_version tlsv1
-</ui-codemirror>
-   <p>Make sure to stop and start mosquitto service after this change</p>
-    <pre><code>systemctl stop mosquitto</code></pre>
-    <pre><code>systemctl start mosquitto</code></pre>
-  <p>Check to make sure mosquitto service is running properly with below command. The status should be "active (running)"</p>
-    <pre><code>systemctl status mosquitto</code></pre>
-  </div>
-</div>
-
-<div ibox title="Download & Configure virtual sensor">
-  <div content-block message="Download & Configure virtual sensor" name="configure-virtual-sensor">
-    <p>Open a ssh terminal to your NUC gateway, at the root directory download and run virtual sensor program using the below commands</p>
-    <pre><code>git clone https://github.com/SSG-DRD-IOT/virtual-sensor.git</code></pre>
-    <pre><code>cd virtual-sensor</code></pre>
-    <pre><code>npm install</code></pre>
-    <pre><code>node virtual-sensor-secure.js</code></pre>
-    <p>You should start seeing sensor data being published like below</p>
-    <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
-    <p>Keep this running in a separate shell as we will use this to capture this data in Data Analytics lab too</p>
   </div>
 </div>
 
