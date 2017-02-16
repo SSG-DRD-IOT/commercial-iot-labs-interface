@@ -58,7 +58,7 @@
 
 
         <div ibox title="Node-Red Flow: Temperature to LCD">
-          <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/temperature-sensors.jpg">
+          <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/temperature-sensors-arduino.jpg">
 
             <ol>
               <li><p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p></li>
@@ -66,6 +66,18 @@
               <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p></li>
             </ol>
           </div>
+          <div content-block name="connect-sensors" message="Save current Node-Red flow" image-link="./views/labs/protocols/images/node-red-export.png">
+            <p><b>Save current Node-Red flow</b></p>
+            <p>Before we start writing Node-Red flow let's backup the existing flow with following steps:</p>
+            <ul>
+              <li><p>Select all the nodes in the current flow manually or by doing a 'Ctrl A'</p></li>
+              <li><p>Click on the menu button next to Deploy and go to Export->Clipboard as shown in figure</p></li>
+              <li><p>Copy the content to a text file and save it</p></li>
+              <li><p>Now delete all the nodes and we are ready for a new flow</p></li>
+            </ul>
+            <div class="alert alert-info">
+              <p>Note: It is possible to create multiple Node-Red flows but since all the flows will be deployed simultaneously and we will be using same resources (I2C pin, temperature sensor, LCD etc.) there will be contention and hence we use only one flow at a time</p>
+            </div>
         </div>
 
           <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT ">
@@ -123,6 +135,7 @@
               <p>Use the
               <ul>
                 <li><b>mqtt</b> node from the input section connected to the:</li>
+                <li><b>function</b> node from the function section connected to:</li>
                 <li><b>debug</b> node from the output section</li>
               </ul>
               <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console in node-red.</p>
@@ -134,13 +147,13 @@
             <div content-block name="protocol-assign-pins" message="Configure the nodes">
               <h2 class="labHidden">Configure the nodes in the MQTT flow</h2>
               <ol>
-                <li>Double click the temperature node to assign it to pin A1</li>
+                <li>Double click the temperature node to assign it to pin <b>A1</b> and change the Platform from Native to <b>Firmata</b></li>
                 <li>Configure <b>both</b> the <b>input mqtt</b> and <b>output mqtt</b> nodes as described below:</li>
 
                 <ul>
-                  <li>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic:</li>
+                  <li>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="" title="mqtt edit" typeof="foaf:Image"></p>
-                  <li>Enter the ip address of the gateway 192.168.1.1 and 1880 is the port number if you are using MQTT. If you are using MQTT-TLS then the port number should be 1883.</li>
+                  <li>Enter the ip address of the gateway and port number as 1883. Here 1883 is the port number if you are using MQTT. If you are using MQTT-TLS then the port number should be 8883.</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="" title="mqtt edit" typeof="foaf:Image"></p>
                 </ul>
               </ol>
@@ -160,9 +173,10 @@
 
             <div content-block name="" message="Configure a Function Node to create the JSON format for the labs">
               <p>Double click the function node and name is <strong>JSONify</strong> and add the following code:</p>
+              <p>Note here 0.66 is a correction factor since the temperature sensor is designed to read at 3.3V but for LCD to work we are using 5V</p>
               <ui-codemirror ui-codemirror-opts="editorOptions ">msg.payload = {
     sensor_id: "temperature",
-    value: Math.floor(msg.payload),
+    value: Math.floor(msg.payload*0.66),
     timestamp: Date.now(),
 }
 return msg;</pre></ui-codemirror>
@@ -213,7 +227,7 @@ return msg;</pre></ui-codemirror>
 
 
             <div content-block name="protocol-publish-mqtt " message="Deploy the application"
-            image-link="./views/labs/protocols/images/mqtt_flow_connected.png ">
+            image-link="./views/labs/protocols/images/node-red-temp.png ">
 <h2 class="labHidden ">Deploy the application</h2>
 <p><img class="labHidden" alt="mqtt flow connected" data-fid="503936" src="https://software.intel.com/sites/default/files/managed/a6/3f/mqtt_flow_connected.png" title="mqtt flow connected" typeof="foaf:Image"></p>
 
@@ -233,7 +247,7 @@ return msg;</pre></ui-codemirror>
               <h5>Monitor MQTT Topic on Gateway</h5>
               <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
               <p>In the SSH terminal to the Gateway type:</p>
-              <code>mosquitto_sub -t sensors/temperature/data</code>
+              <pre><code>mosquitto_sub -t sensors/temperature/data</pre></code>
               <p>You will start to see the data being published to the "temperature" topic.  This is a great way to help you debug a program that uses MQTT</p>
             </div>
 
@@ -285,7 +299,7 @@ return msg;</pre></ui-codemirror>
       "type":"function",
       "z":"4072485.59502b8",
       "name":"JSONify",
-      "func":"msg.payload = {\n    sensor_id: \"temperature\",\n    value: Math.floor(msg.payload)),\n    timestamp: Date.now(),\n}\nreturn msg;",
+      "func":"msg.payload = {\n    sensor_id: \"temperature\",\n    value: Math.floor(msg.payload*0.66)),\n    timestamp: Date.now(),\n}\nreturn msg;",
       "outputs":1,
       "noerr":0,
       "x":366.5,
