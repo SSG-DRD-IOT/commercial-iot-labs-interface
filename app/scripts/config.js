@@ -151,7 +151,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.admin', {
+    .state('labs.admin-interface', {
       url: "/admin-interface",
       templateUrl: "views/labs/admin-interface/index.html",
       data: {
