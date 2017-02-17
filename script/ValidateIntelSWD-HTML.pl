@@ -3,13 +3,16 @@
 #  - Checks that the IDZ manifest file is well-formed 
 #  - Checks if HTML files referenced by the IDZ manifest file are present in the current directory
 #  - Checks if all image and HTML files referenced by HTML are present in the current directory
+#  - 2017Jan11 Checks for duplicate aliases in the manifest file
+#  - 2017Jan12 Removed support for Audience taxonomy. "Developers" is no longer an available value and no other values apply at this time.
+#              Added support for term identifiers for Subject Matter values.
+#  - 2017Feb01 Add check for aliases that are greater than 255 character limit.
 #
 # Run as:
 #         ValidateIntelSWD-HTML.pl intel-swd-manifest.xml
 #
-# Peter Shepton
-# SSG Information Development, peter.sheptons@intel.com
-# Last Updated: 02/06/2015
+# SSG Information Development - Tools Team
+# Last Updated: 02/01/2017
 # *****************************************************************************
 
 use Cwd;
@@ -18,6 +21,8 @@ use strict;
 use warnings;
 use List::MoreUtils 'uniq';
 use XML::Parser;
+use XML::LibXML;
+
 
 my %guidArray = ();
 my %dup_guidArray = ();
@@ -26,6 +31,12 @@ my $duplicatecounter = 0;
 my $Guid;
 my $GuidFile;
 my $manifestfile = shift @ARGV;              # the file to parse - manifest file
+sub checkForDuplicateAliases;                # Added for alias support
+my $duplicateAliasCounter = 0;               # Added for alias support
+my $Manifest_Contains_AliasPrefix = 0;       # Boolean - whether manifest expects automated alias support
+my $Alias_Prefix_Value = "";
+my $Alias_Prefix_Length = 0;
+my $DRUPAL_ALIAS_LIMIT = 255;
 
 # --------------------------------------------------------------------- 
 # initialize parser object and parse the string
@@ -77,7 +88,6 @@ my $swdMetadata;
 my $swdValue;
 #my $swdlocale = "locale";
 my $swdlang = "lang";
-my $swdaudience	= "audience";
 #my $swddoctype = "doctype";
 my $swdid = "id";
 my $swdpublish = "publish";
@@ -136,20 +146,11 @@ else {
 	print LOGFILE "***ERROR*** Default value for intelswd-lang is not set correctly. It should be \"en\".\n";
 }
 
-# Check default value for intelswd-audience set to "Developers"
-if (exists $swdArray{$swdaudience} and $swdArray{$swdaudience} eq "Developers") {
-#	print STDERR "Default value for intelswd-audience is set: $swdArray{$swdaudience}.\n";
-	print LOGFILE "Default value for intelswd-audience is set: $swdArray{$swdaudience}.\n";
-	$swdMetadataCounter++;
-}
-else {
-#	print STDERR "Default value for intelswd-audience is not set. It should be \"Developers\".\n";
-	print LOGFILE "***ERROR*** Default value for intelswd-audience is not set correctly. It should be \"Developers\".\n";
-}
 
 # Check default value for intelswd-subjectmatter set to "Product Documentation"
 # -	Original metadata intelswd-doctype was changed to intelswd-subjectmatter, to reflect which taxonomy it comes from. 07-26-2013
 # - 02-06-2015 Changed number of occurrences to 1+. "Product Documentation" is required; One additional occurrence is for doctype
+# - 01-12-2017 Term identifiers are now allowed. 
 my $numSubjectMatterEntries = 0;
 my $isProductDocFound = 0;
 my $isDocTypeFound = 0;
@@ -157,22 +158,23 @@ my $doctype = "";
 $numSubjectMatterEntries = keys(%subjectMatterHash); # Get the size of the subject matter hash
 while ($numSubjectMatterEntries > 0){
     my $entry = $subjectMatterHash{$numSubjectMatterEntries};
-    if ($entry =~ m/Product Documentation/) {
+    if ( ($entry =~ m/Product Documentation/) or ($entry =~ m/20774/) ) {
         $isProductDocFound = 1;
     }
-    if ($entry =~ m/Catalogs|Code Samples|Cookbooks|Getting Started|References|Tutorials|User Guides/) {
+    if ( ($entry =~ m/Catalog|Code Sample|Cookbook|Getting Started|Tutorial|User Guide|Developer Guide|Developer Reference/) 
+          or ($entry =~ m/79004|20780|79005|79497|20783|78151|83039|79003/) ) {
         $isDocTypeFound = 1;
         $doctype = $entry;
     }
     $numSubjectMatterEntries--;
 }
 if ($isProductDocFound) {
-	print LOGFILE "Default value for intelswd-subjectmatter is set: Product Documentation.\n";
+	print LOGFILE "Default value for intelswd-subjectmatter is set: Product Documentation or 20774\n";
 	$swdMetadataCounter++;
 }
 else {
 #	print STDERR "Default value for intelswd-doctype is not set. It should be \"Product Documentation\".\n";
-	print LOGFILE "***ERROR*** Default value for intelswd-subjectmatter is not set correctly. It should be \"Product Documentation\".\n";
+	print LOGFILE "***ERROR*** Default value for intelswd-subjectmatter is not set correctly. It should be \"Product Documentation\" or \"20774\".\n";
 }
 if ($isDocTypeFound) {
     print LOGFILE "Value for doctype (intelswd-subjectmatter) found: $doctype.\n";
@@ -382,18 +384,35 @@ my $href_value_xml_counter_missing=0;
 print LOGFILE "Checking if all referenced image and HTML files are present:\n";
 
 find(\&updateHREF,  $manifestfiledir );
+# Grab the alias from the manifest file
+my $query = XML::LibXML::XPathExpression->new('//intel-swd-manifest/intel-swd-metadata/intelswd-aliasprefix');
+my $tmp_parser = XML::LibXML->new();
+my $manifest = $tmp_parser->parse_file($manifestfile) or die "ERROR - Could not parse '$manifestfile': $!\n";
+my($node) = $manifest->findnodes($query);
+if ($node) {
+    my $Alias_Prefix_Value = $node->getAttribute('value');
+    if ($Alias_Prefix_Value) {
+        $Manifest_Contains_AliasPrefix = 1;
+        $Alias_Prefix_Length = length $Alias_Prefix_Value;
+    }
+}
+# Added for alias support
+if ($Manifest_Contains_AliasPrefix) {
+    checkForDuplicateAliases();
+}
 
 print LOGFILE "------------------------------------------------\n";
 print LOGFILE " - Number of referenced HTML file links: $href_value_xml_counter\n";
 print LOGFILE " - Number of missing referenced HTML file links: $href_value_xml_counter_missing\n";
 print LOGFILE " - Number of referenced Image file links: $href_value_img_counter\n";
 print LOGFILE " - Number of missing referenced Image file links: $href_value_img_counter_missing\n";
+print LOGFILE " - Number of duplicate aliases found: $duplicateAliasCounter\n";
 print LOGFILE "------------------------------------------------\n";
 
 print STDERR "\nVALIDATION RESULTS\n";
 
 # If metadata validation is complete without errors ...
-if ($swdMetadataCounter == 8) {	
+if ($swdMetadataCounter == 7) {	
 	print STDERR "SUCCESS: Metadata in the manifest file appears valid\n";
 }
 else {
@@ -409,18 +428,31 @@ else {
     print STDERR "***ERROR*** $nonexistingFileCounter missing files referenced in the manifest file.\n";
 }
 if ($href_value_xml_counter_missing==0) {
-    print STDERR "SUCCESS: Found all HTML files referenced in document bundle.\n";
+    # DPD200413054 Fix validation for broken links; Updated text for clarity
+    print STDERR "SUCCESS: All HTML files references are working.\n";
 }
 else {
-    print STDERR "***ERROR*** Missing $href_value_xml_counter_missing files referenced in document bundle!\n";
+    # DPD200413054 Fix validation for broken links; Updated text for clarity
+    print STDERR "***ERROR*** $href_value_xml_counter_missing html file references are broken!\n";
     print STDERR "       For details check log file ValidateIntelSWD.log\n";
 }
 if ($href_value_img_counter_missing==0) {
-    print STDERR "SUCCESS: Found all image files referenced in document bundle.\n";
+    # DPD200413054 Fix validation for broken links; Updated text for clarity
+    print STDERR "SUCCESS: All image file references are working.\n";
 }
 else {
-    print STDERR "***ERROR*** Missing $href_value_img_counter_missing image files referenced in document bundle!\n";
+    # DPD200413054 Fix validation for broken links; Updated text for clarity
+    print STDERR "***ERROR*** $href_value_img_counter_missing image file references are broken!\n";
     print STDERR "            For details check log file ValidateIntelSWD.log\n";
+}
+# Added for alias support
+if ($Manifest_Contains_AliasPrefix) {
+    if ($duplicateAliasCounter == 0) {
+        print STDERR "SUCCESS: No duplicate aliases found.\n";
+    } else {
+        print STDERR "***ERROR*** $duplicateAliasCounter duplicate aliases found!\n";
+        print STDERR "            For details check log file ValidateIntelSWD.log\n";
+    }
 }
 
 print STDERR "\n";
@@ -455,7 +487,8 @@ sub updateHREF() {
 		while(<A>) {
 			chomp;
 			# Search for all href links containing UUIDs
-			while (m/ href=\"((\w|-|:|\/)+\.html?)\"/gi) {
+            # DPD200413054 Fix validation for broken links; Regex updated to account for '../' in href and removed matching the end quote. Some links end with element IDs in the URI
+			while (m/ href=\"(([a-zA-Z#_\-=\w\.\/]+)\.html?)/gi) {
 				$href_value_xml_ext=$1;
 				# Ignore out link content containing www and http
 				if ($href_value_xml_ext =~ m/www/) {
@@ -463,8 +496,10 @@ sub updateHREF() {
 				elsif ($href_value_xml_ext =~ m/http/) {
 				}
 				elsif ($href_value_xml_ext =~ m/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\.html?/) {
-					if (-e $href_value_xml_ext) {
+                    # DPD200413054 Fix validation for broken links; Get an accurate count of all href links encountered in htm in docbundle folder
 						$href_value_xml_counter++;
+					if (-e $href_value_xml_ext) {
+						#$href_value_xml_counter++;
 					}
 					else {
 						print LOGFILE "Referenced file $href_value_xml_ext in $File::Find::name cannot be found!\n";
@@ -472,25 +507,23 @@ sub updateHREF() {
 					}					
 				}
 				else {
-					if (-e $href_value_xml_ext) {
-						print LOGFILE "Referenced file $href_value_xml_ext in $File::Find::name is not in UUID form!\n";
+                    # DPD200413054 Fix validation for broken links; Get an accurate count of all href links encountered in htm in docbundle folder
+                    $href_value_xml_counter++;
 						$href_value_xml_counter_missing++;
-					}
-					else {
-						print LOGFILE "Referenced file $href_value_xml_ext in $File::Find::name is not in UUID form and cannot be found!\n";
-						$href_value_xml_counter_missing++;
-					}
+                    print LOGFILE "Referenced file $href_value_xml_ext in $File::Find::name is not in UUID form. Check that the source file exists and a UUID mapping exists in your mapping file.\n";
 				}
 			}			
 			
-			# Search for all src links containing UUIDs	
-			while (m/( src=\"(\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\.(g|j|p)\w\w\w?))/gi) {
+			# Search for all src links
+            # DPD200413054 Fix validation for broken links; Look for all src links, not just those that match a UUID	
+			while (m/( src=\"([^"]+\.(g|j|p)\w\w\w?))/gi) {
 				$href_value_src_img=$1;
 				$href_value_img_ext=$2;
-				# If image filename is in UUID form
+				# If image filename is in UUID form, check if file exists in this directory
 				if ($href_value_src_img =~ m/ src=\"\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\.\w\w\w\w?/i) {
-					if (-e $href_value_img_ext) {
 						$href_value_img_counter++;
+					if (-e $href_value_img_ext) {
+						#$href_value_img_counter++;
 					}
 					else {
 						print LOGFILE "Referenced file $href_value_img_ext in $File::Find::name cannot be found!\n";
@@ -498,14 +531,9 @@ sub updateHREF() {
 					}			
 				}
 				else {
-					if (-e $href_value_img_ext) {
-						print LOGFILE "Referenced file $href_value_img_ext in $File::Find::name is not in UUID form!\n";
+                    $href_value_img_counter++;
 						$href_value_img_counter_missing++;
-					}
-					else {
-						print LOGFILE "Referenced file $href_value_img_ext in $File::Find::name is not in UUID form and cannot be found!\n";
-						$href_value_img_counter_missing++;
-					}
+                    print LOGFILE "Referenced file $href_value_img_ext in $File::Find::name is not in UUID form. Check that the source file exists and a UUID mapping exists in your  mapping file.\n";
 				}
 			}	
 		}
@@ -519,3 +547,28 @@ sub updateHREF() {
 }
 # ************************** End of function **************************
 
+#
+sub checkForDuplicateAliases() {
+    my $parser = XML::LibXML->new(); # XML parser
+    my $manifest = $parser->parse_file($manifestfile) or die "ERROR - Could not parse '$manifestfile': $!\n"; # Filehandle on parsed manifest file
+    my %unique_aliases = ();  # Instantiate a hash for recording of unique aliases key=alias string, value=GUID
+    
+    foreach my $topic ($manifest->findnodes('/intel-swd-manifest/intel-swd-topic')) {
+        my $alias           = $topic->find('@alias')->to_literal->value();
+        my $id              = $topic->find('@id')->to_literal->value();
+        
+        if (!exists $unique_aliases{$alias}) {
+            $unique_aliases{$alias} = $id;
+        } else {
+            print STDERR "ERROR! Found a duplicate alias '$alias', already defined for ID '$unique_aliases{$alias}'. Duplicate found on ID '$id'.\n";
+            print LOGFILE "ERROR! Found a duplicate alias '$alias', already defined for ID '$unique_aliases{$alias}'. Duplicate found on ID '$id'.\n";
+            $duplicateAliasCounter++;
+        }
+        # Check if alias + alias prefix is longer than 255 characters
+        my $full_alias_length = $Alias_Prefix_Length + (length $alias);
+        if ($full_alias_length > 255) {
+            print STDERR "ERROR! Found an alias that is longer than '$DRUPAL_ALIAS_LIMIT' characters. See the alias defined in '$id'.\n";
+            print LOGFILE "ERROR! Found an alias that is longer than '$DRUPAL_ALIAS_LIMIT' characters. See the alias defined in '$id'.\n";
+        }
+    }
+}
