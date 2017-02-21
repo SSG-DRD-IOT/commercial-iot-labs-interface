@@ -134,7 +134,7 @@
 
         <div ibox title="MQTT Sensor Monitoring on the Gateway">
           <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
-<h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
+            <h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
             <p>Before we start monitoring sensor data, let's make sure the sensors are publishing the data. We saw two ways to do this:</p>
             <ul>
               <li><p>Using the node-red flow for temperature sensor that we did in "Application Protocols: MQTT and HTTP". However this needs a small change where we have to change the mqtt output and input nodes to use port <b>8883</b> instead of 1883 and re-deploy</p></li>
@@ -297,6 +297,7 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
               </ul>
           </li>
           <li>
+            <p class="label">./server.js</p>
             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// MQTT connection function
 mqttClient.on('connect', function() {
   console.log("Connected to MQTT server");
@@ -314,9 +315,9 @@ mqttClient.on('connect', function() {
 
     <div content-block name="decode-incoming-json" message="Decode the incoming JSON message from MQTT">
 <h2 class="labHidden">Decode the incoming JSON message from MQTT</h2>
-      <li>
         <p>Next, write a handler for the MQTT <code>message</code> event.</p>
-        <p>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</p></li>
+        <p>Parse the incoming message using a <code>try-catch</code> block and the <code>JSON.parse</code> function.</p>
+        <p class="label">./server.js</p>
         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// A function that runs when MQTT receives a message
 mqttClient.on('message', function(topic, message) {
       var json;
@@ -330,10 +331,10 @@ mqttClient.on('message', function(topic, message) {
 
 
     <div content-block name="is-announcement" message="Log all announcements to the database">
-<h2 class="labHidden">Log all announcements to the database</h2>
-      <li>
-        <p>Decide whether it is a new piece of sensor data or a new announcement. If it is an annoucement then create a new MongoDB sensor object and save it to the database. Handle any database error by printing the error to the console.</p>
-          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">if (topic.match(/announcements/)) {
+      <h2 class="labHidden">Log all announcements to the database</h2>
+      <p>Decide whether it is a new piece of sensor data or a new announcement. If it is an annoucement then create a new MongoDB sensor object and save it to the database. Handle any database error by printing the error to the console.</p>
+      <p class="label">./server.js</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">if (topic.match(/announcements/)) {
   var sensor = new SensorModel(json);
   sensor.save(function(err, sensor) {
     if (err)
@@ -342,12 +343,12 @@ mqttClient.on('message', function(topic, message) {
       console.log(topic + ":" + message.toString());
   });
 };</pre></ui-codemirror>
-      </li>
     </div>
 
     <div content-block name="is-data" message="Log all sensor readings to the database">
-<h2 class="labHidden">Log all sensor readings to the database</h2>
-    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">    if (topic.match(/data/)) {
+      <h2 class="labHidden">Log all sensor readings to the database</h2>
+      <p class="label">./server.js</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">    if (topic.match(/data/)) {
       var value = new DataModel(json);
       value.save(function(err, data) {
         if (err)
