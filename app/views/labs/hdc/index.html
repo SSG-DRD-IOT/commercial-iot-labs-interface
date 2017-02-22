@@ -23,7 +23,7 @@
         <div content-block name="" message="Read the Objectives">
           <h2 class="labHidden">Read the Objectives</h2>
           <labels gateway window apple linux/>
-          <p>In this lab you will learn the follow:</p>
+          <p>In this lab you will go through the following:</p>
           <ul>
             <li><p>Install Helix Device Cloud (HDC) on your NUC platform</p></li>
             <li><p>Learn how HDC can be used as a device management platform for Intel NUC Gateway</p></li>
@@ -82,7 +82,7 @@ ls</code></pre>
         <h2 class="labHidden">Helix Device Cloud Configuration</h2>
 
         <p>Log on to <a href="https://www.helixdevicecloud.com/" target="_blank">https://www.helixdevicecloud.com/</a> with below credentials.</p>
-        <pre><code>Login: lab_user&#13;&#10;Password: intel123</code></pre>
+        <pre><code>Login: StudentX (where X can be from 0 to 49 based on the ID assigned to you)&#13;&#10;Password: Intel@123</code></pre>
         <ul>
           <li>Verify your device is registered in HDC UI – use MAC address to locate your device</li>
           <li>Edit the device details to assign a friendly name as shown in the figure</li>
@@ -169,7 +169,7 @@ ls</code></pre>
     <div ibox title="Helix Device Cloud Rules and Alerts">
       <div content-block name="" message="Objectives and Prerequisites to create a rule">
         <h2 class="labHidden">Objectives</h2>
-        <p>We will learn how to create a rule and generate an alert in HDC using another sample app iot-app-complete</p>
+        <p>We will learn how to create a rule and generate an alert in HDC using another sample app <b>iot-app-complete</b></p>
         <ul>
           <li>One of the telemetry data that this app publishes is random values of temperature (temp). We will set up a rule to generate an alert when this temp value crosses a certain limit</li>
           <li>Make sure your app is running on the device before you start creating the rule.</li>
@@ -181,7 +181,7 @@ ls</code></pre>
       </div>
       <div content-block name="" message="Create a New Rule" image-link="./views/labs/hdc/images/8.png">
         <li><p>Go to “RULES” tab and click on “Create New Rule”</p></li>
-        <li><p>Give a rule name, for e.g. “temperature alert”</p></li>
+        <li><p>Give a unique rule name, for e.g. <b>“temperature_alert_studentX”</b> where X is the assigned number to you based on your login ID</p></li>
         <li><p>Choose your device in option “Apply Rule to these devices” – make sure you select only your device</p></li>
       </div>
       <div content-block name="" message="Add a condition to the rule" image-link="./views/labs/hdc/images/9.png">
@@ -255,7 +255,7 @@ ls</code></pre>
       <div content-block name="" message="Manage the software installed on the device">
         <!-- 4.2	Manage the software installed on the device
         Objective: monitor update traffic between the agent and the cloud -->
-        <li><p>Login to the device either doing a ssh from your host PC or through the “Remote Login” window</li></p>
+        <li><p>Login to the device either by doing a ssh from your host PC or through the “Remote Login” window</li></p>
         <li><p>Execute this command: <pre><code>journalctl -u iot -f</code></pre></li></p>
         <li><p>Keep this handy for the next exercise</li></p>
 
@@ -276,7 +276,7 @@ ls</code></pre>
     <div content-block name="" message="Select the software update package" image-link="./views/labs/hdc/images/hdc-update_1.png">
       <li><p>Click on the "UPDATE" tab on top of the HDC page</p></li>
       <li><p>On the Software Updates page, click "Available Packages" and then click "CREATE NEW UPDATE PACKAGE"</p></li>
-      <li><p>Give a short name in "Package Name" and a version number in "Version" box as shown in figure. You can put in a description if you want</p></li>
+      <li><p>Give a short unique name in "Package Name", for e.g. sampleX (where X is your id no. in your HDC login) and a version number in "Version" box as shown in figure. You can put in a description if you want</p></li>
       <li><p>Next specify the criteria to select compatible devices. In our case we will chose Firmware version and value as 2.2. This lets you choose which devices you want to update based on the criteria</p></li>
     </div>
 
@@ -290,14 +290,14 @@ ls</code></pre>
 
     <div content-block name="" message="Prepare to Deploy the Package" image-link="./views/labs/hdc/images/hdc-update_4.png">
       <li><p>On "Available Packages" find your package and click "DEPLOY"</p></li>
-      <li><p>Give a name to your deployment and a description</p></li>
+      <li><p>Give a unique name to your deployment, for e.g. <b>deploy_sample_studentX</b> (where X is the id no. in your HDC login) and a description</p></li>
       <li><p>Your package information will be available under "Package Information" section. Note that there will be additional Package Files (update.json and manifest.spec) which the system puts in your package</p></li>
     </div>
 
     <div content-block name="" message="Deploy the Package to the NUC" image-link="./views/labs/hdc/images/hdc-update_5.png">
       <li><p>At the bottom of the page, you will see list of devices compatible for your package. This is based on the criteria we selected earlier for compatible devices, which is the Firmware Version in our case</p></li>
       <li><p>You will see all the devices with 2.2 Firmware (it will list all the devices in the workshop since they are based on 2.2)</p></li>
-      <li><p>Check mark your devie based on your ID and MAC address and press "ADD DEVICES". This will then list your device in section "Devices selected for deployment"</p></li>
+      <li><p>Check mark your device based on your ID and MAC address and press "ADD DEVICES". This will then list your device in section "Devices selected for deployment"</p></li>
       <li><p>Click "DEPLOY"</p></li>
     </div>
 
