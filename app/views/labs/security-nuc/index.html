@@ -113,6 +113,16 @@ tls_version tlsv1</ui-codemirror>
               </div>
             </div>
 
+            <div ibox title="Subscribe to the sensor data published">
+              <div content-block message="Subscribe to the sensor data published" name="configure-virtual-sensor">
+                <p>Using mosquitto_sub utility we will subscribe to the data being published</p>
+                <p>Open another ssh terminal to your NUC gateway and give the following command:</p>
+                <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
+                <p>Note here we are listening on the secure port 8883 with the TLS version specified. If you use port 1883 it will refuse the connection</p>
+                <p>You should start receiving messages as below which we are publishing for the topic /sensors/temperature/data using virtual-sensor-secure program</p>
+                <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
+              </div>
+            </div>
 
             <div ibox  title="McAfee&reg; Embedded Control Orientation">
                 <div content-block name="security-objectives" message="Complete the McAfee&reg; Embedded Control Exercises">
@@ -616,17 +626,6 @@ tls_version tlsv1</ui-codemirror>
     <pre><code>systemctl unmask nginx</code></pre>
     <p>You can see that this service is enable again when you check the list</p>
     <pre><code>systemctl list-unit-files</code></pre>
-  </div>
-</div>
-
-<div ibox title="Subscribe to the sensor data published">
-  <div content-block message="Subscribe to the sensor data published" name="configure-virtual-sensor">
-    <p>Using mosquitto_sub utility we will subscribe to the data being published</p>
-    <p>Open another ssh terminal to your NUC gateway and give the following command:</p>
-    <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
-    <p>Note here we are listening on the secure port 8883 with the TLS version specified. If you use port 1883 it will refuse the connection</p>
-    <p>You should start receiving messages as below which we are publishing for the topic /sensors/temperature/data using virtual-sensor-secure program</p>
-    <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
   </div>
 </div>
 
