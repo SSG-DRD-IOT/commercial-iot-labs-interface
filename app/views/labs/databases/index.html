@@ -129,7 +129,7 @@
         </div>
       </div>
 
-      <!-- Create JavaScript Models to represent the Edge Network -->
+      <!-- Initialize the Database -->
       <div ibox title="Initializing the Database">
         <div content-block name="defining-database-types" message="Read and Understand the types of objects that we will track on our Edge network">
           <p class="alert alert-info">
@@ -510,6 +510,28 @@ mqttClient.on('message', function(topic, message) {
       </div>
     </div>
 
+
+      <div ibox title="Verify that Temperature Data is being Put in the Database">
+        <!-- Objectives -->
+        <div content-block name="database-objectives" message="Read help Commands">
+          <p>
+            To verify that data is being spooled into the database, you will need to use the command line Mongo client.
+          </p>
+          <p>
+            Start the Mongo client by typing on a command line <pre><code>mongo</code></pre>
+          </p>
+          <p>
+            Once in the mongo client type <pre><code>show dbs</code></pre> the <b>iotdemo</b> database should be in the displayed list.  Now you can switch to the database. <pre><code>use iotdemo</code></pre>
+          </p>
+          <p>
+            Collections in MongoDB are similar to tables in an SQL database. To see the collections in the iotdemo database type <pre><code>show collections</code></pre>
+          </p>
+          <p>
+            Now you can begin querying data. The first command will list all data in the collection and the second will count the number of data entries in the collection. <pre><code>db.datamodels.find()</code></pre> or <pre><code>db.datamodels.count()</code></pre>
+          </p>
+        </div>
+      </div>
+
     <div ibox title="Lab Solutions">
     <div content-block name="Clone-the-Solution-from-its-Github-Repository" message="Clone the Solution from it's Github Repository">
         <h2 class="labHidden">Clone the Solution from it's Github Repository</h2>
@@ -537,6 +559,7 @@ mqttClient.on('message', function(topic, message) {
     </div>
 </div>
   </div>
+
 
 <!-- Duplicate Instructions
       <div ibox  title="Lab Solutions">
