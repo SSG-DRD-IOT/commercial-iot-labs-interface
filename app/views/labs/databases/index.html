@@ -261,23 +261,23 @@
         </div>
       </div>
 
-        <div ibox title="MQTT Sensor Monitoring on the Gateway">
-          <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
-            <h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
-            <p>Before we start monitoring sensor data, let's make sure the sensors are publishing the data. We saw two ways to do this:</p>
-            <ul>
-              <li><p>Using the node-red flow for temperature sensor that we did in "Application Protocols: MQTT and HTTP". However this needs a small change where we have to change the mqtt output and input nodes to use port <b>8883</b> instead of 1883 and re-deploy</p></li>
-              <li><p>Second is by running the virtual-sensor-secure.js program in "virtual-sensor" folder we downloaded in "Security and the Internet of Things" lab with command "node virtual-sensor-secure.js" which publishes random temperature data on port <b>8883</b></li></p>
-            </ul>
-            <div class="alert alert-info">
-              <p>Ensure that sensor data is published using any one of the above two methods.</p>
-            </div>
-            <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
-            <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
+      <div ibox title="MQTT Sensor Monitoring on the Gateway">
+        <div content-block name="read-mqtt-monitoring-intro" message="Read the Introduction to the NodeJS Server Monitoring with MQTT ">
+          <h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
+          <p>Before we start monitoring sensor data, let's make sure the sensors are publishing the data. We saw two ways to do this:</p>
+          <ul>
+            <li><p>Using the node-red flow for temperature sensor that we did in "Application Protocols: MQTT and HTTP". However this needs a small change where we have to change the mqtt output and input nodes to use port <b>8883</b> instead of 1883 and re-deploy</p></li>
+            <li><p>Second is by running the virtual-sensor-secure.js program in "virtual-sensor" folder we downloaded in "Security and the Internet of Things" lab with command "node virtual-sensor-secure.js" which publishes random temperature data on port <b>8883</b></li></p>
+          </ul>
+          <div class="alert alert-info">
+            <p>Ensure that sensor data is published using any one of the above two methods.</p>
           </div>
+          <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
+          <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
+        </div>
 
           <div content-block name="about-topics" message="Read the Overview on MQTT Topics on the Edge Network">
-<h2 class="labHidden">Read the Overview on MQTT Topics on the Edge Network</h2>
+            <h2 class="labHidden">Read the Overview on MQTT Topics on the Edge Network</h2>
             <h4>Overview on MQTT Topics on the Edge Network</h4>
 
             <div class="alert alert-info">
@@ -550,7 +550,7 @@ mqttClient.on('message', function(topic, message) {
         <p>You should start seeing prints of data that is monitored by this server and written to the database</p>
     </div>
 </div>
-  </div>
+
 
 
 <!-- Duplicate Instructions
