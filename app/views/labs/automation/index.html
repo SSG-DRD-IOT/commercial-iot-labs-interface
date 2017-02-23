@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Automation on the Edge Network</h2>
+        <h2>Automating IoT Networks</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -9,7 +9,7 @@
                 <a>Labs</a>
             </li>
             <li class="active">
-                <strong>Automation on the Edge Network</strong>
+                <strong>Automating IoT Networks</strong>
             </li>
         </ol>
     </div>
@@ -27,18 +27,23 @@
               <p>By the end of this module, you should be able to:</p>
 
               <ul>
-                <li>Implement your business logic in the form of triggers which are automatic rules that run on the edge network.</li>
+                <li>Implement your automation rules in the form of conditional actions called triggers that run on the edge network.</li>
                 <li>Read triggers from the database and evaulate whether any of them should be executed.</li>
-                <li>Write your own Condition Based Monitoring System (CDMS)</li>
+                <li>Write your own Automation Service</li>
               </ul>
             </div>
+          <div content-block message="Prerequisites" image-link="./views/labs/automation/images/admin.png">
+            <p>
+              Before you can begin this lab, you must install the custom administration web application. This web application will allow you to easily create, edit and delete triggers. Creating the trigger service and setting up a couple of triggers is the focus of this lab.
+            </p>
+          </div>
           </div>
 
             <!-- Introduction -->
             <div ibox  title="Introduction">
               <div content-block name="automation-introduction" message="Read the Introduction">
 <h2 class="labHidden">Read the Introduction</h2>
-                <p>In this lab, we will walk you through building a NodeJS application that implements conditions based monitoring on an edge network.</p>
+                <p>In this lab, we will walk you through building a NodeJS application that implements an automation service for a network.</p>
                 <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, or <em>Edge Network Automation</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The Iot Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
                 <p>In the example of a temperature controlled room, the temperature sensor is reporting the temperature to the Intel&reg; IoT Gateway and the gateway is responsible for triggering an Iot event. An Iot Event (also called a trigger in this workshop) always has a conditions function and a trigger function. In the case that the temperature is too hot the event may take automatic action to turn on the air conditioning on and send an alert to the person responsible for the room.</p>
               </div>
@@ -52,11 +57,10 @@
 
                 <ul>
                   <li><p>Write several triggers.  Develop an understanding of a condition/predicate function. Develop an understanding of trigger functions and their capabilities.</p></li>
-                  <li><p>Add several triggers to the database manually</p></li>
                   <li><p>Create a new NPM package named "trigger-daemon"</p></li>
                   <li><p>Create a NodeJS server that listens to all sensor based data</p></li>
                   <li><p>Reads in the triggers from the MongoDB. We will store the triggers in the Mongo database so that they can be remotely added from the administration interface.</p></li>
-                  <li><p>Compare sensor data to the condition function of each trigger</p></li>
+                  <li><p>Compare sensor data to the condition function of each trigger.</p></li>
                   <li><p>If a comparison function evaluates to true then execute the trigger function.</p></li>
                 </ul>
 
@@ -64,39 +68,45 @@
             </div>
 
             <!-- Writing the Trigger's Conditional Functions -->
-        <div ibox  title="Writing the Trigger's Conditional Functions">
-          <div content-block name="write-triggers" message="Practice writing conditional predicates for triggers">
-<h2 class="labHidden">Practice writing conditional predicates for triggers</h2>
-                    <p><b>A conditional predicate function always returns a true or false value.</b>  It has access to all of the sensor data on the edge network.</p>
+          <div ibox  title="Learning about Automation Rules">
+            <div content-block name="write-triggers" message="Learn about writing conditional predicates for triggers">
+              <h2 class="labHidden">Practice writing conditional predicates for triggers</h2>
+                <p><b>A conditional predicate function always returns a true or false value.</b>  It has access to all of the sensor data on the edge network.</p>
 
-                    <p>For example in JavaScript a predicate function that tests if the temperature is greater than 27 looks like this:</p>
+                <p>For example in JavaScript a predicate function that tests if the temperature is greater than 27 looks like this:</p>
 
-                    <div>
-                        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The trigger condition function is a predicate function which returns a TRUE or FALSE.
+
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The trigger condition function is a predicate function which returns a TRUE or FALSE.
 (
   function( temperature ) {
-    return stash["temperature"] &gt; 27;
+    return temperature &gt; 27;
   }
 )</pre></ui-codemirror>
-                    </div>
 
                     <p>Notice the <span style='font-weight:bold'>parathesis</span> that surround this function.  These are required for the trigger to run correctly.  In JavaScript, these parathesis create a block of executable code called a <b>closure</b>.  The JavaScript interpreter requires this in order to dynamically evaluate the code.</p>
-
-                    <p>Later in this lab, we will implement a associative array called the <b>stash</b>  that contains the last value of each of the sensors on the edge network. Let's build some triggers using the stash now.</p>
                   </div>
-                  <div content-block name="conditional-function-exercises" message="Read the  predicate function for the light sensor">
-<h2 class="labHidden">Read the  predicate function for the light sensor</h2>
-                    <h4>Exercises:</h4>
+
+                  <div content-block name="write-triggers" message="The previous value for each sensor is stored in the stash array">
+                      <h2 class="labHidden">The previous value for each sensor is stored in the stash array</h2>
+
+                    <p class="alert alert-info">Later in this lab, we will implement an associative array called the <b>stash</b>  that contains the last value of each of the sensors on the edge network. Let's build some triggers using the stash now.</p>
+                  </div>
+
+                  <div content-block name="conditional-function-exercises" message="Read the predicate function for the light sensor">
+                    <h2 class="labHidden">Read the  predicate function for the light sensor</h2>
+                    <h4>More Examples:</h4>
 
                     <p>Write a predicate function that tests if a light sensor has a value less than or equal 15 lumens.</p>
 
                     <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">(
-  function( light ) {
-    return stash["light"] &lt;= 15;
+  function( brightness ) {
+    return brightness &lt;= 15;
   }
 )</pre></ui-codemirror>
 
-
+                    <p>
+                      In our Automation Service, we will also implement the notion of a "stash". The current value will be passed into the function as an argument, but the next most recent value will be stored in the stash. This will allow us to make comparisons between the current value and the previously most recent value.
+                    </p>
 
                     <p>Write a predicate function that tests of a light sensor has a value greater than 15 lumens and temperature is greater than 27.</p>
                     <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">(
@@ -105,18 +115,13 @@
     }
 )</pre></ui-codemirror>
 
-                <li>Write a predicate function that generates a false condition if there is no data available to process.</li>
-
                 </div>
-            </div>
 
-        <!-- Writing Trigger Functions -->
-        <div ibox  title="Writing Trigger Functions">
-          <div content-block name="write-trigger-function" message="Understand the idea of trigger functions and complete the excercises">
-<h2 class="labHidden">Understand the idea of trigger functions and complete the excercises</h2>
+        <div content-block name="write-trigger-function" message="Understand the idea of trigger functions and complete the excercises">
+          <h2 class="labHidden">Understand the idea of trigger functions and complete the excercises</h2>
           <p>A trigger function is a function that is activated when the predicate function is true.  Trigger functions have access to all of the sensor data on the edge network, as well as, all of the actuators on the network.</p>
 
-          <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network.</p>
+          <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network. In the example here the actuator is a heater that is turned on when it is too cold.</p>
 
             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">(
   temperature_too_cold = function() {
@@ -125,12 +130,12 @@
     };
     self.mqttClient.publish('sensors/temperature/alerts', JSON.stringify(alert) );
 
-    //this.http.get('http://lightandlamp:10010/action?deviceId=light&amp;action=on', function (err, res) {
-      //if (err) {
-      //  console.log("Unable to turn light on");
-        //        console.log(err);
-        //        }
-  //  });
+    this.http.get('http://heater:10010/action?deviceId=heater&amp;action=on', function (err, res) {
+      if (err) {
+        console.log("Unable to turn light on");
+        console.log(err);
+      }
+    });
   };
  )</pre></ui-codemirror>
 
@@ -142,172 +147,297 @@
           </div>
       </div>
 
-            <!-- Dependencies -->
-            <div ibox  title="Dependencies">
-              <p>This lab depends on the following modules and need to be added to <span class="icon file">package.json</span></p>
-              <p>Create a new file named <span class="icon file">server.js</span> and add these lines:</p>
-              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mqtt = require('mqtt');
+
+    <div ibox title="Write the Automation Server">
+      <div content-block message="Create the Project Directory and package.json file">
+        <p>
+          Create a new directory for the automation server and initialze a NodeJS application.
+        </p>
+
+        <pre><code>mkdir automation; cd automation; npm init</code></pre>
+      </div>
+
+      <!-- Dependencies -->
+      <div content-block message="Dependencies">
+        <p>This lab depends on the following modules add them to your package.json <span class="icon file">package.json</span></p>
+
+        <p>
+          Next add the dependencies to your project.
+        </p>
+        <pre><code>npm install intel-commerical-edge-network-database-models lodash mongoose mqtt request request-promise --save</code></pre>
+
+        <p>
+          Your package.json file's dependencies section should look like this.
+        </p>
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">"dependencies": {
+  "intel-commerical-edge-network-database-models": "latest",
+  "lodash": "latest",
+  "mongoose": "latest",
+  "mqtt": "latest",
+  "request": "latest",
+  "request-promise": "latest"
+}</pre></ui-codemirror>
+      </div>
+      <div content-block message="Create the server.js file and require the dependencies">
+        <p>Create a new file named <span class="icon file">server.js</span> and add these lines:</p>
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Load the application configuration file
+var config = require("./config.json")
+
+// Load NodeJS Library to interact with the filesystem
+var fs = require('fs');
+
+// A library to colorize console output
+var chalk = require('chalk');
+
+// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+
+// Require the MongoDB libraries and connect to the database
 var mongoose = require('mongoose');
-var http = require('promise-request');
+
+// A modern JavaScript utility library delivering modularity, performance & extras.
 var _ = require("lodash");
-var config = require("./config.json");
-var DataModel = require('intel-commercial-edge-network-database-models').DataModel;
-var SensorModel = require('intel-commercial-edge-network-database-models').SensorModel;
+
+// A simplified HTTP request client with Promise support.
+// The request-promise library will be passed to the context Object
+// and made available in the triggers.
+var http = require('request-promise');
+
+
+// Write startup message to the console
+console.log(chalk.bold.yellow("Automation server is starting"));
 </pre></ui-codemirror>
             </div>
 
 
-            <!-- Server Configuration File -->
-            <div ibox  title="Server Configuration File">
-                    <p>Create a file named <span class="icon file">config.json.</span></p>
+    <!-- Server Configuration File -->
+    <div content-block message="Server Configuration File">
+      <p>Create a file named <span class="icon file">config.json</span></p>
 
-                    <p>Use the following configuration to allow us to change the locations of the MQTT and MongoDB servers:</p>
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
-  "mqtt" : {
-    "uri" : "mqtt://localhost"
-  },
-  "mongodb" : {
-    "uri" : "mongodb://localhost/iotdemo"
-  }
+      <p>Use the following configuration to allow us to change the locations of the MQTT and MongoDB servers:</p>
+      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+    "mqtt" : {
+        "url" : "mqtt://localhost"
+    },
+
+    "mongodb" : {
+        "host" : "mongodb://localhost/iotdemo"
+    },
+
+    "tls" : {
+      "serverKey" : "/etc/mosquitto/certs/server.key",
+      "serverCrt" : "/etc/mosquitto/certs/server.crt",
+      "ca_certificates" : "/etc/mosquitto/ca_certificates/ca.crt",
+      "host" : "localhost",
+      "port" : "8883"
+    },
+
+    "debug" : "true"
 }</pre></ui-codemirror>
-            <p>By default, the IP address of your gateway on the edge network is localhost</p>
-            </div>
+      </div>
 
 
 
             <!-- Server Configuration File -->
-            <div ibox  title="Setup the MQTT and Mongoose DB connections">
+            <div content-block  message="Setup the MQTT connection">
             <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Connect to the MQTT server
-var fs = require('fs');
-var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Read in the server key and cert and the CA certs
+try {
+  var KEY = fs.readFileSync(config.tls.serverKey);
+  var CERT = fs.readFileSync(config.tls.serverCrt);
+  var TRUSTED_CA_LIST = [fs.readFileSync(config.tls.ca_certificates)];
+} catch (err) {
+  console.error(chalk.bold.red("Unable to find the TLS certs. Please see the first section of the security lab for instructions on creating TLS keys and certificates"))
+  console.error(err)
+  process.exit()
+}
 
-var PORT = 8883;
-var HOST = 'localhost';
-
+// options - an object to initialize the TLS connection settings
 var options = {
- port: PORT,
- host: HOST,
- protocol: 'mqtts',    //also add this
- protocolId: 'MQIsdp',
- keyPath: KEY,
- certPath: CERT,
- rejectUnauthorized : false,
- //The CA list will be used to determine if server is authorized
- ca: TRUSTED_CA_LIST,
- secureProtocol: 'TLSv1_method',
- protocolVersion: 3
+  port: config.tls.port,
+  host: config.tls.host,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
 };
 
-var mqttClient = mqtt.connect(options);
 
-// Connect to the MongoDB server
-var db = mongoose.connect(config.mongodb.uri);
-//mongoose.connect(config.mongodb.uri);
-var db = mongoose.connection;
+// Connect to the MQTT server
+var mqttClient  = mqtt.connect(options);</pre></ui-codemirror>
+      </div>
 
-// Bind db errors to the console
-db.on('error', console.error.bind(console, 'connection error:'));
-// When a connection to the
-db.once('open', function (callback) {
-    console.log("Connection to MongoDB successful");
+      <!-- Server Configuration File -->
+      <div content-block  message="Setup the functions that respond to the MQTT connect and error events">
+      <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
+      <p>The NodeJS MQTT module starts an event loop that will be the main event loop for the program.  We can set callback functions to be called when different event occur.  We will attach two callback functions, one function to the "connect" event and another to the “message” event.</p>
+
+      <p>The sensor reading is received on the 'sensors/+/data' topic. Remember that the '+' is a wild card character and can stand for 1 or more of any character. Temperature readings would come from the topic 'sensors/temperature/data' and light reading will come from 'sensors/light/data'. Each incoming piece of data has the potential for firing several triggers.  For example, if the temperature sensor sends a temperature reading of 28 degress Celsius then it may fire a trigger. Which triggers will might it fire? The trigger must have a sensor_id of "temperature" which indicates that the condition function of this trigger should be evaluated when a temperature reading arrives.  If the condition function returns a <code>true</code> value then the action function should be run.</p>
+
+    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Define function to respond to the 'connect' event
+mqttClient.on('connect', function () {
+    console.log(chalk.bold.yellow("Connected to MQTT server"));
+
+    // Subscribe to the MQTT topics
+    mqttClient.subscribe('announcements');
+    mqttClient.subscribe('sensors/+/data');
+});
+
+// Define function to respond to the 'error' event
+mqttClient.on('error', function () {
+    console.log(chalk.bold.yellow("Unable to connect to MQTT server"));
+    process.exit();
 });</pre></ui-codemirror>
-          </div>
+</div>
 
-            <!-- Set Up a Context Object for the Triggers -->
-          <div ibox  title="Set Up a Context Object for the Triggers">
-            <p>When the Condition Based Monitoring System evaluates a trigger's condition and action functions, it runs them in a context that we can define.</p>
-            <p>This context object is passed into the function that evaluates the trigger's conditional and action function. Any JavaScript Array or object stored in the context below will be accessable in the triggers' functions through the "this" object. For example, if you add <code>http</code> to the context below it will be accessible through <code>this.http</code> in the trigger.</p>
+<div content-block  message="Setup the functions that respond to the MQTT connect and error events">
+  <p>Next create the code for your MongoDB database connection and create the TriggerModel and ErrorModel objects that will access the trigger and error db collections.</p>
+
+  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Create a connection to the database
+  mongoose.connect(config.mongodb.url);
+  var db = mongoose.connection;
+
+  // Report database errors to the console
+  db.on('error', console.error.bind(console, 'connection error:'));
+
+  // Log when a connection is established to the MongoDB server
+  db.once('open', function (callback) {
+      console.log(chalk.bold.yellow("Connection to MongoDB successful"));
+  });
+
+  // Import the Database Model Objects
+  var TriggerModel = require('intel-commerical-edge-network-database-models').TriggerModel;
+  var ErrorModel = require('intel-commerical-edge-network-database-models').ErrorModel;
+</pre></ui-codemirror>
+</div>
+
+
+      <!-- Set Up a Context Object for the Triggers -->
+      <div content-block message="Set Up a Context Object for the Triggers">
+        <p>When the Condition Based Monitoring System evaluates a trigger's condition and action functions, it runs them in a context that we can define.</p>
+        <p>This context object is passed into the function that evaluates the trigger's conditional and action function. Any JavaScript Array or object stored in the context below will be accessable in the triggers' functions through the "this" object. For example, if you add <code>http</code> to the context below it will be accessible through <code>this.http</code> in the trigger.</p>
 
             <p>Let's define the context object and add a couple of items to it. First, we will define two arrays. One array will hold all of the triggers and the second will be treated as an associative array and hold the name of the each sensor and its last published value.</p>
 
             <p>The stash array will be made available to all trigger condition functions and trigger functions.  This make the stash very important because it’s used in all Iot Event triggers as the method of accessing the temperature sensors and any other sensors that are available on the network.</p>
-<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var context = {
-    // Holds the triggers retrieved from the database
+<ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Context - An object that will be passed into each trigger condition and action
+//           function.  If you want to use a library in your automation rules,
+//           for example MQTT, then put it in the context object.
+var context = {
+    // Holds the trigger conditions and
      triggers : [],
 
-    // Holds the last sensor reading from each sensor
+    // Holds the last value of each sensor and makes the value available
+    // to the conditions and functions
     stash : [],
 
-    // An object that gives us access to an HTTP service
+    // Make the HTTP request-promise library available in automation rules
     http: http,
 
-    // An object that gives us access to an MQTT service
+    // Make the MQTT library available in automation rules
     mqttClient: mqttClient,
 
-    // An object that let's us read and write errors to the database
-    ErrorModel: ErrorModel
-};</pre></ui-codemirror>
+    // Make the Chalk library available in automation rules
+    chalk: chalk
+};
+</pre></ui-codemirror>
          </div>
 
 
             <!-- Retrieve the Triggers from the Database -->
-            <div ibox  title="Retrieve the Triggers from the Database">
+            <div content-block message="Retrieve the Triggers from the Database">
                     <p>Let implement a function to retrieve all of the triggers from the database. Here, we are using MongooseJS to access the database. The find function takes a callback as an argument if there is an error the err argument will have a value.</p>
 
                     <p>If you are interested in the <code>then</code> function.  This is called a promise in JavaScript. The Promise object is used for deferred and asynchronous computations. A Promise represents an operation that hasn't completed yet, but is expected in the future.  Allowing the developer to write asynchronous code in a more synchronous fashion</p>
 
                     <p>You can read more able Promise in an article entitled <a href="http://www.html5rocks.com/en/tutorials/es6/promises/">JavaScript Promises: There and Back Agin</a> by Jake Archibald.</p>
 
-           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// On Server start, read the triggers from the db and store them
-// the triggers array.
-var retrieveTriggersFromDB = function() {
-    console.log("Retrieving all triggers from the database");
+           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Fetch the Automation Rules from the Database
+ console.log(chalk.bold.yellow("Getting Automation Rules from the Database"));
 
-    TriggerModel
-        .find()
-        .exec().then(function(triggersDB) {
-            console.log("Retrieving triggers from db");
-            context.triggers = triggersDB;
-            _.forEach(context.triggers,
-                      function(trigger) {
-                          console.log("Loaded trigger - " + trigger.name);
-                      });
-        });
-};
 
-retrieveTriggersFromDB();</pre></ui-codemirror>
+ // When the server starts, it should read the triggers from the db and store
+ // them the triggers array.
+
+ // Define the function that reads automation rules from the database
+ var retrieveTriggersFromDB = function() {
+     TriggerModel
+         .find().
+         exec().then(function(triggersDB) {
+             context.triggers = triggersDB;
+             _.forEach(context.triggers,
+                       function(trigger) {
+                           console.log("Retrieved trigger - " + trigger.name);
+                       });
+         });
+ };
+
+ // Reads automation rules from the database once when the server starts
+ retrieveTriggersFromDB();</pre></ui-codemirror>
 
               <p>Notice that we call the function as soon as it is defined.  When the Conditional Based Monitoring system starts this will read the triggers from the database.</p>
             </div>
 
             <!-- Start the MQTT Event Loop -->
-            <div ibox  title="Start the MQTT Event Loop">
-                    <p>The NodeJS MQTT module starts an event loop that will be the main event loop for the program.  We can set callback functions to be called when different event occur.  We will attach two callback functions, one function to the "connect" event and another to the “message” event.</p>
+            <div content-block message="Start the MQTT Event Loop">
+              <p>When a message is received then parse it and determine if it is a new sensor or if it is new sensor data.</p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// On the start of a connection, do the following...
-mqttClient.on('connect', function () {
-    console.log("Connected to MQTT server");
-    mqttClient.subscribe('triggers/refresh');
-    mqttClient.subscribe('sensors/+/data');
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Every time a new message is received, do the following
+mqttClient.on('message', function (topic, message) {
+    console.log(chalk.bold.green(topic + ":" + message.toString()));
+    var json;
+
+    // Parse incoming JSON and print an error if JSON is bad
+    try {
+        json = JSON.parse(message);
+    } catch(error) {
+        console.log("Malformated JSON received: " + message);
+    }
+
+    // If a sensor datum arrives on a MQTT topic then process it.
+    if (isSensorTopic(topic)) {
+        processSensorData(json);
+    }
 });</pre></ui-codemirror>
 
-              <p>When a message is received then parse it and determine if it is a new sensor or if it is new sensor data.</p>
+
+
+
+
             </div>
 
-            <div ibox  title="Start the MQTT Event Loop">
+            <div content-block message="Start the MQTT Event Loop">
                 <h3>Define a few Helper Functions</h3>
 
                 <p>Before we define the on message function, let's define a couple of helper functions. These will make our code a bit easier to read. The first two function match the <code>topic</code> on the incoming MQTT messages. The third function takes an array for triggers and returns an array with all of the triggers that have a sensor_id that matches the sensor_id that we pass into the function.  This will be useful because when a sensor reading arrives it can only fire a trigger that has a sensor_id matching the data. </p>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var isSensorTopic: function(str) {
-    return str.match(/sensors\/[A-Za-z0-9]{0,32}\/data/);
-}
-
-var isRefreshTopic = function(str) {
-    return str.match(/triggers\/refresh/);
-}
-
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// filter_triggers_by_sensor_id - Takes an array of automation rules and returns
+// and returns an array of automation rules that apply to a particular sensor.
 var filter_triggers_by_sensor_id = function(id) {
     return _.filter(context.triggers, {sensor_id : id});
-};</pre></ui-codemirror>
+};
+
+// filter_triggers_by_active - Takes an array of automation rules and returns
+// and returns an array of automation rules that are set to active.
+var filter_triggers_by_active= function(id) {
+    return _.filter(context.triggers, {active : true});
+};
+
+// Predicate to determine if the message is from a sensors/<sensor_id>/data topic
+var isSensorTopic = function(str) {
+    return str.match(/sensors\/[A-Za-z0-9]{0,32}\/data/);
+}
+</pre></ui-codemirror>
             </div>
 
             <!-- Helper Functions for the Triggers -->
-            <div ibox  title="Helper Functions for the Triggers">
+            <!-- <div content-block message="Helper Functions for the Triggers">
                     <p>The Trigger Model is more than simply a JavaScript object that can access the MongoDB.  It can also hold methods that operate on the database model.  We are going to implement two methods.</p>
 
                     <ul>
@@ -318,67 +448,19 @@ var filter_triggers_by_sensor_id = function(id) {
                             <code>eval_trigger()(context, args)</code> - Runs a trigger's action. The <code>context</code> and <code>args</code> are the same as in the <code>eval_condition</code>
                         </li>
                     </ul>
+            </div> -->
 
-            <p class="label">./schemas/triggerSchema.js</p>
-            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
-triggerSchema.methods.eval_condition = function (scope, args) {
-    var result;
-
-    try {
-        result = eval(this.condition).call(scope, args);
-    } catch(e) {
-        throw(e);
-    }
-    return result;
-};
-
-triggerSchema.methods.eval_triggerFunc = function (scope, args) {
-    var result;
-    try {
-        result = eval(this.triggerFunc).call(scope, args);
-    } catch(e) {
-        throw(e);
-    }
-    return result;
-};</pre></ui-codemirror>
-            </div>
-
-
-            <!-- Define the On Message Callback Function -->
-            <div ibox  title="Define the On Message Callback Function">
-              <p>There are two types of messages that we will support in our OnMessage function.  The first type is a sensor reading and it is received on the 'sensors/+/data' topic. Remember that the '+' is a wild card character and can stand for 1 or more of any character. Temperature readings would come from the topic 'sensors/temperature/data' and light reading will come from 'sensors/light/data'. Each incoming piece of data has the potential for firing several triggers.  For example, if the temperature sensor sends a temperature reading of 28 degress Celsius then it may fire a trigger. Which triggers will might it fire? The trigger must have a sensor_id of "temperature" which indicates that the condition function of this trigger should be evaluated when a temperature reading arrives.  If the condition function returns a <code>true</code> value then the action function should be run.</p>
-
-              <p>The second type of message is a trigger refresh message and is received on the MQTT topic 'triggers/refresh'</p>
-
-            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Every time a new message is received, do the following
-mqttClient.on('message', function (topic, message) {
-    console.log(topic + ":" + message.toString());
-    var json;
-
-    // Parse incoming JSON and print an error if JSON is bad
-    try {
-        json = JSON.parse(message);
-    } catch(error) {
-        console.log("Malformated JSON received: " + message);
-    }
-
-    // Determine if the incoming MQTT message is a sensor reading
-    // or a request for the server to reload the triggers
-                if (isSensorTopic(topic)) {
-                // Received a message on a Sensor MQTT topic
-        processSensorData(json);
-    } else if (isRefreshTopic(topic)) {
-        // Received a message on the Refresh MQTT topic
-        retrieveTriggersFromDB();
-    }
-});</pre></ui-codemirror>
-
-            </div>
             <!--         Trigger Each Rule that Applies to a Particular Incoming Sensor Data -->
-          <div ibox  title="Trigger Each Rule that Applies to a Particular Incoming Sensor Data">
+          <div content-block message="Trigger Each Rule that Applies to a Particular Incoming Sensor Data">
             <h3>Check the Predicate Function for each Trigger and Execute a Trigger Function if true</h3>
 
-            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var processSensorData = function(json) {
+            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// processSensorData - a function that receives a sensor datum in json format
+// and filters the automation rules by the sensor that the datum came from.
+// It then call the automation rules condition function. If the condition
+// function is TRUE, it call the eval_triggerFunc which performs the automation
+// action. This function also stores the datum in the stash. If the stash had a
+// previous value then it will be overwritten.
+var processSensorData = function(json) {
     var sensor_id = json.sensor_id;
     var value = json.value;
 
@@ -386,22 +468,26 @@ mqttClient.on('message', function (topic, message) {
     // is sending this incoming sensor data.
     context.stash[sensor_id] = value;
 
+    // Filter the automation filter rules by sensor and whether it is active
+    // then pass each rule to a functions that checks the trigger predicate function
+    // and call the action function if it is TRUE
     _.forEach(
-        filter_triggers_by_sensor_id(
+        filter_triggers_by_active(
+          filter_triggers_by_sensor_id(
             sensor_id
-        ),
+        )),
 
         // Check if the triggers predicate evaluates to true
         function(trigger) {
-
             // If a trigger is malformatted then log the error
             try {
-                if (trigger.eval_condition(context, value)) {
-                    console.log("Trigger Fired: " + trigger.name + " with value " + value);
-                    trigger.eval_triggerFunc(context, value);
+                // Pass the context object into the evaluation of condition and action
+                if (trigger.eval_condition(context, json)) {
+                    console.log(chalk.bold.yellow("Trigger Fired: ") + chalk.bold.white(trigger.name) + " temperature value is " + value);
+                    trigger.eval_triggerFunc(context, json);
                 }
             } catch (err) {
-                console.log(err);
+                console.log(chalk.bold.red(err));
             }
         });
 
@@ -409,8 +495,10 @@ mqttClient.on('message', function (topic, message) {
     context.stash[sensor_id+"_prev"] = value;
 };</pre></ui-codemirror>
             </div>
+          </div>
 
-            <div ibox  title="Download Automation code from Github">
+          <div ibox title="Solutions">
+            <div content-block message="Download Automation code from Github">
               <p>If you have not followed the steps given above then you can download automation code directly from github following below steps.</p><br>
               <code>$ git clone https://github.com/SSG-DRD-IOT/lab-solution-automation</code><br>
               <code>$ cd lab-solution-automation</code><br>
@@ -419,7 +507,7 @@ mqttClient.on('message', function (topic, message) {
             </div>
 
 
-            <div ibox title="Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts" image-link="./views/labs/automation/images/image_1.png">
+            <!-- <div ibox title="Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts" image-link="./views/labs/automation/images/image_1.png">
                 <div content-block name="unbox-kit" message="Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts" image-link="./views/labs/automation/images/image_1.png">
               <p>To verify triggers are working properly we can create a node red flow with mqtt subscriber on topic /sensors/temperature/alerts</p><br>
               <p>Open Node-red flow editor and import the following json object.</p>
@@ -512,14 +600,14 @@ mqttClient.on('message', function (topic, message) {
 
           <p>LCD will change color and text according to alerts received on the mqtt topic.</p>
             </div>
-            </div>
+            </div>-->
 
 
 
     <!-- TODO: The trigger eval condition and eval action Functions -->
     <!-- TODO: Write a better practice triggers section.  too_hot_condition  too_cold_condition -->
     <!--             Spend some time and Creating Your Own Triggers -->
-    <div ibox  title="Spend some time and Creating Your Own Triggers">
+    <div content-block message="Spend some time and Creating Your Own Triggers">
       <p>Remember that triggers can contain computationally expensive operations.  For example, you can complex calculations and operations and accessing of externals network services.</p>
     </div>
   </div>
