@@ -25,7 +25,6 @@
                     <labels gateway window apple linux/>
                     <p>You can monitor the status of your edge network system using NodeJS on the back end and HTML, CSS, and JavaScript on the front end. Write system condition based monitoring triggers, record system errors, and perform edge network analytics.</p>
                     <p>By the end of this module, you should be able to:</p>
-
                     <ul>
                         <li>Deploy a web-based administrative interface on your Intel&reg; IoT Gateway.</li>
                         <li>Have an understanding of how you could build your own web-based monitoring system.</li>
@@ -71,15 +70,36 @@
                             <img src="./views/labs/admin-interface/images/dashboard-default.png"/>
                             <p>Before we explore more options let's populate this interface with some static data</p>
                         </li>
-
                         <li>
-                            <p>Populate this sample interface by running initialize-db.js script from the lab-solution-monitor-daemon repository downloaded in previous "Databases at the Edge" lab</p>
-                            <p>Open a new console to your Gateway and give the following commands:</p>
+                            <p>Populate this sample interface by running initdb.js script from the lab-solution-monitor-daemon repository downloaded in previous "Databases at the Edge" lab</p>
+                            <p>If you have not yet downloaded it, give the following command to download it from a new SSH terminal on your Gateway</p>
+                            <pre><code>git clone https://github.com/SSG-DRD-IOT/lab-solution-monitor-daemon.git</code></pre>
+                            <p>If you already downloaded it, go to the directory directly</p>
                             <pre><code>cd ~/lab-solution-monitor-daemon&#13;&#10;cd initialize</pre></code>
                             <pre><code>npm install</pre></code>
-                            <pre><code>node initialize-db.js</pre></code>
+                            <div class="alert alert-warning">
+                              <p>Before you run this make sure that your mongod service is still running. The "Databases at the Edge" lab describes how to run it</p>
+                            </div>
+                            <pre><code>node initdb.js</pre></code>
                             <p>Note that once it runs this initialization script requires you to exit it by pressing <code>Ctrl-C</code>.</p>
-                            <p>This will create an LCD actuator, a temperature sensor and a couple of basic automatic rules. Refresh your browser on your computer to see these on the admin interface web page</p>
+                            <p>
+                              This script creates one temperature sensor, one LCD actuator and three automation rules (triggers).  The triggers are as follows:
+                            </p>
+                            <ul>
+                              <li>
+                                temperature_greater_than_27 - A rule that is trigger when the temperature sensors go above 27.
+                              </li>
+                              <li>
+                                temperature_less_than_20 - A rule that is trigger when the temperature sensors go below 20.
+                              </li>
+                              <li>
+                                temperature_ok - A rule that is trigger when the temperature is between 20 and 27.
+                              </li>
+                            </ul>
+                            <p>
+
+                            </p>
+                            <p>Refresh your browser on your computer to see these on the admin interface web page</p>
                             <img src="./views/labs/admin-interface/images/dashboard.png"/>
                             <p>Explore the interface for condition based monitoring triggers, record system errors.</p>
                             <p>In the next lab, you will write most complex automatic rules and a rules engine to the run these rules on an edge network.</p>
