@@ -34,7 +34,7 @@
             </div>
           <div content-block message="Prerequisites" image-link="./views/labs/automation/images/admin.png">
             <p>
-              Before you can begin this lab, you must install the custom administration web application. This web application will allow you to easily create, edit and delete triggers. Creating the trigger service and setting up a couple of triggers is the focus of this lab.
+              Before you can begin this lab, you must ensure that mongod service is running and install the custom administration web application. This web application will allow you to easily create, edit and delete triggers. Creating the trigger service and setting up a couple of triggers is the focus of this lab.
             </p>
           </div>
 
@@ -85,7 +85,6 @@
 
                 <ul>
                   <li><p>Write several triggers.  Develop an understanding of a condition/predicate function. Develop an understanding of trigger functions and their capabilities.</p></li>
-                  <li><p>Create a new NPM package named "trigger-daemon"</p></li>
                   <li><p>Create a NodeJS server that listens to all sensor based data</p></li>
                   <li><p>Reads in the triggers from the MongoDB. We will store the triggers in the Mongo database so that they can be remotely added from the administration interface.</p></li>
                   <li><p>Compare sensor data to the condition function of each trigger.</p></li>
@@ -192,7 +191,7 @@
         <p>
           Next add the dependencies to your project.
         </p>
-        <pre><code>npm install intel-commerical-edge-network-database-models lodash mongoose mqtt request request-promise --save</code></pre>
+        <pre><code>npm install intel-commerical-edge-network-database-models lodash mongoose mqtt request request-promise chalk --save</code></pre>
 
         <p>
           Your package.json file's dependencies section should look like this.
@@ -200,11 +199,49 @@
         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">"dependencies": {
   "intel-commerical-edge-network-database-models": "latest",
   "lodash": "latest",
+  "chalk": "latest",
   "mongoose": "latest",
   "mqtt": "latest",
   "request": "latest",
   "request-promise": "latest"
 }</pre></ui-codemirror>
+      </div>
+      <!-- Server Configuration File -->
+      <div content-block message="Server Configuration File">
+        <p>Create a file named <span class="icon file">config.json</span></p>
+
+        <p>Use the following configuration to allow us to change the locations of the MQTT and MongoDB servers:</p>
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+      "mqtt" : {
+          "url" : "mqtt://localhost"
+      },
+
+      "mongodb" : {
+          "url" : "mongodb://localhost/iotdemo"
+      },
+
+      "tls" : {
+        "serverKey" : "/etc/mosquitto/certs/server.key",
+        "serverCrt" : "/etc/mosquitto/certs/server.crt",
+        "ca_certificates" : "/etc/mosquitto/ca_certificates/ca.crt",
+        "host" : "localhost",
+        "port" : "8883"
+      },
+
+      "debug" : {
+       "level" : {
+          "console" : "trace",
+          "file" : "trace"
+       }
+     },
+
+      "threshold" : {
+       "temp_high" : 27,
+       "temp_low" : 20,
+       "sound" : 40,
+       "light" : 700
+    }
+  }</pre></ui-codemirror>
       </div>
       <div content-block message="Create the server.js file and require the dependencies">
         <p>Create a new file named <span class="icon file">server.js</span> and add these lines:</p>
@@ -236,35 +273,6 @@ var http = require('request-promise');
 console.log(chalk.bold.yellow("Automation server is starting"));
 </pre></ui-codemirror>
             </div>
-
-
-    <!-- Server Configuration File -->
-    <div content-block message="Server Configuration File">
-      <p>Create a file named <span class="icon file">config.json</span></p>
-
-      <p>Use the following configuration to allow us to change the locations of the MQTT and MongoDB servers:</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
-    "mqtt" : {
-        "url" : "mqtt://localhost"
-    },
-
-    "mongodb" : {
-        "host" : "mongodb://localhost/iotdemo"
-    },
-
-    "tls" : {
-      "serverKey" : "/etc/mosquitto/certs/server.key",
-      "serverCrt" : "/etc/mosquitto/certs/server.crt",
-      "ca_certificates" : "/etc/mosquitto/ca_certificates/ca.crt",
-      "host" : "localhost",
-      "port" : "8883"
-    },
-
-    "debug" : "true"
-}</pre></ui-codemirror>
-      </div>
-
-
 
             <!-- Server Configuration File -->
             <div content-block  message="Setup the MQTT connection">
@@ -303,7 +311,6 @@ var mqttClient  = mqtt.connect(options);</pre></ui-codemirror>
 
       <!-- Server Configuration File -->
       <div content-block  message="Setup the functions that respond to the MQTT connect and error events">
-      <p>Be sure to setup a connection to both the MQTT broker and Mongoose DB.</p>
       <p>The NodeJS MQTT module starts an event loop that will be the main event loop for the program.  We can set callback functions to be called when different event occur.  We will attach two callback functions, one function to the "connect" event and another to the “message” event.</p>
 
       <p>The sensor reading is received on the 'sensors/+/data' topic. Remember that the '+' is a wild card character and can stand for 1 or more of any character. Temperature readings would come from the topic 'sensors/temperature/data' and light reading will come from 'sensors/light/data'. Each incoming piece of data has the potential for firing several triggers.  For example, if the temperature sensor sends a temperature reading of 28 degress Celsius then it may fire a trigger. Which triggers will might it fire? The trigger must have a sensor_id of "temperature" which indicates that the condition function of this trigger should be evaluated when a temperature reading arrives.  If the condition function returns a <code>true</code> value then the action function should be run.</p>
@@ -380,7 +387,7 @@ var context = {
 
             <!-- Retrieve the Triggers from the Database -->
             <div content-block message="Retrieve the Triggers from the Database">
-                    <p>Let implement a function to retrieve all of the triggers from the database. Here, we are using MongooseJS to access the database. The find function takes a callback as an argument if there is an error the err argument will have a value.</p>
+                    <p>Let's implement a function to retrieve all of the triggers from the database. Here, we are using MongooseJS to access the database. The find function takes a callback as an argument if there is an error the err argument will have a value.</p>
 
                     <p>If you are interested in the <code>then</code> function.  This is called a promise in JavaScript. The Promise object is used for deferred and asynchronous computations. A Promise represents an operation that hasn't completed yet, but is expected in the future.  Allowing the developer to write asynchronous code in a more synchronous fashion</p>
 
@@ -440,7 +447,7 @@ mqttClient.on('message', function (topic, message) {
 
             </div>
 
-            <div content-block message="Start the MQTT Event Loop">
+            <div content-block message="Define Helper Functions">
                 <h3>Define a few Helper Functions</h3>
 
                 <p>Before we define the on message function, let's define a couple of helper functions. These will make our code a bit easier to read. The first two function match the <code>topic</code> on the incoming MQTT messages. The third function takes an array for triggers and returns an array with all of the triggers that have a sensor_id that matches the sensor_id that we pass into the function.  This will be useful because when a sensor reading arrives it can only fire a trigger that has a sensor_id matching the data. </p>
@@ -522,6 +529,16 @@ var processSensorData = function(json) {
     // After the trigger is run the value used becomes the previous value
     context.stash[sensor_id+"_prev"] = value;
 };</pre></ui-codemirror>
+            </div>
+          </div>
+          <div ibox title="Run the Automation Server">
+            <div content-block message="Run the automation server and verify the Triggers" image-link="./views/labs/automation/images/automation_triggers.png">
+              <div class="alert alert-warning">
+                <p>Before we run the automation server make sure that sensors are publishing the topic <b>sensors/temperature/data</b>. As described in earlier labs one way is to run the virtual-sensor-secure.js in another SSH terminal of Gateway</p>
+              </div>
+              <p>Execute the automation <span class="icon file">server.js</span> that we created</p>
+              <pre><code>$ node server.js</code></pre>
+              <p>You should start seeing the sensor topic messages from the traces. You should also notice the triggers getting fired for the conditions that we have set as shown in the figure</p>
             </div>
           </div>
 
