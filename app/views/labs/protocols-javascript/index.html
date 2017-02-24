@@ -1,618 +1,340 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-   <div class="col-lg-10">
-      <h2>Application Protocols: MQTT and HTTP</h2>
-      <ol class="breadcrumb">
-         <li>
-            <a href="index.html">Home</a>
-         </li>
-         <li>
-            <a>Labs</a>
-         </li>
-         <li class="active">
-            <strong>Application Protocols: MQTT and HTTP</strong>
-         </li>
-      </ol>
-   </div>
+    <div class="col-lg-10">
+        <h2>IoT Protocols: JavaScript</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>IoT Protocols: JavaScript</strong>
+            </li>
+        </ol>
+    </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-   <div class="row">
-      <div class="col-lg-12">
-         <!-- Objective -->
-         <div ibox title="Objective">
-            <div content-block name="read-objectives" message="Read the Objectives">
-               <h2 class="labHidden">Read the Objectives</h2>
-               <p>In this lab, we will explore using a visual programming tool named <a href="http://node-red.org">Node-Red</a> to build data flows from the edge sensor to the Intel&reg; IoT Gateway.</p>
-               <ol>
-                  <li>Build a data flow that sends information from the temperature sensors to the LCD screen.</li>
-                  <li>Build a data flow that sends information from the temperature sensor to an MQTT broker on the gateway</li>
-                  <li>Build a data flow that receives Restful HTTP requests and changes the state of the LCD screen</li>
-               </ol>
-            </div>
-         </div>
+    <div class="row">
+        <div class="col-lg-12">
 
+            <!-- Objectives -->
+            <div ibox title="Objectives">
+              <div content-block name="read-objectives" message="Overview">
+                  <h2 class="labHidden">Read the Objectives</h2>
+                  <labels arduino windows apple linux/>
+                  <p>Now that you've created a sensor and actuator device using a temperature sensor and LCD and the Intel IoT Gateway, this lab will lead you through the process of networking them. By the end of the lab instead of having a single process controlling both the temperature sensor and the LCD, you will decouple them. The temperature sensor will send data to the Intel IoT Gateway over MQTT-TLS, and you will write a Restful HTTP server to control the LCD.</p>
 
-        <div ibox title="Overview of Node-Red Service on the Intel&reg; IoT Gateway">
-          <div content-block name="start-node-red" message="Be sure that you know how to start and stop the node-red-experience service" image-link="./views/labs/protocols/images/node-red-experience-running.png">
-            <div class="alert alert-info">
-              <p>Knowing how to start and stop the node-red-experience service will help tremendously in troubleshooting problems that may arise while developing.</p>
-            </div>
-            <p>Open a console to the Intel&reg; IoT Gateway and type the following:</p>
-            <pre><code>systemctl status node-red-experience</code></pre>
-            <p>If you see green text that says, "active (running)" then the Node-Red service is running</p>
-            <p>If Node-Red is not running on your gateway then type: </p>
-            <pre><code>systemctl start node-red-experience</code></pre>
-            <p>This will begin the node-red service.</p>
-          </div>
+                  <p>
+                    This allows the Intel IoT Gateway to be the centralized point of management, which makes administering the IoT network much more manageable. By networking the sensors and actuators, you can deploy dozens or even hundreds of sensors and actuators all controlled by a single gateway. The decisions and coordiation of IoT devices is handled by the gateway on the edge network.  The sensors simply report their data over MQTT and the actuators wait for commands via HTTP.
+                  </p>
+              </div>
+              <div content-block name="read-objectives" message="Read the Objectives">
+                  <h2 class="labHidden">Read the Objectives</h2>
+                  <p>By the end of this module, you should be able to:</p>
 
-          <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols/images/node-red-experience-off.png">
-            <div class="alert alert-info">
-              <p>If you are developing using the Intel&reg; XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
-              <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I2C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
-
-            </div>
-            <pre><code>systemctl stop node-red-experience</code></pre>
-            <p>This will turn off the node-red service.</p>
-          </div>
-        </div>
-
-
-        <div ibox title="Node-Red Flow: Temperature to LCD">
-          <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/temperature-sensors-arduino.jpg">
-
-            <ol>
-              <li><p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p></li>
-              <li><p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p></li>
-              <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p></li>
-            </ol>
-          </div>
-          <div content-block name="connect-sensors" message="Save current Node-Red flow" image-link="./views/labs/protocols/images/node-red-export.png">
-            <p><b>Save current Node-Red flow</b></p>
-            <p>Before we start writing Node-Red flow let's backup the existing flow with following steps:</p>
-            <ul>
-              <li><p>Select all the nodes in the current flow manually or by doing a 'Ctrl A'</p></li>
-              <li><p>Click on the menu button next to Deploy and go to Export->Clipboard as shown in figure</p></li>
-              <li><p>Copy the content to a text file and save it</p></li>
-              <li><p>Now delete all the nodes and we are ready for a new flow</p></li>
-            </ul>
-            <div class="alert alert-info">
-              <p>Note: It is possible to create multiple Node-Red flows but since all the flows will be deployed simultaneously and we will be using same resources (I2C pin, temperature sensor, LCD etc.) there will be contention and hence we use only one flow at a time</p>
-            </div>
-        </div>
-      </div>
-
-          <div ibox title="Node-Red Flow: Publish Sensor Data over MQTT ">
-            <labels gateway/>
-
-
-            <!-- <div content-block name="find-ip-address " message="Review useful commands to help you organize your workflow on the Intel&reg; IoT Gateway ">
-<h2 class="labHidden ">Review useful commands to help you organize your workflow on the Intel&reg; IoT Gateway</h2>
-              <h5>Setup Screen Window Manager</h5>
-              <p>Log into your Intel&reg; Iot Gateway. As a refresher: </p>
-              <p>Use Putty or Screen to connect to ip address <b>192.168.1.1</b> and use <b>root</b> as the username and password.</p>
-              <p>For more details refer back to the 3rd section of the introduction lab</p>
-              <p>Once you log in the Intel&reg; Iot Gateway, start the <code>screen</code> window manager. </p>
-              <p><code>$ screen</code></p>
-
-              <p>You can open multiple console windows, name them and switch between them using screen.  There will be many times when you will want to run several processes at the same time and <code>screen</code> will be very useful to launch them in separate windows.  The another alternative is to simply SSH into the server multiple times.  Of course, in production you will want to launch most processes at boot time using Systemd.</p>
-              <ul>
-                <p>To create a new console type <code>Ctrl-A C</code></p>
-                <p>To name the console type <code>Ctrl-A Shift-A</code></p>
-                <p>To get a list of all consoles type <code>Ctrl-A &quot;</code></p>
-              </ul>
-
-              <h5>Set up the Mosquitto MQTT Broker</h5>
-              <ol>
-                <li>
-                  <p>Create a user for your Mosquitto.</p>
-                  <p><code>$ adduser mosquitto</code></p>
-                </li>
-                <li>
-                  <p>For simplicity use <b>root</b> when asked for the UNIX password</p>
-                </li>
-
-                <li>
-                  <p>Launch the MQTT Broker named mosquitto</p>
-                  <p><code>$ mosquitto</code></p>
-                </li>
-              </ol>
-            </div> -->
-
-            <div content-block name="find-ip-address " message="Create a Node-Red flow that will sends the temperature reading to the MQTT broker "
-            image-link="./views/labs/protocols/images/mqtt_flow.png ">
-              <h2 class="labHidden ">Create a Node-Red flow that will sends the temperature reading to the MQTT broker</h2>
-              <p><img class="labHidden" alt="mqtt flow" data-fid="503933" src="https://software.intel.com/sites/default/files/managed/8a/d4/mqtt_flow.png" title="mqtt flow" typeof="foaf:Image"><strong> </strong></p>
-
-              <h5>Create a Node-RED flow</h5>
-              <p>Now you will create a new flow in Node-RED in order to send the temperature data up to your MQTT server.<p>
-              <p>Use the:
-              <ul>
-                <li><b>grove temp sensor</b> from the Intel-gpio section connected to:</li>
-                <li><b>function</b> node from the function section connected to:</li>
-                <li><b>mqtt</b> node from the output section</li>
-              </ul>
-              <p>This creates a sequence that will send temperature data over MQTT to a broker.</p>
-
-              <p>Use the
-              <ul>
-                <li><b>mqtt</b> node from the input section connected to the:</li>
-                <li><b>function</b> node from the function section connected to:</li>
-                <li><b>debug</b> node from the output section</li>
-              </ul>
-              <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console in node-red.</p>
-              <div class="alert alert-warning">
-                <p>In the next section, we will be build a Restful HTTP service that will control the output of the LCD screen.  At that point, we will delete the flow on the bottom that uses MQTT to update the LCD screeen.</p>
+                  <ul>
+                      <li>Create a NodeJS service that sends temperature data to the gateway via MQTT-TLS</li>
+                      <li>Create a NodeJS service that implements a Restful HTTP API to control the LCD screen. </li>
+                  </ul>
               </div>
             </div>
 
-            <div content-block name="protocol-assign-pins" message="Configure the nodes">
-              <h2 class="labHidden">Configure the nodes in the MQTT flow</h2>
-              <ol>
-                <li>Double click the temperature node to assign it to pin <b>A1</b> and change the Platform from Native to <b>Firmata</b></li>
-                <li>Configure <b>both</b> the <b>input mqtt</b> and <b>output mqtt</b> nodes as described below:</li>
 
-                <ul>
-                  <li>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic</li>
-                  <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="" title="mqtt edit" typeof="foaf:Image"></p>
-                  <li>Enter the ip address of the gateway and port number as 1883. Here 1883 is the port number if you are using MQTT. If you are using MQTT-TLS then the port number should be 8883.</li>
-                  <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="" title="mqtt edit" typeof="foaf:Image"></p>
-                </ul>
-              </ol>
-            </div>
-            <div content-block name="" message="Take Note of the JSON format that you will need to create for this and future labs.">
-              <h2 class="labHidden">Configure a Function Node to create the JSON format for the labs</h2>
+            <div ibox title="Creating an MQTT Service to Publish the Temperature Sensor Data">
+                <div content-block name="read-xdk-intro" message="Plug in the Grove shield, temperature sensor and the LCD" image-link="./views/labs/protocols-javascript/images/temperature-sensors.jpg">
+                    <h2 class="labHidden">Plug in the Grove shield, temperature sensor and the LCD</h2>
 
-              <div class="alert alert-info">
-                <p>For future labs, it is very important that the JSON that we create has the correct properties.  The JSON format should have 3 properties.</p>
-                <ul>
-                  <li>sensor_id - a string representing the name of the sensor</li>
-                  <li>value - the temperature sensor value</li>
-                  <li>timestamp - the time the sensor value was recorded</li>
-                </ul>
-              </div>
-            </div>
+                    <p>In the Sensors and Actuators lab, we connected the temperature sensor (Analog) and LCD display (I2C) to your Arduino* 101. We wrote NodeJS code using the Intel® XDK IoT Edition to measure the temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
 
-            <div content-block name="" message="Configure a Function Node to create the JSON format for the labs">
-              <p>Double click the function node and name is <strong>JSONify</strong> and add the following code:</p>
-              <p>Note here 0.66 is a correction factor since the temperature sensor is designed to read at 3.3V but for LCD to work we are using 5V</p>
-              <ui-codemirror ui-codemirror-opts="editorOptions ">msg.payload = {
-    sensor_id: "temperature",
-    value: Math.floor(msg.payload*0.66),
-    timestamp: Date.now(),
-}
-return msg;</pre></ui-codemirror>
+                    <p>
+                      You're project should start looking like the picture on the left.
+                    </p>
 
-            <p>If you connect a debug node to the JSONify function node, you should see a JSON object with the correct properties in the Debug tab.</p>
-          </div>
-
-          <div content-block name="" message="Configure a Function Node to parse the JSON from MQTT and format it for the LCD">
-            <p>Double click the function node and name is <strong>Switch Color on Temperature</strong> and add the following code:</p>
-            <ui-codemirror ui-codemirror-opts="editorOptions ">var r_val = 0;
-var g_val = 0;
-var b_val = 0;
-
-var json = JSON.parse(msg.payload)
-
-if (json.value >= 25) {
-  r_val = 255;
-  g_val = 0;
-  b_val = 0;
-} else if (json.value <= 20) {
-  r_val = 0;
-  g_val = 0;
-  b_val = 255;
-} else {
-  r_val = 0;
-  g_val = 255;
-  b_val = 0;
-}
-
-msg.payload = json.value + "C              "
-
-msg.lcdColor = {
-  "r": r_val,
-  "g": g_val,
-  "b": b_val,
-}
-
-msg.lcdCursor = {
-    row: 1,
-    column: 1,
-}
-
-return msg;</pre></ui-codemirror>
-
-          <p>If you connect a debug node to the "Switch Color on Temperature" function node, you should see a JSON object formated for the LCD in the Debug tab.</p>
-        </div>
-
-
-
-            <div content-block name="protocol-publish-mqtt " message="Deploy the application"
-            image-link="./views/labs/protocols/images/node-red-temp.png ">
-<h2 class="labHidden ">Deploy the application</h2>
-<p><img class="labHidden" alt="mqtt flow connected" data-fid="503936" src="https://software.intel.com/sites/default/files/managed/a6/3f/mqtt_flow_connected.png" title="mqtt flow connected" typeof="foaf:Image"></p>
-
-              <p>When you are done configuring the nodes hit deploy</p>
-              <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the IoT device is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
-              <p> If you do not see the output in the debug window:</p>
-              <ul>
-                <li>Make sure the you can see the debug window - you  might have to expand it by dragging the right side of the workspace to the center.</li>
-                <li>Make sure that the debug tab is selected in the upper right</li>
-                <li>Click the tab to the right of the debug node - called msg.payload in your flow</p></li>
-              </ul>
-            </div>
-
-
-            <div content-block name="protocol-monitor-mqtt " message="Publish data to the temperature topic ">
-              <h2 class="labHidden ">Publish data to the temperature topic</h2>
-              <h5>Monitor MQTT Topic on Gateway</h5>
-              <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
-              <p>In the SSH terminal to the Gateway type:</p>
-              <pre><code>mosquitto_sub -t sensors/temperature/data</pre></code>
-              <p>You will start to see the data being published to the "temperature" topic.  This is a great way to help you debug a program that uses MQTT</p>
-            </div>
-
-
-            <div content-block name="node-red-flow2-solution" message="Check out the solution to this exercise">
-                <h2 class="labHidden">Check out the solution to this exercise</h2>
-                <h5>Flow Source Code</h5>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
-   {
-      "id":"1dc1405c.26a96",
-      "type":"mqtt-broker",
-      "z":"",
-      "broker":"localhost",
-      "port":"1880",
-      "clientid":"",
-      "usetls":false,
-      "verifyservercert":true,
-      "compatmode":true,
-      "keepalive":"60",
-      "cleansession":true,
-      "willTopic":"",
-      "willQos":"0",
-      "willRetain":null,
-      "willPayload":"",
-      "birthTopic":"",
-      "birthQos":"0",
-      "birthRetain":null,
-      "birthPayload":""
-   },
-   {
-      "id":"bb262fa2.18c21",
-      "type":"upm-grove-temperature",
-      "z":"4072485.59502b8",
-      "name":"",
-      "platform":"512",
-      "unit":"C",
-      "pin":"1",
-      "interval":1000,
-      "x":135.5,
-      "y":75,
-      "wires":[
-         [
-            "a83804b3.09f158"
-         ]
-      ]
-   },
-   {
-      "id":"a83804b3.09f158",
-      "type":"function",
-      "z":"4072485.59502b8",
-      "name":"JSONify",
-      "func":"msg.payload = {\n    sensor_id: \"temperature\",\n    value: Math.floor(msg.payload*0.66)),\n    timestamp: Date.now(),\n}\nreturn msg;",
-      "outputs":1,
-      "noerr":0,
-      "x":366.5,
-      "y":103,
-      "wires":[
-         [
-            "9635ab89.d14de8",
-            "967b8aa5.9c1bc8"
-         ]
-      ]
-   },
-   {
-      "id":"635f249e.4799dc",
-      "type":"upm-grove-rgb-lcd",
-      "z":"4072485.59502b8",
-      "name":"",
-      "platform":"512",
-      "r":0,
-      "g":0,
-      "b":"0",
-      "row":0,
-      "column":0,
-      "x":683.5,
-      "y":290,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"9635ab89.d14de8",
-      "type":"mqtt out",
-      "z":"4072485.59502b8",
-      "name":"",
-      "topic":"sensors/temperature/data",
-      "qos":"",
-      "retain":"",
-      "broker":"1dc1405c.26a96",
-      "x":655.5,
-      "y":166,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"e9563a9b.81e1d8",
-      "type":"mqtt in",
-      "z":"4072485.59502b8",
-      "name":"",
-      "topic":"sensors/temperature/data",
-      "broker":"1dc1405c.26a96",
-      "x":142,
-      "y":279,
-      "wires":[
-         [
-            "f58764be.9f3458"
-         ]
-      ]
-   },
-   {
-      "id":"f58764be.9f3458",
-      "type":"function",
-      "z":"4072485.59502b8",
-      "name":"Switch Color on Temperature",
-      "func":"var r_val = 0;\nvar g_val = 0;\nvar b_val = 0;\n\nvar json = JSON.parse(msg.payload)\n\nif (json.value >= 25) {\n  r_val = 255;\n  g_val = 0;\n  b_val = 0;\n} else if (json.value <= 20) {\n  r_val = 0;\n  g_val = 0;\n  b_val = 255;\n} else {\n  r_val = 0;\n  g_val = 255;\n  b_val = 0;\n}\n\nmsg.payload = json.value + \"C              \"\n\nmsg.lcdColor = {\n  \"r\": r_val,\n  \"g\": g_val,\n  \"b\": b_val, \n}\n\nmsg.lcdCursor = {\n    row: 0,\n    column: 0,\n}\n\nreturn msg;",
-      "outputs":1,
-      "noerr":0,
-      "x":434,
-      "y":289,
-      "wires":[
-         [
-            "635f249e.4799dc"
-         ]
-      ]
-   },
-   {
-      "id":"967b8aa5.9c1bc8",
-      "type":"debug",
-      "z":"4072485.59502b8",
-      "name":"",
-      "active":true,
-      "console":"false",
-      "complete":"false",
-      "x":577.5,
-      "y":85,
-      "wires":[
-
-      ]
-   }
-]</pre></ui-codemirror>
+                    <ol>
+                        <li>
+                            <p>Install the Grove Base Shield onto the Arduino* 101 Arduino expansion board.</p>
+                        </li>
+                        <li>
+                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
+                        </li>
+                        <li>
+                            <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
+                        </li>
+                    </ol>
 
                 </div>
-            </div>
 
-<!-- Restful API -->
+                <div content-block name="read-xdk-intro" message="Start a new project in the Intel® XDK using a blank template." image-link="./views/labs/protocols-javascript/images/new-project.png">
+                    <h2 class="labHidden">Start a new project in the Intel® XDK using a blank template.</h2>
 
-            <div ibox title="Node-Red Flow: RESTful API to control LCD screen">
-              <div content-block name="node-red-http-intro" message="Read the objective of this section of the lab">
-                <h2 class="labHidden">Create Node-RED flow that creates a Restful HTTP API to control the LCD screen</h2>
+                    <ol>
+                        <li>
+                            <p>Start a new project in the Intel® XDK using a blank template.</p>
+                        </li>
+                        <li>
+                            <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
+                        </li>
+                    </ol>
 
-                <p>In this exercise, you will create a restful HTTP API to control an actuator (LCD Screen) deployed on an edge network. Use the http node to create a flow that controls the LCD with web requests.</p>
-                <p>The Restful API will define 6 API endpoints that will allow you to control the display on the LCD</p>
-
-                <div class="alert alert-info">
-                  <p>The six APIs are defined as follows:</p>
-                  <table class="table-mail">
-                    <tr><td><b>GET</b></td><td>/lcd/color</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
-                    <tr><td><b>POST</b></td><td>/lcd/color</td><td>Set a new color to display on the LCD</td></tr>
-                    <tr><td><b>DELETE</b></td><td>/lcd/color</td><td>Turn the LCD backlight off</td></tr>
-                    <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
-                    <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new color to display on the LCD</td></tr>
-                    <tr><td><b>DELETE</b></td><td>/lcd/text</td><td>Clear text on LCD</td></tr>
-                  </table>
+                    <div class="alert alert-info">
+                        <p>This temperature project will be used in all the later labs to supply a steady stream of data.</p>
+                    </div>
                 </div>
-              </div>
 
-              <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create 6 new flows" image-link="./views/labs/protocols/images/http-text-color-apis.png">
-                <p>Note that the picture on the left only shows the 3 flows for the LCD COLOR API.  You need to create an additional 3 flows for the LCD TEXT API.</p>
-                <p>Each API defined in this new Node-Red flow will contains the following nodes:</p>
+                <div content-block name="read-xdk-intro" message="Select the Blank Template" image-link="./views/labs/protocols-javascript/images/blank_template.png">
+                    <h2 class="labHidden">Select the Blank Template</h2>
+
+                    <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
+
+
+                    <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
+                </div>
+
+                <div content-block name="read-xdk-intro" message="Start with the Code from the JavaScript Sensors and Actuators Lab">
+                    <h2 class="labHidden">Start with the Code from the JavaScript Sensors and Actuators Lab</h2>
+                    <p>
+                      In the Sensors and Actuators lab, we created a program to read the temperature and display is on the LCD screen. It should look something like this.
+                    </p>
+
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
+
+// The Offset is necessary for Firmata
+var OFFSET = 512;
+
+// Instantiate the temperature sensor and LCD actuator
+var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+
+// monitor: creates an anonymous function that runs once per second
+// The function will get the temperature and display it on the LCD.
+function monitor() {
+    setInterval(
+      function() {
+        // Read the temperature sensor
+        var celsius = temp.value();
+
+        // Convert it to fahrenheit
+        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+
+        // Log it to the console window
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+
+        // Update the LCD screen
+        screen.setCursor(0, 0);
+        screen.setColor(255, 255, 255);
+        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+    }, 1000);
+}
+
+// Call the monitor function once
+monitor();</pre></ui-codemirror>
+                </div>
+
+            <div content-block name="read-xdk-intro" message="Remove the LCD Code">
+              <h2 class="labHidden">Write the Code to Read the Temperature Sensor.</h2>
+
+                <p>
+                    Now we will remove the LCD code. This is straight forward. Simply remove any line that has a reference to the screen or LCD variables.
+                </p>
+
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
+var groveSensor = require('jsupm_grove');
+
+// The Offset is necessary for Firmata
+var OFFSET = 512;
+
+// Instantiate the temperature sensor and LCD actuator
+var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+
+// monitor: creates an anonymous function that runs once per second
+// The function will get the temperature and display it on the LCD.
+function monitor() {
+  setInterval(
+    function() {
+      // Read the temperature sensor
+      var celsius = temp.value();
+
+      // Convert it to fahrenheit
+      var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+
+      // Log it to the console window
+      console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+  }, 1000);
+}
+
+// Call the monitor function once
+monitor();</pre></ui-codemirror>
+
+            </div>
+
+            <div content-block name="read-xdk-intro" message="Add the MQTT or MQTT-TLS code">
+              <p>
+                The preferred method of connecting to the MQTT broker is over MQTT-TLS. First setup the MQTT-TLS options and then call the MQTT connect function.
+              </p>
+
+              <p class="alert alert-warning">
+                <b>Be sure not to mix MQTT and MQTT-TLS. You must use one or the other throughout all the labs.</b>
+              </p>
+
+              <p>
+                Add this code just below the line that creates the temp sensor. Be sure to see the Security Lab for a complete walkthrough of TLS setup including generating the key and certificates that you will need for the code below.
+              </p>
+
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+var fs = require('fs');
+var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+
+var PORT = 8883;
+var HOST = 'localhost';
+
+var options = {
+  port: PORT,
+  host: HOST,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
+};
+var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
+              </p>
+
+              <p>
+                If you are plan on connecting over an uncrypted MQTT connection then you only need the following code.
+              </p>
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mqttClient = mqtt.connect("mqtt://localhost/");</pre></ui-codemirror>
+            </div>
+
+            <div content-block name="repeat-sensor-reading" message="Add the MQTT code to publish the sensor data">
+                <p>
+                  Next we will add the code to publish the sensor data over MQTT at the end of the anonymous function.
+                </p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current time
+                        var current_time = (new Date).getTime();
+
+                        /*
+                          This JSON structure is extremely important
+                          future labs will assume that every temperature
+                          reading has a "sensor_id", "value" and "timestamp"
+                        */
+                        var json = {
+                          sensor_id : tempSensorName,
+                          value : temp,
+                          timestamp : current_time
+                        };
+
+                        // Convert the JSON object to a string
+                        var str = JSON.stringify(json);
+
+                        // Log the string to the console
+                        console.log(str);
+
+                        // Publish the temperature reading string on the MQTT topic
+                        client.publish(tempSensorTopic, str);</pre></ui-codemirror>
+            </div>
+
+
+                <div content-block name="repeat-sensor-reading" message="See the Debugging MQTT section in the sidebar under Additional Information">
+                    <p>
+                      You've completed the service that will publish temperature data to the gateway.
+                      See the Debugging MQTT section in the sidebar under Additional Information for information on how to verify that MQTT traffic is indeed being published.
+                    </p>
+                </div>
+
+            </div>
+
+            <div ibox title="Additional resources">
+                <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
+
+                <h4>Grove Temperature Sensor</h4>
+
                 <ul>
-                  <li>http input</li>
-                  <li>function</li>
-                  <li>http output</li>
-                  <li>debug</li>
-                  <li>Grove RGB LCD</li>
+                    <li>
+                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a>
+                    </li>
+                    <li>
+                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a>
+                    </li>
                 </ul>
-              </div>
 
-              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols/images/lcdcolor.png">
-                <p>Open the <b>HTTP Input</b> node in the first three flows and set the URL to /lcd/color</p>
-              </div>
+                <h4>Grove LCD RGB Backlight</h4>
 
-              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols/images/lcd-firmata.png">
-                <p>Open the <b>Grove RGB LCD</b> node and set the platform to <b>firmata</b>.</p>
-              </div>
-
-              <div content-block message="Insert code into the GET /lcd/color flow's function node">
-                <p>Open the <b>Function</b> node in the GET /lcd/color flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the color from the global context
-// If color is not defined then the default is to turn the LCD off
-var color = flow.get('color') || {r:0, g:0, b:0};
-
-// Pass it along in the payload
-msg.payload = color;
-return msg;</pre></ui-codemirror>
-              </div>
-
-              <div content-block message="Insert code into the POST /lcd/color flow's function node">
-                <p>Open the <b>Function</b> node in the POST /lcd/color flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// isInt
-function isInt(value) {
-  return !isNaN(value) &&
-         parseInt(Number(value)) == value &&
-         !isNaN(parseInt(value, 10));
-}
-
-var validateHTTPParameters = function(params) {
-    return (
-      (params.hasOwnProperty('r')
-        && params.hasOwnProperty('g')
-        && params.hasOwnProperty('b'))
-      &&
-      (isInt(params.r)
-            && isInt(params.g)
-            && isInt(params.b))
-      &&
-        ((params.r >= 0 && params.r <= 255)
-           && (params.g >= 0 && params.g <= 255)
-           && (params.b >= 0 && params.b <= 255)));
-}
-
-// Declare variables
-var message = flow.get('message') || "";
-var color = {};
-
-// Check if the HTTP query contains r,g,b properties
-if (validateHTTPParameters(msg.req.query) === true) {
-
-    // Only the r, g and b properties should be copied
-    // to the color variable.
-    color =  {
-        r: msg.req.query.r,
-        g: msg.req.query.g,
-        b: msg.req.query.b
-    };
-
-    // Store the Color variable in the Node-Red Global Context
-    flow.set('color', color);
-
-    // Insert the message and color into the payload
-    msg.payload = message;
-    msg.lcdColor = color;
-
-    msg.statusCode = 201;  // HTTP Code 201 - Object Successfully Created
-} else {;
-    msg.statusCode = 400;  // HTTP Code 400 - Bad Request Format
-}
-return msg;</pre></ui-codemirror>
-              </div>
-
-              <div content-block message="Insert code into the DELETE /lcd/color flow's function node">
-                <p>Open the <b>Function</b> node in the DELETE /lcd/color flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current message from the global context
-var message = flow.get('message') || "";
-
-// This will turn the LCD backlight off
-var color = {r:0, g:0, b:0};
-
-// Store the blank color in the Node-Red global context
-flow.set('color', color);
-
-msg.payload = message;
-msg.lcdColor = color
-return msg;</pre></ui-codemirror>
-              </div>
-
-              <div content-block message="Insert code into the GET /lcd/text flow's function node">
-                <p>Open the <b>Function</b> node in the GET /lcd/text flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the color from the global context
-// If color is not defined then the default is to turn the LCD off
-var message = flow.get('message') || "";
-
-// Pass it along in the payload
-msg.payload = message;
-return msg;</pre></ui-codemirror>
-              </div>
-
-              <div content-block message="Insert code into the POST /lcd/text flow's function node">
-                <p>Open the <b>Function</b> node in the POST /lcd/text flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// isString
-function isString(value) {
-  return (typeof value === 'string' || value instanceof String);
-}
-
-var validateHTTPParameters = function(params) {
-    return params.hasOwnProperty('lcdtext')
-            && isString(params.lcdtext);
-}
-
-// Declare variables
-var message = "";
-var color = flow.get('color') || {r:0, g:0, b:0} ;
-
-// Check if the HTTP query contains r,g,b properties
-if (validateHTTPParameters(msg.req.query) === true) {
-
-    // Only the r, g and b properties should be copied
-    // to the color variable.
-    message = msg.req.query.lcdtext
-
-    // Store the Color variable in the Node-Red Global Context
-    flow.set('message', message);
-
-    // Insert the message and color into the payload
-    msg.payload = message;
-    msg.lcdColor = color;
-
-    msg.statusCode = 201;  // HTTP Code 201 - Object Successfully Created
-} else {;
-    msg.statusCode = 400;  // HTTP Code 400 - Bad Request Format
-}
-return msg;</pre></ui-codemirror>
-              </div>
-
-              <div content-block message="Insert code into the DELETE /lcd/text flow's function node">
-                <p>Open the <b>Function</b> node in the DELETE /lcd/text flow and insert the following code:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current message from the global context
-var message = "                 ";
-
-// This will turn the LCD backlight off
-var color = flow.get('color');
-
-// Store the blank color in the Node-Red global context
-flow.set('message', message);
-
-msg.payload = message;
-msg.lcdColor = color
-return msg;</pre></ui-codemirror>
-              </div>
-            </div>
-
-
-          <div ibox title="Testing Your Restful HTTP API">
-            <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">
-                <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
-                <p><img class="labHidden" alt="postman website" data-fid="503944" src="https://software.intel.com/sites/default/files/managed/96/7a/postman_website.png" title="postman website" typeof="foaf:Image"></p>
-
-                <h5> Install Postman </h5>
-                <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
-                <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
-
-                <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
-            </div>
-
-
-            <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/images/postman.png">
-                <h5>Use Postman to send web request </h5>
-                <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
                 <ul>
-                  <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 1880 with the URL specified above.</li>
-                  <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and enter your gateway password in Password field. </li>
-                  <li>The /lcd/color API  can be passed a RGB value like this.
-                    <pre><code>http://{{hostname}}:1880/lcd/color?r=128&g=255&b=255</code></pre>
-                  </li>
+                    <li>
+                        <a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" target="_blank">Seeed Studio Wiki: LCD RGB Backlight</a>
+                    </li>
+                    <li>
+                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">UPM API - i2clcd</a>
+                    </li>
+                    <li>
+                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">UPM API - Jhd1313m1</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/jhd1313m1-lcd.js" target="_blank">UPM JavaScript example: RGB LCD</a>
+                    </li>
                 </ul>
-            </div>
 
-            <div ibox title="Additional Resources">
-              <ul>
-                <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
-                <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
-                <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p></li>
-              </ul>
+                <h4>Accelerometer</h4>
+                <ul>
+                    <li>
+                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js">UPM JavaScript example: Accelerometer</a>
+                    </li>
+                    <li>
+                        <a href="http://www.seeedstudio.com/wiki/Grove_-_3-Axis_Digital_Accelerometer(%C2%B11.5g)">Seeed Studio Wiki: 3-Axis Digital Accelerometer</a>
+                    </li>
+                </ul>
+
+                <h4>Rotary Angle Sensor</h4>
+                <ul>
+                    <li>
+                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">UPM JavaScript example: Rotary Angle Sensor</a>
+                    </li>
+                    <li>
+                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">Seeed Studio Wiki: Rotary Angle Sensor</a>
+                    </li>
+                </ul>
+
+                <h4>Grove Button</h4>
+                <ul>
+                    <li>
+                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">UPM JavaScript example: Grove Button</a>
+                    </li>
+                    <li>
+                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Button">Seeed Studio Wiki: Grove Button</a>
+                    </li>
+                </ul>
+
+                <h4>Grove Buzzer</h4>
+                <ul>
+                    <li>
+                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">UPM JavaScript example: Buzzer</a>
+                    </li>
+                    <li>
+                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">Seeed Studio Wiki: Grove Buzzer</a>
+                    </li>
+                </ul>
+
+                <h4>JavaScript Libraries</h4>
+                <ul>
+                    <li><a href="http://expressjs.com/starter/hello-world.html">Express Hello World</a></li>
+                    <li><a href="http://momentjs.com/docs/">MomentJS</a></li>
+                </ul>
             </div>
         </div>
     </div>
+  </div>
+</div>
