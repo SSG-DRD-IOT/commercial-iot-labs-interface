@@ -50,14 +50,26 @@
                             <!--<li ui-sref-active="active"><a ui-sref="labs.sensors-node-red">Node-Red</a></li>-->
                         </ul>
                     </li>
-                    <li ui-sref-active="active"><a ui-sref="labs.protocols">Application Protocols: MQTT and HTTP</a></li>
+                    <li ng-class="{active: $state.includes('labs')}">
+                        <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Protocols</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
+                            <li ui-sref-active="active"><a ui-sref="labs.protocols-javascript">JavaScript</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.protocols`-node-red">Node-Red</a></li>
+                        </ul>
+                    </li>
                     <li ui-sref-active="active"><a ui-sref="labs.security-nuc">Security and the Internet of Things</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.databases">Databases at the Edge</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.admin-interface">Custom Administrative Interfaces</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.automation">Automation on the Edge Network</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.hdc">The Helix Device Cloud</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.cloud">Data Analytics</a></li>
-                    <li ui-sref-active="active"><a ui-sref="labs.additional">Additional Information</a></li>
+                    <li ng-class="{active: $state.includes('labs')}">
+                        <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Additional Information</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
+                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mqtt">Debugging MQTT</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb">Using MongoDB</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
 

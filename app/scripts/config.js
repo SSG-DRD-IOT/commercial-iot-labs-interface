@@ -128,6 +128,53 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+    .state('labs.protocols-javascript', {
+      url: "/protocols-javascript",
+      templateUrl: "views/labs/protocols-javascript/index.html",
+      data: {
+        pageTitle: 'IoT Protocols: JavaScript'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+
+    .state('labs.protocols-node-red', {
+      url: "/protocols-node-red",
+      templateUrl: "views/labs/protocols-node-red/index.html",
+      data: {
+        pageTitle: 'IoT Protocols: Node-Red'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
     .state('labs.databases', {
       url: "/databases",
       templateUrl: "views/labs/databases/index.html",
@@ -372,11 +419,50 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         pageTitle: 'Lab Solutions'
       }
     })
-    .state('labs.additional', {
-      url: "/more-info",
-      templateUrl: "views/labs/more/index.html",
+    .state('labs.additional-info-mqtt', {
+      url: "/additional-info-mqtt",
+      templateUrl: "views/labs/additional-info-mqtt/index.html",
       data: {
-        pageTitle: 'More Information'
+        pageTitle: 'Additional Information: Debugging MQTT'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+    .state('labs.additional-info-mongodb', {
+      url: "/additional-info-mongodb",
+      templateUrl: "views/labs/additional-info-mongodb/index.html",
+      data: {
+        pageTitle: 'Additional Information: Using MongoDB'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
       }
     })
     .state('index.faq', {
