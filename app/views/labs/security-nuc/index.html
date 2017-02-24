@@ -92,6 +92,7 @@ certfile /etc/mosquitto/certs/server.crt
 keyfile /etc/mosquitto/certs/server.key
 
 tls_version tlsv1</ui-codemirror>
+              <br></br>
                <p>Make sure to stop and start mosquitto service after this change</p>
                 <pre><code>systemctl stop mosquitto</code></pre>
                 <pre><code>systemctl start mosquitto</code></pre>
@@ -100,8 +101,50 @@ tls_version tlsv1</ui-codemirror>
               </div>
             </div>
 
+            <div ibox title="Change all configurations from MQTT to MQTT with TLS/SSL">
+              <div content-block message="Modify JavaScript & Node-Red flows for MQTT-TLS configuration" name="configure-mqtt-tls">
+                <h4>JavaScript configuration change for MQTT with TLS/SSL</h4>
+                <p>If you are using JavaScript code modify the MQTT connect function to include additional parameters for TLS/SSL as shown below:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+var fs = require('fs');
+var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+
+var PORT = 8883;
+var HOST = 'localhost';
+
+var options = {
+  port: PORT,
+  host: HOST,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
+};
+var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
+                <br></br>
+                <h4>Node-Red configuration change for MQTT with TLS/SSL</h4>
+                <p>If you are using Node-Red flows, in your flow diagram edit all the MQTT input and output nodes to change port number to <b>8883</b> instead of 1883</p>
+                <p>Deploy your Node-Red flow after making these changes</p>
+                <div class="alert alert-info">
+                  <p>If your configuration of MQTT with TLS/SSL is complete and working with JavaScript or Node-Red, your sensor data should be getting published</p>
+                </div>
+                <p>We will see how to verify the secure MQTT published data below but before that we will look at one other option to publish data which is using virtual sensor program</p>
+
+            </div>
+
             <div ibox title="Download & Configure virtual sensor">
               <div content-block message="Download & Configure virtual sensor" name="configure-virtual-sensor">
+                <p>Virtual sensor program is designed to simulate publishing of continuous random temperature sensor data over the topic <b>sensors/temperature/data</b>. This can be useful in scenarios where it is required to test/debug some infrastructure/connections/code without use of actual sensors.</p>
+                <p>The virtual sensor program has two versions, one is the <b>virtual-sensor.js</b> and another is <b>virtual-sensor-secure.js</b>. The secure version uses MQTT connection with TLS & SSL components. You can use secure version if you are using MQTT with TLS/SSL in your project.</p>
+                <p>Follow the below steps to download and run virtual sensors</p>
                 <p>Open a ssh terminal to your NUC gateway, at the root directory download and run virtual sensor program using the below commands</p>
                 <pre><code>git clone https://github.com/SSG-DRD-IOT/virtual-sensor.git</code></pre>
                 <pre><code>cd virtual-sensor</code></pre>
@@ -109,18 +152,18 @@ tls_version tlsv1</ui-codemirror>
                 <pre><code>node virtual-sensor-secure.js</code></pre>
                 <p>You should start seeing sensor data being published like below</p>
                 <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
-                <p>Keep this running in a separate shell as we will use this to capture this data in Data Analytics lab too</p>
               </div>
             </div>
 
             <div ibox title="Subscribe to the sensor data published">
               <div content-block message="Subscribe to the sensor data published" name="configure-virtual-sensor">
-                <p>Using mosquitto_sub utility we will subscribe to the data being published</p>
+                <p>Using mosquitto_sub utility we will subscribe to the data being published (using either JavaScript, Node-Red flows or Virtual Sensor program)</p>
                 <p>Open another ssh terminal to your NUC gateway and give the following command:</p>
                 <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
                 <p>Note here we are listening on the secure port 8883 with the TLS version specified. If you use port 1883 it will refuse the connection</p>
-                <p>You should start receiving messages as below which we are publishing for the topic /sensors/temperature/data using virtual-sensor-secure program</p>
+                <p>You should start receiving messages as below which are getting published for the topic /sensors/temperature/data depending on whether you are using JavaScript, Node-Red or virtual-sensor-secure program to publish it</p>
                 <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
+                <p>If the sensor data is not getting published or you are facing issues check debugging options available under Additional Information->Debugging MQTT</p>
               </div>
             </div>
 

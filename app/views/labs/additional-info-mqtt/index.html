@@ -89,30 +89,30 @@ tls_version tlsv1</ui-codemirror>
           <h4>Verify your JavaScript code for MQTT connection with TLS/SSL</h4>
           <ul>
             <li><p>If you are using JavaScript check your MQTT connect function to make sure it is passing all the TLS/SSL configuration parameters. It should be as shown below:</p></li>
-            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
-    var mqtt = require('mqtt');
-    var fs = require('fs');
-    var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
-    var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-    var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+var fs = require('fs');
+var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
 
-    var PORT = 8883;
-    var HOST = 'localhost';
+var PORT = 8883;
+var HOST = 'localhost';
 
-    var options = {
-      port: PORT,
-      host: HOST,
-      protocol: 'mqtts',
-      protocolId: 'MQIsdp',
-      keyPath: KEY,
-      certPath: CERT,
-      rejectUnauthorized : false,
-      //The CA list will be used to determine if server is authorized
-      ca: TRUSTED_CA_LIST,
-      secureProtocol: 'TLSv1_method',
-      protocolVersion: 3
-    };
-    var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
+var options = {
+  port: PORT,
+  host: HOST,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
+};
+var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
           </ul>
           <h4>Verify if your sensors are connected properly</h4>
           <ul>
