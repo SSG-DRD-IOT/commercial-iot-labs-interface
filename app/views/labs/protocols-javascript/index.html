@@ -219,84 +219,195 @@ client.publish(tempSensorTopic, str);</pre></ui-codemirror>
 
             </div>
 
+            <div ibox title="Create the Restful HTTP API to Control the LCD Screen">
+              <div content-block message="Overview of the Restful LCD API">
+                  <h2 class="labHidden">Create the Restful HTTP API to Control the LCD Screen</h2>
+                  <p>
+                    For this section of the lab, we will be using a JavaScript HTTP library called Express to build a small HTTP server that implements two APIs.
+                  </p>
+
+                  <p>
+                    The two APIs will control the color of the backlight on the LCD screen and the text that is displayed on the LCD screen. This is what the API will look like:
+                  </p>
+
+                  <div class="alert alert-info">
+                    <p>The six APIs are defined as follows:</p>
+                    <table class="table-mail">
+                      <tr><td><b>GET</b></td><td>/lcd/color</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
+                      <tr><td><b>POST</b></td><td>/lcd/color</td><td>Set a new color to display on the LCD</td></tr>
+                      <tr><td><b>DELETE</b></td><td>/lcd/color</td><td>Turn the LCD backlight off</td></tr>
+                      <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
+                      <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new color to display on the LCD</td></tr>
+                      <tr><td><b>DELETE</b></td><td>/lcd/text</td><td>Clear text on LCD</td></tr>
+                    </table>
+                  </div>
+                </div>
+
+                <div content-block message="Include the Dependencies">
+                    <h2 class="labHidden">Include the Dependencies</h2>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTP server
+var express = require('express');
+
+// The body-parser library allows us to declare the server will use JSON format
+var bodyParser = require('body-parser');</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Instantiate the HTTP server variable named app and the LCD variable.">
+                    <h2 class="labHidden">Instantiate the HTTP server variable named app and the LCD variable.</h2>
+                    <p>
+                      Instantiate the HTTP server variable named app and the LCD variable.
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Declare the HTTP server as a variable named "app"
+var app = express();
+
+// Declare the LCD variable
+var mylcd = new (require("jsupm_i2clcd").Jhd1313m1)(6, 0x3E, 0x62);</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Declare that the HTTP server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client">
+                    <h2 class="labHidden">Declare that the HTTP server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client</h2>
+                    <p>
+                      Declare that the HTTP server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client
+                    </p>
+
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// parse application/json
+app.use(bodyParser.json());
+
+// This function will print the route for each incoming HTTP request
+app.use(function (req, res, next) {
+  console.log(req.body); // populated!
+  next();
+});</pre></ui-codemirror>
+                </div>
+
+
+                <div content-block message="Instantiate the HTTP server variable named app   and the LCD variable.">
+                    <h2 class="labHidden">Instantiate the HTTP server variable named app and the LCD variable.</h2>
+                    <p>
+                      Declare two variables to hold the the backlight value and the text that the LCD screen.  At this point, we can also turn the backlight off.
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var backlight = {
+    r:0,
+    g:0,
+    b:0
+};
+
+var lcdtext = "";
+mylcd.setColor(backlight.r,backlight.g,backlight.b);</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Create the routes to GET the LCD text and GET the backlight">
+                    <h2 class="labHidden">Create the routes to GET the LCD text and GET the backlight</h2>
+                    <p>
+                      Create the routes to GET the LCD text and GET the backlight
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.get('/lcd/backlight/', function (req, res) {
+  res.status(200).json(backlight);
+});
+app.get('/lcd/text/', function (req, res) {
+  res.status(200).json(lcdtext);
+});</pre></ui-codemirror>
+                </div>
+
+
+
+                <div content-block message="Create the routes to POST the LCD text and POST the backlight">
+                    <h2 class="labHidden">Create the routes to POST the LCD text and POST the backlight</h2>
+                    <p>
+                      Create the routes to POST the LCD text and POST the backlight
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.post('/lcd/backlight/', function (req, res) {
+   backlight = {
+      r:parseInt(req.query.r),
+      g:parseInt(req.query.g),
+      b:parseInt(req.query.b)
+  };
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(201).send("Success");
+});
+
+app.post('/lcd/text/', function (req, res) {
+  lcdtext = req.query.lcdtext;
+  mylcd.clear();
+  mylcd.write(lcdtext);
+  res.status(201).send("Success");
+});</pre></ui-codemirror>
+                </div>
+
+
+                <div content-block message="Create the routes to DELETE the LCD text and DELETE the backlight">
+                    <h2 class="labHidden">Create the routes to DELETE the LCD text and DELETE the backlight</h2>
+                    <p>
+                      Create the routes to DELETE the LCD text and DELETE the backlight
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.delete('/lcd/backlight/', function (req, res) {
+  backlight = {r:0,g:0,b:0};
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(204).send("Deleted");
+});
+
+
+
+app.delete('/lcd/text/', function (req, res) {
+  mylcd.clear();
+  res.status(204).send("Deleted");
+});</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Start the HTTP server">
+                    <h2 class="labHidden">Start the HTTP server</h2>
+                    <p>
+                      Start the HTTP server
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+console.log('Example app listening at http://%s:%s', host, port);
+});</pre></ui-codemirror>
+                </div>
+              </div>
+
+              <div ibox title="Testing Your Restful HTTP API">
+                <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols-javascript/images/postman_website.png">
+                    <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
+                    <p><img class="labHidden" alt="postman website" data-fid="503944" src="https://software.intel.com/sites/default/files/managed/96/7a/postman_website.png" title="postman website" typeof="foaf:Image"></p>
+
+                    <h5> Install Postman </h5>
+                    <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
+                    <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
+
+                    <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
+                </div>
+
+
+                <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols-javascript/images/postman.png">
+                    <h5>Use Postman to send web request </h5>
+                    <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
+                    <ul>
+                      <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 1880 with the URL specified above.</li>
+                      <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and enter your gateway password in Password field. </li>
+                      <li>The /lcd/color API  can be passed a RGB value like this.
+                        <pre><code>http://gateway_ip:port/lcd/color?r=128&g=255&b=255</code></pre>
+                      </li>
+                    </ul>
+                </div>
+              </div>
+
             <div ibox title="Additional resources">
                 <p>For reference code for any sensor/actuator from the Grove Kit, visit <a href="https://software.intel.com/en-us/iot/hardware/sensors">https://software.intel.com/en-us/iot/hardware/sensors</a></p>
 
-                <h4>Grove Temperature Sensor</h4>
-
                 <ul>
                     <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a>
+                        <a href="http://expressjs.com/" target="_blank">ExpressJS</a>
                     </li>
-                    <li>
-                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a>
-                    </li>
-                </ul>
-
-                <h4>Grove LCD RGB Backlight</h4>
-
-                <ul>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_LCD_RGB_Backlight" target="_blank">Seeed Studio Wiki: LCD RGB Backlight</a>
-                    </li>
-                    <li>
-                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">UPM API - i2clcd</a>
-                    </li>
-                    <li>
-                        <a href="http://iotdk.intel.com/docs/master/upm/node/classes/jhd1313m1.html#methods" target="_blank">UPM API - Jhd1313m1</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/jhd1313m1-lcd.js" target="_blank">UPM JavaScript example: RGB LCD</a>
-                    </li>
-                </ul>
-
-                <h4>Accelerometer</h4>
-                <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/mma7660.js">UPM JavaScript example: Accelerometer</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_3-Axis_Digital_Accelerometer(%C2%B11.5g)">Seeed Studio Wiki: 3-Axis Digital Accelerometer</a>
-                    </li>
-                </ul>
-
-                <h4>Rotary Angle Sensor</h4>
-                <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/groverotary.js">UPM JavaScript example: Rotary Angle Sensor</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Rotary_Angle_Sensor">Seeed Studio Wiki: Rotary Angle Sensor</a>
-                    </li>
-                </ul>
-
-                <h4>Grove Button</h4>
-                <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovebutton.js">UPM JavaScript example: Grove Button</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Button">Seeed Studio Wiki: Grove Button</a>
-                    </li>
-                </ul>
-
-                <h4>Grove Buzzer</h4>
-                <ul>
-                    <li>
-                        <a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/buzzer.js">UPM JavaScript example: Buzzer</a>
-                    </li>
-                    <li>
-                        <a href="http://www.seeedstudio.com/wiki/Grove_-_Buzzer">Seeed Studio Wiki: Grove Buzzer</a>
-                    </li>
-                </ul>
-
-                <h4>JavaScript Libraries</h4>
-                <ul>
-                    <li><a href="http://expressjs.com/starter/hello-world.html">Express Hello World</a></li>
-                    <li><a href="http://momentjs.com/docs/">MomentJS</a></li>
                 </ul>
             </div>
         </div>
