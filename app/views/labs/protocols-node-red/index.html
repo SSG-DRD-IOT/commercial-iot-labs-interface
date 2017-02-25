@@ -33,7 +33,7 @@
 
 
         <div ibox title="Overview of Node-Red Service on the Intel&reg; IoT Gateway">
-          <div content-block name="start-node-red" message="Be sure that you know how to start and stop the node-red-experience service" image-link="./views/labs/protocols/images/node-red-experience-running.png">
+          <div content-block name="start-node-red" message="Be sure that you know how to start and stop the node-red-experience service" image-link="./views/labs/protocols-node-red/images/node-red-experience-running.png">
             <div class="alert alert-info">
               <p>Knowing how to start and stop the node-red-experience service will help tremendously in troubleshooting problems that may arise while developing.</p>
             </div>
@@ -45,7 +45,7 @@
             <p>This will begin the node-red service.</p>
           </div>
 
-          <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols/images/node-red-experience-off.png">
+          <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols-node-red/images/node-red-experience-off.png">
             <div class="alert alert-info">
               <p>If you are developing using the Intel&reg; XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
               <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I2C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
@@ -58,7 +58,7 @@
 
 
         <div ibox title="Node-Red Flow: Temperature to LCD">
-          <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols/images/temperature-sensors-arduino.jpg">
+          <div content-block name="connect-sensors" message="Install the Grove base shield and sensors" image-link="./views/labs/protocols-node-red/images/temperature-sensors-arduino.jpg">
 
             <ol>
               <li><p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p></li>
@@ -66,7 +66,7 @@
               <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p></li>
             </ol>
           </div>
-          <div content-block name="connect-sensors" message="Save current Node-Red flow" image-link="./views/labs/protocols/images/node-red-export.png">
+          <div content-block name="connect-sensors" message="Save current Node-Red flow" image-link="./views/labs/protocols-node-red/images/node-red-export.png">
             <p><b>Save current Node-Red flow</b></p>
             <p>Before we start writing Node-Red flow let's backup the existing flow with following steps:</p>
             <ul>
@@ -119,7 +119,7 @@
             </div> -->
 
             <div content-block name="find-ip-address " message="Create a Node-Red flow that will sends the temperature reading to the MQTT broker "
-            image-link="./views/labs/protocols/images/mqtt_flow.png ">
+            image-link="./views/labs/protocols-node-red/images/mqtt_flow.png ">
               <h2 class="labHidden ">Create a Node-Red flow that will sends the temperature reading to the MQTT broker</h2>
               <p><img class="labHidden" alt="mqtt flow" data-fid="503933" src="https://software.intel.com/sites/default/files/managed/8a/d4/mqtt_flow.png" title="mqtt flow" typeof="foaf:Image"><strong> </strong></p>
 
@@ -228,7 +228,7 @@ return msg;</pre></ui-codemirror>
 
 
             <div content-block name="protocol-publish-mqtt " message="Deploy the application"
-            image-link="./views/labs/protocols/images/node-red-temp.png ">
+            image-link="./views/labs/protocols-node-red/images/node-red-temp.png ">
 <h2 class="labHidden ">Deploy the application</h2>
 <p><img class="labHidden" alt="mqtt flow connected" data-fid="503936" src="https://software.intel.com/sites/default/files/managed/a6/3f/mqtt_flow_connected.png" title="mqtt flow connected" typeof="foaf:Image"></p>
 
@@ -416,7 +416,7 @@ return msg;</pre></ui-codemirror>
                 </div>
               </div>
 
-              <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create 6 new flows" image-link="./views/labs/protocols/images/http-text-color-apis.png">
+              <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create 6 new flows" image-link="./views/labs/protocols-node-red/images/http-text-color-apis.png">
                 <p>Note that the picture on the left only shows the 3 flows for the LCD COLOR API.  You need to create an additional 3 flows for the LCD TEXT API.</p>
                 <p>Each API defined in this new Node-Red flow will contains the following nodes:</p>
                 <ul>
@@ -428,11 +428,11 @@ return msg;</pre></ui-codemirror>
                 </ul>
               </div>
 
-              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols/images/lcdcolor.png">
+              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols-node-red/images/lcdcolor.png">
                 <p>Open the <b>HTTP Input</b> node in the first three flows and set the URL to /lcd/color</p>
               </div>
 
-              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols/images/lcd-firmata.png">
+              <div content-block message="Open the HTTP Input node in the first three flows and set the URL to /lcd/color" image-link="./views/labs/protocols-node-red/images/lcd-firmata.png">
                 <p>Open the <b>Grove RGB LCD</b> node and set the platform to <b>firmata</b>.</p>
               </div>
 
@@ -583,7 +583,7 @@ return msg;</pre></ui-codemirror>
 
 
           <div ibox title="Testing Your Restful HTTP API">
-            <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols/images/postman_website.png">
+            <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols-node-red/images/postman_website.png">
                 <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
                 <p><img class="labHidden" alt="postman website" data-fid="503944" src="https://software.intel.com/sites/default/files/managed/96/7a/postman_website.png" title="postman website" typeof="foaf:Image"></p>
 
@@ -595,7 +595,7 @@ return msg;</pre></ui-codemirror>
             </div>
 
 
-            <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols/images/postman.png">
+            <div content-block name="install-postman" message="Use PostMan to send an HTTP request" image-link="./views/labs/protocols-node-red/images/postman.png">
                 <h5>Use Postman to send web request </h5>
                 <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
                 <ul>
