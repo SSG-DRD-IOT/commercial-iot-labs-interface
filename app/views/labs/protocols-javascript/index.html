@@ -171,6 +171,31 @@ monitor();</pre></ui-codemirror>
 
             </div>
 
+
+              <div content-block name="read-xdk-intro" message="Remove the LCD Code">
+                <h2 class="labHidden">Write the Code to Read the Temperature Sensor.</h2>
+
+                <p>
+                   Next add MQTT as a dependency in your package.json.
+                </p>
+
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+  "name": "xdk-iot-blank-template",
+  "description": "Intel® XDK IoT Blank Node.js Template",
+  "version": "0.0.0",
+  "main": "main.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "BSD-3-Clause",
+  "private": true,
+  "dependencies": {
+      "mqtt" : "latest"
+  }
+}</pre></ui-codemirror>
+
+              </div>
+
             <div content-block name="read-xdk-intro" message="Add the MQTT connect code">
               <p>
                 The preferred method of connecting to the MQTT broker is over MQTT-TLS. However to start with we will use only MQTT without TLS/SSL configuration. Later in Security lab we will learn how to configure MQTT with TLS/SSL.
