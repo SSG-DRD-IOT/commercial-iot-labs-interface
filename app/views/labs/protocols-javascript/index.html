@@ -203,7 +203,9 @@ monitor();</pre></ui-codemirror>
               <p>
                 Add following one line of code for an uncrypted MQTT connection just below the line that creates the temp sensor.
               </p>
-              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mqttClient = mqtt.connect("mqtt://localhost/");</pre></ui-codemirror>
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+var mqttClient = mqtt.connect("mqtt://localhost/");</pre></ui-codemirror>
             </div>
 
             <div content-block name="repeat-sensor-reading" message="Add the MQTT code to publish the sensor data">
@@ -219,8 +221,8 @@ var current_time = (new Date).getTime();
   reading has a "sensor_id", "value" and "timestamp"
 */
 var json = {
-  sensor_id : tempSensorName,
-  value : temp,
+  sensor_id : "temperature",
+  value : celsius,
   timestamp : current_time
 };
 
@@ -231,7 +233,7 @@ var str = JSON.stringify(json);
 console.log(str);
 
 // Publish the temperature reading string on the MQTT topic
-client.publish(tempSensorTopic, str);</pre></ui-codemirror>
+mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
             </div>
 
 
