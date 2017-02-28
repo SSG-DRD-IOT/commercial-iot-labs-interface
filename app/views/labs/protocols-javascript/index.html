@@ -273,6 +273,15 @@ mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
                 <div content-block message="Include the Dependencies">
                     <h2 class="labHidden">Include the Dependencies</h2>
 
+                    <p>
+                      In the package.json file change the dependencies to include the <b>express</b> and <b>body-parser</b>.
+                    </p>
+
+                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">  "dependencies": {
+      "mqtt" : "latest",
+      "body-parser" : "latest"
+  }</pre></ui-codemirror>
+
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTP server
 var express = require('express');
 
