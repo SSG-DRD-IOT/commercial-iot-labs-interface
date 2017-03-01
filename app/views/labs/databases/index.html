@@ -171,13 +171,11 @@
       <p>The server will be listening to two MQTT topics:</p>
       <ul>
         <li>sensors/+/data</li>
-        <li>announcements</li>
       </ul>
 
       <p>Note the <code>+</code> is a wildcard character that matches any alphanumeric string. In this case, we are using it where the sensor name would be.  This lets us receive data from all sensors on the edge network.</p>
 
       <p>The <code>monitord</code> does this by listening to all MQTT sensor topics 'sensors/+/data' that are published on the edge network. New sensor data is written to the database.</p>
-      <p>The <code>monitord</code> also listens to the MQTT <code>announcements</code> topic, which will carry information on new sensors that are deployed on the network.</p>
     </div>
 
     <div content-block name="monitord-new-project" message="Create monitord Project and Import NPM Modules">
@@ -289,7 +287,6 @@ var SensorModel = require('intel-commercial-edge-network-database-models').Senso
               <p>In Application Protocol lab, you learned how to create a handler for the MQTT <code>connect</code> event with NodeRed. Here we show how to create such handlers in JavaScript. In this event handler, the handler subscribes to the following MQTT topics:</p>
 
               <ul>
-                  <li><code>announcements</code></li>
                   <li><code>sensors/+/data</code></li>
               </ul>
           </li>
@@ -300,12 +297,8 @@ mqttClient.on('connect', function() {
   console.log("Connected to MQTT server");
 
   // Subscribe to the MQTT topics
-  mqttClient.subscribe('announcements');
   mqttClient.subscribe('sensors/+/data');
 });</pre></ui-codemirror>
-          </li>
-          <li>
-            <p>An MQTT message will be sent to the <b>announcements</b> topic if a new network sensor comes online in the edge network. The new sensor will reponsible for sending it's own MQTT message.</p>
           </li>
       </ol>
     </div>
@@ -324,22 +317,6 @@ mqttClient.on('message', function(topic, message) {
       } catch (e) {
         console.log(e);
       };</pre></ui-codemirror>
-    </div>
-
-
-    <div content-block name="is-announcement" message="Log all announcements to the database">
-      <h2 class="labHidden">Log all announcements to the database</h2>
-      <p>Decide whether it is a new piece of sensor data or a new announcement. If it is an annoucement then create a new MongoDB sensor object and save it to the database. Handle any database error by printing the error to the console.</p>
-      <p class="label">./server.js</p>
-      <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">if (topic.match(/announcements/)) {
-  var sensor = new SensorModel(json);
-  sensor.save(function(err, sensor) {
-    if (err)
-      console.log(err);
-    else
-      console.log(topic + ":" + message.toString());
-  });
-};</pre></ui-codemirror>
     </div>
 
     <div content-block name="is-data" message="Log all sensor readings to the database">
