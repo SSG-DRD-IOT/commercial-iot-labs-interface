@@ -412,6 +412,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+    .state('labs.additional-info-mongodb-schemas', {
+      url: "/additional-info-mongodb-schemas",
+      templateUrl: "views/labs/additional-info-mongodb-schemas/index.html",
+      data: {
+        pageTitle: 'Additional Information: Mongoose Schemas'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
     .state('labs.additional-info-mongodb', {
       url: "/additional-info-mongodb",
       templateUrl: "views/labs/additional-info-mongodb/index.html",
