@@ -39,14 +39,11 @@
             <li ng-class="{active: $state.includes('labs')}">
                 <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Labs</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
-                    <li ui-sref-active="active"><a ui-sref="labs.introduction-nuc">Introduction</a></li>
-                    <li ui-sref-active="active"><a ui-sref="labs.dev-hub">Intel&reg; IoT Gateway Developer hub</a></li>
+                    <li ui-sref-active="active"><a ui-sref="labs.introduction">Introduction</a></li>
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Sensors and Actuators</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
-                            <li ui-sref-active="active"><a ui-sref="labs.sensors-c">C/C++</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.sensors-javascript">JavaScript</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.sensors-java">Java</a></li>
                             <!--<li ui-sref-active="active"><a ui-sref="labs.sensors-node-red">Node-Red</a></li>-->
                         </ul>
                     </li>
@@ -57,7 +54,7 @@
                             <li ui-sref-active="active"><a ui-sref="labs.protocols-node-red">Node-Red</a></li>
                         </ul>
                     </li>
-                    <li ui-sref-active="active"><a ui-sref="labs.security-nuc">Security and the Internet of Things</a></li>
+                    <li ui-sref-active="active"><a ui-sref="labs.security">Security and the Internet of Things</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.databases">Databases at the Edge</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.admin-interface">Custom Administrative Interfaces</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.automation">Automation on the Edge Network</a></li>

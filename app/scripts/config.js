@@ -47,14 +47,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     })
     .state('labs.introduction', {
       url: "/introduction",
-      templateUrl: "views/labs/intro/index.html",
-      data: {
-        pageTitle: 'Introduction'
-      }
-    })
-    .state('labs.introduction-nuc', {
-      url: "/introduction-nuc",
-      templateUrl: "views/labs/intro-nuc/index.html",
+      templateUrl: "views/labs/introduction/index.html",
       data: {
         pageTitle: 'Introduction'
       }
@@ -228,32 +221,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.security', {
-      url: "/security",
-      templateUrl: "views/labs/security/index.html",
-      data: {
-        pageTitle: 'Security on the Internet of Things'
-      },
-      resolve: {
-        loadPlugin: function($ocLazyLoad) {
-          return $ocLazyLoad.load([{
-            serie: true,
-            files: [
-              'bower_components/codemirror/lib/codemirror.css',
-              'bower_components/codemirror/theme/ambiance.css',
-              'bower_components/codemirror/lib/codemirror.js',
-              'bower_components/codemirror/mode/javascript/javascript.js'
-            ]
-          }, {
-            name: 'ui.codemirror',
-            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
-          }]);
-        }
-      }
-    })
-  .state('labs.security-nuc', {
-    url: "/security-nuc",
-    templateUrl: "views/labs/security-nuc/index.html",
+  .state('labs.security', {
+    url: "/security",
+    templateUrl: "views/labs/security/index.html",
     data: {
       pageTitle: 'Security on the Internet of Things'
     },

@@ -493,7 +493,7 @@ var OFFSET = 512;
 
 // Instantiate the temperature sensor and LCD actuator
 var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
-var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+var screen = new LCD.i2clcd(0+OFFSET, 0x3E, 0x62);
 // monitor: creates an anonymous function that runs once per second
 // The function will get the temperature and display it on the LCD.
 function monitor() {
