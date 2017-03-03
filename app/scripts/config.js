@@ -244,6 +244,77 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       }
     }
   })
+
+  .state('labs.security-tls', {
+    url: "/security-tls",
+    templateUrl: "views/labs/security-tls/index.html",
+    data: {
+      pageTitle: 'Setup TLS'
+    },
+    resolve: {
+      loadPlugin: function($ocLazyLoad) {
+        return $ocLazyLoad.load([{
+          serie: true,
+          files: [
+            'bower_components/codemirror/lib/codemirror.css',
+            'bower_components/codemirror/theme/ambiance.css',
+            'bower_components/codemirror/lib/codemirror.js',
+            'bower_components/codemirror/mode/javascript/javascript.js'
+          ]
+        }, {
+          name: 'ui.codemirror',
+          files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+        }]);
+      }
+    }
+})
+.state('labs.security-mcafee', {
+  url: "/security-mcafee",
+  templateUrl: "views/labs/security-mcafee/index.html",
+  data: {
+    pageTitle: 'McAfee'
+  },
+  resolve: {
+    loadPlugin: function($ocLazyLoad) {
+      return $ocLazyLoad.load([{
+        serie: true,
+        files: [
+          'bower_components/codemirror/lib/codemirror.css',
+          'bower_components/codemirror/theme/ambiance.css',
+          'bower_components/codemirror/lib/codemirror.js',
+          'bower_components/codemirror/mode/javascript/javascript.js'
+        ]
+      }, {
+        name: 'ui.codemirror',
+        files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+      }]);
+    }
+  }
+})
+
+.state('labs.security-systemd', {
+  url: "/security-systemd",
+  templateUrl: "views/labs/security-systemd/index.html",
+  data: {
+    pageTitle: 'Systemd'
+  },
+  resolve: {
+    loadPlugin: function($ocLazyLoad) {
+      return $ocLazyLoad.load([{
+        serie: true,
+        files: [
+          'bower_components/codemirror/lib/codemirror.css',
+          'bower_components/codemirror/theme/ambiance.css',
+          'bower_components/codemirror/lib/codemirror.js',
+          'bower_components/codemirror/mode/javascript/javascript.js'
+        ]
+      }, {
+        name: 'ui.codemirror',
+        files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+      }]);
+    }
+  }
+})
   .state('labs.sensors-c', {
     url: "/sensors-c",
     templateUrl: "views/labs/sensors-c/index.html",
@@ -394,6 +465,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       templateUrl: "views/labs/additional-info-mqtt/index.html",
       data: {
         pageTitle: 'Additional Information: Debugging MQTT'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+    .state('labs.additional-info-virtual-sensor', {
+      url: "/additional-info-virtual-sensor",
+      templateUrl: "views/labs/additional-info-virtual-sensor/index.html",
+      data: {
+        pageTitle: 'Additional Information: Virtual Sensor'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {

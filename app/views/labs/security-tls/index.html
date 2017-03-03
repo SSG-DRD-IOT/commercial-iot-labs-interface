@@ -1,0 +1,118 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Setup TLS</h2>
+        <ol class="breadcrumb">
+            <li><a href="index.html">Home</a></li>
+            <li><a>Labs</a></li>
+            <li><a>Security</a></li>
+            <li class="active">
+                <strong>Setup TLS</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+      <div class="row">
+        <div class="col-lg-12">
+
+            <div ibox title="Configure Secure MQTT connection with SSL & TLS">
+              <div content-block message="Objectives" name="configure-secure-mqtt">
+                <ul>
+                  <p><li>We will see how to configure  NUC gateway for secure MQTT connection with SSL & TLS</li></p>
+                  <p>TLS (Transport Layer Security) and SSL (Secure Sockets Layer) provide a secure communication channel between a client and server</p>
+                  <p><li>Since we are using SSL encryption we will generate certificates which will be used for authentication. MQTT uses port 8883 for secure connection hence we will make some changes in MQTT broker (mosquitto in our case) configuration file</li></p>
+                  <p><li>To validate the secure connection we will use a virtual-sensor program that will generate random temperature values and publish this data on a secure MQTT port</li></p>
+                  <p><li>Finally we will listen for this data using mosquitto_sub tool</li></p>
+                </ul>
+              </div>
+            </div>
+
+            <div ibox title="Generate Server Certificate Authority, Certificate and Key">
+              <div content-block message="Generate Server Certificate Authority, Certificate and Key" name="telegraf-certs">
+                <p>First, we will need to generate a server certificate authority, certificate and key. These will be used to authenticate and encrypt the MQTT sensor data.</p>
+
+                <p>Run these commands on the gateway console.</p>
+                <div class="alert alert-warning">
+                  <p>It is important to note that while generating these, the “Common Name” parameter in step 1 above and step 3 should specify the server address, “localhost”. Otherwise it will not authenticate correctly.</p>
+                </div>
+                <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
+openssl genrsa -out server.key 2048
+openssl req -out server.csr -key server.key -new
+openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365</code></pre>
+              </div>
+
+              <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
+                <p>Now move the CA, Certificate and Key file to the MQTT broker's configuration directories</p>
+                <div class="alert alert-warning">
+                  <p>Note: If the directories <b>ca_certificates</b> and <b>certs</b> are not there manually create them</p>
+                </div>
+                <pre><code>mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
+mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
+              </div>
+            </div>
+
+            <div ibox title="Configure Mosquitto to use MQTT over TLS">
+              <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
+                <p>Be sure that your Mosquitto configuration file has all of these options set, particularly the <b>port number 8883, the cafile, and certfile and the keyfile.</b></p>
+                <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
+            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># Place your local configuration in /etc/mosquitto/conf.d/
+
+bind_address 127.0.0.1
+port 8883
+
+cafile /etc/mosquitto/ca_certificates/ca.crt
+certfile /etc/mosquitto/certs/server.crt
+keyfile /etc/mosquitto/certs/server.key
+
+tls_version tlsv1</ui-codemirror>
+              <br></br>
+               <p>Make sure to stop and start mosquitto service after this change</p>
+                <pre><code>systemctl stop mosquitto</code></pre>
+                <pre><code>systemctl start mosquitto</code></pre>
+              <p>Check to make sure mosquitto service is running properly with below command. The status should be "active (running)"</p>
+                <pre><code>systemctl status mosquitto</code></pre>
+              </div>
+            </div>
+
+            <div ibox title="Change all configurations from MQTT to MQTT with TLS/SSL">
+              <div content-block message="Modify JavaScript & Node-Red flows for MQTT-TLS configuration" name="configure-mqtt-tls">
+                <h4>JavaScript configuration change for MQTT with TLS/SSL</h4>
+                <p>If you are using JavaScript code modify the MQTT connect function to include additional parameters for TLS/SSL as shown below:</p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+var fs = require('fs');
+var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+
+var PORT = 8883;
+var HOST = 'localhost';
+
+var options = {
+  port: PORT,
+  host: HOST,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
+};
+var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
+          <br></br>
+          <h4>Node-Red configuration change for MQTT with TLS/SSL</h4>
+          <p>If you are using Node-Red flows, in your flow diagram edit all the MQTT input and output nodes to change port number to <b>8883</b> instead of 1883</p>
+          <p>Deploy your Node-Red flow after making these changes</p>
+          <div class="alert alert-info">
+            <p>If your configuration of MQTT with TLS/SSL is complete and working with JavaScript or Node-Red, your sensor data should be getting published</p>
+          </div>
+          <p>We will see how to verify the secure MQTT published data below but before that we will look at one other option to publish data which is using virtual sensor program</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

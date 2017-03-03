@@ -1,46 +1,26 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-lg-10">
-    <h2>Additional Information</h2>
-    <ol class="breadcrumb">
-      <li>
-        <a href="index.html">Home</a>
-      </li>
-      <li>
-        <a>Labs</a>
-      </li>
-      <li class="active">
-        <strong>Additional Information</strong>
-      </li>
-    </ol>
-  </div>
+    <div class="col-lg-10">
+        <h2>Security</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li>
+                Additional Information
+            </li>
+            <li class="active">
+                <strong>Virtual Sensor</strong>
+            </li>
+        </ol>
+    </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
   <div class="row">
     <div class="col-lg-12">
-
-      <div ibox title="Download and Configure virtual sensors">
-        <div content-block name="virtual-sensors" message="Configure virtual sensors to publish sensor data">
-          <h2 class="labHidden">Configure virtual sensors to publish sensor data</h2>
-          <h4>Configure virtual sensors to publish sensor data</h4>
-          <p>Virtual sensor program is designed to simulate publishing of continuous random temperature sensor data over the topic <b>sensors/temperature/data</b>. This can be useful in scenarios where it is required to test/debug some infrastructure/connections/code without use of actual sensors.</p>
-          <p>The virtual sensor program has two versions, one is the <b>virtual-sensor.js</b> and another is <b>virtual-sensor-secure.js</b>. The secure version uses MQTT connection with TLS & SSL components. You can use secure version if you are using MQTT with TLS/SSL in your project.</p>
-          <p>Follow the below steps to download and run virtual sensors</p>
-          <p>Open a ssh terminal to your NUC gateway, at the root directory download and run virtual sensor program using the below commands</p>
-          <pre><code>git clone https://github.com/SSG-DRD-IOT/virtual-sensor.git</code></pre>
-          <pre><code>cd virtual-sensor</code></pre>
-          <pre><code>npm install</code></pre>
-          <p>For secure MQTT connection with TLS & SSL:</p>
-          <pre><code>node virtual-sensor-secure.js</code></pre>
-          <p>-------------- OR -----------------</p>
-          <p>For MQTT connection without TLS & SLL:</p>
-          <pre><code>node virtual-sensor.js</code></pre>
-          <p>You should start seeing sensor data being published like below</p>
-          <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
-        </div>
-      </div>
-
-
       <div ibox title="Debugging MQTT connection issues">
         <div content-block name="mqtt-issues-notls" message="Issues with MQTT (without TLS/SSL) not publishing sensor data">
           <h2 class="labHidden">Issues with MQTT (without TLS/SSL) not publishing sensor data</h2>
@@ -55,7 +35,7 @@
         <div content-block name="mqtt-issues-tls" message="Issues with MQTT configured with TLS/SSL not publishing sensor data">
           <h2 class="labHidden">Issues with MQTT configured with TLS/SSL not publishing sensor data</h2>
           <h4>Issues with MQTT configured with TLS/SSL not publishing data sensor data</h4>
-          <li><p>If you are using MQTT with TLS & SSL configuration then use the below command to verify if sensor data topic for e.g. sensors/temperature/data is published correctly</p></li>
+          <p>If you are using MQTT with TLS & SSL configuration then use the below command to verify if sensor data topic for e.g. sensors/temperature/data is published correctly</p>
           <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
           <p>If you don't see output messages and it gives error, check the following:</p>
           <h4>Verify your mosquitto broker configuration</h4>

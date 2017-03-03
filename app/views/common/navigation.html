@@ -54,7 +54,14 @@
                             <li ui-sref-active="active"><a ui-sref="labs.protocols-node-red">Node-Red</a></li>
                         </ul>
                     </li>
-                    <li ui-sref-active="active"><a ui-sref="labs.security">Security and the Internet of Things</a></li>
+                    <li ng-class="{active: $state.includes('labs')}">
+                        <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Security</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
+                            <li ui-sref-active="active"><a ui-sref="labs.security-tls">Setup TLS</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.security-mcafee">McAfee&reg; Embedded Control Orientation</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.security-systemd">Systemd</a></li>
+                        </ul>
+                    </li>
                     <li ui-sref-active="active"><a ui-sref="labs.databases">Databases at the Edge</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.admin-interface">Custom Administrative Interfaces</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.automation">Automation on the Edge Network</a></li>
@@ -66,6 +73,7 @@
                             <li ui-sref-active="active"><a ui-sref="labs.additional-info-mqtt">Debugging MQTT</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb">Using MongoDB</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb-schemas">Mongoose Schemas</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-virtual-sensor">Virtual Sensor</a></li>
                         </ul>
                     </li>
                 </ul>

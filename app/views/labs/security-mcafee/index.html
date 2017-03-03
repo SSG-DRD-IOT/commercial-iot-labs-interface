@@ -8,8 +8,11 @@
             <li>
                 <a>Labs</a>
             </li>
-            <li class="active">
+            <li>
                 <strong>Security</strong>
+            </li>
+            <li class="active">
+                <strong>McAfee&reg; Embedded Control Orientation</strong>
             </li>
         </ol>
     </div>
@@ -19,156 +22,7 @@
       <div class="row">
         <div class="col-lg-12">
 
-
-
-            <div ibox  title="Objectives">
-                <div content-block name="security-objectives" message="Read the Objectives">
-                    <h2 class="labHidden">Read the Objectives</h2>
-                    <labels gateway window apple linux/>
-                    <p>By the end of this module, you should be able to:</p>
-
-                    <ul>
-                        <li>Generate server and client certificates to enable MQTT-TLS communication</li>
-                        <li>Use McAfee&reg; Embedded Control (MEC) to manage the inventory of executables, its configurations, operation modes and logs.</li>
-                        <li>Have an understanding of the core MEC features, including code and application protection, write and read protection and dynamic whitelisting.</li>
-                        <!-- <li>Use Grsecurity to learn the "normal" or authorized actions on the gateway and lock your commands down.</li> -->
-                        <!-- <li>Ability to execute applications with minimum system level privilege. Protecting System data integrity.</li> -->
-                        <li>Ensuring IoT Gateways so that only trusted modules, Files can Read / Write, Modify & execute.</li>
-                        <li>Ability to log the IoT gateway usage and changes</li>
-                        <li>Learn to configure and lock down system services using Systemd</li>
-                    </ul>
-                </div>
-            </div>
-
-
-
-            <div ibox title="Configure Secure MQTT connection with SSL & TLS">
-              <div content-block message="Objectives" name="configure-secure-mqtt">
-                <ul>
-                  <p><li>We will see how to configure  NUC gateway for secure MQTT connection with SSL & TLS</li></p>
-                  <p>TLS (Transport Layer Security) and SSL (Secure Sockets Layer) provide a secure communication channel between a client and server</p>
-                  <p><li>Since we are using SSL encryption we will generate certificates which will be used for authentication. MQTT uses port 8883 for secure connection hence we will make some changes in MQTT broker (mosquitto in our case) configuration file</li></p>
-                  <p><li>To validate the secure connection we will use a virtual-sensor program that will generate random temperature values and publish this data on a secure MQTT port</li></p>
-                  <p><li>Finally we will listen for this data using mosquitto_sub tool</li></p>
-                </ul>
-              </div>
-            </div>
-
-            <div ibox title="Generate Server Certificate Authority, Certificate and Key">
-              <div content-block message="Generate Server Certificate Authority, Certificate and Key" name="telegraf-certs">
-                <p>First, we will need to generate a server certificate authority, certificate and key. These will be used to authenticate and encrypt the MQTT sensor data.</p>
-
-                <p>Run these commands on the gateway console.</p>
-                <div class="alert alert-warning">
-                  <p>It is important to note that while generating these, the “Common Name” parameter in step 1 above and step 3 should specify the server address, “localhost”. Otherwise it will not authenticate correctly.</p>
-                </div>
-                <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
-openssl genrsa -out server.key 2048
-openssl req -out server.csr -key server.key -new
-openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365</code></pre>
-              </div>
-
-              <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
-                <p>Now move the CA, Certificate and Key file to the MQTT broker's configuration directories</p>
-                <div class="alert alert-warning">
-                  <p>Note: If the directories <b>ca_certificates</b> and <b>certs</b> are not there manually create them</p>
-                </div>
-                <pre><code>mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
-mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
-              </div>
-            </div>
-
-            <div ibox title="Configure Mosquitto to use MQTT over TLS">
-              <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
-                <p>Be sure that your Mosquitto configuration file has all of these options set, particularly the <b>port number 8883, the cafile, and certfile and the keyfile.</b></p>
-                <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
-            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># Place your local configuration in /etc/mosquitto/conf.d/
-
-bind_address 127.0.0.1
-port 8883
-
-cafile /etc/mosquitto/ca_certificates/ca.crt
-certfile /etc/mosquitto/certs/server.crt
-keyfile /etc/mosquitto/certs/server.key
-
-tls_version tlsv1</ui-codemirror>
-              <br></br>
-               <p>Make sure to stop and start mosquitto service after this change</p>
-                <pre><code>systemctl stop mosquitto</code></pre>
-                <pre><code>systemctl start mosquitto</code></pre>
-              <p>Check to make sure mosquitto service is running properly with below command. The status should be "active (running)"</p>
-                <pre><code>systemctl status mosquitto</code></pre>
-              </div>
-            </div>
-
-            <div ibox title="Change all configurations from MQTT to MQTT with TLS/SSL">
-              <div content-block message="Modify JavaScript & Node-Red flows for MQTT-TLS configuration" name="configure-mqtt-tls">
-                <h4>JavaScript configuration change for MQTT with TLS/SSL</h4>
-                <p>If you are using JavaScript code modify the MQTT connect function to include additional parameters for TLS/SSL as shown below:</p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
-var mqtt = require('mqtt');
-var fs = require('fs');
-var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
-
-var PORT = 8883;
-var HOST = 'localhost';
-
-var options = {
-  port: PORT,
-  host: HOST,
-  protocol: 'mqtts',
-  protocolId: 'MQIsdp',
-  keyPath: KEY,
-  certPath: CERT,
-  rejectUnauthorized : false,
-  //The CA list will be used to determine if server is authorized
-  ca: TRUSTED_CA_LIST,
-  secureProtocol: 'TLSv1_method',
-  protocolVersion: 3
-};
-var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
-                <br></br>
-                <h4>Node-Red configuration change for MQTT with TLS/SSL</h4>
-                <p>If you are using Node-Red flows, in your flow diagram edit all the MQTT input and output nodes to change port number to <b>8883</b> instead of 1883</p>
-                <p>Deploy your Node-Red flow after making these changes</p>
-                <div class="alert alert-info">
-                  <p>If your configuration of MQTT with TLS/SSL is complete and working with JavaScript or Node-Red, your sensor data should be getting published</p>
-                </div>
-                <p>We will see how to verify the secure MQTT published data below but before that we will look at one other option to publish data which is using virtual sensor program</p>
-
-            </div>
-          </div>
-
-            <div ibox title="Download & Configure virtual sensor">
-              <div content-block message="Download & Configure virtual sensor" name="configure-virtual-sensor">
-                <p>Virtual sensor program is designed to simulate publishing of continuous random temperature sensor data over the topic <b>sensors/temperature/data</b>. This can be useful in scenarios where it is required to test/debug some infrastructure/connections/code without use of actual sensors.</p>
-                <p>The virtual sensor program has two versions, one is the <b>virtual-sensor.js</b> and another is <b>virtual-sensor-secure.js</b>. The secure version uses MQTT connection with TLS & SSL components. You can use secure version if you are using MQTT with TLS/SSL in your project.</p>
-                <p>Follow the below steps to download and run virtual sensors</p>
-                <p>Open a ssh terminal to your NUC gateway, at the root directory download and run virtual sensor program using the below commands</p>
-                <pre><code>git clone https://github.com/SSG-DRD-IOT/virtual-sensor.git</code></pre>
-                <pre><code>cd virtual-sensor</code></pre>
-                <pre><code>npm install</code></pre>
-                <pre><code>node virtual-sensor-secure.js</code></pre>
-                <p>You should start seeing sensor data being published like below</p>
-                <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
-              </div>
-            </div>
-
-            <div ibox title="Subscribe to the sensor data published">
-              <div content-block message="Subscribe to the sensor data published" name="configure-virtual-sensor">
-                <p>Using mosquitto_sub utility we will subscribe to the data being published (using either JavaScript, Node-Red flows or Virtual Sensor program)</p>
-                <p>Open another ssh terminal to your NUC gateway and give the following command:</p>
-                <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
-                <p>Note here we are listening on the secure port 8883 with the TLS version specified. If you use port 1883 it will refuse the connection</p>
-                <p>You should start receiving messages as below which are getting published for the topic /sensors/temperature/data depending on whether you are using JavaScript, Node-Red or virtual-sensor-secure program to publish it</p>
-                <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
-                <p>If the sensor data is not getting published or you are facing issues check debugging options available under Additional Information->Debugging MQTT</p>
-              </div>
-            </div>
-
-            <div ibox  title="McAfee&reg; Embedded Control Orientation">
+            <div ibox title="McAfee&reg; Embedded Control Orientation">
                 <div content-block name="security-objectives" message="Complete the McAfee&reg; Embedded Control Exercises">
                     <h2 class="labHidden">Complete the McAfee&reg; Embedded Control Exercises</h2>
                     <h5>Lab Overview</h5>
@@ -231,13 +85,13 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
                   <div content-block name="security-mec-help" message="Observe the list of possible commands in the help of McAfee&reg; Embedded Control ">
                     <p>Execute the following command to display the help menu:</p>
                     <pre><code>sadmin help</code></pre>
-                    <img src="./views/labs/security-nuc/images/sadmin-help.png" alt="image alt text" />
+                    <img src="./views/labs/security-mcafee/images/sadmin-help.png" alt="image alt text" />
                   </div>
 
-                  <div content-block name="security-mec-status" message="Find the current status of McAfee&reg; Embedded Control" image-link="./views/labs/security-nuc/images/sadmin-status.png">
+                  <div content-block name="security-mec-status" message="Find the current status of McAfee&reg; Embedded Control" image-link="./views/labs/security-mcafee/images/sadmin-status.png">
                     <p>As the MEC administrators, execute the following command to check the status of the McAfee&reg; Embedded Control on your target:</p>
                     <pre><code>sadmin status</code></pre>
-                    <img class="labHidden" alt="" src="./views/labs/security-nuc/images/sadmin-status.png">
+                    <img class="labHidden" alt="" src="./views/labs/security-mcafee/images/sadmin-status.png">
                           <p>Observe that the status is Unsolidified.</p>
 
                           <p>The following table describes the fields and their meaning.</p>
@@ -339,13 +193,13 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
 
                     <p>As the MEC administrator, execute the following command to confirm that MEC created the initial whitelist. The application control component stores a whitelist for each volume at volume</p>
                     <pre><code>ls -l /.solidcore/scinv</code></pre>
-                    <img alt=""  src="./views/labs/security-nuc/images/solidcore-index.png">
+                    <img alt=""  src="./views/labs/security-mcafee/images/solidcore-index.png">
                   </div>
 
                   <div content-block name="security-test-restart" message="Run 'sadmin status' and observe the results.">
                     <p>Execute the following command to check the status of McAfee&reg; Embedded Control.</p>
                     <pre><code>sadmin status</code></pre>
-                    <img alt=""  src="./views/labs/security-nuc/images/sadmin-status-solidify-enabled.png"/>
+                    <img alt=""  src="./views/labs/security-mcafee/images/sadmin-status-solidify-enabled.png"/>
                     <p>Observe that the status of the ext4 drive has changed to Solidified.</p>
                   </div>
 
@@ -355,13 +209,13 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
                     <p>McAfee Solidifier will be enabled on service restart.</p>
                     <p>As the MEC admin, execute this command to restart the McAfee service</p>
                     <pre><code>systemctl restart scsrvc</code></pre>
-                    <img alt=""  src="./views/labs/security-nuc/images/systemctl-status.png"/>
+                    <img alt=""  src="./views/labs/security-mcafee/images/systemctl-status.png"/>
                   </div>
 
                   <div content-block name="security-test-restart" message="Enable MEC">
                     <p>Now enable MEC with below command</p>
                     <pre><code>sadmin enable</code></pre>
-                    <img alt=""  src="./views/labs/security-nuc/images/sadmin-enable2.png"/>
+                    <img alt=""  src="./views/labs/security-mcafee/images/sadmin-enable2.png"/>
                   </div>
                 </div>
 
@@ -494,13 +348,13 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
 
 
       <div ibox  title="McAfee&reg; Embedded Control - Configure Checksum Calculation">
-        <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-nuc/images/sadmin-config-show.png">
+        <div content-block name="security-objectives" message="Determine which Hashing Algorithm is used in Integrity Calculations" image-link="./views/labs/security-mcafee/images/sadmin-config-show.png">
           <p>McAfee&reg; Embedded Control can be configured to use a variety of algorithms to verify the integrity of solidified system files.</p>
           <p>Type the following to find which algorithm is currently being used:</p>
           <pre><code>sadmin config show</code></pre>
           <p>Or if you'd like a less cluttered view then type:</p>
           <pre><code>sadmin config show | egrep HashAlgorithm</code></pre>
-          <img src="./views/labs/security-nuc/images/sadmin-config-show-egrep.png" alt="" />
+          <img src="./views/labs/security-mcafee/images/sadmin-config-show-egrep.png" alt="" />
         </div>
 
         <div content-block name="security-objectives" message="Configure the Hashing Algorithm">
@@ -556,7 +410,7 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
 
 
 <div ibox  title="McAfee&reg; Embedded Control Updating A Solidified Box">
-  <div content-block name="security-objectives" message="Set McAffee Embedded Control Into Update Mode" image-link="./views/labs/security-nuc/images/sadmin-bu.png">
+  <div content-block name="security-objectives" message="Set McAffee Embedded Control Into Update Mode" image-link="./views/labs/security-mcafee/images/sadmin-bu.png">
     <h5>Using the Update Mode</h5>
 
     <p>When MEC is in update mode it allows all changes on a protected system. You can use update mode to complete maintenance tasks, such as installing patches or upgrading software and data files.</p>
@@ -570,12 +424,12 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
 
   </div>
 
-  <div content-block name="security-objectives" message="When you are done with the Update Mode switch back to protected mode" image-link="./views/labs/security-nuc/images/sadmin-eu.png">
+  <div content-block name="security-objectives" message="When you are done with the Update Mode switch back to protected mode" image-link="./views/labs/security-mcafee/images/sadmin-eu.png">
     <p>This command ends the Update mode.</p>
     <pre><code>sadmin eu</code></pre>
   </div>
 
-<div content-block name="security-objectives" message="Disable the MEC feature to return your target to the standard configuration" image-link="./views/labs/security-nuc/images/sadmin-disable.png">
+<div content-block name="security-objectives" message="Disable the MEC feature to return your target to the standard configuration" image-link="./views/labs/security-mcafee/images/sadmin-disable.png">
     <h5>Disable Application Control</h5>
 
     <p>In this section, you will disable the MEC feature to return your target to the standard configuration.</p>
@@ -586,94 +440,6 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
 
   </div>
 </div>
-
-
-<div ibox title="How To Use Systemctl to Manage Systemd Services and Units">
-  <div content-block name="" message="Introduction to Service Management">
-    <p>Wind River Linux uses Systemd to manage the Intel&reg; IoT Gateway system services. Systemd is a widely used in the Linux community and understanding how it works is essential for securing your gateway for deployment.</p>
-    <p>In this lab, you will be using the systemctl command, which is the administrative command line tool for controlling the init system. You will cover how to disable unused services, check statuses, change system states, and modify configuration files.</p>
-    <p>Systemd labels services that it controls as "units".  A unit configuration file that describes how to manage a system resource.  Systemd defines a number of types of services. In this lab, you will be managing services with the aim of reducing the attack surface of your gateway.</p>
-  </div>
-  <div content-block name="" message="Starting and Stopping Services" image-link="./views/labs/security-nuc/images/systemctl-start.png">
-    <p>To start a service use the <strong>start</strong> command.  You will need to be the root user or use the sudo command.</p>
-    <p>Try starting the <strong>node-red-experience</strong></p>
-    <pre><code>systemctl start node-red-experience.service</code></pre>
-    <p>or you can simply drop the <strong>.service</strong> and type:
-    <pre><code>systemctl start node-red-experience</code></pre>
-    <p>Try stopping the <strong>node-red-experience</strong></p>
-    <p>Likewise, you can stop a system service by typing:</p>
-    <pre><code>systemctl stop node-red-experience</code></pre>
-  </div>
-  <div content-block name="" message="Restarting and Reloading" image-link="./views/labs/security-nuc/images/system-status.png">
-    <p>Restarting a currently running service is simple with the <strong>restart</strong> command. This will terminate the process and then relaunch it.</p>
-    <pre><code>systemctl restart node-red-experience</code></pre>
-    <p>If the service is able to reload its configuration files without terminating first, then you can use the <strong>reload</strong> command.</p>
-    <pre><code>systemctl reload node-red-experience</code></pre>
-    <p>If you are unsure whether the service is able to reload its own configuration files, you can use the <strong>reload-or-restart</strong> command. This will reload the configuration if possbile. Otherwise, it will restart the service.</p>
-    <pre><code>systemctl reload-or-restart node-red-experience</code></pre>
-    <p>You can check the status of your service <strong>node-red-experience</strong> with following command, it will display current status as shown in figure.</p>
-    <pre><code>systemctl status node-red-experience</code></pre>
-  </div>
-  <div content-block name="" message="Enabling and Disabling Services" image-link="./views/labs/security-nuc/images/systemctl-enable-disable.png">
-    <p>Enabling and disabling refers to whether a service is started at boot (enabled) or not (disabled).</p>
-    <p>If you want a service to start when the system next boots type the follow:</p>
-    <pre><code>systemctl enable node-red-experience</code></pre>
-    <p>To make sure that the system does not start a service at boot, type the following:</p>
-    <pre><code>systemctl disable node-red-experience</code></pre>
-  </div>
-  <div content-block name="" message="Checking the Status of Services" image-link="./views/labs/security-nuc/images/systemctl-is-active.png">
-    <p>The <strong>status</strong> command will report whether the service is running or not and if there is a failure condition.</p>
-    <p>Let's see if what the current status is of the <strong>node-red-experience</strong>.
-    <pre><code>systemctl status node-red-experience</code></pre>
-    <p>There are functions which determine the current status of a service</p>
-    <pre><code>systemctl is-active node-red-experience</code></pre>
-    <p>This will return the current unit state, which is usually active or inactive. The exit code will be "0" if it is active, making the result simpler to parse programatically.</p>
-    <pre><code>systemctl is-enabled node-red-experience</code></pre>
-    <pre><code>systemctl is-failed node-red-experience</code></pre>
-  </div>
-  <div content-block name="" message="System State Overview" image-link="./views/labs/security-nuc/images/systemctl-list-units.png">
-    <p>The next set of commands will help to determine the state of the entire system.</p>
-    <pre><code>systemctl list-units</code></pre>
-    <p>This command will show you a list of all of the units on the system whether they are active or not.</p>
-    <pre><code>systemctl list-units --all</code></pre>
-
-    <p>The output has the following columns:</p>
-    <ul>
-      <li>UNIT: The name of the systemd </li>
-      <li>LOAD: This value is true if systemd parse the configuration files for this unit</li>
-      <li>ACTIVE: A summary state about whether the unit is active.</li>
-      <li>SUB: This is a level state that indicates more detailed information about the unit. This often varies by unit type, state, and the actual method in which the unit runs.</li>
-      <li>DESCRIPTION: A short description of the unit.</li>
-    </ul>
-    <p>You can also display all units in the inactive state</p>
-    <pre><code>systemctl list-units --all --state=inactive</code></pre>
-    <p>Lastly, it's very useful to filter the results to include only the <strong>service</strong> type.
-    <pre><code>systemctl list-units --type=service</code></pre>
-  </div>
-  <div content-block name="" message="Unit Management - Displaying a Unit File" image-link="./views/labs/security-nuc/images/systemctl-cat.png">
-    <p>The cat command will display the unit file that was used to configure a given process.</p>
-    <pre><code>systemctl cat node-red-experience.service</code></pre>
-  </div>
-  <div content-block name="" message="Displaying Dependencies" image-link="./views/labs/security-nuc/images/systemctl-list-deps.png">
-    <p>To display the heirarchy of units that must successfully become active before a given unit can run.</p>
-    <pre><code>systemctl list-dependencies node-red-experience.service</code></pre>
-    <p>To show the units that list a given unit as a dependency type:</p>
-    <pre><code>systemctl list-dependencies --reverse node-red-experience.service</code></pre>
-    <pre><code>systemctl show node-red-experience.service -p Conflicts</code></pre>
-  </div>
-  <div content-block name="" message="Masking and Unmasking Units" image-link="./views/labs/security-nuc/images/systemctl-mask.png">
-    <p>Earlier we showed you how to stop a service. Systemd has another mechanism for stopping a service from running called <strong>masking</strong>. When masking a service systemd creates a symlink between the service's configuration files in /etc/systemd/ and /dev/null.  This stops the service from being triggered as a dependency of another service.  It also prevents the service from being activated manually.</p>
-    <pre><code>systemctl mask nginx</code></pre>
-    <p>You can see a list of masked units by typing the following:</p>
-    <pre><code>systemctl list-unit-files</code></pre>
-    <p>To unmask the service so that it is enabled again type the following</p>
-    <pre><code>systemctl unmask nginx</code></pre>
-    <p>You can see that this service is enable again when you check the list</p>
-    <pre><code>systemctl list-unit-files</code></pre>
-  </div>
-</div>
-
-
 
 
             <!-- <div ibox title="Exercise 2: Role Based Security and Memory Protection with GrSecurity">
@@ -757,7 +523,7 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
           <p>HTTPS provides SSL encyption for all data passed between client and server. Below you will learn how to secure your Node-RED server, and all web requests to it, with HTTPS. More info can be found at <a href="https://nodejs.org/api/https.html">https://nodejs.org/api/https.html</a>                        </p>
       </div>
 
-      <div content-block name="grsecurity-objectives" message="Generate and Install HTTPS Certificates in Node-Red" image-link="./views/labs/security-nuc/images/openssl-create-key.png">
+      <div content-block name="grsecurity-objectives" message="Generate and Install HTTPS Certificates in Node-Red" image-link="./views/labs/security-mcafee/images/openssl-create-key.png">
           <p>First you will generate a private key and certificate using openssl.</p>
           <p>Open a console on the Intel&reg; IoT Gateway and enter in the following commands:</p>
           <pre><code>$ cd /home/gwuser/.node-red/ </code></pre>
@@ -767,7 +533,7 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
           <p>you now have a private key and certificate in your home directory. </p>
       </div>
 
-      <div content-block name="grsecurity-objectives" message="Edit Node-RED Settings to include the HTTPS Certificates" image-link="./views/labs/security-nuc/images/node-red-settings-https.png">
+      <div content-block name="grsecurity-objectives" message="Edit Node-RED Settings to include the HTTPS Certificates" image-link="./views/labs/security-mcafee/images/node-red-settings-https.png">
         <p>In order to enable HTTPS on your Node-RED server you must edit the settings file.</p>
         <p>Edit settings.js in user Node-RED user directory:</p>
         <pre><code>$ vi /home/gwuser/.node-red/settings.js</code></pre>
@@ -780,14 +546,14 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
         </ul>
       </div>
 
-      <div content-block name="grsecurity-objectives" message="Restart the Node-Red Experience" image-link="./views/labs/security-nuc/images/restart-node-red.png">
+      <div content-block name="grsecurity-objectives" message="Restart the Node-Red Experience" image-link="./views/labs/security-mcafee/images/restart-node-red.png">
         <h5>Run Node-RED server</h5>
         <p>Now that you have finished configuring your Node-Red server to include HTTP certificates, you need to restart Node-Red.</p>
 
         <pre><code>$ systemctl restart node-red-experience</code></pre>
       </div>
 
-      <div content-block name="grsecurity-objectives" message="Restart the Node-Red Experience"  image-link="./views/labs/security-nuc/images/ssl-warning.png">
+      <div content-block name="grsecurity-objectives" message="Restart the Node-Red Experience"  image-link="./views/labs/security-mcafee/images/ssl-warning.png">
         <p>Navigate to the Node-RED server in your browser at https://gateway-ip:1880 , note that you must replace gateway-ip with the actual ip address of your Arduino* 101.</p>
 
         <p>Since the SSL certifiacte you are using is self signed your browser will throw a warning. Click advanced and select "Proceed to xx.xx.xx (unsafe)"</p>

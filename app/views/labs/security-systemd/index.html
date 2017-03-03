@@ -1,0 +1,241 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Security</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>Security</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div ibox title="How To Use Systemctl to Manage Systemd Services and Units">
+            <div content-block name="" message="Introduction to Service Management">
+              <p>Wind River Linux uses Systemd to manage the Intel&reg; IoT Gateway system services. Systemd is a widely used in the Linux community and understanding how it works is essential for securing your gateway for deployment.</p>
+              <p>In this lab, you will be using the systemctl command, which is the administrative command line tool for controlling the init system. You will cover how to disable unused services, check statuses, change system states, and modify configuration files.</p>
+              <p>Systemd labels services that it controls as "units".  A unit configuration file that describes how to manage a system resource.  Systemd defines a number of types of services. In this lab, you will be managing services with the aim of reducing the attack surface of your gateway.</p>
+            </div>
+            <div content-block name="" message="Starting and Stopping Services" image-link="./views/labs/security-systemd/images/systemctl-start.png">
+              <p>To start a service use the <strong>start</strong> command.  You will need to be the root user or use the sudo command.</p>
+              <p>Try starting the <strong>node-red-experience</strong></p>
+              <pre><code>systemctl start node-red-experience.service</code></pre>
+              <p>or you can simply drop the <strong>.service</strong> and type:
+              <pre><code>systemctl start node-red-experience</code></pre>
+              <p>Try stopping the <strong>node-red-experience</strong></p>
+              <p>Likewise, you can stop a system service by typing:</p>
+              <pre><code>systemctl stop node-red-experience</code></pre>
+            </div>
+            <div content-block name="" message="Restarting and Reloading" image-link="./views/labs/security-systemd/images/system-status.png">
+              <p>Restarting a currently running service is simple with the <strong>restart</strong> command. This will terminate the process and then relaunch it.</p>
+              <pre><code>systemctl restart node-red-experience</code></pre>
+              <p>If the service is able to reload its configuration files without terminating first, then you can use the <strong>reload</strong> command.</p>
+              <pre><code>systemctl reload node-red-experience</code></pre>
+              <p>If you are unsure whether the service is able to reload its own configuration files, you can use the <strong>reload-or-restart</strong> command. This will reload the configuration if possbile. Otherwise, it will restart the service.</p>
+              <pre><code>systemctl reload-or-restart node-red-experience</code></pre>
+              <p>You can check the status of your service <strong>node-red-experience</strong> with following command, it will display current status as shown in figure.</p>
+              <pre><code>systemctl status node-red-experience</code></pre>
+            </div>
+            <div content-block name="" message="Enabling and Disabling Services" image-link="./views/labs/security-systemd/images/systemctl-enable-disable.png">
+              <p>Enabling and disabling refers to whether a service is started at boot (enabled) or not (disabled).</p>
+              <p>If you want a service to start when the system next boots type the follow:</p>
+              <pre><code>systemctl enable node-red-experience</code></pre>
+              <p>To make sure that the system does not start a service at boot, type the following:</p>
+              <pre><code>systemctl disable node-red-experience</code></pre>
+            </div>
+            <div content-block name="" message="Checking the Status of Services" image-link="./views/labs/security-systemd/images/systemctl-is-active.png">
+              <p>The <strong>status</strong> command will report whether the service is running or not and if there is a failure condition.</p>
+              <p>Let's see if what the current status is of the <strong>node-red-experience</strong>.
+              <pre><code>systemctl status node-red-experience</code></pre>
+              <p>There are functions which determine the current status of a service</p>
+              <pre><code>systemctl is-active node-red-experience</code></pre>
+              <p>This will return the current unit state, which is usually active or inactive. The exit code will be "0" if it is active, making the result simpler to parse programatically.</p>
+              <pre><code>systemctl is-enabled node-red-experience</code></pre>
+              <pre><code>systemctl is-failed node-red-experience</code></pre>
+            </div>
+            <div content-block name="" message="System State Overview" image-link="./views/labs/security-systemd/images/systemctl-list-units.png">
+              <p>The next set of commands will help to determine the state of the entire system.</p>
+              <pre><code>systemctl list-units</code></pre>
+              <p>This command will show you a list of all of the units on the system whether they are active or not.</p>
+              <pre><code>systemctl list-units --all</code></pre>
+
+              <p>The output has the following columns:</p>
+              <ul>
+                <li>UNIT: The name of the systemd </li>
+                <li>LOAD: This value is true if systemd parse the configuration files for this unit</li>
+                <li>ACTIVE: A summary state about whether the unit is active.</li>
+                <li>SUB: This is a level state that indicates more detailed information about the unit. This often varies by unit type, state, and the actual method in which the unit runs.</li>
+                <li>DESCRIPTION: A short description of the unit.</li>
+              </ul>
+              <p>You can also display all units in the inactive state</p>
+              <pre><code>systemctl list-units --all --state=inactive</code></pre>
+              <p>Lastly, it's very useful to filter the results to include only the <strong>service</strong> type.
+              <pre><code>systemctl list-units --type=service</code></pre>
+            </div>
+            <div content-block name="" message="Unit Management - Displaying a Unit File" image-link="./views/labs/security-systemd/images/systemctl-cat.png">
+              <p>The cat command will display the unit file that was used to configure a given process.</p>
+              <pre><code>systemctl cat node-red-experience.service</code></pre>
+            </div>
+            <div content-block name="" message="Displaying Dependencies" image-link="./views/labs/security-systemd/images/systemctl-list-deps.png">
+              <p>To display the heirarchy of units that must successfully become active before a given unit can run.</p>
+              <pre><code>systemctl list-dependencies node-red-experience.service</code></pre>
+              <p>To show the units that list a given unit as a dependency type:</p>
+              <pre><code>systemctl list-dependencies --reverse node-red-experience.service</code></pre>
+              <pre><code>systemctl show node-red-experience.service -p Conflicts</code></pre>
+            </div>
+            <div content-block name="" message="Masking and Unmasking Units" image-link="./views/labs/security-systemd/images/systemctl-mask.png">
+              <p>Earlier we showed you how to stop a service. Systemd has another mechanism for stopping a service from running called <strong>masking</strong>. When masking a service systemd creates a symlink between the service's configuration files in /etc/systemd/ and /dev/null.  This stops the service from being triggered as a dependency of another service.  It also prevents the service from being activated manually.</p>
+              <pre><code>systemctl mask nginx</code></pre>
+              <p>You can see a list of masked units by typing the following:</p>
+              <pre><code>systemctl list-unit-files</code></pre>
+              <p>To unmask the service so that it is enabled again type the following</p>
+              <pre><code>systemctl unmask nginx</code></pre>
+              <p>You can see that this service is enable again when you check the list</p>
+              <pre><code>systemctl list-unit-files</code></pre>
+            </div>
+          </div>
+
+
+
+
+            <!-- <div ibox title="Exercise 2: Role Based Security and Memory Protection with GrSecurity">
+                <div content-block name="grsecurity-objectives" message="Exercise 2: Role Based Security and Memory Protection with GrSecurity">
+                    <h2 class="labHidden">Exercise 2: Role Based Security and Memory Protection with GrSecurity</h2>
+
+                    <h5>Lab Overview</h5>
+
+                    <p><b>GRSecurity</b> is a set of software patches released under the GNU GPL for the Linux kernel to enhance the system security. It allows the system administrator to, among other things, define a minimum privilege policy for the system,
+                        in which every process and user have only the lowest privileges necessary to function. GRSecurity has 2 primary features, the RBAC (Rules Based Access Control) and the PaX.</p>
+                    <p><b>gradm</b>, the administration utility for the role-based access control system, is a powerful tool that parses your ACLs (Access Control Lists), performs the enforcement of a secure base policy, optimizes the ACLs, as well as handles
+                        parsing of the learning logs, merges them with your ACL set and outputs the final ACLs.</p>
+
+
+                    <h5>Disable McAfee&reg; Embedded Control</h5>
+
+                    <p>By design, <b>McAfee&reg; Embedded Control</b> will protect your system from changes. So let's turn it off now.</p>
+                    <pre><code>sadmin disable</code></pre>
+
+                    <h5>The gradm command</h5>
+                    <p>gradm is the grsecurity RBAC administration and policy analysis utility. It allows you to configure and administrate the grsecurity system.</p>
+                    <p>To display all available command-line switches, run gradm --help.</p>
+                    <pre><code>gradm</code></pre>
+                    <pre><code>gradm</code> <img alt="" data-fid="504152" src="https://software.intel.com/sites/default/files/managed/85/2c/gr1.png" typeof="foaf:Image"></p>
+
+
+                    <h5>Setting up a Role-Based Access</h5>
+                    <p>Here we will create three roles <b>root</b>, <b>admin</b>, <b>shutdown</b>. Each of these roles will have unique abilities that will be constrained by the by RBAC. You can use any password that you like for each role.</p>
+                    <pre><code>gradm -P</code></pre>
+                    <p><img alt="" data-fid="504153" src="https://software.intel.com/sites/default/files/managed/cb/2b/gr0.png" typeof="foaf:Image"></p>
+
+                    <pre><code>gradm -P admin</code></pre>
+                    <p><img alt="" data-fid="504154" src="https://software.intel.com/sites/default/files/managed/d6/9b/gr2.png" typeof="foaf:Image"></p>
+                    <pre><code>gradm -P shutdown</code></pre>
+                    <p><img alt="" data-fid="504155" src="https://software.intel.com/sites/default/files/managed/b2/31/gr3.png" typeof="foaf:Image"></p>
+
+                    <h5>Enable Learning Mode</h5>
+                    <p>Learning Mode for Role based access – RBAC requires policy to be created to ensure that system is aware of known execution, this can be done by enabling GR-SEC in learning mode or manually updating the policy file.</p>
+                    <p>Grsecurity's learning mode can be used on a per-subject or per-role basis, as well as system-wide. When using the learning mode on a single process or role, the rest of the system remains protected as defined by the policy. The learning
+                        mode can learn all things that the RBAC system supports: files, capabilities, resources, what IP addresses make use of each role, and socket usage. The learning system performs intelligent reduction of filesystem and network access
+                        to reduce policy size, increase readability, and reduce the amount of manual tweaking needed later. Furthermore, the learning system enforces a secure base that is configurable. Once it learning mode GR-sec will log all the activities
+                        of system.</p>
+                    <p>To enable full system learning, run gradm as root with the following options:</p>
+                    <p>Please run few commands. In actual environment learning mode is usually 24-48 hours.</p>
+                    <pre><code>gradm –S
+                # gradm –F –L /etc/grsec/learning.logs
+
+                # ls
+                # pwd
+                # date
+                # gradm –D
+                # gradm –F –L /etc/grsec/learning.logs –O /etc/grsec/learning.roles</code></pre>
+                    <p><img alt="" data-fid="504156" src="https://software.intel.com/sites/default/files/managed/75/0c/gr4.png" typeof="foaf:Image"></p>
+
+                    <p>You've now created a set of commands that are allowed by grsecurity. Let's now enabled grsecurity and test to see if the learned commands are allowed and all other commands are disallowed.</p>
+
+                    <h5>Enabling Grsecurity with Learned Rules</h5>
+
+                    <p>First backup the current policy file.</p>
+                    <pre><code>cp /etc/grsec/policy /etc/grsec/policy.bak
+                  # cp /etc/grsec/learning.roles /etc/grsec/policy</code></pre>
+
+                    <p>Now enable grsecurity.</p>
+                    <pre><code>gradm -E</code></pre>
+
+                    <h5>Test the Learned Rules</h5>
+                    <pre><code>ls
+                    # pwd
+                    # cat
+                    # ifconfig
+                    # date
+                    # gradm -D</code></pre>
+
+                </div>
+            </div>
+
+
+  <div ibox title="Exercise 3: Node-RED with HTTPS">
+      <div content-block name="grsecurity-objectives" message="Read the Introduction and Objectives">
+          <h2 class="labHidden">Exercise 3: Node-RED with HTTPS</h2>
+          <p>HTTPS provides SSL encyption for all data passed between client and server. Below you will learn how to secure your Node-RED server, and all web requests to it, with HTTPS. More info can be found at <a href="https://nodejs.org/api/https.html">https://nodejs.org/api/https.html</a>                        </p>
+      </div>
+
+      <div content-block name="grsecurity-objectives" message="Generate and Install HTTPS Certificates in Node-Red" image-link="./views/labs/security-systemd/images/openssl-create-key.png">
+          <p>First you will generate a private key and certificate using openssl.</p>
+          <p>Open a console on the Intel&reg; IoT Gateway and enter in the following commands:</p>
+          <pre><code>$ cd /home/gwuser/.node-red/ </code></pre>
+          <pre><code>$ openssl req -newkey rsa:2048 -nodes -keyout privatekey.pem -x509 -days 365 -out certificate.pem </code></pre>
+
+          <p>Answer the prompts with your info, or hit enter to leave as blank.</p>
+          <p>you now have a private key and certificate in your home directory. </p>
+      </div>
+
+      <div content-block name="grsecurity-objectives" message="Edit Node-RED Settings to include the HTTPS Certificates" image-link="./views/labs/security-systemd/images/node-red-settings-https.png">
+        <p>In order to enable HTTPS on your Node-RED server you must edit the settings file.</p>
+        <p>Edit settings.js in user Node-RED user directory:</p>
+        <pre><code>$ vi /home/gwuser/.node-red/settings.js</code></pre>
+
+        <ul>
+          <li>Hit "i" to enable editing</li>
+          <li>On line 19 remove the "//" to uncomment the line.that says, var fs = require("fs")</li>
+          <li>On lines 107-110 remove the "//" at the start of each line to uncomment the lines.</li>
+          <li>Hit Esc, type :wq, and hit enter to save and exit vi.</li>
+        </ul>
+      </div>
+
+      <div content-block name="grsecurity-objectives" message="Restart the Node-Red Experience" image-link="./views/labs/security-systemd/images/restart-node-red.png">
+        <h5>Run Node-RED server</h5>
+        <p>Now that you have finished configuring your Node-Red server to include HTTP certificates, you need to restart Node-Red.</p>
+
+        <pre><code>$ systemctl restart node-red-experience</code></pre>
+      </div>
+
+      <div content-block name="grsecurity-objectives" message="Restart the Node-Red Experience"  image-link="./views/labs/security-systemd/images/ssl-warning.png">
+        <p>Navigate to the Node-RED server in your browser at https://gateway-ip:1880 , note that you must replace gateway-ip with the actual ip address of your Arduino* 101.</p>
+
+        <p>Since the SSL certifiacte you are using is self signed your browser will throw a warning. Click advanced and select "Proceed to xx.xx.xx (unsafe)"</p>
+
+        <p>Your Node-RED server now uses TLS 1.2 to secure the connection.</p>
+      </div>
+
+       -->
+
+        <div ibox title="References">
+          <ul>
+              <li>
+                  <p><a href="https://www.openssl.org/">https://www.openssl.org/</a></p>
+                  <p><a href="http://www.intel.com/content/dam/support/us/en/documents/motherboards/server/sb/g21682003_tpm_hwug.pdf">Trusted Platform Technology</a></p>
+              </li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</div>
