@@ -203,23 +203,6 @@
                 </div>
 
 
-                <div content-block name="modify-the-xdk-app" message="Modify LED blink code for NUC Gateway" image-link="./views/labs/sensors-javascript/images/led-xdk-NUC.png">
-                  <li><p>The default LED blinky app does not have support for Arduino* 101 connected through NUC. We will make some minor changes to the code.</li></p>
-                  <li><p>Open <b>cfg-app-platform.js</b> file and make below changes in the functions indicated in comments (also shown in figure) and save the file</li></p>
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">//Change in cfg.int = function()
-case cfg.mraa.INTEL_DE3815:               // NUC
-	io = opt.altPin ? io : 525 ;            // use alternate pin
-	break ;                                 // GPIO pin 13 + 512 is Firmata offset
-
-//Change in cfg.test = function()
-case cfg.mraa.INTEL_GALILEO_GEN1:           // Gallileo Gen 1
-case cfg.mraa.INTEL_GALILEO_GEN2:           // Gallileo Gen 2
-case cfg.mraa.INTEL_EDISON_FAB_C:           // Edison
-case cfg.mraa.INTEL_DE3815:                 // NUC Gateway
-	checkNode = checkNodeVersion("4.0") ;
-	checkMraa = checkMraaVersion("1.0.0") ;
-                  </pre></ui-codemirror>
-                </div>
                 <div content-block name="build-the-xdk-app" message="Upload the application" image-link="./views/labs/sensors-javascript/images/image_10.png">
                     <h2 class="labHidden">Upload the application</h2>
                     <p><img class="labHidden" alt="" data-fid="503910" src="https://software.intel.com/sites/default/files/managed/16/d8/image_10.png" typeof="foaf:Image"></p>
