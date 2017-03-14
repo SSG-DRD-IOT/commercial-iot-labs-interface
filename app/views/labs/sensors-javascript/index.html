@@ -202,7 +202,6 @@
                     <p>A message in the console log will appear to confirm the update.</p>
                 </div>
 
-
                 <div content-block name="build-the-xdk-app" message="Upload the application" image-link="./views/labs/sensors-javascript/images/image_10.png">
                     <h2 class="labHidden">Upload the application</h2>
                     <p><img class="labHidden" alt="" data-fid="503910" src="https://software.intel.com/sites/default/files/managed/16/d8/image_10.png" typeof="foaf:Image"></p>
@@ -245,6 +244,18 @@
                     </ol>
                 </div>
 
+                <div content-block name="build-the-xdk-app" message="If you receive an error, try cleaning the target directory on the gateway" image-link="./views/labs/sensors-javascript/images/run-error.png">
+                    <h2 class="labHidden">If you receive an error, try cleaning the target directory on the gateway</h2>
+
+                    <p>Go to <b>Board Control</b> in the manage device menu.</p>
+                    <img src="./views/labs/sensors-javascript/images/board-control.png" />
+
+                    <p>Click the <b>Clear Board Directory</b> button to remove all the files from the target directory on the gateway device.</p>
+                    <img src="./views/labs/sensors-javascript/images/clear-board-directory.png" />
+                </div>
+
+
+
                 <div content-block name="blink-the-light" message="Congratulations, you just ran your first Intel&reg; XDK application!" image-link="./views/labs/sensors-javascript/images/image_arduino_led.png">
                     <h2 class="labHidden">Congratulations, you just ran your first Intel&reg; XDK application!</h2>
                     <p><img class="labHidden" alt="" data-fid="503913" src="https://software.intel.com/sites/default/files/managed/61/94/image_arduino_led.png" typeof="foaf:Image"></p>
@@ -261,7 +272,7 @@
                 </div>
             </div>
 
-            <div ibox title="Exercise 1: Temperature Sensor and LCD">
+            <div ibox title="Setup the temperature sensor and LCD screen">
                 <div content-block name="read-xdk-intro" message="Plug in the Grove shield, temperature sensor and the LCD" image-link="./views/labs/sensors-javascript/images/temperature-sensors.jpg">
                     <h2 class="labHidden">Plug in the Grove shield, temperature sensor and the LCD</h2>
                     <p><img class="labHidden" alt="temperature sensor" data-fid="503915" src="https://software.intel.com/sites/default/files/managed/21/f9/temperature-sensors.jpg" title="temperature sensor" typeof="foaf:Image"></p>
@@ -336,18 +347,8 @@
                         </li>
 
                         <li>
-                            <p>Read the value of the <code>GroveTemp</code> object you just created.</p>
-                            <p><code>var celsius = temp.value();</code></p>
-                        </li>
+                          <p>Create a loop that will call a function to get the temperature once per second with the JavaScript setInterval() function</p>
 
-                        <li>
-                            <p>If desired, convert the Celsius value to Fahrenheit using the standard conversion formula.</p>
-                            <p><code>var fahrenheit = Math.round(celsius * 9.0/5.0 + 32.0);</code></p>
-                        </li>
-
-                        <li>
-                            <p>Finally, output the value of the temperature sensor.</p>
-                            <p><code>console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</code></p>
                         </li>
 
                         <li>
@@ -356,9 +357,15 @@
                             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var OFFSET = 512;
 var groveSensor = require('jsupm_grove');
 var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66);
-var celsius = temp.value();
-var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
-console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");  </li>
+
+function monitor() {
+    setInterval(function() {
+        var celsius = temp.value();
+        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+    }, 1000);
+}
+monitor();</li>
 
                         <li>
                             <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel&reg; XDK to:
@@ -375,50 +382,8 @@ console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");  </li>
                     </div>
                 </div>
 
-                <div content-block name="repeat-sensor-reading" message="Make the sensor reading repeat once per second">
-                    <h2 class="labHidden">Make the sensor reading repeat once per second</h2>
-                    <p>Currently the temperature sensor is only read once on application start. Add a JavaScript <code>setInterval</code> to regularly poll the sensor every second (1000 miliseconds).</p>
-                    <p>If you are not familiar with JavaScript, the format should look similar to this:</p>
-                    <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">function monitor() {
-    setInterval(function() {
-        // code to repeat goes here
-    }, 1000);
-}
-monitor();</pre></ui-codemirror>
-                </div>
-
-
-                <div content-block name="repeat-sensor-reading" message="Bring the SetInterval and Sensor Reading code together.">
-                    <h2 class="labHidden">Bring the SetInterval and Sensor Reading code together.</h2>
-                    <ol>
-
-                        <li>
-                            <p>Try incorporating the <code>setInterval</code> callback with the code you wrote in <span class="icon bookmark">Read the temperature sensor</span> before scrolling down for the solution.</p>
-                        </li>
-
-                        <li>
-                            <p>
-                                With polling, the exercise code should look like this:</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var OFFSET = 512;
-var groveSensor = require('jsupm_grove');
-var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66);
-
-function monitor() {
-    setInterval(function() {
-        var celsius = temp.value();
-        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
-        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit ");
-    }, 1000);
-}
-monitor();</pre></ui-codemirror>
-
-                        </li>
-
-                    </ol>
-                </div>
-
-                <div content-block name="repeat-sensor-reading" message="Add the LCD Screen.">
-                    <h2 class="labHidden">Add the LCD Screen.</h2>
+                <div content-block name="repeat-sensor-reading" message="Add the LCD Screen">
+                    <h2 class="labHidden">Add the LCD Screen</h2>
                     <p>Update <span class="icon file">main.js</span> to output the value from the temperature sensor to the LCD display.</p>
 
                     <p>Below are the general steps to complete the exercise.</p>
@@ -476,8 +441,9 @@ var OFFSET = 512;
 
 // Instantiate the temperature sensor and LCD actuator
 var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
-var screen = new LCD.i2clcd(0+OFFSET, 0x3E, 0x62);
-// monitor: creates an anonymous function that runs once per second
+var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+
+// monitor - creates an anonymous function that runs once per second
 // The function will get the temperature and display it on the LCD.
 function monitor() {
     setInterval(
