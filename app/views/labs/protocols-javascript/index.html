@@ -92,8 +92,8 @@
                     <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
                 </div>
 
-                <div content-block name="read-xdk-intro" message="Start with the Code from the JavaScript Sensors and Actuators Lab">
-                    <h2 class="labHidden">Start with the Code from the JavaScript Sensors and Actuators Lab</h2>
+                <div content-block name="read-xdk-intro" message="Copy the code from the JavaScript Sensors and Actuators Lab into this new project">
+                    <h2 class="labHidden">Copy the code from the JavaScript Sensors and Actuators Lab into this new project</h2>
                     <p>
                       In the Sensors and Actuators lab, we created a program to read the temperature and display is on the LCD screen. It should look something like this.
                     </p>
@@ -180,8 +180,8 @@ monitor();</pre></ui-codemirror>
                 </p>
 
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
-  "name": "xdk-iot-blank-template",
-  "description": "Intel® XDK IoT Blank Node.js Template",
+  "name": "protocol-mqtt",
+  "description": "Creates a simple service to publish a temperature sensor's data over MQTT",
   "version": "0.0.0",
   "main": "main.js",
   "engines": {
@@ -190,9 +190,10 @@ monitor();</pre></ui-codemirror>
   "license": "BSD-3-Clause",
   "private": true,
   "dependencies": {
-      "mqtt" : "latest"
+      "mqtt": "latest"
   }
-}</pre></ui-codemirror>
+}
+</pre></ui-codemirror>
 
               </div>
 
@@ -236,6 +237,34 @@ console.log(str);
 mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
             </div>
 
+            <div content-block name="repeat-sensor-reading" message="The complete code to publish the temperature sensor over MQTT">
+                <p>
+                  Next we will add the code to publish the sensor data over MQTT at the end of the anonymous function.
+                </p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current time
+        var current_time = (new Date).getTime();
+
+        /*
+        This JSON structure is extremely important
+        future labs will assume that every temperature
+        reading has a "sensor_id", "value" and "timestamp"
+        */
+        var json = {
+        sensor_id : "temperature",
+        value : celsius,
+        timestamp : current_time
+        };
+
+        // Convert the JSON object to a string
+        var str = JSON.stringify(json);
+
+        // Log the string to the console
+        console.log(str);
+
+        // Publish the temperature reading string on the MQTT topic
+        mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
+            </div>
+
 
                 <div content-block name="repeat-sensor-reading" message="See the Debugging MQTT section in the sidebar under Additional Information">
                     <p>
@@ -269,6 +298,30 @@ mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
                     </table>
                   </div>
                 </div>
+
+
+                                <div content-block name="read-xdk-intro" message="Start a new project in the Intel® XDK using a blank template." image-link="./views/labs/protocols-javascript/images/new-project.png">
+                                    <h2 class="labHidden">Start a new project in the Intel® XDK using a blank template.</h2>
+
+                                    <ol>
+                                        <li>
+                                            <p>Start a new project in the Intel® XDK using a blank template.</p>
+                                        </li>
+                                        <li>
+                                            <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
+                                        </li>
+                                    </ol>
+                                </div>
+
+                                <div content-block name="read-xdk-intro" message="Select the Blank Template" image-link="./views/labs/protocols-javascript/images/blank_template.png">
+                                    <h2 class="labHidden">Select the Blank Template</h2>
+
+                                    <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
+
+
+                                    <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
+                                </div>
+
 
                 <div content-block message="Include the Dependencies">
                     <h2 class="labHidden">Include the Dependencies</h2>
