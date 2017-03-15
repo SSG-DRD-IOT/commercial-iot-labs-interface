@@ -102,39 +102,39 @@
                               </p>
 
                               <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
-          var groveSensor = require('jsupm_grove');
-          var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
 
-          // The Offset is necessary for Firmata
-          var OFFSET = 512;
+// The Offset is necessary for Firmata
+var OFFSET = 512;
 
-          // Instantiate the temperature sensor and LCD actuator
-          var temp = new groveSensor.GroveTemp(0+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
-          var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+// Instantiate the temperature sensor and LCD actuator
+var temp = new groveSensor.GroveTemp(0+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
 
-          // monitor: creates an anonymous function that runs once per second
-          // The function will get the temperature and display it on the LCD.
-          function monitor() {
-              setInterval(
-                function() {
-                  // Read the temperature sensor
-                  var celsius = temp.value();
+// monitor: creates an anonymous function that runs once per second
+// The function will get the temperature and display it on the LCD.
+function monitor() {
+    setInterval(
+      function() {
+        // Read the temperature sensor
+        var celsius = temp.value();
 
-                  // Convert it to fahrenheit
-                  var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+        // Convert it to fahrenheit
+        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
 
-                  // Log it to the console window
-                  console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+        // Log it to the console window
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
 
-                  // Update the LCD screen
-                  screen.setCursor(0, 0);
-                  screen.setColor(255, 255, 255);
-                  screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
-              }, 1000);
-          }
+        // Update the LCD screen
+        screen.setCursor(0, 0);
+        screen.setColor(255, 255, 255);
+        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+    }, 1000);
+}
 
-          // Call the monitor function once
-          monitor();</pre></ui-codemirror>
+// Call the monitor function once
+monitor();</pre></ui-codemirror>
                           </div>
 
                       <div content-block name="read-xdk-intro" message="Remove the LCD Code">
@@ -145,32 +145,32 @@
                           </p>
 
                           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
-          var groveSensor = require('jsupm_grove');
+var groveSensor = require('jsupm_grove');
 
-          // The Offset is necessary for Firmata
-          var OFFSET = 512;
+// The Offset is necessary for Firmata
+var OFFSET = 512;
 
-          // Instantiate the temperature sensor and LCD actuator
-          var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+// Instantiate the temperature sensor and LCD actuator
+var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
 
-          // monitor: creates an anonymous function that runs once per second
-          // The function will get the temperature and display it on the LCD.
-          function monitor() {
-            setInterval(
-              function() {
-                // Read the temperature sensor
-                var celsius = temp.value();
+// monitor: creates an anonymous function that runs once per second
+// The function will get the temperature and display it on the LCD.
+function monitor() {
+  setInterval(
+    function() {
+      // Read the temperature sensor
+      var celsius = temp.value();
 
-                // Convert it to fahrenheit
-                var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+      // Convert it to fahrenheit
+      var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
 
-                // Log it to the console window
-                console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
-            }, 1000);
-          }
+      // Log it to the console window
+      console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+  }, 1000);
+}
 
-          // Call the monitor function once
-          monitor();</pre></ui-codemirror>
+// Call the monitor function once
+monitor();</pre></ui-codemirror>
 
                       </div>
 
@@ -183,20 +183,19 @@
                           </p>
 
                           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
-            "name": "protocol-mqtt",
-            "description": "Creates a simple service to publish a temperature sensor's data over MQTT",
-            "version": "0.0.0",
-            "main": "main.js",
-            "engines": {
-              "node": ">=0.10.0"
-            },
-            "license": "BSD-3-Clause",
-            "private": true,
-            "dependencies": {
-                "mqtt": "latest"
-            }
-          }
-          </pre></ui-codemirror>
+  "name": "protocol-mqtt",
+  "description": "Creates a simple service to publish a temperature sensor's data over MQTT",
+  "version": "0.0.0",
+  "main": "main.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "BSD-3-Clause",
+  "private": true,
+  "dependencies": {
+      "mqtt": "latest"
+  }
+}</pre></ui-codemirror>
 
                         </div>
 
@@ -208,8 +207,8 @@
                           Add following one line of code for an uncrypted MQTT connection just below the line that creates the temp sensor.
                         </p>
                         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
-          var mqtt = require('mqtt');
-          var mqttClient = mqtt.connect("mqtt://localhost/");</pre></ui-codemirror>
+var mqtt = require('mqtt');
+var mqttClient = mqtt.connect("mqtt://localhost/");</pre></ui-codemirror>
                       </div>
 
                       <div content-block name="repeat-sensor-reading" message="Add the MQTT code to publish the sensor data">
@@ -217,27 +216,27 @@
                             Next we will add the code to publish the sensor data over MQTT at the end of the anonymous function.
                           </p>
                           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current time
-          var current_time = (new Date).getTime();
+var current_time = (new Date).getTime();
 
-          /*
-            This JSON structure is extremely important
-            future labs will assume that every temperature
-            reading has a "sensor_id", "value" and "timestamp"
-          */
-          var json = {
-            sensor_id : "temperature",
-            value : celsius,
-            timestamp : current_time
-          };
+/*
+  This JSON structure is extremely important
+  future labs will assume that every temperature
+  reading has a "sensor_id", "value" and "timestamp"
+*/
+var json = {
+  sensor_id : "temperature",
+  value : celsius,
+  timestamp : current_time
+};
 
-          // Convert the JSON object to a string
-          var str = JSON.stringify(json);
+// Convert the JSON object to a string
+var str = JSON.stringify(json);
 
-          // Log the string to the console
-          console.log(str);
+// Log the string to the console
+console.log(str);
 
-          // Publish the temperature reading string on the MQTT topic
-          mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
+// Publish the temperature reading string on the MQTT topic
+mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
                       </div>
 
                       <div content-block name="repeat-sensor-reading" message="The complete code to publish the temperature sensor over MQTT">
@@ -245,38 +244,38 @@
                             Here is the complete code for this lab.
                           </p>
                           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
-          var groveSensor = require('jsupm_grove');
-          var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
+var groveSensor = require('jsupm_grove');
+var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
 
-          // The Offset is necessary for Firmata
-          var OFFSET = 512;
+// The Offset is necessary for Firmata
+var OFFSET = 512;
 
-          // Instantiate the temperature sensor and LCD actuator
-          var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
-          var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
-          // monitor: creates an anonymous function that runs once per second
-          // The function will get the temperature and display it on the LCD.
-          function monitor() {
-              setInterval(
-                function() {
-                  // Read the temperature sensor
-                  var celsius = temp.value();
+// Instantiate the temperature sensor and LCD actuator
+var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+// monitor: creates an anonymous function that runs once per second
+// The function will get the temperature and display it on the LCD.
+function monitor() {
+    setInterval(
+      function() {
+        // Read the temperature sensor
+        var celsius = temp.value();
 
-                  // Convert it to fahrenheit
-                  var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+        // Convert it to fahrenheit
+        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
 
-                  // Log it to the console window
-                  console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
+        // Log it to the console window
+        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
 
-                  // Update the LCD screen
-                  screen.setCursor(0, 0);
-                  screen.setColor(255, 255, 255);
-                  screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
-              }, 1000);
-          }
+        // Update the LCD screen
+        screen.setCursor(0, 0);
+        screen.setColor(255, 255, 255);
+        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+    }, 1000);
+}
 
-          // Call the monitor function once
-          monitor();</pre></ui-codemirror>
+// Call the monitor function once
+monitor();</pre></ui-codemirror>
           </div>
 
 
