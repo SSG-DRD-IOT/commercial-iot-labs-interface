@@ -28,7 +28,7 @@
                 <h2 class="labHidden">Read the Objectives</h2>
                 <labels arduino windows apple linux/>
                 <p>
-                  Now that you've created a sensor and actuator device using a temperature sensor and LCD and the Intel IoT Gateway, this lab will lead you through the process of connecting them to a network. By the end of the lab instead of having a single process controlling both the temperature sensor and the LCD, you will decouple them. You will write a Restful HTTP server to control the action of the LCD.
+                  By the end of the lab you will write a Restful HTTP server to control the action of the LCD.
                 </p>
 
                 <p>
@@ -234,6 +234,89 @@ app.delete('/lcd/text/', function (req, res) {
                     </p>
 
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+console.log('Example app listening at http://%s:%s', host, port);
+});</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Checkout the completed lab">
+                    <h2 class="labHidden">Checkout the completed lab</h2>
+                    <p>
+                      Here is the code to the complete the lab.
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTP server
+var express = require('express');
+
+// The body-parser library allows us to declare the server will use JSON format
+var bodyParser = require('body-parser');
+
+// Declare the HTTP server as a variable named "app"
+var app = express();
+
+// Declare the LCD variable
+var LCD = require("jsupm_jhd1313m1");
+var OFFSET = 512;
+var mylcd = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+
+// parse application/json
+app.use(bodyParser.json());
+
+// This function will print the route for each incoming HTTP request
+app.use(function (req, res, next) {
+  console.log(req.body); // populated!
+  next();
+});
+
+var backlight = {
+    r:0,
+    g:0,
+    b:0
+};
+
+var lcdtext = "";
+mylcd.setColor(backlight.r,backlight.g,backlight.b);
+
+app.get('/lcd/backlight/', function (req, res) {
+  res.status(200).json(backlight);
+});
+app.get('/lcd/text/', function (req, res) {
+  res.status(200).json(lcdtext);
+});
+
+app.post('/lcd/backlight/', function (req, res) {
+   backlight = {
+      r:parseInt(req.query.r),
+      g:parseInt(req.query.g),
+      b:parseInt(req.query.b)
+  };
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(201).send("Success");
+});
+
+app.post('/lcd/text/', function (req, res) {
+  lcdtext = req.query.lcdtext;
+  mylcd.clear();
+  mylcd.write(lcdtext);
+  res.status(201).send("Success");
+});
+
+app.delete('/lcd/backlight/', function (req, res) {
+  backlight = {r:0,g:0,b:0};
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(204).send("Deleted");
+});
+
+
+
+app.delete('/lcd/text/', function (req, res) {
+  mylcd.clear();
+  res.status(204).send("Deleted");
+});
+
+var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
 
