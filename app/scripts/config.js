@@ -75,9 +75,9 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.networking', {
-      url: "/networking",
-      templateUrl: "views/labs/networking/index.html",
+    .state('labs.protocols-javascript-http', {
+      url: "/protocols-javascript-http",
+      templateUrl: "views/labs/protocols-javascript-http/index.html",
       data: {
         pageTitle: 'Application Protocols: MQTT and HTTP'
       },
@@ -98,11 +98,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.protocols', {
-      url: "/protocols",
-      templateUrl: "views/labs/protocols/index.html",
+    .state('labs.protocols-javascript-mqtt', {
+      url: "/protocols-javascript-mqtt",
+      templateUrl: "views/labs/protocols-javascript-mqtt/index.html",
       data: {
-        pageTitle: 'Using Bluetooth and Zigbee'
+        pageTitle: ''
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
