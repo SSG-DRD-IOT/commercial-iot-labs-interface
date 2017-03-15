@@ -45,11 +45,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       url: "/labs",
       templateUrl: "views/common/content.html"
     })
-    .state('labs.introduction', {
-      url: "/introduction",
-      templateUrl: "views/labs/introduction/index.html",
+    .state('labs.setup-development-environment', {
+      url: "/setup-development-environment",
+      templateUrl: "views/labs/setup-development-environment/index.html",
       data: {
-        pageTitle: 'Introduction'
+        pageTitle: ''
       }
     })
     .state('labs.hdc', {
