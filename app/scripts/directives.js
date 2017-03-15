@@ -104,7 +104,8 @@ function contentBlock($timeout) {
     scope: {
       name: '@',
       message: '@',
-      imageLink: '@'
+      imageLink: '@',
+      slidesLink: '@'
     },
     templateUrl: 'views/common/contentBlock.html',
     controller: function ($scope, $element) {
