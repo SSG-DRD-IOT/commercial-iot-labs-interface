@@ -65,7 +65,7 @@
 
             <ol>
               <li><p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p></li>
-              <li><p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p></li>
+              <li><p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p></li>
               <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p></li>
             </ol>
           </div>
@@ -151,7 +151,7 @@
             <div content-block name="protocol-assign-pins" message="Configure the nodes">
               <h2 class="labHidden">Configure the nodes in the MQTT flow</h2>
               <ol>
-                <li>Double click the temperature node to assign it to pin <b>A1</b> and change the Platform from Native to <b>Firmata</b></li>
+                <li>Double click the temperature node to assign it to pin <b>A0</b> and change the Platform from Native to <b>Firmata</b></li>
                 <li>Configure <b>both</b> the <b>input mqtt</b> and <b>output mqtt</b> nodes as described below:</li>
 
                 <ul>
@@ -412,15 +412,15 @@ return msg;</pre></ui-codemirror>
                     <tr><td><b>GET</b></td><td>/lcd/color</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
                     <tr><td><b>POST</b></td><td>/lcd/color</td><td>Set a new color to display on the LCD</td></tr>
                     <tr><td><b>DELETE</b></td><td>/lcd/color</td><td>Turn the LCD backlight off</td></tr>
-                    <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
-                    <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new color to display on the LCD</td></tr>
+                    <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTP Server for the current text value displayed on the LCD</td></tr>
+                    <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new text to display on the LCD</td></tr>
                     <tr><td><b>DELETE</b></td><td>/lcd/text</td><td>Clear text on LCD</td></tr>
                   </table>
                 </div>
               </div>
 
               <div content-block name="restful-api-node-red-flow" message="Open Node Red Flow Editor and create 6 new flows" image-link="./views/labs/protocols-node-red/images/http-text-color-apis.png">
-                <p>Note that the picture on the left only shows the 3 flows for the LCD COLOR API.  You need to create an additional 3 flows for the LCD TEXT API.</p>
+                <p>Note that the picture on the right only shows the 3 flows for the LCD COLOR API.  You need to create an additional 3 flows for the LCD TEXT API.</p>
                 <p>Each API defined in this new Node-Red flow will contains the following nodes:</p>
                 <ul>
                   <li>http input</li>
@@ -594,7 +594,7 @@ return msg;</pre></ui-codemirror>
                 <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
                 <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
 
-                <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
+                <p>To install the app navigate to <a href="https://www.getpostman.com/" target="_blank"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
             </div>
 
 
@@ -613,9 +613,9 @@ return msg;</pre></ui-codemirror>
 
             <div ibox title="Additional Resources">
               <ul>
-                <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
-                <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
-                <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p></li>
+                <li><p><a href="http://mqtt.org/" target="_blank">MQTT</a></p></li>
+                <li><p><a href="https://www.npmjs.com/package/express" target="_blank">ExpressJS</a></p></li>
+                <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a></p></li>
               </ul>
             </div>
         </div>

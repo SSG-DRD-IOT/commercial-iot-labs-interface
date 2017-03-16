@@ -62,8 +62,8 @@
                       <tr><td><b>GET</b></td><td>/lcd/color</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
                       <tr><td><b>POST</b></td><td>/lcd/color</td><td>Set a new color to display on the LCD</td></tr>
                       <tr><td><b>DELETE</b></td><td>/lcd/color</td><td>Turn the LCD backlight off</td></tr>
-                      <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTP Server for the current color value displayed on the LCD</td></tr>
-                      <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new color to display on the LCD</td></tr>
+                      <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTP Server for the current text value displayed on the LCD</td></tr>
+                      <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new text to display on the LCD</td></tr>
                       <tr><td><b>DELETE</b></td><td>/lcd/text</td><td>Clear text on LCD</td></tr>
                     </table>
                   </div>
@@ -106,7 +106,9 @@
       "express" : "latest",
       "body-parser" : "latest"
   }</pre></ui-codemirror>
-
+              <p>
+                In the server.json file do a require of <b>express</b> and <b>body-parser</b>.
+              </p>
               <p class="label">
                 server.js
               </p>
@@ -120,7 +122,7 @@ var bodyParser = require('body-parser');</pre></ui-codemirror>
                 <div content-block message="Instantiate the HTTP server variable named app and the LCD variable.">
                     <h2 class="labHidden">Instantiate the HTTP server variable named app and the LCD variable.</h2>
                     <p>
-                      Instantiate the HTTP server variable named app and the LCD variable.
+                      Continue making changes to server.js. Instantiate the HTTP server variable named app and the LCD variable.
                     </p>
 
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Declare the HTTP server as a variable named "app"
@@ -323,6 +325,10 @@ var server = app.listen(3000, function () {
 console.log('Example app listening at http://%s:%s', host, port);
 });</pre></ui-codemirror>
                 </div>
+                <div content-block name="deploy-application" message="Deploy the application">
+                    <h2 class="labHidden">Deploy the application</h2>
+                    <p>Upload and run your application from Intel&reg; XDK</p>
+                </div>
               </div>
 
               <div ibox title="Testing Your Restful HTTP API">
@@ -333,7 +339,7 @@ console.log('Example app listening at http://%s:%s', host, port);
                     <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
                     <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
 
-                    <p>To install the app navigate to <a href="https://www.getpostman.com/"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
+                    <p>To install the app navigate to <a href="https://www.getpostman.com/" target="_blank"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
                 </div>
 
 
@@ -352,9 +358,9 @@ console.log('Example app listening at http://%s:%s', host, port);
 
               <div ibox title="Additional Resources">
                 <ul>
-                  <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
-                  <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
-                  <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p></li>
+                  <li><p><a href="http://mqtt.org/" target="_blank">MQTT</a></p></li>
+                  <li><p><a href="https://www.npmjs.com/package/express" target="_blank">ExpressJS</a></p></li>
+                  <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a></p></li>
                 </ul>
               </div>
         </div>

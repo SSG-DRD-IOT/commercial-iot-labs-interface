@@ -52,7 +52,7 @@
               <p>In the Sensors and Actuators lab, we connected the temperature sensor (Analog) and LCD display (I2C) to your Arduino* 101. We wrote NodeJS code using the Intel® XDK IoT Edition to measure the temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
 
               <p>
-                You're project should start looking like the picture on the right.
+                Your project should start looking like the picture on the right.
               </p>
 
               <ol>
@@ -148,7 +148,7 @@ var groveSensor = require('jsupm_grove');
 var OFFSET = 512;
 
 // Instantiate the temperature sensor and LCD actuator
-var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
 
 // monitor: creates an anonymous function that runs once per second
 // The function will get the temperature and display it on the LCD.
@@ -248,7 +248,7 @@ var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LC
 var OFFSET = 512;
 
 // Instantiate the temperature sensor and LCD actuator
-var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
 var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
 // monitor: creates an anonymous function that runs once per second
 // The function will get the temperature and display it on the LCD.
@@ -275,6 +275,10 @@ function monitor() {
 monitor();</pre></ui-codemirror>
           </div>
 
+              <div content-block name="deploy-application" message="Deploy the application">
+                  <h2 class="labHidden">Deploy the application</h2>
+                  <p>Upload and run your application from Intel&reg; XDK</p>
+              </div>
 
               <div content-block name="repeat-sensor-reading" message="See the Debugging MQTT section in the sidebar under Additional Information">
                   <p>
@@ -288,9 +292,9 @@ monitor();</pre></ui-codemirror>
 
           <div ibox title="Additional Resources">
             <ul>
-              <li><p><a href="http://mqtt.org/">MQTT</a></p></li>
-              <li><p><a href="https://www.npmjs.com/package/express">ExpressJS</a></p></li>
-              <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer">REST</a></p></li>
+              <li><p><a href="http://mqtt.org/" target="_blank">MQTT</a></p></li>
+              <li><p><a href="https://www.npmjs.com/package/express" target="_blank">ExpressJS</a></p></li>
+              <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a></p></li>
             </ul>
           </div>
         </div>

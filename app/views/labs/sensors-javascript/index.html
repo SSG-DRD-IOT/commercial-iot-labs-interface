@@ -93,7 +93,7 @@
 
                 <div content-block name="download-xdk-intro" message="Download the Intel&reg; XDK Introduction">
                     <h2 class="labHidden">Download the Intel&reg; XDK Introduction</h2>
-                    <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide" target="_blank">Intel&reg; IoT Developer Kit Integrated Development Environments Download Page</a> and get download a copy of the Intel&reg; XDK IoT Edition.</p>
+                    <p>Go to the <a href="https://software.intel.com/en-us/iot/software/ide" target="_blank">Intel&reg; IoT Developer Kit Integrated Development Environments Download Page</a> and download a copy of the Intel&reg; XDK IoT Edition.</p>
                 </div>
 
                 <div content-block name="read-xdk-intro" message="Read the Intel&reg; XDK Introduction" image-link="./views/labs/sensors-javascript/images/xdk-splash.png">
@@ -107,7 +107,7 @@
                         Create and run a Hello Word project (blinking the onboard LED) on your Intel&reg; IoT board based on the "Onboard LED Blink" starter template.
                     </p>
 
-                    <p>The <a href="https://software.intel.com/en-us/iot/downloads#ide" target="_blank">Intel&reg; XDK IoT Edition</a> lets you create and test applications on Intel&reg; IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The
+                    <p>The <a href="https://software.intel.com/en-us/intel-xdk" target="_blank">Intel&reg; XDK IoT Edition</a> lets you create and test applications on Intel&reg; IoT platforms. It uses NodeJS to communicate with all the GPIOs, libraries, and packages. The
                         IoT edition also provides NodeJS templates for creating new applications that interact with sensors and actuators, enabling you to get a quick start on developing for the Internet of Things.</p>
                 </div>
 
@@ -379,7 +379,7 @@ monitor();</li>
                         </li>
                     </ol>
                     <div class="alert alert-warning">
-                      <p>Sometimes a single reading from the temperature sensor might be garbled, ignore this. Once we write a loop to read data continuously from sensor we should not get this garbled value</p>
+                      <p>Sometimes a single reading from the temperature sensor might be incorrect or garbled, ignore this. Once we write a loop to read data continuously from sensor we should not get this garbled value</p>
                     </div>
                 </div>
 
@@ -400,7 +400,7 @@ monitor();</li>
                             <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
                             <dl>
                                 <dt>I2C bus (Number)</dt>
-                                <dd>For the Intel Edison, <strong>use <code>0</code></strong> with an offset of <strong>use <code>512</code></strong>.</dd>
+                                <dd>For Gateway and Arduino101*, <strong>use <code>0</code></strong> with an offset of <strong><code>512</code></strong>.</dd>
 
                                 <dt>lcdAddress (Number)</dt>
                                 <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
@@ -478,7 +478,7 @@ monitor();</pre></ui-codemirror>
                     <p>Build and run your application.</p>
 
                     <div class="alert alert-success">
-                        <p>You should now be seeing the temperature displayed on the LCD.</p>
+                        <p>You should now see the temperature displayed on the LCD.</p>
                     </div>
 
                 </div>
@@ -508,15 +508,6 @@ monitor();</pre></ui-codemirror>
                   <li><a href="https://iotdk.intel.com/docs/master/upm/java/" target="_blank">Java Sensor/Actuator API libmraa (v1.5.1) and UPM (v1.0.2)</a></li>
                   <li><a href="https://iotdk.intel.com/docs/master/upm/python/" target="_blank">Python Sensor/Actuator API libmraa (v1.5.1) and UPM (v1.0.2)</a></li>
                   <li><a href="https://iotdk.intel.com/docs/master/upm/node/" target="_blank">NodeJS Sensor/Actuator API libmraa (v1.5.1) and UPM (v1.0.2)</a></li>
-                </ul>
-
-
-                <h4>Information on Sensors and Actuators</h4>
-                <ul>
-                  <li><a href="http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2" target="_blank">Seeed Studio Wiki: Grove Temperature Sensor</a></li>
-                  <li><a href="http://iotdk.intel.com/docs/master/upm/node/classes/grovetemp.html#methods" target="_blank">UPM API - GroveTemp</a></li>
-                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/c%2B%2B/grovetemp.cxx" target="_blank">UPM C++ example: Grove Temperature Sensor</a></li>
-                  <li><a href="https://github.com/intel-iot-devkit/upm/blob/master/examples/javascript/grovetemp.js" target="_blank">UPM JavaScript example: Grove Temperature Sensor</a></li>
                 </ul>
 
 
