@@ -16,15 +16,22 @@
       <div class="row">
         <div class="col-lg-12">
 
-            <div ibox title="Configure Secure MQTT connection with SSL & TLS">
-              <div content-block message="Objectives" name="configure-secure-mqtt" image-link="./views/labs/security-tls/images/lab6.png">
-                <ul>
-                  <p><li>We will see how to configure  NUC gateway for secure MQTT connection with SSL & TLS</li></p>
-                  <p>TLS (Transport Layer Security) and SSL (Secure Sockets Layer) provide a secure communication channel between a client and server</p>
-                  <p><li>Since we are using SSL encryption we will generate certificates which will be used for authentication. MQTT uses port 8883 for secure connection hence we will make some changes in MQTT broker (mosquitto in our case) configuration file</li></p>
-                  <p><li>To validate the secure connection we will use a virtual-sensor program that will generate random temperature values and publish this data on a secure MQTT port</li></p>
-                  <p><li>Finally we will listen for this data using mosquitto_sub tool</li></p>
-                </ul>
+            <div ibox title="Objectives">
+              <div content-block message="Read the Objectives" name="configure-secure-mqtt" image-link="./views/labs/security-tls/images/lab6.png">
+                <p>
+                  This lab will enable you to configure MQTT-TLS and modify the temperature data to switch from MQTT to MQTT-TLS.
+                </p>
+                <div class="alert alert-info">
+                  <p>
+                    In this lab we will do the following:
+                  </p>
+                  <ul>
+                    <li>Configure Intel IoT Gateway to only accept secure MQTT connection over TLS. The TLS (Transport Layer Security) provides a secure communication channel between a client and server.</li>
+                    <li>Generate certificates that will be used for TLS authentication.</li>
+                    <li>Test the MQTT-TLS configuration by setting up a program, named virtual-sensor, that generates temperature data over MQTT and MQTT-TLS.</li>
+                    <li>Finally we will listen for this data on the MQTT-TLS port using the mosquitto_sub tool</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -34,7 +41,7 @@
 
                 <p>Run these commands on the gateway console.</p>
                 <div class="alert alert-warning">
-                  <p>It is important to note that while generating these, the “Common Name” parameter in step 1 above and step 3 should specify the server address, “localhost”. Otherwise it will not authenticate correctly.</p>
+                  <p><b>It is important to note that while generating these, the <i style="font-size: 1.2em; color: #F00">Common Name</i> parameter in step 1 above and step 3 should specify the server address, <i style="font-size: 1.2em; color: #F00">localhost</i>. Otherwise it will not authenticate correctly.</b></p>
                 </div>
                 <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
 openssl genrsa -out server.key 2048
@@ -47,12 +54,14 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out s
                 <div class="alert alert-warning">
                   <p>Note: If the directories <b>ca_certificates</b> and <b>certs</b> are not there manually create them</p>
                 </div>
-                <pre><code>mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
+                <pre><code>mkdir -p /etc/mosquitto/ca_certificates
+mkdir -p /etc/mosquitto/certs
+mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
 mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
               </div>
             </div>
 
-            <div ibox title="Configure Mosquitto to use MQTT over TLS">
+            <div ibox title="Configure the MQTT Broker, Mosquitto, to use MQTT over TLS">
               <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
                 <p>Be sure that your Mosquitto configuration file has all of these options set, particularly the <b>port number 8883, the cafile, and certfile and the keyfile.</b></p>
                 <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
@@ -66,7 +75,17 @@ certfile /etc/mosquitto/certs/server.crt
 keyfile /etc/mosquitto/certs/server.key
 
 tls_version tlsv1</ui-codemirror>
-              <br></br>
+              <div class="alert alert-info">
+                <p>
+                  To paste text into VIM, you may need to use the paste mode.
+                </p>
+                <p>
+                  :set paste
+                </p>
+                <p>
+                  Then type "i" to enter insert mode and click the middle mouse button (usually) to paste.
+                </p>
+              </div>
                <p>Make sure to stop and start mosquitto service after this change</p>
                 <pre><code>systemctl stop mosquitto</code></pre>
                 <pre><code>systemctl start mosquitto</code></pre>
@@ -75,10 +94,10 @@ tls_version tlsv1</ui-codemirror>
               </div>
             </div>
 
-            <div ibox title="Change all configurations from MQTT to MQTT with TLS/SSL">
-              <div content-block message="Modify JavaScript & Node-Red flows for MQTT-TLS configuration" name="configure-mqtt-tls">
-                <h4>JavaScript configuration change for MQTT with TLS/SSL</h4>
-                <p>If you are using JavaScript code modify the MQTT connect function to include additional parameters for TLS/SSL as shown below:</p>
+            <div ibox title="Modify JavaScript Programs using MQTT to use MQTT-TLS instead">
+              <div content-block message="Modify JavaScript for MQTT-TLS configuration" name="configure-mqtt-tls">
+                <h4 class="labHidden">JavaScript configuration change for MQTT with TLS/SSL</h4>
+                <p>If you are using JavaScript code modify the MQTT connect function to include additional parameters for TLS as shown below:</p>
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
 var fs = require('fs');
@@ -103,8 +122,14 @@ var options = {
   protocolVersion: 3
 };
 var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
-          <br></br>
-          <h4>Node-Red configuration change for MQTT with TLS/SSL</h4>
+        </div>
+      </div>
+
+
+      <div ibox title="Modify Node-Red Flows using MQTT to use MQTT-TLS">
+        <div content-block message="Modify Node-Red Flows using MQTT to use MQTT-TLS" name="configure-mqtt-tls">
+
+          <h4 class="labHidden">Node-Red configuration change for MQTT with TLS/SSL</h4>
           <p>If you are using Node-Red flows, in your flow diagram edit all the MQTT input and output nodes to change port number to <b>8883</b> instead of 1883</p>
           <p>Deploy your Node-Red flow after making these changes</p>
           <div class="alert alert-info">
@@ -113,6 +138,15 @@ var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
           <p>We will see how to verify the secure MQTT published data below but before that we will look at one other option to publish data which is using virtual sensor program</p>
         </div>
       </div>
+
+
+      <div ibox title="Checkout the Debugging Guide for MQTT and MQTT-TLS using the Virtual Sensor">
+        <div content-block message="Checkout the Debugging Guide for MQTT and MQTT-TLS using the Virtual Sensor" name="configure-virtual-sensor">
+          <p><a href="http://localhost:9000/#/labs/additional-info-virtual-sensor">Debugging MQTT and MQTT-TLS</a></p>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </div>
