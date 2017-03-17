@@ -41,20 +41,20 @@
                     <li><a ui-sref="labs.setup-development-environment">Setup Development Environment</a></li>
                     <li><a ui-sref="labs.sensors-javascript">Sensors and Actuators</a></li>
                     <li ng-class="{active: $state.includes('labs')}">
-                        <a href=""><span class="nav-label">Protocols</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
-                          <li ui-sref-active="active"><a ui-sref="labs.protocols-javascript-mqtt">Publishing Sensor data via MQTT</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.protocols-javascript-http">Restful IoT Actuator Control via HTTP</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.protocols-node-red">IoT Devices with Node-Red</a></li>
-                        </ul>
+                      <a href=""><span class="nav-label">Protocols</span> <span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                        <li ui-sref-active="active"><a ui-sref="labs.protocols-javascript-mqtt">Publishing Sensor data via MQTT</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.protocols-javascript-http">Restful IoT Actuator Control via HTTP</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.protocols-node-red">IoT Devices with Node-Red</a></li>
+                      </ul>
                     </li>
                     <li ng-class="{active: $state.includes('labs')}">
-                        <a href=""> <span class="nav-label">Security</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
-                            <li ui-sref-active="active"><a ui-sref="labs.security-tls">Setup TLS</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.security-mcafee">McAfee&reg; Embedded Control Orientation</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.security-systemd">Systemd</a></li>
-                        </ul>
+                      <a href=""> <span class="nav-label">Security</span> <span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                        <li ui-sref-active="active"><a ui-sref="labs.security-tls">Setup TLS</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.security-mcafee">McAfee&reg; Embedded Control</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.security-systemd">Systemd</a></li>
+                      </ul>
                     </li>
                     <li ui-sref-active="active"><a ui-sref="labs.databases">Databases at the Edge</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.admin-interface">Custom Administrative Interfaces</a></li>
@@ -62,15 +62,15 @@
                     <li ui-sref-active="active"><a ui-sref="labs.hdc">The Helix Device Cloud</a></li>
                     <li ui-sref-active="active"><a ui-sref="labs.cloud">Data Analytics</a></li>
                     <li ng-class="{active: $state.includes('labs')}">
-                        <a href=""> <span class="nav-label">Additional Information</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mqtt">Debugging MQTT</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-xdk">Debugging Intel&reg; XDK</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb">Using MongoDB</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb-schemas">Mongoose Schemas</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-virtual-sensor">Virtual Sensor</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-hdc">Helix Device Cloud (HDC)</a></li>
-                        </ul>
+                      <a href=""><span class="nav-label">Additional Information</span> <span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                        <li ui-sref-active="active"><a ui-sref="labs.additional-info-mqtt">Debugging MQTT</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.additional-info-xdk">Debugging Intel&reg; XDK</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb">Using MongoDB</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb-schemas">Mongoose Schemas</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.additional-info-virtual-sensor">Virtual Sensor</a></li>
+                        <li ui-sref-active="active"><a ui-sref="labs.additional-info-hdc">Helix Device Cloud (HDC)</a></li>
+                      </ul>
                     </li>
                 </ul>
             </li>
