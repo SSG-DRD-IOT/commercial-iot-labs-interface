@@ -23,6 +23,77 @@
     <div class="col-lg-12">
       <div ibox title="Download & Configure virtual sensor">
         <div content-block message="Download & Configure virtual sensor" name="configure-virtual-sensor">
+          <p>
+            Get it at <a href="https://github.com/SSG-DRD-IOT/virtual-sensor">https://github.com/SSG-DRD-IOT/virtual-sensor</a>
+          </p>
+
+          <div id="readme" class="readme boxed-group clearfix announce instapaper_body md">
+    <h3>
+      <svg aria-hidden="true" class="octicon octicon-book" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M3 5h4v1H3V5zm0 3h4V7H3v1zm0 2h4V9H3v1zm11-5h-4v1h4V5zm0 2h-4v1h4V7zm0 2h-4v1h4V9zm2-6v9c0 .55-.45 1-1 1H9.5l-1 1-1-1H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h5.5l1 1 1-1H15c.55 0 1 .45 1 1zm-8 .5L7.5 3H2v9h6V3.5zm7-.5H9.5l-.5.5V12h6V3z"></path></svg>
+      README.md
+    </h3>
+
+      <article class="markdown-body entry-content" itemprop="text"><h1><a id="user-content-a-virtual-sensor-application" class="anchor" href="#a-virtual-sensor-application" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A Virtual Sensor Application</h1>
+<p>Generates sensor data traffic over MQTT and MQTT-TLS.</p>
+<p>Data is always sent to a topic like <em>sensors/<strong>name of sensor</strong>/data</em> where the name is set by the <strong>-n</strong> option.</p>
+<pre><code> Main options
+
+   -h, --help           Display this usage guide.
+   -s, --silent         Supress extra information
+   -d, --debug          Display debugging information
+   -l, --delay number   the delay between sensor readings in milliseconds. Default is 1000ms
+   -t, --timeout ms     Stop emitting sensors readings after timeout number of milliseconds
+
+Connection options
+
+  -i, --hostname string   the hostname or IP address of the MQTT broker
+  -p, --port number       the port number to connect of the MQTT broker
+
+Encryption options
+
+  --tls           Use MQTT-TLS. MQTT encryption over TLS.
+  --key string    the client key file
+  --cert string   the client certificate file
+  --ca string     the client ca file
+
+Sensor Options
+
+  -n, --name string   the id of the sensor
+  --digital           Specifies that the sensor will be digital
+  --analog            Specifies that the sensor will be analog
+
+Analog Sensor Options
+
+  --min number   the minimum value emitted
+  --max number   the maximun value emitted
+</code></pre>
+<h2><a id="user-content-examples" class="anchor" href="#examples" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h2>
+<h3><a id="user-content-default-parameters" class="anchor" href="#default-parameters" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Default parameters</h3>
+<p>If you don't specify any parameters an analog sensor named <em>"temperature"</em> will a minimum of 17 and maximum value of 30 will be created. The MQTT traffic will be sent to a MQTT broker on the <em>sensors/temperature/data</em> topic on the localhost machine and data will be echoed to the console every 2 seconds.</p>
+<div class="highlight highlight-source-shell"><pre>$ node virtual-sensor.js
+Connected to MQTT server at mqtt://localhost:1883/
+Publishing sensors data on sensors/temperature/data
+{<span class="pl-s"><span class="pl-pds">"</span>sensor_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>temperature<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>:18,<span class="pl-s"><span class="pl-pds">"</span>timestamp<span class="pl-pds">"</span></span>:1489862667655}
+{<span class="pl-s"><span class="pl-pds">"</span>sensor_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>temperature<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>:23,<span class="pl-s"><span class="pl-pds">"</span>timestamp<span class="pl-pds">"</span></span>:1489862668658}
+{<span class="pl-s"><span class="pl-pds">"</span>sensor_id<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>temperature<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>value<span class="pl-pds">"</span></span>:26,<span class="pl-s"><span class="pl-pds">"</span>timestamp<span class="pl-pds">"</span></span>:1489862669660}</pre></div>
+<h3><a id="user-content-analog-and-digital-data-sources" class="anchor" href="#analog-and-digital-data-sources" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Analog and Digital Data Sources</h3>
+<p>Create a Analog data source named "light-sensor" with a minimum output value of 300 and a maximum of 500</p>
+<div class="highlight highlight-source-shell"><pre>node virtual-sensor.js --name <span class="pl-s"><span class="pl-pds">"</span>light-sensor<span class="pl-pds">"</span></span> --min=300 --max=500</pre></div>
+<p>Create a digital GPIO data source named "relay"</p>
+<div class="highlight highlight-source-shell"><pre>node virtual-sensor.js --name <span class="pl-s"><span class="pl-pds">"</span>relay<span class="pl-pds">"</span></span> --digital</pre></div>
+<h3><a id="user-content-hostname-and-port-options" class="anchor" href="#hostname-and-port-options" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Hostname and Port Options</h3>
+<p>Create a digital GPIO data source named "relay"</p>
+<div class="highlight highlight-source-shell"><pre>node virtual-sensor.js --name <span class="pl-s"><span class="pl-pds">"</span>relay<span class="pl-pds">"</span></span> --digital</pre></div>
+<h3><a id="user-content-encryption-options" class="anchor" href="#encryption-options" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Encryption Options</h3>
+<p>Enable MQTT-TLS. This changes the port to 8883 and assumes the certificates and key files to be stored in the /etc/mosquitto directory.</p>
+<div class="highlight highlight-source-shell"><pre>node virtual-sensor.js --tls</pre></div>
+<h3><a id="user-content-delay-and-timeout-options" class="anchor" href="#delay-and-timeout-options" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Delay and Timeout options</h3>
+<p>Put a 5 second delay between sensor readings.</p>
+<div class="highlight highlight-source-shell"><pre>node virtual-sensor.js --delay 5000</pre></div>
+<p>Stop virtual sensor after 10 seconds.</p>
+<div class="highlight highlight-source-shell"><pre>node virtual-sensor.js --timeout 10000</pre></div>
+</article>
+  </div>
           <p>Virtual sensor program is designed to simulate publishing of continuous random temperature sensor data over the topic <b>sensors/temperature/data</b>. This can be useful in scenarios where it is required to test/debug some infrastructure/connections/code without use of actual sensors.</p>
           <p>The virtual sensor program has two versions, one is the <b>virtual-sensor.js</b> and another is <b>virtual-sensor-secure.js</b>. The secure version uses MQTT connection with TLS & SSL components. You can use secure version if you are using MQTT with TLS/SSL in your project.</p>
           <p>Follow the below steps to download and run virtual sensors</p>
