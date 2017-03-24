@@ -534,7 +534,7 @@ var processSensorData = function(json) {
           <div ibox title="Run the Automation Server">
             <div content-block message="Run the automation server and verify the Triggers" image-link="./views/labs/automation/images/automation_triggers.png">
               <div class="alert alert-warning">
-                <p>Before we run the automation server make sure that sensors are publishing the topic <b>sensors/temperature/data</b>. As described in earlier labs one way is to run the virtual-sensor-secure.js in another SSH terminal of Gateway</p>
+                <p>Before we run the automation server make sure that sensors are publishing the topic <b>sensors/temperature/data</b> using secure MQTT-TLS configuration. As described in earlier labs one way is to run virtual-sensor.js in another SSH terminal of Gateway</p>
               </div>
               <p>Execute the automation <span class="icon file">server.js</span> that we created</p>
               <pre><code>$ node server.js</code></pre>
@@ -653,7 +653,7 @@ var processSensorData = function(json) {
     <!-- TODO: Write a better practice triggers section.  too_hot_condition  too_cold_condition -->
     <!--             Spend some time and Creating Your Own Triggers -->
     <div content-block message="Spend some time and Creating Your Own Triggers">
-      <p>Remember that triggers can contain computationally expensive operations.  For example, you can complex calculations and operations and accessing of externals network services.</p>
+      <p>Remember that triggers can contain computationally expensive operations.  For example, you can do complex calculations and operations and accessing of externals network services.</p>
     </div>
   </div>
 
