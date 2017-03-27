@@ -1,8 +1,8 @@
 {
-  "name": "LABS",
+  "name": "Commercial-IoT-Labs",
   "version": "2.4",
   "authors": [
-    "Damian Dudziak - WebAppLayers"
+    "Daniel Holmlund"
   ],
   "description": "LABS - Responsive Admin Theme",
   "main": "app/index.html",
