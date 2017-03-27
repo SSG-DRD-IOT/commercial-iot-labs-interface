@@ -76,13 +76,12 @@ ls</code></pre>
           <li>Click on the Device ID to get more details on the device properties like the Firmware version, OS version, the telemetry metrics it supports etc. This can be useful during debugging.</li>
         </ul>
       </div>
-    </div>
 
 
-    <div ibox title="Monitor Device Status">
+    <div ibox title="Monitor">
       <div content-block name="" message="Objectives" image-link="./views/labs/hdc/images/5.png">
         <h2 class="labHidden">Monitor Device Status</h2>
-        <li>In this section, we will learn how to monitor the status of the device from HDC</li>
+        <li>Monitor the status of the device from HDC</li>
         <li>Perform any diagnostic actions if required to ensure device connectivity to the cloud</li>
       </div>
 
@@ -126,11 +125,9 @@ ls</code></pre>
     <div ibox title="Telemetry Data and Actions">
       <div content-block name="" message="Understand about Telemtry Data and Actions">
         <h2 class="labHidden">Monitor Device Status</h2>
-        <ul>
-          <li><p>This session explains how to send Telemetry and expose device actions on the cloud.</p></li>
-          <li><p>We will run one of the sample apps "iot-app-simple-telemetry" which is included as one of the sample HDC apps in /usr/bin. This app registers 13 telemetry metrics and an action to start and stop transmitting telemetry data to the cloud.</p></li>
-          <li><p>Later we will use one of the telemetry data (temp) to set up alert rules</p></li>
-        </ul>
+        <li><p>This session explains how to send Telemetry and expose device actions on the cloud.</p></li>
+        <li><p>We will run one of the sample apps "iot-app-simple-telemetry" which is included as one of the sample HDC apps in /usr/bin. This app registers 13 telemetry metrics and an action to start and stop transmitting telemetry data to the cloud.</p></li>
+        <li><p>Later we will use one of the telemetry data (temp) to set up alert rules</p></li>
       </div>
 
       <div content-block name="" message="Run the sample telemetry application to begin generating data" image-link="./views/labs/hdc/images/hdc_app.png">
@@ -139,13 +136,11 @@ ls</code></pre>
         <pre><code>/usr/bin/iot-app-simple-telemetry</code></pre>
       </div>
 
-      <div content-block name="" message="Turn ON telemetry data from HDC" image-link="./views/labs/hdc/images/hdc_tel.png">
+      <div content-block name="" message="turn ON telemetry data from HDC" image-link="./views/labs/hdc/images/hdc_tel.png">
         <h2 class="labHidden">turn ON telemetry data from HDC</h2>
-        <ul>
-          <li><p>To start seeing the telemetry data on HDC, go to your NUC device page and in "CUSTOM ACTIONS" tab select "telemetry_ON_OFF" as highlighted in figure</p></li>
-          <li><p>This will allow HDC to start receiving telemetry data. The highlighted part in Device Details will show this in "Available actions" and "Available Telemetry Metrics"</p></li>
-          <li><p>This may take a little while to reflect, to refresh the device data click the icon on left side as shown in figure</p></li>
-        </ul>
+        <li><p>To start seeing the telemetry data on HDC, go to your NUC device page and in "CUSTOM ACTIONS" tab select "telemetry_ON_OFF" as highlighted in figure</p></li>
+        <li><p>This will allow HDC to start receiving telemetry data. The highlighted part in Device Details will show this in "Available actions" and "Available Telemetry Metrics"</p></li>
+        <li><p>This may take a little while to reflect, to refresh the device data click the icon on left side as shown in figure</p></li>
       </div>
 
       <div content-block name="" message="Observe the telemetry data from HDC" image-link="./views/labs/hdc/images/hdc_tel_data.png">
