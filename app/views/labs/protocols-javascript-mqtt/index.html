@@ -213,7 +213,7 @@ var mqttClient = mqtt.connect("mqtt://localhost/");</pre></ui-codemirror>
                             Next we will add the code to publish the sensor data over MQTT at the end of the anonymous function.
                           </p>
                           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Get the current time
-var current_time = (new Date).getTime();
+var current_time = (new Date()).getTime();
 
 /*
   This JSON structure is extremely important
@@ -269,7 +269,7 @@ function monitor() {
       console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
 
         // Get the current time
-        var current_time = (new Date).getTime();
+        var current_time = (new Date()).getTime();
 
         /*
           This JSON structure is extremely important
