@@ -124,7 +124,7 @@
 
           <p>MongooseJS is an Object Data Manager that let’s you build JavaScript objects that can create, read, validate, update and remove entries from a MongoDB.</p>
 
-          <p>Read through the documentation on building Mongoose Schemas and Models at <a href="http://mongoosejs.com/docs/guide.html" target="_blank">http://mongoosejs.com/docs/guide.html</a> then start the exercise.</p>
+          <p>Read through the documentation on building Mongoose Schemas and Models at <a href="http://mongoosejs.com/docs/guide.html">http://mongoosejs.com/docs/guide.html</a> then start the exercise.</p>
 
         </div>
       </div>
@@ -134,12 +134,11 @@
           <h2 class="labHidden">Read the Introduction to the NodeJS Server Monitoring with MQTT </h2>
           <p>Before we start monitoring sensor data, let's make sure the sensors are publishing the data. We saw two ways to do this:</p>
           <ul>
-            <li><p>Using the javascript code in "Publishing Sensor data via MQTT" or node-red flow for temperature sensor that we did in "IoT devices with Node-Red".</p></li>
-            <li><p>Second is by running the virtual-sensor.js program. More details on this can be found in "Virtual Sensor" section in Additional Information</li></p>
-            <p>Make sure that the data published is using secure MQTT-TLS configuration</p>
+            <li><p>Using the node-red flow for temperature sensor that we did in "Application Protocols: MQTT and HTTP". However this needs a small change where we have to change the mqtt output and input nodes to use port <b>8883</b> instead of 1883 and re-deploy</p></li>
+            <li><p>Second is by running the virtual-sensor-secure.js program in "virtual-sensor" folder we downloaded in "Security and the Internet of Things" lab with command "node virtual-sensor-secure.js" which publishes random temperature data on port <b>8883</b></li></p>
           </ul>
           <div class="alert alert-info">
-            <p>Ensure that sensor data is published using any one of the above methods with MQTT-TLS configuration.</p>
+            <p>Ensure that sensor data is published using any one of the above two methods.</p>
           </div>
           <p>Now that the database schemas are defined and the sensors are publishing data on the edge network, we can listen to the data and begin to use it to trigger actions or perform edge analytics.</p>
           <p>The purpose of this project is to track new sensors on the edge network and to record their data into the MongoDB database.</p>
@@ -222,7 +221,7 @@
       <p>Create a file called <code>server.js</code> in your monitord folder. This will be the main entry point into your monitord.</p>
 
       <p>After importing the MQTT module, setup a connection to the MQTT broker with changes as below</p>
-      <p>The "options" variable is to set up a secure connection using TLS properties as described in "Security->Setup TLS" lab</p>
+      <p>The "options" variable is to set up a secure connection using SSL and TLS properties as described earlier in "Security and the Internet of Things" lab</p>
       <p class="label">./server.js</p>
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');

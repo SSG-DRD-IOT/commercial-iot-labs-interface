@@ -196,23 +196,26 @@
                     <img alt=""  src="./views/labs/security-mcafee/images/solidcore-index.png">
                   </div>
 
-                  <div content-block name="security-test-restart" message="Enable MEC">
-                    <p>Now enable MEC with below command</p>
-                    <pre><code>sadmin enable</code></pre>
-                    <img alt=""  src="./views/labs/security-mcafee/images/sadmin-enable2.png"/>
-                  </div>
-
-                  <div content-block name="security-test-restart" message="Restart the McAfee&reg; Embedded Control service to enable MEC">
-                    <p>As the MEC admin, execute this command to restart the McAfee service</p>
-                    <pre><code>systemctl restart scsrvc</code></pre>
-                    <img alt=""  src="./views/labs/security-mcafee/images/systemctl-status.png"/>
-                  </div>
-
                   <div content-block name="security-test-restart" message="Run 'sadmin status' and observe the results.">
                     <p>Execute the following command to check the status of McAfee&reg; Embedded Control.</p>
                     <pre><code>sadmin status</code></pre>
                     <img alt=""  src="./views/labs/security-mcafee/images/sadmin-status-solidify-enabled.png"/>
                     <p>Observe that the status of the ext4 drive has changed to Solidified.</p>
+                  </div>
+
+                  <div content-block name="security-test-restart" message="Restart the McAfee&reg; Embedded Control service to enable MEC">
+                    <p>As the MEC administrator, execute the following command to enable MEC.</p>
+                    <pre><code>sadmin enable</code></pre>
+                    <p>McAfee Solidifier will be enabled on service restart.</p>
+                    <p>As the MEC admin, execute this command to restart the McAfee service</p>
+                    <pre><code>systemctl restart scsrvc</code></pre>
+                    <img alt=""  src="./views/labs/security-mcafee/images/systemctl-status.png"/>
+                  </div>
+
+                  <div content-block name="security-test-restart" message="Enable MEC">
+                    <p>Now enable MEC with below command</p>
+                    <pre><code>sadmin enable</code></pre>
+                    <img alt=""  src="./views/labs/security-mcafee/images/sadmin-enable2.png"/>
                   </div>
                 </div>
 
