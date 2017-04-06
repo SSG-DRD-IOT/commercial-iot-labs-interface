@@ -157,7 +157,8 @@
                 <ul>
                   <li>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="" title="mqtt edit" typeof="foaf:Image"></p>
-                  <li>Enter the ip address of the gateway and port number as 1883. Here 1883 is the port number if you are using MQTT. If you are using MQTT-TLS then the port number should be 8883.</li>
+                  <li>Enter the ip address of the gateway and port number as <strong>8883</strong>. Since we are using MQTT-TLS configuration 8883 is the port number,  if you are using MQTT without TLS specify 1883 as the port.</li>
+                  <li>Click on the <strong>Security</strong> tab and enable the check box <strong>Enable secure (SSL/TLS) configuration</strong></li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="" title="mqtt edit" typeof="foaf:Image"></p>
                 </ul>
               </ol>
@@ -245,16 +246,14 @@ return msg;</pre></ui-codemirror>
               </ul>
             </div>
 
-
             <div content-block name="protocol-monitor-mqtt " message="Publish data to the temperature topic ">
               <h2 class="labHidden ">Publish data to the temperature topic</h2>
               <h5>Monitor MQTT Topic on Gateway</h5>
               <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
               <p>In the SSH terminal to the Gateway type:</p>
-              <pre><code>mosquitto_sub -t sensors/temperature/data</pre></code>
+              <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</pre></code>
               <p>You will start to see the data being published to the "temperature" topic.  This is a great way to help you debug a program that uses MQTT</p>
             </div>
-
 
             <div content-block name="node-red-flow2-solution" message="Check out the solution to this exercise">
                 <h2 class="labHidden">Check out the solution to this exercise</h2>

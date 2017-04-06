@@ -28,6 +28,7 @@
               <h2 class="labHidden">Read the Objectives</h2>
               <labels arduino windows apple linux/>
               <p>Now that you've created a sensor and actuator device using a temperature sensor and LCD and the Intel IoT Gateway, this lab will lead you through the process of networking them. By the end of the lab instead of having a single process controlling both the temperature sensor and the LCD, you will decouple them. The temperature sensor will send data to the Intel IoT Gateway over MQTT, and you will write a Restful HTTP server to control the LCD.</p>
+              <p>We will use TLS (certificates that we configured in "Setup TLS" lab) to secure both MQTT and HTTP data</p>
 
               <p>
                 This allows the Intel IoT Gateway to be the centralized point of management, which makes administering the IoT network much more manageable. By networking the sensors and actuators, you can deploy dozens or even hundreds of sensors and actuators all controlled by a single gateway. The decisions and coordiation of IoT devices is handled by the gateway on the edge network.  The sensors simply report their data over MQTT and the actuators wait for commands via HTTP.
@@ -198,14 +199,38 @@ monitor();</pre></ui-codemirror>
 
                       <div content-block name="read-xdk-intro" message="Add the MQTT connect code">
                         <p>
-                          The preferred method of connecting to the MQTT broker is over MQTT-TLS. However to start with we will use only MQTT without TLS/SSL configuration. Later in Security lab we will learn how to configure MQTT with TLS/SSL.
+                          The preferred method of connecting to the MQTT broker is over MQTT-TLS. Since we have now setup the SSL certificates we will use TLS configuration in the code.
                         </p>
+                        <div class="alert alert-warning">
+                            <p>Make sure SSL certificates are installed as per instructions in <strong>Setup TLS</strong> lab</p>
+                        </div>
                         <p>
-                          Add following one line of code for an uncrypted MQTT connection just below the line that creates the temp sensor.
+                          Add following lines of code for an encrypted MQTT connection just below the line that creates the temp sensor.
                         </p>
                         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
-var mqttClient = mqtt.connect("mqtt://localhost/");</pre></ui-codemirror>
+var fs = require('fs');
+var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+
+var PORT = 8883;
+var HOST = 'localhost';
+
+var options = {
+  port: PORT,
+  host: HOST,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
+};
+var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
                       </div>
 
                       <div content-block name="repeat-sensor-reading" message="Add the MQTT code to publish the sensor data">
@@ -253,7 +278,6 @@ var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
 // monitor: creates an anonymous function that runs once per second
 // The function will get the temperature and display it on the LCD.
 function monitor() {
-<<<<<<< HEAD
   setInterval(
     function() {
       // Read the temperature sensor
@@ -278,23 +302,14 @@ function monitor() {
           value : celsius,
           timestamp : current_time
         };
-=======
-    setInterval(
-      function() {
-        // Read the temperature sensor
-        var celsius = temp.value();
->>>>>>> origin/master
+        // Convert the JSON object to a string
+        var str = JSON.stringify(json);
 
-        // Convert it to fahrenheit
-        var fahrenheit = Math.round(celsius * 9.0 / 5.0 + 32.0);
+        // Log the string to the console
+        console.log(str);
 
-        // Log it to the console window
-        console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");
-
-        // Update the LCD screen
-        screen.setCursor(0, 0);
-        screen.setColor(255, 255, 255);
-        screen.write("Temp: " + celsius + "C or " + fahrenheit + "F");
+        // Publish the temperature reading string on the MQTT topic
+        mqttClient.publish("sensors/temperature/data", str);
     }, 1000);
 }
 
