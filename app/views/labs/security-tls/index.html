@@ -33,6 +33,7 @@
                 <p>Run these commands on the gateway console.</p>
                 <div class="alert alert-warning">
                   <p>It is important to note that while generating these, the <strong>“Common Name”</strong> parameter in step 1 above and step 3 should specify the server address, <strong>“localhost”</strong>. Otherwise it will not authenticate correctly.</p>
+                  <p>Also make sure to use the same passphrase between the first step and the last step of generating server key</p>
                 </div>
                 <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
 openssl genrsa -out server.key 2048
@@ -54,11 +55,9 @@ mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
 
             <div ibox title="Configure Mosquitto to use MQTT over TLS">
               <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
-                <p>Add the below changes to the <strong>end of the mosquitto.conf file</strong></p>
-                <pre><code>vim /etc/mosquitto/mosquitto.conf</code></pre>
-            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># Place your local configuration in /etc/mosquitto/conf.d/
-
-bind_address 127.0.0.1
+                <p>Create a custom configuration file <strong>mosquitto_tls.conf</strong> in conf.d folder of mosquitto as shown below</p>
+                <pre><code>vim /etc/mosquitto/conf.d/mosquitto_tls.conf</code></pre>
+            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">bind_address 127.0.0.1
 port 8883
 
 cafile /etc/mosquitto/ca_certificates/ca.crt
@@ -67,12 +66,6 @@ keyfile /etc/mosquitto/certs/server.key
 
 tls_version tlsv1</ui-codemirror>
               <br></br>
-              <div class="alert alert-info">
-                <p>To paste text into VIM using your mouse, you may need to use the paste mode.</p>
-                <p>:set mouse=v</p>
-                <p>:set paste</p>
-                <p>Then type "i" to enter insert mode and click the middle mouse button (usually) to paste</p>
-              </div>
               <p>Make sure to stop and start mosquitto service after this change</p>
                 <pre><code>systemctl stop mosquitto</code></pre>
                 <pre><code>systemctl start mosquitto</code></pre>

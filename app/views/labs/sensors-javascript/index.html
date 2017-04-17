@@ -125,17 +125,6 @@
                         If you clicked the <b>later</b> on the sign in page then you will not see this step.</div>
                 </div>
 
-                <div content-block name="disable-node-red" message="Disable Node-Red service">
-                  <p><b>  Disable Node-Red service running on your Gateway</b></p>
-                  <ul>
-                    <li><p>In previous lab we were executing few Node-Red flows which made use of system resources like (sensors, GPIOs, I2C etc.). Since in this lab we will be using the same resources to avoid any contention we will disable the node-red service during this exercise</li></p>
-                    <li><p>Open a terminal to your Gateway and give following command:</li></p>
-                    <pre><code>systemctl stop node-red-experience</pre></code>
-                    <li><p>Check that service has stopped</li></p>
-                    <pre><code>systemctl status node-red-experience</pre></code>
-                  </ul>
-                </div>
-
                 <div content-block name="click-on-templates" message="Click on Templates" image-link="./views/labs/sensors-javascript/images/image_2.png">
                     <h2 class="labHidden">Click on Templates</h2>
                     <p><img class="labHidden" alt="" data-fid="503894" src="https://software.intel.com/sites/default/files/managed/9b/da/image_2.png" typeof="foaf:Image"></p>
@@ -287,7 +276,7 @@
                             <p>Install the Grove Base Shield onto the Arduino* 101 Arduino expansion board.</p>
                         </li>
                         <li>
-                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
+                            <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
@@ -331,7 +320,11 @@
                     <p>Update <span class="icon file">main.js</span> to read the temperature sensor on program start up and log it to the console.</p>
 
                     <ol>
-
+                        <li>
+                            <p>Add below lines to include the FIRMATA subplatform for MRAA. The Arduino 101* is accessed via ttyACM0 port</p>
+                            <p><code>var mraa = require("mraa");</code></p>
+                            <p><code>mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");</code></p>
+                        </li>
                         <li>
                             <p>Create an offset var of 512. This offset is required since we use Firmata to connect Arduino* 101 with NUC gateway which needs this conversion for all the I/O pins</p>
                             <p><code>var OFFSET = 512;</code></p>
@@ -355,7 +348,10 @@
                         <li>
                             <p>The final code should look like this:</p>
 
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var OFFSET = 512;
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa") ;
+mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
+
+var OFFSET = 512;
 var groveSensor = require('jsupm_grove');
 var temp = new groveSensor.GroveTemp(1+OFFSET, 0.66);
 
@@ -393,7 +389,7 @@ monitor();</li>
 
                         <li>
                             <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
-                            <p><code>var LCD = require('jsupm_jhd1313m1');</code></p>
+                            <p><code>var LCD = require('jsupm_i2clcd');</code></p>
                         </li>
 
                         <li>
@@ -433,9 +429,12 @@ monitor();</li>
 
                         <li>
                             <p>Below is an example of the final solution.</p>
-                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
+                            <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa");
+mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
+
+// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
-var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
+var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove RGB LCD screen
 
 // The Offset is necessary for Firmata
 var OFFSET = 512;
