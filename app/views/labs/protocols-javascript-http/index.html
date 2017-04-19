@@ -120,7 +120,10 @@
               <p class="label">
                 server.js
               </p>
-              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTPS server
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa");
+mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
+
+// The express library provides a quick and easy way to create on HTTPS server
 var express = require('express');
 var fs = require('fs');
 var http = require('http');
@@ -147,7 +150,7 @@ var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
 // Declare the LCD variable
-var LCD = require("jsupm_jhd1313m1");
+var LCD = require("jsupm_i2clcd");
 var OFFSET = 512;
 var mylcd = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
 </pre></ui-codemirror>
@@ -267,7 +270,10 @@ console.log('Example app listening at http://%s:%s', host, port);
                       Here is the code to the complete the lab.
                     </p>
 
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTP server
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa");
+mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
+
+// The express library provides a quick and easy way to create on HTTP server
 var express = require('express');
 var fs = require('fs');
 var http = require('http');
@@ -287,7 +293,7 @@ var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
 // Declare the LCD variable
-var LCD = require("jsupm_jhd1313m1");
+var LCD = require("jsupm_i2clcd");
 var OFFSET = 512;
 var mylcd = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
 

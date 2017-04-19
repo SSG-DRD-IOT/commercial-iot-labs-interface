@@ -43,11 +43,9 @@
             <li><p>First check what is the error message from mosquitto with following command:</p></li>
             <pre><code>systemctl status mosquitto</pre></code>
             <p>This should give a dump of messages which should give an indication of failure</p>
-            <li><p>Make sure your SSL certificates are generated correctly and copied to directories <b>/etc/mosquitto/ca_certificates</b> and <b>/etc/mosquitto/certs</b> folders. If required re-generate the certificates by following the steps mentioned in section "Generate Server Certificate Authority, Certificate and Key" of lab "Security and Internet of Things"</p></li>
-            <li><p>Next check your mosquitto configuration file <b>/etc/mosquitto/mosquitto.conf</b> is correctly configured for port 8883, paths to SSL certificates and TLS version as shown below</p></li>
+            <li><p>Make sure your SSL certificates are generated correctly and copied to directories <b>/etc/mosquitto/ca_certificates</b> and <b>/etc/mosquitto/certs</b> folders. If required re-generate the certificates by following the steps mentioned in section "Generate Server Certificate Authority, Certificate and Key" of lab "Setup TLS"</p></li>
+            <li><p>Next check your custom mosquitto configuration file <b>/etc/mosquitto/conf.d/mosquitto_tls.conf</b> is correctly configured for port 8883, paths to SSL certificates and TLS version as shown below</p></li>
             <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># TLS and SSL configuration
-
-bind_address 127.0.0.1
 port 8883
 
 cafile /etc/mosquitto/ca_certificates/ca.crt
