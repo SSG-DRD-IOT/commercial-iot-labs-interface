@@ -54,36 +54,13 @@
           <p>Now you are ready to download and install MongoDB.</p>
         </div>
 -->
-  <div ibox title="Install MongoDB">
-        <div content-block name="" message="Download and Install MongoDB" image-link="./views/labs/databases/images/mongodb.png">
-          <h2 class="labHidden">Download and Install MongoDB</h2>
-          <p>Open a ssh terminal to your gateway and download MongoDB with following command:</p>
-          <pre><code>wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-3.2.9.tgz</code></pre>
-          <p>Unarchive the downloaded file and change directories into the newly created mongodb directory.<p>
-          <pre><code>tar zxvf mongodb-linux-x86_64-3.2.9.tgz&#13;&#10;cd mongodb-linux-x86_64-3.2.9</code></pre>
-
+  <div ibox title="Verify if MongoDB service is running">
+        <div content-block name="" message="Verify if MongoDB serivce is running">
+          <p>The mongod process should already by running on your system, check with below command if it is running properly</p>
+          <pre><code>ps aux | grep mongod</code></pre>
+          <p>This should list the mongodb process, if it does not try and launch it again with below command</p>
+          <pre><code>mongod --dbpath=/data/db</code></pre>
         </div>
-
-
-        <div content-block name="" message="Create a directory to store the MongoDB data files">
-          <p>Create a directory to store the MongoDB data files</p>
-          <pre><code>mkdir -p /data/db</code></pre>
-        </div>
-
-        <div content-block name="" message="Change directories to the mongod binary and run it with a flag to modify the data path">
-          <p>Change directories to the MongoDB server binary.</p>
-          <pre><code>cd ~/mongodb-linux-x86_64-3.2.9/bin</code></pre>
-
-          <p>Run the mongod. The mongod process will continue to run while you are working on the rest of the labs.  You may wish to open a new console and run the mongod process there.</p>
-
-          <pre><code>./mongod --dbpath=/data/db</code></pre>
-          <p>Wait till below message is displayed. </p>
-          <p><code>[initandlisten] waiting for connections on port 27017</code></p>
-            <p>Now Mongodb is executed and display all the messages on that terminal. For next step open new SSH terminal.</p>
-        </div>
-
-
-
       </div>
 
       <!-- Create JavaScript Models to represent the Edge Network -->
