@@ -99,12 +99,9 @@
                   In the Sensors and Actuators lab, we created a program to read the temperature and display is on the LCD screen. It should look something like this.
                 </p>
 
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa") ;
-mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
-
-// Include the JavaScript UPM libraries
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
-var LCD = require("jsupm_12clcd"); // Create a new instance of a Grove RGB LCD screen
+var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
 
 // The Offset is necessary for Firmata
 var OFFSET = 512;
@@ -145,10 +142,7 @@ monitor();</pre></ui-codemirror>
                               Now we will remove the LCD code. This is straight forward. Simply remove any line that has a reference to the screen or LCD variables.
                           </p>
 
-                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa") ;
-mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
-
-// Include the JavaScript UPM libraries
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
 
 // The Offset is necessary for Firmata
@@ -177,11 +171,15 @@ function monitor() {
 monitor();</pre></ui-codemirror>
 
                       </div>
+
+
                         <div content-block name="read-xdk-intro" message="Remove the LCD Code">
                           <h2 class="labHidden">Write the Code to Read the Temperature Sensor.</h2>
+
                           <p>
                              Next add MQTT as a dependency in your package.json.
                           </p>
+
                           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
   "name": "protocol-mqtt",
   "description": "Creates a simple service to publish a temperature sensor's data over MQTT",
@@ -267,37 +265,9 @@ mqttClient.publish("sensors/temperature/data", str);</pre></ui-codemirror>
                           <p>
                             Here is the complete code for this lab.
                           </p>
-                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa") ;
-mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
-
-//Require MQTT and setup the connection to the broker
-var mqtt = require('mqtt');
-var fs = require('fs');
-var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
-
-var PORT = 8883;
-var HOST = 'localhost';
-
-var options = {
-  port: PORT,
-  host: HOST,
-  protocol: 'mqtts',
-  protocolId: 'MQIsdp',
-  keyPath: KEY,
-  certPath: CERT,
-  rejectUnauthorized : false,
-  //The CA list will be used to determine if server is authorized
-  ca: TRUSTED_CA_LIST,
-  secureProtocol: 'TLSv1_method',
-  protocolVersion: 3
-};
-var mqttClient = mqtt.connect(options);
-
-// Include the JavaScript UPM libraries
+                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
-var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove RGB LCD screen
+var LCD = require("jsupm_jhd1313m1"); // Create a new instance of a Grove RGB LCD screen
 
 // The Offset is necessary for Firmata
 var OFFSET = 512;

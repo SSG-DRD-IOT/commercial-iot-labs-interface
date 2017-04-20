@@ -57,7 +57,8 @@ mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
               <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
                 <p>Create a custom configuration file <strong>mosquitto_tls.conf</strong> in conf.d folder of mosquitto as shown below</p>
                 <pre><code>vim /etc/mosquitto/conf.d/mosquitto_tls.conf</code></pre>
-            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">port 8883
+            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">bind_address 127.0.0.1
+port 8883
 
 cafile /etc/mosquitto/ca_certificates/ca.crt
 certfile /etc/mosquitto/certs/server.crt
