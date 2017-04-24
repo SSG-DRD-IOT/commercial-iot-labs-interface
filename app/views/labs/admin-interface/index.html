@@ -54,6 +54,7 @@
           <div ibox title="Populate the Database with initial data for the administrative interface">
             <div content-block message="Obtain the initdb.js script">
               <p>Before we explore more options let's populate this interface with some static data. Populate this sample interface by running initdb.js script from the lab-solution-monitor-daemon repository downloaded in previous "Databases at the Edge" lab. If you have not yet downloaded it, give the following command to download it from a new SSH terminal on your Gateway</p>
+              <pre><code>cd ~</pre></code>
               <pre><code>git clone https://github.com/SSG-DRD-IOT/lab-solution-monitor-daemon.git</code></pre>
               <p>If you already downloaded it, go to the directory directly</p>
               <pre><code>cd ~/lab-solution-monitor-daemon&#13;&#10;cd initialize</pre></code>
@@ -82,11 +83,12 @@
 
           <div ibox message="Open a browser and navigate to the administrative interface">
             <div content-block message="SSH into the Gateway and Unzip the administrative interface">
-              <p>Run <span class="icon file">server.js</span> as a <strong>Node</strong> process.</p>
+              <p>Go back to admin-interface folder and run <span class="icon file">server.js</span> as a <strong>Node</strong> process.</p>
+              <pre><code>cd ~/admin-interface</code></pre>
               <pre><code>node server.js</code></pre>
               <p>This will start a NodeJS HTTP server that will provide the front end user interface.</p>
             </div>
-            <div content-block message="Open a browser and navigate to the administrative interface" image-link="./views/labs/admin-interface/images/dashboard-default.png">
+            <div content-block message="Open a browser and navigate to the administrative interface" image-link="./views/labs/admin-interface/images/dashboard.png">
               <p>Visit "http://{Your Gateway IP address}:3000" in your development computer's web browser.</p>
               <p>It will show you in a browser a simple, sample web based interface that will allow you to create, edit and delete automatic actions (triggers)</p>
               <p>Explore the interface for condition based monitoring triggers, record system errors.</p>
