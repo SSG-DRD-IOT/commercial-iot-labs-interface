@@ -1,0 +1,238 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h4>Data Analytics</h4>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li class="active">
+                <strong>Data Analytics</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- Objectives -->
+            <div ibox title="Objectives">
+                <div content-block name="cloud-objectives" message="Read the Objectives" image-link="./views/labs/cloud/images/dashboard_ex.png">
+                    <h2 class="labHidden">Read the Objectives</h2>
+                    <p>This lab instructs the reader to setup an open source charting and analytics tool named Grafana, an open-source project at <a href="http://grafana.org/">http://grafana.org/</a>. Grafana is a graphical interface with InfluxDB as the data source and Telegraf as the agent that reads data. This is to read the sensor
+                        data from device through gateway and mqtt broker, store it in InfluxDB and display it through the Grafana graphical interface</p>
+                    <p>In this lab, you will do the following:</p>
+                    <ul>
+                        <li>Install a timeseries database named InfluxDB</li>
+                        <li>Configure it to injest the temperature sensor data</li>
+                        <li>Then visualize the data using Grafana, an open source analytics platform.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Install a timeseries database name InfluxDB -->
+            <div ibox title="Download and Install InfluxDB">
+                <div content-block name="influx-db-download" message="Download the pre-compiled 64-bit binary distribution of InfluxDB and unarchive it.">
+                    <h2 class="labHidden">Install a timeseries database name InfluxDB</h2>
+                    <labels gateway window apple linux/>
+
+                    <p>The first step is to download the pre-compiled 64-bit binary distribution of InfluxDB and unarchive it.</p>
+                    <pre><code>wget https://dl.influxdata.com/influxdb/releases/influxdb-0.13.0_linux_amd64.tar.gz</code></pre>
+                    <pre><code>tar zxvf influxdb-0.13.0_linux_amd64.tar.gz</code></pre>
+                </div>
+
+                <div content-block name="influx-db" message="Run the InfluxDB database">
+                    <p>Change directories into the InfluxDB directory that was just unarchived.</p>
+                    <pre><code>cd influxdb-0.13.0-1</code></pre>
+
+                    <p>Run the InfluxDB database.</p>
+                    <pre><code>./usr/bin/influxd --config ./etc/influxdb/influxdb.conf</code></pre>
+                </div>
+              </div>
+
+        <!-- Install the data collector named Telegraf -->
+        <div ibox title="Download and Install Telegraf">
+            <div content-block message="Download 64-bit pre-compiled Telegraf binaries" name="telegraf-download">
+              <p>Telegraf is an open source agent written for collecting metrics and data on the system it's running on or from other services. Telegraf writes data it collects to InfluxDB in the correct format.</p>
+              <p>We will be downloading Telegraf and configuring the MQTT over TLS. This will gather sensor data over MQTT TLS and store it in the InfluxDB database.</p>
+              <p>Download the pre-compiled 64-bit binary distribution of Telegraf in a <strong>new SSH terminal</strong> and unarchive it.</p>
+              <pre><code>wget https://dl.influxdata.com/telegraf/releases/telegraf-0.13.1_linux_amd64.tar.gz
+</code></pre>
+              <pre><code>tar zxvf telegraf-0.13.1_linux_amd64.tar.gz</code></pre>
+              <div class="alert alert-warning">
+                <p>If you are running from an external drive and see an error try below command:</p>
+                <p><code>tar zxvf telegraf-0.13.1_linux_amd64.tar.gz --no-same-owner</code></p>
+              </div>
+            </div>
+          </div>
+
+          <div ibox title="Configure Telegraf to use MQTT over TLS">
+            <div content-block message="Configure Telegraf to use an MQTT consumer and an InfluxDB output filter" name="telegraf-configure">
+              <p>Change directories into the newly unarchived telegraf directory with the telegraf binary.</p>
+              <pre><code>cd telegraf-0.13.1-1/usr/bin</code></pre>
+
+              <p>Run this command to generate a configuration file with an MQTT consumer and an InfluxDB output filter.</p>
+              <pre><code>./telegraf -sample-config --input-filter mqtt_consumer --output-filter influxdb > telegraf-mqtt.conf</code></pre>
+            </div>
+
+            <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
+              <p>Open the telegraf-mqtt.conf file, go to [[outputs.influxdb]] and verify the contents to be similar to what is shown below. Ideally there should not be any changes required in this section</p>
+              <pre><code>vim telegraf-mqtt.conf</code></pre>
+
+<ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
+###############################################################################
+#                            OUTPUT PLUGINS                                   #
+###############################################################################
+
+# Configuration for influxdb server to send metrics to
+[[outputs.influxdb]]
+## The full HTTP or UDP endpoint URL for your InfluxDB instance.
+## Multiple urls can be specified as part of the same cluster,
+## this means that only ONE of the urls will be written to each interval.
+# urls = ["udp://localhost:8089"] # UDP endpoint example
+urls = ["http://localhost:8086"] # required
+## The target database for metrics (telegraf will create it if not exists).
+database = "telegraf" # required
+## Precision of writes, valid values are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+## note: using "s" precision greatly improves InfluxDB compression.
+precision = "s"
+
+## Retention policy to write to.
+retention_policy = "default"
+## Write consistency (clusters only), can be: "any", "one", "quorom", "all"
+write_consistency = "any"
+
+## Write timeout (for the InfluxDB client), formatted as a string.
+## If not provided, will default to 5s. 0s means no timeout (not recommended).
+timeout = "5s"
+# username = "telegraf"
+# password = "metricsmetricsmetricsmetrics"
+## Set the user agent for HTTP POSTs (can be useful for log differentiation)
+# user_agent = "telegraf"
+## Set UDP payload size, defaults to InfluxDB UDP Client default (512 bytes)
+# udp_payload = 512
+
+## Optional SSL Config
+# ssl_ca = "/etc/telegraf/ca.pem"
+# ssl_cert = "/etc/telegraf/cert.pem"
+# ssl_key = "/etc/telegraf/key.pem"
+## Use SSL but skip chain & host verification
+# insecure_skip_verify = false
+</ui-codemirror>
+            </div>
+
+
+            <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
+              <p>Open the telegraf-mqtt.conf file, go to [[inputs.mqtt_comsumer]] and make changes as shown below. There are few changes required here, for e.g. <strong>port no. to 8883, the SSL config, topics and data_config parameter</strong></p>
+<ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">###############################################################################
+#                            SERVICE INPUT PLUGINS                            #
+###############################################################################
+
+# Read metrics from MQTT topic(s)
+[[inputs.mqtt_consumer]]
+servers = ["localhost:8883"]
+qos = 0
+
+topics = [
+   "sensors/temperature/data",
+   "sensors/new",
+]
+
+persistent_session = false
+client_id = ""
+
+## Optional SSL Config
+ssl_ca = "/etc/mosquitto/ca_certificates/ca.crt"
+ssl_cert = "/etc/mosquitto/certs/server.crt"
+ssl_key = "/etc/mosquitto/certs/server.key"
+insecure_skip_verify = true
+
+data_format = "json"</ui-codemirror>
+
+            <p>The first topic <b>sensors/+/data</b> will comsume messages that contain new sensor data. In MQTT, topics are heirarchical.  In the heirarchy here the second level is the sensors unqiue identifier. We've used a '+' symbol which is a wild card in MQTT topics.  So this topic represents all the data from sensors on the local network.</p>
+            <p>The second topic <b>sensors/new</b> will consume messages that announce new sensors on the network.</p>
+
+
+            <p>Next change the data format on line 149 to "json"</p>
+            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">data_format = "json"</ui-codemirror>
+
+            <p>Here topics should point to what we are subscribing to listen on the mqtt connection. Also important to note here is to change the data_format = “json” since the data that we will publish from the sensors will be in json format. If we keep the default data_format which is influx we will see parsing errors.</p>
+          </div>
+
+          <div content-block message="Make sure virtual-sensor-secure is running" name="modify-mqtt-node">
+            <p>Before we start telegraf service we need to make sure that <b>sensors/temperature/data</b> topic is being published</p>
+            <p>One way is to use the Node-Red flows of temperature sensor and change the MQTT port to 8883 instead of 1883. Another way is to run virtual-sensor-secure.js</p>
+            <p>Here we will run the virtual sensor program. We downloaded <b>virtual-sensor-secure</b> in Security lab, if this program is not already running, <strong>open a new SSH terminal</strong> and start it with below commands</p>
+            <pre><code>cd ~/virtual-sensor</code></pre>
+            <pre><code>node virtual-sensor-secure.js</code></pre>
+            <p>You should start seeing sensor data being published like below</p>
+            <pre><code>{"sensor_id": "temperature", "value": 25, "timestamp": 1486163433176}</code></pre>
+          </div>
+
+          <div content-block message="Start the telegraf service" name="telegraf-start">
+            <p>Next go back to the SSH terminal where you configured telegraf and start the telegraf service pointing to this conf file:</p>
+            <pre><code>./telegraf -config telegraf-mqtt.conf</code></pre>
+          </div>
+          <div content-block message="Start the telegraf service" name="telegraf-start" image-link="./views/labs/cloud/images/telegraf-start.png">
+            <p>We should start getting the readings if they are getting published from the sensors as shown in the figure</p>
+            <p>If telegraf is not getting the data make sure you check the following:</p>
+            <ul>
+              <li>Sensor topic sensors/temperature/data is being published either using the virtual-sensor-secure.js program or through the Node-red flow</li>
+              <li>The mosquitto broker configuration file mosquitto.conf in path /etc/mosquitto/ has the right TLS & SSL configuration as explained in Security and Internet of Things lab</li>
+            </ul>
+            <img class='labHidden' src="./views/labs/cloud/images/telegraf-start.png"></src>
+          </div>
+
+        </div>
+
+        <!-- Install the data collector named Telegraf -->
+        <div ibox title="Install Grafana">
+          <div content-block message="Download Grafana" name="grafana-download">
+            <p>Open a new SSH terminal and download Grafana using below command:</p>
+            <pre><code>wget https://grafanarel.s3.amazonaws.com/builds/grafana-3.1.0-1468321182.linux-x64.tar.gz</code></pre>
+            <pre><code>tar zxvf grafana-3.1.0-1468321182.linux-x64.tar.gz</code></pre>
+            <pre><code>cd grafana*/bin</code></pre>
+
+            <p>Run the Grafana service</p>
+            <pre><code>./grafana-server</code></pre>
+          </div>
+          <div content-block message="Sign into Grafana" name="grafana-download" image-link="./views/labs/cloud/images/grafana-login.png">
+
+            <p>Start Grafana from browser:</p>
+            <pre><code>http://{Your Gateway IP address}:3000</code></pre>
+
+            <div class="alert alert-info">
+              <p>You can sign up or just sign in with</p>
+              <pre>Login: <b>admin</b>
+Password: <b>admin</b></pre>
+            </div>
+          </div>
+          <div content-block message="Setup Database in Grafana" name="grafana-database" image-link="./views/labs/cloud/images/telegraf-database.png">
+            <ul>
+              <li><p>Click on the top left Grafana icon and select <b>"Data Sources"</b> and <b>"Add data Sources"</b></p></li>
+              <li><p>Setup the influxdb data source with parameters as shown in figure. Make sure to replace "localhost" with your gateway IP address, specify Type as <b>InfluxDB</b> and Database as <b>telegraf</b>. You can give username and password as "test"</p></li>
+              <li><p>Click <b>Add</b> after which you should see the message "Success: Data Source is working"</p></li>
+            </ul>
+          </div>
+          <div content-block message="Setup Dashboard in Grafana" name="grafana-dashboard" image-link="./views/labs/cloud/images/Metrics-dashboard.PNG">
+            <ul>
+              <li><p>Click on the top left Grafana icon and select <b>"Dashboards"->"New"</b></p></li>
+              <li><p>Next click on the small green bar on the left hand of the blank page that comes up after you select new dashboard</p></li>
+              <div class="alert alert-info">
+                <p>Note that the small green bar is on extreme left top corner and not very clearly visible</p>
+              </div>
+              <li><p>In that select <b>"Add Panel" -> "Graph"</b></p></li>
+              <li><p>This will create a default Panel. Now first select <b>"Panel data source"</b> as <b>"myInfluxDB"</b> instead of default</p></li>
+              <li><p>Next set up the Metrics panel by clicking on "A" icon and filling up the parameters as shown in figure. Key components are in <b>"select measurement"</b> option to chose <b>mqtt_consumer</b>, then click <b>"+"</b> next to "WHERE" and chose <b>topic</b> and finally in <b>"select tag value"</b> chose <b>sensors/temperature/data</b> </p></li>
+              <li><p>To get continous readings click on the top right corner with a clock icon and chose <b>"Refreshing every:"</b> setting as <b>5 s</b> and <b>"Last 30 minutes"</b>. This will ensure continous data on the graph</p></li>
+              <li><p>Finally you can play around with other tabs like Axes, Legend and Display to change graph properties</p></li>
+            </ul>
+          </div>
+
+        </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Additional Information</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li>
+                Additional Information
+            </li>
+            <li class="active">
+                <strong>Debugging MQTT</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+  <div class="row">
+    <div class="col-lg-12">
+      <div ibox title="Debugging MQTT connection issues">
+        <div content-block name="mqtt-issues-notls" message="Issues with MQTT (without TLS/SSL) not publishing sensor data">
+          <h2 class="labHidden">Issues with MQTT (without TLS/SSL) not publishing sensor data</h2>
+          <h4>Issues with MQTT (without TLS/SSL) not publishing data sensor data</h4>
+          <li><p>If you are using MQTT without TLS & SSL configuration then use the below command to verify if sensor data topic for e.g. sensors/temperature/data is published correctly</p></li>
+          <pre><code>mosquitto_sub -t sensors/temperature/data -p 1883</code></pre>
+          <p>If you don't see any output messages check your Node-Red flow to verify your gateway IP address is correct and port no. as <b>1883</b> (and not 8883). Remember to re-deploy after the change.</p>
+          <li><p>To isolate if issue is with your actual sensors, you can run <b>virtual-sensor.js</b> program (explained in above section "Download and Configure virtual sensors") and then montior using mosquitto_sub command</p></li>
+          <p>If you see the messages with virtual sensor then your MQTT configuration is fine and probably issue is with the sensor or your Arduino 101* connections. You can re-check the connections and unplug/re-plug your Arduino 101* from Gateway. If that also does not help try restarting your Gateway with Arduino 101* connected</p>
+        </div>
+
+        <div content-block name="mqtt-issues-tls" message="Issues with MQTT configured with TLS/SSL not publishing sensor data">
+          <h2 class="labHidden">Issues with MQTT configured with TLS/SSL not publishing sensor data</h2>
+          <h4>Issues with MQTT configured with TLS/SSL not publishing data sensor data</h4>
+          <p>If you are using MQTT with TLS & SSL configuration then use the below command to verify if sensor data topic for e.g. sensors/temperature/data is published correctly</p>
+          <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
+          <p>If you don't see output messages and it gives error, check the following:</p>
+          <h4>Verify your mosquitto broker configuration</h4>
+          <ul>
+            <li><p>First check what is the error message from mosquitto with following command:</p></li>
+            <pre><code>systemctl status mosquitto</pre></code>
+            <p>This should give a dump of messages which should give an indication of failure</p>
+            <li><p>Make sure your SSL certificates are generated correctly and copied to directories <b>/etc/mosquitto/ca_certificates</b> and <b>/etc/mosquitto/certs</b> folders. If required re-generate the certificates by following the steps mentioned in section "Generate Server Certificate Authority, Certificate and Key" of lab "Security and Internet of Things"</p></li>
+            <li><p>Next check your mosquitto configuration file <b>/etc/mosquitto/mosquitto.conf</b> is correctly configured for port 8883, paths to SSL certificates and TLS version as shown below</p></li>
+            <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># TLS and SSL configuration
+
+bind_address 127.0.0.1
+port 8883
+
+cafile /etc/mosquitto/ca_certificates/ca.crt
+certfile /etc/mosquitto/certs/server.crt
+keyfile /etc/mosquitto/certs/server.key
+
+tls_version tlsv1</ui-codemirror>
+            <p>Make sure to stop and start mosquitto service after this change</p>
+             <pre><code>systemctl stop mosquitto</code></pre>
+             <pre><code>systemctl start mosquitto</code></pre>
+            <p>Check to make sure mosquitto service is running properly with below command. The status should be "active (running)"</p>
+             <pre><code>systemctl status mosquitto</code></pre>
+            <p>Run again the mosquitto_sub command to check if you are getting the output messages from sensor topic</p>
+          </ul>
+          <h4>Verify your Node-Red flow</h4>
+          <ul>
+            <li><p>If you are using Node-Red flow and don't see any output messages check your Node-Red flow to verify your gateway IP address is correct and port no. as <b>8883</b> (and not 1883). Remember to re-deploy after the change.</p></li>
+          </ul>
+          <h4>Verify your JavaScript code for MQTT connection with TLS/SSL</h4>
+          <ul>
+            <li><p>If you are using JavaScript check your MQTT connect function to make sure it is passing all the TLS/SSL configuration parameters. It should be as shown below:</p></li>
+        <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
+var mqtt = require('mqtt');
+var fs = require('fs');
+var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+
+var PORT = 8883;
+var HOST = 'localhost';
+
+var options = {
+  port: PORT,
+  host: HOST,
+  protocol: 'mqtts',
+  protocolId: 'MQIsdp',
+  keyPath: KEY,
+  certPath: CERT,
+  rejectUnauthorized : false,
+  //The CA list will be used to determine if server is authorized
+  ca: TRUSTED_CA_LIST,
+  secureProtocol: 'TLSv1_method',
+  protocolVersion: 3
+};
+var mqttClient = mqtt.connect(options);</pre></ui-codemirror>
+          </ul>
+          <h4>Verify if your sensors are connected properly</h4>
+          <ul>
+            <li><p>To isolate if issue is with your actual sensors, you can run <b>virtual-sensor-secure.js</b> program (explained in above section "Download and Configure virtual sensors") and then montior using mosquitto_sub command</p></li>
+            <p>If you see the messages with virtual sensor then your MQTT configuration is fine and probably issue is with the sensor or your Arduino 101* connections. You can re-check the connections and unplug/re-plug your Arduino 101* from Gateway. If that also does not help try restarting your Gateway with Arduino 101* connected</p>
+          </ul>
+        </div>
+
+
+    </div>

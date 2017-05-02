@@ -1,0 +1,400 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Restful APIs for Controlling Actuators in JavaScript</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li>
+                <a>Protocols</a>
+            </li>
+            <li class="active">
+                <strong>Restful APIs for Controlling Actuators in JavaScript</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+    <div class="row">
+        <div class="col-lg-12">
+
+            <!-- Objectives -->
+            <div ibox title="Objectives">
+              <div content-block name="read-objectives" message="Overview" image-link="./views/labs/protocols-javascript-http/images/lab3.png">
+                <h2 class="labHidden">Read the Objectives</h2>
+                <labels arduino windows apple linux/>
+                <p>
+                  By the end of the lab you will write a Restful HTTPS server to control the action of the LCD.
+                </p>
+
+                <p>
+                  This builds towards the goal of IoT management. The Intel IoT Gateway will be the centralized point of management. Creating a hierarchial management architecture reduces the amount of work need to maintain the IoT network and increases your organization's return on investment (ROI). By networking the sensors and actuators, you can deploy dozens or even hundreds of sensors and actuators all controlled by a single gateway. The decisions and coordiation of IoT devices is handled by the gateway on the edge network.  The sensors simply report their data over MQTT and the actuators wait for commands via HTTP.
+                </p>
+
+                <div class="alert alert-info">
+                  <p>
+                    <strong>Prerequisite for the Lab</strong>: Since we will be using HTTPS instead of HTTP make sure that your certificates are installed as describe in the section <strong>"Setup TLS"</strong> else you will get connection errors
+                  </p>
+                </div>
+              </div>
+              <div content-block name="read-objectives" message="Read the Objectives">
+                  <h2 class="labHidden">Read the Objectives</h2>
+                  <p>By the end of this module, you should be able to:</p>
+
+                  <ul>
+                      <li>Create a NodeJS service that implements a Restful HTTPS API to control the LCD screen. In later labs this API will be used to automate IoT actions.</li>
+                  </ul>
+              </div>
+            </div>
+
+            <div ibox title="Create the Restful HTTPS API to Control the LCD Screen">
+              <div content-block message="Overview of the Restful LCD API">
+                <h2 class="labHidden">Create the Restful HTTPS API to Control the LCD Screen</h2>
+                <p>
+                  For this section of the lab, we will be using a JavaScript HTTPS library called Express to build a small HTTPS server that implements two APIs.
+                </p>
+
+                <p>
+                  The two APIs will control the color of the backlight on the LCD screen and the text that is displayed on the LCD screen. This is what the API will look like:
+                </p>
+
+                <div class="alert alert-info">
+                    <p>The six APIs are defined as follows:</p>
+                    <table class="table-mail">
+                      <tr><td><b>GET</b></td><td>/lcd/color</td><td>Query the HTTPS Server for the current color value displayed on the LCD</td></tr>
+                      <tr><td><b>POST</b></td><td>/lcd/color</td><td>Set a new color to display on the LCD</td></tr>
+                      <tr><td><b>DELETE</b></td><td>/lcd/color</td><td>Turn the LCD backlight off</td></tr>
+                      <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTPS Server for the current text value displayed on the LCD</td></tr>
+                      <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new text to display on the LCD</td></tr>
+                      <tr><td><b>DELETE</b></td><td>/lcd/text</td><td>Clear text on LCD</td></tr>
+                    </table>
+                  </div>
+              </div>
+
+
+              <div content-block name="read-xdk-intro" message="Start a new project in the Intel® XDK using a blank template." image-link="./views/labs/protocols-javascript-http/images/new-project.png">
+                <h2 class="labHidden">Start a new project in the Intel® XDK using a blank template.</h2>
+
+                <ol>
+                    <li>
+                        <p>Start a new project in the Intel® XDK using a blank template.</p>
+                    </li>
+                    <li>
+                        <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
+                    </li>
+                </ol>
+              </div>
+
+              <div content-block name="read-xdk-intro" message="Select the Blank Template" image-link="./views/labs/protocols-javascript-http/images/blank_template.png">
+                <h2 class="labHidden">Select the Blank Template</h2>
+
+                <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
+
+
+                <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
+              </div>
+
+
+              <div content-block message="Include the Dependencies">
+                <h2 class="labHidden">Include the Dependencies</h2>
+
+                <p>
+                  In the package.json file change the dependencies to include the <b>express</b> and <b>body-parser</b>.
+                </p>
+                <p class="label">
+                  package.json
+                </p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">  "dependencies": {
+      "express" : "latest",
+      "body-parser" : "latest",
+      "http" : "latest",
+      "https" : "latest"
+  }</pre></ui-codemirror>
+              <p>
+                In the server.json file do a require of <b>express</b> and <b>body-parser</b>.
+              </p>
+              <p class="label">
+                server.js
+              </p>
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTPS server
+var express = require('express');
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
+var privateKey  = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var certificate = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var credentials = {key: privateKey, cert: certificate};
+
+// The body-parser library allows us to declare the server will use JSON format
+var bodyParser = require('body-parser');</pre></ui-codemirror>
+              </div>
+
+                <div content-block message="Instantiate the HTTPS server variable named app and the LCD variable.">
+                    <h2 class="labHidden">Instantiate the HTTPS server variable named app and the LCD variable.</h2>
+                    <p>
+                      Continue making changes to server.js. Instantiate the HTTPS server variable named app and the LCD variable.
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Declare the HTTPS server as a variable named "app"
+var app = express();
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+// Declare the LCD variable
+var LCD = require("jsupm_jhd1313m1");
+var OFFSET = 512;
+var mylcd = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Declare that the HTTPS server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client">
+                  <h2 class="labHidden">Declare that the HTTP server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client</h2>
+                  <p>
+                    Declare that the HTTP server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client
+                  </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// parse application/json
+app.use(bodyParser.json());
+
+// This function will print the route for each incoming HTTP request
+app.use(function (req, res, next) {
+  console.log(req.body); // populated!
+  next();
+});</pre></ui-codemirror>
+                </div>
+
+
+                <div content-block message="Instantiate the HTTPS server variable named app   and the LCD variable.">
+                    <h2 class="labHidden">Instantiate the HTTPS server variable named app and the LCD variable.</h2>
+                    <p>
+                      Declare two variables to hold the the backlight value and the text that the LCD screen.  At this point, we can also turn the backlight off.
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var backlight = {
+    r:0,
+    g:0,
+    b:0
+};
+
+var lcdtext = "";
+mylcd.setColor(backlight.r,backlight.g,backlight.b);</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Create the routes to GET the LCD text and GET the backlight">
+                    <h2 class="labHidden">Create the routes to GET the LCD text and GET the backlight</h2>
+                    <p>
+                      Create the routes to GET the LCD text and GET the backlight
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.get('/lcd/backlight/', function (req, res) {
+  res.status(200).json(backlight);
+});
+app.get('/lcd/text/', function (req, res) {
+  res.status(200).json(lcdtext);
+});</pre></ui-codemirror>
+                </div>
+
+
+
+                <div content-block message="Create the routes to POST the LCD text and POST the backlight">
+                    <h2 class="labHidden">Create the routes to POST the LCD text and POST the backlight</h2>
+                    <p>
+                      Create the routes to POST the LCD text and POST the backlight
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.post('/lcd/backlight/', function (req, res) {
+   backlight = {
+      r:parseInt(req.query.r),
+      g:parseInt(req.query.g),
+      b:parseInt(req.query.b)
+  };
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(201).send("Success");
+});
+
+app.post('/lcd/text/', function (req, res) {
+  lcdtext = req.query.lcdtext;
+  mylcd.clear();
+  mylcd.write(lcdtext);
+  res.status(201).send("Success");
+});</pre></ui-codemirror>
+                </div>
+
+
+                <div content-block message="Create the routes to DELETE the LCD text and DELETE the backlight">
+                    <h2 class="labHidden">Create the routes to DELETE the LCD text and DELETE the backlight</h2>
+                    <p>
+                      Create the routes to DELETE the LCD text and DELETE the backlight
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.delete('/lcd/backlight/', function (req, res) {
+  backlight = {r:0,g:0,b:0};
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(204).send("Deleted");
+});
+
+
+
+app.delete('/lcd/text/', function (req, res) {
+  mylcd.clear();
+  res.status(204).send("Deleted");
+});</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Start the HTTPS server">
+                    <h2 class="labHidden">Start the HTTPS server</h2>
+                    <p>
+                      Start the HTTP server
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var server = httpsServer.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+console.log('Example app listening at http://%s:%s', host, port);
+});</pre></ui-codemirror>
+                </div>
+
+                <div content-block message="Checkout the completed lab">
+                    <h2 class="labHidden">Checkout the completed lab</h2>
+                    <p>
+                      Here is the code to the complete the lab.
+                    </p>
+
+                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTP server
+var express = require('express');
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+
+// The body-parser library allows us to declare the server will use JSON format
+var bodyParser = require('body-parser');
+
+var privateKey  = fs.readFileSync('/etc/mosquitto/certs/server.key');
+var certificate = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var credentials = {key: privateKey, cert: certificate};
+
+// Declare the HTTP server as a variable named "app"
+var app = express();
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+// Declare the LCD variable
+var LCD = require("jsupm_jhd1313m1");
+var OFFSET = 512;
+var mylcd = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
+
+// parse application/json
+app.use(bodyParser.json());
+
+// This function will print the route for each incoming HTTP request
+app.use(function (req, res, next) {
+  console.log(req.body); // populated!
+  next();
+});
+
+var backlight = {
+    r:0,
+    g:0,
+    b:0
+};
+
+var lcdtext = "";
+mylcd.setColor(backlight.r,backlight.g,backlight.b);
+
+app.get('/lcd/backlight/', function (req, res) {
+  res.status(200).json(backlight);
+});
+app.get('/lcd/text/', function (req, res) {
+  res.status(200).json(lcdtext);
+});
+
+app.post('/lcd/backlight/', function (req, res) {
+   backlight = {
+      r:parseInt(req.query.r),
+      g:parseInt(req.query.g),
+      b:parseInt(req.query.b)
+  };
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(201).send("Success");
+});
+
+app.post('/lcd/text/', function (req, res) {
+  lcdtext = req.query.lcdtext;
+  mylcd.clear();
+  mylcd.write(lcdtext);
+  res.status(201).send("Success");
+});
+
+app.delete('/lcd/backlight/', function (req, res) {
+  backlight = {r:0,g:0,b:0};
+  mylcd.setColor(backlight.r,backlight.g,backlight.b);
+  res.status(204).send("Deleted");
+});
+
+app.delete('/lcd/text/', function (req, res) {
+  mylcd.clear();
+  res.status(204).send("Deleted");
+});
+
+var server = httpsServer.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+console.log('Example app listening at http://%s:%s', host, port);
+});</pre></ui-codemirror>
+                </div>
+                <div content-block name="deploy-application" message="Deploy the application">
+                    <h2 class="labHidden">Deploy the application</h2>
+                    <p>Upload and run your application from Intel&reg; XDK</p>
+                </div>
+              </div>
+
+              <div ibox title="Testing Your Restful HTTP API">
+                <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols-javascript-http/images/postman_website.png">
+                    <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
+
+                    <h5> Install Postman </h5>
+                    <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
+                    <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
+
+                    <p>To install the app navigate to <a href="https://www.getpostman.com/" target="_blank"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
+                </div>
+
+
+                <div content-block name="install-postman" message="Use PostMan to send an HTTPS request" image-link="./views/labs/protocols-javascript-http/images/postman.png">
+                    <h5>Use Postman to send web request </h5>
+                    <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
+                    <ul>
+                      <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 3000 with the URL specified above.</li>
+                      <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and enter your gateway password in Password field. </li>
+                      <div class="alert alert-warning">
+                        <p>
+                          Since we are using a self signed certificate, we need to authenticate it from the browser without which it will fail to connect through Postman. For this go to your chrome browser and type "https://gateway_ip:port" and then go to Andvanced and Proceed. More details can be found <a href="http://blog.getpostman.com/2014/01/28/using-self-signed-certificates-with-postman/" target="_blank"> here</a>
+                        </p>
+                      </div>
+                      <li>The /lcd/color API  can be passed a RGB value like this.
+                        <pre><code>https://gateway_ip:port/lcd/backlight?r=128&g=255&b=255</code></pre>
+                      </li>
+                    </ul>
+                </div>
+              </div>
+
+              <div ibox title="Additional Resources">
+                <ul>
+                  <li><p><a href="http://mqtt.org/" target="_blank">MQTT</a></p></li>
+                  <li><p><a href="https://www.npmjs.com/package/express" target="_blank">ExpressJS</a></p></li>
+                  <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a></p></li>
+                </ul>
+              </div>
+        </div>
+    </div>
+  </div>
+</div>
