@@ -98,7 +98,6 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    /*
     .state('labs.videoperformance-maarsunderstand', {
       url: "/videoperformance-maarsunderstand",
       templateUrl: "views/labs/videoperformance-maarsunderstand/index.html",
@@ -592,7 +591,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
           }]);
         }
       }
-    })*/
+    })
    .state('index.faq', {
       url: "/faq",
       templateUrl: "views/faq.html",
