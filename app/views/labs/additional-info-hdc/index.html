@@ -22,11 +22,19 @@
   <div class="row">
     <div class="col-lg-12">
       <div ibox title="Steps to Install HDC">
-        <p>1. Insert the USB drive to your NUC and copy the top level folder "hdc_2.2_conf_files" to /root folder and go to that folder</p>
-        <pre><code>cd /root&#13;&#10;cp -r /media/sda1/HDC/hdc_2.2_conf_files /root&#13;&#10;cd /root/hdc_2.2_conf_files</code></pre>
-        <p>2. Run the shell script</p>
-        <pre><code>./hdc_2.2.0_install.sh</code></pre>
-        <p>3. Wait for the script to complete, at the end it will reboot the gateway. This step will take upto 5 minutes.</p>
+        <p>HDC should be installed on your Ubuntu Gateway system. In case it is not, follow the below steps to install it</p>
+        <div class="alert alert-info">
+          <p>Below steps are required only if HDC is not installed. To confirm if HDC files are not there go to /var/lib/iot and check if files agentguid.bin, dxlpolicy.bin and startup.bin are present. If not follow the below install steps.<p>
+        </div>
+        <p>Download following github repository:</p>
+        <pre><code>git clone https://github.com/SSG-DRD-IOT/gateway-setup</code></pre>
+        <pre><code>cd gateway-setup</code></pre>
+        <p>2. Install the HDC deb package</p>
+        <pre><code>apt-get install -y $PWD/conf_files/hdc/hdc-2.3.0-x86_64.deb</code></pre>
+        <p>3. Copy the startup.bin to /var/lib/iot</p>
+        <pre><code>cp conf_files/hdc/startup.bin /var/lib/iot</code></pre>
+        <p>4. Run the iot-control program with startup.bin as its parameter.</p>
+        <pre><code>iot-control -c /var/lib/iot/startup.bin</pre></code>
         <div content-block name="" message="Install HDC">
           <h2 class="labHidden">Read the Objectives</h2>
           <labels gateway window apple linux/>
