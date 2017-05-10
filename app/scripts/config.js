@@ -54,7 +54,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     })
     .state('labs.laboverview', {
       url: "/laboverview",
-      templateUrl: "views/labs/labs.laboverview/index.html",
+      templateUrl: "views/labs/laboverview/index.html",
       data: {
         pageTitle: 'Lab Overview'
       },
@@ -239,11 +239,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     }
   })
 
-  .state('labs.analytics-opencvface', {
-    url: "/analytics-opencvface",
-    templateUrl: "views/labs/analytics-opencvface/index.html",
+  .state('labs.analytics-opencvmotion', {
+    url: "/analytics-opencvmotion",
+    templateUrl: "views/labs/analytics-opencvmotion/index.html",
     data: {
-      pageTitle: 'Face detection using OpenCV'
+      pageTitle: 'Motion detection using OpenCV'
     },
     resolve: {
       loadPlugin: function($ocLazyLoad) {
@@ -262,11 +262,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       }
     }
 })
-.state('labs.analytics-opencvface_features', {
-  url: "/analytics-opencvface_features",
-  templateUrl: "views/labs/analytics-opencvface_features/index.html",
+.state('labs.analytics-opencvface', {
+  url: "/analytics-opencvface",
+  templateUrl: "views/labs/analytics-opencvface/index.html",
   data: {
-    pageTitle: 'Face feature detection with OpenCV'
+    pageTitle: 'Face detection with OpenCV'
   },
   resolve: {
     loadPlugin: function($ocLazyLoad) {
