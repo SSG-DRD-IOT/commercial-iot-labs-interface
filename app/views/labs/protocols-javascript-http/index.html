@@ -387,7 +387,10 @@ console.log('Example app listening at http://%s:%s', host, port);
                         </p>
                       </div>
                       <li>The /lcd/color API  can be passed a RGB value like this.
-                        <pre><code>https://gateway_ip:port/lcd/backlight?r=128&g=255&b=255</code></pre>
+                        <pre><code>https://gateway_ip:port/lcd/backlight?r=0&g=255&b=0</code></pre>
+                      </li>
+                      <li>Similarly the /lcd/text API  can be passed a string value like this.
+                        <pre><code>https://gateway_ip:port/lcd/text?lcdtext="Hello World"</code></pre>
                       </li>
                     </ul>
                 </div>

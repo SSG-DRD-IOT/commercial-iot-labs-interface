@@ -148,20 +148,25 @@
               </div>
             </div>
 
-            <div content-block name="protocol-assign-pins" message="Configure the nodes">
+            <div content-block name="protocol-assign-pins" message="Configure the Grove nodes" image-link="./views/labs/protocols-node-red/images/node-red-grove.png">
               <h2 class="labHidden">Configure the nodes in the MQTT flow</h2>
               <ol>
-                <li>Double click the temperature node to assign it to pin <b>A0</b> and change the Platform from Native to <b>Firmata</b></li>
-                <li>Configure <b>both</b> the <b>input mqtt</b> and <b>output mqtt</b> nodes as described below:</li>
+                <li>Double click the temperature node to assign it to pin <b>A0</b> and change the Platform from Native to <b>Firmata</b> as shown in figure</li>
+                <li>Double click the LCD node and change the Platform from Native to <b>Firmata</b> as shown in figure</li>
+              </ol>
+            </div>
 
+            <div content-block name="protocol-assign-pins" message="Configure the MQTT-TLS nodes" image-link="./views/labs/protocols-node-red/images/node-red-mqtt-tls.png">
+              <h2 class="labHidden">Configure the nodes in the MQTT flow</h2>
+                <p>Configure <b>both</b> the <b>input mqtt</b> and <b>output mqtt</b> nodes as described below:</p>
+                <p>Double click on the output mqtt node and configure it with below steps. Do the same for the input mqtt node</p>
                 <ul>
-                  <li>Select the pencil icon to edit the server settings and enter <b>sensors/temperature/data</b> as the topic</li>
+                  <li>Enter the "Server" configuration as <strong>"localhost:8883"</strong>. Here 8883 is the secure TLS port. Also enter Topic as <strong>sensors/temperature/data</strong></li>
+                  <li>Next select the pencil icon to edit the server settings. In that check the <strong>Enable secure (SSL/TLS) connection</strong> option and select the pencil icon to edit the TLS configuration</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="" title="mqtt edit" typeof="foaf:Image"></p>
-                  <li>Enter the ip address of the gateway and port number as <strong>8883</strong>. Since we are using MQTT-TLS configuration 8883 is the port number,  if you are using MQTT without TLS specify 1883 as the port.</li>
-                  <li>Click on the <strong>Security</strong> tab and enable the check box <strong>Enable secure (SSL/TLS) configuration</strong></li>
+                  <li>Enter the certificate information as shown in the figure. These are the self signed certificates that we generated in "Setup TLS" lab. Uncheck the "Verify server certificate option"</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="" title="mqtt edit" typeof="foaf:Image"></p>
                 </ul>
-              </ol>
             </div>
             <div content-block name="" message="Take Note of the JSON format that you will need to create for this and future labs.">
               <h2 class="labHidden">Configure a Function Node to create the JSON format for the labs</h2>
@@ -231,12 +236,17 @@ return msg;</pre></ui-codemirror>
 
 
 
-            <div content-block name="protocol-publish-mqtt " message="Deploy the application"
-            image-link="./views/labs/protocols-node-red/images/node-red-temp.png ">
-<h2 class="labHidden ">Deploy the application</h2>
-<p><img class="labHidden" alt="mqtt flow connected" data-fid="503936" src="https://software.intel.com/sites/default/files/managed/a6/3f/mqtt_flow_connected.png" title="mqtt flow connected" typeof="foaf:Image"></p>
-
+            <div content-block name="protocol-publish-mqtt " message="Deploy the application">
+                <h2 class="labHidden ">Deploy the application</h2>
+                <p><img class="labHidden" alt="mqtt flow connected" data-fid="503936" src="https://software.intel.com/sites/default/files/managed/a6/3f/mqtt_flow_connected.png" title="mqtt flow connected" typeof="foaf:Image"></p>
               <p>When you are done configuring the nodes hit deploy</p>
+              <p>You should see temperature displayed on your LCD and also on the debug window the Json format string</p>
+            </div>
+
+            <div content-block name="protocol-publish-mqtt " message="Remove LCD node from flow and deploy again"
+            image-link="./views/labs/protocols-node-red/images/node-red-temp.png ">
+              <p>To demonstrate we can control actuator (LCD) separately we will now remove the Grove LCD node and move the debug node to the output of function node as shown in figure</p>
+              <p>Deploy again and you should see the same temperature output as you saw on your LCD screen</p>
               <p>In the debug tab you should now see temperature readings from the temperature sensor. Take note, the IoT device is publishing the sensor data to the MQTT server on the Gateway and then pulling the sensor data down into the debug window.</p>
               <p> If you do not see the output in the debug window:</p>
               <ul>
@@ -259,138 +269,123 @@ return msg;</pre></ui-codemirror>
                 <h2 class="labHidden">Check out the solution to this exercise</h2>
                 <h5>Flow Source Code</h5>
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">[
-   {
-      "id":"1dc1405c.26a96",
-      "type":"mqtt-broker",
-      "z":"",
-      "broker":"localhost",
-      "port":"1880",
-      "clientid":"",
-      "usetls":false,
-      "verifyservercert":true,
-      "compatmode":true,
-      "keepalive":"60",
-      "cleansession":true,
-      "willTopic":"",
-      "willQos":"0",
-      "willRetain":null,
-      "willPayload":"",
-      "birthTopic":"",
-      "birthQos":"0",
-      "birthRetain":null,
-      "birthPayload":""
-   },
-   {
-      "id":"bb262fa2.18c21",
-      "type":"upm-grove-temperature",
-      "z":"4072485.59502b8",
-      "name":"",
-      "platform":"512",
-      "unit":"C",
-      "pin":"1",
-      "interval":1000,
-      "x":135.5,
-      "y":75,
-      "wires":[
-         [
-            "a83804b3.09f158"
-         ]
-      ]
-   },
-   {
-      "id":"a83804b3.09f158",
-      "type":"function",
-      "z":"4072485.59502b8",
-      "name":"JSONify",
-      "func":"msg.payload = {\n    sensor_id: \"temperature\",\n    value: Math.floor(msg.payload*0.66)),\n    timestamp: Date.now(),\n}\nreturn msg;",
-      "outputs":1,
-      "noerr":0,
-      "x":366.5,
-      "y":103,
-      "wires":[
-         [
-            "9635ab89.d14de8",
-            "967b8aa5.9c1bc8"
-         ]
-      ]
-   },
-   {
-      "id":"635f249e.4799dc",
-      "type":"upm-grove-rgb-lcd",
-      "z":"4072485.59502b8",
-      "name":"",
-      "platform":"512",
-      "r":0,
-      "g":0,
-      "b":"0",
-      "row":0,
-      "column":0,
-      "x":683.5,
-      "y":290,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"9635ab89.d14de8",
-      "type":"mqtt out",
-      "z":"4072485.59502b8",
-      "name":"",
-      "topic":"sensors/temperature/data",
-      "qos":"",
-      "retain":"",
-      "broker":"1dc1405c.26a96",
-      "x":655.5,
-      "y":166,
-      "wires":[
-
-      ]
-   },
-   {
-      "id":"e9563a9b.81e1d8",
-      "type":"mqtt in",
-      "z":"4072485.59502b8",
-      "name":"",
-      "topic":"sensors/temperature/data",
-      "broker":"1dc1405c.26a96",
-      "x":142,
-      "y":279,
-      "wires":[
-         [
-            "f58764be.9f3458"
-         ]
-      ]
-   },
-   {
-      "id":"f58764be.9f3458",
-      "type":"function",
-      "z":"4072485.59502b8",
-      "name":"Switch Color on Temperature",
-      "func":"var r_val = 0;\nvar g_val = 0;\nvar b_val = 0;\n\nvar json = JSON.parse(msg.payload)\n\nif (json.value >= 25) {\n  r_val = 255;\n  g_val = 0;\n  b_val = 0;\n} else if (json.value <= 20) {\n  r_val = 0;\n  g_val = 0;\n  b_val = 255;\n} else {\n  r_val = 0;\n  g_val = 255;\n  b_val = 0;\n}\n\nmsg.payload = json.value + \"C              \"\n\nmsg.lcdColor = {\n  \"r\": r_val,\n  \"g\": g_val,\n  \"b\": b_val, \n}\n\nmsg.lcdCursor = {\n    row: 0,\n    column: 0,\n}\n\nreturn msg;",
-      "outputs":1,
-      "noerr":0,
-      "x":434,
-      "y":289,
-      "wires":[
-         [
-            "635f249e.4799dc"
-         ]
-      ]
-   },
-   {
-      "id":"967b8aa5.9c1bc8",
-      "type":"debug",
-      "z":"4072485.59502b8",
-      "name":"",
-      "active":true,
-      "console":"false",
-      "complete":"false",
-      "x":577.5,
-      "y":85,
-      "wires":[
-
-      ]
-   }
+	{
+		"id":"f23264de.b85f",
+		"type":"function",
+		"z":"951c9bfb.3785a",
+		"name":"JSONify",
+		"func":"msg.payload = {\n    sensor_id: \"temperature\",\n    value: Math.floor(msg.payload*0.66),\n    timestamp: Date.now(),\n}\nreturn msg;",
+		"outputs":1,
+		"noerr":0,
+		"x":501.5,
+		"y":139,
+		"wires":[["b778a9cf.161728","65d39f57.81cf4"]]
+	},
+	{
+		"id":"c629a5f3.a08b08",
+		"type":"upm-grove-temperature",
+		"z":"951c9bfb.3785a",
+		"name":"",
+		"platform":"512",
+		"unit":"C",
+		"pin":"1",
+		"interval":1000,
+		"x":200.5,
+		"y":137,
+		"wires":[["f23264de.b85f"]]
+	},
+	{
+		"id":"65d39f57.81cf4",
+		"type":"mqtt out",
+		"z":"951c9bfb.3785a",
+		"name":"",
+		"topic":"sensors/temperature/data",
+		"qos":"",
+		"retain":"",
+		"broker":"67048e4d.0a0518",
+		"x":865.5,
+		"y":135,
+		"wires":[]
+	},
+	{
+		"id":"b778a9cf.161728",
+		"type":"debug",
+		"z":"951c9bfb.3785a",
+		"name":"",
+		"active":true,
+		"console":"false",
+		"complete":"false",
+		"x":795.5,
+		"y":63,
+		"wires":[]
+	},
+	{
+		"id":"fac60b04.05c008",
+		"type":"mqtt in",
+		"z":"951c9bfb.3785a",
+		"name":"",
+		"topic":"sensors/temperature/data",
+		"qos":"2",
+		"broker":"67048e4d.0a0518",
+		"x":215.5,
+		"y":223,
+		"wires":[["263bf844.3a74c"]]
+	},
+	{
+		"id":"263bf844.3a74c",
+		"type":"function",
+		"z":"951c9bfb.3785a",
+		"name":"Switch LCD color",
+		"func":"var r_val = 0;\nvar g_val = 0;\nvar b_val = 0;\n\nvar json = JSON.parse(msg.payload)\n\nif (json.value >= 25) {\n  r_val = 255;\n  g_val = 0;\n  b_val = 0;\n} else if (json.value <= 20){\n  r_val = 0;\n  g_val = 0;\n  b_val = 255;\n} else {\n  r_val = 0;\n  g_val = 255;\n  b_val = 0;\n}\n\nmsg.payload = json.value + \"C              \"\n\nmsg.lcdColor = {\n  \"r\": r_val,\n  \"g\": g_val,\n  \"b\": b_val,\n}\n\nmsg.lcdCursor = {\n    row: 1,\n    column: 1,\n}\n\nreturn msg;",
+		"outputs":1,
+		"noerr":0,
+		"x":541.5,
+		"y":227,
+		"wires":[["a94423ae.49f258"]]},
+	{
+		"id":"a94423ae.49f258",
+		"type":"upm-grove-rgb-lcd",
+		"z":"951c9bfb.3785a",
+		"name":"",
+		"platform":"512",
+		"r":0,
+		"g":0,
+		"b":255,
+		"row":0,
+		"column":0,
+		"x":804.5,
+		"y":226,
+		"wires":[]
+	},
+	{
+		"id":"67048e4d.0a0518",
+		"type":"mqtt-broker",
+		"z":"",
+		"broker":"localhost",
+		"port":"8883",
+		"tls":"fbb704ea.f6274",
+		"clientid":"",
+		"usetls":true,
+		"compatmode":true,
+		"keepalive":"60",
+		"cleansession":true,
+		"willTopic":"",
+		"willQos":"0",
+		"willPayload":"",
+		"birthTopic":"",
+		"birthQos":"0",
+		"birthPayload":""
+	},
+	{
+		"id":"fbb704ea.f6274",
+		"type":"tls-config",
+		"z":"",
+		"name":"",
+		"cert":"/etc/mosquitto/certs/server.crt",
+		"key":"/etc/mosquitto/certs/server.key",
+		"ca":"/etc/mosquitto/ca_certificates/ca.crt",
+		"verifyservercert":false
+	}
 ]</pre></ui-codemirror>
 
                 </div>
@@ -605,6 +600,9 @@ return msg;</pre></ui-codemirror>
                   <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and enter your gateway password in Password field. </li>
                   <li>The /lcd/color API  can be passed a RGB value like this.
                     <pre><code>http://{{hostname}}:1880/lcd/color?r=128&g=255&b=255</code></pre>
+                  <li>Similarly the /lcd/lcdtext API  can be passed a string value like this.
+                    <pre><code>http://{{hostname}}:1880/lcd/lcdtext?lcdtext="Hello World!"</code></pre>
+
                   </li>
                 </ul>
             </div>
