@@ -599,9 +599,9 @@ return msg;</pre></ui-codemirror>
                   <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 1880 with the URL specified above.</li>
                   <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and enter your gateway password in Password field. </li>
                   <li>The /lcd/color API  can be passed a RGB value like this.
-                    <pre><code>http://{{hostname}}:1880/lcd/color?r=128&g=255&b=255</code></pre>
+                    <pre><code>http://{gateway ip address}:1880/lcd/color?r=0&g=255&b=0</code></pre>
                   <li>Similarly the /lcd/lcdtext API  can be passed a string value like this.
-                    <pre><code>http://{{hostname}}:1880/lcd/lcdtext?lcdtext="Hello World!"</code></pre>
+                    <pre><code>http://{gateway ip address}:1880/lcd/text?lcdtext="Hello World!"</code></pre>
 
                   </li>
                 </ul>
