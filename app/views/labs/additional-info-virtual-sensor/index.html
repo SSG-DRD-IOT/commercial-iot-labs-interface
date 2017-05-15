@@ -26,7 +26,7 @@
           <p>Virtual sensor program is designed to simulate publishing of continuous random temperature sensor data over the topic <b>sensors/temperature/data</b>. This can be useful in scenarios where it is required to test/debug some infrastructure/connections/code without use of actual sensors.</p>
           <p>The virtual sensor program has two versions, one is the <b>virtual-sensor.js</b> and another is <b>virtual-sensor-secure.js</b>. The secure version uses MQTT connection with TLS & SSL components. You can use secure version if you are using MQTT with TLS/SSL in your project.</p>
           <p>Follow the below steps to download and run virtual sensors</p>
-          <p>Open a ssh terminal to your NUC gateway, at the root directory download and run virtual sensor program using the below commands</p>
+          <p>Open a ssh terminal to your Intel® IoT Gateway, at the root directory download and run virtual sensor program using the below commands</p>
           <pre><code>git clone https://github.com/SSG-DRD-IOT/virtual-sensor.git</code></pre>
           <pre><code>cd virtual-sensor</code></pre>
           <pre><code>npm install</code></pre>
@@ -39,7 +39,7 @@
       <div ibox title="Subscribe to the sensor data published">
         <div content-block message="Subscribe to the sensor data published" name="configure-virtual-sensor">
           <p>Using mosquitto_sub utility we will subscribe to the data being published (using either JavaScript, Node-Red flows or Virtual Sensor program)</p>
-          <p>Open another ssh terminal to your NUC gateway and give the following command:</p>
+          <p>Open another ssh terminal to your Intel® IoT Gateway and give the following command:</p>
           <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
           <p>Note here we are listening on the secure port 8883 with the TLS version specified. If you use port 1883 it will refuse the connection</p>
           <p>You should start receiving messages as below which are getting published for the topic /sensors/temperature/data depending on whether you are using JavaScript, Node-Red or virtual-sensor-secure program to publish it</p>
