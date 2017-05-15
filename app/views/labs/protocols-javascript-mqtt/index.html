@@ -104,7 +104,7 @@ mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
 
 // Include the JavaScript UPM libraries
 var groveSensor = require('jsupm_grove');
-var LCD = require("jsupm_12clcd"); // Create a new instance of a Grove RGB LCD screen
+var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove RGB LCD screen
 
 // The Offset is necessary for Firmata
 var OFFSET = 512;
