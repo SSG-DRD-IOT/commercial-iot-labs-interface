@@ -39,15 +39,12 @@
                 <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Labs</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
                   <li><a ui-sref="labs.laboverview">Lab Overview</a></li>
-                    <li><a ui-sref="labs.setup-development-environment">Setup Development Environment</a></li>
+                    <!--<li><a ui-sref="labs.setup-development-environment">Setup Development Environment</a></li>-->
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""><span class="nav-label">Video Performance</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
-                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-maarssetup">MAARS Source Setup</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-maarsunderstand">Understand MAARS</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-maarscustomize">Customize MAARS</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-maarscustomsoln">Integrate MAARs into custom solution</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-mediasdk">[Placeholder]Intel&reg; MediaSDK and ffmpeg</a></li>
+                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-maarsunderstand">Explore Intel &reg; Media SDK</a></li>
+                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-maarscustomsoln">Understand Media Acceleration Reference Software</a></li>
                         </ul>
                     </li>
                     <li ng-class="{active: $state.includes('labs')}">
