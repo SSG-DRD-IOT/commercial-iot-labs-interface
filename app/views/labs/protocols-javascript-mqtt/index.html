@@ -27,11 +27,11 @@
             <div content-block name="read-objectives" message="Overview" image-link="./views/labs/protocols-javascript-mqtt/images/lab3.png">
               <h2 class="labHidden">Read the Objectives</h2>
               <labels arduino windows apple linux/>
-              <p>Now that you've created a sensor and actuator device using a temperature sensor and LCD and the Intel IoT Gateway, this lab will lead you through the process of networking them. By the end of the lab instead of having a single process controlling both the temperature sensor and the LCD, you will decouple them. The temperature sensor will send data to the Intel IoT Gateway over MQTT, and you will write a Restful HTTP server to control the LCD.</p>
+              <p>Now that you've created a sensor and actuator device using a temperature sensor and LCD and the Intel® IoT Gateway, this lab will lead you through the process of networking them. By the end of the lab instead of having a single process controlling both the temperature sensor and the LCD, you will decouple them. The temperature sensor will send data to the Intel® IoT Gateway over MQTT, and you will write a Restful HTTP server to control the LCD.</p>
               <p>We will use TLS (certificates that we configured in "Setup TLS" lab) to secure both MQTT and HTTP data</p>
 
               <p>
-                This allows the Intel IoT Gateway to be the centralized point of management, which makes administering the IoT network much more manageable. By networking the sensors and actuators, you can deploy dozens or even hundreds of sensors and actuators all controlled by a single gateway. The decisions and coordiation of IoT devices is handled by the gateway on the edge network.  The sensors simply report their data over MQTT and the actuators wait for commands via HTTP.
+                This allows the Intel® IoT Gateway to be the centralized point of management, which makes administering the IoT network much more manageable. By networking the sensors and actuators, you can deploy dozens or even hundreds of sensors and actuators all controlled by a single gateway. The decisions and coordiation of IoT devices is handled by the gateway on the edge network.  The sensors simply report their data over MQTT and the actuators wait for commands via HTTP.
               </p>
             </div>
             <div content-block name="read-objectives" message="Read the Objectives">
@@ -50,7 +50,7 @@
             <div content-block name="read-xdk-intro" message="Plug in the Grove shield, temperature sensor and the LCD" image-link="./views/labs/protocols-javascript-mqtt/images/temperature-sensors-arduino.jpg">
               <h2 class="labHidden">Plug in the Grove shield, temperature sensor and the LCD</h2>
 
-              <p>In the Sensors and Actuators lab, we connected the temperature sensor (Analog) and LCD display (I2C) to your Arduino* 101. We wrote NodeJS code using the Intel® XDK IoT Edition to measure the temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
+              <p>In the Sensors and Actuators lab, we connected the temperature sensor (Analog) and LCD display (I2C) to your Arduino 101*. We wrote NodeJS code using the Intel® XDK IoT Edition to measure the temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
 
               <p>
                 Your project should start looking like the picture on the right.
@@ -58,7 +58,7 @@
 
               <ol>
                 <li>
-                    <p>Install the Grove Base Shield onto the Arduino* 101 Arduino expansion board.</p>
+                    <p>Install the Grove Base Shield onto the Arduino 101* Arduino expansion board.</p>
                 </li>
                 <li>
                     <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>

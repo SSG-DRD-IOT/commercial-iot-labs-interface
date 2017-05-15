@@ -22,13 +22,13 @@
         <div ibox title="Objectives">
           <div content-block name="read-objectives" message="Read the Objectives">
             <h2 class="labHidden">Read the Objectives</h2>
-            <labels Arduino* 101 windows apple linux/>
-            <p>In this lab you will learn how to use the Intel IoT Developer Kit to developer and deploy software to your Intel&reg; IoT Gateway and Arduino* 101. You will also learn use the hardware in the starter kit to build stand alone IoT devices.</p>
+            <labels Arduino 101* windows apple linux/>
+            <p>In this lab you will learn how to use the Intel IoT Developer Kit to developer and deploy software to your Intel&reg; IoT Gateway and Arduino 101*. You will also learn use the hardware in the starter kit to build stand alone IoT devices.</p>
 
             <p>By the end of this module, you should be able to:</p>
 
             <ul>
-              <li>Connect Grove Kit sensors and actuators to your Arduino* 101.</li>
+              <li>Connect Grove Kit sensors and actuators to your Arduino 101*.</li>
               <li>Use the Node-Red to control actuators and read data from sensors.</li>
             </ul>
           </div>
@@ -108,7 +108,7 @@ function periodicActivity()
   ledState = !ledState; //invert the ledState
   setTimeout(periodicActivity,1000); //call the indicated function after 1 second (1000 milliseconds)
 } </pre> </ui-codemirror><br>
-                    <p>When working with the Gateway and Arduino* 101, "MRAA loads the Arduino* 101* board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
+                    <p>When working with the Gateway and Arduino 101*, "MRAA loads the Arduino 101** board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
                     <p>Note: MRAA is a C/C++ library with bindings to Python, Javascript and Java to interface with the I/O on Galileo, Edison and other platforms, with a structured and sane API where port names/numbering matches the board that you are on</p>
 
                 </div>
@@ -145,7 +145,7 @@ function periodicActivity()
                     </div>
                 </div>
 
-                <div content-block name="establish-connection" message="Establish the connection to the Gateway and synchronize the clocks between your development system and your Arduino* 101" image-link="./views/labs/build-nuc/images/image33.png">
+                <div content-block name="establish-connection" message="Establish the connection to the Gateway and synchronize the clocks between your development system and your Arduino 101*" image-link="./views/labs/build-nuc/images/image33.png">
                     <h2 class="labHidden">Establish the connection to the Gateway and synchronize the clocks between your development system and it</h2>
                     <p><img class="labHidden" alt="" data-fid="503907" src="https://software.intel.com/sites/default/files/managed/fe/8f/image33.png" typeof="foaf:Image"></p>
 
@@ -246,12 +246,12 @@ function periodicActivity()
                     <p><img class="labHidden" alt="temperature sensor" data-fid="503915" src="https://software.intel.com/sites/default/files/managed/21/f9/temperature-sensors.jpg" title="temperature sensor" typeof="foaf:Image"></p>
 
 
-                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Arduino* 101. Write code for NodeJS using the Intel&reg; XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
+                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Arduino 101*. Write code for NodeJS using the Intel&reg; XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
                         on the LCD.</p>
 
                     <ol>
                         <li>
-                            <p>Install the Grove Base Shield onto the Arduino* 101.</p>
+                            <p>Install the Grove Base Shield onto the Arduino 101*.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
@@ -304,7 +304,7 @@ function periodicActivity()
                             <p><code>var groveSensor = require('jsupm_grove');</code></li>
 
                         <li>
-                          <p>When connecting the Intel&reg; IoT Gateway to an Arduino* 101, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino* 101.</p>
+                          <p>When connecting the Intel&reg; IoT Gateway to an Arduino 101*, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101*.</p>
                           <p>Firmata is a generic protocol for communicating with microcontrollers from software on a host computer. It is intended to work with any host computer software package.Basically, this firmware establishes a protocol for talking to the Arduino from the host software.</p>
                           <p class="alert alert-info">However, when communicating to the subplatform all analog, digital and I2C pins require a 512 bit offset.</p>
                         </li>
@@ -353,7 +353,7 @@ console.log(celsius + "° Celsius, or " + fahrenheit + "° Fahrenheit");</pre></
                         <li>
                             <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and use the buttons at the bottom of the Intel&reg; XDK to:
                                 <br> (1) Build your application,
-                                <br> (2) Upload it to Arduino* 101, and
+                                <br> (2) Upload it to Arduino 101*, and
                                 <br> (3) Run the application.</p>
                         </li>
 
@@ -424,7 +424,7 @@ monitor();</pre></ui-codemirror>
                             <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
                             <dl>
                                 <dt>I2C bus (Number)</dt>
-                                <dd>For the Arduino* 101, <strong>use <code>0 + OFFSET</code></strong>.</dd>
+                                <dd>For the Arduino 101*, <strong>use <code>0 + OFFSET</code></strong>.</dd>
 
                                 <dt>lcdAddress (Number)</dt>
                                 <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
@@ -594,7 +594,7 @@ main();</pre></ui-codemirror>
             <div ibox title="Exercise 3: Smart Alarm Clock">
                 <div content-block name="alarm-intro" message="Read the project introduction">
                     <h2 class="labHidden">Read the project introduction</h2>
-                    <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Arduino* 101. Set the alarm time using a web page served directly
+                    <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Arduino 101*. Set the alarm time using a web page served directly
                         from the gateway itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.</p>
                 </div>
 
@@ -639,7 +639,7 @@ main();</pre></ui-codemirror>
                         <p>Now, add your server side code in <span class="icon file">main.js</span>:</p>
                         <ul>
                             <li>
-                                <p>Create a web server on the Arduino* 101 using express in NodeJS.</p>
+                                <p>Create a web server on the Arduino 101* using express in NodeJS.</p>
                             </li>
                             <li>
                                 <p>Remember to edit your <span class="icon file">package.json</span> to include the <em>express</em>, <em>moment</em>, and <em>superagent</em> npm modules.</p>
