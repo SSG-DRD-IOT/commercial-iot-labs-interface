@@ -108,7 +108,7 @@ function periodicActivity()
   ledState = !ledState; //invert the ledState
   setTimeout(periodicActivity,1000); //call the indicated function after 1 second (1000 milliseconds)
 } </pre> </ui-codemirror><br>
-                    <p>When working with the Gateway and Arduino 101*, "MRAA loads the Arduino 101** board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I2C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
+                    <p>When working with the Gateway and Arduino 101*, "MRAA loads the Arduino 101** board as a subplatform. This means all pin numbers, regardless of IO protocol (GPIO/AIO/PWM/I<sup>2</sup>C) are offset by a subplatform index, in this case 512".(Source https://github.com/intel-iot-devkit/commercial-developer-kit-getting-started)</p>
                     <p>Note: MRAA is a C/C++ library with bindings to Python, Javascript and Java to interface with the I/O on Galileo, Edison and other platforms, with a structured and sane API where port names/numbering matches the board that you are on</p>
 
                 </div>
@@ -246,7 +246,7 @@ function periodicActivity()
                     <p><img class="labHidden" alt="temperature sensor" data-fid="503915" src="https://software.intel.com/sites/default/files/managed/21/f9/temperature-sensors.jpg" title="temperature sensor" typeof="foaf:Image"></p>
 
 
-                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Arduino 101*. Write code for NodeJS using the Intel&reg; XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
+                    <p>Connect the Temperature sensor (Analog) and LCD display (I<sup>2</sup>C) to your Arduino 101*. Write code for NodeJS using the Intel&reg; XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
                         on the LCD.</p>
 
                     <ol>
@@ -257,7 +257,7 @@ function periodicActivity()
                             <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A1</strong> of the Grove Base Shield.</p>
                         </li>
                         <li>
-                            <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
+                            <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I<sup>2</sup>C</strong> pins.</p>
                         </li>
                     </ol>
 
@@ -306,7 +306,7 @@ function periodicActivity()
                         <li>
                           <p>When connecting the Intel&reg; IoT Gateway to an Arduino 101*, the gateway uses a subplatform called Firmata to communicate GPIO requests to the Arduino 101*.</p>
                           <p>Firmata is a generic protocol for communicating with microcontrollers from software on a host computer. It is intended to work with any host computer software package.Basically, this firmware establishes a protocol for talking to the Arduino from the host software.</p>
-                          <p class="alert alert-info">However, when communicating to the subplatform all analog, digital and I2C pins require a 512 bit offset.</p>
+                          <p class="alert alert-info">However, when communicating to the subplatform all analog, digital and I<sup>2</sup>C pins require a 512 bit offset.</p>
                         </li>
 
                         <li>
@@ -416,21 +416,21 @@ monitor();</pre></ui-codemirror>
                     <ol>
 
                         <li>
-                            <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
+                            <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I<sup>2</sup>C-type LCDs</strong>:</p>
                             <p><code>var LCD = require('jsupm_i2clcd');</code></p>
                         </li>
 
                         <li>
                             <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
                             <dl>
-                                <dt>I2C bus (Number)</dt>
+                                <dt>I<sup>2</sup>C bus (Number)</dt>
                                 <dd>For the Arduino 101*, <strong>use <code>0 + OFFSET</code></strong>.</dd>
 
                                 <dt>lcdAddress (Number)</dt>
-                                <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
+                                <dd>The JHD1313M1 has two I<sup>2</sup>C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
 
                                 <dt>rgbAddress (Number)</dt>
-                                <dd>The JHD1313M1 has two I2C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
+                                <dd>The JHD1313M1 has two I<sup>2</sup>C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
                             </dl>
                         </li>
 
@@ -442,7 +442,7 @@ monitor();</pre></ui-codemirror>
                                 <li>Then, <strong>write</strong> a string/message to the screen.
                                     <br> e.g. <code>"Temp: " + celsius + "C or " + fahrenheit + "F"</code></li>
                             </ol>
-                            <p>The API documentation for generic I2C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
+                            <p>The API documentation for generic I<sup>2</sup>C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
                         </li>
 
                         <li>
@@ -500,15 +500,15 @@ monitor();</pre></ui-codemirror>
                 <div content-block name="earthquake-sensor-intro" message="Read the introduction to the Earthquake Detector Exercise">
                     <h2 class="labHidden">Read the introduction to the Earthquake Detector Exercise</h2>
 
-                    <p> Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.</p>
+                    <p> Create a prototype of an earthquake detection system using a 3-axis accelerometer (I<sup>2</sup>C) and an LCD display (I<sup>2</sup>C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.</p>
                 </div>
 
                 <div content-block name="earthquake-sensor-plug-in" message="Plug in the Accelerometer" image-link="./views/labs/build-nuc/images/earthquake-detector.jpg">
                     <h2 class="labHidden">Plug in the Accelerometer</h2>
                     <p><img class="labHidden" alt="earthquake detector" data-fid="503918" src="https://software.intel.com/sites/default/files/managed/d6/2d/earthquake-detector.jpg" title="earthquake detector" typeof="foaf:Image"></p>
 
-                    <p>Connect <strong>Grove Accelerometer</strong> to one of the <strong>I2C</strong> pins of the Grove Base Shield.</p>
-                    <p>Connect <strong>Grove LCD</strong> display to another <strong>I2C</strong> pin.</p>
+                    <p>Connect <strong>Grove Accelerometer</strong> to one of the <strong>I<sup>2</sup>C</strong> pins of the Grove Base Shield.</p>
+                    <p>Connect <strong>Grove LCD</strong> display to another <strong>I<sup>2</sup>C</strong> pin.</p>
 
                 </div>
                 <li>
@@ -522,7 +522,7 @@ monitor();</pre></ui-codemirror>
                 <div id="done-exercise1">
 
                     <p>
-                        Create a prototype of an earthquake detection system using a 3-axis accelerometer (I2C) and an LCD display (I2C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
+                        Create a prototype of an earthquake detection system using a 3-axis accelerometer (I<sup>2</sup>C) and an LCD display (I<sup>2</sup>C). Write code for the accelerometer to measure vibration and update the LCD display to warn people of a quake occurring.
                     </p>
 
                     <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">"use strict";
@@ -594,7 +594,7 @@ main();</pre></ui-codemirror>
             <div ibox title="Exercise 3: Smart Alarm Clock">
                 <div content-block name="alarm-intro" message="Read the project introduction">
                     <h2 class="labHidden">Read the project introduction</h2>
-                    <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I2C) with a web server running on the Arduino 101*. Set the alarm time using a web page served directly
+                    <p>Create a prototype of a smart alarm clock using a buzzer (Digital), a button (Digital), a rotary angle (Analog), and an LCD display (I<sup>2</sup>C) with a web server running on the Arduino 101*. Set the alarm time using a web page served directly
                         from the gateway itself, using your laptop or mobile phone. When the alarm goes off, the buzzer sounds and the LCD display indicates it’s time to get up. The rotary dial can be used to adjust the brightness of the display.</p>
                 </div>
 
@@ -610,7 +610,7 @@ main();</pre></ui-codemirror>
                             <p>Connect <strong>Grove Button</strong> to digital pin <strong>D4</strong>.</p>
                         </li>
                         <li>
-                            <p>Connect <strong>Grove LCD</strong> display to any <strong>I2C</strong> pin.</p>
+                            <p>Connect <strong>Grove LCD</strong> display to any <strong>I<sup>2</sup>C</strong> pin.</p>
                         </li>
                         <li>
                             <p>Connect <strong>Grove Rotary Angle</strong> to analog pin <strong>A0</strong>.</p>

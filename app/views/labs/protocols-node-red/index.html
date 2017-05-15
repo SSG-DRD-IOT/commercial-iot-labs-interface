@@ -51,7 +51,7 @@
           <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols-node-red/images/node-red-experience-off.png">
             <div class="alert alert-info">
               <p>If you are developing using the Intel&reg; XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
-              <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I2C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
+              <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I<sup>2</sup>C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
 
             </div>
             <pre><code>systemctl stop node-red-experience</code></pre>
@@ -66,7 +66,7 @@
             <ol>
               <li><p>Install the <b>Grove Base Shield</b> onto the IoT device expansion board.</p></li>
               <li><p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p></li>
-              <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p></li>
+              <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I<sup>2</sup>C</strong> pins.</p></li>
             </ol>
           </div>
           <div content-block name="connect-sensors" message="Save current Node-Red flow" image-link="./views/labs/protocols-node-red/images/node-red-export.png">
@@ -79,7 +79,7 @@
               <li><p>Now delete all the nodes and we are ready for a new flow</p></li>
             </ul>
             <div class="alert alert-info">
-              <p>Note: It is possible to create multiple Node-Red flows but since all the flows will be deployed simultaneously and we will be using same resources (I2C pin, temperature sensor, LCD etc.) there will be contention and hence we use only one flow at a time</p>
+              <p>Note: It is possible to create multiple Node-Red flows but since all the flows will be deployed simultaneously and we will be using same resources (I<sup>2</sup>C pin, temperature sensor, LCD etc.) there will be contention and hence we use only one flow at a time</p>
             </div>
         </div>
       </div>

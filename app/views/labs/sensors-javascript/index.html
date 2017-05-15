@@ -268,7 +268,7 @@
                     <p><img class="labHidden" alt="temperature sensor" data-fid="503915" src="https://software.intel.com/sites/default/files/managed/21/f9/temperature-sensors.jpg" title="temperature sensor" typeof="foaf:Image"></p>
 
 
-                    <p>Connect the Temperature sensor (Analog) and LCD display (I2C) to your Arduino 101*. Write code for NodeJS using the Intel&reg; XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
+                    <p>Connect the Temperature sensor (Analog) and LCD display (I<sup>2</sup>C) to your Arduino 101*. Write code for NodeJS using the Intel&reg; XDK IoT Edition. Measure temperature in Celsius using upm library, convert it to Fahrenheit, then display it
                         on the LCD.</p>
 
                     <ol>
@@ -279,7 +279,7 @@
                             <p>Connect <strong>Grove Temperature Sensor</strong> to analog pin <strong>A0</strong> of the Grove Base Shield.</p>
                         </li>
                         <li>
-                            <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I2C</strong> pins.</p>
+                            <p>Connect <strong>Grove LCD</strong> display to one of the <strong>I<sup>2</sup>C</strong> pins.</p>
                         </li>
                     </ol>
 
@@ -388,21 +388,21 @@ monitor();</li>
                     <ol>
 
                         <li>
-                            <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I2C-type LCDs</strong>:</p>
+                            <p>Similar to using <code>require('jsupm_grove')</code> to include the JavaScript UPM library for the basic Grove components, <strong>include the UPM library for I<sup>2</sup>C-type LCDs</strong>:</p>
                             <p><code>var LCD = require('jsupm_i2clcd');</code></p>
                         </li>
 
                         <li>
                             <p>The specific LCD you have is the <strong>JHD1313M1</strong> Grove RBG LCD. <strong>Instantiate a new <code>LCD.Jhd1313m1</code> object.</strong> The constructor accepts 3 parameters in this order:</p>
                             <dl>
-                                <dt>I2C bus (Number)</dt>
+                                <dt>I<sup>2</sup>C bus (Number)</dt>
                                 <dd>For Gateway and Arduino101*, <strong>use <code>0</code></strong> with an offset of <strong><code>512</code></strong>.</dd>
 
                                 <dt>lcdAddress (Number)</dt>
-                                <dd>The JHD1313M1 has two I2C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
+                                <dd>The JHD1313M1 has two I<sup>2</sup>C addreses: this address identifies the LCD display. <strong>Use <code>0x3E</code>.</strong></dd>
 
                                 <dt>rgbAddress (Number)</dt>
-                                <dd>The JHD1313M1 has two I2C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
+                                <dd>The JHD1313M1 has two I<sup>2</sup>C addreses: this address identifies the RGB backlight. <strong>Use <code>0x62</code>.</strong></dd>
                             </dl>
                         </li>
 
@@ -414,7 +414,7 @@ monitor();</li>
                                 <li>Then, <strong>write</strong> a string/message to the screen.
                                     <br> e.g. <code>"Temp: " + celsius + "C or " + fahrenheit + "F"</code></li>
                             </ol>
-                            <p>The API documentation for generic I2C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
+                            <p>The API documentation for generic I<sup>2</sup>C LCDs can be found here: <a href="http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods" target="_blank">http://iotdk.intel.com/docs/master/upm/node/classes/lcd.html#methods</a></p>
                         </li>
 
                         <li>
