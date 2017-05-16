@@ -261,7 +261,7 @@ return msg;</pre></ui-codemirror>
               <h5>Monitor MQTT Topic on Gateway</h5>
               <p>In order to monitor the MQTT topic on the gateway you will subscribe to the topic using mosquitto.</p>
               <p>In the SSH terminal to the Gateway type:</p>
-              <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</pre></code>
+              <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/tls-certs/certs/server.crt -p 8883 --tls-version tlsv1</pre></code>
               <p>You will start to see the data being published to the "temperature" topic.  This is a great way to help you debug a program that uses MQTT</p>
             </div>
 
@@ -381,9 +381,9 @@ return msg;</pre></ui-codemirror>
 		"type":"tls-config",
 		"z":"",
 		"name":"",
-		"cert":"/etc/mosquitto/certs/server.crt",
-		"key":"/etc/mosquitto/certs/server.key",
-		"ca":"/etc/mosquitto/ca_certificates/ca.crt",
+		"cert":"/etc/tls-certs/certs/server.crt",
+		"key":"/etc/tls-certs/certs/server.key",
+		"ca":"/etc/tls-certs/ca_certificates/ca.crt",
 		"verifyservercert":false
 	}
 ]</pre></ui-codemirror>

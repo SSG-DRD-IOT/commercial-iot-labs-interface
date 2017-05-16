@@ -203,9 +203,9 @@
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
 var fs = require('fs');
-var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+var KEY = fs.readFileSync('/etc/tls-certs/certs/server.key');
+var CERT = fs.readFileSync('/etc/tls-certs/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/tls-certs/ca_certificates/ca.crt')];
 
 var PORT = 8883;
 var HOST = 'localhost';

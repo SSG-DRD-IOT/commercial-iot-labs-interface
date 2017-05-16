@@ -28,7 +28,7 @@
 
             <div ibox title="Generate Server Certificate Authority, Certificate and Key">
               <div content-block message="Generate Server Certificate Authority, Certificate and Key" name="telegraf-certs">
-                <p>First, we will need to generate a server certificate authority, certificate and key. These will be used to authenticate and encrypt the MQTT sensor data.</p>
+                <p>First, we will need to generate a server certificate authority, certificate and key. These will be used to authenticate and encrypt the MQTT & HTTP sensor data.</p>
 
                 <p>Run these commands on the gateway console.</p>
                 <div class="alert alert-warning">
@@ -42,14 +42,11 @@ openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out s
               </div>
 
               <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
-                <p>Now move the CA, Certificate and Key file to the MQTT broker's configuration directories</p>
-                <div class="alert alert-warning">
-                  <p>Note: If the directories <b>ca_certificates</b> and <b>certs</b> are not there manually create them</p>
-                </div>
-                <pre><code>mkdir -p /etc/mosquitto/ca_certificates
-mkdir -p /etc/mosquitto/certs
-mv ca.crt ca.key ca.srl /etc/mosquitto/ca_certificates
-mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
+                <p>Create directories <strong>/etc/tls-certs/ca_certificates</strong> and <strong>/etc/tls-certs/certs</strong> and move the CA, Certificate and Key file to these directories</p>
+                <pre><code>mkdir -p /etc/tls-certs/ca_certificates
+mkdir -p /etc/tls-certs/certs
+mv ca.crt ca.key ca.srl /etc/tls-certs/ca_certificates
+mv server.crt server.csr server.key /etc/tls-certs/certs</code></pre>
               </div>
             </div>
 
@@ -59,9 +56,9 @@ mv server.crt server.csr server.key /etc/mosquitto/certs</code></pre>
                 <pre><code>vim /etc/mosquitto/conf.d/mosquitto_tls.conf</code></pre>
             <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">port 8883
 
-cafile /etc/mosquitto/ca_certificates/ca.crt
-certfile /etc/mosquitto/certs/server.crt
-keyfile /etc/mosquitto/certs/server.key
+cafile /etc/tls-certs/ca_certificates/ca.crt
+certfile /etc/tls-certs/certs/server.crt
+keyfile /etc/tls-certs/certs/server.key
 
 tls_version tlsv1</ui-codemirror>
               <br></br>

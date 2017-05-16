@@ -36,21 +36,21 @@
           <h2 class="labHidden">Issues with MQTT configured with TLS/SSL not publishing sensor data</h2>
           <h4>Issues with MQTT configured with TLS/SSL not publishing data sensor data</h4>
           <p>If you are using MQTT with TLS & SSL configuration then use the below command to verify if sensor data topic for e.g. sensors/temperature/data is published correctly</p>
-          <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/mosquitto/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
+          <pre><code>mosquitto_sub -t sensors/temperature/data --cafile /etc/tls-certs/certs/server.crt -p 8883 --tls-version tlsv1</code></pre>
           <p>If you don't see output messages and it gives error, check the following:</p>
           <h4>Verify your mosquitto broker configuration</h4>
           <ul>
             <li><p>First check what is the error message from mosquitto with following command:</p></li>
             <pre><code>systemctl status mosquitto</pre></code>
             <p>This should give a dump of messages which should give an indication of failure</p>
-            <li><p>Make sure your SSL certificates are generated correctly and copied to directories <b>/etc/mosquitto/ca_certificates</b> and <b>/etc/mosquitto/certs</b> folders. If required re-generate the certificates by following the steps mentioned in section "Generate Server Certificate Authority, Certificate and Key" of lab "Setup TLS"</p></li>
-            <li><p>Next check your custom mosquitto configuration file <b>/etc/mosquitto/conf.d/mosquitto_tls.conf</b> is correctly configured for port 8883, paths to SSL certificates and TLS version as shown below</p></li>
+            <li><p>Make sure your SSL certificates are generated correctly and copied to directories <b>/etc/tls-certs/ca_certificates</b> and <b>/etc/tls-certs/certs</b> folders. If required re-generate the certificates by following the steps mentioned in section "Generate Server Certificate Authority, Certificate and Key" of lab "Setup TLS"</p></li>
+            <li><p>Next check your custom mosquitto configuration file <b>/etc/tls-certs/conf.d/mosquitto_tls.conf</b> is correctly configured for port 8883, paths to SSL certificates and TLS version as shown below</p></li>
             <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure"># TLS and SSL configuration
 port 8883
 
-cafile /etc/mosquitto/ca_certificates/ca.crt
-certfile /etc/mosquitto/certs/server.crt
-keyfile /etc/mosquitto/certs/server.key
+cafile /etc/tls-certs/ca_certificates/ca.crt
+certfile /etc/tls-certs/certs/server.crt
+keyfile /etc/tls-certs/certs/server.key
 
 tls_version tlsv1</ui-codemirror>
             <p>Make sure to stop and start mosquitto service after this change</p>
@@ -70,9 +70,9 @@ tls_version tlsv1</ui-codemirror>
         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Require MQTT and setup the connection to the broker
 var mqtt = require('mqtt');
 var fs = require('fs');
-var KEY = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var CERT = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-var TRUSTED_CA_LIST = [fs.readFileSync('/etc/mosquitto/ca_certificates/ca.crt')];
+var KEY = fs.readFileSync('/etc/tls-certs/certs/server.key');
+var CERT = fs.readFileSync('/etc/tls-certs/certs/server.crt');
+var TRUSTED_CA_LIST = [fs.readFileSync('/etc/tls-certs/ca_certificates/ca.crt')];
 
 var PORT = 8883;
 var HOST = 'localhost';

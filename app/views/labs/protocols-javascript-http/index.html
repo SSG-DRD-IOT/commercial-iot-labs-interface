@@ -129,8 +129,8 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 
-var privateKey  = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var certificate = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var privateKey  = fs.readFileSync('/etc/tls-certs/certs/server.key');
+var certificate = fs.readFileSync('/etc/tls-certs/certs/server.crt');
 var credentials = {key: privateKey, cert: certificate};
 
 // The body-parser library allows us to declare the server will use JSON format
@@ -282,8 +282,8 @@ var https = require('https');
 // The body-parser library allows us to declare the server will use JSON format
 var bodyParser = require('body-parser');
 
-var privateKey  = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var certificate = fs.readFileSync('/etc/mosquitto/certs/server.crt');
+var privateKey  = fs.readFileSync('/etc/tls-certs/certs/server.key');
+var certificate = fs.readFileSync('/etc/tls-certs/certs/server.crt');
 var credentials = {key: privateKey, cert: certificate};
 
 // Declare the HTTP server as a variable named "app"
