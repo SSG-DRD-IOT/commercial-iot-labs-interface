@@ -162,8 +162,6 @@
                 </div>
             </div>
 
-
-
             <!-- Change the password of your Intel® IoT Gateway -->
             <div ibox title="Change the password of your Intel® IoT Gateway">
                 <div content-block name="Windows-SSH" message="Change the password of your Intel® IoT Gateway">
@@ -176,7 +174,39 @@
                 </div>
             </div>
 
+            <!-- Change the password of your Intel® IoT Gateway -->
+            <div ibox title="Install and configure Atom Editor">
+                <div content-block name="Download and install Atom Editor" message="Download and install Atom Editor">
+                    <h2 class="labHidden">Install and configure Atom text Editor</h2>
+                    <p>Atom is an open source text editor which we can use to write programs in our labs and then execute on the Intel® IoT Gateway</p>
+                    <p>It also has an option to connect remotely to your device so that all the files on the device can be accesible through Atom UI interface</p>
+                    <p>Download and install Atom for your host PC/laptop from the <a href="https://atom.io" target="_blank">atom.io</a> link. Follow the instructions available on the link</p>
+                </div>
+                <div content-block name="Install nuclide plugin in Atom" message="Install nuclide plugin in Atom" image-link="./views/labs/setup-development-environment/images/nuclide-install.png">
+                    <h2 class="labHidden">Install nuclide plugin in Atom</h2>
+                    <p>To remotely connect to our Intel® IoT Gateway from Atom we will install nuclide package</p>
+                    <p>On Windows PC: Go to <strong>File->Settings</strong></p>
+                    <p>On Ubunutu/Linux PC: Go to <strong>Edit->Preferences</strong></p>
+                    <p>On Mac PC: Go to <strong>Edit->Preferences</strong></p>
+                    <p>Click "+Install" and then in the text box of "Install Packages" type <strong>nuclide</strong> and click "Packages" as shown in figure. This will list the nuclide pacakges.</p>
+                    <p>Click <strong>Install</strong> on nuclide package as shown in the figure to install the plugin</p>
+                </div>
 
+                <div content-block name="Launch Remote connection from Nuclide" message="Launch Remote connection from Nuclide" image-link="./views/labs/setup-development-environment/images/nuclide-install_2.png">
+                  <h2 class="labHidden">Launch Remote connection from Nuclide</h2>
+                  <p>Once nuclide is installed successfully on Atom you will see Nuclide home page as shown in figure</p>
+                  <p>Click on "Try it" button of <strong>Remote Connection</strong> on home page of Nuclide</p>
+                </div>
+
+                <div content-block name="Configuration for Remote Connection to Intel® IoT Gateway" message="Configuration for Remote Connection to Intel® IoT Gateway" image-link="./views/labs/setup-development-environment/images/nuclide-install_3.png">
+                  <h2 class="labHidden">Configuration for Remote Connection to Intel® IoT Gateway</h2>
+                  <p>As shown in figure fill up the details for your device to connect to it remotely. You can specify your <strong>/home/{user name}"</strong> directory as "Initial Directory"</p>
+                  <p>Give your device IP address as "Server" and your user name in "Username"</p>
+                  <p>Make sure that "Authentication method" is selected as "Password:" and enter your device passwrod there</p>
+                  <p>Click on Connect</p>
+                  <p>If connection is successfull you should see your device home directory in "File Tree"</p>
+                </div>
+            </div>
 
             <!-- Lab Conclusion -->
             <div ibox title="Lab Conclusion">
