@@ -35,25 +35,29 @@
                   <p>It is important to note that while generating these, the <strong>“Common Name”</strong> parameter in step 1 above and step 3 should specify the server address, <strong>“localhost”</strong>. Otherwise it will not authenticate correctly.</p>
                   <p>Also make sure to use the same passphrase between the first step and the last step of generating server key</p>
                 </div>
-                <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt
-openssl genrsa -out server.key 2048
-openssl req -out server.csr -key server.key -new
-openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365</code></pre>
+                <pre><code>openssl req -new -x509 -days 365 -extensions v3_ca -keyout ca.key -out ca.crt</pre></code>
+                <p>It will ask you to enter a passphrase "Enter PEM pass phrase:". You will use this same passphrase in last step of generating certificates so make sure to make a note of it</p>
+                <p>You can enter default for all the steps except when it asks for "Common Name" where you should enter <strong>localhost</strong></p>
+                <pre><code>openssl genrsa -out server.key 2048
+openssl req -out server.csr -key server.key -new</code></pre>
+                <p>If you entered all defaults in step 1 do the same here except "Common Name" which should be specified as <strong>localhost</strong></p>
+                <pre><code>openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365</code></pre>
+                <p>Here enter the passphrase you used in step 1 to generate all the required certificates</p>
               </div>
 
               <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
                 <p>Create directories <strong>/etc/tls-certs/ca_certificates</strong> and <strong>/etc/tls-certs/certs</strong> and move the CA, Certificate and Key file to these directories</p>
-                <pre><code>mkdir -p /etc/tls-certs/ca_certificates
-mkdir -p /etc/tls-certs/certs
-mv ca.crt ca.key ca.srl /etc/tls-certs/ca_certificates
-mv server.crt server.csr server.key /etc/tls-certs/certs</code></pre>
+                <pre><code>sudo mkdir -p /etc/tls-certs/ca_certificates
+sudo mkdir -p /etc/tls-certs/certs
+sudo mv ca.crt ca.key ca.srl /etc/tls-certs/ca_certificates
+sudo mv server.crt server.csr server.key /etc/tls-certs/certs</code></pre>
               </div>
             </div>
 
             <div ibox title="Configure Mosquitto to use MQTT over TLS">
               <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
                 <p>Create a custom configuration file <strong>mosquitto_tls.conf</strong> in conf.d folder of mosquitto as shown below</p>
-                <pre><code>vim /etc/mosquitto/conf.d/mosquitto_tls.conf</code></pre>
+                <pre><code>sudo vim /etc/mosquitto/conf.d/mosquitto_tls.conf</code></pre>
             <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">port 8883
 
 cafile /etc/tls-certs/ca_certificates/ca.crt
@@ -63,10 +67,10 @@ keyfile /etc/tls-certs/certs/server.key
 tls_version tlsv1</ui-codemirror>
               <br></br>
               <p>Make sure to stop and start mosquitto service after this change</p>
-                <pre><code>systemctl stop mosquitto</code></pre>
-                <pre><code>systemctl start mosquitto</code></pre>
+                <pre><code>sudo systemctl stop mosquitto</code></pre>
+                <pre><code>sudo systemctl start mosquitto</code></pre>
               <p>Check to make sure mosquitto service is running properly with below command. The status should be "active (running)"</p>
-                <pre><code>systemctl status mosquitto</code></pre>
+                <pre><code>sudo systemctl status mosquitto</code></pre>
               </div>
             </div>
     </div>

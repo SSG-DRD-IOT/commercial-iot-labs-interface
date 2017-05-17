@@ -47,7 +47,7 @@
                   <h2 class="labHidden">Create a LED blink project</h2>
                   <p>In your home directory on your Intel® IoT Gateway create a <strong>labs</strong> directory. We will put all our labs program here. This can be done from Atom Editor by right clicking on the home folder in your "File Tree" and selecting <strong>New->Folder</strong></p>
                   <p>In same way under lab directory create another directory and name it <strong>sensors</strong></p>
-                  <p>Similarly create <strong>LEDBlink</strong> directory under sensors and finally right click on sensors directory and choose <strong>New->File</strong> and name the file <strong>main.js</strong>. We will write the LED blink program to it</p>
+                  <p>Similarly create <strong>LEDBlink</strong> directory under sensors and finally right click on LEDBlink directory and choose <strong>New->File</strong> and name the file <strong>main.js</strong>. We will write the LED blink program to it</p>
               </div>
 
               <div content-block name="Write LED blink program" message="Write LED blink program">
@@ -92,6 +92,17 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
                   </ol>
               </div>
 
+              <div content-block name="disable-node-red" message="Disable Node-Red service">
+                <p><b>  Disable Node-Red service running on your Gateway</b></p>
+                <ul>
+                  <li><p>The IP address that you see on the LCD screen is a Node-Red flow running on boot, since Node-Red uses the device resources through ttyACM0 node it is required to stop it before we run our Node JS programs</li></p>
+                  <li><p>Open a ssh terminal to your Gateway and give following command:</li></p>
+                  <pre><code>sudo systemctl stop node-red-experience</pre></code>
+                  <li><p>Check that service has stopped</li></p>
+                  <pre><code>sudo systemctl status node-red-experience</pre></code>
+                </ul>
+              </div>
+
               <div content-block name="blink-the-light" message="Run your LED blink program" image-link="./views/labs/sensors-javascript/images/image_arduino_led.png">
                   <h2 class="labHidden">Run your LED blink program</h2>
                   <p><img class="labHidden" alt="" data-fid="503913" src="https://software.intel.com/sites/default/files/managed/61/94/image_arduino_led.png" typeof="foaf:Image"></p>
@@ -132,7 +143,7 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
                             <p>On your Intel® IoT Gateway under <strong>labs/sensors</strong> folder create another folder <strong>temperature-sensor</strong> through the Atom editor</p>
                         </li>
                         <li>
-                            <p>In the labs/sensors/temperature-sensor folder create a main.js file</p>
+                            <p>In the labs/sensors/temperature-sensor folder create a <strong>main.js</strong> file</p>
                         </li>
                     </ul>
 

@@ -47,10 +47,10 @@
 
 
           <div ibox title="Creating an MQTT Service to Publish the Temperature Sensor Data">
-            <div content-block name="read-xdk-intro" message="Plug in the Grove shield, temperature sensor and the LCD" image-link="./views/labs/protocols-javascript-mqtt/images/temperature-sensors-arduino.jpg">
+            <div content-block name="mqtt-lab" message="Plug in the Grove shield, temperature sensor and the LCD" image-link="./views/labs/protocols-javascript-mqtt/images/temperature-sensors-arduino.jpg">
               <h2 class="labHidden">Plug in the Grove shield, temperature sensor and the LCD</h2>
 
-              <p>In the Sensors and Actuators lab, we connected the temperature sensor (Analog) and LCD display (I<sup>2</sup>C) to your Arduino 101*. We wrote NodeJS code using the Intel® XDK IoT Edition to measure the temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
+              <p>In the Sensors and Actuators lab, we connected the temperature sensor (Analog) and LCD display (I<sup>2</sup>C) to your Arduino 101*. We wrote NodeJS code to measure the temperature in Celsius using upm library, convert it to Fahrenheit, then display it on the LCD.</p>
 
               <p>
                 Your project should start looking like the picture on the right.
@@ -69,36 +69,41 @@
               </ol>
             </div>
 
-              <div content-block name="read-xdk-intro" message="Start a new project in the Intel® XDK using a blank template." image-link="./views/labs/protocols-javascript-mqtt/images/new-project.png">
-                  <h2 class="labHidden">Start a new project in the Intel® XDK using a blank template.</h2>
+            <div content-block name="mqtt-lab" message="Create a new Node JS project">
+                <h2 class="labHidden">Create a new Node JS project</h2>
+                <p>In earlier lab you created a <strong>labs</strong> directory under home directory on your Intel® IoT Gateway. Now create a <strong>protocols</strong> directory under that</p>
+                <p>In same way under protocols directory create another directory and name it <strong>mqtt-lab</strong></p>
+                <p>Create a <strong>package.json</strong> file and a <strong>main.js</strong> file under mqtt-lab folder</p>
+            </div>
 
-                  <ol>
-                      <li>
-                          <p>Start a new project in the Intel® XDK using a blank template.</p>
-                      </li>
-                      <li>
-                          <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
-                      </li>
-                  </ol>
+            <div content-block name="mqtt-lab" message="Populate the package.json file">
+              <h2 class="labHidden">Write the Code to Read the Temperature Sensor.</h2>
+              <p>
+                 Update package.json you created as shown below. The important component in it is mqtt dependency. You can create your own default package.json file by using command "npm init" and then update the dependencies section with mqtt.
+              </p>
+              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+"name": "protocol-mqtt",
+"description": "Creates a simple service to publish a temperature sensor's data over MQTT",
+"version": "0.0.0",
+"main": "main.js",
+"engines": {
+  "node": ">=0.10.0"
+},
+"license": "BSD-3-Clause",
+"private": true,
+"dependencies": {
+  "mqtt": "latest"
+}
+}</pre></ui-codemirror>
 
-                  <div class="alert alert-info">
-                      <p>This temperature project will be used in all the later labs to supply a steady stream of data.</p>
-                  </div>
-              </div>
+            </div>
 
-              <div content-block name="read-xdk-intro" message="Select the Blank Template" image-link="./views/labs/protocols-javascript-mqtt/images/blank_template.png">
-                <h2 class="labHidden">Select the Blank Template</h2>
-
-                <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
-                <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
-              </div>
-
-              <div content-block name="read-xdk-intro" message="Copy the code from the JavaScript Sensors and Actuators Lab into this new project">
+            <div content-block name="mqtt-lab" message="Copy the code from the JavaScript Sensors and Actuators Lab into this new project">
                 <h2 class="labHidden">Copy the code from the JavaScript Sensors and Actuators Lab into this new project</h2>
                 <p>
-                  In the Sensors and Actuators lab, we created a program to read the temperature and display is on the LCD screen. It should look something like this.
+                  In the Sensors and Actuators lab, we created a program to read the temperature and display is on the LCD screen. It should look something like code below.
+                  Copy this to the newly created <strong>main.js</strong> file.
                 </p>
-
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa") ;
 mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
 
@@ -138,7 +143,7 @@ function monitor() {
 monitor();</pre></ui-codemirror>
                           </div>
 
-                      <div content-block name="read-xdk-intro" message="Remove the LCD Code">
+                      <div content-block name="mqtt-lab" message="Remove the LCD Code">
                         <h2 class="labHidden">Write the Code to Read the Temperature Sensor.</h2>
 
                           <p>
@@ -175,29 +180,7 @@ function monitor() {
 
 // Call the monitor function once
 monitor();</pre></ui-codemirror>
-
                       </div>
-                        <div content-block name="read-xdk-intro" message="Remove the LCD Code">
-                          <h2 class="labHidden">Write the Code to Read the Temperature Sensor.</h2>
-                          <p>
-                             Next add MQTT as a dependency in your package.json.
-                          </p>
-                          <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
-  "name": "protocol-mqtt",
-  "description": "Creates a simple service to publish a temperature sensor's data over MQTT",
-  "version": "0.0.0",
-  "main": "main.js",
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "license": "BSD-3-Clause",
-  "private": true,
-  "dependencies": {
-      "mqtt": "latest"
-  }
-}</pre></ui-codemirror>
-
-                        </div>
 
                       <div content-block name="read-xdk-intro" message="Add the MQTT connect code">
                         <p>
@@ -349,7 +332,10 @@ monitor();</pre></ui-codemirror>
 
               <div content-block name="deploy-application" message="Deploy the application">
                   <h2 class="labHidden">Deploy the application</h2>
-                  <p>Upload and run your application from Intel&reg; XDK</p>
+                  <p>Open a ssh terminal to your Intel® IoT Gateway and go to folder <strong>/home/{user}/labs/protocols/mqtt-lab</strong>. Type following command to install mqtt depenency package</p>
+                  <pre><code>npm install</pre></code>
+                  <p>Next run your application</p>
+                  <pre><code>node main.js</pre></code>
               </div>
 
               <div content-block name="repeat-sensor-reading" message="See the Debugging MQTT section in the sidebar under Additional Information">
