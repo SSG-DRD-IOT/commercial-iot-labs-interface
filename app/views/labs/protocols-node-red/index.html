@@ -41,10 +41,10 @@
               <p>Knowing how to start and stop the node-red-experience service will help tremendously in troubleshooting problems that may arise while developing.</p>
             </div>
             <p>Open a console to the Intel&reg; IoT Gateway and type the following:</p>
-            <pre><code>systemctl status node-red-experience</code></pre>
+            <pre><code>sudo systemctl status node-red-experience</code></pre>
             <p>If you see green text that says, "active (running)" then the Node-Red service is running</p>
             <p>If Node-Red is not running on your gateway then type: </p>
-            <pre><code>systemctl start node-red-experience</code></pre>
+            <pre><code>sudo systemctl start node-red-experience</code></pre>
             <p>This will begin the node-red service.</p>
           </div>
 
@@ -54,7 +54,7 @@
               <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I<sup>2</sup>C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
 
             </div>
-            <pre><code>systemctl stop node-red-experience</code></pre>
+            <pre><code>sudo systemctl stop node-red-experience</code></pre>
             <p>This will turn off the node-red service.</p>
           </div>
         </div>
@@ -69,6 +69,12 @@
               <li><p>Connect <strong>Grove LCD</strong> display to one of the <strong>I<sup>2</sup>C</strong> pins.</p></li>
             </ol>
           </div>
+
+          <div content-block name="connect-sensors" message="Start Node-Red interface from browser">
+            <p>Open your browser and enter your Intel® IoT Gateway IP address with port as 1880. Replace 192.168.3.4 with your device IP address below:</p>
+            <pre><code>https://192.168.3.4:1880</pre></code>
+          </div>
+
           <div content-block name="connect-sensors" message="Save current Node-Red flow" image-link="./views/labs/protocols-node-red/images/node-red-export.png">
             <p><b>Save current Node-Red flow</b></p>
             <p>Before we start writing Node-Red flow let's backup the existing flow with following steps:</p>
@@ -164,8 +170,11 @@
                   <li>Enter the "Server" configuration as <strong>"localhost:8883"</strong>. Here 8883 is the secure TLS port. Also enter Topic as <strong>sensors/temperature/data</strong></li>
                   <li>Next select the pencil icon to edit the server settings. In that check the <strong>Enable secure (SSL/TLS) connection</strong> option and select the pencil icon to edit the TLS configuration</li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503934" src="" title="mqtt edit" typeof="foaf:Image"></p>
-                  <li>Enter the certificate information as shown in the figure. These are the self signed certificates that we generated in "Setup TLS" lab. Uncheck the "Verify server certificate option"</li>
+                  <li>Enter the certificate information as shown in the figure (and listed below). These are the self signed certificates that we generated in "Setup TLS" lab. Uncheck the <strong>"Verify server certificate option"</strong></li>
                   <p><img class="labHidden" alt="mqtt edit" data-fid="503935" src="" title="mqtt edit" typeof="foaf:Image"></p>
+                  <p><strong>Certificate:</strong> /etc/tls-certs/certs/server.crt</p>
+                  <p><strong>Private Key:</strong> /etc/tls-certs/certs/server.key</p>
+                  <p><strong>CA Certificate:</strong> /etc/tls-certs/ca_certificates/ca.crt</p>
                 </ul>
             </div>
             <div content-block name="" message="Take Note of the JSON format that you will need to create for this and future labs.">

@@ -75,51 +75,45 @@
                   </div>
               </div>
 
-
-              <div content-block name="read-xdk-intro" message="Start a new project in the Intel® XDK using a blank template." image-link="./views/labs/protocols-javascript-http/images/new-project.png">
-                <h2 class="labHidden">Start a new project in the Intel® XDK using a blank template.</h2>
-
-                <ol>
-                    <li>
-                        <p>Start a new project in the Intel® XDK using a blank template.</p>
-                    </li>
-                    <li>
-                        <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
-                    </li>
-                </ol>
+              <div content-block name="http-lab" message="Create a new Node JS project">
+                  <h2 class="labHidden">Create a new Node JS project</h2>
+                  <p>Create a <strong>http-lab</strong> directory under <strong>/home/{user}/labs/protocols</strong> from your Atom editor</p>
+                  <p>Create a <strong>package.json</strong> file and a <strong>server.js</strong> file under http-lab folder</p>
               </div>
 
-              <div content-block name="read-xdk-intro" message="Select the Blank Template" image-link="./views/labs/protocols-javascript-http/images/blank_template.png">
-                <h2 class="labHidden">Select the Blank Template</h2>
-
-                <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
-
-
-                <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
-              </div>
-
-
-              <div content-block message="Include the Dependencies">
-                <h2 class="labHidden">Include the Dependencies</h2>
-
+              <div content-block name="http-lab" message="Populate the package.json file">
+                <h2 class="labHidden">Populate the package.json file</h2>
                 <p>
-                  In the package.json file change the dependencies to include the <b>express</b> and <b>body-parser</b>.
+                   Update <strong>package.json</strong> you created as shown below. The important section is dependencies. You can create your own default package.json file by using command "npm init" and then update the dependencies section as shown below.
+                </p>
+                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">{
+  "name": "protocol-http",
+  "description": "Creates a simple HTTPS server to control LCD actuator",
+  "version": "0.0.0",
+  "main": "server.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "BSD-3-Clause",
+  "private": true,
+  "dependencies": {
+    "express" : "latest",
+    "body-parser" : "latest",
+    "http" : "latest",
+    "https" : "latest"
+  }
+}</pre></ui-codemirror>
+
+              </div>
+
+              <div content-block message="Start updating the content of server.js">
+                <h2 class="labHidden">Start updating the content of server.js</h2>
+                <p>
+                  In the server.js file do a require of <b>express</b> and <b>body-parser</b> along with mraa, fs, http and https. Also add details of TLS certificates
                 </p>
                 <p class="label">
-                  package.json
+                  server.js
                 </p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">  "dependencies": {
-      "express" : "latest",
-      "body-parser" : "latest",
-      "http" : "latest",
-      "https" : "latest"
-  }</pre></ui-codemirror>
-              <p>
-                In the server.json file do a require of <b>express</b> and <b>body-parser</b>.
-              </p>
-              <p class="label">
-                server.js
-              </p>
               <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var mraa = require("mraa");
 mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
 
@@ -173,10 +167,10 @@ app.use(function (req, res, next) {
                 </div>
 
 
-                <div content-block message="Instantiate the HTTPS server variable named app   and the LCD variable.">
-                    <h2 class="labHidden">Instantiate the HTTPS server variable named app and the LCD variable.</h2>
+                <div content-block message="Add variables to hold backlight value and text for LCD.">
+                    <h2 class="labHidden">Add variables to hold backlight value and text for LCD.</h2>
                     <p>
-                      Declare two variables to hold the the backlight value and the text that the LCD screen.  At this point, we can also turn the backlight off.
+                      Declare two variables to hold the the backlight value and the text for the LCD screen. At this point, we can also turn the backlight off.
                     </p>
 
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var backlight = {
@@ -359,7 +353,10 @@ console.log('Example app listening at http://%s:%s', host, port);
                 </div>
                 <div content-block name="deploy-application" message="Deploy the application">
                     <h2 class="labHidden">Deploy the application</h2>
-                    <p>Upload and run your application from Intel&reg; XDK</p>
+                    <p>Open a ssh terminal to your Intel® IoT Gateway and go to folder <strong>/home/{user}/labs/protocols/http-lab</strong>. Type following command to install all the depenencies</p>
+                    <pre><code>npm install</pre></code>
+                    <p>Next run your https server application</p>
+                    <pre><code>node server.js</pre></code>
                 </div>
               </div>
 
