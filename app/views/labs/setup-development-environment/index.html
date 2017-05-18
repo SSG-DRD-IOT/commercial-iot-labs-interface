@@ -182,20 +182,28 @@
                     <p>It also has an option to connect remotely to your device so that all the files on the device can be accesible through Atom UI interface on your PC/laptop</p>
                     <p>Download and install Atom for your host PC/laptop from the <a href="https://atom.io" target="_blank">atom.io</a> link. Follow the instructions available on the link</p>
                 </div>
-                <div content-block name="Install nuclide plugin in Atom" message="Install nuclide plugin in Atom" image-link="./views/labs/setup-development-environment/images/nuclide-install.png">
+                <div content-block name="Install nuclide plugin in Atom" message="Install nuclide plugin in Atom">
                     <h2 class="labHidden">Install nuclide plugin in Atom</h2>
-                    <p>To remotely connect to our Intel® IoT Gateway from Atom we will install nuclide package</p>
-                    <p>On Windows PC: Go to <strong>File->Settings</strong></p>
-                    <p>On Ubunutu/Linux PC: Go to <strong>Edit->Preferences</strong></p>
-                    <p>On Mac PC: Go to <strong>Edit->Preferences</strong></p>
-                    <p>Click "+Install" and then in the text box of "Install Packages" type <strong>nuclide</strong> and click "Packages" as shown in figure. This will list the nuclide pacakges.</p>
-                    <p>Click <strong>Install</strong> on nuclide package as shown in the figure to install the plugin</p>
+                    <p>We will install version 0.226.0 of nuclide. Open a command prompt on your PC/laptop and enter following command:</p>
+                    <pre><code>apm install nuclide@0.226.0</pre></code>
+                    <div class="alert alert-info">
+                      <p>apm is atom package manager, in case if apm is not found, for e.g. on Windows PC set environment path variable to point to "C:\Users\{User login}\AppData\Local\atom\bin"</p>
+                    </div>
+                </div>
+
+                <div content-block name="Restart Atom and Rebuild Nuclide package if necessary" message="Restart Atom and Rebuild Nuclide package if necessary" image-link="./views/labs/setup-development-environment/images/nuclide-226.png">
+                  <h2 class="labHidden">Restart Atom and Rebuild Nuclide package if necessary</h2>
+                  <p>Close and restart Atom Editor</p>
+                  <p>If you see <strong>Nuclide</strong> as one of the menu option in Atom then it installed successfully and you don't need the below two steps</p>
+                  <p>As shown in figure if you see a red error icon on the bottom right corner, click on it and it will show that nuclide package needs rebuilding</p>
+                  <p>Click on <strong>Rebuild Packages</strong> and once it is completed, click on <strong>Reload Atom</strong> which will restart Atom and you should see Nuclide in the menu</p>
                 </div>
 
                 <div content-block name="Launch Remote connection from Nuclide" message="Launch Remote connection from Nuclide" image-link="./views/labs/setup-development-environment/images/nuclide-install_2.png">
                   <h2 class="labHidden">Launch Remote connection from Nuclide</h2>
                   <p>Once nuclide is installed successfully on Atom you will see Nuclide home page as shown in figure</p>
                   <p>Click on "Try it" button of <strong>Remote Connection</strong> on home page of Nuclide</p>
+                  <p>If you don't see the home page go to menu option <strong>Nuclide->Remote Projects->Connect to Remote Project</strong></p>
                 </div>
 
                 <div content-block name="Configuration for Remote Connection to Intel® IoT Gateway" message="Configuration for Remote Connection to Intel® IoT Gateway" image-link="./views/labs/setup-development-environment/images/nuclide-install_3.png">

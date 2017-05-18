@@ -112,7 +112,12 @@
           <p>Before we start monitoring sensor data, let's make sure the sensors are publishing the data. We saw two ways to do this:</p>
           <ul>
             <li><p>Using the node-red flow for temperature sensor that we did in "Application Protocols: MQTT and HTTP". However this needs a small change where we have to change the mqtt output and input nodes to use port <b>8883</b> instead of 1883 and re-deploy</p></li>
-            <li><p>Second is by running the virtual-sensor.js program in "virtual-sensor" folder we downloaded in "Security and the Internet of Things" lab with command "node virtual-sensor.js" which publishes random temperature data on port <b>8883</b></li></p>
+            <li><p>Second is by running the virtual-sensor.js program. This program simulates temperature and other sensor readings in absence of actual hardware. We will execute this program to generate random temperature data on port <b>8883</b></li></p>
+            <li><p>Follow below steps to download and run it</p></li>
+            <pre><code>git clone https://github.com/SSG-DRD-IOT/virtual-sensor.git</code></pre>
+            <pre><code>cd virtual-sensor</code></pre>
+            <pre><code>npm install</code></pre>
+            <pre><code>node virtual-sensor.js --tls</code></pre>
           </ul>
           <div class="alert alert-info">
             <p>Ensure that sensor data is published using any one of the above two methods.</p>
@@ -158,7 +163,7 @@
     <div content-block name="monitord-new-project" message="Create monitord Project and Import NPM Modules">
       <h2 class="labHidden">Create "monitord" Project and Import NPM Modules</h2>
       <h4><a name="sensorMonitor">Create "monitord" Project and Import NPM Modules</a></h4>
-      <p>Open a new console to your gateway and create a project named <b>monitord</b> and change to that directory.</p>
+      <p>Open a new console to your gateway and create a project named <b>monitord</b> under the <b>/home/{user}/labs</b> directory and change to that directory.</p>
       <pre><code>cd ~&#13;&#10;mkdir monitord&#13;&#10;cd monitord</code></pre>
 
       <p>Next generate an NPM package file which holds the metadata associated with this project.</p>
@@ -332,7 +337,7 @@ mqttClient.on('message', function(topic, message) {
             To verify that data is being spooled into the database, you will need to use the command line Mongo client.
           </p>
           <p>
-            Start the Mongo client by typing on a command line <pre><code>mongo</code></pre>
+            Open a new ssh terminal to your gateway and start the Mongo client by typing on a command line <pre><code>mongo</code></pre>
           </p>
           <p>
             Once in the mongo client type <pre><code>show dbs</code></pre> the <b>iotdemo</b> database should be in the displayed list.  Now you can switch to the database. <pre><code>use iotdemo</code></pre>
