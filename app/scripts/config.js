@@ -168,6 +168,31 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+
+    .state('labs.videoperformance-mediasdk', {
+      url: "/videoperformance-mediasdk",
+      templateUrl: "views/labs/videoperformance-mediasdk/index.html",
+      data: {
+        pageTitle: 'Integrate MAARs into custom solution'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+
     .state('labs.remote-configamt', {
       url: "/remote-configamt",
       templateUrl: "views/labs/remote-configamt/index.html",
