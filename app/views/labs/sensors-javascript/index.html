@@ -41,13 +41,10 @@
 
             <div ibox title="Deploy LED application to Intel® IoT Gateway">
               <div content-block name="Create a LED blink project" message="Create a LED blink project">
-                <div class="alert alert-info">
-                  <p>Make sure Atom editor is installed on your PC/laptop and Remote connection established with your Intel® IoT Gateway as explained in the first lab "Setup Development Environment"</p>
-                </div>
-                  <h2 class="labHidden">Create a LED blink project</h2>
-                  <p>In your home directory on your Intel® IoT Gateway create a <strong>labs</strong> directory. We will put all our labs program here. This can be done from Atom Editor by right clicking on the home folder in your "File Tree" and selecting <strong>New->Folder</strong></p>
-                  <p>In same way under lab directory create another directory and name it <strong>sensors</strong></p>
-                  <p>Similarly create <strong>LEDBlink</strong> directory under sensors and finally right click on LEDBlink directory and choose <strong>New->File</strong> and name the file <strong>main.js</strong>. We will write the LED blink program to it</p>
+                <h2 class="labHidden">Create a LED blink project</h2>
+                <p>In your home directory (/home/{user}) on your Intel® IoT Gateway create a <strong>labs</strong> directory. We will put all our labs program here.</p>
+                <p>Under lab directory create another directory and name it <strong>sensors</strong></p>
+                <p>Similarly create <strong>LEDBlink</strong> directory under sensors and finally create file <strong>main.js</strong> in it. We will write the LED blink program to it</p>
               </div>
 
               <div content-block name="Write LED blink program" message="Write LED blink program">
@@ -140,7 +137,7 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
 
                     <ul>
                         <li>
-                            <p>On your Intel® IoT Gateway under <strong>labs/sensors</strong> folder create another folder <strong>temperature-sensor</strong> through the Atom editor</p>
+                            <p>On your Intel® IoT Gateway under <strong>labs/sensors</strong> folder create another folder <strong>temperature-sensor</strong></p>
                         </li>
                         <li>
                             <p>In the labs/sensors/temperature-sensor folder create a <strong>main.js</strong> file</p>
@@ -305,7 +302,7 @@ monitor();</pre></ui-codemirror>
                 <div content-block name="deploy-temperature-sensor" message="Deploy the temperature sensor application">
                     <h2 class="labHidden">Deploy the temperature sensor application</h2>
                     <p>Run your application from ssh terminal of your Intel® IoT Gateway by going to the folder temperature-sensor with command</p>
-                    <p><code>node main.js</code></p>
+                    <pre><code>node main.js</code></pre>
                     <div class="alert alert-success">
                         <p>You should now see the temperature displayed on the LCD.</p>
                     </div>
