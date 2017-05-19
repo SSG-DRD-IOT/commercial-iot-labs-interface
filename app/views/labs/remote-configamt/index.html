@@ -9,14 +9,10 @@
                 <a>Labs</a>
             </li>
             <li>
-                <a>Protocols</a>
+                <a>Remote Management</a>
             </li>
             <li class="active">
-                <strong>When entering MEBx change the following:
-1st time login password : “admin” without “”  change to desired password
-Set User Consent Option from “KVM” to “NONE”
-Activate “Network Access” – this enables vPro!
-NOTE: Keep MEBx password in Safe place – If lost, m</strong>
+                <strong>Intel&reg; Active Management Technology</strong>
             </li>
         </ol>
     </div>
@@ -25,380 +21,171 @@ NOTE: Keep MEBx password in Safe place – If lost, m</strong>
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
-
-            <!-- Objectives -->
-            <div ibox title="Objectives">
-              <div content-block name="read-objectives" message="Overview" image-link="./views/labs/protocols-javascript-http/images/lab3.png">
-                <h2 class="labHidden">Read the Objectives</h2>
-                <labels arduino windows apple linux/>
+            <div ibox title="Overview">
+              <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section" image-link="../views/labs/remote-configamt/images/001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS.jpg">
                 <p>
-                  By the end of the lab you will write a Restful HTTPS server to control the action of the LCD.
+                  A single system setup that you can perform and start to get a feel of Intel Active Management Technology (Intel AMT) functionality in just a few minutes. A second system with a network and Internet browser is needed to connect to the Intel AMT system.</p>
                 </p>
-
                 <p>
-                  This builds towards the goal of IoT management. The Intel IoT Gateway will be the centralized point of management. Creating a hierarchial management architecture reduces the amount of work need to maintain the IoT network and increases your organization's return on investment (ROI). By networking the sensors and actuators, you can deploy dozens or even hundreds of sensors and actuators all controlled by a single gateway. The decisions and coordiation of IoT devices is handled by the gateway on the edge network.  The sensors simply report their data over MQTT and the actuators wait for commands via HTTP.
+                  On motherboards that come from Intel1, Intel AMT setup is performed within the BIOS, which is accessed by pressing the <b>F2 key</b> at boot time.
                 </p>
-
-                <div class="alert alert-info">
-                  <p>
-                    <strong>Prerequisite for the Lab</strong>: Since we will be using HTTPS instead of HTTP make sure that your certificates are installed as describe in the section <strong>"Setup TLS"</strong> else you will get connection errors
-                  </p>
-                </div>
+                <p>
+                  For most other vendors, Intel AMT setup occurs using the Intel® Management Engine BIOS Extension (Intel MEBX) and can be accessed using <b>Ctrl-P key</b> combination at boot time.
+                </p>
+                <h4>Intel Motherboards</h4>
+                <p>
+                  Once in the BIOS setup screen, look for "Intel AMT".
+                  If you have such a screen as shown in Figure 1, your system has Intel AMT,
+                  and you can continue with the short setup steps below. While at the BIOS screen,
+                  make sure to enable Intel AMT or Intel MEBX so that when you reboot, you can enter into the appropriate setup screens.
+                  Within a few minutes you will be interacting with Intel AMT.
+                </p>
               </div>
-              <div content-block name="read-objectives" message="Read the Objectives">
-                  <h2 class="labHidden">Read the Objectives</h2>
-                  <p>By the end of this module, you should be able to:</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                  <ul>
-                      <li>Create a NodeJS service that implements a Restful HTTPS API to control the LCD screen. In later labs this API will be used to automate IoT actions.</li>
-                  </ul>
+    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+        <div class="row">
+            <div class="col-lg-12">
+                <div ibox title="Setting Up the Intel&reg; AMT System">
+                  <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section">
+                    To set up the Intel AMT System, follow these steps:
+                    <ol>
+                      <li>
+                          Connect the Intel AMT system to a power outlet. This is necessary because some of the Intel AMT capabilities maybe disabled on battery power. Reset the system to a fresh boot.
+                      </li>
+                      <li>
+                          At the system reboot, enter the BIOS or Intel MEBX to get into Intel AMT setup, as described in previous section.
+                      </li>
+                      <li>
+                          You will be asked to enter the password, and forced to change it. Default factory password is "admin". Change this to a strong password such as: "intel123". Intel AMT will never be enabled unless the password is changed.
+                      </li>
+                      <li>
+                          Select ME Configuration. Verify that the following are set correctly:
+                          <ul>
+                            <li>
+                              ME State Control = Enabled
+                            </li>
+                            <li>
+                              ME Features Control -> Manageability Feature Selection is set to "Intel AMT"
+                            </li>
+                          </ul>
+                      </li>
+                      <li>
+                        Select ME Power Control -> ME ON in Host Sleep States, and at the menu selection, pick ON in S0, S3/AC, S4-S5/AC
+                      </li>
+                      <li>
+                        Select AMT Configuration, and go to TCP/IP setup. Configure the static IP address as follows:
+                        </br>IP Address: 192.168.1.20
+                      </li>
+                      <li>
+                        Subnet Mask: 255.255.255.0
+                      </li>
+                      <li>
+                        Save the configuration.
+                      </li>
+                    </ol>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div ibox title="Configure a Browser to Connect">
+                      <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section">
+                        <p>
+                          To configure a browser to connect, follow these steps:
+                        </p>
+                        <ol>
+                          <li>
+                            Select a system that you can connect to the Intel AMT system using an Ethernet cable. Go to the network settings of this system and configure the IP address. Assign a static IP address
+                            </br>IP Address: 192.168.1.21
+                            </br>Subnet Mask: 255.255.255.0
+                          </li>
+                          <li>
+                            Now, connect this system to the Intel AMT system using an Ethernet cable.
+                          </li>
+                          <li>
+                            Open a command prompt, and try pinging the Intel AMT system.
+                            </br>ping 192.168.1.20
+                            </br>You should get a ping response.
+                          </li>
+                        </ol>
+                      </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div ibox title="Create the Restful HTTPS API to Control the LCD Screen">
-              <div content-block message="Overview of the Restful LCD API">
-                <h2 class="labHidden">Create the Restful HTTPS API to Control the LCD Screen</h2>
-                <p>
-                  For this section of the lab, we will be using a JavaScript HTTPS library called Express to build a small HTTPS server that implements two APIs.
-                </p>
-
-                <p>
-                  The two APIs will control the color of the backlight on the LCD screen and the text that is displayed on the LCD screen. This is what the API will look like:
-                </p>
-
-                <div class="alert alert-info">
-                    <p>The six APIs are defined as follows:</p>
-                    <table class="table-mail">
-                      <tr><td><b>GET</b></td><td>/lcd/color</td><td>Query the HTTPS Server for the current color value displayed on the LCD</td></tr>
-                      <tr><td><b>POST</b></td><td>/lcd/color</td><td>Set a new color to display on the LCD</td></tr>
-                      <tr><td><b>DELETE</b></td><td>/lcd/color</td><td>Turn the LCD backlight off</td></tr>
-                      <tr><td><b>GET</b></td><td>/lcd/text</td><td>Query the HTTPS Server for the current text value displayed on the LCD</td></tr>
-                      <tr><td><b>POST</b></td><td>/lcd/text</td><td>Set a new text to display on the LCD</td></tr>
-                      <tr><td><b>DELETE</b></td><td>/lcd/text</td><td>Clear text on LCD</td></tr>
-                    </table>
-                  </div>
-              </div>
-
-
-              <div content-block name="read-xdk-intro" message="Start a new project in the Intel® XDK using a blank template." image-link="./views/labs/remote-configamt/images/new-project.png">
-                <h2 class="labHidden">Start a new project in the Intel® XDK using a blank template.</h2>
-
-                <ol>
-                    <li>
-                        <p>Start a new project in the Intel® XDK using a blank template.</p>
-                    </li>
-                    <li>
-                        <p>If you have an Intel® XDK project already open, click on the projects drop down menu in the upper left hand corner, then select <strong>New Project</strong>.</p>
-                    </li>
-                </ol>
-              </div>
-
-              <div content-block name="read-xdk-intro" message="Select the Blank Template" image-link="./views/labs/protocols-javascript-http/images/blank_template.png">
-                <h2 class="labHidden">Select the Blank Template</h2>
-
-                <p>Choose <strong>Blank Template</strong> from the list of templates, then click <strong>Continue</strong>.</p>
-
-
-                <p>The Intel® XDK will create and open <span class="icon file">main.js</span> for you.</p>
-              </div>
-
-
-              <div content-block message="Include the Dependencies">
-                <h2 class="labHidden">Include the Dependencies</h2>
-
-                <p>
-                  In the package.json file change the dependencies to include the <b>express</b> and <b>body-parser</b>.
-                </p>
-                <p class="label">
-                  package.json
-                </p>
-                <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">  "dependencies": {
-      "express" : "latest",
-      "body-parser" : "latest",
-      "http" : "latest",
-      "https" : "latest"
-  }</pre></ui-codemirror>
-              <p>
-                In the server.json file do a require of <b>express</b> and <b>body-parser</b>.
-              </p>
-              <p class="label">
-                server.js
-              </p>
-              <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTPS server
-var express = require('express');
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-
-var privateKey  = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var certificate = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-var credentials = {key: privateKey, cert: certificate};
-
-// The body-parser library allows us to declare the server will use JSON format
-var bodyParser = require('body-parser');</pre></ui-codemirror>
-              </div>
-
-                <div content-block message="Instantiate the HTTPS server variable named app and the LCD variable.">
-                    <h2 class="labHidden">Instantiate the HTTPS server variable named app and the LCD variable.</h2>
-                    <p>
-                      Continue making changes to server.js. Instantiate the HTTPS server variable named app and the LCD variable.
-                    </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Declare the HTTPS server as a variable named "app"
-var app = express();
-
-var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
-
-// Declare the LCD variable
-var LCD = require("jsupm_jhd1313m1");
-var OFFSET = 512;
-var mylcd = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
-</pre></ui-codemirror>
-                </div>
-
-                <div content-block message="Declare that the HTTPS server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client">
-                  <h2 class="labHidden">Declare that the HTTP server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client</h2>
-                  <p>
-                    Declare that the HTTP server will serve JSON and add some debugging code to print any requests that are requested by an HTTP client
-                  </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// parse application/json
-app.use(bodyParser.json());
-
-// This function will print the route for each incoming HTTP request
-app.use(function (req, res, next) {
-  console.log(req.body); // populated!
-  next();
-});</pre></ui-codemirror>
-                </div>
-
-
-                <div content-block message="Instantiate the HTTPS server variable named app   and the LCD variable.">
-                    <h2 class="labHidden">Instantiate the HTTPS server variable named app and the LCD variable.</h2>
-                    <p>
-                      Declare two variables to hold the the backlight value and the text that the LCD screen.  At this point, we can also turn the backlight off.
-                    </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var backlight = {
-    r:0,
-    g:0,
-    b:0
-};
-
-var lcdtext = "";
-mylcd.setColor(backlight.r,backlight.g,backlight.b);</pre></ui-codemirror>
-                </div>
-
-                <div content-block message="Create the routes to GET the LCD text and GET the backlight">
-                    <h2 class="labHidden">Create the routes to GET the LCD text and GET the backlight</h2>
-                    <p>
-                      Create the routes to GET the LCD text and GET the backlight
-                    </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.get('/lcd/backlight/', function (req, res) {
-  res.status(200).json(backlight);
-});
-app.get('/lcd/text/', function (req, res) {
-  res.status(200).json(lcdtext);
-});</pre></ui-codemirror>
-                </div>
-
-
-
-                <div content-block message="Create the routes to POST the LCD text and POST the backlight">
-                    <h2 class="labHidden">Create the routes to POST the LCD text and POST the backlight</h2>
-                    <p>
-                      Create the routes to POST the LCD text and POST the backlight
-                    </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.post('/lcd/backlight/', function (req, res) {
-   backlight = {
-      r:parseInt(req.query.r),
-      g:parseInt(req.query.g),
-      b:parseInt(req.query.b)
-  };
-  mylcd.setColor(backlight.r,backlight.g,backlight.b);
-  res.status(201).send("Success");
-});
-
-app.post('/lcd/text/', function (req, res) {
-  lcdtext = req.query.lcdtext;
-  mylcd.clear();
-  mylcd.write(lcdtext);
-  res.status(201).send("Success");
-});</pre></ui-codemirror>
-                </div>
-
-
-                <div content-block message="Create the routes to DELETE the LCD text and DELETE the backlight">
-                    <h2 class="labHidden">Create the routes to DELETE the LCD text and DELETE the backlight</h2>
-                    <p>
-                      Create the routes to DELETE the LCD text and DELETE the backlight
-                    </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">app.delete('/lcd/backlight/', function (req, res) {
-  backlight = {r:0,g:0,b:0};
-  mylcd.setColor(backlight.r,backlight.g,backlight.b);
-  res.status(204).send("Deleted");
-});
-
-
-
-app.delete('/lcd/text/', function (req, res) {
-  mylcd.clear();
-  res.status(204).send("Deleted");
-});</pre></ui-codemirror>
-                </div>
-
-                <div content-block message="Start the HTTPS server">
-                    <h2 class="labHidden">Start the HTTPS server</h2>
-                    <p>
-                      Start the HTTP server
-                    </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">var server = httpsServer.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-
-console.log('Example app listening at http://%s:%s', host, port);
-});</pre></ui-codemirror>
-                </div>
-
-                <div content-block message="Checkout the completed lab">
-                    <h2 class="labHidden">Checkout the completed lab</h2>
-                    <p>
-                      Here is the code to the complete the lab.
-                    </p>
-
-                  <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// The express library provides a quick and easy way to create on HTTP server
-var express = require('express');
-var fs = require('fs');
-var http = require('http');
-var https = require('https');
-
-// The body-parser library allows us to declare the server will use JSON format
-var bodyParser = require('body-parser');
-
-var privateKey  = fs.readFileSync('/etc/mosquitto/certs/server.key');
-var certificate = fs.readFileSync('/etc/mosquitto/certs/server.crt');
-var credentials = {key: privateKey, cert: certificate};
-
-// Declare the HTTP server as a variable named "app"
-var app = express();
-
-var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
-
-// Declare the LCD variable
-var LCD = require("jsupm_jhd1313m1");
-var OFFSET = 512;
-var mylcd = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
-
-// parse application/json
-app.use(bodyParser.json());
-
-// This function will print the route for each incoming HTTP request
-app.use(function (req, res, next) {
-  console.log(req.body); // populated!
-  next();
-});
-
-var backlight = {
-    r:0,
-    g:0,
-    b:0
-};
-
-var lcdtext = "";
-mylcd.setColor(backlight.r,backlight.g,backlight.b);
-
-app.get('/lcd/backlight/', function (req, res) {
-  res.status(200).json(backlight);
-});
-app.get('/lcd/text/', function (req, res) {
-  res.status(200).json(lcdtext);
-});
-
-app.post('/lcd/backlight/', function (req, res) {
-   backlight = {
-      r:parseInt(req.query.r),
-      g:parseInt(req.query.g),
-      b:parseInt(req.query.b)
-  };
-  mylcd.setColor(backlight.r,backlight.g,backlight.b);
-  res.status(201).send("Success");
-});
-
-app.post('/lcd/text/', function (req, res) {
-  lcdtext = req.query.lcdtext;
-  mylcd.clear();
-  mylcd.write(lcdtext);
-  res.status(201).send("Success");
-});
-
-app.delete('/lcd/backlight/', function (req, res) {
-  backlight = {r:0,g:0,b:0};
-  mylcd.setColor(backlight.r,backlight.g,backlight.b);
-  res.status(204).send("Deleted");
-});
-
-app.delete('/lcd/text/', function (req, res) {
-  mylcd.clear();
-  res.status(204).send("Deleted");
-});
-
-var server = httpsServer.listen(3000, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-
-console.log('Example app listening at http://%s:%s', host, port);
-});</pre></ui-codemirror>
-                </div>
-                <div content-block name="deploy-application" message="Deploy the application">
-                    <h2 class="labHidden">Deploy the application</h2>
-                    <p>Upload and run your application from Intel&reg; XDK</p>
-                </div>
-              </div>
-
-              <div ibox title="Testing Your Restful HTTP API">
-                <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols-javascript-http/images/postman_website.png">
-                    <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
-
-                    <h5> Install Postman </h5>
-                    <p><code>Postman</code> is a developer debugging tool that allows developers to send HTTP requests. If you feel more familar with other tools, such as <code>curl</code>, feel free to use it.</p>
-                    <p>To send web requests to the Intel IoT device we will be using Postman, a Chrome app designed to send web requests.</p>
-
-                    <p>To install the app navigate to <a href="https://www.getpostman.com/" target="_blank"> https://www.getpostman.com</a>, Select Chrome App, and install it following the directions given.</p>
-                </div>
-
-
-                <div content-block name="install-postman" message="Use PostMan to send an HTTPS request" image-link="./views/labs/protocols-javascript-http/images/postman.png">
-                    <h5>Use Postman to send web request </h5>
-                    <p>Once Postman is installed launch it from the Google Apps Launcher.</p>
-                    <ul>
-                      <li>Select post from the dropdown menu and enter the IP address of your Intel IoT device port 3000 with the URL specified above.</li>
-                      <li>Go to "Authorization" tab, select "Basic Auth" from drop down menu. Provide root as Username and enter your gateway password in Password field. </li>
-                      <div class="alert alert-warning">
-                        <p>
-                          Since we are using a self signed certificate, we need to authenticate it from the browser without which it will fail to connect through Postman. For this go to your chrome browser and type "https://gateway_ip:port" and then go to Andvanced and Proceed. More details can be found <a href="http://blog.getpostman.com/2014/01/28/using-self-signed-certificates-with-postman/" target="_blank"> here</a>
-                        </p>
+            <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div ibox title="Connect and Explore">
+                            <p>
+                              Now you are ready to start a web browser.
+                            </p>
+                            <ol>
+                              <li>
+                                Point the web browser to the address
+                                </br>http://192.168.1.20:16992
+                              </li>
+                            </ol>
+
+
+                <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+
+                          <div class="wrapper wrapper-content animated fadeIn">
+                              <div class="row">
+                                  <div class="col-lg-6">
+                                      <div class="ibox">
+                                          <div class="ibox-title">
+                                              <h5>2. When prompted for username/password, type admin for username and intel123 as the password</h5>
+                                              <div ibox-tools></div>
+                                          </div>
+                                          <div class="ibox-content">
+                                              <img src="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg" alt="002-Intel-AMT-Web-Browser-Login-Screen" />
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col-lg-6">
+                                      <div class="ibox">
+                                          <div class="ibox-title">
+                                              <h5>3 You are now connected</h5>
+                                              <div ibox-tools></div>
+                                          </div>
+                                          <div class="ibox-content">
+                                              <img src="../views/labs/remote-configamt/images/003-Intel-AMT-Web-Browser-Screen.jpg" alt="003-Intel-AMT-Web-Browser-Screen" />
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="ibox">
+                                        <div class="ibox-title">
+                                            <h5>4. Try rebooting the system by going to the Remote Control task from the list items in the menu shown in Figure below</h5>
+                                            <div ibox-tools></div>
+                                        </div>
+                                        <div class="ibox-content">
+                                            <img src="../views/labs/remote-configamt/images/004-Remote-Power-Control-Using-Intel-AMT-Web-Browser-Screen.jpg" alt="004-Remote-Power-Control-Using-Intel-AMT-Web-Browser-Screen" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
                       </div>
-                      <li>The /lcd/color API  can be passed a RGB value like this.
-                        <pre><code>https://gateway_ip:port/lcd/backlight?r=128&g=255&b=255</code></pre>
-                      </li>
-                    </ul>
-                </div>
-              </div>
 
-              <div ibox title="Additional Resources">
-                <ul>
-                  <li><p><a href="http://mqtt.org/" target="_blank">MQTT</a></p></li>
-                  <li><p><a href="https://www.npmjs.com/package/express" target="_blank">ExpressJS</a></p></li>
-                  <li><p><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">REST</a></p></li>
-                </ul>
-              </div>
-        </div>
-    </div>
-  </div>
-</div>
+                    </div>
+
+                  </div>
+                  </div>
+                  </div>
+
+                </div>
