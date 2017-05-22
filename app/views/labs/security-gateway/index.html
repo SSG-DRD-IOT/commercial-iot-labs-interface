@@ -1,0 +1,104 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Security</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+            <li>
+                <a>Labs</a>
+            </li>
+            <li>
+                <strong>Security</strong>
+            </li>
+            <li class="active">
+                <strong>Security features on Intel&reg; IoT Gateway</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+      <div class="row">
+        <div class="col-lg-12">
+
+            <div ibox title="Security features on Intel® IoT Gateway">
+                <div content-block name="security-objectives" message="Objectives" image-link="./views/labs/security-gateway/images/lab6.png">
+                    <h2 class="labHidden">Complete the Security features lab</h2>
+                    <h5>Lab Overview</h5>
+
+                    <p>The Intel&reg; IoT Gateway provides number of Security features both at hardware and software level to securely execute your IoT applications. In this lab we will go through following features:</p>
+
+                    <ul>
+                        <li>
+                            <p>Trusted Protection module (TPM)</p>
+                        </li>
+                        <li>
+                            <p>Intel&reg; Software Guard Extensions (Intel&reg; SGX)</p>
+                        </li>
+                        <li>
+                            <p>Software/OS level security on your Intel® IoT Gateway</p>
+                        </li>
+                    </ul>
+              </div>
+
+
+      <div ibox  title="Software/OS security features">
+        <div content-block name="security-objectives" message="Objectives">
+          <p>There are several OS level security options that can be utilized on your Intel® IoT Gateway. Ubuntu has several features like AppArmor, home folder encryption during installation, firewalls etc. to protect your content. There are also tools like encfs to encrypt specific folders</p>
+          <p>In this lab we will look at some software/OS level tools/option available to secure your IoT applications running on the gateway</p>
+        </div>
+        <div content-block name="security-objectives" message="Folder encryption using encfs">
+          <p>Encfs is an application that allows you to create encrypted directories, any file that is placed in such a directory will be encrypted. To open an encrypted directory you need a correct password.</p>
+          <p>It is one of several utilities/options available on Ubuntu for encrypting your content. Follow below steps to set up encfs on your Intel® IoT Gateway</p>
+          <ul>
+            <li>
+              <p>Open a ssh terminal to your device and type:</p>
+              <pre><code>sudo apt install encfs</code></pre>
+            </li>
+            <li>
+              <p>You are now ready to create encrypted directory. The application encfs will create one directory which contains the encrypted files and one directory where the files are unlocked and accessible. The syntax for encfs is: "encfs {path to encrypted directory} {path to visible directory}"</p>
+              <p>For example, If you wish to have a directory in home directory called visible and another one called encrypted:
+              <pre><code>encfs ~/.encrypted ~/visible</code></pre>
+              <p>First encfs will ask you to create the selected directories. Simply type 'y'. Then it asks which degree of encryption that should be used, simply press enter to use default encryption-level. At last encfs will ask you for the password that is needed to reach the encrypted information.</p>
+              <p>If all goes well and there is no error you can start creating content in this directory</p>
+            </li>
+            <li>
+              <p>Let's create a sample file in the directory. For e.g. we create one file here myfile and save it</p>
+              <pre><code>vi ~/visible/myfile</code></pre>
+              <p>Save the file with a ":wq" command in vi editor</p>
+            </li>
+            <li>
+              <p>In order to close the ~/visible directory simply type: </p>
+              <pre><code>fusermount -u ~/visible</code></pre>
+              <p>As long as the directory is closed all the information in ~/visible will seem to have disappeared. The only way to gain access to this information again is by unlocking it</p>
+              <p>Now if you browse to directory ~/virtual you will not see myfile there.</p>
+            </li>
+            <li>
+              <p>To unlock the directory and have access to content, again type the following command</p>
+              <pre><code>encfs ~/.encrypted ~/visible</code></pre>
+              <p>Give the password for the directory and then you should see the content of the directory, in our case myfile will be now visible</p>
+            </li>
+            <li>
+              <p>It is also possible to automatically mount the directory at login in a secure way</p>
+            </li>
+          </ul>
+        </div>
+
+
+        <div ibox title="References">
+          <ul>
+              <li>
+                  <p><a href="https://www.openssl.org/">https://www.openssl.org/</a></p>
+                  <p><a href="http://www.intel.com/content/dam/support/us/en/documents/motherboards/server/sb/g21682003_tpm_hwug.pdf">Trusted Platform Technology</a></p>
+              </li>
+          </ul>
+        </div>
+
+
+      </div>
+  </div>
+
+        </div>
+    </div>
+</div>

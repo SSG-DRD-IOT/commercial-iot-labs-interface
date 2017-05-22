@@ -268,11 +268,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       }
     }
 })
-.state('labs.security-mcafee', {
-  url: "/security-mcafee",
-  templateUrl: "views/labs/security-mcafee/index.html",
+.state('labs.security-gateway', {
+  url: "/security-gateway",
+  templateUrl: "views/labs/security-gateway/index.html",
   data: {
-    pageTitle: 'McAfee'
+    pageTitle: 'Security Gateway'
   },
   resolve: {
     loadPlugin: function($ocLazyLoad) {
