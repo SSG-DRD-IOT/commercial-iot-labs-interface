@@ -173,7 +173,31 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       url: "/videoperformance-mediasdk",
       templateUrl: "views/labs/videoperformance-mediasdk/index.html",
       data: {
-        pageTitle: 'Integrate MAARs into custom solution'
+        pageTitle: 'Explore Intel Media SDK'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+
+    .state('labs.videoperformance-mediasdksamples', {
+      url: "/videoperformance-mediasdksamples",
+      templateUrl: "views/labs/videoperformance-mediasdksamples/index.html",
+      data: {
+        pageTitle: 'Understand Media Acceleration Reference Software'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
