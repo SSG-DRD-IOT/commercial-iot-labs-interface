@@ -57,7 +57,7 @@ sudo mv server.crt server.csr server.key /etc/tls-certs/certs</code></pre>
             <div ibox title="Configure Mosquitto to use MQTT over TLS">
               <div content-block message="Configure the MQTT Broker to use TLS" name="telegraf-mqtt-tls">
                 <p>Create a custom configuration file <strong>mosquitto_tls.conf</strong> in conf.d folder of mosquitto as shown below</p>
-                <pre><code>sudo vim /etc/mosquitto/conf.d/mosquitto_tls.conf</code></pre>
+                <pre><code>sudo nano /etc/mosquitto/conf.d/mosquitto_tls.conf</code></pre>
             <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">port 8883
 
 cafile /etc/tls-certs/ca_certificates/ca.crt

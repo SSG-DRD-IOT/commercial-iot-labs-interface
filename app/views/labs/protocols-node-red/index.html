@@ -48,7 +48,7 @@
             <p>This will begin the node-red service.</p>
           </div>
 
-          <div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols-node-red/images/node-red-experience-off.png">
+        <!--<div content-block name="start-node-red" message="When you are developing with another IDE, be sure to turn Node-Red off." image-link="./views/labs/protocols-node-red/images/node-red-experience-off.png">
             <div class="alert alert-info">
               <p>If you are developing using the Intel&reg; XDK, Intel System Studio or simply developing directly on the command line, be sure to <b>turn off Node-Red</b></p>
               <p>The reason that you want to turn off Node-Red is because whenever Node-Red is on it will be running the Node-Red flows that are currently on it. These flows will run at the same time as your programs that you are writing in other IDEs.  <b>Node-Red may also already be using the LCD screen or certain GPIO ports. If you attempt to use them in a separate program that you are writing then there may be errors in initializing in the second program. You will get errors in initializing MRAA or the I<sup>2</sup>C bus, and it may not be obvious that this is because Node-Red is also using these resources.</b></p>
@@ -57,7 +57,7 @@
             <pre><code>sudo systemctl stop node-red-experience</code></pre>
             <p>This will turn off the node-red service.</p>
           </div>
-        </div>
+        </div>-->
 
 
         <div ibox title="Node-Red Flow: Temperature to LCD">
@@ -72,7 +72,7 @@
 
           <div content-block name="connect-sensors" message="Start Node-Red interface from browser">
             <p>Open your browser and enter your Intel® IoT Gateway IP address with port as 1880. Replace 192.168.3.4 with your device IP address below:</p>
-            <pre><code>https://192.168.3.4:1880</pre></code>
+            <pre><code>http://192.168.3.4:1880</pre></code>
           </div>
 
           <div content-block name="connect-sensors" message="Save current Node-Red flow" image-link="./views/labs/protocols-node-red/images/node-red-export.png">
@@ -133,12 +133,13 @@
               <p><img class="labHidden" alt="mqtt flow" data-fid="503933" src="https://software.intel.com/sites/default/files/managed/8a/d4/mqtt_flow.png" title="mqtt flow" typeof="foaf:Image"><strong> </strong></p>
 
               <h5>Create a Node-RED flow</h5>
-              <p>Now you will create a new flow in Node-RED in order to send the temperature data up to your MQTT server.<p>
+              <p>Now you will create a new flow in Node-RED as shown in figure in order to send the temperature data up to your MQTT server.<p>
               <p>Use the:
               <ul>
-                <li><b>grove temp sensor</b> from the Intel-gpio section connected to:</li>
+                <li><b>Grove Temperature</b> node from the UPM-sensors section connected to:</li>
                 <li><b>function</b> node from the function section connected to:</li>
                 <li><b>mqtt</b> node from the output section</li>
+                <li>Also connect the <b>function</b> node to the <b>debug</b> node from the output section</li>
               </ul>
               <p>This creates a sequence that will send temperature data over MQTT to a broker.</p>
 
@@ -146,12 +147,9 @@
               <ul>
                 <li><b>mqtt</b> node from the input section connected to the:</li>
                 <li><b>function</b> node from the function section connected to:</li>
-                <li><b>debug</b> node from the output section</li>
+                <li><b>Grove RGB LCD</b> node from the UPM-sensors section</li>
               </ul>
-              <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console in node-red.</p>
-              <div class="alert alert-warning">
-                <p>In the next section, we will be build a Restful HTTP service that will control the output of the LCD screen.  At that point, we will delete the flow on the bottom that uses MQTT to update the LCD screeen.</p>
-              </div>
+              <p>This creates a sequence that recives data from a MQTT broker and prints it to the debug console and also outputs it on the LCD screen in node-red.</p>
             </div>
 
             <div content-block name="protocol-assign-pins" message="Configure the Grove nodes" image-link="./views/labs/protocols-node-red/images/node-red-grove.png">
@@ -589,6 +587,18 @@ return msg;</pre></ui-codemirror>
 
 
           <div ibox title="Testing Your Restful HTTP API">
+            <div content-block name="install-postman" message="Options to test your Restful HTTP APIs">
+              <p>You can test your Restful HTTP APIs using either <b>curl</b> commandline tool or <b>Postman</b> tool</p>
+              <p>Below are the steps to use either of these tools to control your LCD with the Restful HTTP APIs</p>
+            </div>
+
+            <div content-block name="install-postman" message="Use curl to test your restful APIs">
+              <p>Open a ssh terminal to your Gateway or from your PC/laptop terminal type the following command:</p>
+              <p>In the below command replace &lt;passwd&gt; with your password and &lt;gateway-IP&gt; with your gateway IP address</p>
+              <pre><code>curl -u nuc-user:&lt;passwd&gt; -X POST http://&lt;gateway-IP&gt;:1880/lcd/color\?r=0\&g=255\&b=0
+curl -u nuc-user:&lt;passwd&gt; -X POST http://&lt;gateway-IP&gt;:1880/lcd/text\?lcdtext=\"Hello World!\"</pre></code>
+            </div>
+
             <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols-node-red/images/postman_website.png">
                 <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
                 <p><img class="labHidden" alt="postman website" data-fid="503944" src="https://software.intel.com/sites/default/files/managed/96/7a/postman_website.png" title="postman website" typeof="foaf:Image"></p>

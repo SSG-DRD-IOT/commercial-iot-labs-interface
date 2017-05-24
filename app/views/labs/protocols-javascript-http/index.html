@@ -77,7 +77,7 @@
 
               <div content-block name="http-lab" message="Create a new Node JS project">
                   <h2 class="labHidden">Create a new Node JS project</h2>
-                  <p>Create a <strong>http-lab</strong> directory under <strong>/home/{user}/labs/protocols</strong> from your Atom editor</p>
+                  <p>Create a <strong>http-lab</strong> directory under <strong>/home/{user}/labs/protocols</strong></p>
                   <p>Create a <strong>package.json</strong> file and a <strong>server.js</strong> file under http-lab folder</p>
               </div>
 
@@ -354,13 +354,25 @@ console.log('Example app listening at http://%s:%s', host, port);
                 <div content-block name="deploy-application" message="Deploy the application">
                     <h2 class="labHidden">Deploy the application</h2>
                     <p>Open a ssh terminal to your Intel® IoT Gateway and go to folder <strong>/home/{user}/labs/protocols/http-lab</strong>. Type following command to install all the depenencies</p>
-                    <pre><code>npm install</pre></code>
+                    <pre><code>sudo npm install</pre></code>
                     <p>Next run your https server application</p>
                     <pre><code>node server.js</pre></code>
                 </div>
               </div>
 
               <div ibox title="Testing Your Restful HTTP API">
+                <div content-block name="install-postman" message="Options to test your Restful HTTP APIs">
+                  <p>You can test your Restful HTTP APIs using either <b>curl</b> commandline tool or <b>Postman</b> tool</p>
+                  <p>Below are the steps to use either of these tools to control your LCD with the Restful HTTP APIs</p>
+                </div>
+
+                <div content-block name="install-postman" message="Use curl to test your restful APIs">
+                  <p>Open a ssh terminal to your Gateway and type the following command:</p>
+                  <p>In the below command replace &lt;passwd&gt; with your NUC password </p>
+                  <pre><code>curl --cacert /etc/tls-certs/ca_certificates/ca.crt -u nuc-user:&lt;passwd&gt; --tlsv1.0 -X POST https://localhost:4000/lcd/backlight\?r=0\&g=255\&b=0
+curl --cacert /etc/tls-certs/ca_certificates/ca.crt -u nuc-user:&lt;passwd&gt; --tlsv1.0 -X POST https://localhost:4000/lcd/text\?lcdtext=\"HelloWorld\"</pre></code>
+                </div>
+
                 <div content-block name="install-postman" message="Install Postman, a HTTP debugging tool" image-link="./views/labs/protocols-javascript-http/images/postman_website.png">
                     <h2 class="labHidden">Install Postman, a HTTP debugging tool</h2>
 
