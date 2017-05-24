@@ -58,10 +58,12 @@
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""> <span class="nav-label">Video Analytics</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                            <li ui-sref-active="active"><a ui-sref="labs.analytics-opencvinit">A Simple video capture using OpenCV</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.analytics-opencvmotion">Motion detection using OpenCV</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.analytics-opencvface">Face detection with OpenCV</a></li>
                         </ul>
                     </li>
+                    <!--
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""> <span class="nav-label">Additional Information</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
@@ -69,14 +71,16 @@
                             <li ui-sref-active="active"><a ui-sref="labs.additional-info-remote_linux">Managing Linux systems with Intel&reg; AMT and Mesh Central</a></li>
                         </ul>
                     </li>
+                    -->
                 </ul>
             </li>
-
+            <!--
             <li>
                 <li ui-sref-active="active"><a ui-sref="labs.solutions"><i class="fa fa-github"></i> <span class="nav-label">Solutions</span></a></li>
             </li>
 
             <li ui-sref-active="active"><a ui-sref="index.faq">FAQ</a></li>
+            -->
         </ul>
 
     </div>
