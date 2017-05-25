@@ -75,6 +75,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+    .state('labs.labInfrastructure', {
+      url: "/laboverview",
+      templateUrl: "views/labs/labInfrastructure/index.html",
+      data: {
+        pageTitle: 'Lab Infrastructure'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
     .state('labs.videoperformance-maarssetup', {
       url: "/videoperformance-maarssetup",
       templateUrl: "views/labs/videoperformance-maarssetup/index.html",
