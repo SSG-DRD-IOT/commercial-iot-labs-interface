@@ -45,7 +45,7 @@ openssl req -out server.csr -key server.key -new</code></pre>
                 <p>Here enter the passphrase you used in step 1 to generate all the required certificates</p>
               </div>
 
-              <div content-block message="Move the CA, Certificate and Key files to the mosquitto configuration directory" name="telegraf-setup-configuration">
+              <div content-block message="Move the CA, Certificate and Key files to the newly created tls-certs directory" name="telegraf-setup-configuration">
                 <p>Create directories <strong>/etc/tls-certs/ca_certificates</strong> and <strong>/etc/tls-certs/certs</strong> and move the CA, Certificate and Key file to these directories</p>
                 <pre><code>sudo mkdir -p /etc/tls-certs/ca_certificates
 sudo mkdir -p /etc/tls-certs/certs

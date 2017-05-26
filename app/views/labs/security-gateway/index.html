@@ -232,7 +232,7 @@ sudo aa-autodep nginx</pre></code>
               Open a browser, and visit http://gateway-IP:8080/safe/index.html. This will trigger the normal entries for accessing the safe website to appear in your Nginx logs.
               Go back to the terminal. Now we'll use an AppArmor utility to go through the Nginx logs and approve or disapprove each action it finds there.
             </p>
-            </pre>sudo aa-logprof</code>
+            <pre><code>sudo aa-logprof</pre></code>
             <p>
               This command scans the log files and updates the AppArmor Nginx profile. You will be prompted several times to allow or deny a capability. Assuming your server is not under an attack
               currently, you can press <b>A</b> every time, since all the capabilities requested are necessary for Nginx to work correctly. Finally, when prompted to save the changes, press <b>S</b>.
@@ -273,7 +273,7 @@ sudo aa-autodep nginx</pre></code>
  #include &lt;abstractions/lxc/container-base&gt;
 
  capability setuid,
- capability setuid,
+ capability setgid,
 
  /data/www/safe/* r,
  deny /data/www/unsafe/* r,
