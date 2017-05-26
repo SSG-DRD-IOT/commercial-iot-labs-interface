@@ -36,29 +36,29 @@
         </div>
       </div>
       <div ibox title="Administration Interface">
-          <div content-block message="Install and Run the Custom Administration Interface">
+          <div content-block message="Install the Custom Administration Interface">
             <h2 class="labHidden">Install and Run the Custom Administration Interface</h2>
-              <p>Download the <a href="https://drive.google.com/open?id=0B2ywC78pxngCWDY5OFhhNlNrbVk">admin-interface.zip</a>.</p>
-              <p>Transfer the archive file to your Intel&reg; IoT Gateway.</p>
-            </div>
-
-            <div content-block message="SSH into the Gateway and Unzip the administrative interface">
-              <p>Use <span class="icon windows">PuTTY</span> to SSH into the Intel&reg; IoT Gateway.</p>
-              <p>Navigate to the directory with the zip file and unzip it.</p>
-              <pre><code>$ unzip admin-interface.zip</code></pre>
-              <p>After the zip file has been uncompressed, go into the resulting folder.</p>
-              <pre><code>cd admin-interface</code></pre>
+              <p>Open a SSH terminal to your Intel&reg; IoT Gateway and go to ~/labs folder</p>
+              <pre><code>cd ~/labs</pre></code>
+              <p>Download and install administration interface with following commands</p>
+              <pre><code>git clone https://github.com/SSG-DRD-IOT/admin-interface.git</pre></code>
+              <pre><code>cd admin-interface</pre></code>
+              <pre><code>sudo npm install</pre></code>
+              <p>Next go to app folder and install bower dependencies listed in bower.json</p>
+              <pre><code>cd app</pre></code>
+              <pre><code>bower install</pre></code>
+              <pre><code>cd ..</pre></code>
             </div>
           </div>
 
           <div ibox title="Populate the Database with initial data for the administrative interface">
             <div content-block message="Obtain the initdb.js script">
               <p>Before we explore more options let's populate this interface with some static data. Populate this sample interface by running initdb.js script from the lab-solution-monitor-daemon repository downloaded in previous "Databases at the Edge" lab. If you have not yet downloaded it, give the following command to download it from a new SSH terminal on your Gateway</p>
-              <pre><code>cd ~</pre></code>
+              <pre><code>cd ~/labs</pre></code>
               <pre><code>git clone https://github.com/SSG-DRD-IOT/lab-solution-monitor-daemon.git</code></pre>
               <p>If you already downloaded it, go to the directory directly</p>
-              <pre><code>cd ~/lab-solution-monitor-daemon&#13;&#10;cd initialize</pre></code>
-              <pre><code>npm install</pre></code>
+              <pre><code>cd ~/labs/lab-solution-monitor-daemon&#13;&#10;cd initialize</pre></code>
+              <pre><code>sudo npm install</pre></code>
               <div class="alert alert-warning">
                 <p>Before you run this make sure that your mongod service is still running. The "Databases at the Edge" lab describes how to run it.</p>
               </div>
@@ -82,14 +82,14 @@
           </div>
 
           <div ibox message="Open a browser and navigate to the administrative interface">
-            <div content-block message="SSH into the Gateway and Unzip the administrative interface">
+            <div content-block message="Start the administrative interface">
               <p>Go back to admin-interface folder and run <span class="icon file">server.js</span> as a <strong>Node</strong> process.</p>
-              <pre><code>cd ~/admin-interface</code></pre>
+              <pre><code>cd ~/labs/admin-interface</code></pre>
               <pre><code>node server.js</code></pre>
               <p>This will start a NodeJS HTTP server that will provide the front end user interface.</p>
             </div>
             <div content-block message="Open a browser and navigate to the administrative interface" image-link="./views/labs/admin-interface/images/dashboard.png">
-              <p>Visit "http://{Your Gateway IP address}:3000" in your development computer's web browser.</p>
+              <p>Visit <b>"http://{Your Gateway IP address}:5000"</b> in your development computer's web browser.</p>
               <p>It will show you in a browser a simple, sample web based interface that will allow you to create, edit and delete automatic actions (triggers)</p>
               <p>Explore the interface for condition based monitoring triggers, record system errors.</p>
               <p>In the next lab, you will write most complex automatic rules and a rules engine to the run these rules on an edge network.</p>
