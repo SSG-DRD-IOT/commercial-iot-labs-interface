@@ -121,11 +121,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.videoperformance-maarsunderstand', {
-      url: "/videoperformance-maarsunderstand",
-      templateUrl: "views/labs/videoperformance-maarsunderstand/index.html",
+    .state('labs.videoperformance-marsunderstand', {
+      url: "/videoperformance-marsunderstand",
+      templateUrl: "views/labs/videoperformance-marsunderstand/index.html",
       data: {
-        pageTitle: 'MAARS Source Walkthrough'
+        pageTitle: 'MARS Application Walkthrough'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -311,7 +311,7 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     }
   })
 
-  
+
 .state('labs.analytics-opencvinit', {
     url: "/labs.analytics-opencvinit",
     templateUrl: "views/labs/analytics-opencvinit/index.html",
