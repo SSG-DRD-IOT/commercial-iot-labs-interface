@@ -12,7 +12,7 @@
                 MediaSDK Sample
             </li>
             <li class="active">
-                <strong>Video Decoder</strong>
+                <strong>Build simple Video Decoder using Media SDK Samples</strong>
             </li>
         </ol>
     </div>
@@ -21,57 +21,52 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
-            <div ibox title="Video Decoding Sample">
-                <div content-block name="xdk-issues" message="Check after completing this section">
-                  <p>Console application which performs decoding of elementary compressed video stream to raw frames.
-                  <p> There are two projects in this solution:</p>
-                    <p> 1. sample_common: Media SDK, Direct3D, System files, helpers</p>
-                    <p> 2. sample_decode: Has pipeline_decode and sample_decode files</p>
-                  <p> In the present exercise you have to fill the gaps in pipeline_decode.cpp and sample_decode.cpp</p>
-                </div>
+            <div ibox title="Objective" >
+                <div content-block name="xdk-issues" message="Objective"  image-link="./views/labs/videoperformance-mediasdksamples/images/psuedocode.png">
+                  <p>We will build a custom Console application which performs decoding of elementary compressed video stream and renders them on the screen:
+                    <ul>
+                      <li>Setup parameter to decode pipeline</li>
+                      <li>Initialize decoder</li>
+                      <li>Decode frame by frame</li>
+                  </ul>
+                  </div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div ibox title="Download empty Visual Studio solution">
+                <div content-block name="xdk-issues" message="Download empty Visual Studio solution">
+                  <P>Please download empty solution from <a href="../views/labs/videoperformance-mediasdksamples/downloads/solution.zip" target="_blank">here</a>. We have done all the necessary library linking in this solution.
+                  </p>
+              </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-lg-12">
             <div ibox title="Header files for inclusion">
                 <div content-block name="xdk-issues" message="Check after completing this section">
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
-                  #include "mfx_samples_config.h"
-                  #include "sample_defs.h"
-                  #include &ltalgorithm&gt
+TODO: Hemanth
+//Create a skeleton of decode.cpp file and start laying the outline. In step 1 only give outline methods. Then start filling them with actual values.
+//Refer PrintHelp method from original sample_decode for command line flags and its meaning.
+//For example
+//pParams->memType = D3D11_MEMORY;
+//Above line is an interpretation of below flag
+//[-d3d11]            - work with d3d11 surfaces
+//We will write a code flow like
+//write to d3d11 surfaces
+pParams->memType = D3D11_MEMORY;
+//render decoded data in a separate window
+pParams->mode = MODE_RENDERING;
 
-                  #if defined(_WIN32) || defined(_WIN64)
-                  #include &lttchar.h&gt
-                  #include &ltwindows.h&gt
-                  #endif
-
-                  #include &ltctime&gt
-                  #include &ltalgorithm&gt
-                  #include "pipeline_decode.h"
-                  #include "sysmem_allocator.h"
-
-                  #if defined(_WIN32) || defined(_WIN64)
-                  #include "d3d_allocator.h"
-                  #include "d3d11_allocator.h"
-                  #include "d3d_device.h"
-                  #include "d3d11_device.h"
-                  #endif
-
-                  #if defined LIBVA_SUPPORT
-                  #include "vaapi_allocator.h"
-                  #include "vaapi_device.h"
-                  #include "vaapi_utils.h"
-                  #endif
-
-                  #if defined(LIBVA_WAYLAND_SUPPORT)
-                  #include "class_wayland.h"
-                  #endif
-
-                  #pragma warning(disable : 4100)
-
-                  #define __SYNC_WA // avoid sync issue on Media SDK side
+//Similarly udpate other flags. Based on that, update InputSetup description. Currently I have only few parameters.. add few more.
+//we will follow MARS method. They have registered those sample_pipelines and used them directly in the proram.
+//We will also use  CDecodingPipeline class and make calls accordingly as I did in my example.
+//REMOTE CDecodingPipeline class code from this document.
                 </ui-codemirror>
 
               </div>
