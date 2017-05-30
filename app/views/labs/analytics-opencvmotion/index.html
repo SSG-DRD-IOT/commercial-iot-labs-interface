@@ -26,7 +26,7 @@
                 <div content-block name="opencv_motion-objectives" message="Complete Objectives">
                     <h2 class="labHidden"></h2>
                     <h5>Lab Overview</h5>
-                    <p>Our motion detector will observe the difference between consecutive frames; when this difference is high, we can assume that motion was found. In order to prevent false positives, we will observe the standard deviation of the frame. When motion of a suitably sized object is detected, the standard deviation will rise, allowing us to trigger a motion event. 
+                    <p>Our motion detector will observe the difference between consecutive frames; when this difference is high, we can assume that motion was found. In order to prevent false positives, we will observe the standard deviation of the frame. When motion of a suitably sized object is detected, the standard deviation will rise, allowing us to trigger a motion event.
                     <p>Our program will be laid out as follows:</p>
                     <ul>
                         <li>import OpenCV and its dependencies</li>
@@ -38,7 +38,7 @@
                             <li>apply thresholding</li>
                             <li>calculate st dev</li>
                             <li>if motion detected is above threshold, then print a message</li>
-                            
+
                             </ul></li>
                         <li>show the video</li>
                         <li>release resources</li>
@@ -56,6 +56,7 @@
                 <li>Type following two lines</li>
                 <li><pre><code>import numpy as np
 import cv2
+#TODO: Cloud integration 1
 </code></pre></li>
                       <li>Press CTRL + S to save the file</li>
 
@@ -69,7 +70,7 @@ import cv2
                   <ul><li>sdThresh is used for motion level threshold</li>
                 <li>font is used for setting for for text display on video</li></ul>
                 <h5>distMap function gives us the Pythagorean distance between the three BGR layers of 2 frames.</h5>
-                
+
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
 sdThresh = 10
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -94,7 +95,7 @@ def distMap(frame1, frame2):
                 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">cv2.namedWindow('frame')
 cv2.namedWindow('dist')
 
-#capture video stream from camera source. 0 refers to first camera, 1 referes to 2nd and so on. 
+#capture video stream from camera source. 0 refers to first camera, 1 referes to 2nd and so on.
 cap = cv2.VideoCapture(0)
 
 _, frame1 = cap.read()
@@ -122,7 +123,7 @@ Get frame3's cols and rows matrix.
 		<li>And threshold this result to retrieve a binary mapping of where motion is taking place.
 			<pre><code>     _, thresh = cv2.threshold(mod, 100, 255, 0)</code></pre></li>
 		<li>At this point, we have a binary array that indicates where motion has occurred and where it has not. Now, we will use standard deviation to calculate where the motion is significant enough to trigger an alarm.
-                 </li> 
+                 </li>
         <li>Calculate the standard deviation using:
 			<pre><code>     _, stDev = cv2.meanStdDev(mod)</code></pre></li>
         <li>Lets show what we found after standard deviation and display that value on the video
@@ -131,11 +132,11 @@ Get frame3's cols and rows matrix.
                  </code></pre>
         </li>
      <li>If standard deviation is more than our threshold, then print a message
-       <pre><code>    if stDev > sdThresh:    
+       <pre><code>    if stDev > sdThresh:
       print("Motion detected.. Do something!!!");   </code></pre></li>
 <li>Show the BGR color video</li>
     <li>Wait for escape button press to exit</li>
-</ul>   
+</ul>
                   <h5>Here is the complete main program. </h5>
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
 while(True):
@@ -159,11 +160,11 @@ while(True):
     cv2.imshow('dist', mod)
     cv2.putText(frame2, "Standard Deviation - {}".format(round(stDev[0][0],0)), (70, 70), font, 1, (255, 0, 255), 1, cv2.LINE_AA)
 
-    
-    if stDev > sdThresh:    
-            print("Motion detected.. Do something!!!");
-            #TODO: Face Detection 2                          
 
+    if stDev > sdThresh:
+            print("Motion detected.. Do something!!!");
+            #TODO: Face Detection 2
+    #TODO: Cloud integration 2
     cv2.imshow('frame', frame2)
 
     if cv2.waitKey(1) & 0xFF == 27:
@@ -181,6 +182,7 @@ cv2.destroyAllWindows()
                   <h5>Keep those TODO as it is. We will re-use this program during face detection</h5>
 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import numpy as np
 import cv2
+#TODO: Cloud integration 1
 
 sdThresh = 10
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -198,7 +200,7 @@ def distMap(frame1, frame2):
 cv2.namedWindow('frame')
 cv2.namedWindow('dist')
 
-#capture video stream from camera source. 0 refers to first camera, 1 referes to 2nd and so on. 
+#capture video stream from camera source. 0 refers to first camera, 1 referes to 2nd and so on.
 cap = cv2.VideoCapture(0)
 
 _, frame1 = cap.read()
@@ -224,17 +226,17 @@ while(True):
 
     cv2.imshow('dist', mod)
     cv2.putText(frame2, "Standard Deviation - {}".format(round(stDev[0][0],0)), (70, 70), font, 1, (255, 0, 255), 1, cv2.LINE_AA)
-    if stDev > sdThresh:    
-            print("Motion detected.. Do something!!!"); 
-            #TODO: Face Detection 2   
-
+    if stDev > sdThresh:
+            print("Motion detected.. Do something!!!");
+            #TODO: Face Detection 2
+    #TODO: Cloud integration 2
     cv2.imshow('frame', frame2)
     if cv2.waitKey(1) & 0xFF == 27:
         break
 
 cap.release()
 cv2.destroyAllWindows()
-</pre></ui-codemirror>               
+</pre></ui-codemirror>
               </div>
             </div>
 

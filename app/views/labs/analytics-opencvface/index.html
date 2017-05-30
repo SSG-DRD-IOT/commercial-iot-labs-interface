@@ -63,7 +63,7 @@ faceCascade = cv2.CascadeClassifier('haar_face.xml')
             gray = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
 
 </code></pre></li>
-<li>Now that we have the grayscale frame, we can apply a the Haar cascade to it. 
+<li>Now that we have the grayscale frame, we can apply a the Haar cascade to it.
     This is done by using the detectMultiScale method of the faceCascade<pre><code>            # begin face cascade
             faces = faceCascade.detectMultiScale(
                 gray,
@@ -76,11 +76,11 @@ faceCascade = cv2.CascadeClassifier('haar_face.xml')
 			<pre><code>            facecount = 0
             # draw a rectangle over detected faces
             for (x, y, w, h) in faces:
-                facecount = facecount + 1 
+                facecount = facecount + 1
                 cv2.rectangle(frame2, (x, y), (x+w, y+h), (0, 255, 0), 1)
             cv2.putText(frame2, "No of faces {}".format(facecount), (50, 50), font, 1, (0, 0, 255), 1, cv2.LINE_AA)
 </code></pre></li>
-</ul>   
+</ul>
                   <h5>Here is the complete while loop looks like (including motion detection). </h5>
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
 while(True):
@@ -104,7 +104,7 @@ while(True):
     cv2.imshow('dist', mod)
     cv2.putText(frame2, "Standard Deviation - {}".format(round(stDev[0][0],0)), (70, 70), font, 1, (255, 0, 255), 1, cv2.LINE_AA)
 
-    
+
     if stDev > sdThresh:
             # the cascade is implemented in grayscale mode
             gray = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
@@ -118,7 +118,7 @@ while(True):
             facecount = 0
             # draw a rectangle over detected faces
             for (x, y, w, h) in faces:
-                facecount = facecount + 1 
+                facecount = facecount + 1
                 cv2.rectangle(frame2, (x, y), (x+w, y+h), (0, 255, 0), 1)
                 cv2.putText(frame2, "No of faces {}".format(facecount), (50, 50), font, 1, (0, 0, 255), 1, cv2.LINE_AA)
 
@@ -132,7 +132,7 @@ while(True):
                 <h5>Here is the final code base including motion sensing</h5>
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import numpy as np
 import cv2
-
+#TODO: Cloud integration 1
 
 cv2.namedWindow('frame')
 cv2.namedWindow('dist')
@@ -140,7 +140,7 @@ cv2.namedWindow('dist')
 # the classifier that will be used in the cascade
 faceCascade = cv2.CascadeClassifier('haar_face.xml')
 
-#capture video stream from camera source. 0 refers to first camera, 1 referes to 2nd and so on. 
+#capture video stream from camera source. 0 refers to first camera, 1 referes to 2nd and so on.
 cap = cv2.VideoCapture(0)
 
 
@@ -181,7 +181,7 @@ while(True):
     cv2.imshow('dist', mod)
     cv2.putText(frame2, "Standard Deviation - {}".format(round(stDev[0][0],0)), (70, 70), font, 1, (255, 0, 255), 1, cv2.LINE_AA)
 
-    
+
     if stDev > sdThresh:
             # the cascade is implemented in grayscale mode
             gray = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
@@ -195,10 +195,10 @@ while(True):
             facecount = 0
             # draw a rectangle over detected faces
             for (x, y, w, h) in faces:
-                facecount = facecount + 1 
+                facecount = facecount + 1
                 cv2.rectangle(frame2, (x, y), (x+w, y+h), (0, 255, 0), 1)
             cv2.putText(frame2, "No of faces {}".format(facecount), (50, 50), font, 1, (0, 0, 255), 1, cv2.LINE_AA)
-                            
+    #TODO: Cloud integration 2
     cv2.imshow('frame', frame2)
 
     if cv2.waitKey(1) & 0xFF == 27:
@@ -207,7 +207,7 @@ while(True):
 cap.release()
 cv2.destroyAllWindows()
 
-</pre></ui-codemirror>             
+</pre></ui-codemirror>
               </div>
             </div>
 
