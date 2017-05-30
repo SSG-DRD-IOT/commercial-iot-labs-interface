@@ -19,160 +19,159 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
+      <div class="row">
         <div class="col-lg-12">
-            <div ibox title="Overview">
-              <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section" image-link="../views/labs/remote-configamt/images/001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS.jpg">
-                <p>
-                  A single system setup that you can perform and start to get a feel of Intel Active Management Technology (Intel AMT) functionality in just a few minutes. A second system with a network and Internet browser is needed to connect to the Intel AMT system.</p>
-                </p>
-                <p>
-                  On motherboards that come from Intel1, Intel AMT setup is performed within the BIOS, which is accessed by pressing the <b>F2 key</b> at boot time.
-                </p>
-                <p>
-                  For most other vendors, Intel AMT setup occurs using the Intel® Management Engine BIOS Extension (Intel MEBX) and can be accessed using <b>Ctrl-P key</b> combination at boot time.
-                </p>
-                <h4>Intel Motherboards</h4>
-                <p>
-                  Once in the BIOS setup screen, look for "Intel AMT".
-                  If you have such a screen as shown in Figure 1, your system has Intel AMT,
-                  and you can continue with the short setup steps below. While at the BIOS screen,
-                  make sure to enable Intel AMT or Intel MEBX so that when you reboot, you can enter into the appropriate setup screens.
-                  Within a few minutes you will be interacting with Intel AMT.
-                </p>
-              </div>
-          </div>
+            <div ibox title="Objectives">
+                <div content-block name="AMT_init-objectives" message="Complete Objectives">
+                  <p>This guide is intended to be a starting point for testing your Intel &reg; vPro&trade; technology systems within
+                     your environment. It will guide you through setting up a "Sandbox" test environment using your own
+                     network environment so that you can test your specific use cases on Intel vPro technology that
+                     ultimately will help reduce overall support costs and costly service/truck rolls.</p>
+                </div>
+            </div>
         </div>
       </div>
-    </div>
 
-    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-        <div class="row">
-            <div class="col-lg-12">
-                <div ibox title="Setting Up the Intel&reg; AMT System">
-                  <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section">
-                    To set up the Intel AMT System, follow these steps:
-                    <ol>
-                      <li>
-                          Connect the Intel AMT system to a power outlet. This is necessary because some of the Intel AMT capabilities maybe disabled on battery power. Reset the system to a fresh boot.
-                      </li>
-                      <li>
-                          At the system reboot, enter the BIOS or Intel MEBX to get into Intel AMT setup, as described in previous section.
-                      </li>
-                      <li>
-                          You will be asked to enter the password, and forced to change it. Default factory password is "admin". Change this to a strong password such as: "intel123". Intel AMT will never be enabled unless the password is changed.
-                      </li>
-                      <li>
-                          Select ME Configuration. Verify that the following are set correctly:
-                          <ul>
-                            <li>
-                              ME State Control = Enabled
-                            </li>
-                            <li>
-                              ME Features Control -> Manageability Feature Selection is set to "Intel AMT"
-                            </li>
-                          </ul>
-                      </li>
-                      <li>
-                        Select ME Power Control -> ME ON in Host Sleep States, and at the menu selection, pick ON in S0, S3/AC, S4-S5/AC
-                      </li>
-                      <li>
-                        Select AMT Configuration, and go to TCP/IP setup. Configure the static IP address as follows:
-                        </br>IP Address: 192.168.1.20
-                      </li>
-                      <li>
-                        Subnet Mask: 255.255.255.0
-                      </li>
-                      <li>
-                        Save the configuration.
-                      </li>
-                    </ol>
-                  </div>
-              </div>
+      <div class="row">
+        <div class="col-lg-12">
+            <div ibox title="Step 1: Gather the Required Hardware">
+                <div content-block name="step1" message="Check after completion of this section">
+                  <p>You need:</p>
+                  <ul>
+                    <li>A host system (does not need to have Intel vPro technology)</li>
+                    <li>An empty USB drive</li>
+                    <li>An Intel vPro technology system with Intel&reg; Active Management Technology (Intel&reg; AMT) 7.0 or higher</li>
+                  </ul>
+                  <p>To verify that the Intel vPro system has Intel AMT 7.0 or higher, look for one of these badges on the system case:</p>
+                  <img class="labhidden" src="../views/labs/remote-configamt/images/AMT001.png" align="right"/>
+                </div>
             </div>
-          </div>
         </div>
+      </div>
 
-        <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div ibox title="Configure a Browser to Connect">
-                      <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section">
-                        <p>
-                          To configure a browser to connect, follow these steps:
-                        </p>
-                        <ol>
-                          <li>
-                            Select a system that you can connect to the Intel AMT system using an Ethernet cable. Go to the network settings of this system and configure the IP address. Assign a static IP address
-                            </br>IP Address: 192.168.1.21
-                            </br>Subnet Mask: 255.255.255.0
-                          </li>
-                          <li>
-                            Now, connect this system to the Intel AMT system using an Ethernet cable.
-                          </li>
-                          <li>
-                            Open a command prompt, and try pinging the Intel AMT system.
-                            </br>ping 192.168.1.20
-                            </br>You should get a ping response.
-                          </li>
-                        </ol>
-                      </div>
+      <div class="row">
+        <div class="col-lg-12">
+            <div ibox title="Step 2: Make Sure the Intel vPro System Is Unconfigured">
+                  <p>On the Intel vPro system:</p>
+                  <ol>
+                    <li>Open the Intel&reg; Management and Security Status (IMSS) program.</li>
+                    <li>Click the <b>Advanced</b> tab.</li>
+                    <li>Under Intel&reg; Management Engine, verify that the status is <b>Unconfigured</b>.</li>
+                  </ol>
+                  <div content-block image-link="../views/labs/remote-configamt/images/AMT002.png"></div>
                   </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+            <div ibox title="Step 3: Configure the USB Drive">
+                <div content-block name="step2" message="Check after completion of this section">
+                  <p>On the host system:</p>
+                  <ol>
+                    <li>Insert the empty USB drive in the USB port on the host system.</li>
+                    <li>Download <u>Intel&reg; Setup and Configuration Software (Intel&reg; SCS)</u> to the host system.</li>
+                    <li>Extract the Intel SCS download to a directory of your choice.</li>
+                    <li>Browse to the ACUWizard directory.</li>
+                    <li>Right-click ACUWizard.exe and select <b>Run as administrator.</b></li>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT003.png"></div>
+                    <p>The Intel&reg; AMT Configuration Utility appears.</p>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT004.png"></div>
+                    <li>Select <b>Create Settings to Configure Multiple Systems.</b></li>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT005.png"></div>
+                    <p>The following screen appears</p>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT006.png"></div>
+                    <li>Click the <b>Tools</b> drop-down menu and select <b>Prepare a USB Key for Manual Configuration</b></li>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT007.png"></div>
+                    <p>The following screen appears</p>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT008.png"></div>
+                    <li>Select the type of Intel vPro system that you will be configuring: <b>Mobile Systems</b> or <b>Desktop Systems</b>.</li>
+                    <p><b>Note</b>: Some Small Form Factor (SFF) desktops use mobile chipsets. For example, QM87 is a mobile
+                     Intel vPro chipset noted by the “M,” whereas the desktop equivalent chipset is the Q87.
+                    <li>Select <b>All systems are version 7.0 and higher.</b></li>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT009.png"></div>
+                    <li>In the Configuration Settings section:</li>
+                  <ul>
+                    <li><p>Old Intel MEBX Password: <b>Intel@1234</b></p>
+                      <p>Intel SCS always puts the default password of unconfigured systems ("admin") in this field.</p>
+                      <p>For the present workshop it is "Intel@1234"</p>
+                      <p>If this is not the password currently defined in Intel MEBX, enter the correct password. </p>
+                      <p>Note: If you have lost your Intel MEBX password, you will need to consult the OEM manual for clearing the CMOS battery to reset the password to "admin".</p></li>
+                    <li>New Intel MEBX Password: type a new password. Click <b>"i"</b> for password rules.</li>
+                    <li>Leave the power states and user consent settings as is.</li>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT010.png"></div>
+                  </ul>
+                  <li>In the USB Drive section, browse to the USB drive.</li>
+                  <div content-block image-link="../views/labs/remote-configamt/images/AMT011.png"></div>
+                  <li>Click <b>OK</b>.</li>
+                  <p>The following warning appears.</p>
+                  <div content-block image-link="../views/labs/remote-configamt/images/AMT012.png"></div>
+                  <li>Click <b>Yes</b> if you are sure you want to continue.</li>
+                  <p>The following dialog box appears.</p>
+                  <div content-block image-link="../views/labs/remote-configamt/images/AMT013.png"></div>
+                  <li>Click <b>OK</b>.</li>
+                  <li>Remove the USB drive.</li>
+                  <p>You are now ready to configure the Intel vPro system.</p>
+                </ol>
                 </div>
-              </div>
             </div>
+        </div>
+      </div>
 
-            <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div ibox title="Connect and Explore">
-                            <p>
-                              Now you are ready to start a web browser.
-                            </p>
-                            <ol>
-                              <li>
-                                Point the web browser to the address
-                                </br>http://192.168.1.20:16992
-                              </li>
-                            </ol>
+      <div class="row">
+        <div class="col-lg-12">
+            <div ibox title="Step 4: Configure the Intel vPro System">
+                  <ol>
+                    <li>Move back to the Intel vPro system.</li>
+                    <li>Start with the system in the off state.</li>
+                    <li>Insert the newly setup USB drive in the USB port.</li>
+                    <li>Turn on the system.</li>
+                    <li>The system will read the USB drive if it is enabled to do so in the BIOS. If the system does not read</li>
+                    the USB drive, check the BIOS.</li>
+                    <li>While the system is reading the USB drive, select <b>Y</b> when prompted to provision the system.</li>
+                    <p>Note: Provisioning might take about 15 seconds.</p>
+                    <li>To verify, do the following:</li>
+                    <p>   a. Open the Intel&reg; Management and Security Status (IMSS) program.</p>
+                    <p>   b. Click the Advanced tab.</p>
+                    <p>   c. Under Intel&reg; Management Engine, verify that the status is Configured.</p>
+                  </ol>
+                  <div content-block image-link="../views/labs/remote-configamt/images/AMT014.png"></div>
+                  <p>You have successfully configured the system</p>
+            </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-lg-12">
+            <div ibox title="Step 5: Connect to the Intel vPro System Remotely">
+                  <p>Now you can test your remote manageability using the host system and the Intel vPro system.</p>
+                  <ol>
+                    <li>Move back to the host system.</li>
+                    <li>On the host system, download and install the RealVNC* Viewer Plus trial version.</li>
+                    <li>Open the program.</li>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT015.png"></div>
+                    <li>Enter the following information:
+                      <ul>
+                        <li>AMT Server: The <IP Address or FQDN> of the Intel vPro system you are connecting to</li>
+                        <li>Encryption: <b>None</b></li>
+                        <li>Connection Mode: <b>Intel&reg; AMT KVM</b></li>
+                    </li>
+                    <li>Click Options.</li>
+                    <li>Match the items selected below and click <b>OK.</b></li>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT016.png"></div>
+                    <li>On the VNC Viewer Plus screen, click <b>Connect.</b></li>
+                    <li>Log in to the Intel vPro system.</li>
+                    <ul>
+                      <li>Username: <b>admin</b></li>
+                      <li>Password: &ltYour Intel MEBX password&gt</li>
+                    </ul>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT017.png"></div>
+                    <li>Move to the top of the window to use the menu.</li>
 
-                <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-
-                          <div class="wrapper wrapper-content animated fadeIn">
-                              <div class="row">
-                                  <div class="col-lg-6">
-                                      <div class="ibox">
-                                          <div class="ibox-title">
-                                              <h5>2. When prompted for username/password, type admin for username and intel123 as the password</h5>
-                                              <div ibox-tools></div>
-                                          </div>
-                                          <div class="ibox-content">
-                                              <img src="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg" alt="002-Intel-AMT-Web-Browser-Login-Screen" />
-                                          </div>
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-lg-6">
-                                      <div class="ibox">
-                                          <div class="ibox-title">
-                                              <h5>3 You are now connected</h5>
-                                              <div ibox-tools></div>
-                                          </div>
-                                          <div class="ibox-content">
-                                              <img src="../views/labs/remote-configamt/images/003-Intel-AMT-Web-Browser-Screen.jpg" alt="003-Intel-AMT-Web-Browser-Screen" />
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-
-                    </div>
-
-                  </div>
-                  </div>
-                  </div>
-
-                </div>
+                  </ol>
+                  <div content-block image-link="../views/labs/remote-configamt/images/AMT018.png"></div>
+                  <p>You have successfully configured the system</p>
+            </div>
+        </div>
+      </div>
+  </div>
