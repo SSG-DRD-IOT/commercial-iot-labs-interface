@@ -24,7 +24,8 @@
             <div ibox title="Objectives">
                 <div content-block name="AMT_init-objectives" message="Complete Objectives">
                   <p>This guide is intended to be a starting point for testing your Intel &reg; vPro&trade; technology systems within
-                     your environment. It will guide you through setting up a "Sandbox" test environment using your own
+                     your environment.</p>
+                   <p>It will guide you through setting up a "Sandbox" test environment using your own
                      network environment so that you can test your specific use cases on Intel vPro technology that
                      ultimately will help reduce overall support costs and costly service/truck rolls.</p>
                 </div>
@@ -66,7 +67,8 @@
       <div class="row">
         <div class="col-lg-12">
             <div ibox title="Step 3: Configure the USB Drive">
-                <div content-block name="step2" message="Check after completion of this section">
+                <div content-block name="step3" message="Check after completion of this section">
+                  <p><b>Note:</b> Pre-configured USB is provided for lab. So Step 3 is only for knowledge purpose</p>
                   <p>On the host system:</p>
                   <ol>
                     <li>Insert the empty USB drive in the USB port on the host system.</li>
@@ -91,16 +93,17 @@
                     <li>Select <b>All systems are version 7.0 and higher.</b></li>
                     <div content-block image-link="../views/labs/remote-configamt/images/AMT009.png"></div>
                     <li>In the Configuration Settings section:</li>
-                  <ul>
-                    <li><p>Old Intel MEBX Password: <b>Intel@1234</b></p>
+                  <div content-block image-link="../views/labs/remote-configamt/images/AMT010.png">
+                    <ul>
+                    <li><p>Old Intel MEBX Password: <b>admin</b></p>
                       <p>Intel SCS always puts the default password of unconfigured systems ("admin") in this field.</p>
-                      <p>For the present workshop it is "Intel@1234"</p>
+                      <p>For the present workshop new MEBX password is "Intel@1234"</p>
                       <p>If this is not the password currently defined in Intel MEBX, enter the correct password. </p>
                       <p>Note: If you have lost your Intel MEBX password, you will need to consult the OEM manual for clearing the CMOS battery to reset the password to "admin".</p></li>
                     <li>New Intel MEBX Password: type a new password. Click <b>"i"</b> for password rules.</li>
                     <li>Leave the power states and user consent settings as is.</li>
-                    <div content-block image-link="../views/labs/remote-configamt/images/AMT010.png"></div>
                   </ul>
+                  </div>
                   <li>In the USB Drive section, browse to the USB drive.</li>
                   <div content-block image-link="../views/labs/remote-configamt/images/AMT011.png"></div>
                   <li>Click <b>OK</b>.</li>
@@ -150,6 +153,7 @@
                     <li>On the host system, download and install the RealVNC* Viewer Plus trial version.</li>
                     <li>Open the program.</li>
                     <div content-block image-link="../views/labs/remote-configamt/images/AMT015.png"></div>
+                    <div content-block image-link="../views/labs/remote-configamt/images/AMT016.png">
                     <li>Enter the following information:
                       <ul>
                         <li>AMT Server: The <IP Address or FQDN> of the Intel vPro system you are connecting to</li>
@@ -158,7 +162,7 @@
                     </li>
                     <li>Click Options.</li>
                     <li>Match the items selected below and click <b>OK.</b></li>
-                    <div content-block image-link="../views/labs/remote-configamt/images/AMT016.png"></div>
+                    </div>
                     <li>On the VNC Viewer Plus screen, click <b>Connect.</b></li>
                     <li>Log in to the Intel vPro system.</li>
                     <ul>
