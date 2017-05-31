@@ -78,40 +78,33 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <div ibox title="Running sample apps">
-                <div content-block name="xdk-issues" message="Check after completing this section">
-                    <ul>
-                        <li>Sample apps are ready to compilation to get the executables .</li>
-                        <li>
-                            <span>Start exploring:</span>
-                            <span style="color:#2554C7">C:\Users\&lt;user name&gt;\Desktop\03-MediaSDK\simple_sample</span>
-                        </li>
-                        </br>
-                        Note:
-                        <li>MS Visual studio 2015 is required for compiling this sample app. </li>
-                        <li>Readme file specifies the supported input/output formats, HW/SW limitations etc.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-12">
             <div ibox title="1. Sample Decoder">
                 <div content-block name="xdk-issues" message="Check after completing this section">
                     <ul>
+                      <li>Navigate to Documents &gt Samples-master</li>
+                      <li>Unzip the Samples-master</li>
+                      <li>Open the solution file in the path:
+                        <p><span style="color:#A52A2A">Documents &gt samples-master &gt samples &gt sample_decode &gt sample_decode.sln</span></p>
                       <li>
-                        Open the simple_sample Solution in MS Visual Studio 2015, build and run.
+                        <p>Open the sample_decode Solution in MS Visual Studio 2015, </p>
+                        <p><u>build</u> the solution successfully without any errors
                       </li>
-                        <li>Command line for SW decode-
+                      <li>If there are errors, rectify them. Known rectification methods involve:
+                        <ul>
+                          <li>Right clicking the solution in Visual studio solution explorer and click retarget solution</li>
+                          <li>If warning is treated as error, right click both projects one by one, right click on each project, select properties, click C/C++.
+                             <p>Set "Treat Warnings As Errors" to No(/WX). Then click Apply and OK.</p></li>
+                        </ul>
+                        <li>Goto <b>_Build &gt x64</b> folder and <u>run</u> execute as follows:
+                      </li>
+                        <li>Open the _Build &gt x64 path in command prompt and test Software decode-
                             <ul>
                                 <li>
                                     <span style="color:#A52A2A">sample_decode.exe h264 -i C:\City.h264 –r -sw</span>
                                 </li>
                             </ul>
                         </li>
-                        <li>Command line for HW decode-
+                        <li>Open the _Build &gt x64 path in command prompt and test Hardware decode-
                             <ul>
                                 <li>
                                     <span style="color:#A52A2A">sample_decode.exe h264 -i C:\City.h264 –r -hw</span>
@@ -137,7 +130,7 @@
             <div ibox title="2. Video Wall">
                 <div content-block name="xdk-issues" message="Check after completing this section">
                     <ul>
-                      <li>Open Documents &gt samples-master &gt ssamples &gt sample_decode &gt sample_decode.sln</li>
+                      <li>Open Documents &gt samples-master &gt samples &gt sample_decode &gt sample_decode.sln</li>
                         <li>Build for x64 & Windows 10 platform set</li>
                         <li>Copy the <span style="color:#A52A2A">Documents &gt samples-master &gt ssamples &gt sample_decode &gt sample_video_wall.bat</span></li>
                         <p>to <span style="color:#2554C7">Documents &gt samples-master &gt ssamples &gt sample_decode &gt _build &gt x64 folder</p>
