@@ -230,7 +230,7 @@
         </div>
 
     </div>
--->
+
     <div ibox title="Platform Manager Configuration">
 
         <div class="wrapper wrapper-content animated fadeIn">
@@ -288,75 +288,83 @@
         </div>
 
     </div>
-
+-->
     <div ibox title="Meshcentral Web">
       <div class="wrapper wrapper-content animated fadeIn">
-          <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 1: Run the MeshAgent as Administrator</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configamt/images/016-meshagent-run-as-admin.jpg" alt="016-meshagent-run-as-admin" />
-                        </div>
+
+
+        <div class="row">
+          <div class="col-lg-6">
+              <div ibox title="Step1: Login to local mesh central server">
+                    <div content-block image-link="../views/labs/remote-configamt/images/mesh0.png" message="Login successful">
+                            <p>Url: <a href="https://192.168.11.100">https://192.168.11.100</a>
+                            <p>Username: workshop</p>
+                            <p>Password: intel@123</p>
                     </div>
-                </div>
+              </div>
+          </div>
+        </div>
+
+
+        <div class="row">
                 <div class="col-lg-6">
-                        <div class="ibox">
-                            <div class="ibox-title">
-                                <h5>Step 2: Install Mesh Agent</h5>
-                                <div ibox-tools></div>
-                            </div>
-                            <div class="ibox-content">
-                                <img src="../views/labs/remote-configamt/images/017-meshagent-install.jpg" alt="017-meshagent-install" />
-                            </div>
+                    <div ibox title="Step 2: Create Mesh Agent">
+                        <div content-block image-link="../views/labs/remote-configamt/images/mesh1.png" message="Mesh Created">
+                              <p>Goto MyAccount tab > Administrative Meshes > New</p>
+                              <p>In the Create new mesh popup, provide mesh name and password</p>
+                              <p>Check mark all the options and click create mesh</p>
                         </div>
                     </div>
               </div>
           </div>
 
-          <div class="wrapper wrapper-content animated fadeIn">
-              <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 3: Web device refresh</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configamt/images/018-web-device-refresh.jpg" alt="018-web-device-refresh" />
-                        </div>
-                      </div>
-                    </div>
+            <div class="row">
                     <div class="col-lg-6">
-                        <div class="ibox">
-                            <div class="ibox-title">
-                                <h5>Step 4: Install Mesh Agent</h5>
-                                <div ibox-tools></div>
-                            </div>
-                            <div class="ibox-content">
-                              <img src="../views/labs/remote-configamt/images/019-web-device-detail.jpg" alt="019-web-device-detail" />
+                        <div ibox title="Step 3: Test & install the created Mesh">
+                            <div content-block image-link="../views/labs/remote-configamt/images/mesh2.png" message="Mesh Created">
+                                  <p>Goto MyAccount tab and click the newly created mesh.</p>
+                                  <p>Have a look on Web Authorizations.</p>
+                                  <p>Click on Install</p>
+                                  <p>Download <b>Window Mesh Agent</b> and <b>Mesh Policy File</b></p>
+                                  <p>Run the downloaded Mesh Agent as Administrator to install it.</p>
                             </div>
                         </div>
-                      </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                      <div class="col-lg-6">
+                          <div ibox title="Step 4: Web device refresh">
+                              <div content-block image-link="../views/labs/remote-configamt/images/018-web-device-refresh.jpg" message="Web Device refresh">
+                                <p>Goto MyAccount tab and click the newly created mesh.</p>
+                              </div>
+                          </div>
                     </div>
                 </div>
 
-                <div class="wrapper wrapper-content animated fadeIn">
-                    <div class="row">
-                      <div class="col-lg-6">
-                          <div class="ibox">
-                                <div class="ibox-title">
-                                    <h5>Step 5: Web Socket Desktop Loop</h5>
-                                    <div ibox-tools></div>
-                                </div>
-                                <div class="ibox-content">
-                                    <img src="../views/labs/remote-configamt/images/020-websocket-desktop-loop.jpg" alt="020-websocket-desktop-loop" />
+                <div class="row">
+                        <div class="col-lg-6">
+                            <div ibox title="Step 5: Explore file system">
+                                <div content-block image-link="../views/labs/remote-configamt/images/mesh3.png" message="Explore file system">
                                 </div>
                             </div>
-                        </div>
                       </div>
+                  </div>
+
+                  <div class="row">
+                          <div class="col-lg-6">
+                              <div ibox title="Step 6: Explore Terminal">
+                                  <div content-block image-link="../views/labs/remote-configamt/images/mesh4.png" message="Explore file system">
+                                  </div>
+                              </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="row">
+                            <div class="col-lg-6">
+                                <div ibox title="Step 7: Web Socket Desktop Loop">
+                                    <div content-block image-link="../views/labs/remote-configamt/images/020-websocket-desktop-loop.jpg" message="Explore file system">
+                                    </div>
+                                </div>
+                          </div>
+                      </div>
