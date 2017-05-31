@@ -35,39 +35,8 @@
 
       <div class="row">
         <div class="col-lg-12">
-            <div ibox title="Step 1: Gather the Required Hardware">
+            <div ibox title="Step 1: Configure the USB Drive">
                 <div content-block name="step1" message="Check after completion of this section">
-                  <p>You need:</p>
-                  <ul>
-                    <li>A host system (does not need to have Intel vPro technology)</li>
-                    <li>An empty USB drive</li>
-                    <li>An Intel vPro technology system with Intel&reg; Active Management Technology (Intel&reg; AMT) 7.0 or higher</li>
-                  </ul>
-                  <p>To verify that the Intel vPro system has Intel AMT 7.0 or higher, look for one of these badges on the system case:</p>
-                  <img class="labhidden" src="../views/labs/remote-configamt/images/AMT001.png" align="right"/>
-                </div>
-            </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Step 2: Make Sure the Intel vPro System Is Unconfigured">
-                  <p>On the Intel vPro system:</p>
-                  <ol>
-                    <li>Open the Intel&reg; Management and Security Status (IMSS) program.</li>
-                    <li>Click the <b>Advanced</b> tab.</li>
-                    <li>Under Intel&reg; Management Engine, verify that the status is <b>Unconfigured</b>.</li>
-                  </ol>
-                  <div content-block image-link="../views/labs/remote-configamt/images/AMT002.png"></div>
-                  </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Step 3: Configure the USB Drive">
-                <div content-block name="step3" message="Check after completion of this section">
                   <p><b>Note:</b> Pre-configured USB is provided for lab. So Step 3 is only for knowledge purpose</p>
                   <p>On the host system:</p>
                   <ol>
@@ -123,7 +92,7 @@
 
       <div class="row">
         <div class="col-lg-12">
-            <div ibox title="Step 4: Configure the Intel vPro System">
+            <div ibox title="Step 2: Configure the Intel vPro System">
                   <ol>
                     <li>Move back to the Intel vPro system.</li>
                     <li>Start with the system in the off state.</li>
@@ -145,37 +114,56 @@
       </div>
 
       <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Step 5: Connect to the Intel vPro System Remotely">
-                  <p>Now you can test your remote manageability using the host system and the Intel vPro system.</p>
-                  <ol>
-                    <li>Move back to the host system.</li>
-                    <li>On the host system, download and install the RealVNC* Viewer Plus trial version.</li>
-                    <li>Open the program.</li>
-                    <div content-block image-link="../views/labs/remote-configamt/images/AMT015.png"></div>
-                    <div content-block image-link="../views/labs/remote-configamt/images/AMT016.png">
-                    <li>Enter the following information:
-                      <ul>
-                        <li>AMT Server: The <IP Address or FQDN> of the Intel vPro system you are connecting to</li>
-                        <li>Encryption: <b>None</b></li>
-                        <li>Connection Mode: <b>Intel&reg; AMT KVM</b></li>
-                    </li>
-                    <li>Click Options.</li>
-                    <li>Match the items selected below and click <b>OK.</b></li>
+              <div class="col-lg-12">
+                  <div ibox title="Step 3: Configure a Browser to Connect">
+                    <div content-block message="Check after finishing this section">
+                      <p>
+                        To configure a browser to connect, follow these steps:
+                      </p>
+                      <ol>
+                        <li>
+                          Select a system that you can connect to the Intel AMT system using an Ethernet cable. Go to the network settings of this system and configure the IP address. Assign a static IP address
+                        </br>IP Address: 192.168.__.__
+                          </br>Subnet Mask: 255.255.255.0
+                        </li>
+                        <li>
+                          Now, connect this system to the Intel AMT system using an Ethernet cable.
+                        </li>
+                        <li>
+                          Open a command prompt, and try pinging the Intel AMT system.
+                        </br>ping 192.168.__.__
+                          </br>You should get a ping response.
+                        </li>
+                      </ol>
                     </div>
-                    <li>On the VNC Viewer Plus screen, click <b>Connect.</b></li>
-                    <li>Log in to the Intel vPro system.</li>
-                    <ul>
-                      <li>Username: <b>admin</b></li>
-                      <li>Password: &ltYour Intel MEBX password&gt</li>
-                    </ul>
-                    <div content-block image-link="../views/labs/remote-configamt/images/AMT017.png"></div>
-                    <li>Move to the top of the window to use the menu.</li>
-
-                  </ol>
-                  <div content-block image-link="../views/labs/remote-configamt/images/AMT018.png"></div>
-                  <p>You have successfully configured the system</p>
+                </div>
+              </div>
             </div>
-        </div>
-      </div>
+
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div ibox title="Step 4: Connect and Explore">
+                          <p>
+                            Now you are ready to start a web browser.
+                          </p>
+                          <ol>
+                            <li>
+                              Point the web browser to the address
+                            </br>http://192.168.__.__:16992
+                            </li>
+                            <li>
+                              <p>When prompted for username/password, type admin for username and Intel@1234 as the password</p>
+                              <div content-block image-link="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg">
+                              </div>
+                            </li>
+                            <li>
+                              <p>You are now connected. Please explore different sections.</p>
+                              <div content-block image-link="../views/labs/remote-configamt/images/003-Intel-AMT-Web-Browser-Screen.jpg">
+                              </div>
+                            </li>
+                          </ol>
+
   </div>
+</div>
+</div>
+</div>

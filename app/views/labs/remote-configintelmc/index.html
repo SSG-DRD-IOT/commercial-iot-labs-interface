@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Intel® AMT Provisioning</h2>
+        <h2>Remote Config with Intel Mesh Commander</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -12,7 +12,7 @@
                 <a>Remote Management</a>
             </li>
             <li class="active">
-                <strong>Intel&reg; Active Management Technology</strong>
+                <strong>Mesh Commander</strong>
             </li>
         </ol>
     </div>
@@ -21,157 +21,151 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
-            <div ibox title="Overview">
-              <div content-block message="Check after finishing this section">
-                <p>
-                  A single system setup that you can perform and start to get a feel of Intel Active Management Technology (Intel AMT) functionality in just a few minutes. A second system with a network and Internet browser is needed to connect to the Intel AMT system.</p>
-                </p>
-                <p>
-                  On motherboards that come from Intel1, Intel AMT setup is performed within the BIOS, which is accessed by pressing the <b>F2 key</b> at boot time.
-                </p>
-                <p>
-                  For most other vendors, Intel AMT setup occurs using the Intel® Management Engine BIOS Extension (Intel MEBX) and can be accessed using <b>Ctrl-P key</b> combination at boot time.
-                </p>
-                <h4>Intel Motherboards</h4>
-                <p>
-                  Once in the BIOS setup screen, look for "Intel AMT".
-                  If you have such a screen as shown in Figure 1, your system has Intel AMT,
-                  and you can continue with the short setup steps below. While at the BIOS screen,
-                  make sure to enable Intel AMT or Intel MEBX so that when you reboot, you can enter into the appropriate setup screens.
-                  Within a few minutes you will be interacting with Intel AMT.
-                </p>
-              </div>
+          <div ibox title="Overview">
+              <h2 class="labHidden">Read the Overview</h2>
+              <labels arduino windows apple linux/>
+              <p>The web based Intel AMT management console is now called Mesh Commander. It runs on many operating systems and can be hosted in a web server.</p>
+              <p>With HTML5 being very capable, it's a lot easier for administrators to use  web applications that interact with Intel AMT within a browser, making the local installation of tools a thing of the past in some cases.</p>
           </div>
         </div>
-      </div>
     </div>
 
-    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-        <div class="row">
-            <div class="col-lg-12">
-                <div ibox title="Setting Up the Intel&reg; AMT System">
-                  <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section">
-                    To set up the Intel AMT System, follow these steps:
-                    <ol>
-                      <li>
-                          Connect the Intel AMT system to a power outlet. This is necessary because some of the Intel AMT capabilities maybe disabled on battery power. Reset the system to a fresh boot.
-                      </li>
-                      <li>
-                          At the system reboot, enter the BIOS or Intel MEBX to get into Intel AMT setup, as described in previous section.
-                      </li>
-                      <li>
-                          You will be asked to enter the password, and forced to change it. Default factory password is "admin". Change this to a strong password such as: "intel123". Intel AMT will never be enabled unless the password is changed.
-                      </li>
-                      <li>
-                          Select ME Configuration. Verify that the following are set correctly:
-                          <ul>
-                            <li>
-                              ME State Control = Enabled
-                            </li>
-                            <li>
-                              ME Features Control -> Manageability Feature Selection is set to "Intel AMT"
-                            </li>
-                          </ul>
-                      </li>
-                      <li>
-                        Select ME Power Control -> ME ON in Host Sleep States, and at the menu selection, pick ON in S0, S3/AC, S4-S5/AC
-                      </li>
-                      <li>
-                        Select AMT Configuration, and go to TCP/IP setup. Configure the static IP address as follows:
-                      </br>IP Address: 192.168.__.__
-                      </li>
-                      <li>
-                        Subnet Mask: 255.255.255.0
-                      </li>
-                      <li>
-                        Save the configuration.
-                      </li>
-                    </ol>
-                  </div>
-              </div>
+    <div ibox title="Mesh Commander Installation">
+
+        <div class="wrapper wrapper-content animated fadeIn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 1: Add AMT Computer</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg" alt="001-Add-AMT-Computer" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 2: AMT Entry Screen</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/002-AMT-Entry-Screen.jpg" alt="002-AMT-Entry-Screen" />
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
 
-        <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+        <div class="wrapper wrapper-content animated fadeIn">
             <div class="row">
-                <div class="col-lg-12">
-                    <div ibox title="Configure a Browser to Connect">
-                      <div content-block name="001-Sample-Intel-AMT-Setup-Screen-within-the-Intel-BIOS" message="Check after finishing this section">
-                        <p>
-                          To configure a browser to connect, follow these steps:
-                        </p>
-                        <ol>
-                          <li>
-                            Select a system that you can connect to the Intel AMT system using an Ethernet cable. Go to the network settings of this system and configure the IP address. Assign a static IP address
-                          </br>IP Address: 192.168.__.__
-                            </br>Subnet Mask: 255.255.255.0
-                          </li>
-                          <li>
-                            Now, connect this system to the Intel AMT system using an Ethernet cable.
-                          </li>
-                          <li>
-                            Open a command prompt, and try pinging the Intel AMT system.
-                            </br>ping 192.168.1.20
-                            </br>You should get a ping response.
-                          </li>
-                        </ol>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div ibox title="Connect and Explore">
-                            <p>
-                              Now you are ready to start a web browser.
-                            </p>
-                            <ol>
-                              <li>
-                                Point the web browser to the address
-                              </br>http://192.168.__.__:16992
-                              </li>
-                            </ol>
-
-                <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-
-                          <div class="wrapper wrapper-content animated fadeIn">
-                              <div class="row">
-                                  <div class="col-lg-6">
-                                      <div class="ibox">
-                                          <div class="ibox-title">
-                                              <h5>2. When prompted for username/password, type admin for username and Intel@1234 as the password</h5>
-                                              <div ibox-tools></div>
-                                          </div>
-                                          <div class="ibox-content">
-                                              <img src="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg" alt="002-Intel-AMT-Web-Browser-Login-Screen" />
-                                          </div>
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-lg-6">
-                                      <div class="ibox">
-                                          <div class="ibox-title">
-                                              <h5>3 You are now connected</h5>
-                                              <div ibox-tools></div>
-                                          </div>
-                                          <div class="ibox-content">
-                                              <img src="../views/labs/remote-configamt/images/003-Intel-AMT-Web-Browser-Screen.jpg" alt="003-Intel-AMT-Web-Browser-Screen" />
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 3: Click Connect</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg" alt="003-Click-Connect" />
+                        </div>
                     </div>
-
-                  </div>
-                  </div>
-                  </div>
-
                 </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 4: Click Remote Desktop</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/004-Click-Remote-Desktop.jpg" alt="004-Click-Remote-Desktop" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeIn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 5: Click Connect Remote Desktop</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/005-Click-Connect-Remote-Desktop.jpg" alt="005-Click-Connect-Remote-Desktop" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 6: Out of band Remote Desktop</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/006-Out-of-band-Remote-Desktop.jpg" alt="006-Out-of-band-Remote-Desktop.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeIn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 7: Power Actions Reset To BIOS</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/007-Power-Actions-Reset-To-BIOS.jpg" alt="007-Power-Actions-Reset-To-BIOS" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 8: BIOS Setup Page</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/008-BIOS-Setup-Page.jpg" alt="008-BIOS-Setup-Page" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content animated fadeIn">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 9: SQL Express Server Configuration</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/009-IDE-Redirection.jpg" alt="009-IDE-Redirection" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>Step 10: Mesh Commander's System Defense panel</h5>
+                            <div ibox-tools></div>
+                        </div>
+                        <div class="ibox-content">
+                            <img src="../views/labs/remote-configintelmc/images/010-MeshCommanderMatchingRules.jpg" alt="010-MeshCommanderMatchingRules" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
