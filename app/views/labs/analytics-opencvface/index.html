@@ -104,7 +104,7 @@ while(True):
     cv2.imshow('dist', mod)
     cv2.putText(frame2, "Standard Deviation - {}".format(round(stDev[0][0],0)), (70, 70), font, 1, (255, 0, 255), 1, cv2.LINE_AA)
 
-
+    facecount = 0
     if stDev > sdThresh:
             # the cascade is implemented in grayscale mode
             gray = cv2.cvtColor(frame2, cv2.COLOR_BGR2GRAY)
@@ -159,7 +159,7 @@ def distMap(frame1, frame2):
 
 _, frame1 = cap.read()
 _, frame2 = cap.read()
-
+facecount = 0
 while(True):
     _, frame3 = cap.read()
     rows, cols, _ = np.shape(frame3)

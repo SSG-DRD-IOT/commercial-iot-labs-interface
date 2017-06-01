@@ -20,7 +20,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
       <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-12">+
 
             <div ibox title="Objectives">
                 <div content-block name="opencv_motion-objectives" message="Complete Objectives">
@@ -139,6 +139,7 @@ Get frame3's cols and rows matrix.
 </ul>
                   <h5>Here is the complete main program. </h5>
                   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">
+facecount = 0
 while(True):
     _, frame3 = cap.read()
     rows, cols, _ = np.shape(frame3)
@@ -206,6 +207,7 @@ cap = cv2.VideoCapture(0)
 _, frame1 = cap.read()
 _, frame2 = cap.read()
 
+facecount = 0
 while(True):
     _, frame3 = cap.read()
     rows, cols, _ = np.shape(frame3)
