@@ -39,10 +39,11 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
   <div class="row">
         <div class="col-lg-12">
-            <div ibox title="Download empty Visual Studio solution">
-                <div content-block name="xdk-issues" message="Download empty Visual Studio solution">
-                  <P>Please download empty solution from <a href="../views/labs/videoperformance-mediasdksamples/downloads/lab_exercise.7z" target="_blank">here</a>. </p>
-                  <P>Open the sample_decode.sln file located in sample_decode folder</p>
+            <div ibox title="Open Visual Studio solution exercise">
+                <div content-block name="xdk-issues" message="Open Visual Studio solution exercise">
+                  <P>Please open empty solution from </p>
+                  <p><b>Desktop &gt; Retail &gt; 03-MediaSDK &gt; lab_exercise</b> folder</p>
+                  <P>Open the <b>sample_decode.sln</b> file located in sample_decode folder</p>
                   <p>We have done all the necessary library linking in this solution.</p>
               </div>
             </div>
@@ -54,7 +55,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div ibox title="Outline">
-                <div content-block name="xdk-issues" message="Check after completing this section">
+                <div content-block name="xdk-issues" message="Outline read">
                   <p>In this example we are decoding an AVC (H.264) stream.</p>
                     <ul>
                       <li>Inclusions</li>
@@ -74,8 +75,8 @@
     <div class="row">
         <div class="col-lg-12">
             <div ibox title="Inclusions">
-                <div content-block name="xdk-issues" message="Check after completing this section">
-                  <p>Open sample_decode.cpp file to complete the exercise with the code given in the following steps:</p>
+                <div content-block name="xdk-issues" message="Header file included">
+                  <p>Open <u>sample_decode.cpp</u> file to complete the exercise with the code given in the following steps:</p>
                   <pre><code>
                     #include "pipeline_decode.h"
                     #include &ltsstream&gt
@@ -90,7 +91,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div ibox title="Input Processing">
-                <div content-block name="xdk-issues" message="Check after completing this section">
+                <div content-block name="xdk-issues" message="Input processing done">
                   <p>Define a method <b>InputSetup()</b> that accepts the sInputParams array defined from main program.</p>
                   <p>This method first checks the input array for consistency.</p>
                   <p>Then sets the video type, memory type, hardware acceleration, asynchronous depth factor, mode, etc.,</p>
@@ -179,7 +180,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div ibox title="Decoding Pipeline">
-                <div content-block name="xdk-issues" message="Check after completing this section">
+                <div content-block name="xdk-issues" message="Decoding pipeline completed">
                 </br><p>Initialise the decoding pipeline and check the error status.</p>
                   <p>Continue coding in the main program</p>
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
@@ -197,7 +198,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div ibox title="Output Processing">
-                <div content-block name="xdk-issues" message="Check after completing this section">
+                <div content-block name="xdk-issues" message="Output processing done">
                 </br><p>Print the stream information</p>
                   <p>Continue coding in the main program</p>
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
@@ -216,7 +217,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div ibox title="Main Decoding Loop">
-                <div content-block name="xdk-issues" message="Check after completing this section">
+                <div content-block name="xdk-issues" message="Main decoding loop completed">
                 </br><p>Now let us loop all the frames in the video to decode them using <b>Pipeline.RunDecoding()</b></p>
                   <p> Error handling for incompatible video parameters, lost device, failed device, etc., </p>
                   <p>Reset the device using <b>Pipeline.ResetDevice</b> in case of hardaware error.
@@ -271,10 +272,9 @@
             <div class="col-lg-12">
                 <div ibox title="Complete Solution">
                     <div content-block name="xdk-issues" message="Download complete Visual Studio solution">
-                      <P>If you have problems in executing your code, you can download the complete Visual Studio solution from
-                        <a href="../views/labs/videoperformance-mediasdksamples/downloads/complete_solution.zip" target="_blank">here</a>.
-                        We have done all the necessary library linking in this solution.
-                      </p>
+                      <P>If you have problems in executing your code, you can see the complete Visual Studio solution in</p>
+                          <p><b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;complete_solution</b> folder</p>
+                          <p>We have done all the necessary library linking in this solution.</p>
                   </div>
                 </div>
             </div>
