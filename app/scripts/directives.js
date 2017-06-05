@@ -128,6 +128,8 @@ function labels($timeout) {
       scope.xdk = 'xdk' in attrs;
       scope.nodered = 'nodered' in attrs;
       scope.windows = 'windows' in attrs;
+      scope.laptop = 'laptop' in attrs;
+        scope.nuc = 'nuc' in attrs;
       scope.apple = 'apple' in attrs;
       scope.linux = 'linux' in attrs;
     }

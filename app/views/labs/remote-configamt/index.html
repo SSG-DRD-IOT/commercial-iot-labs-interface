@@ -37,8 +37,7 @@
         <div class="col-lg-12">
             <div ibox title="Step 1: Configure the USB Drive">
                 <div content-block name="step1" message="Check after completion of this section">
-                  <p><b>Note:</b> Pre-configured USB is provided for lab. So Step 3 is only for knowledge purpose</p>
-                  <p>On the host system:</p>
+                  <labels nuc/><p>On the host system:</p>
                   <ol>
                     <li>Insert the empty USB drive in the USB port on the host system.</li>
                     <li>Goto <b>C:\Users\&lt;username&gt;\Desktop\Retail\02-RemoteManagement\Configurator_download_package_11.1.0.75\ACU_Wizard folder</b></li>
@@ -66,8 +65,8 @@
                       <p>Intel SCS always puts the default password of unconfigured systems ("admin") in this field.</p>
                       <p>For the present workshop new MEBX password is "Intel@1234"</p>
                       <p>If this is not the password currently defined in Intel MEBX, enter the correct password. </p>
-                      <p>Note: If you have lost your Intel MEBX password, you will need to consult the OEM manual for clearing the CMOS battery to reset the password to "admin".</p></li>
-                    <li>New Intel MEBX Password: type a new password. Click <b>"i"</b> for password rules.</li>
+                      <div class="alert alert-warning">Note: If you have lost your Intel MEBX password, you will need to consult the OEM manual for clearing the CMOS battery to reset the password to "admin".</div></li>
+                    <li>New Intel MEBX Password: <strong>Intel@1234 (password is case sensitive).</strong> </li>
                     <li>Leave the power states and user consent settings as is.</li>
                   </ul>
                   </div>
@@ -80,7 +79,6 @@
                   <p>The following dialog box appears.</p>
                   <div content-block image-link="../views/labs/remote-configamt/images/AMT013.png"></div>
                   <li>Click <b>OK</b>.</li>
-                  <li>Remove the USB drive.</li>
                   <p>You are now ready to configure the Intel vPro system.</p>
                 </ol>
                 </div>
@@ -92,14 +90,11 @@
         <div class="col-lg-12">
             <div ibox title="Step 2: Configure the Intel vPro System">
                   <ol>
-                    <li>Move back to the Intel vPro system.</li>
-                    <li>Start with the system in the off state.</li>
-                    <li>Insert the newly setup USB drive in the USB port.</li>
-                    <li>Turn on the system.</li>
+                    <li>Re-start your system.</li>
                     <li>The system will read the USB drive if it is enabled to do so in the BIOS. If the system does not read</li>
                     the USB drive, check the BIOS.</li>
                     <li>While the system is reading the USB drive, select <b>Y</b> when prompted to provision the system.</li>
-                    <p>Note: Provisioning might take about 15 seconds.</p>
+                    <div class="alert alert-warning">Note: Provisioning might take about 15 seconds.</div>
                   </ol>
             </div>
         </div>
@@ -114,17 +109,13 @@
                       </p>
                       <ol>
                         <li>
-                          Select a system that you can connect to the Intel AMT system using an Ethernet cable. Go to the network settings of this system and configure the IP address. Assign a static IP address
-                        </br>IP Address: 192.168.__.__
-                          </br>Subnet Mask: 255.255.255.0
+                          Go to command prompt and type ipconfig.
                         </li>
+
                         <li>
-                          Now, connect this system to the Intel AMT system using an Ethernet cable.
-                        </li>
-                        <li>
-                          Open a command prompt, and try pinging the Intel AMT system.
-                        </br>ping 192.168.__.__
-                          </br>You should get a ping response.
+                          Note down the ip address of your NUC machine.
+                        </li><li>
+                          Go to next step to connect to your NUC from your laptop.
                         </li>
                       </ol>
                     </div>
@@ -135,12 +126,13 @@
               <div class="row">
                   <div class="col-lg-12">
                       <div ibox title="Step 4: Connect and Explore (In your personal LAPTOPS)" message="Connect and Explore (In your personal LAPTOPS)">
+
                           <p>
-                            Now you are ready to start a web browser.
+                            Now you are ready to start a web browser.<p><labels laptop/></p>
                           </p>
                           <ol>
                             <li>
-                              Point the web browser to the address
+                              Point the web browser to the address. You may not able to access your own machine. Hence, try to connect to your neibour and see the result.
                             </br>http://192.168.__.__:16992
                             </li>
                             <li>

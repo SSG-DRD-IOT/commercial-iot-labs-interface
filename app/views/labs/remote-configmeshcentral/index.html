@@ -290,11 +290,29 @@
     </div>
 -->
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+  <div class="row">
+    <div class="col-lg-12">
+          <div ibox title="Objective">
+                <div content-block image-link="../views/labs/remote-configamt/images/mesh0.png" message="Objective">
+  <p>
+  Meshcentral is open source and peer-to-peer technology with a wide range of use cases, including web services that enable remote monitoring and management of computers and devices. Users can manage all their devices from a single web site, no matter the location of the computers or if they are behind routers or proxies.</p>
+<p>In this module we will explore following
+  <ul><li>
+  How to create device mesh?</li>
+  <li>
+  How to remotely share desktop of remote machine?</li>
+  <li>How to explore file system on remote machine?</li>
+  <li>How to login to command line?</li>
+</ul>
+                </div>
+          </div>
+      </div>
+    </div>
       <div class="row">
         <div class="col-lg-12">
               <div ibox title="Step1: Login to local mesh central server">
                     <div content-block image-link="../views/labs/remote-configamt/images/mesh0.png" message="Login successful">
-                            <p>Url: <a href="https://192.168.11.100">https://192.168.11.100</a>
+                            <p>Url: <a href="https://192.168.11.100" target="_blank">https://192.168.11.100</a>
                             <p>Username: workshop</p>
                             <p>Password: intel@123</p>
                     </div>
@@ -322,7 +340,7 @@
                                   <p>Have a look on Web Authorizations.</p>
                                   <p>Click on Install</p>
                                   <p>Download <b>Window Mesh Agent</b> and <b>Mesh Policy File</b></p>
-                                  <p>Run the downloaded Mesh Agent as Administrator to install it.</p>
+                                  <div class="alert alert-warning">Run the downloaded Mesh Agent as Administrator to install it.</div>
                             </div>
                         </div>
                   </div>

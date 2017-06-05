@@ -23,7 +23,7 @@
         <div class="col-lg-12">
 
             <div ibox title="Objectives">
-                <div content-block name="opencv_motion-objectives" message="Complete Objectives">
+                <div content-block name="opencv_motion-objectives" message="Complete Objectives" image-link="../views/labs/analytics-analyse/images/cloudmain.png">
                     <h2 class="labHidden"></h2>
                     <h5>Lab Overview</h5>
                     <p>We have done motion and face detection in our previous modules. We have successfully counted number of faces so far.
@@ -59,11 +59,12 @@
                     <li>replace second #TODO: Cloud integration 2</li>
                     <li>Note that we are sending the data to cloud when the motion stops</li>
                     <li>Paste the following line</li>
-                    <li>Replace &lt;enter your device id> with the device id written on your computer</li>
-                    <li>Replace &lt;cloud server url> with the cloud URL provided in the workshop</li>
+                    <li><div class="alert alert-warning">Replace device id "1234" with the device id written on your computer</div></li>
+                    <li><div class="alert alert-warning">Replace &lt;cloud server url> with the cloud URL provided in the workshop</div></li>
+                    <li>your cloud server URL would be <a id="href" target="_blank"></span><script>document.getElementById("href").innerHTML = window.location.hostname + ":9002";document.getElementById("href").href = "http://" + window.location.hostname + ":9002";</script></li>
                     <li><pre><code>else:
-            query = 'id=&lt;enter your device id>' + '&value=' + str(facecount)
-            resp = requests.get('http://&lt;cloud server url>:9002/analytics/face?'+ query)
+            query = 'id=1234' + '&value=' + str(facecount)
+            resp = requests.get('http://&lt;cloud server url>/analytics/face?'+ query)
             if resp.status_code != 201:
                 # This means something went wrong.
                 print("Unable to submit the data")
@@ -146,7 +147,7 @@ while(True):
             cv2.putText(frame2, "No of faces {}".format(facecount), (50, 50), font, 1, (0, 0, 255), 1, cv2.LINE_AA)
     else:
             if facecount > 0:
-                    query = 'id=&lt;enter your device id>' + '&value=' + str(facecount)
+                    query = 'id=1234' + '&value=' + str(facecount)
                     resp = requests.get('http://&lt;cloud server url>:9002/analytics/face?'+ query)
                     if resp.status_code != 201:
                         # This means something went wrong.
@@ -165,7 +166,18 @@ cv2.destroyAllWindows()
 </pre></ui-codemirror>
               </div>
             </div>
-
+            <div ibox title="Visualize Your data">
+                <div content-block name="opencv_analyse-objectives" message="Visualize Your data" image-link="../views/labs/analytics-analyse/images/cloudmain.png">
+                    <h2 class="labHidden"></h2>
+                    <h5>Visualizing your data on the cloud</h5>
+                    <ul>
+                        <li>Go to http://&lt;cloud server url>:9002</li>
+                        <li>Example: <a id="href1" target="_blank"></span><script>document.getElementById("href1").innerHTML = window.location.hostname + ":9002";document.getElementById("href1").href = "http://" + window.location.hostname + ":9002";</script></li>
+                        <li>Enter your device ID</li>
+                        <li>Click on plot</li>
+                    </ul>
+              </div>
+            </div>
         <div ibox title="References">
           <ul>
               <li>
