@@ -73,7 +73,7 @@ import cv2
                 <li>Create a namedWindow to show the output</li>
                 <li>Show the output on this namedWindow using imshow method</li>
                 <li>Copy the below code and put it on your file and run your application</li>
-                <li>Press "q" to exit</li>
+                <li>Press Esc to exit</li>
                 <li>
 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">cap = cv2.VideoCapture(0)
 
@@ -88,7 +88,7 @@ while(True):
     # Display the resulting frame
     cv2.imshow('Target',frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == 27:
         break
 
 # When everything done, release the capture
@@ -121,7 +121,7 @@ while(True):
     # Display the resulting frame
     cv2.imshow('Target',frame)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == 27:
         break
 
 # When everything done, release the capture
