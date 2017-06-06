@@ -28,9 +28,8 @@
             <p>we will explore the mesh commander capabilities in this module.</div>
         </div>
     </div>
-
+</div>
     <div ibox title="Explore Mesh commander">
-
         <div class="wrapper wrapper-content animated fadeIn">
             <div class="row">
                 <div class="col-lg-6">
@@ -139,32 +138,49 @@
             </div>
         </div>
 
-        <div class="wrapper wrapper-content animated fadeIn">
+        <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 9: IDE-Redirection</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/009-IDE-Redirection.jpg" alt="009-IDE-Redirection" />
+                <div class="col-lg-12">
+                    <div ibox title="Step 9: IDE-Redirection">
+                        <div content-block image-link="../views/labs/remote-configintelmc/images/009-IDE-Redirection.jpg">
+                          <ul>
+                            <li>Navigate to Remote Desktop</li>
+                            <li>Click IDE-R, which opens up Storage Redirection</li>
+                            <li>Choose any .iso file and .img file</li>
+                            <li>"IDE-R Session, Connected, 0 in, 0 out" message will be displayed at top</li>
+                            <li>Click Power Actions and select "Reset to IDE-R CDROM"</li>
+                            <li>Now observe the top row showing variation in the message "IDE-R Session, Connected, 0 in, ###### out" showing number of packets going out</li>
+                            <li>CDROM Image content will be displayed</li>
+                            <li>Click the Disconnect button inside the Remote Desktop</li>
+                            <li>Click Stop IDE-R Session</li>
+                            <li>Goto Power Actions &gt; Reset to complete the session</li>
+                          </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 10: Mesh Commander's System Defense panel</h5>
-                            <div ibox-tools></div>
+              </div>
+            </div>
+
+
+          <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <div ibox title="Step 10: Mesh Commander's System Defense panel">
+                         <div content-block image-link="../views/labs/remote-configintelmc/images/010-MeshCommanderMatchingRules.jpg">
+                              <p>Within Mesh Commander's System Defense panel, you can add to Intel AMT network filters and policies that can be used to match certain type of network traffic.
+                              You can use Intel AMT system defense to count, drop or rate limit network traffic that matches certain rules. In this page, we look at how to create advanced
+                              filters that use the "Matching Rules" box in the "Add System Defense Filter" dialog box.</p>
+                              <p>The "Matching Rules" field is a comma separated list of name and values. The names must have exact capitalization and no extra spaces must be added. </p>
+                              <p>The first matching rule is the <b>ProtocolID</b>, usually TCP (6) or UDP (17). For example, if you want to match on TCP traffic, you put "ProtocolID=6" in the matching rules.
+                                You must specify a protocol id of TCP or UDP before you can use any of the other filters below.</p>
+                              <p><b>DestAddress</b> and <b>DestMask</b> to filter the destination of the packet. Both of these must be used at the same time. For example, you can set the matching rules to
+                                "ProtocolID=6,DestAddress=192.168.1.0,DestMask=255.255.255.0". This will filter all packets that go to 192.168.1.*.</p>
+                              <p>In addition, you can filter based on source address with <b>SrcAddress</b> and <b>SrcMask</b>. Both must be used at the same time.
+                                For example, you can have "ProtocolID=6,SrcAddress=192.168.1.0,SrcMask=255.255.0.0" to match all packets with a source address of 192.168.*.</p>
                         </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/010-MeshCommanderMatchingRules.jpg" alt="010-MeshCommanderMatchingRules" />
-                        </div>
+                      </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-</div>
