@@ -251,8 +251,8 @@ db.once('open', function(callback) {
         <p>Now import and initialize a sensor and a data model.</p>
         <p class="label">./server.js</p>
         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Import the Database Model Objects
-var DataModel = require('intel-commercial-edge-network-database-models').DataModel;
-var SensorModel = require('intel-commercial-edge-network-database-models').SensorModel;</pre></ui-codemirror>
+var Data = require('intel-commercial-edge-network-database-models').Data;
+var Sensor = require('intel-commercial-edge-network-database-models').Sensor;</pre></ui-codemirror>
 
         <p>Now that the dependencies are included and the connection code to the MQTT broker and MongoDB database is written. Proceed to create the main loop of the program.</p>
       </div>
@@ -305,7 +305,7 @@ mqttClient.on('message', function(topic, message) {
       <h2 class="labHidden">Log all sensor readings to the database</h2>
       <p class="label">./server.js</p>
       <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">    if (topic.match(/data/)) {
-      var value = new DataModel(json);
+      var value = new Data(json);
       value.save(function(err, data) {
         if (err)
           console.log(err);

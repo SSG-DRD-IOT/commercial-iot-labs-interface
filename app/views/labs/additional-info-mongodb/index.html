@@ -155,11 +155,11 @@ var DataSchema = require('./schema/dataSchema.js');
 var ErrorSchema = require('./schema/errorSchema.js');
 
 module.exports = {
-  SensorModel: mongoose.model('SensorModel', SensorSchema),
+  Sensor: mongoose.model('Sensor', SensorSchema),
   ActuatorModel: mongoose.model('ActuatorModel', ActuatorSchema),
-  DataModel: mongoose.model('DataModel', DataSchema),
-  TriggerModel: mongoose.model('TriggerModel', TriggerSchema),
-  ErrorModel: mongoose.model('ErrorModel', ErrorSchema)
+  Data: mongoose.model('Data', DataSchema),
+  Trigger: mongoose.model('Trigger', TriggerSchema),
+  Error: mongoose.model('Error', ErrorSchema)
 };</pre></ui-codemirror>
               </div>
             </div>

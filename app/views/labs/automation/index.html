@@ -355,7 +355,7 @@ mqttClient.on('error', function () {
 <div content-block  message="Setup the functions that respond to the MQTT connect and error events">
 
 <h3 class="labHidden">Setup the functions that respond to the MQTT connect and error events</h3>
-  <p>Next create the code for your MongoDB database connection and create the TriggerModel and ErrorModel objects that will access the trigger and error db collections.</p>
+  <p>Next create the code for your MongoDB database connection and create the Trigger and Error objects that will access the trigger and error db collections.</p>
 
   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// Create a connection to the database
   mongoose.connect(config.mongodb.url);
@@ -370,8 +370,8 @@ mqttClient.on('error', function () {
   });
 
   // Import the Database Model Objects
-  var TriggerModel = require('intel-commerical-edge-network-database-models').TriggerModel;
-  var ErrorModel = require('intel-commerical-edge-network-database-models').ErrorModel;
+  var Trigger = require('intel-commerical-edge-network-database-models').Trigger;
+  var Error = require('intel-commerical-edge-network-database-models').Error;
 </pre></ui-codemirror>
 </div>
 
@@ -427,7 +427,7 @@ var context = {
 
  // Define the function that reads automation rules from the database
  var retrieveTriggersFromDB = function() {
-     TriggerModel
+     Trigger
          .find().
          exec().then(function(triggersDB) {
              context.triggers = triggersDB;
