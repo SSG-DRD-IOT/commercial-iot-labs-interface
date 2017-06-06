@@ -33,13 +33,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         pageTitle: 'Slides View'
       }
     })
-    .state('index.videos', {
+  /*  .state('index.videos', {
       url: "/videos",
       templateUrl: "views/videos.html",
       data: {
         pageTitle: 'Videos'
       }
-    })
+    }) */
     .state('labs', {
       abstract: true,
       url: "/labs",
