@@ -18,9 +18,12 @@ env:
   global:
     - COMMIT=${TRAVIS_COMMIT::8}
 
-install:
+before_script:
   - npm install
+  - npm install -g bower
   - bower install
+
+install:
   - grunt build
 
 after_success:
