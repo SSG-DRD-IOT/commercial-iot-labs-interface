@@ -23,8 +23,7 @@
           <div ibox title="Objectives">
             <div content-block name="automation-objectives" message="Read the Objectives" image-link="./views/labs/automation/images/lab7.png">
             <h3 class="labHidden">Read the Objectives</h3>
-            <img  class="labHidden" src="./images/lab7.png"/>
-              <h2 class="labHidden">Read the Objectives</h2>
+            <img class="labHidden" src="./images/lab7.png"/>
               <labels gateway window apple linux/>
               <p>By the end of this module, you should be able to:</p>
 
@@ -77,7 +76,6 @@
             <div ibox  title="Introduction">
               <div content-block name="automation-introduction" message="Read the Introduction">
               <h3 class="labHidden">Read the Introduction</h3>
-<h2 class="labHidden">Read the Introduction</h2>
                 <p>In this lab, we will walk you through building a NodeJS application that implements an automation service for a network.</p>
                 <p><em>Condition Based Monitoring</em>, sometimes also called <em>Edge Device Management</em>, or <em>Edge Network Automation</em>, is the idea that edge sensors and actuators should <strong>not be responsible</strong> for decision making or coordinating the responses to various edge network condition. However, neither should all of this decision making and analytics processing be performed in the cloud. The IoT Gateway should be remotely programmable by an IoT administrator or software developer in such a way that <strong>local events</strong> can be <strong>automatically managed and reported</strong>. Intelligent closed loop systems are able to coordinate responses to conditions on their own networks and report back to the cloud or a network operation center.</p>
                 <p>In the example of a temperature controlled room, the temperature sensor is reporting the temperature to the Intel&reg; IoT Gateway and the gateway is responsible for triggering an IoT event. An IoT Event (also called a trigger in this workshop) always has a conditions function and a trigger function. In the case that the temperature is too hot the event may take automatic action to turn on the air conditioning on and send an alert to the person responsible for the room.</p>
@@ -88,7 +86,6 @@
             <div ibox  title="Steps in this Lab">
               <div content-block name="read-steps-automation" message="Read the Steps in the Automation Lab">
               <h3 class="labHidden">Read the Steps in the Automation Lab</h3>
-<h2 class="labHidden">Read the Steps in the Automation Lab</h2>
                 <p>In this lab, we will:</p>
 
                 <ul>
@@ -125,7 +122,6 @@
                   <div content-block name="write-triggers" message="The previous value for each sensor is stored in the stash array">
 
                   <h3 class="labHidden">The previous value for each sensor is stored in the stash array</h3>
-                      <h2 class="labHidden">The previous value for each sensor is stored in the stash array</h2>
 
                     <p class="alert alert-info">Later in this lab, we will implement an associative array called the <b>stash</b>  that contains the last value of each of the sensors on the edge network. Let's build some triggers using the stash now.</p>
                   </div>
@@ -133,7 +129,6 @@
                   <div content-block name="conditional-function-exercises" message="Read the predicate function for the light sensor">
 
                   <h3 class="labHidden">Read the predicate function for the light sensor</h3>
-                    <h2 class="labHidden">Read the  predicate function for the light sensor</h2>
                     <h4>More Examples:</h4>
 
                     <p>Write a predicate function that tests if a light sensor has a value less than or equal 15 lumens.</p>
@@ -160,7 +155,6 @@
         <div content-block name="write-trigger-function" message="Understand the idea of trigger functions and complete the excercises">
 
         <h3 class="labHidden">Understand the idea of trigger functions and complete the excercises</h3>
-          <h2 class="labHidden">Understand the idea of trigger functions and complete the excercises</h2>
           <p>A trigger function is a function that is activated when the predicate function is true.  Trigger functions have access to all of the sensor data on the edge network, as well as, all of the actuators on the network.</p>
 
           <p>This is an example of a function that is activated when a predicate function returns that it is too cold.  First, publish an alert to the rest of the edge network.  Restful HTTP requests are used to trigger the actuators on the edge network. In the example here the actuator is a heater that is turned on when it is too cold.</p>
@@ -516,7 +510,6 @@ var isSensorTopic = function(str) {
             <!--         Trigger Each Rule that Applies to a Particular Incoming Sensor Data -->
           <div content-block message="Trigger Each Rule that Applies to a Particular Incoming Sensor Data">
           <h3 class="labHidden">Trigger Each Rule that Applies to a Particular Incoming Sensor Data</h3>
-            <h3>Check the Predicate Function for each Trigger and Execute a Trigger Function if true</h3>
 
             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">// processSensorData - a function that receives a sensor datum in json format
 // and filters the automation rules by the sensor that the datum came from.
@@ -563,7 +556,7 @@ var processSensorData = function(json) {
           <div ibox title="Run the Automation Server">
             <div content-block message="Run the automation server and verify the Triggers" image-link="./views/labs/automation/images/automation_triggers.png">
             <h3 class="labHidden">Run the automation server and verify the Triggers</h3>
-            <img  class="labHidden" src="./images/automation_triggers.png"/>
+            <img class="labHidden" src="./images/automation_triggers.png"></img>
               <div class="alert alert-warning">
                 <p>Before we run the automation server make sure that sensors are publishing the topic <b>sensors/temperature/data</b>. As described in earlier labs one way is to run the virtual-sensor.js with --tls option in another SSH terminal of Gateway</p>
               </div>
@@ -586,6 +579,8 @@ var processSensorData = function(json) {
 
             <!-- <div ibox title="Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts" image-link="./views/labs/automation/images/image_1.png">
                 <div content-block name="unbox-kit" message="Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts" image-link="./views/labs/automation/images/image_1.png">
+                <h3 class="labHidden">Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts</h3>
+                <img class="labHidden" src="./images/image_1.png"></img>
                 <h3 class="labHidden">Start Node Red Flow to monitor Alerts on topic /sensors/temperature/alerts</h3>
                 <img  class="labHidden" src="./images/image_1.png"/>
               <p>To verify triggers are working properly we can create a node red flow with mqtt subscriber on topic /sensors/temperature/alerts</p><br>
