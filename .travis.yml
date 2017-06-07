@@ -20,7 +20,7 @@ env:
 
 before_script:
   - npm install
-  - npm install -g bower grunt
+  - npm install -g bower grunt grunt-cli
   - bower install
 
 install:
