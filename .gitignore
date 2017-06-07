@@ -8,3 +8,4 @@ bower_components
 xdk
 app/styles/style.css
 dist/
+yarn.lock
