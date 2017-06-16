@@ -92,7 +92,7 @@
                 <div content-block name="intro-press" message="Connect LCD to Arduino 101*" image-link="./views/labs/setup-development-environment/images/5.png">
                     <h2 class="labHidden">Connect LCD to Arduino 101*</h2>
                     <img class="labHidden" src="./views/labs/setup-development-environment/images/5.png"></img>
-                    <p>Connect the LCD screen to any of the I<sup>2</sup>C pins on base shield.</p>
+                    <p>Connect the LCD screen to any of the I<sup>2</sup>C pins on base shield using one of the connecting cables from the grove sensor kit.</p>
                 </div>
 
                 <div content-block name="intro-press" message="Now connect Arduino 101* with Intel® IoT Gateway via USB A-B cable" image-link="./views/labs/setup-development-environment/images/6.png">
@@ -136,7 +136,7 @@
                     <ol>
                         <li>Double-click putty.exe on your computer to launch PuTTY.</li>
                         <li>Enter IP address of the Gateway</li>
-                        <li>You can login with the username as <strong>root</strong> and the password <strong>root</strong>.</li>
+                        <li>You can login with the username as <strong>nuc-user</strong> and the password <strong>root</strong>.</li>
                     </ol>
                     <p class="alert alert-warning">Note that your development computer and your NUC device has to be on the same network with same subnet else it will not connect</p>
                 </div>
@@ -152,7 +152,7 @@
 
                     <ol>
                         <li>Open Terminal</li>
-                        <li>Type $ ssh root@
+                        <li>Type $ ssh nuc-user@
                             <<IP Address>>. Replace
                                 <<IP Address>> to IP address of your gateway. E.g. root@192.168.3.3</li>
                         <li>Enter root as password</li>
