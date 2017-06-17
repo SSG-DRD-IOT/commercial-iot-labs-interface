@@ -15,6 +15,7 @@
     </div>
 </div>
 
+
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
     <div class="row">
         <div class="col-lg-12">
@@ -208,13 +209,13 @@
         <p>
           Next add the dependencies to your project.
         </p>
-        <pre><code>npm install intel-commerical-edge-network-database-models lodash mongoose mqtt request request-promise chalk --save</code></pre>
+        <pre><code>npm install intel-commercial-edge-network-database-models lodash mongoose mqtt request request-promise chalk --save</code></pre>
 
         <p>
           Your package.json file's dependencies section should look like this.
         </p>
         <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">"dependencies": {
-  "intel-commerical-edge-network-database-models": "latest",
+  "intel-commercial-edge-network-database-models": "latest",
   "lodash": "latest",
   "chalk": "latest",
   "mongoose": "latest",
@@ -370,8 +371,8 @@ mqttClient.on('error', function () {
   });
 
   // Import the Database Model Objects
-  var Trigger = require('intel-commerical-edge-network-database-models').Trigger;
-  var Error = require('intel-commerical-edge-network-database-models').Error;
+  var Trigger = require('intel-commercial-edge-network-database-models').Trigger;
+  var Error = require('intel-commercial-edge-network-database-models').Error;
 </pre></ui-codemirror>
 </div>
 
