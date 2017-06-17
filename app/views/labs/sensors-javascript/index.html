@@ -44,11 +44,11 @@
                 <h2 class="labHidden">Create a LED blink project</h2>
                 <p>In your home directory (/home/{user}) on your Intel® IoT Gateway create a <strong>labs</strong> directory. We will put all our labs program here.</p>
                 <p>Under lab directory create another directory and name it <strong>sensors</strong></p>
-                <p>Similarly create <strong>LEDBlink</strong> directory under sensors and finally create file <strong>main.js</strong> in it. We will write the LED blink program to it</p>
+                <p>Similarly create <strong>LEDBlink</strong> directory under sensors and finally create file <strong>index.js</strong> in it. We will write the LED blink program to it</p>
               </div>
 
               <div content-block name="Write LED blink program" message="Write LED blink program">
-                <p>Update <strong>main.js</strong> with following changes</p>
+                <p>Update <strong>index.js</strong> with following changes</p>
                 <ol>
                     <li>
                         <p>Add below lines to include the FIRMATA subplatform for MRAA. The Arduino 101* is accessed via ttyACM0 port</p>
@@ -104,7 +104,7 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
                   <h2 class="labHidden">Run your LED blink program</h2>
                   <p><img class="labHidden" alt="" data-fid="503913" src="https://software.intel.com/sites/default/files/managed/61/94/image_arduino_led.png" typeof="foaf:Image"></p>
                   <p>Open a SSH terminal to your Intel® IoT Gateway and go to your <strong>LEDBlink</strong> folder. Type the following command to run your JS application</p>
-                  <p><code>node main.js</code></p>
+                  <p><code>node index.js</code></p>
                   <p>This should execute your program and you should see LED blinking on your Arduino 101* board.The LED is located near the center of the board as shown in the figure</p>
               </div>
             </div>
@@ -140,7 +140,7 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
                             <p>On your Intel® IoT Gateway under <strong>labs/sensors</strong> folder create another folder <strong>temperature-sensor</strong></p>
                         </li>
                         <li>
-                            <p>In the labs/sensors/temperature-sensor folder create a <strong>main.js</strong> file</p>
+                            <p>In the labs/sensors/temperature-sensor folder create a <strong>index.js</strong> file</p>
                         </li>
                     </ul>
 
@@ -150,7 +150,7 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
                     <h2 class="labHidden">Write the Code to Read the Temperature Sensor.</h2>
                     <h5>Read the temperature sensor</h5>
 
-                    <p>Update <span class="icon file">main.js</span> to read the temperature sensor on program start up and log it to the console.</p>
+                    <p>Update <span class="icon file">index.js</span> to read the temperature sensor on program start up and log it to the console.</p>
 
                     <ol>
                         <li>
@@ -169,8 +169,8 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
                         </li>
 
                         <li>
-                            <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 1 and add the offset. Here 0.66 is a scaling factor, the grove temp sensor is designed to read value at 3.3V however since we are using 5.5V we need this conversion factor</p>
-                            <p><code>var temp = new groveSensor.GroveTemp(0+OFFSET, 0.66);</code></p>
+                            <p>Instantiate a <code>GroveTemp</code> Grove Sensor on analog pin 1 and add the offset. Here 0.60 is a scaling factor, the grove temp sensor is designed to read value at 3.3V however since we are using 5V we need this conversion factor</p>
+                            <p><code>var temp = new groveSensor.GroveTemp(0+OFFSET, 0.60);</code></p>
                         </li>
 
                         <li>
@@ -186,7 +186,7 @@ mraa.addSubplatform(mraa.GENERIC_FIRMATA, "/dev/ttyACM0");
 
 var OFFSET = 512;
 var groveSensor = require('jsupm_grove');
-var temp = new groveSensor.GroveTemp(0+OFFSET, 0.66);
+var temp = new groveSensor.GroveTemp(0+OFFSET, 0.60);
 
 function monitor() {
     setInterval(function() {
@@ -198,8 +198,8 @@ function monitor() {
 monitor();</li>
 
                         <li>
-                            <p>Make sure your changes to <span class="icon file">main.js</span> have been saved and now from a ssh terminal go to the temperature-sensor folder and type following to run it:</p>
-                            <p><code>node main.js</code></p>
+                            <p>Make sure your changes to <span class="icon file">index.js</span> have been saved and now from a ssh terminal go to the temperature-sensor folder and type following to run it:</p>
+                            <p><code>node index.js</code></p>
                         </li>
 
                         <li>
@@ -210,7 +210,7 @@ monitor();</li>
 
                 <div content-block name="repeat-sensor-reading" message="Add the LCD Screen">
                     <h2 class="labHidden">Add the LCD Screen</h2>
-                    <p>Update <span class="icon file">main.js</span> to output the value from the temperature sensor to the LCD display.</p>
+                    <p>Update <span class="icon file">index.js</span> to output the value from the temperature sensor to the LCD display.</p>
 
                     <p>Below are the general steps to complete the exercise.</p>
                     <ol>
@@ -267,7 +267,7 @@ var LCD = require("jsupm_i2clcd"); // Create a new instance of a Grove RGB LCD s
 var OFFSET = 512;
 
 // Instantiate the temperature sensor and LCD actuator
-var temp = new groveSensor.GroveTemp(0+OFFSET, 0.66); // Create a new instance of a Grove Temperature Sensor
+var temp = new groveSensor.GroveTemp(0+OFFSET, 0.60); // Create a new instance of a Grove Temperature Sensor
 var screen = new LCD.Jhd1313m1(0+OFFSET, 0x3E, 0x62);
 
 // monitor - creates an anonymous function that runs once per second
@@ -302,13 +302,25 @@ monitor();</pre></ui-codemirror>
                 <div content-block name="deploy-temperature-sensor" message="Deploy the temperature sensor application">
                     <h2 class="labHidden">Deploy the temperature sensor application</h2>
                     <p>Run your application from ssh terminal of your Intel® IoT Gateway by going to the folder temperature-sensor with command</p>
-                    <pre><code>node main.js</code></pre>
+                    <pre><code>node index.js</code></pre>
                     <div class="alert alert-success">
                         <p>You should now see the temperature displayed on the LCD.</p>
                     </div>
 
                 </div>
             </div>
+
+            <div ibox title="Solution">
+              <div content-block message="Download code from Github">
+              <h3 class="labHidden">Download code from Github</h3>
+                <p>If you have not followed the steps given above then you can download the sensor code directly from github following below steps.</p><br>
+                <pre><code>$ git clone https://github.com/SSG-DRD-IOT/lab-sensors-javascript.git</code></pre>
+                <pre><code>$ cd lab-sensors-javascript</code></pre>
+                <pre><code>$ npm install</code></pre>
+                <pre><code>$ node index.js</code></pre>
+              </div>
+            </div>
+
 
             <div ibox title="Sample Exercises">
               <div content-block name="exercise1" message="Exercise 1: Alarm Clock">
