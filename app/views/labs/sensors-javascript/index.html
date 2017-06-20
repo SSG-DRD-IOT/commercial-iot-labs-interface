@@ -103,8 +103,10 @@ var intervalID = setInterval(periodicActivity, 1000);  // start the periodic tog
               <div content-block name="blink-the-light" message="Run your LED blink program" image-link="./views/labs/sensors-javascript/images/image_arduino_led.png">
                   <h2 class="labHidden">Run your LED blink program</h2>
                   <p><img class="labHidden" alt="" data-fid="503913" src="https://software.intel.com/sites/default/files/managed/61/94/image_arduino_led.png" typeof="foaf:Image"></p>
-                  <p>Open a SSH terminal to your Intel® IoT Gateway and go to your <strong>LEDBlink</strong> folder. Type the following command to run your JS application</p>
-                  <p><code>node index.js</code></p>
+                  <p>Open a SSH terminal to your Intel® IoT Gateway and go to your <strong>LEDBlink</strong> folder</p>
+                  <pre><code>cd ~/labs/sensors/LEDBlink</pre></code>
+                  <p>Type the following command to run your JS application</p>
+                  <pre><code>node index.js</code></pre>
                   <p>This should execute your program and you should see LED blinking on your Arduino 101* board.The LED is located near the center of the board as shown in the figure</p>
               </div>
             </div>
@@ -199,7 +201,8 @@ monitor();</li>
 
                         <li>
                             <p>Make sure your changes to <span class="icon file">index.js</span> have been saved and now from a ssh terminal go to the temperature-sensor folder and type following to run it:</p>
-                            <p><code>node index.js</code></p>
+                            <pre><code>cd ~/labs/sensors/temperature-sensor</pre></code>
+                            <pre><code>node index.js</code></pre>
                         </li>
 
                         <li>
@@ -301,7 +304,8 @@ monitor();</pre></ui-codemirror>
 
                 <div content-block name="deploy-temperature-sensor" message="Deploy the temperature sensor application">
                     <h2 class="labHidden">Deploy the temperature sensor application</h2>
-                    <p>Run your application from ssh terminal of your Intel® IoT Gateway by going to the folder temperature-sensor with command</p>
+                    <p>Run your application from ssh terminal of your Intel® IoT Gateway by going to the folder temperature-sensor with command:</p>
+                    <pre><code>cd ~/labs/sensors/temperature-sensor</pre></code>
                     <pre><code>node index.js</code></pre>
                     <div class="alert alert-success">
                         <p>You should now see the temperature displayed on the LCD.</p>

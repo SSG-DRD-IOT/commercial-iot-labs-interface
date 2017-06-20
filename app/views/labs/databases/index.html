@@ -59,7 +59,7 @@
           <p>The mongod process should already by running on your system, check with below command if it is running properly</p>
           <pre><code>ps aux | grep mongod</code></pre>
           <p>This should list the mongodb process, if it does not try and launch it again with below command</p>
-          <pre><code>mongod --dbpath=/data/db</code></pre>
+          <pre><code>sudo /usr/bin/mongod --config /etc/mongodb.conf &</code></pre>
         </div>
       </div>
 
@@ -346,7 +346,7 @@ mqttClient.on('message', function(topic, message) {
             Collections in MongoDB are similar to tables in an SQL database. To see the collections in the iotdemo database type <pre><code>show collections</code></pre>
           </p>
           <p>
-            Now you can begin querying data. The first command will list all data in the collection and the second will count the number of data entries in the collection. <pre><code>db.datamodels.find()</code></pre> or <pre><code>db.datamodels.count()</code></pre>
+            Now you can begin querying data. The first command will list all data in the collection and the second will count the number of data entries in the collection. <pre><code>db.datas.find()</code></pre> or <pre><code>db.datas.count()</code></pre>
           </p>
         </div>
       </div>

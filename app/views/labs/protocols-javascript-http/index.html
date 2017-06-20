@@ -367,7 +367,7 @@ console.log('Example app listening at http://%s:%s', host, port);
                 </div>
 
                 <div content-block name="install-postman" message="Use curl to test your restful APIs">
-                  <p>Open a ssh terminal to your Gateway and type the following command:</p>
+                  <p>Open a <b>new</b> ssh terminal to your Gateway and type the following command:</p>
                   <p>In the below command replace &lt;passwd&gt; with your NUC password </p>
                   <pre><code>curl --cacert /etc/tls-certs/ca_certificates/ca.crt -u nuc-user:&lt;passwd&gt; --tlsv1.0 -X POST https://localhost:4000/lcd/backlight\?r=0\&g=255\&b=0
 curl --cacert /etc/tls-certs/ca_certificates/ca.crt -u nuc-user:&lt;passwd&gt; --tlsv1.0 -X POST https://localhost:4000/lcd/text\?lcdtext=\"HelloWorld\"</pre></code>
