@@ -289,6 +289,15 @@ var _ = require("lodash");
 // and made available in the triggers.
 var http = require('request-promise');
 
+var https = require('https');
+
+var options = {
+    key: fs.readFileSync(config.tls.serverKey),
+    cert: fs.readFileSync(config.tls.serverCrt)
+};
+
+
+
 
 // Write startup message to the console
 console.log(chalk.bold.yellow("Automation server is starting"));
@@ -400,6 +409,9 @@ var context = {
 
     // Make the HTTP request-promise library available in automation rules
     http: http,
+
+    // Include https
+    https:https,
 
     // Make the MQTT library available in automation rules
     mqttClient: mqttClient,
