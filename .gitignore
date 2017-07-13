@@ -9,3 +9,4 @@ xdk
 app/styles/style.css
 dist/
 app/views/labs/downloads/python_sample/face/face.py
+*.bowerrc
