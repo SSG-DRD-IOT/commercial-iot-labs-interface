@@ -22,7 +22,7 @@
   <div ibox title="Objectives">
     <div content-block name="AMT_init-objectives" message="Read the Objectives">
       <p>This guide is intended to be a starting point for testing your Intel &reg; vPro&trade; technology systems within your environment.</p>
-      <p>It will guide you through setting up a "Sandbox" test environment using your own network environment so that you can test your specific use cases on Intel vPro technology that ultimately will help reduce overall support costs and costly service/truck
+      <p>It will guide you through setting up a "Sandbox" test environment using your own network environment so that you can test your specific use cases on Intel&reg; vPro technology that ultimately will help reduce overall support costs and costly service/truck
         rolls.
       </p>
       <p>The first step in enabling Intel® AMT is to install the Intel® AMT agent. In this lab, we create a USB drive that will install the Intel® AMT agent onto a host system. Then we will verify that the agent is correctly install by going to a web browser
@@ -30,28 +30,20 @@
     </div>
   </div>
 
-  <div ibox title="Step 1: Configure the USB Drive">
-    <div content-block name="step1" message="Check after completion of this section">
+  <div ibox title="Instal the Intel&reg; AMT Configuration Utility installation utility on a USB drive">
+    <div content-block name="step1" message="Check after completion of this section" image-link="../views/labs/remote-configamt/images/nuc.jpg">
       <labels nuc/>
 
-      <p>Start by performing these actions on your Intel IoT Gateway:</p>
-      <ol>
+      <p>Start by performing these actions on your Intel IoT Gateway.</p>
+      <ul>
         <li>Insert the empty USB drive in the USB port on the host system.</li>
         <li>Goto <b>C:\Users\&lt;username&gt;\Desktop\Retail\02-RemoteManagement\Configurator_download_package_11.1.0.75\ACU_Wizard folder</b></li>
-        <li>Right-click ACUWizard.exe and select <b>Run as administrator.</b></li>
-      </ol>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT003.png">
-      <p>The Intel&reg; AMT Configuration Utility appears.</p>
+        <li>Right-click ACUWizard.exe and select <b>Run as administrator.</b> to launch the Intel&reg; AMT Configuration Utility</li>
+      </ul>
     </div>
 
     <div content-block image-link="../views/labs/remote-configamt/images/AMT004.png">
       <p>Select <b>Create Settings to Configure Multiple Systems.</b></p>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT005.png">
-      <p>The following screen appears</p>
     </div>
 
     <div content-block image-link="../views/labs/remote-configamt/images/AMT006.png">
@@ -59,12 +51,12 @@
     </div>
 
     <div content-block image-link="../views/labs/remote-configamt/images/AMT007.png">
-      <p>The following screen appears</p>
+      <p>Select <b>Prepare a USB Key for Manual Configuration</b></p>
     </div>
 
     <div content-block image-link="../views/labs/remote-configamt/images/AMT008.png">
-      <p>Select the type of Intel vPro system that you will be configuring: <b>Mobile Systems</b> or <b>Desktop Systems</b>.</p>
-      <p><b>Note</b>: Some Small Form Factor (SFF) desktops use mobile chipsets. For example, QM87 is a mobile Intel vPro chipset noted by the "M," whereas the desktop equivalent chipset is the Q87.</p>
+      <p>Select the type of Intel&reg; vPro system that you will be configuring: <b>Mobile Systems</b> or <b>Desktop Systems</b>.</p>
+      <p><b>Note</b>: Some Small Form Factor (SFF) desktops use mobile chipsets. For example, QM87 is a mobile Intel&reg; vPro chipset noted by the "M," whereas the desktop equivalent chipset is the Q87.</p>
       <p>Select <b>All systems are version 7.0 and higher.</b></p>
     </div>
 
@@ -74,41 +66,36 @@
 
     <div content-block image-link="../views/labs/remote-configamt/images/AMT010.png">
       <ul>
-        <li>
-          <p>Old Intel MEBX Password: <b>admin</b></p>
-          <p>Intel SCS always puts the default password of unconfigured systems ("admin") in this field.</p>
-          <p>For the present workshop new MEBX password is "Intel@1234"</p>
-          <p>If this is not the password currently defined in Intel MEBX, enter the correct password. </p>
-          <div class="alert alert-warning">Note: If you have lost your Intel MEBX password, you will need to consult the OEM manual for clearing the CMOS battery to reset the password to "admin".</div>
+        <li>The default password is <b>admin</b></li>
+        <li>Intel SCS always puts the default password of unconfigured systems ("admin") in this field.</li>
+        <div class="alert alert-info">
+          <p>For this workshop, please use the password is <b>Intel@1234</b></p>
+        </div>
+        <div class="alert alert-warning">Note: If you have lost your Intel MEBX password, you will need to consult the OEM manual for clearing the CMOS battery to reset the password to "admin".</div>
         </li>
-        <li>New Intel MEBX Password: <strong>Intel@1234 (password is case sensitive).</strong> </li>
-        <li>Leave the power states and user consent settings as is.</li>
+        <li>There is no need to change the power states or user consent settings.</li>
       </ul>
     </div>
 
 
     <div content-block image-link="../views/labs/remote-configamt/images/AMT011.png">
-      <p>In the USB Drive section, browse to the USB drive.</p>
-      <p>Click <b>OK</b>.</p>
-      <p>The following warning appears.</p>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT012.png">
-      <p>Click <b>Yes</b> if you are sure you want to continue.</p>
-      <p>Ignore the error message shown while configuring the USB</p>
-      <p>The following dialog box appears.</p>
+      <p>In the USB Drive section, browse to the USB drive and click <b>OK</b>.</p>
+      <p>A warning will appear, when it does click<b>Yes</b>.</p>
+      <div class="alert alert-warning">
+        <p>You will see one Abort, Retry, Ignore error message box shown while configuring the USB. Select <b>ignore</b>. The installation will successfully continue.</p>
+      </div>
     </div>
 
     <div content-block image-link="../views/labs/remote-configamt/images/AMT013.png">
       <p>Click <b>OK</b>.</p>
-      <p>You are now ready to configure the Intel vPro system.</p>
+      <p>You are now ready to configure the Intel&reg; vPro system.</p>
     </div>
   </div>
   <!-- end of ibox -->
 
 
-  <div ibox title="Step 2: Configure the Intel vPro System">
-    <p>Now that you have create a USB drive that can install the Intel AMT agent. You will need to reboot your computer with the USB drive inserted. When the system reboot you will be asked if you wish to install the Intel AMT agent</p>
+  <div ibox title="Install the Intel&reg; Active Management Agent on the Intel&reg; IoT Gateway">
+    <p>Now that you have create a USB drive that can install the Intel&reg; AMT agent. You will need to reboot your computer with the USB drive inserted. When the system reboot you will be asked if you wish to install the Intel&reg; AMT agent</p>
     <ol>
       <li>Re-start your system.</li>
       <li>The system will read the USB drive if it is enabled to do so in the BIOS. If the system does not read</li>
@@ -118,29 +105,34 @@
     </ol>
   </div>
 
-  <div ibox title="Step 3: Use a Web Browser to Connet to the Intel AMT">
-    <div content-block message="Check after finishing this section">
-      <p>To configure a browser to connect, follow these steps:</p>
+  <div ibox title="Note the IP address of Your Intel&reg; IoT Gateway">
+    <div content-block message="Check after finishing this section" image-link="../views/labs/remote-configamt/images/ipconfig.png">
+      <p></p>
       <ol>
-        <li>Go to command prompt and type ipconfig.</li>
+        <li>Open a PowerShell command prompt by going to the Windows menu in the lower left corner and typing <b>powershell</b>.</li>
+        <li>In Powershell type <pre><code>ipconfig</code></pre></li>
         <li>Note down the ip address of your NUC machine.</li>
         <li>Go to next step to connect to your NUC from your laptop.</li>
       </ol>
     </div>
   </div>
 
-  <div ibox title="Step 4: Connect and Explore (In your personal LAPTOPS)" message="Connect and Explore (In your personal LAPTOPS)">
-    <div content-block image-link="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg">
+  <div ibox title="Use a Web Browser to Connet to the Intel&reg; Active Management Technology web interface">
+    <div content-block message="Use a Web Browser to Connet to the Intel&reg; Active Management Technology web interface" image-link="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg">
       <labels laptop/>
-      <p>Now you are ready to start a web browser.</p>
-      <p>Point the web browser to the address. You may not able to access your own machine. Hence, try to connect to your neibour and see the result. http://192.168.__.__:16992</p>
+      <p>To use the Intel&reg; Active Management Technology web interface, open a browser and go to the IP address of the Intel&reg; IoT Gateway. The port number is 16992.</p>
+      <div class="alert alert-warning">
+        <p><b>For this step, you will need to work with the person next to you.</b></p>
+        <p>You will not be able to access the Intel&reg; AMT web interface, if you are using a web browser on the same machine.</p>
+        <p>Try to connect to your neighbor's Intel&reg; IoT Gateway and let them connect to yours. http://x.x.x.x:16992</p>
+      </div>
     </div>
 
     <div content-block image-link="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg">
-      <p>When prompted for username/password, type admin for username and Intel@1234 as the password</p>
+      <p>When prompted for username/password, type <b>admin</b> for username and <b>Intel@1234</b> as the password</p>
     </div>
 
-    <div content-block image-link="../views/labs/remote-configamt/images/003-Intel-AMT-Web-Browser-Screen.jpg" message="Connect and Explore (In your personal LAPTOPS)">
+    <div content-block image-link="../views/labs/remote-configamt/images/003-Intel-AMT-Web-Browser-Screen.jpg" message="Connect and Explore">
       <p>You are now connected. Please explore different sections.</p>
     </div>
   </div>
