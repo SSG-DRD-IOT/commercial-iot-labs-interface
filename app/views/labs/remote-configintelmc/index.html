@@ -1,191 +1,94 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Intel&reg; Mesh Commander</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a>Labs</a>
-            </li>
-            <li>
-                <a>Remote Management</a>
-            </li>
-            <li class="active">
-                <strong>Remote Configuration with Intel&reg; Mesh Commander</strong>
-            </li>
-        </ol>
-    </div>
+  <div class="col-lg-10">
+    <h2>Intel&reg; Mesh Commander</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a>Labs</a>
+      </li>
+      <li>
+        <a>Remote Management</a>
+      </li>
+      <li class="active">
+        <strong>Remote Configuration with Intel&reg; Mesh Commander</strong>
+      </li>
+    </ol>
+  </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-          <div ibox title="Overview"><labels laptop windows/>
-              <h2 class="labHidden">Read the Overview</h2>
-              <p>The web based Intel&reg; AMT management console is now called Mesh Commander. It runs on many operating systems and can be hosted in a web server as mesh central.</p>
-              <p>Mesh commander primarilty used for 1:1  remote management of devices.</p>
-            <p>we will explore the mesh commander capabilities in this module.</div>
-        </div>
+  <div ibox title="Overview">
+    <div content-block name="step1" message="Read the Objectives">
+      <labels laptop windows/>
+      <h2 class="labHidden">Read the Overview</h2>
+      <p>The Mesh Commander is an application that provides an interface for using Intel&reg; Active Management technology. Its project site states that its purpose is to make hardware configuration easy over Internet.</p>
+      <p>MeshCommander is primarily used for 1:1 remote management of devices. Current supported features include:</p>
     </div>
+
+    <div content-block message="Step 1: Add AMT Computer" image-link="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg">
+    </div>
+
+    <div content-block message="Step 1: Add AMT Computer" image-link="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg">
+    </div>
+
+    <div content-block message="Step 2: AMT Entry Screen" image-link="../views/labs/remote-configintelmc/images/002-AMT-Entry-Screen.jpg">
+    </div>
+
+    <div content-block message="Step 3: Click Connect" image-link="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg">
+    </div>
+
+    <div content-block message="Step 4: Click Remote Desktop" image-link="../views/labs/remote-configintelmc/images/004-Click-Remote-Desktop.jpg">
+    </div>
+
+    <div content-block message="Step 5: Click Connect Remote Desktop" image-link="../views/labs/remote-configintelmc/images/005-Click-Connect-Remote-Desktop.jpg">
+    </div>
+
+    <div content-block message="Step 6: Out of band Remote Desktop" image-link="../views/labs/remote-configintelmc/images/006-Out-of-band-Remote-Desktop.jpg">
+    </div>
+
+    <div content-block message="Step 7: Power Actions Reset To BIOS" image-link="../views/labs/remote-configintelmc/images/007-Power-Actions-Reset-To-BIOS.jpg">
+    </div>
+
+    <div content-block message="Step 8: BIOS Setup Page" image-link="../views/labs/remote-configintelmc/images/008-BIOS-Setup-Page.jpg">
+    </div>
+  </div>
+
+  <div ibox title="Step 9: IDE-Redirection">
+    <div content-block image-link="../views/labs/remote-configintelmc/images/009-IDE-Redirection.jpg">
+      <ul>
+        <li>Navigate to Remote Desktop</li>
+        <li>Click IDE-R, which opens up Storage Redirection</li>
+        <li>Choose any .iso file and .img file</li>
+        <li>"IDE-R Session, Connected, 0 in, 0 out" message will be displayed at top</li>
+        <li>Click Power Actions and select "Reset to IDE-R CDROM"</li>
+        <li>Now observe the top row showing variation in the message "IDE-R Session, Connected, 0 in, ###### out" showing number of packets going out</li>
+      </ul>
+    </div>
+
+    <div content-block image-link="../views/labs/remote-configintelmc/images/IDER.png" message="IDE-R completed">
+      <ul>
+        <li>CDROM Image content will be displayed</li>
+        <li>A samle DOS image is loaded here</li>
+        <li>Click the Disconnect button inside the Remote Desktop</li>
+        <li>Click Stop IDE-R Session</li>
+        <li>Goto Power Actions &gt; Reset to complete the session</li>
+      </ul>
+    </div>
+  </div>
+
+  <div ibox title="Step 10: Mesh Commander's System Defense panel">
+    <div content-block image-link="../views/labs/remote-configintelmc/images/010-MeshCommanderMatchingRules.jpg">
+      <p>Within Mesh Commander's System Defense panel, you can add to Intel AMT network filters and policies that can be used to match certain type of network traffic. You can use Intel AMT system defense to count, drop or rate limit network traffic that
+        matches certain rules. In this page, we look at how to create advanced filters that use the "Matching Rules" box in the "Add System Defense Filter" dialog box.</p>
+      <p>The "Matching Rules" field is a comma separated list of name and values. The names must have exact capitalization and no extra spaces must be added. </p>
+      <p>The first matching rule is the <b>ProtocolID</b>, usually TCP (6) or UDP (17). For example, if you want to match on TCP traffic, you put "ProtocolID=6" in the matching rules. You must specify a protocol id of TCP or UDP before you can use any of
+        the other filters below.</p>
+      <p><b>DestAddress</b> and <b>DestMask</b> to filter the destination of the packet. Both of these must be used at the same time. For example, you can set the matching rules to "ProtocolID=6,DestAddress=192.168.1.0,DestMask=255.255.255.0". This will
+        filter all packets that go to 192.168.1.*.</p>
+      <p>In addition, you can filter based on source address with <b>SrcAddress</b> and <b>SrcMask</b>. Both must be used at the same time. For example, you can have "ProtocolID=6,SrcAddress=192.168.1.0,SrcMask=255.255.0.0" to match all packets with a source
+        address of 192.168.*.</p>
+    </div>
+  </div>
 </div>
-    <div ibox title="Explore Mesh commander">
-        <div class="wrapper wrapper-content animated fadeIn">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 1: Add AMT Computer</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg" alt="001-Add-AMT-Computer" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 2: AMT Entry Screen</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/002-AMT-Entry-Screen.jpg" alt="002-AMT-Entry-Screen" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper wrapper-content animated fadeIn">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 3: Click Connect</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg" alt="003-Click-Connect" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 4: Click Remote Desktop</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/004-Click-Remote-Desktop.jpg" alt="004-Click-Remote-Desktop" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper wrapper-content animated fadeIn">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 5: Click Connect Remote Desktop</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/005-Click-Connect-Remote-Desktop.jpg" alt="005-Click-Connect-Remote-Desktop" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 6: Out of band Remote Desktop</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/006-Out-of-band-Remote-Desktop.jpg" alt="006-Out-of-band-Remote-Desktop.jpg" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper wrapper-content animated fadeIn">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 7: Power Actions Reset To BIOS</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/007-Power-Actions-Reset-To-BIOS.jpg" alt="007-Power-Actions-Reset-To-BIOS" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="ibox">
-                        <div class="ibox-title">
-                            <h5>Step 8: BIOS Setup Page</h5>
-                            <div ibox-tools></div>
-                        </div>
-                        <div class="ibox-content">
-                            <img src="../views/labs/remote-configintelmc/images/008-BIOS-Setup-Page.jpg" alt="008-BIOS-Setup-Page" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div ibox title="Step 9: IDE-Redirection">
-                        <div content-block image-link="../views/labs/remote-configintelmc/images/009-IDE-Redirection.jpg">
-                          <ul>
-                            <li>Navigate to Remote Desktop</li>
-                            <li>Click IDE-R, which opens up Storage Redirection</li>
-                            <li>Choose any .iso file and .img file</li>
-                            <li>"IDE-R Session, Connected, 0 in, 0 out" message will be displayed at top</li>
-                            <li>Click Power Actions and select "Reset to IDE-R CDROM"</li>
-                            <li>Now observe the top row showing variation in the message "IDE-R Session, Connected, 0 in, ###### out" showing number of packets going out</li>
-
-                          </ul>
-                        </div>
-                        <div content-block image-link="../views/labs/remote-configintelmc/images/IDER.png" message="IDE-R completed">
-                          <ul>
-                            <li>CDROM Image content will be displayed</li>
-                            <li>A samle DOS image is loaded here</li>
-                            <li>Click the Disconnect button inside the Remote Desktop</li>
-                            <li>Click Stop IDE-R Session</li>
-                            <li>Goto Power Actions &gt; Reset to complete the session</li>
-                          </ul>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-          <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-                <div class="row">
-                    <div class="col-lg-12">
-                      <div ibox title="Step 10: Mesh Commander's System Defense panel">
-                         <div content-block image-link="../views/labs/remote-configintelmc/images/010-MeshCommanderMatchingRules.jpg">
-                              <p>Within Mesh Commander's System Defense panel, you can add to Intel AMT network filters and policies that can be used to match certain type of network traffic.
-                              You can use Intel AMT system defense to count, drop or rate limit network traffic that matches certain rules. In this page, we look at how to create advanced
-                              filters that use the "Matching Rules" box in the "Add System Defense Filter" dialog box.</p>
-                              <p>The "Matching Rules" field is a comma separated list of name and values. The names must have exact capitalization and no extra spaces must be added. </p>
-                              <p>The first matching rule is the <b>ProtocolID</b>, usually TCP (6) or UDP (17). For example, if you want to match on TCP traffic, you put "ProtocolID=6" in the matching rules.
-                                You must specify a protocol id of TCP or UDP before you can use any of the other filters below.</p>
-                              <p><b>DestAddress</b> and <b>DestMask</b> to filter the destination of the packet. Both of these must be used at the same time. For example, you can set the matching rules to
-                                "ProtocolID=6,DestAddress=192.168.1.0,DestMask=255.255.255.0". This will filter all packets that go to 192.168.1.*.</p>
-                              <p>In addition, you can filter based on source address with <b>SrcAddress</b> and <b>SrcMask</b>. Both must be used at the same time.
-                                For example, you can have "ProtocolID=6,SrcAddress=192.168.1.0,SrcMask=255.255.0.0" to match all packets with a source address of 192.168.*.</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
