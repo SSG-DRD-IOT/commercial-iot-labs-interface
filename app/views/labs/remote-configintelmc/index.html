@@ -12,7 +12,7 @@
         <a>Remote Management</a>
       </li>
       <li class="active">
-        <strong>Remote Configuration with Intel&reg; Mesh Commander</strong>
+        <strong>Remote Configuration with Mesh Commander</strong>
       </li>
     </ol>
   </div>
@@ -25,37 +25,65 @@
       <h2 class="labHidden">Read the Overview</h2>
       <p>The Mesh Commander is an application that provides an interface for using Intel&reg; Active Management technology. Its project site states that its purpose is to make hardware configuration easy over Internet.</p>
       <p>MeshCommander is primarily used for 1:1 remote management of devices. Current supported features include:</p>
+      <ul>
+        <li>Hardware KVM viewer</li>
+        <li>Serial over LAN terminal</li>
+        <li>IDE-R support</li>
+        <li>Power control</li>
+        <li>Event viewer</li>
+        <li>Audit log viewer</li>
+        <li>Hardware asset</li>
+        <li>Account management</li>
+        <li>Network settings</li>
+        <li>WIFI management</li>
+        <li>User consent and control</li>
+        <li>Certificate &amp; TLS management</li>
+        <li>CIRA &amp; Environment Detection</li>
+        <li>WSMAN browser</li>
+      </ul>
     </div>
 
-    <div content-block message="Step 1: Add AMT Computer" image-link="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg">
+    <div content-block message="Launch the MeshCommander utility" image-link="../views/labs/remote-configintelmc/images/launch.png">
+      <p>The MeshCommander utility is already installed on your Intel&reg IoT Gateway</p>
+      <p>Go to the Windows launch bar icon in the lower left of your screen and type <b>Mesh Commander</b>.</p>
+
+      <div class="alert alert-warning">
+        <p>Be sure to right click on the MeshCommander application and select <b>Run as Administrator</b>.</p>
+      </div>
     </div>
 
-    <div content-block message="Step 1: Add AMT Computer" image-link="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg">
+    <div content-block message="Add An Inte&reg AMT enabled Computer to MeshCommander" image-link="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg">
+      <p>The first step to add a system to the Intel AMT mission commander configuration utility is to click on a computer. </p>
+      <p>After that you can specify a <b>friendly name</b> which is simply a string that allows you to easily identify the system.</p>
+      <p>You can <b>tags</b> that allow you to put several systems together into recognizable categories.</p>
+      <p>You'll need to enter either the <b>host name</b> or the <b>IP address</b> of the computer.</p>
+      <p>The <b>authentication</b> should remain as digest or none.</p>
+      <p>Lastly, the <b>username and password</b> are the same as username and password that you configured during the USB drive lab.</p>
     </div>
 
-    <div content-block message="Step 2: AMT Entry Screen" image-link="../views/labs/remote-configintelmc/images/002-AMT-Entry-Screen.jpg">
+    <div content-block message="Connect to your Intel&reg IoT Gateway" image-link="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg">
+      <p>Next to each computer that has been added to the system there is a button labeled connect.</p>
+      <pre><code>Click the Connect button to begin communicating with your gateway.</code></pre>
     </div>
 
-    <div content-block message="Step 3: Click Connect" image-link="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg">
+    <div content-block message="Click Remote Desktop" image-link="../views/labs/remote-configintelmc/images/004-Click-Remote-Desktop.jpg">
+      <p>After connecting to a system, you'll see the system information on the screen, such as the power state, the unique identifier and basic settings.</p>
     </div>
 
-    <div content-block message="Step 4: Click Remote Desktop" image-link="../views/labs/remote-configintelmc/images/004-Click-Remote-Desktop.jpg">
+    <div content-block message="Click Connect Remote Desktop" image-link="../views/labs/remote-configintelmc/images/005-Click-Connect-Remote-Desktop.jpg">
     </div>
 
-    <div content-block message="Step 5: Click Connect Remote Desktop" image-link="../views/labs/remote-configintelmc/images/005-Click-Connect-Remote-Desktop.jpg">
+    <div content-block message="Out of band Remote Desktop" image-link="../views/labs/remote-configintelmc/images/006-Out-of-band-Remote-Desktop.jpg">
     </div>
 
-    <div content-block message="Step 6: Out of band Remote Desktop" image-link="../views/labs/remote-configintelmc/images/006-Out-of-band-Remote-Desktop.jpg">
+    <div content-block message="Power Actions Reset To BIOS" image-link="../views/labs/remote-configintelmc/images/007-Power-Actions-Reset-To-BIOS.jpg">
     </div>
 
-    <div content-block message="Step 7: Power Actions Reset To BIOS" image-link="../views/labs/remote-configintelmc/images/007-Power-Actions-Reset-To-BIOS.jpg">
-    </div>
-
-    <div content-block message="Step 8: BIOS Setup Page" image-link="../views/labs/remote-configintelmc/images/008-BIOS-Setup-Page.jpg">
+    <div content-block message="BIOS Setup Page" image-link="../views/labs/remote-configintelmc/images/008-BIOS-Setup-Page.jpg">
     </div>
   </div>
 
-  <div ibox title="Step 9: IDE-Redirection">
+  <div ibox title="IDE-Redirection">
     <div content-block image-link="../views/labs/remote-configintelmc/images/009-IDE-Redirection.jpg">
       <ul>
         <li>Navigate to Remote Desktop</li>
@@ -78,7 +106,7 @@
     </div>
   </div>
 
-  <div ibox title="Step 10: Mesh Commander's System Defense panel">
+  <div ibox title="Mesh Commander's System Defense panel">
     <div content-block image-link="../views/labs/remote-configintelmc/images/010-MeshCommanderMatchingRules.jpg">
       <p>Within Mesh Commander's System Defense panel, you can add to Intel AMT network filters and policies that can be used to match certain type of network traffic. You can use Intel AMT system defense to count, drop or rate limit network traffic that
         matches certain rules. In this page, we look at how to create advanced filters that use the "Matching Rules" box in the "Add System Defense Filter" dialog box.</p>
