@@ -72,34 +72,42 @@
     </div>
   </div>
 
-  <div ibox title="1. Sample Decoder">
-    <div content-block name="xdk-issues" message="Check after completion of Sample Decoder">
-      <ul>
-        <li>Goto <b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;</b> folder</li>
-        <li>Open the task manager to compare the CPU performance of the below two cases.
-          <p>Note:If you are running any other programs, their process will be added to the CPU & memory utilization. So try closing all other programs. Then observe the Sample_decode.exe process performance.</p>
-        </li>
-        <li>Case 1: Execute the below command with software implementation enabled:
-          <ul>
-            <li>
-              <span style="color:#A52A2A">sample_decode.exe h264 -i C:\input.h264 –r -sw</span>
-            </li>
-          </ul>
-        </li>
-        <li>Case 2: Execute the below command with hardware acceleration enabled:
-          <ul>
-            <li>
-              <span style="color:#A52A2A">sample_decode.exe h264 -i C:\input.h264 –r -hw</span>
-            </li>
-          </ul>
-        </li>
-        <li>Just type sample_decode.exe and explore other command line switches:
-          </br>-o : output to file in RAW formats
-          </br>-r: Present
-          </br>-f : change rendering frame rate
-          </br>-w and –h : changing the resolution
-        </li>
-      </ul>
+  <div ibox title="Compare the Frame Rate between Hardware Accelerated Video and Software Rendered Video">
+    <div content-block name="xdk-issues" message="Check after completion of Sample Decoder"  image-link="./views/labs/videoperformance-mediasdk/images/directory.png">
+      <p>In this exercise, you will play back an H.264 video file initially with software video play back and then afterwards with hardware playback. The goal is to observe the different in the speed of decoding.  The decoding speed is measures in frames per second or <b>fps</b>. The example will display the fps for each case on the command line that you launch the application.</p>
+
+      <p>In Windows Explorer, navigate to <b>03-MediaSDK</b> directory</p>
+      <pre><code>C:\Users\nuc-user\Desktop\Retail\03-MediaSDK</code></pre>
+    </div>
+
+    <div content-block name="xdk-issues" message="Open the Windows Task Manager and begin monitoring the CPU Utilization" image-link="./views/labs/videoperformance-mediasdk/images/02-task-manager.png">
+      <p>Open the <b>Task Manager</b> and click on the <b>Perforance tab</b>. When you run the <b>sample_decode.exe</b> you will be able to compare the CPU performance between the non-accelerated and the accelerated video playback.</p>
+
+      <div class="alert alert-warning">
+        <p>If you are running any other programs, their process will be added to the CPU &amp; memory utilization. So try closing all other programs. Then observe the <b>sample_decode.exe</b> process performance.</p>
+      </div>
+    </div>
+
+    <div content-block name="xdk-issues" message="Run the sample_decode.exe program with software based decoding." image-link="./views/labs/videoperformance-mediasdk/images/01-sample-decoder-software.png">
+      <p>Now run the sample decoding program with only software based decoding enabled. In this senario, the video playback is not taking advantage of hardware acceleration. The software based decoding progress will achieve an acceptable frame rate, but hardware based decoding will perform much better.</p>
+      <pre><code>sample_decode.exe h264 -i C:\input.h264 –r -sw</code></pre>
+    </div>
+
+    <div content-block name="xdk-issues" message="Run the sample_decode.exe program with hardware based decoding." image-link="./views/labs/videoperformance-mediasdk/images/01-sample-decoder-hardware.png">
+      <p>This time run the same program but switch to hardware based decoding.</p>
+      <pre><code>sample_decode.exe h264 -i C:\input.h264 –r -hw</code></pre>
+
+      <div class="alert alert-info">
+        <p>You will notice that the <b>fps</b> of the hardware accelerate decoding is nearly 10 times faster than the software based decoding, and the <b>CPU Utilization</b> is much lower!</p>
+      </div>
+    </div>
+
+    <div content-block name="xdk-issues" message="Continue to experiment with other decoding setting">
+      <p>Just type sample_decode.exe and explore other command line switches.</p>
+          <pre><code>-o : output to file in RAW formats
+-r: Present
+-f : change rendering frame rate
+-w and –h : changing the resolution</code></pre>
     </div>
   </div>
 
