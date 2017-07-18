@@ -19,79 +19,56 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Objective" >
-                <div content-block name="xdk-issues" message="Objective"  image-link="./views/labs/videoperformance-mediasdksamples/images/psuedocode.png">
-                  <p>We will build a custom Console application which performs decoding of elementary compressed video stream and renders them on the screen:
-                    <ul>
-                      <li>Setup parameter to decode pipeline</li>
-                      <li>Initialize decoder</li>
-                      <li>Decode frame by frame</li>
-                  </ul>
-                  </div>
-            </div>
-        </div>
-    </div>
-  </div>
-</div>
+          <div ibox title="Objectives">
+              <div content-block name="xdk-issues" message="Check after completing the Objectives" image-link="./views/labs/videoperformance-mediasdksamples/images/psuedocode.png">
+              <b>Introduction</b>
+              <p>We will build a custom Console application which performs decoding of elementary compressed video stream and renders them on the screen:
+                <ul>
+                  <li>Setup parameter to decode pipeline</li>
+                  <li>Initialize decoder</li>
+                  <li>Decode frame by frame</li>
+              </ul>
+              <b>Exploration</b>
+              <p>In this example we are decoding an AVC (H.264) stream.</p>
+                <ul>
+                  <li>Inclusions</li>
+                  <li>Input Processing</li>
+                  <li>Decoding pipeline</li>
+                  <li>Output Processing</li>
+                  <li>Main decoding loop</li>
+                  <li>Error Handling</li>
+                  <li>Finish decoding</li>
+              </ul>
+              <b>Observation</b>
+                <p>Observe different parameters of "sInputParams"</p>
+              <b>Learning Outcome</b>
+              <p>By the end of this module, the participant is expected to understand the decoding an
+                AVC (H.264) stream using Intel&reg; Media SDK</p>
+              </div>
+          </div>
 
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-  <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Open Visual Studio solution exercise">
-                <div content-block name="xdk-issues" message="Open Visual Studio solution exercise">
+          <div ibox title="Open Visual Studio solution exercise">
+                <div content-block name="xdk-issues" message="Check after opening the Visual Studio solution exercise">
                   <P>Please open empty solution from </p>
                   <p><b>Desktop &gt; Retail &gt; 03-MediaSDK &gt; lab_exercise</b> folder</p>
                   <P>Open the <b>sample_decode.sln</b> file located in sample_decode folder</p>
                   <p>We have done all the necessary library linking in this solution.</p>
               </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Outline">
-                <div content-block name="xdk-issues" message="Outline read">
-                  <p>In this example we are decoding an AVC (H.264) stream.</p>
-                    <ul>
-                      <li>Inclusions</li>
-                      <li>Input Processing</li>
-                      <li>Decoding pipeline</li>
-                      <li>Output Processing</li>
-                      <li>Main decoding loop</li>
-                      <li>Error Handling</li>
-                      <li>Finish decoding</li>
-                  </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Inclusions">
-                <div content-block name="xdk-issues" message="Header file included">
+          <div ibox title="Inclusions">
+                <div content-block name="xdk-issues" message="Check after including Header files">
                   <p>Open <u>sample_decode.cpp</u> file to complete the exercise with the code given in the following steps:</p>
+                  <p> Include the pipeline_decode.h and sstream headers </p>
                   <pre><code>
                     #include "pipeline_decode.h"
                     #include &ltsstream&gt
                 </code></pre>
               </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Input Processing">
-                <div content-block name="xdk-issues" message="Input processing done">
+          <div ibox title="Input Processing">
+                <div content-block name="xdk-issues" message="Check after completing Input processing">
                   <p>Define a method <b>InputSetup()</b> that accepts the sInputParams array defined from main program.</p>
                   <p>This method first checks the input array for consistency.</p>
                   <p>Then sets the video type, memory type, hardware acceleration, asynchronous depth factor, mode, etc.,</p>
@@ -172,33 +149,23 @@
                 </ui-codemirror>
               </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Decoding Pipeline">
-                <div content-block name="xdk-issues" message="Decoding pipeline completed">
-                </br><p>Initialise the decoding pipeline and check the error status.</p>
-                  <p>Continue coding in the main program</p>
-                  <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
-                    //Initialise the Decode pipeline
-                    sts = Pipeline.Init(&Params);
-                    MSDK_CHECK_RESULT(sts, MFX_ERR_NONE, 1);
-                </ui-codemirror>
-              </div>
+          <div ibox title="Decoding Pipeline">
+                <div content-block name="xdk-issues" message="Check after completion of Decoding pipeline">
+                  </br><p>Initialise the decoding pipeline and check the error status.</p>
+                    <p>Continue coding in the main program</p>
+                    <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
+                      //Initialise the Decode pipeline
+
+                      sts = Pipeline.Init(&Params);
+
+                      MSDK_CHECK_RESULT(sts, MFX_ERR_NONE, 1);
+                    </ui-codemirror>
+                  </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Output Processing">
-                <div content-block name="xdk-issues" message="Output processing done">
+          <div ibox title="Output Processing">
+                <div content-block name="xdk-issues" message="Check after completion of Output processing">
                 </br><p>Print the stream information</p>
                   <p>Continue coding in the main program</p>
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
@@ -209,15 +176,9 @@
                 </ui-codemirror>
               </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-    <div class="row">
-        <div class="col-lg-12">
-            <div ibox title="Main Decoding Loop">
-                <div content-block name="xdk-issues" message="Main decoding loop completed">
+          <div ibox title="Main Decoding Loop">
+                <div content-block name="xdk-issues" message="Check after completion of Main decoding loop">
                 </br><p>Now let us loop all the frames in the video to decode them using <b>Pipeline.RunDecoding()</b></p>
                   <p> Error handling for incompatible video parameters, lost device, failed device, etc., </p>
                   <p>Reset the device using <b>Pipeline.ResetDevice</b> in case of hardaware error.
@@ -259,26 +220,25 @@
                     }
 
                     msdk_printf(MSDK_STRING("\nDecoding finished\n"));
-                </ui-codemirror>
+                  </ui-codemirror>
                 </br>
-            </br>
-        <p><b>Build this solution for x64 in debug mode and run to see the output</b></p>
+                </br>
+                <p><b>Build this solution for x64 in debug mode and run to see the output</b></p>
               </div>
-            </div>
+        </div>
+
+    <div ibox title="Complete Solution">
+                    <div content-block name="xdk-issues" message="Check after Downloading complete Visual Studio solution">
+                      <P>If you have problems in executing your code, you can see the complete Visual Studio solution in</p>
+                      <p><b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;complete_solution</b> folder</p>
+                      <p>We have done all the necessary library linking in this solution.</p>
+                    </div>
+    </div>
+
+    <div ibox title="Lesson learnt">
+        <div content-block name="xdk-issues" message="Check after completion of lesson">
+          <p>Decoding the H.264 stream and exploring supported input parameters from Intel&reg; Media SDK</p>
         </div>
     </div>
 
-    <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-      <div class="row">
-            <div class="col-lg-12">
-                <div ibox title="Complete Solution">
-                    <div content-block name="xdk-issues" message="Download complete Visual Studio solution">
-                      <P>If you have problems in executing your code, you can see the complete Visual Studio solution in</p>
-                          <p><b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;complete_solution</b> folder</p>
-                          <p>We have done all the necessary library linking in this solution.</p>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
