@@ -19,25 +19,34 @@
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-  <div class="row">
-    <div class="col-lg-12">
-      <div ibox title="Introduction">
-        <div content-block name="xdk-issues" message="Check mark after completing this section">
-          <p>Intel MARS: Media Acceleration Reference Software is licensed reference code for Digital Signage that uses the best practices for video decode, transcode, playback, compositing, blending, streaming and rendering by using a combination of Intel and other SDKs on Intel platforms</p>
-          <p>Target Platforms –Intel Sky Lake/KabyLake Core & Braswell, Apollo Lake Atom Platforms
-          <ul>
-            <li>OS supported –Windows 10</li>
-            <li>SDK -FFMPEG, Media Foundation, Media SDK 2016, DirectX 11 (DXVA2.0+)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+          <div ibox title="Objectives">
+              <div content-block message="Check after completing the Objectives">
+                <b>Introduction</b>
+                <p>Intel MARS: Media Acceleration Reference Software is licensed reference code for Digital Signage that uses the best practices for video decode, transcode, playback, compositing, blending, streaming and rendering by using a combination of Intel and other SDKs on Intel platforms</p>
+                <p>Target Platforms –Intel Sky Lake/KabyLake Core & Braswell, Apollo Lake Atom Platforms
+                <ul>
+                  <li>OS supported –Windows 10</li>
+                  <li>SDK -FFMPEG, Media Foundation, Media SDK 2016, DirectX 11 (DXVA2.0+)</li>
+                </ul>
+                <b>Exploration</b>
+                <p>In this exercise let us explore the Media Acceleration Reference Software as follows:</p>
+                  <ul>
+                    <li>Running the preset Media Acceleration Reference Software</li>
+                    <li>Configure the GUI</li>
+                    <li>Explore Image and Video zones</li>
+                    <li>Customizing the Configuration files</li>
+                    <li>Observing the output</li>
+                  </ul>
+                <b>Observation</b>
+                  <p>Observe the faciliy of different zones and corresponding settings provided</p>
+                  <p>Check the hardware acceleration performance</p>
+                <b>Learning Outcome</b>
+                <p>By the end of this module, the participant is expected to understand briefly the working of Intel Media Acceleration Reference Software</p>
+              </div>
+          </div>
 
-  <div class="row">
-    <div class="col-lg-12">
-      <div ibox title="Execution">
-        <div content-block name="xdk-issues" message="Check mark after completing this section">
+      <div ibox title="Running the Intel Media Acceleration Reference Software">
+        <div content-block message="Check mark after completing this section">
           <ul>
             <li>Goto Start, type cmd, right click, run as administrator</li>
             <li>Through elevated command prompt run <b>Desktop &gt; Retail &gt; 01-MARS &gt; filterDlls &gt; regdll.bat</b>, execute to register the dlls required for MARS
@@ -48,11 +57,9 @@
           </ul>
         </div>
     </div>
-  </div>
-</div>
 
 <div ibox title="Configuration GUI">
-  <div content-block name="opencv_init-launch" message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings001.png">
+  <div content-block message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings001.png">
     <p>While MARS is running, press "s" key to invoke the configuration GUI. All the settings are available in the screen as shown here.</p>
     <p>User can either select any of the preset files i.e.
       <ul>
@@ -72,7 +79,7 @@
 </div>
 
 <div ibox title="Zone 1: Image Slideshow Settings">
-  <div content-block message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings002.png">
+  <div content-block message="Check mark after playing with Image Slideshow Settings" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings002.png">
     <p>Click on Zone 1 to see Image slideshow settings on right side panel.</p>
     <p>Change some of the settings like Visibility, XLocation, YLocation, Height, Width, Auto Scaling, Border, etc.,</p>
     <p>Image can also be changed by File uploader provided.</p>
@@ -80,7 +87,7 @@
 </div>
 
 <div ibox title="Zone 2: Video Settings">
-  <div content-block message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings003.png">
+  <div content-block message="Check mark after playing with Video Settings" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings003.png">
     <p>Click on Zone 2 to see Video settings on right side panel.</p>
     <p>Change some of the settings like Visibility, XLocation, YLocation, Height, Width, Auto Scaling, Border, etc.,</p>
     <p>Check the Hardware Acceleration option for performance gain</p>
@@ -89,28 +96,34 @@
 </div>
 
 <div ibox title="Loading New Configuration file">
-  <div content-block name="opencv_init-launch" message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings004.png">
+  <div content-block message="Check mark after loading new config file" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings004.png">
     <p>Select Custom configuration from dropdown box at top.</p>
     <p>Provide any other relevant configuration file from <b>Desktop > Retail &gt 01-MARS &gt SupportFiles &gt ConfigFiles &gt Windows</b> folder</p>
   </div>
 </div>
 
 <div ibox title="Loading new Video to new Configuration file">
-  <div content-block name="opencv_init-launch" message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings005.png">
+  <div content-block message="Check mark after loading the new Video" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings005.png">
     <p>Select a zone, select custom video sample and click save button</p>
   </div>
 </div>
 
 <div ibox title="Finish editing new Configuration GUI">
-  <div content-block name="opencv_init-launch" message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings006.png">
+  <div content-block message="Check mark after editing new Configuration GUI" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings006.png">
       <p>Once the required changes are done, the file can be saved or new config file can be created using Save As option</p>
       <p>Hit Finish button after completion</p>
   </div>
 </div>
 
 <div ibox title="Sample MARS Output">
-  <div content-block name="opencv_init-launch" message="Check mark after completing this section" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings007.png">
+  <div content-block message="Check mark getting the output" image-link="../views/labs/videoperformance-marsunderstand/images/DUSettings007.png">
   </div>
+</div>
+
+<div ibox title="Lesson learnt">
+    <div content-block message="Check after completion of lesson">
+      <p>Working of Intel Media Acceleration Reference Software</p>
+    </div>
 </div>
 
 </div>
