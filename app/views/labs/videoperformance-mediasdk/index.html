@@ -1,139 +1,134 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Intel&reg; Media SDK Samples</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a>Labs</a>
-            </li>
-            <li>
-                video performance
-            </li>
-            <li class="active">
-                <strong>Explore Intel&reg; Media SDK Samples</strong>
-            </li>
-        </ol>
-    </div>
+  <div class="col-lg-10">
+    <h2>Intel&reg; Media SDK Samples</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="index.html">Home</a>
+      </li>
+      <li>
+        <a>Labs</a>
+      </li>
+      <li>
+        video performance
+      </li>
+      <li class="active">
+        <strong>Explore Intel&reg; Media SDK Samples</strong>
+      </li>
+    </ol>
+  </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
-          <div ibox title="Objectives">
-              <div content-block name="xdk-issues" message="Check after completion of Objectives">
-              <b>Introduction</b>
-              <p>Intel&reg; Media SDK is a set of libraries, tools, header and sample code files that define cross-platform API for developing consumer
-                 and professional grade media applications on Intel platforms. Providing an access to Intel&reg; Quick Sync Video, hardware accelerated codecs
-                 in Intel Graphics Processor, Media SDK allows application developer to speed up video playback, encoding, processing and media conversion.
-                 Media SDK for Windows helps to deliver desktop applications, such as video players, editors and video conferencing clients,
-                 while Media SDK for Embedded Linux enables digital security and surveillance and connected car manufacturers to deliver smart cameras
-                 and infotainment or cluster display solutions.</p>
-              <b>Exploration</b>
-              <p>This lab starts with exploring and understanding the media sdk related packages installed in your Intel&reg; NUC.
-                 Then understand the customized applications such as sample decoder and video wall bundled with installation. </p>
-              <b>Observation</b>
-                <p>Performance monitoring using system performance monitoring tool; before and after hardware acceleration.</p>
-              <b>Learning Outcome</b>
-              <p>By the end of this module, the participant is expected to understand the Intel&reg; Media SDK, installation structure,
-                 hardware acceleration and performance enhancement of selected applications.</p>
-              </div>
-            </div>
+  <div ibox title="Objectives">
+    <div content-block name="xdk-issues" message="Check after completion of Objectives">
+      <b>Introduction</b>
+      <p>Intel&reg; Media SDK is a set of libraries, tools, header and sample code files that define cross-platform API for developing consumer and professional grade media applications on Intel platforms. Providing an access to Intel&reg; Quick Sync Video,
+        hardware accelerated codecs in Intel Graphics Processor, Media SDK allows application developer to speed up video playback, encoding, processing and media conversion. Media SDK for Windows helps to deliver desktop applications, such as video players,
+        editors and video conferencing clients, while Media SDK for Embedded Linux enables digital security and surveillance and connected car manufacturers to deliver smart cameras and infotainment or cluster display solutions.</p>
+      <b>Exploration</b>
+      <p>This lab starts with exploring and understanding the media sdk related packages installed in your Intel&reg; NUC. Then understand the customized applications such as sample decoder and video wall bundled with installation. </p>
+      <b>Observation</b>
+      <p>Performance monitoring using system performance monitoring tool; before and after hardware acceleration.</p>
+      <b>Learning Outcome</b>
+      <p>By the end of this module, the participant is expected to understand the Intel&reg; Media SDK, installation structure, hardware acceleration and performance enhancement of selected applications.</p>
+    </div>
+  </div>
 
-          <div ibox title="View the packages installed on your NUC">
-            <div content-block name="xdk-issues" message="Check after viewing the packages installed on your NUC">
-                    <ul>
-                        <li><b>Media SDK installer</b>
-                            <p>Intel_Media_SDK_2016_R2.msi by default installs at
-                              <span style="color:#A52A2A"> C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2</span></p>
-                        </li>
-                        <li><b>Media Sample applications</b>
-                            <p>Media SDK samples is made available in
-                              <span style="color:#2554C7">C:\Users\&lt;user name&gt;\Documents\Samples-master.zip</span>
-                        </li>
-                        <li><b>Media SDK Documentation directory </b>
-                            <p><span style="color:#A52A2A">C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2\doc</span></p>
-                        </li>
-                    </ul>
-            </div>
-          </div>
+  <div ibox title="View the packages installed on your NUC">
+    <div content-block name="xdk-issues" message="Check after viewing the packages installed on your NUC">
+      <ul>
+        <li>
+          <b>Media SDK installer</b>
+          <p>Intel_Media_SDK_2016_R2.msi by default installs at
+            <span style="color:#A52A2A"> C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2</span></p>
+        </li>
+        <li><b>Media Sample applications</b>
+          <p>Media SDK samples is made available in
+            <span style="color:#2554C7">C:\Users\&lt;user name&gt;\Documents\Samples-master.zip</span>
+        </li>
+        <li><b>Media SDK Documentation directory </b>
+          <p><span style="color:#A52A2A">C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2\doc</span></p>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-            <div ibox title="Understand the packages">
-                <div content-block name="xdk-issues" message="Check after understanding the packages">
-                    <ol>
-                        <li>
-                            <span>Go to </span>
-                            <span style="color:#A52A2A">C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2</span>
-                            <span>and understand the Package Contents</span>
-                        </li>
-                        <li>
-                            <span>Go to </span>
-                            <span style="color:#A52A2A">C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2\tools\mediasdk_sys_analyzer</span>
-                            <span> and run the exe to check your platform's capability</span>
-                        </li>
-                        <li>Identify the SW libraries, dispatcher, tools, etc., installed in the same folder</li>
-                    </ol>
-                    </br>
-                </div>
-            </div>
+  <div ibox title="Understand the packages">
+    <div content-block name="xdk-issues" message="Check after understanding the packages">
+      <ol>
+        <li>
+          <span>Go to </span>
+          <span style="color:#A52A2A">C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2</span>
+          <span>and understand the Package Contents</span>
+        </li>
+        <li>
+          <span>Go to </span>
+          <span style="color:#A52A2A">C:\Program Files (x86)\IntelSWTools\Intel(R)_Media_SDK_2016.0.2\tools\mediasdk_sys_analyzer</span>
+          <span> and run the exe to check your platform's capability</span>
+        </li>
+        <li>Identify the SW libraries, dispatcher, tools, etc., installed in the same folder</li>
+      </ol>
+      </br>
+    </div>
+  </div>
 
-            <div ibox title="1. Sample Decoder">
-                <div content-block name="xdk-issues" message="Check after completion of Sample Decoder">
-                    <ul>
-                        <li>Goto <b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;</b> folder</li>
-                      <li>Open the task manager to compare the CPU performance of the below two cases.
-                          <p>Note:If you are running any other programs, their process will be added to the CPU & memory utilization.
-                              So try closing all other programs. Then observe the Sample_decode.exe process performance.</p>
-                        </li>
-                        <li>Case 1: Execute the below command with software implementation enabled:
-                            <ul>
-                                <li>
-                                    <span style="color:#A52A2A">sample_decode.exe h264 -i C:\input.h264 –r -sw</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Case 2: Execute the below command with hardware acceleration enabled:
-                            <ul>
-                                <li>
-                                    <span style="color:#A52A2A">sample_decode.exe h264 -i C:\input.h264 –r -hw</span>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>Just type sample_decode.exe and explore other command line switches:
-                            </br>-o : output to file in RAW formats
-                            </br>-r: Present
-                            </br>-f : change rendering frame rate
-                            </br>-w and –h : changing the resolution
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <div ibox title="1. Sample Decoder">
+    <div content-block name="xdk-issues" message="Check after completion of Sample Decoder">
+      <ul>
+        <li>Goto <b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;</b> folder</li>
+        <li>Open the task manager to compare the CPU performance of the below two cases.
+          <p>Note:If you are running any other programs, their process will be added to the CPU & memory utilization. So try closing all other programs. Then observe the Sample_decode.exe process performance.</p>
+        </li>
+        <li>Case 1: Execute the below command with software implementation enabled:
+          <ul>
+            <li>
+              <span style="color:#A52A2A">sample_decode.exe h264 -i C:\input.h264 –r -sw</span>
+            </li>
+          </ul>
+        </li>
+        <li>Case 2: Execute the below command with hardware acceleration enabled:
+          <ul>
+            <li>
+              <span style="color:#A52A2A">sample_decode.exe h264 -i C:\input.h264 –r -hw</span>
+            </li>
+          </ul>
+        </li>
+        <li>Just type sample_decode.exe and explore other command line switches:
+          </br>-o : output to file in RAW formats
+          </br>-r: Present
+          </br>-f : change rendering frame rate
+          </br>-w and –h : changing the resolution
+        </li>
+      </ul>
+    </div>
+  </div>
 
-            <div ibox title="2. Video Wall">
-                <div content-block name="xdk-issues" message="Check after completion of Video Wall">
-                    <ul>
-                      <li>Goto <b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;</b> folder</li>
-                        <li>Open the command prompt and provide the below command-
-                            <ul>
-                                <li>
-                                    <span style="color:#A52A2A">sample_video_wall.bat C:\input.h264</span>
-                                </li>
-                            </ul>
-                        </li>
-                      </li>Observe the video projected on the wall divided into channels as specified in the batch file</li>
-                        </br>Note:
-                        <li>No. of channels (i.e VerticalCells and HorizontalCells) can be edited in sample_video_wall.bat file.</li>
-                        <li>Change MediaSDKImplementation to sw and hw.</li>
-                        <li>Change these variables and notice the difference.</li>
-                    </ul>
-                </div>
-            </div>
+  <div ibox title="2. Video Wall">
+    <div content-block name="xdk-issues" message="Check after completion of Video Wall">
+      <ul>
+        <li>Goto <b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;</b> folder</li>
+        <li>Open the command prompt and provide the below command-
+          <ul>
+            <li>
+              <span style="color:#A52A2A">sample_video_wall.bat C:\input.h264</span>
+            </li>
+          </ul>
+        </li>
+        </li>Observe the video projected on the wall divided into channels as specified in the batch file</li>
+        </br>Note:
+        <li>No. of channels (i.e VerticalCells and HorizontalCells) can be edited in sample_video_wall.bat file.</li>
+        <li>Change MediaSDKImplementation to sw and hw.</li>
+        <li>Change these variables and notice the difference.</li>
+      </ul>
+    </div>
+  </div>
 
-            <div ibox title="Lessons learnt">
-                <div content-block name="xdk-issues" message="Check after completion of lesson">
-                <ul>
-                <li>Intel&reg; Media SDK's libraries, tools, header and sample code files.</li>
-                <li>speed up in video playback, encoding, processing and media conversion.</li>
-                <li>Performance monitoring</li>
-              </div>
-            </div>
+  <div ibox title="Lessons learnt">
+    <div content-block name="xdk-issues" message="Check after completion of lesson">
+      <ul>
+        <li>Intel&reg; Media SDK's libraries, tools, header and sample code files.</li>
+        <li>speed up in video playback, encoding, processing and media conversion.</li>
+        <li>Performance monitoring</li>
+    </div>
+  </div>
 </div>
