@@ -38,34 +38,31 @@
           </ul>
         </div>
       </div>
-      <div ibox title="Launch IDLE for Python development">
-        <div content-block name="opencv_init-launch" message="Launch IDLE for Python development" image-link="./views/labs/analytics-opencvinit/images/search_idle.png">
-          <p>To create the Python programs in this lab, we will use the Launch <b>IDLE for Python development</b>.</p>
+      <div ibox title="Navigate to OpenCV Python directory">
+        <div content-block name="opencv_init-launch" message="Launch Terminal and navigate to opencv folder" image-link="./views/labs/analytics-opencvinit/images/search_idle.png">
+          <p>To create the Python programs in this lab, we will use the terminal and gedit editor in Linux</b>.</p>
 
-          <p>Open the IDLE for Python development by doing the following:</p>
+          <p>Open the gedit by doing the following:</p>
           <ol>
-            <li>Press Windows + S</li>
-            <li>Type IDLE</li>
-            <li>Click on IDLE application</li>
+            <li>Navigate to Applications > Utilites > Terminal</li>
+            <li> Elevate to root by typing "su" and providing root password "intel123"</li>
+            <li> Run the following command to check where the opencv is installed: find / -name opencv </li>
+            <li> Now navigate to &lt;opencv-installation-folder&gt;/samples/python/</li>
           </ol>
         </div>
 
         <div content-block name="opencv_init-newfile" message="Create new file named camera.py" image-link="./views/labs/analytics-opencvinit/images/idle_newfile.png">
           <p>Create new file and save it as camera.py by following these steps:</p>
           <ol>
-            <li>Open Python IDLE</li>
-            <li>Select File > New Window</li>
+            <li>Issue the command: gedit camera.py</li>
             <li>A blank file opens up</li>
-            <li>Select File > Save</li>
-            <li>Give the file the name <b>camera.py</b></li>
-          </ol>
-        </div>
-
-        <div content-block name="opencv_init-newfile" message="Create new file named camera.py" image-link="./views/labs/analytics-opencvinit/images/idle_newfile.png">
-            <p>Begin by importing the numpy and opencv packages.</p>
+            <li>Select File > Save or use Ctrl + s</li>
+            <li>Begin by importing the numpy and opencv packages. </li>
+          </br>
             <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import numpy as np
 import cv2
 </pre></ui-codemirror>
+              </br>
           </ol>
         </div>
       </div>
@@ -104,7 +101,8 @@ cv2.destroyAllWindows()
 </pre></ui-codemirror>
             </li>
             <li>Press CTRL + S to save the file</li>
-            <li>Press F5</li>
+            <li>Close the file and return to terminal</li>
+            <li>Run:- python camera.py</li>
           </ol>
         </div>
       </div>

@@ -132,7 +132,7 @@
                         <li>Go to <span style="color:#2554C7">/opt/&lt;username&gt;/mediasdk/samples/_bin/ </span></li>
                         <li>Open the Performance monitoring tool by running "top" command to compare the CPU performance of the below two cases.
                           <div class="alert alert-info">Note: If you are running any other programs, their process will be added to the CPU & memory utilization.
-                              So try closing all other programs. Then observe the Sample_decode.exe process performance from task manager.</div>
+                              So try closing all other programs. Then observe the Sample_decode process performance from task manager.</div>
                         </li>
                         <li>Case 1: Execute the below command for software implementation:
                         </br>
@@ -154,7 +154,7 @@
                         </li>
                         <li>Just type sample_decode and explore other command line switches:
                             </br>-o : output to file in RAW formats
-                          </br>-r: Present (only if there is a supported player installed)
+                            </br>-r: Present (only if there is a supported player installed)
                             </br>-f : change rendering frame rate
                             </br>-w and –h : changing the resolution
                         </li>
@@ -179,6 +179,43 @@
                 </div>
             </div>
 -->
+
+<div ibox title="1. Sample Encoder">
+    <div content-block name="xdk-issues" message="Check after completion of Sample Encoder">
+        <ul>
+            <li>Go to <span style="color:#2554C7">/opt/&lt;username&gt;/mediasdk/samples/_bin/ </span></li>
+            <li>Open the Performance monitoring tool by running "top" command to compare the CPU performance of the below two cases.
+              <div class="alert alert-info">Note: If you are running any other programs, their process will be added to the CPU & memory utilization.
+                  So try closing all other programs. Then observe the Sample_encode process performance from task manager.</div>
+            </li>
+            <li>Case 1: Execute the below command for software implementation:
+            </br>
+                    </br>
+                        <div class="alert alert-warning"><span style="color:#A52A2A">sample_encode h264 -i ../content/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -sw</span></div>
+                        <p>Output & Performance:</p>
+                        <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" />
+                      </br>
+                    </br>
+            </li>
+            <li>Case 2: Execute the below command for hardware acceleration:
+            </br>
+                    </br>
+                        <div class="alert alert-warning"><span style="color:#A52A2A">sample_encode h264 -i ../content/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -hw</span></div>
+                        <p>Output & Performance:</p>
+                        <img src="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg" />
+                      </br>
+                    </br>
+            </li>
+            <li>Just type sample_encode and explore other command line switches:
+                </br>-o : output to file in RAW formats
+                </br>-r: Present (only if there is a supported player installed)
+                </br>-f : change rendering frame rate
+                </br>-w and –h : changing the resolution
+            </li>
+        </ul>
+    </div>
+</div>
+
             <div ibox title="Lessons learnt">
                 <div content-block name="xdk-issues" message="Check after completion of lesson">
                 <ul>

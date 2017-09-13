@@ -48,17 +48,23 @@
             <div ibox title="Motion detection using OpenCV">
 
               <div content-block name="opencv_motion-newfile" message="Create new file" image-link="./views/labs/analytics-opencvinit/images/idle_newfile.png">
-                <h5>Create new file</h5>
-                  <ol>
-                <li>Open IDLE</li>
-                <li>Select File > New Window</li>
-                <li>A blank file opens up</li>
-                <li>Type following two lines</li>
+                <p>To create the Python programs in this lab, we will use the terminal and gedit editor in Linux</b>.</p>
+
+                <p>Open the gedit by doing the following:</p>
+                <ol>
+                  <li>Navigate to Applications > Utilites > Terminal</li>
+                  <li> Elevate to root by typing "su" and providing root password "intel123"</li>
+                  <li> Run the following command to check where the opencv is installed: find / -name opencv </li>
+                  <li> Now navigate to &lt;opencv-installation-folder&gt;/samples/python/</li>
+                  <li>Issue the command: gedit motion_detect.py</li>
+                  <li>A blank file opens up</li>
+                  <li>Select File > Save or use Ctrl + s</li>
+                  <li> Issue the following two program statements </li>
                 <li><pre><code>import numpy as np
 import cv2
 #TODO: Cloud integration 1
 </code></pre></li>
-                      <li>Press CTRL + S to save the file</li>
+                      <li>Press CTRL + s to save the file</li>
 
                        </ol>
               </div>
