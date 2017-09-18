@@ -47,12 +47,12 @@
               </div>
           </div>
 
-          <div ibox title="Open Visual Studio solution exercise">
-                <div content-block name="xdk-issues" message="Check after opening the Visual Studio solution exercise">
-                  <P>Please open empty solution from </p>
-                  <p><b>Desktop &gt; Retail &gt; 03-MediaSDK &gt; lab_exercise</b> folder</p>
-                  <P>Open the <b>sample_decode.sln</b> file located in sample_decode folder</p>
-                  <p>We have done all the necessary library linking in this solution.</p>
+          <div ibox title="Building new sample">
+                <div content-block name="xdk-issues" message="Check after creating new sample">
+                  <p>Elevate to root by su command and issue the following command to change project working directory</p>
+                  <div class="alert alert-warning"><span style="color:#A52A2A">cd /home/intel/Downloads/MediaServerStudioEssentials2017R2/MediaSamples_LINUX_2017R2_b634/samples/sample_decode/src </p></span></div>
+                  <P>Please open empty gedit text editor </p>
+                  <p>Save it as sample_decode.cpp in the above folder</p>
               </div>
             </div>
 
@@ -85,7 +85,7 @@
                       //MFX_CODEC_JPEG for JPEG codec
                     	pParams->videoType = MFX_CODEC_AVC;
 
-                    	msdk_opt_read(MSDK_STRING("C:\\input.h264"), pParams->strSrcFile);
+                    	msdk_opt_read(MSDK_STRING("/home/input.h264"), pParams->strSrcFile);
 
                       //Set the memory type:
                       //D3D11_MEMORY for Directx11
@@ -227,14 +227,38 @@
               </div>
         </div>
 
-    <div ibox title="Complete Solution">
-                    <div content-block name="xdk-issues" message="Check after Downloading complete Visual Studio solution">
-                      <P>If you have problems in executing your code, you can see the complete Visual Studio solution in</p>
-                      <p><b>Desktop &gt; Retail &gt; 03-MediaSDK &gt;complete_solution</b> folder</p>
-                      <p>We have done all the necessary library linking in this solution.</p>
-                    </div>
-    </div>
+<div ibox title="Configure and generate solution">
+  <div content-block name="xdk-issues" message="Check after configuring and generating the solution">
+    <p>Run the following command to configure and generate solution for 64bit debug mode using cmake</p>
+    <p>perl build.pl --cmake=intel64,make,debug --build --clean</p>
+    <p> Navigate to the directory where sample is generated:</p>
+    <p>cd __cmake/intel64.make.debug/__bin/debug/</p>
+  </div>
+</div>
 
+<div ibox title="Complete Solution">
+                    <div content-block name="xdk-issues" message="Check after Downloading complete solution">
+                      <P>If you have problems in executing your code, you can see the complete solution in the below directory:</p>
+                      <div class="alert alert-warning"><span style="color:#A52A2A">/home/intel/Downloads/MediaServerStudioEssentials2017R2/MediaSamples_LINUX_2017R2_b634/samples/sample_decode/src</b></span></div>
+                      <p>We have done all the necessary library linking in this solution.</p>
+                      <p>So please reconfigure and regenerate the updated solution as mentioned in previous step</P>
+                    </div>
+</div>
+  <div ibox title="Execution">
+   <div content-block name="xdk-issues" message="Check after running the sample">
+  <ul>
+    <li>Case 1: Execute the below command for software implementation:
+            </br>
+                <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/test_stream.h264 -o output_sw.yuv -sw</span></div>
+            </br>
+    </li>
+    <li>Case 2: Execute the below command for hardware acceleration:
+    </br>
+                <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/input.h264 -o output_hw.yuv -vaapi -hw</span></div>
+    </li>
+  </ul>
+</div>
+</div>
     <div ibox title="Lesson learnt">
         <div content-block name="xdk-issues" message="Check after completion of lesson">
           <p>Decoding the H.264 stream and exploring supported input parameters from Intel&reg; Media SDK</p>
