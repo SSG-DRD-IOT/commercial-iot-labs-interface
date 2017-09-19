@@ -230,9 +230,9 @@
 <div ibox title="Configure and generate solution">
   <div content-block name="xdk-issues" message="Check after configuring and generating the solution">
     <p>Run the following command to configure and generate solution for 64bit debug mode using cmake</p>
-    <p>perl build.pl --cmake=intel64,make,debug --build --clean</p>
+    <div class="alert alert-warning"><span style="color:#A52A2A">perl build.pl --cmake=intel64,make,debug --build --clean</span></div>
     <p> Navigate to the directory where sample is generated:</p>
-    <p>cd __cmake/intel64.make.debug/__bin/debug/</p>
+    <div class="alert alert-warning"><span style="color:#A52A2A">cd __cmake/intel64.make.debug/__bin/debug/</span></div>
   </div>
 </div>
 
@@ -248,12 +248,12 @@
    <div content-block name="xdk-issues" message="Check after running the sample">
   <ul>
     <li>Case 1: Execute the below command for software implementation:
-            </br>
+    </br></br>
                 <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/test_stream.h264 -o output_sw.yuv -sw</span></div>
             </br>
     </li>
     <li>Case 2: Execute the below command for hardware acceleration:
-    </br>
+    </br></br>
                 <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/input.h264 -o output_hw.yuv -vaapi -hw</span></div>
     </li>
   </ul>

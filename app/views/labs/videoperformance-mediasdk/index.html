@@ -31,6 +31,13 @@
               <b>Exploration</b>
               <p>This lab starts with exploring and understanding the media sdk related packages installed in your Intel&reg; NUC.
                  Then understand the customized applications such as sample decoder and video wall bundled with installation. </p>
+              <p>Video Acceleration API (VA API) is a royalty-free API as well as its implementation as free and open-source library (libVA) distributed under the MIT License.
+                The VA API interface is to be implemented by device drivers to offer end-user software, such as VLC media player or GStreamer, access to available video acceleration hardware,
+                such as PureVideo (through the libva-vdpau driver, which implements VA API in terms of VDPAU) or Unified Video Decoder. The API enables and provides access to
+                hardware-accelerated video processing, using hardware such as graphics processing units (GPU) to accelerate video encoding and decoding by offloading processing from the central processing unit (CPU).
+                The VA API specification was originally designed by Intel for its GMA (Graphics Media Accelerator) series of GPU hardware with the specific purpose of eventually replacing the XvMC standard as the default Unix multi-platform equivalent of Microsoft Windows DirectX Video Acceleration (DxVA) API, but today the API is no longer limited to Intel-specific hardware or GPUs.
+                Other hardware and manufacturers can freely use this open standard API for hardware accelerated video processing with their own hardware without paying a royalty fee.
+              </p>
               <b>Observation</b>
                 <p>Performance monitoring using system performance monitoring tool; before and after hardware acceleration.</p>
               <b>Learning Outcome</b>
@@ -44,22 +51,22 @@
                     <ul>
                         <li><b>Media SDK installer</b>
                             <p>Intel&reg; Media Server Studio Professional 2017 by default installs at
-                              <span style="color:#A52A2A"> /opt/&lt;username&gt;/mediasdk/</span></p>
+                              <span style="color:#A52A2A"> /opt/intel/mediasdk/</span></p>
                         </li>
                         <li><b>Media Sample applications</b>
                             <p>Pre built Media SDK samples are available in
-                              <span style="color:#2554C7">/opt/&lt;username&gt;/mediasdk/samples/_bin/ </span>
+                              <span style="color:#2554C7">/opt/intel/mediasdk/samples/_bin/ </span>
                               <p>for 64-bit architecture</p>
                         </li>
                         <li><b>Media SDK Documentation directory </b>
-                            <p><span style="color:#A52A2A">/opt/&lt;username&gt;/mediasdk/doc/</span></p>
+                            <p><span style="color:#A52A2A">/opt/intel/mediasdk/doc/</span></p>
                         </li>
                     </ul>
             </div>
           </div>
 
             <div ibox title="Understand the packages">
-                <div class="alert alert-warning">Go to <span style="color:#A52A2A">/opt/&lt;username&gt;/mediasdk/</span>
+                <div class="alert alert-warning">Go to <span style="color:#A52A2A">/opt/intel/mediasdk/</span>
                     <span>and understand the Package Contents</span>
                 </div>
                   <div content-block name="xdk-issues" message="Check after opening the packages" image-link="../views/labs/videoperformance-mediasdk/images/img001.JPG"></div>
@@ -127,13 +134,18 @@
             </div>
           </div>
             <div ibox title="1. Sample Decoder">
-                <div content-block name="xdk-issues" message="Check after completion of Sample Decoder">
-                    <ul>
-                        <li>Go to <span style="color:#2554C7">/opt/&lt;username&gt;/mediasdk/samples/_bin/ </span></li>
-                        <li>Open the Performance monitoring tool by running "top" command to compare the CPU performance of the below two cases.
-                          <div class="alert alert-info">Note: If you are running any other programs, their process will be added to the CPU & memory utilization.
-                              So try closing all other programs. Then observe the Sample_decode process performance from task manager.</div>
-                        </li>
+                <div content-block name="xdk-issues" message="Check after opening system monitor tool" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
+                        <p>Go to <span style="color:#2554C7">/opt/intel/mediasdk/samples/_bin/ </span></p>
+                        </br>
+                        <p>Open the Performance monitoring tool by running "top" command or system monitor gui to compare the CPU performance of the below two cases.</p>
+                        <div class="alert alert-info">
+                          Note: If you are running any other programs, their process will be added to the CPU & memory utilization.
+                          So try closing all other programs. Then observe the Sample_decode process performance from system monitor tool.
+                        </div>
+                </div>
+                <div content-block name="xdk-issues" message="Check after completion of sample decoding">
+
+                      <ol>
                         <li>Case 1: Execute the below command for software implementation:
                         </br>
                                 </br>
@@ -160,7 +172,6 @@
                         </li>
                     </ul>
                 </div>
-            </div>
 
             <!--<div ibox title="2. Video Wall">
                 <div content-block name="xdk-issues" message="Check after completion of Video Wall">
@@ -183,28 +194,22 @@
 <div ibox title="1. Sample Encoder">
     <div content-block name="xdk-issues" message="Check after completion of Sample Encoder">
         <ul>
-            <li>Go to <span style="color:#2554C7">/opt/&lt;username&gt;/mediasdk/samples/_bin/ </span></li>
-            <li>Open the Performance monitoring tool by running "top" command to compare the CPU performance of the below two cases.
+            <li>Go to <span style="color:#2554C7">/opt/intel/mediasdk/samples/_bin/ </span></li>
+            <li>Open the Performance monitoring tool by running "top" command or system monitor gui tool to compare the CPU performance of the below two cases.
               <div class="alert alert-info">Note: If you are running any other programs, their process will be added to the CPU & memory utilization.
                   So try closing all other programs. Then observe the Sample_encode process performance from task manager.</div>
             </li>
             <li>Case 1: Execute the below command for software implementation:
-            </br>
-                    </br>
+            </br></br>
                         <div class="alert alert-warning"><span style="color:#A52A2A">./sample_encode h264 -i ../content/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -sw</span></div>
-                        <p>Output & Performance:</p>
-                        <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" />
-                      </br>
-                    </br>
+                        <!--<p>Output & Performance:</p>
+                        <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" /> -->
             </li>
             <li>Case 2: Execute the below command for hardware acceleration:
-            </br>
-                    </br>
+            </br></br>
                         <div class="alert alert-warning"><span style="color:#A52A2A">./sample_encode h264 -i ../content/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -hw</span></div>
-                        <p>Output & Performance:</p>
-                        <img src="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg" />
-                      </br>
-                    </br>
+                        <!-- <p>Output & Performance:</p>
+                        <img src="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg" /> -->
             </li>
             <li>Just type sample_encode and explore other command line switches:
                 </br>-o : output to file in RAW formats
