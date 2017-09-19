@@ -29,34 +29,17 @@
       <p>Start by performing these actions on your Intel IoT Gateway.</p>
       <ul>
         <li>Insert the empty USB drive in the USB port on the host system.</li>
-        <li>Goto <b>C:\Users\&lt;username&gt;\Desktop\Retail\02-RemoteManagement\Configurator_download_package_11.1.0.75\ACU_Wizard folder</b></li>
-        <li>Right-click ACUWizard.exe and select <b>Run as administrator.</b> to launch the Intel&reg; AMT Configuration Utility</li>
+        <li>Right click the mounted USB and identify its name and path by either from properties or opening it directly in terminal</li>
+        <li>Open a terminal, type <pre><code>ifconfig</code></pre> and note down the IP Address</li>
+        <li>Goto the following folder from terminal <div class="alert alert-warning"><span style="color:#A52A2A">'/Downloads/Linux AMT8 Files/ACUConfig'</span></div></li>
+        <li>Execute any one the following commands to configure the AMD in the mounted USB</li>
+        <li>For Dhcp: <div class="alert alert-warning"><span style="color:#A52A2A">./ACUConfig ConfigViaUSB -MePassword admin -NewMePassword Intel@1234 -OutputFile &lt;usb name with full path&gt;/Setup.bin -UsingDhcp</span></div></li>
+        <li>For dynamic IP: <div class="alert alert-warning"><span style="color:#A52A2A">./ACUConfig ConfigViaUSB -MePassword admin -NewMePassword Intel@1234 -OutputFile &lt;usb name with full path&gt;/Setup.bin -HostName localhost.localdomain -LocalHostIp &lt;your local host ip such as: 10.224.16.134&gt;  </span></div></li>
+        <li>Verify the availability of Setup.bin file in the mounted USB</li>
       </ul>
     </div>
 
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT004.png">
-      <p>Select <b>Create Settings to Configure Multiple Systems.</b></p>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT006.png">
-      <p>Click the <b>Tools</b> drop-down menu and select <b>Prepare a USB Key for Manual Configuration</b></p>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT007.png">
-      <p>Select <b>Prepare a USB Key for Manual Configuration</b></p>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT008.png">
-      <p>Select the type of Intel&reg; vPro system that you will be configuring: <b>Mobile Systems</b> or <b>Desktop Systems</b>.</p>
-      <p><b>Note</b>: Some Small Form Factor (SFF) desktops use mobile chipsets. For example, QM87 is a mobile Intel&reg; vPro chipset noted by the "M," whereas the desktop equivalent chipset is the Q87.</p>
-      <p>Select <b>All systems are version 7.0 and higher.</b></p>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT009.png">
-      <p>In the Configuration Settings section:</p>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT010.png">
+    <div content-block>
       <ul>
         <li>The default password is <b>admin</b></li>
         <li>Intel SCS always puts the default password of unconfigured systems ("admin") in this field.</li>
@@ -68,23 +51,8 @@
         <li>There is no need to change the power states or user consent settings.</li>
       </ul>
     </div>
-
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT011.png">
-      <p>In the USB Drive section, browse to the USB drive and click <b>OK</b>.</p>
-      <p>A warning will appear, when it does click<b>Yes</b>.</p>
-      <div class="alert alert-warning">
-        <p>You will see one Abort, Retry, Ignore error message box shown while configuring the USB. Select <b>ignore</b>. The installation will successfully continue.</p>
-      </div>
-    </div>
-
-    <div content-block image-link="../views/labs/remote-configamt/images/AMT013.png">
-      <p>Click <b>OK</b>.</p>
-      <p>You are now ready to configure the Intel&reg; vPro system.</p>
-    </div>
   </div>
   <!-- end of ibox -->
-
 
   <div ibox title="Install the Intel&reg; Active Management Agent on the Intel&reg; IoT Gateway">
     <p>Now that you have create a USB drive that can install the Intel&reg; AMT agent. You will need to reboot your computer with the USB drive inserted. When the system reboot you will be asked if you wish to install the Intel&reg; AMT agent</p>
@@ -94,23 +62,12 @@
       the USB drive, check the BIOS.</li>
       <li>While the system is reading the USB drive, select <b>Y</b> when prompted to provision the system.</li>
       <div class="alert alert-warning">Note: Provisioning might take about 15 seconds.</div>
+      <li>Go to next step to connect to your NUC from your laptop.</li>
     </ol>
   </div>
 
-  <div ibox title="Note the IP address of Your Intel&reg; IoT Gateway">
-    <div content-block message="Check after finishing this section" image-link="../views/labs/remote-configamt/images/ipconfig.png">
-      <p></p>
-      <ol>
-        <li>Open a PowerShell command prompt by going to the Windows menu in the lower left corner and typing <b>powershell</b>.</li>
-        <li>In Powershell type <pre><code>ipconfig</code></pre></li>
-        <li>Note down the ip address of your NUC machine.</li>
-        <li>Go to next step to connect to your NUC from your laptop.</li>
-      </ol>
-    </div>
-  </div>
-
   <div ibox title="Use a Web Browser to Connet to the Intel&reg; Active Management Technology web interface">
-    <div content-block message="Use a Web Browser to Connet to the Intel&reg; Active Management Technology web interface" image-link="../views/labs/remote-configamt/images/002-Intel-AMT-Web-Browser-Login-Screen.jpg">
+    <div content-block message="Use a Web Browser to Connet to the Intel&reg; Active Management Technology web interface">
       <labels laptop/>
       <p>To use the Intel&reg; Active Management Technology web interface, open a browser and go to the IP address of the Intel&reg; IoT Gateway. The port number is 16992.</p>
       <div class="alert alert-warning">
