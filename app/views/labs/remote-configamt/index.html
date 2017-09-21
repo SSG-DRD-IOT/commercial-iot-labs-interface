@@ -18,12 +18,16 @@
     <div content-block name="AMT_init-objectives" message="Read the Objectives">
       <p>This guide is intended to be a starting point for testing your Intel &reg; vPro&trade; technology systems within your environment.</p>
       <p>It will guide you through setting up a "Sandbox" test environment using your own network environment so that you can test your specific use cases on Intel&reg; vPro technology that ultimately will help reduce overall support costs and costly service/truck rolls.</p>
-      <p>The first step in enabling Intel® AMT is to install the Intel® AMT agent. In this lab, we create a USB drive that will install the Intel® AMT agent onto a host system. Then we will verify that the agent is correctly install by going to a web browser and accessing the Intel® AMT firmware based web configuration console.</p>
+      <p>The first step in enabling Intel® AMT is to install the Intel® AMT agent. In this lab,
+        <!--we create a USB drive that will install the Intel® AMT agent onto a host system.-->
+        we will manually configure the AMT from BIOS. Then we will verify that the agent is correctly install by going to a web browser and accessing the Intel® AMT firmware based web configuration console.
+        The Converged Security and Manageability Engine (CSME) powers the Intel AMT system. As a component of the Intel® vPro™ platform, Intel AMT uses a number of elements in the Intel vPro platform architecture.
+      </p>
     </div>
   </div>
 
-  <div ibox title="Install the Intel&reg; AMT Configuration Utility installation utility on a USB drive">
-    <div content-block name="step1" message="Check after completion of this section" image-link="../views/labs/remote-configamt/images/nuc.jpg">
+  <div ibox title="Install the Intel&reg; AMT Configuration">
+    <!--<div content-block name="step1" message="Check after completion of this section" image-link="../views/labs/remote-configamt/images/nuc.jpg">
       <labels nuc/>
 
       <p>Start by performing these actions on your Intel IoT Gateway.</p>
@@ -38,7 +42,41 @@
         <li>Verify the availability of Setup.bin file in the mounted USB</li>
       </ul>
     </div>
-
+-->
+<div content-block name="step1" message="Check after completion of this section">
+  <labels nuc/>
+  <p>Start by performing these actions on your Intel IoT Gateway.</p>
+  <p>During power up, the Intel AMT platform displays the BIOS startup screen, then it processes the MEBx.
+    During this process, access to the Intel MEBX can be made; however the method is BIOS vendor-dependent. Some methods are:</p>
+  <p>Most BIOS vendors add entry into the CSME via the one-time boot menu. Select the appropriate key (Ctrl+P is typical) and follow the prompts.
+Some OEM platforms prompt you to press &lt;Ctrl+P&gt; after POST. When you press &lt;Ctrl+P&gt;, control passes to the Intel MEBx (CSME) main menu.
+Some OEMs integrate the CSME configuration inside the BIOS (uncommon).
+Some OEMs have an option in the BIOS to show/hide the &lt;Ctrl+P&gt; prompt,
+so if the prompt is not available in the one-time boot menu check the BIOS to activate the CTRL+P.</p>
+<p>Enter the CSME default password ("admin").</p>
+<p>Change the default password (required to proceed). The new value must be a strong password. It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and be at least eight characters. A management console application can change the Intel AMT password without modifying the CSME password.</p>
+<ol>
+  <li>
+    Select Intel AMT Configuration.
+  </li>
+  <li>
+    Select/Verify Manageability Feature Selection is Enabled.
+  </li>
+  <li>
+    Select Activate Network Access.
+  </li>
+  <li>
+    Select "Y" to confirm Activating the interface.
+  </li>
+  <li>
+    Exit CSME.
+  </li>
+</ol>
+<p>Issue:- If the NUC is already AMT configured, it may have "Intel@1234" as password</p>
+</div>
+</div>
+<!--
+</div>
     <div content-block>
       <ul>
         <li>The default password is <b>admin</b></li>
@@ -52,9 +90,10 @@
       </ul>
     </div>
   </div>
-  <!-- end of ibox -->
+-->
+<!-- end of ibox -->
 
-  <div ibox title="Install the Intel&reg; Active Management Agent on the Intel&reg; IoT Gateway">
+  <!--<div ibox title="Install the Intel&reg; Active Management Agent on the Intel&reg; IoT Gateway">
     <p>Now that you have create a USB drive that can install the Intel&reg; AMT agent. You will need to reboot your computer with the USB drive inserted. When the system reboot you will be asked if you wish to install the Intel&reg; AMT agent</p>
     <ol>
       <li>Re-start your system.</li>
@@ -64,7 +103,7 @@
       <div class="alert alert-warning">Note: Provisioning might take about 15 seconds.</div>
       <li>Go to next step to connect to your NUC from your laptop.</li>
     </ol>
-  </div>
+  </div> -->
 
   <div ibox title="Use a Web Browser to Connet to the Intel&reg; Active Management Technology web interface">
     <div content-block message="Use a Web Browser to Connet to the Intel&reg; Active Management Technology web interface">
