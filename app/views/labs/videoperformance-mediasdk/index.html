@@ -151,18 +151,18 @@
                         <li>Case 1: Execute the below command for software implementation:
                         </br>
                                 </br>
-                                    <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/test_stream.h264 -o output_sw.yuv -sw</span></div>
-                                    <p>Output & Performance:</p>
-                                    <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" />
+                                    <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i streams/test_stream.h264 -sw -r</span></div>
+                                    <div content-block name="xdk-issues" message="Output & Performance:" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg">
+                                    </div>
                                   </br>
                                 </br>
                         </li>
                         <li>Case 2: Execute the below command for hardware acceleration:
                         </br>
                                 </br>
-                                    <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/input.h264 -o output_hw.yuv -vaapi -hw</span></div>
-                                    <p>Output & Performance:</p>
-                                    <img src="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg" />
+                                    <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i streams/input.h264 -vaapi -hw -r</span></div>
+                                    <div content-block name="xdk-issues" message="Output & Performance:" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg">
+                                    </div>
                                   </br>
                                 </br>
                         </li>
