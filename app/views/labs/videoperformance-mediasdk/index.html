@@ -50,72 +50,31 @@
           <div ibox title="View the packages installed on your NUC">
             <div content-block name="xdk-issues" message="Check after viewing the packages installed on your NUC">
                     <ul>
-                        <li><b>Media Server Studio installer</b>
-                            <p>Intel&reg; Media Server Studio Professional 2017 by default installs at
-                              <span style="color:#A52A2A"> /opt/intel/mediasdk/</span></p>
+                        <li>Media Server Studio installer:
+                            <p>Intel&reg; Media Server Studio Community Edition 2017 by default installs at
+                              <span style="color:#2554C7"> /opt/intel/mediasdk/</span></p>
                         </li>
-                        <li><b>Media Sample applications</b>
-                            <p>Pre built Media Server Studio samples are available in
-                              <span style="color:#2554C7">/opt/intel/mediasdk/samples/_bin/ </span>
-                              <p>for 64-bit architecture</p>
+                        <li>Media Sample applications:
+                            <p>Pre built Media Server Studio samples are available in <span style="color:#2554C7">/opt/intel/mediasdk/samples/ </span>for 64-bit architecture</p>
                         </li>
-                        <li><b>Media Server Studio Documentation directory </b>
-                            <p><span style="color:#A52A2A">/opt/intel/mediasdk/doc/</span></p>
+                        <li>Media Server Studio Documentation directory: <span style="color:#2554C7">/opt/intel/mediasdk/doc/</span>
                         </li>
-                    </ul>
+                      </ul>
+                          <p><b>Commands:</b></p>
+                          <div class="alert alert-warning">
+                            $ls /opt/intel/mediasdk/
+                          </br>
+                            $ls /opt/intel/mediasdk/samples/
+                          </br>
+                            $ls /opt/intel/mediasdk/doc/
+                          </div>
             </div>
           </div>
-
-            <!--<div ibox title="Understand the packages">
-                <div class="alert alert-warning">Go to <span style="color:#A52A2A">/opt/intel/mediasdk/</span>
-                    <span>and understand the Package Contents</span>
-                </div>
-                  <div content-block name="xdk-issues" message="Check after opening the packages" image-link="../views/labs/videoperformance-mediasdk/images/img001.JPG"></div>
-                  <div content-block name="xdk-issues" message="Check after understanding the prackage contents">
-
-                  <ul>
-                              <li>
-                                <p><b>lib</b> folder will have 64-bit runtime library for Media Server Studio basic capabilities.</p>
-                                <p>E.g., <i>libmfx.a</i> is the general software library for IA-64 architecture</p>
-                              </li>
-                              <li>
-                                <p><b>doc</b> folder has documentation for raw, audio, image, video, etc., media types. It also provide Media Server Studio user manual and developer reference manuals</p>
-                                <p>Use kde-open &lt;pdf filename&gt;</p>
-                              </li>
-                              <li>
-                                <p><b>include</b> folder has several header files supporting Intel&reg; Media Server Studio program development</p>
-                              </li>
-                              <li>
-                                <p><b>lib64</b> folder has 64-bit static libraries </p>
-                                <p><i>libmfxsw64.so</i> for media function encoding and decoding using software</p>
-                                <p><i>libmfxhw64.so</i> for media function encoding and decoding using hardware</p>
-                                <p><i>libmfxhw64-p.so.&lt;mj&gt;.&lt;mn&gt;</i> is the platform specific implementation consumend by dispatcher.</p>
-                                  <p><b>P</b> stands for Production build of the library, &lt;mj&gt; - major version of the library's API, .&lt;mn&gt; - minor version of the library's API</p>
-                              </li>
-                              <li>
-                                <p><b>open source</b> folder has SDK dispatcher.
-                                  The dispatcher is a layer that lies between applications and SDK implementations.
-                                  Upon initialization, the dispatcher locates the appropriate platform-specific SDK implementation.
-                                  If there is none, it will select the software SDK implementation.
-                                  The dispatcher will redirect subsequent function calls to the same functions in the selected SDK implementation.
-                                </p>
-                              </li>
-                              <li>
-                                  <p><b>tools</b> folder has metrics_monitor and tracer.
-                                  <p><b><u>1. MediaSDK Tracer:</u></b></p>
-                                  <p>This tool will capture the basic call information from Media Server Studio API functions.
-                                    It will generate a full log of interaction between the application and the SDK library including per-frame processing.</p>
-                                  <p><b><u>2. MediaSDK Metrics Monitor:</u></b></p>
-                                  <p>This tool provides access to a set of GPU metrics on Linux Server systems</p>
-                                  <div class="alert alert-info">We are not running this tool in the workshop.</div>
-                                </li>
-                            </ul>
-            </div>
-          </div>
--->
             <div ibox title="System Analyzer">
               <div content-block message="Check after running System Analyzer" image-link="../views/labs/videoperformance-mediasdk/images/SystemAnalyzer.JPG">
-              <p>Download the python script named <a href="views/labs/videoperformance-mediasdk/downloads/sys_analyzer_linux.py">sys_analyzer_linux.py</a></p>
+              <p>Download the following python script
+                <u><a href="views/labs/videoperformance-mediasdk/downloads/sys_analyzer_linux.py">sys_analyzer_linux.py</a></u></p>
+              <p>Downloaded file will be available in <span style="color:#2554C7">/home/intel/Downloads</span></p>
               <b>Features</b>
 
                 <p>When executed, the tool reports back</p>
@@ -131,49 +90,61 @@
               <p>The tool is based on Python 2.7.  It should run on a variety of systems with or without necessary components to run GPU applications.
                 However, it is still a work in progress so it may not always exit cleanly when software components are missing.</p>
               <b>Run</b>
-              <div class="alert alert-warning">python sys_analyzer_linux.py</div>
+              <div class="alert alert-warning">
+                <p>$cd /home/intel/Downloads </p>
+                <p>$python sys_analyzer_linux.py</p>
+                </div>
             </div>
           </div>
-            <div ibox title="1. Sample Decoder">
-                <div content-block name="xdk-issues" message="Check after opening system monitor tool" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
-                        <p>Go to <span style="color:#2554C7">/opt/intel/mediasdk/samples/_bin/ </span></p>
-                        </br>
-                        <p>Open the Performance monitoring tool by running "top" command or system monitor gui to compare the CPU performance of the below two cases.</p>
-                        <p>Also run the command "intel_gpu_top" from terminal to see the GPU utilization.</p>
-                        <div class="alert alert-info">
-                          Note: If you are running any other programs, their process will be added to the CPU & memory utilization.
-                          So try closing all other programs. Then observe the Sample_decode process performance from system monitor tool.
-                        </div>
-                </div>
-                <div content-block name="xdk-issues" message="Check after completion of sample decoding">
 
-                      <ol>
-                        <li>Case 1: Execute the below command for software implementation:
-                        </br>
-                                </br>
-                                    <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i streams/test_stream.h264 -sw -r</span></div>
-                                    <div content-block name="xdk-issues" message="Output & Performance:" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg">
+          <div ibox title="CPU & GPU Perfromance Monitoring">
+          <div content-block name="xdk-issues" message="Check after initiating the Perfromance Monitoring" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
+                  <p>Open the Performance monitoring tool by navigating to
+                  <div class="alert alert-info">
+                    <span style="color:#2554C7">Applications > System Tools > System Monitor > Resources Tab</span>
+                  </div>
+                  <p> This tool is used to compare the CPU performance of the below two cases.</p>
+                  <p>Open the Terminal and run the below command to elevate to root privilages:
+                    <div class="alert alert-warning">
+                      <p>$su</p>
+                    </div>
+                    <p>Provide the following password</p>
+                    <div class="alert alert-warning">
+                      <p>intel123</p>
+                    </div>
+                    <p>Run the following command to check the GPU utilization</p>
+                    <div class="alert alert-warning">
+                      <p>$intel_gpu_top</p>
+                    </div>
+                  </p>
+                  <div class="alert alert-info">
+                    Note: If you are running any other programs, their process would be added to the CPU, GPU & memory utilization.
+                    So try closing all other programs. Then observe the Sample_decode process performance from system monitor tool.
+                  </div>
+          </div>
+        </div>
+
+            <div ibox title="1. Sample Decoder">
+                <div content-block name="xdk-issues" message="Check after completion of Sample Decoder">
+                  <p>TODO: What is sample Decoder</p>
+                  <p>Open new terminal and change the directory</p>
+                  <div class="alert alert-warning">
+                    $cd /opt/intel/mediasdk/samples/
+                  </div>
+                        <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
+                                    <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -sw -r</div>
+                                    <div content-block name="xdk-issues" message="Software implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg">
                                     </div>
-                                  </br>
-                                </br>
-                        </li>
-                        <li>Case 2: Execute the below command for hardware acceleration:
-                        </br>
-                                </br>
-                                    <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i streams/input.h264 -vaapi -hw -r</span></div>
-                                    <div content-block name="xdk-issues" message="Output & Performance:" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg">
+                        <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
+                                    <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -vaapi -hw -r</div>
+                                    <p>Just type ./sample_decode and explore other command line switches:
+                                        </br>-o : output to file in RAW formats
+                                        </br>-f : change rendering frame rate
+                                        </br>-w and –h : changing the resolution
+                                    <div content-block name="xdk-issues" message="Hardware implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg">
                                     </div>
-                                  </br>
-                                </br>
-                        </li>
-                        <li>Just type sample_decode and explore other command line switches:
-                            </br>-o : output to file in RAW formats
-                            </br>-r: Present (only if there is a supported player installed)
-                            </br>-f : change rendering frame rate
-                            </br>-w and –h : changing the resolution
-                        </li>
-                    </ul>
                 </div>
+              </div>
 
             <!--<div ibox title="2. Video Wall">
                 <div content-block name="xdk-issues" message="Check after completion of Video Wall">
@@ -193,33 +164,17 @@
             </div>
 -->
 
-<div ibox title="1. Sample Encoder">
+<div ibox title="2. Sample Encoder">
     <div content-block name="xdk-issues" message="Check after completion of Sample Encoder">
-        <ul>
-            <li>Go to <span style="color:#2554C7">/opt/intel/mediasdk/samples/_bin/ </span></li>
-            <li>Open the Performance monitoring tool by running "top" command or system monitor gui tool to compare the CPU performance of the below two cases.
-              <div class="alert alert-info">Note: If you are running any other programs, their process will be added to the CPU & memory utilization.
-                  So try closing all other programs. Then observe the Sample_encode process performance from task manager.</div>
-            </li>
-            <li>Case 1: Execute the below command for software implementation:
-            </br></br>
-                        <div class="alert alert-warning"><span style="color:#A52A2A">./sample_encode h264 -i ../content/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -sw</span></div>
+      <p>TODO: What is sample Decoder</p>
+            <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
+                        <div class="alert alert-warning">$./sample_encode h264 -i streams/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -sw</div>
                         <!--<p>Output & Performance:</p>
                         <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" /> -->
-            </li>
-            <li>Case 2: Execute the below command for hardware acceleration:
-            </br></br>
-                        <div class="alert alert-warning"><span style="color:#A52A2A">./sample_encode h264 -i ../content/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -hw</span></div>
+            <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
+                        <div class="alert alert-warning">$./sample_encode h264 -i streams/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -hw</div>
                         <!-- <p>Output & Performance:</p>
                         <img src="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg" /> -->
-            </li>
-            <li>Just type sample_encode and explore other command line switches:
-                </br>-o : output to file in RAW formats
-                </br>-r: Present (only if there is a supported player installed)
-                </br>-f : change rendering frame rate
-                </br>-w and –h : changing the resolution
-            </li>
-        </ul>
     </div>
 </div>
 
@@ -227,8 +182,8 @@
                 <div content-block name="xdk-issues" message="Check after completion of lesson">
                 <ul>
                 <li>Intel&reg; Media Server Studio's libraries, tools, header and sample code files.</li>
-                <li>speed up in video playback, encoding, processing and media conversion.</li>
-                <li>Performance monitoring</li>
+                <li>Speed up in video decoding and encoding.</li>
+                <li>CPU and GPU Performance monitoring</li>
               </div>
             </div>
 </div>
