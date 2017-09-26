@@ -57,12 +57,12 @@
                     <div class="alert alert-warning">
                       <p>intel123</p>
                     </div>
-                  <p>issue the following command to change project working directory & open text editor</p>
+                  <p>Change project working directory & create new file using text editor</p>
                   <div class="alert alert-warning">
                     <p>$cd /home/intel/Documents/msdk_samples/samples/custom_decoder/src </p>
                     <p>$gedit custom_decode.cpp</p>
                   </div>
-                  <p>Save this custom_decode.cpp in the above folder</p>
+                  <p>Save this custom_decode.cpp using Ctrl+s</p>
               </div>
             </div>
 
@@ -142,8 +142,11 @@
                 </ui-codemirror>
               </br><p>Declare the pipeline having input file reader, decoder and output file writer.</p>
               <p>Then setup the input parameters and perform error checking.</p>
-                <p>Set the following parameters in the main program</p>
+                <p>Set the following parameters in the main function</p>
                 <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
+                  int main()
+                  {
+
                   // input parameters
                   sInputParams        Params;
 
@@ -164,7 +167,7 @@
           <div ibox title="Decoding Pipeline">
                 <div content-block name="xdk-issues" message="Check after completion of Decoding pipeline">
                   </br><p>Initialise the decoding pipeline and check the error status.</p>
-                    <p>Continue coding in the main program</p>
+                    <p>Continue coding in the main function</p>
                     <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
                       //Initialise the Decode pipeline
 
@@ -178,7 +181,7 @@
           <div ibox title="Output Processing">
                 <div content-block name="xdk-issues" message="Check after completion of Output processing">
                 </br><p>Print the stream information</p>
-                  <p>Continue coding in the main program</p>
+                  <p>Continue coding in the main function</p>
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
                     //print stream info
                     Pipeline.PrintInfo();
@@ -231,6 +234,9 @@
                     }
 
                     msdk_printf(MSDK_STRING("\nDecoding finished\n"));
+
+                    return 0;
+                  } // End of main
                   </ui-codemirror>
                 </br>
                 </br>

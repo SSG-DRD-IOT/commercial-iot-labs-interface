@@ -57,6 +57,7 @@ so if the prompt is not available in the one-time boot menu check the BIOS to ac
 </div>
 <div content-block name="step1" message="Change Password" image-link="../views/labs/remote-configamt/images/MEBX002.JPG">
 <p>Enter the CSME default password ("admin").</p>
+<p>Issue:- If the NUC is already AMT configured, it may have "Intel@1234" as password</p>
 <p>Change the default password (required to proceed). The new value must be a strong password. It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and be at least eight characters. A management console application can change the Intel AMT password without modifying the CSME password.</p>
 </div>
 <div content-block name="step1" message="AMT Configuration" image-link="../views/labs/remote-configamt/images/MEBX003.JPG">
@@ -71,13 +72,17 @@ so if the prompt is not available in the one-time boot menu check the BIOS to ac
 
 <div content-block name="step1" message="Network Configuration" image-link="../views/labs/remote-configamt/images/MEBX004.JPG">
 <ul>
-  <li>Under the Intel® ME Network Setup menu Select ‘TCP/IP Settings’ and Press Enter.</li>
+  <li>Under the Intel® ME Network Setup menu Select 'TCP/IP Settings' and Press Enter.</li>
     <li>The Intel Network Setup menu changes to the TCP/IP Settings page</li>
-    <li>Goto Wired LAN IPV4 Configuration Under the TCP/IP Settings, Select ‘Wired LAN IPV4 Configuration’ and press enter</li>
+    <li>Goto Wired LAN IPV4 Configuration Under the TCP/IP Settings, Select 'Wired LAN IPV4 Configuration' and press enter</li>
+    <li>Enable DHCP</li>
 </ul>
 </div>
 <div content-block name="step1" message="Exit">
   <ul>
+    <li>
+      Press Esc key to go to exit screen
+    </li>
   <li>
     Select "Y" to confirm Activating the interface.
   </li>
@@ -85,7 +90,6 @@ so if the prompt is not available in the one-time boot menu check the BIOS to ac
     Exit CSME.
   </li>
 </ul>
-<p>Issue:- If the NUC is already AMT configured, it may have "Intel@1234" as password</p>
 </div>
 <!--
 </div>
