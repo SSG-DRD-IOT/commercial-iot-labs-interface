@@ -168,20 +168,25 @@
     <div content-block name="xdk-issues" message="Check after completion of Sample Encoder">
       <p>TODO: What is sample Decoder</p>
             <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
-                        <div class="alert alert-warning">$./sample_encode h264 -i streams/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -sw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -i streams/input.yuv -o streams/encoder_output.h264 -w 1920 -h 1080 -f 60 -u quality -sw</div>
                         <!--<p>Output & Performance:</p>
                         <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" /> -->
+            <p>Observe the CPU utilization from System Monitor  as described before</p>
             <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
-                        <div class="alert alert-warning">$./sample_encode h264 -i streams/test_stream_176x96.yuv -o output_sw.h264 -w 720 -h 480 -b 10000 -f 30 -u quality -hw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -i streams/input.yuv -o streams/encoder_output.h264 -w 1920 -h 1080 -f 60 -u quality -hw</div>
                         <!-- <p>Output & Performance:</p>
                         <img src="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg" /> -->
+            <p>Observe the CPU utilization from System Monitor and GPU utilization from $intel_gpu_top as described before</p>
+            <p>To view the converted h264 file, run the decoding sample as follows:</p>
+            <div class="alert alert-warning">$./sample_decode h264 -i streams/encoder_output.h264 -vaapi -hw -r</div>
+
     </div>
 </div>
 
             <div ibox title="Lessons learnt">
                 <div content-block name="xdk-issues" message="Check after completion of lesson">
                 <ul>
-                <li>Intel&reg; Media Server Studio's libraries, tools, header and sample code files.</li>
+                <li>Intel&reg; Media Server Studio's libraries, tools and sample code files.</li>
                 <li>Speed up in video decoding and encoding.</li>
                 <li>CPU and GPU Performance monitoring</li>
               </div>

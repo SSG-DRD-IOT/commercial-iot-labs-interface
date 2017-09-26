@@ -31,7 +31,7 @@
               <b>Exploration</b>
               <p>In this example we are decoding an AVC (H.264) stream.</p>
                 <ul>
-                  <li>Inclusions</li>
+                  <li>Headers</li>
                   <li>Input Processing</li>
                   <li>Decoding pipeline</li>
                   <li>Output Processing</li>
@@ -49,8 +49,16 @@
 
           <div ibox title="Building new sample">
                 <div content-block name="xdk-issues" message="Check after creating new sample">
-                  <p>Elevate to root by su command and issue the following command to change project working directory</p>
-                  <div class="alert alert-warning"><span style="color:#A52A2A">cd /home/intel/Downloads/MediaServerStudioEssentials2017R2/MediaSamples_LINUX_2017R2_b634/samples/sample_decode/src </p></span></div>
+                  <p>Open the Terminal and run the below command to elevate to root privilages:
+                    <div class="alert alert-warning">
+                      <p>$su</p>
+                    </div>
+                    <p>Provide the following password</p>
+                    <div class="alert alert-warning">
+                      <p>intel123</p>
+                    </div>
+                  <p>issue the following command to change project working directory</p>
+                  <div class="alert alert-warning">$cd /home/intel/Documents/msdk_samples/samples/custom_decoder/src </p></div>
                   <P>Please open empty gedit text editor </p>
                   <p>Save it as sample_decode.cpp in the above folder</p>
               </div>
@@ -85,13 +93,13 @@
                       //MFX_CODEC_JPEG for JPEG codec
                     	pParams->videoType = MFX_CODEC_AVC;
 
-                    	msdk_opt_read(MSDK_STRING("/home/input.h264"), pParams->strSrcFile);
+                    	msdk_opt_read(MSDK_STRING("/home/intel/Videos/input.h264"), pParams->strSrcFile);
 
                       //Set the memory type:
                       //D3D11_MEMORY for Directx11
                       //D3D9_MEMORY for Directx9
                       //SYSTEM_MEMORY for System Memory
-                    	pParams->memType = D3D11_MEMORY;
+                    	pParams->memType = D3D9_MEMORY;    //For VAAPI
 
                     	//set hardware implementation as default
                       //Software implementation can be tried by setting this to false.
@@ -106,6 +114,7 @@
                       //MODE_FILE_DUMP
 
                       pParams->mode = MODE_RENDERING;
+                      pParams->libvaBackend = MFX_LIBVA_X11;
 
                       //Some other parameters which can be explored further are:
                       /*bool    bIsMVC; // true if Multi-View Codec is in use
@@ -223,40 +232,33 @@
                   </ui-codemirror>
                 </br>
                 </br>
-                <p><b>Build this solution for x64 in debug mode and run to see the output</b></p>
+                <P>Save the file by ctrl+s</p>
               </div>
         </div>
 
 <div ibox title="Configure and generate solution">
   <div content-block name="xdk-issues" message="Check after configuring and generating the solution">
-    <p>Run the following command to configure and generate solution for 64bit debug mode using cmake</p>
-    <div class="alert alert-warning"><span style="color:#A52A2A">perl build.pl --cmake=intel64,make,debug --build --clean</span></div>
-    <p> Navigate to the directory where sample is generated:</p>
-    <div class="alert alert-warning"><span style="color:#A52A2A">cd __cmake/intel64.make.debug/__bin/debug/</span></div>
+    <p>Navigate to samples directory by</p>
+    <div class="alert alert-warning">$cd /home/intel/Documents/workshop/msdk_samples/samples</div>
+    <p>Generate, clean and build the project using build.pl script as follows:</p>
+    <div class="alert alert-warning">$perl build.pl --cmake=intel64.make.debug --build --clean</div>
+    <p>New folder named __cmake will have executables. Navigate to the same as follows:</p>
+    <div class="alert alert-warning">$cd __cmake/intel64.make.debug/__bin/debug/</div>
+    <p>Execute the custom_decode:</p>
+    <div class="alert alert-warning">$./custom_decode</div>
   </div>
 </div>
 
 <div ibox title="Complete Solution">
                     <div content-block name="xdk-issues" message="Check after Downloading complete solution">
-                      <P>If you have problems in executing your code, you can see the complete solution in the below directory:</p>
-                      <div class="alert alert-warning"><span style="color:#A52A2A">/home/intel/Downloads/MediaServerStudioEssentials2017R2/MediaSamples_LINUX_2017R2_b634/samples/sample_decode/src</b></span></div>
-                      <p>We have done all the necessary library linking in this solution.</p>
-                      <p>So please reconfigure and regenerate the updated solution as mentioned in previous step</P>
+                      <P>If you have problems in executing your code, you can see the complete custom_decode source code from below link</p>
+                      <u><a href="views/labs/videoperformance-mediasdk/downloads/custom_decode.cpp">custom_decode.cpp</a></u></p>
+                      <p>Regenerate, clean and rebuild the code using build.pl script as discussed in previous section</p>
                     </div>
 </div>
   <div ibox title="Execution">
    <div content-block name="xdk-issues" message="Check after running the sample">
-  <ul>
-    <li>Case 1: Execute the below command for software implementation:
-    </br></br>
-                <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/test_stream.h264 -o output_sw.yuv -sw</span></div>
-            </br>
-    </li>
-    <li>Case 2: Execute the below command for hardware acceleration:
-    </br></br>
-                <div class="alert alert-warning"><span style="color:#A52A2A">./sample_decode h264 -i ../content/input.h264 -o output_hw.yuv -vaapi -hw</span></div>
-    </li>
-  </ul>
+      <div class="alert alert-warning"><span style="color:#A52A2A">./custom_decode</span></div>
 </div>
 </div>
     <div ibox title="Lesson learnt">
@@ -264,5 +266,4 @@
           <p>Decoding the H.264 stream and exploring supported input parameters from Intel&reg; Media SDK</p>
         </div>
     </div>
-
 </div>
