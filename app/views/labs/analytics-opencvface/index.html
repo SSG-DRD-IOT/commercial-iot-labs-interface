@@ -72,7 +72,7 @@ cap = cv2.VideoCapture(0)</pre></ui-codemirror>
     <li>The detector returns an array of coordinates of a box with a (x,y,w,h)</li>
     <li>Draws a rectangle around the face</li>
     <li>Shows the frame</li>
-    <li>If the user hits the 'q' key the program will exit<li>
+    <li>If the user hits the 'Esc' key the program will exit<li>
   </ol>
 
   <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">while True:
@@ -95,7 +95,7 @@ cap = cv2.VideoCapture(0)</pre></ui-codemirror>
     cv2.imshow('Video', frame)
 
     # If the user presses the 'q' key then quit the program
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == 27:
        break</pre></ui-codemirror>
 
        <div class="alert alert-warning">Save the haar cascade file using "Right click > Save Link as" option <a href="./views/labs/analytics-opencvface/downloads/haar_face.xml" target="_blank">haar cascade file</a> and keep it at the same place as your face detection python file</div></li><li>Press F5</li></ul></div>
@@ -108,7 +108,7 @@ cap = cv2.VideoCapture(0)</pre></ui-codemirror>
           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import cv2
 
 # Create a Haar-like feature cascade classifier object
-faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+faceCascade = cv2.CascadeClassifier("haar_face.xml")
 
 # Set the camera to the first camera detected by the NUC
 cap = cv2.VideoCapture(0)

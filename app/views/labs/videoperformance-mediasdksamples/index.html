@@ -23,13 +23,14 @@
               <div content-block name="xdk-issues" message="Check after completing the Objectives" image-link="./views/labs/videoperformance-mediasdksamples/images/psuedocode.png">
               <b>Introduction</b>
               <p>We will build a custom Console application which performs decoding of elementary compressed video stream and renders them on the screen:
+              <p>Video Decoding Process</p>
                 <ul>
                   <li>Setup parameter to decode pipeline</li>
                   <li>Initialize decoder</li>
                   <li>Decode frame by frame</li>
               </ul>
               <b>Exploration</b>
-              <p>In this example we are decoding an AVC (H.264) stream.</p>
+              <p>In this example we are decoding an AVC (H.264) stream using the following steps</p>
                 <ul>
                   <li>Headers</li>
                   <li>Input Processing</li>
@@ -40,7 +41,7 @@
                   <li>Finish decoding</li>
               </ul>
               <b>Observation</b>
-                <p>Observe different parameters of "sInputParams"</p>
+                <p>Pass different parameters related to "sInputParams" and observe the difference</p>
               <b>Learning Outcome</b>
               <p>By the end of this module, the participant is expected to understand the decoding an
                 AVC (H.264) stream using Intel&reg; Media SDK</p>
@@ -249,7 +250,9 @@
     <p>Navigate to samples directory by</p>
     <div class="alert alert-warning">$cd /home/intel/Documents/workshop/msdk_samples/samples</div>
     <p>Generate, clean and build the project using build.pl script as follows:</p>
+    <p>Check if you are in admin privilages, else give $su command and password "intel123"</p>
     <div class="alert alert-warning">$perl build.pl --cmake=intel64.make.debug --build --clean</div>
+    <p>End result should say <b>state: ok</b></p>
     <p>New folder named __cmake will have executables. Navigate to the same as follows:</p>
     <div class="alert alert-warning">$cd __cmake/intel64.make.debug/__bin/debug/</div>
     <p>Execute the custom_decode:</p>
