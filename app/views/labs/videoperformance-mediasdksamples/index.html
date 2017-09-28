@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Simple Video Decoder</h2>
+        <h2>Build Simple Video Decoder</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -12,7 +12,7 @@
                 MediaSDK Sample
             </li>
             <li class="active">
-                <strong>Simple Video Decoder</strong>
+                <strong>Build Simple Video Decoder</strong>
             </li>
         </ol>
     </div>
@@ -29,22 +29,10 @@
                   <li>Initialize decoder</li>
                   <li>Decode frame by frame</li>
               </ul>
-              <b>Exploration</b>
-              <p>In this example we are decoding an AVC (H.264) stream using the following steps</p>
-                <ul>
-                  <li>Headers</li>
-                  <li>Input Processing</li>
-                  <li>Decoding pipeline</li>
-                  <li>Output Processing</li>
-                  <li>Main decoding loop</li>
-                  <li>Error Handling</li>
-                  <li>Finish decoding</li>
-              </ul>
               <b>Observation</b>
                 <p>Pass different parameters related to "sInputParams" and observe the difference</p>
               <b>Learning Outcome</b>
-              <p>By the end of this module, the participant is expected to understand the decoding an
-                AVC (H.264) stream using Intel&reg; Media SDK</p>
+              <p>By the end of this module, the participant would get the basic understanding of building a decode solution using Intel MSS</p>
               </div>
           </div>
 
@@ -70,21 +58,19 @@
           <div ibox title="Inclusions">
                 <div content-block name="xdk-issues" message="Check after including Header files">
                   <p>Open <u>custom_decode.cpp</u> file to complete the exercise with the code given in the following steps:</p>
-                  <p> Include the pipeline_decode.h and sstream headers </p>
-                  <pre><code>
-                    #include "pipeline_decode.h"
-                    #include &ltsstream&gt
-                </code></pre>
+                  <p> Include the pipeline_decode.h and sstream headers. pipeline_decode has CDecodingPipeline class which does all the critical tasks associated with decode process. </p>
+                  <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">#include "pipeline_decode.h"
+#include &lt;sstream&gt;</ui-codemirror>
               </div>
             </div>
 
           <div ibox title="Input Processing">
                 <div content-block name="xdk-issues" message="Check after completing Input processing">
-                  <p>Define a method <b>InputSetup()</b> that accepts the sInputParams array defined from main program.</p>
+                  <p>Define a method <b>InputSetup()</b> that accepts the sInputParams array.</p>
                   <p>This method first checks the input array for consistency.</p>
                   <p>Then sets the video type, memory type, hardware acceleration, asynchronous depth factor, mode, etc.,</p>
                   <p>It also writes the input h264 file path to parameter list</p>
-                  <p>Finally returns the MFX error status.</p>
+                  TODO: Add details about memoryType, asyncDepth and so on.
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
                     mfxStatus InputSetup(sInputParams* pParams)
                     {
@@ -175,21 +161,13 @@
                       sts = Pipeline.Init(&Params);
 
                       MSDK_CHECK_RESULT(sts, MFX_ERR_NONE, 1);
+
+                      //print stream info
+                      Pipeline.PrintInfo();
+
+                      msdk_printf(MSDK_STRING("Decoding started\n"));
                     </ui-codemirror>
                   </div>
-            </div>
-
-          <div ibox title="Output Processing">
-                <div content-block name="xdk-issues" message="Check after completion of Output processing">
-                </br><p>Print the stream information</p>
-                  <p>Continue coding in the main function</p>
-                  <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
-                    //print stream info
-                    Pipeline.PrintInfo();
-
-                    msdk_printf(MSDK_STRING("Decoding started\n"));
-                </ui-codemirror>
-              </div>
             </div>
 
           <div ibox title="Main Decoding Loop">
