@@ -9,7 +9,7 @@
                 <a>Labs</a>
             </li>
             <li>
-                MediaSDK Sample
+                Intel &reg; MSS Sample
             </li>
             <li class="active">
                 <strong>Build Simple Video Decoder</strong>
@@ -32,7 +32,7 @@
               <b>Observation</b>
                 <p>Pass different parameters related to "sInputParams" and observe the difference</p>
               <b>Learning Outcome</b>
-              <p>By the end of this module, the participant would get the basic understanding of building a decode solution using Intel MSS</p>
+              <p>By the end of this module, participants would get the basic understanding of building a video decode solution using Intel MSS</p>
               </div>
           </div>
 
@@ -173,7 +173,7 @@
           <div ibox title="Main Decoding Loop">
                 <div content-block name="xdk-issues" message="Check after completion of Main decoding loop">
                 </br><p>Now let us loop all the frames in the video to decode them using <b>Pipeline.RunDecoding()</b></p>
-                  <p> Error handling for incompatible video parameters, lost device, failed device, etc., </p>
+                  <p>Every method in MSS returns a status.  Based Error handling for incompatible video parameters, lost device, failed device, etc., </p>
                   <p>Reset the device using <b>Pipeline.ResetDevice</b> in case of hardaware error.
                   <p>If there are no errors, it will set the flag to <b>MFX_ERR_NONE</b></p>
                   <p>Finally clear all decode buffer and move to the next frame using <b>Pipeline.ResetDecoder(&Params);</b></p>

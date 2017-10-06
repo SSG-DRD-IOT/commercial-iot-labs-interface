@@ -34,8 +34,8 @@
                               <li ui-sref-active="active"><a ui-sref="labs.videoperformance-marsunderstand">ffmpeg decode using Intel MSS</a></li>
                         </ul>
                     </li>
+                    <li ng-class="{active: $state.includes('labs')}">
                         <a href=""> <span class="nav-label">Remote Management</span> <span class="fa arrow"></span></a>
-                        <li ng-class="{active: $state.includes('labs')}">
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
                             <li ui-sref-active="active"><a ui-sref="labs.remote-configamt">Configure AMT</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.remote-configintelmc">Manage remote systems</a></li>
