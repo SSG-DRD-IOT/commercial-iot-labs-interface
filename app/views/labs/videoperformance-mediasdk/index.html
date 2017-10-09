@@ -22,7 +22,7 @@
           <div ibox title="Objectives">
               <div content-block name="xdk-issues" message="Check after completion of Objectives">
               <b>Introduction</b>
-              <p>Intel&reg; Media Server Studio is a set of libraries, tools, header and sample code files that define cross-platform API for developing consumer
+              <p>Intel&reg; Media Server Studio (Intel MSS) is a set of libraries, tools, header and sample code files that define cross-platform API for developing consumer
                  and professional grade media applications on Intel platforms. Providing an access to Intel&reg; Quick Sync Video, hardware accelerated codecs
                  in Intel Graphics Processor, Media Server Studio allows application developer to speed up video playback, encoding, processing and media conversion.
                  Intel&reg; Media Server Studio for Windows helps to deliver desktop applications, such as video players, editors and video conferencing clients,
@@ -37,12 +37,16 @@
                  </p>
 
               <b>Exploration</b>
-              <p>This lab starts with exploring and understanding the Media Server Studio related packages installed in your Intel&reg; NUC.
-                 Then understand the customized applications such as sample decoder and video wall bundled with installation. </p>
+              <ul>
+              <li>This lab starts with exploring and understanding the Media Server Studio related packages installed in your Intel&reg; NUC.
+                 Then understand the customized applications such as sample decoder and video wall bundled with installation. </li>
+              <li>Understand the performance differences between hardware and software based encoding/docoding based</li>
+            </ul>
               <b>Observation</b>
-                <p>Performance monitoring using system performance monitoring tool; before and after hardware acceleration.</p>
+                <p>Performance monitoring using system performance monitoring tool. </p>
+                <p>Observe the utilization of GPU and CPU in softwarea and hardware acceleration modes.</p>
               <b>Learning Outcome</b>
-              <p>By the end of this module, the participant is expected to understand the Intel&reg; Media Server Studio, installation structure,
+              <p>By the end of this module, the participant would get basic understanding of Intel&reg; Media Server Studio, installation structure,
                  hardware acceleration and performance enhancement of selected applications.</p>
               </div>
             </div>
@@ -72,12 +76,7 @@
           </div>
             <div ibox title="System Analyzer">
               <div content-block message="Check after running System Analyzer" image-link="../views/labs/videoperformance-mediasdk/images/SystemAnalyzer.JPG">
-              <p>Download the following python script
-                <u><a href="views/labs/videoperformance-mediasdk/downloads/sys_analyzer_linux.py">sys_analyzer_linux.py</a></u></p>
-              <p>Downloaded file will be available in <span style="color:#2554C7">/home/intel/Downloads</span></p>
-              <b>Features</b>
-
-                <p>When executed, the tool reports back</p>
+              <p>System analyzer tool is a python script available for download from Intel website. This tool reports back following information about CPU, GPU and Intel &reg; Media Server studio components.</p>
                 <ul>
                 <li>Platform readiness: check if processor has necessary GPU components</li>
                 <li>OS readiness: check if OS can see GPU, and if it has required glibc/gcc level</li>
@@ -85,20 +84,19 @@
                 <li>Results from runs of small smoke test programs for Media Server Studio and OpenCL</li>
               </ul>
 
-              <b>System Requirements</b>
+              <p>Download <a href="views/labs/videoperformance-mediasdk/downloads/sys_analyzer_linux.py">sys_analyzer_linux.py</a> python script to <span style="color:#2554C7">/home/intel/workshop</span> folder.</p>
 
-              <p>The tool is based on Python 2.7.  It should run on a variety of systems with or without necessary components to run GPU applications.
-                However, it is still a work in progress so it may not always exit cleanly when software components are missing.</p>
               <b>Run</b>
               <div class="alert alert-warning">
-                <p>$cd /home/intel/Downloads </p>
+                <p>$cd /home/intel/workshop </p>
                 <p>$python sys_analyzer_linux.py</p>
                 </div>
             </div>
           </div>
 
           <div ibox title="CPU & GPU Perfromance Monitoring">
-          <div content-block name="xdk-issues" message="Check after initiating the Perfromance Monitoring" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
+          <div content-block name="xdk-issues" message="Check after initiating the Perfromance Monitoring tools" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
+                  <p>We would need few performance monitoring tools before we proceed with Media Server Studio sample programs. </p>
                   <p>Open the Performance monitoring tool by navigating to
                   <div class="alert alert-info">
                     <span style="color:#2554C7">Applications > System Tools > System Monitor > Resources Tab</span>
@@ -118,31 +116,35 @@
                     </div>
                   </p>
                   <div class="alert alert-info">
-                    Note: If you are running any other programs, their process would be added to the CPU, GPU & memory utilization.
+                    Note: If you are running any other programs, their process would be added to the CPU, GPU &amp; memory utilization.
                     So try closing all other programs. Then observe the Sample_decode process performance from system monitor tool.
                   </div>
           </div>
         </div>
 
-            <div ibox title="1. Sample Decoder">
-                <div content-block name="xdk-issues" message="Check after completion of Sample Decoder">
-                  <p>TODO: What is sample Decoder</p>
+            <div ibox title="Decode a raw video">
+                <div content-block name="xdk-issues" message="Decoding example completed">
+                  <p>Intel MSS ships with few basic samples to try various functinalities. Here we are using a console application which performs decoding of elementary compressed video stream to raw frames.</p>
+                  <p>Make sure to review the performance parameters while running these samples. Above said tools can help to understand the difference between software and hardware acceleration modes.</p>
                   <p>Open new terminal and change the directory</p>
                   <div class="alert alert-warning">
                     $cd /opt/intel/mediasdk/samples/
                   </div>
-                        <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
-                                    <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -sw -r</div>
                                     <div content-block name="xdk-issues" message="Software implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg">
+                                      <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
+                                      <p>In this example -sw stands for Software Acceleration, -r is for rendering the output.
+                                    <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -sw -r</div>
                                     </div>
-                        <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
-                                    <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -vaapi -hw -r</div>
-                                    <p>Just type ./sample_decode and explore other command line switches:
-                                        </br>-o : output to file in RAW formats
-                                        </br>-f : change rendering frame rate
-                                        </br>-w and –h : changing the resolution
                                     <div content-block name="xdk-issues" message="Hardware implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg">
-                                    </div>
+                                      <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
+                                      <p>In this example, we are instructing the application to use vaapi memory type. If you dont specify, then it will take system memory by default. -hw stands for hardware Acceleration.
+                                                  <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -vaapi -hw -r</div>
+                                                  <p>If you wish to see all the available options for decode, then type ./sample_decode.
+                                                    This will show the help output with variuos decode options:
+                                                      <p> For example: </br>-o : output to file in RAW formats
+                                                      </br>-f : change rendering frame rate
+                                                      </br>-w and –h : changing the resolution
+                                                  </div>
                 </div>
               </div>
 
@@ -164,10 +166,12 @@
             </div>
 -->
 
-<div ibox title="2. Sample Encoder">
+<div ibox title="Encode raw video frames">
     <div content-block name="xdk-issues" message="Check after completion of Sample Encoder">
-      <p>TODO: What is sample Decoder</p>
+      <p>sample_encode is another console application which performs encoding of raw video frames into elementary compressed stream</p>
             <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
+            <p>We are passing an input raw video stream and converting it to h264 formatted elementary stream.</p>
+            <p>We specify width, height and framerate for this conversion. You can review all the available switches by typing ./sample_encode at the terminal</p>
                         <div class="alert alert-warning">$./sample_encode h264 -i streams/input.yuv -o streams/encoder_output.h264 -w 1920 -h 1080 -f 60 -u quality -sw</div>
                         <!--<p>Output & Performance:</p>
                         <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" /> -->
