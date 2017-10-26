@@ -62,7 +62,7 @@
                     <a href="\\10.224.54.1\Raghavendra\Visual_Retail_Windows_Image">Visual Retail Windows Image</a>
                     <p>Copy the above images in suitable storage device</p>
                 <p>2. Prepare a Resuce disk (USB) using the ISO provided in
-                    <a href="">Rescue ISO</a> according to the instructions given in <a href="https://knowledgebase.macrium.com/display/KNOW7/Creating+rescue+media">Creating rescue media</a></p>
+                    <a href="\\10.224.54.1\Raghavendra\Rescue.iso">Rescue ISO</a> according to the instructions given in <a href="https://knowledgebase.macrium.com/display/KNOW7/Creating+rescue+media">Creating rescue media</a></p>
                 <p>3. Boot through this rescue disk and restore the above said windows image using the instructions given in
                     <a href="https://knowledgebase.macrium.com/display/KNOW7/Restoring+a+system+image">Restoring a system image</a></p>
                 <p>4. On Completion of system image restore, it asks to reboot, after which the Windows system will be ready for Visual Retail Workshop</p>
@@ -72,25 +72,26 @@
                 <p>Note:-If the automatic configuration fails, you can try manual installation as follows</p>
                 <p><b>Manual Windows Configuration</b></p>
                 <p>1. Power on the Intel NUC</p>
-                <p>2. Press F10 and boot from Windows 10 USB.</p>
+                <p>2. Press F10 and boot from Windows 10 USB prepared using <a href="\\10.224.54.1\Raghavendra\en_windows_10_multiple_editions_version_1607_updated_jul_2016_x64_dvd_9058187.iso">Windows 10 </a></p>
                 <p>3. Install Windows 10.</p>
                 <p>4. Set Username: intel<NUC Number> and Password: intel123 </p>
-                <p>5. Open the command prompt in admin mode and navigate to <a href="\\10.224.54.1\Raghavendra\Workshop">Workshop folder</a></p>
-                <p>6. Goto 00-Installers, RunMe1.bat to install drivers. Don't restart in between.</p>
-                <p>7. Reboot the system after RunMe1.bat finishes.</p>
-                <p>8. Execute RunMe2.bat to install WindowsSDK, Directx 11 and Visual Studio 10.</p>
+                <p>5. Download Workshop contents from <a href="\\10.224.54.1\Raghavendra\Bangalore-Workshop">Workshop folder</a></p>
+                <p>6. Open the command prompt in admin mode and navigate to downloaded Workshop folder</p>
+                <p>7. Goto 00-Installers, RunMe1.bat to install drivers. Don't restart in between.</p>
+                <p>8. Reboot the system after RunMe1.bat finishes.</p>
+                <p>9. Execute RunMe2.bat to install WindowsSDK, Directx 11 and <a href="\\10.224.54.1\Raghavendra\en_visual_studio_2010_professional_x86_dvd_509727.iso">Visual Studio 10.</a></p>
                 <p>Note:- Directx installation may ask for .NET framework 3.5 for which internet connection is a must.</p>
-                <p>9. Execute RunMe3.bat to unmount the VS image, register Mars dlls, install opencv and Mesh commander.</p>
-                <p>10. Copy folders 01 - 04 to Desktop > Retail</p>
-                <p>11. Through elevated command prompt run Desktop > Retail > 01-MARS > filterDlls > regdll.bat, execute to register the dlls required for Mars</p>
-                <p>12. Goto Desktop Retail > 01-Mars > Bin > Right Click on MARS.exe and Send to Desktop (create a link).</p>
-                <p>13. Run MARS.exe and check if one video is running properly.</p>
-                <p>14. Run Python idle. Type: import cv2</p>
-                <p>15. It should not give any error.</p>
-                <p>16. Type: print cv2.__version__ </p>
-                <p>17. It should display the cv2 version </p>
-                <p>18. Create System Restore point named "Retail".</p>
-                <p>19. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
+                <p>10. Execute RunMe3.bat to unmount the VS image, register Mars dlls, install opencv and Mesh commander.</p>
+                <p>11. Copy folders 01 - 04 to Desktop > Retail</p>
+                <p>12. Through elevated command prompt run Desktop > Retail > 01-MARS > filterDlls > regdll.bat, execute to register the dlls required for Mars</p>
+                <p>13. Goto Desktop Retail > 01-Mars > Bin > Right Click on MARS.exe and Send to Desktop (create a link).</p>
+                <p>14. Run MARS.exe and check if one video is running properly.</p>
+                <p>15. Run Python idle. Type: import cv2</p>
+                <p>16. It should not give any error.</p>
+                <p>17. Type: print cv2.__version__ </p>
+                <p>18. It should display the cv2 version </p>
+                <p>19. Create System Restore point named "Retail".</p>
+                <p>20. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
             </div>
 
             <!-- Lab Conclusion -->
