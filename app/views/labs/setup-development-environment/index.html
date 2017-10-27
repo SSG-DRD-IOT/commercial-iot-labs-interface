@@ -50,12 +50,19 @@
                   <p>6th Generation Core Processor (Skylake)</p>
                 </br>
                   <p><b>Software Requirements</b></p>
-                  <ul>
+                  <p>Open network is recommended while running the CVSDK & OpenCV installations as corporte proxy blocks downloading certain files.</p>
+                 <ul>
                     <li>Install Ubuntu 16.04</li>
+                    <li>Note: While installing, select to install Ubuntu alongside with Windows and Set name: intel, computer name: intel<NUC Number>, Username: intel and Password: intel123 </p>
                     <li>Install CVSDK, which will internally install Media Server studio also.
-                    <p>Link:- <a href = "\\jfspercbits001.amr.corp.intel.com\shared_outgoing\VisionSDK\install\VAinstallerSept24_2.tgz">VainstallerSept24_2</a></p>
-                    <p>Note:- Use ctrl+alt+F1 to switch to one of the classic UNIX terminals and install the above SDK. It won't install properly in GUI based terminal.</p>
-                    <li>Install OpenCV as per the instructions given in <a href="http://milq.github.io/install-opencv-ubuntu-debian/">OpenCV Installation</a></li>
+                    <p>Link: <a href = "\\jfspercbits001.amr.corp.intel.com\shared_outgoing\VisionSDK\install\VAinstallerSept24_2.tgz">VainstallerSept24_2</a></p>
+                    <p>Note: Use ctrl+alt+F1 to switch to one of the classic UNIX terminals and install the above SDK. It won't install properly in GUI based terminal.</p>
+                    <p>Run the command: sudo python VAinstaller.py --SDK CVSDK</p>
+                        <p>Note:- If it asks for any overwriting during installation, say 'y' - yes to confirm</p>
+                        <p>Run the command: ./setupvars.sh from VAinstallerSept24 directory</p>
+                    <p>Reboot the system</p>
+                    <li>Copy the opencv setup zip file and the below opencv install script from <a href="\\10.224.54.1\Raghavendra\OpenCV">OpenCV folder</a> to downloads directory</li>
+                    <li>Install OpenCV by running the <a href="\\10.224.54.1\Raghavendra\OpenCV\install-opencv.sh">OpenCV install script</a></li>
                     <li>Copy the <a href="../views/labs/downloads/workshop.zip"> workshop folder </a> to /home/Documents/ and unzip it</li>
             </div>
 
