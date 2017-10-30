@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>Setup Development Environment with the Intel® NUC</h2>
+        <h2>Setup Development Environment with the Intel&reg; NUC</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
@@ -9,7 +9,7 @@
                 <a>Labs</a>
             </li>
             <li class="active">
-                <strong>Setup Development Environment with the Intel® NUC</strong>
+                <strong>Setup Development Environment with the Intel&reg; NUC</strong>
             </li>
         </ol>
     </div>
@@ -31,8 +31,8 @@
 
                 <div class="alert alert-info">
                   <ul>
-                    <li>Unbox and setup your Intel® NUC Hardware</li>
-                    <li>Connect to your Intel® NUC to power and monitor.</li>
+                    <li>Unbox and setup your Intel&reg; NUC Hardware</li>
+                    <li>Connect to your Intel&reg; NUC to power and monitor.</li>
                     <li>Install Ubuntu 16.04 from <a href="http://releases.ubuntu.com/16.04/">http://releases.ubuntu.com/16.04/</a></li>
                     <li>Install Media Server Studio</li>
                     <li>Install OpenCV with Python support</li>
@@ -64,13 +64,27 @@
                     <li>Copy the opencv setup zip file and the below opencv install script from <a href="\\10.224.54.1\Raghavendra\OpenCV">OpenCV folder</a> to downloads directory</li>
                     <li>Install OpenCV by running the <a href="\\10.224.54.1\Raghavendra\OpenCV\install-opencv.sh">OpenCV install script</a></li>
                     <li>Copy the <a href="../views/labs/downloads/workshop.zip"> workshop folder </a> to /home/Documents/ and unzip it</li>
-            </div>
+
+</br>
+<p><b>Verification and Validation</b></p>
+                <p>1. Run python <div class="alert alert-warning">$idle </div>from terminal. Type: import cv2</p>
+                <p>2. It should not give any error.</p>
+                <p>3. Type: print cv2.__version__ </p>
+                <p>4. It should display the cv2 version </p>
+		     <p>5. Execute $vainfo and check if there are no errors </p>
+		     <p>6. Execute </p>
+<div class="alert alert-warning"><p>$cd /opt/intel/mediasdk/samples/_bin/x64</p>
+                <p>$./sample_decode h264 -i ../content/test_stream.264 -hw -vaapi -r</p></div>
+		     <p>This should run a video and show the usage of hw and vaapi for decoding frames in terminal.
+                <p>5. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
+            
+</div>
 
             <!-- Lab Conclusion -->
             <div ibox title="Lab Conclusion">
                 <div content-block name="Windows-SSH" message="Read about the next lab">
                     <h2 class="labHidden">Read about the next lab</h2>
-                    <p>Congratulations! You have successfully setup your Intel® NUC with Ubuntu for Visual Retail workshop.
+                    <p>Congratulations! You have successfully setup your Intel&reg; NUC with Ubuntu for Visual Retail workshop.
                       In the next section, you will learn how to enhance the video performance using Intel software.</p>
                 </div>
             </div>
