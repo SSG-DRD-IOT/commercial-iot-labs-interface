@@ -44,7 +44,7 @@
             </ul>
               <b>Observation</b>
                 <p>Performance monitoring using system performance monitoring tool. </p>
-                <p>Observe the utilization of GPU and CPU in softwarea and hardware acceleration modes.</p>
+                <p>Observe the utilization of GPU and CPU in software and hardware acceleration modes.</p>
               <b>Learning Outcome</b>
               <p>By the end of this module, the participant would get basic understanding of Intel&reg; Media Server Studio, installation structure,
                  hardware acceleration and performance enhancement of selected applications.</p>
@@ -55,7 +55,7 @@
             <div content-block name="xdk-issues" message="Check after viewing the packages installed on your NUC">
                     <ul>
                         <li>Media Server Studio installer:
-                            <p>Intel&reg; Media Server Studio Community Edition 2017 by default installs at
+                            <p>Intel&reg; Media Server Studio Community Edition by default installs at
                               <span style="color:#2554C7"> /opt/intel/mediasdk/</span></p>
                         </li>
                         <li>Media Sample applications:
@@ -94,7 +94,7 @@
             </div>
           </div>
 
-          <div ibox title="CPU & GPU Perfromance Monitoring">
+          <div ibox title="Perfromance Monitoring">
           <div content-block name="xdk-issues" message="Check after initiating the Perfromance Monitoring tools" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
                   <p>We would need few performance monitoring tools before we proceed with Media Server Studio sample programs. </p>
                   <p>Open the Performance monitoring tool by navigating to
@@ -102,19 +102,11 @@
                     <span style="color:#2554C7">Applications > System Tools > System Monitor > Resources Tab</span>
                   </div>
                   <p> This tool is used to compare the CPU performance of the below two cases.</p>
-                  <p>Open the Terminal and run the below command to elevate to root privilages:
+                  <!--<p>Open the Terminal and run the below command to check the GPU utilization</p>
                     <div class="alert alert-warning">
-                      <p>$su</p>
+                      <p>$sudo intel_gpu_top</p>
                     </div>
-                    <p>Provide the following password</p>
-                    <div class="alert alert-warning">
-                      <p>intel123</p>
-                    </div>
-                    <p>Run the following command to check the GPU utilization</p>
-                    <div class="alert alert-warning">
-                      <p>$intel_gpu_top</p>
-                    </div>
-                  </p>
+                  </p>-->
                   <div class="alert alert-info">
                     Note: If you are running any other programs, their process would be added to the CPU, GPU &amp; memory utilization.
                     So try closing all other programs. Then observe the Sample_decode process performance from system monitor tool.
@@ -133,12 +125,12 @@
                                     <div content-block name="xdk-issues" message="Software implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg">
                                       <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
                                       <p>In this example -sw stands for Software Acceleration, -r is for rendering the output.
-                                    <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -sw -r</div>
+                                    <div class="alert alert-warning">$./sample_decode h264 -i /home/intel/Documents/workshop/msdk_samples/samples/input.h264 -sw -r</div>
                                     </div>
                                     <div content-block name="xdk-issues" message="Hardware implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg">
                                       <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
                                       <p>In this example, we are instructing the application to use vaapi memory type. If you dont specify, then it will take system memory by default. -hw stands for hardware Acceleration.
-                                                  <div class="alert alert-warning">$./sample_decode h264 -i streams/input.h264 -vaapi -hw -r</div>
+                                                  <div class="alert alert-warning">$./sample_decode h264 -i /home/intel/Documents/workshop/msdk_samples/samples/input.h264 -vaapi -hw -r</div>
                                                   <p>If you wish to see all the available options for decode, then type ./sample_decode.
                                                     This will show the help output with variuos decode options:
                                                       <p> For example: </br>-o : output to file in RAW formats
@@ -172,15 +164,15 @@
             <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
             <p>We are passing an input raw video stream and converting it to h264 formatted elementary stream.</p>
             <p>We specify width, height and framerate for this conversion. You can review all the available switches by typing ./sample_encode at the terminal</p>
-                        <div class="alert alert-warning">$./sample_encode h264 -i streams/input.yuv -o streams/encoder_output.h264 -w 1920 -h 1080 -f 60 -u quality -sw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -i ../content/test_stream.264 -o /home/intel/Documents/Workshop/msdk_samples/samples/input.yuv -w 176 -h 96 -f 60 -sw</div>
                         <!--<p>Output & Performance:</p>
                         <img src="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg" /> -->
-            <p>Observe the CPU utilization from System Monitor  as described before</p>
+            <p>Observe the CPU utilization from System Monitor as described before</p>
             <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
-                        <div class="alert alert-warning">$./sample_encode h264 -i streams/input.yuv -o streams/encoder_output.h264 -w 1920 -h 1080 -f 60 -u quality -hw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -i /home/intel/Documents/Workshop/msdk_samples/samples/input.yuv -o /home/intel/Documents/Workshop/msdk_samples/samples/encoder_output.h264 -w 176 -h 96 -f 60 -hw</div>
                         <!-- <p>Output & Performance:</p>
                         <img src="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg" /> -->
-            <p>Observe the CPU utilization from System Monitor and GPU utilization from $intel_gpu_top as described before</p>
+            <!--<p>Observe the CPU utilization from System Monitor and GPU utilization from $intel_gpu_top as described before</p>-->
             <p>To view the converted h264 file, run the decoding sample as follows:</p>
             <div class="alert alert-warning">$./sample_decode h264 -i streams/encoder_output.h264 -vaapi -hw -r</div>
 
@@ -192,7 +184,7 @@
                 <ul>
                 <li>Intel&reg; Media Server Studio's libraries, tools and sample code files.</li>
                 <li>Speed up in video decoding and encoding.</li>
-                <li>CPU and GPU Performance monitoring</li>
+                <li>Performance monitoring</li>
               </div>
             </div>
 </div>
