@@ -1,5 +1,5 @@
 # commercial-iot-labs-interface
-This is the web application used to access the content of the Intel Commericla IoT Workshop.
+This is the web application used to access the <b>Linux content</b> of the Intel Retail Workshop by Intel Developer Zone.
 
 ## Installation in a Development Environment
 * Clone the repository to the development computer.
