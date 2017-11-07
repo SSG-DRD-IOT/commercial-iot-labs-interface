@@ -38,31 +38,24 @@
 
           <div ibox title="Building new sample">
                 <div content-block name="xdk-issues" message="Check after creating new sample">
-                  <p>Open the Terminal and run the below command to elevate to root privilages:
-                    <div class="alert alert-warning">
-                      <p>$su</p>
-                    </div>
-                    <p>Provide the following password</p>
-                    <div class="alert alert-warning">
-                      <p>intel123</p>
-                    </div>
+                  <p>Open the Terminal and run the below commands
                   <p>Change project working directory & create new file using text editor</p>
                   <div class="alert alert-warning">
-                    <p>$cd /home/intel/Documents/msdk_samples/samples/custom_decoder/src </p>
-                    <p>$gedit custom_decode.cpp</p>
+                    <p>$cd /home/intel/Documents/workshop/msdk_samples/samples/custom_decoder/src </p>
+                    <p>$sudo gedit custom_decode.cpp</p>
                   </div>
                   <p>Save this custom_decode.cpp using Ctrl+s</p>
               </div>
             </div>
 
-          <div ibox title="Inclusions">
+          <!--<div ibox title="Inclusions">
                 <div content-block name="xdk-issues" message="Check after including Header files">
                   <p>Open <u>custom_decode.cpp</u> file to complete the exercise with the code given in the following steps:</p>
                   <p> Include the pipeline_decode.h and sstream headers. pipeline_decode has CDecodingPipeline class which does all the critical tasks associated with decode process. </p>
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">#include "pipeline_decode.h"
 #include &lt;sstream&gt;</ui-codemirror>
               </div>
-            </div>
+            </div>-->
 
           <div ibox title="Input Processing">
                 <div content-block name="xdk-issues" message="Check after completing Input processing">
@@ -70,7 +63,6 @@
                   <p>This method first checks the input array for consistency.</p>
                   <p>Then sets the video type, memory type, hardware acceleration, asynchronous depth factor, mode, etc.,</p>
                   <p>It also writes the input h264 file path to parameter list</p>
-                  TODO: Add details about memoryType, asyncDepth and so on.
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
                     mfxStatus InputSetup(sInputParams* pParams)
                     {
@@ -82,7 +74,7 @@
                       //MFX_CODEC_JPEG for JPEG codec
                     	pParams->videoType = MFX_CODEC_AVC;
 
-                    	msdk_opt_read(MSDK_STRING("/home/intel/Videos/input.h264"), pParams->strSrcFile);
+                    	msdk_opt_read(MSDK_STRING("/home/intel/Documents/workshop/msdk_samples/samples/input.h264"), pParams->strSrcFile);
 
                       //Set the memory type:
                       //D3D11_MEMORY for Directx11
@@ -214,8 +206,7 @@
 
                     msdk_printf(MSDK_STRING("\nDecoding finished\n"));
 
-                    return 0;
-                  } // End of main
+                    // End of main
                   </ui-codemirror>
                 </br>
                 </br>
@@ -228,8 +219,7 @@
     <p>Navigate to samples directory by</p>
     <div class="alert alert-warning">$cd /home/intel/Documents/workshop/msdk_samples/samples</div>
     <p>Generate, clean and build the project using build.pl script as follows:</p>
-    <p>Check if you are in admin privilages, else give $su command and password "intel123"</p>
-    <div class="alert alert-warning">$perl build.pl --cmake=intel64.make.debug --build --clean</div>
+    <div class="alert alert-warning">$sudo perl build.pl --cmake=intel64.make.debug --build --clean</div>
     <p>End result should say <b>state: ok</b></p>
     <p>New folder named __cmake will have executables. Navigate to the same as follows:</p>
     <div class="alert alert-warning">$cd __cmake/intel64.make.debug/__bin/debug/</div>
@@ -248,6 +238,8 @@
   <div ibox title="Execution">
    <div content-block name="xdk-issues" message="Check after running the sample">
       <div class="alert alert-warning"><span style="color:#A52A2A">./custom_decode</span></div>
+    </br>
+    <p>This example demonstrates hardware based video decoding with output rendered on the screen and details printed in the terminal</p>
 </div>
 </div>
     <div ibox title="Lesson learnt">
