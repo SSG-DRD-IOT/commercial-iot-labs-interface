@@ -38,24 +38,32 @@
 
           <div ibox title="Building new sample">
                 <div content-block name="xdk-issues" message="Check after creating new sample">
-                  <p>Open the Terminal and run the below commands
+                    <p>Download samples from <a href="https://github.com/Intel-Media-SDK/samples">https://github.com/Intel-Media-SDK/samples</a></p>
+                    <p>Extract the samples to /home/intel/Documents/workshop/msdk_samples/ </p>
+                    <p>Copy and paste the sample_decode folder by renaming it to custom_decode</p>
+                    <p>Delete the sample_decode.cpp and CMakeLists.txt files in this custom_decode project</p>
+                    <p>Open the Terminal and run the below commands
                   <p>Change project working directory & create new file using text editor</p>
                   <div class="alert alert-warning">
-                    <p>$cd /home/intel/Documents/workshop/msdk_samples/samples/custom_decoder/src </p>
+                    <p>$cd /home/intel/Documents/workshop/msdk_samples/samples</p>
+                    <p>$sudo mkdir custom_decoder</p>
+                    <p>$cd custom_decoder</p>
+                    <p>$sudo mkdir src</p>
+                    <p>$cd src</p>
                     <p>$sudo gedit custom_decode.cpp</p>
                   </div>
                   <p>Save this custom_decode.cpp using Ctrl+s</p>
               </div>
             </div>
 
-          <!--<div ibox title="Inclusions">
+          <div ibox title="Inclusions">
                 <div content-block name="xdk-issues" message="Check after including Header files">
                   <p>Open <u>custom_decode.cpp</u> file to complete the exercise with the code given in the following steps:</p>
                   <p> Include the pipeline_decode.h and sstream headers. pipeline_decode has CDecodingPipeline class which does all the critical tasks associated with decode process. </p>
                   <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">#include "pipeline_decode.h"
 #include &lt;sstream&gt;</ui-codemirror>
               </div>
-            </div>-->
+          </div>
 
           <div ibox title="Input Processing">
                 <div content-block name="xdk-issues" message="Check after completing Input processing">
@@ -74,7 +82,7 @@
                       //MFX_CODEC_JPEG for JPEG codec
                     	pParams->videoType = MFX_CODEC_AVC;
 
-                    	msdk_opt_read(MSDK_STRING("/home/intel/Documents/workshop/msdk_samples/samples/input.h264"), pParams->strSrcFile);
+                    	msdk_opt_read(MSDK_STRING("/home/intel/Videos/test_stream.h264"), pParams->strSrcFile);
 
                       //Set the memory type:
                       //D3D11_MEMORY for Directx11
@@ -139,6 +147,7 @@
                   sts = InputSetup(&Params);
 
                   MSDK_CHECK_PARSE_RESULT(sts, MFX_ERR_NONE, 1);
+                 
                 </ui-codemirror>
               </div>
             </div>
@@ -205,8 +214,9 @@
                     }
 
                     msdk_printf(MSDK_STRING("\nDecoding finished\n"));
-
-                    // End of main
+   
+                    return 0;
+                  }// End of main
                   </ui-codemirror>
                 </br>
                 </br>
@@ -216,9 +226,27 @@
 
 <div ibox title="Configure and generate solution">
   <div content-block name="xdk-issues" message="Check after configuring and generating the solution">
-    <p>Navigate to samples directory by</p>
-    <div class="alert alert-warning">$cd /home/intel/Documents/workshop/msdk_samples/samples</div>
-    <p>Generate, clean and build the project using build.pl script as follows:</p>
+    <p>Navigate to custom_decode directory and create CMakeLists file</p>
+      <div class="alert alert-warning">
+         <p>$cd /home/intel/Documents/workshop/msdk_samples/samples/custom_decode</p>
+         <p>$sudo gedit CMakeLists.txt</p>
+    </div>
+    <p>Enter the following instructions in the CMakeLists.txt file, save and close.</p>
+    <div class="alert alert-warning">
+  include_directories (
+  ${CMAKE_CURRENT_SOURCE_DIR}/../sample_common/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/../sample_misc/wayland/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+list( APPEND LIBS_VARIANT sample_common )
+
+set(DEPENDENCIES libmfx dl pthread)
+make_executable( shortname universal "nosafestring" )
+
+install( TARGETS ${target} RUNTIME DESTINATION ${MFX_SAMPLES_INSTALL_BIN_DIR} )
+      </div>
+      <p>Generate, clean and build the project using build.pl script as follows:</p>
     <div class="alert alert-warning">$sudo perl build.pl --cmake=intel64.make.debug --build --clean</div>
     <p>End result should say <b>state: ok</b></p>
     <p>New folder named __cmake will have executables. Navigate to the same as follows:</p>
