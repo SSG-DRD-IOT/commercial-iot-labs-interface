@@ -1,9 +1,9 @@
 # commercial-iot-labs-interface
-This is the web application used to access the content of the Intel Commericla IoT Workshop.
+This is the web application used to access the content of the Intel® IoT Commercial Workshop.
 
 ## Installation in a Development Environment
 * Clone the repository to the development computer.
-* Be sure that [NodeJS](https://nodejs.org/) is installed.
+* Be sure that [Node.js\*](https://nodejs.org/) is installed.
 * Be sure that [GruntJS](http://gruntjs.com/) is installed.
   ``` npm install -g grunt-cli ```
 * Be sure that [BowerJS](http://bower.io/) is installed.
