@@ -46,7 +46,7 @@
           <h5>The first step is load the Haar-like features classifer cascade file, which is a file create through machine learning to contain the esstential features of a face. In OpenCV, you can detect different types of objects by changing the classifier file.</h5>
 
           <p>Download the haar cascade file, named <a href="../views/labs/analytics-opencvface/downloads/haarcascade_frontalface_default.xml">haarcascade_frontalface_default.xml</a>face, and save it into the same directory as your python script.</p>
-          <p>Create a new Python file named <b>face_detect.py</b></p>
+          <p>Create a new Python\* file named <b>face_detect.py</b></p>
           <p>Paste the following line</p>
           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import cv2</pre></ui-codemirror>
         </div>
@@ -56,7 +56,7 @@
           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"># Create a Haar-like feature cascade classifier object
 faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
 
-# Set the camera to the first camera detected by the NUC
+# Set the camera to the first camera detected by the Intel® NUC
 cap = cv2.VideoCapture(0)</pre></ui-codemirror>
         </div>
 
