@@ -42,13 +42,13 @@
          </div>
          <p>Copy and paste the sample_decode folder by renaming it to custom_decode</p>
          <div class="alert alert-warning">
-            <p>$sudo cp sample_decode custom_decode</p>
+            <p>$sudo cp -R sample_decode custom_decode</p>
          </div>
          <p>Delete the sample_decode.cpp and CMakeLists.txt files in this custom_decode project</p>
          <div class="alert alert-warning">
             <p>$cd custom_decode</p>
             <p>$cd src</p>
-            <p>$rm -rf sample_decode.cpp CMakeLists.txt</p>
+            <p>$sudo rm -rf sample_decode.cpp CMakeLists.txt</p>
          </div>
          <p>Create new custom_decode.cpp file to enter your custom decoding program</p>
          <p>$sudo gedit custom_decode.cpp</p>
@@ -205,25 +205,30 @@
             <p>$cd /home/intel/Documents/workshop/msdk_samples/samples/custom_decode</p>
             <p>$sudo gedit CMakeLists.txt</p>
          </div>
-         <p>Enter the following instructions in the CMakeLists.txt file, save and close.</p>
+         <p>Make sure your CMakeLists.txt file contents matches the below ones:</p>
          <div class="alert alert-warning">
-            include_directories (
-            ${CMAKE_CURRENT_SOURCE_DIR}/../sample_common/include
-            ${CMAKE_CURRENT_SOURCE_DIR}/../sample_misc/wayland/include
-            ${CMAKE_CURRENT_SOURCE_DIR}/include
-            )
-            list( APPEND LIBS_VARIANT sample_common )
-            set(DEPENDENCIES libmfx dl pthread)
-            make_executable( shortname universal "nosafestring" )
-            install( TARGETS ${target} RUNTIME DESTINATION ${MFX_SAMPLES_INSTALL_BIN_DIR} )
+            <p>include_directories (</p>
+            <p>${CMAKE_CURRENT_SOURCE_DIR}/../sample_common/include</p>
+            <p>${CMAKE_CURRENT_SOURCE_DIR}/../sample_misc/wayland/include</p>
+            <p>${CMAKE_CURRENT_SOURCE_DIR}/include</p>
+            <p>)</p>
+            <p>list( APPEND LIBS_VARIANT sample_common )</p>
+            <p>set(DEPENDENCIES libmfx dl pthread)</p>
+            <p>make_executable( shortname universal "nosafestring" )</p>
+            <p>install( TARGETS ${target} RUNTIME DESTINATION ${MFX_SAMPLES_INSTALL_BIN_DIR} )</p>
          </div>
          <p>Generate, clean and build the project using build.pl script as follows:</p>
-         <div class="alert alert-warning">$sudo perl build.pl --cmake=intel64.make.debug --build --clean</div>
+         <div class="alert alert-warning">
+		 <p>cd /home/intel/Documents/workshop/msdk_samples/samples/</p>
+		 <p>$perl build.pl --cmake=intel64.make.debug --build --clean</p>
+		 <p>$make -j4 -C __cmake/intel64.make.debug</p>
+		 </div>
          <p>End result should say <b>state: ok</b></p>
          <p>New folder named __cmake will have executables. Navigate to the same as follows:</p>
          <div class="alert alert-warning">$cd __cmake/intel64.make.debug/__bin/debug/</div>
          <p>Execute the custom_decode:</p>
          <div class="alert alert-warning">$./custom_decode</div>
+		 <p>It should show the video rendered on the screen with settings enabled in custom decoding</p>
       </div>
    </div>
 </div>
