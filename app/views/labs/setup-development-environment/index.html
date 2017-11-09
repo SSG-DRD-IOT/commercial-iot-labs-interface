@@ -33,7 +33,7 @@
                   <ul>
                     <li>Unbox and setup your Intel&reg; NUC Hardware</li>
                     <li>Connect to your Intel&reg; NUC to power and monitor.</li>
-                    <li>Install Ubuntu 16.04 from <a href="http://releases.ubuntu.com/16.04/">http://releases.ubuntu.com/16.04/</a></li>
+                    <li>Install Ubuntu 16.04</li>
                     <li>Install Media Server Studio</li>
                     <li>Install OpenCV with Python support</li>
                     <li>Copy the required lab exercises</li>
@@ -47,24 +47,27 @@
                 <div content-block name="sw-install" message="Software installations">
 
                   <p><b>Hardware Requirements</b></p>
-                  <p>6th Generation Core Processor (Skylake)</p>
+                  <p>5th Generation Core Processor</p>
                 </br>
                   <p><b>Software Requirements</b></p>
                   <p>Open network is recommended while running the CVSDK & OpenCV installations as corporte proxy blocks downloading certain files.</p>
                  <ul>
-                    <li>Install Ubuntu 16.04</li>
-                    <li>Note: While installing, select to install Ubuntu alongside with Windows and Set name: intel, computer name: intel<NUC Number>, Username: intel and Password: intel123 </p>
-                    <li>Install CVSDK, which will internally install Media Server studio also.
-                    <p>Link: <a href = "\\jfspercbits001.amr.corp.intel.com\shared_outgoing\VisionSDK\install\VAinstallerSept24_2.tgz">VainstallerSept24_2</a></p>
-                    <p>Note: Use ctrl+alt+F1 to switch to one of the classic UNIX terminals and install the above SDK. It won't install properly in GUI based terminal.</p>
-                    <p>Run the command: sudo python VAinstaller.py --SDK CVSDK</p>
-                        <p>Note:- If it asks for any overwriting during installation, say 'y' - yes to confirm</p>
-                        <p>Run the command: ./setupvars.sh from VAinstallerSept24 directory</p>
-                    <p>Reboot the system</p>
-                    <li>Copy the opencv setup zip file and the below opencv install script from <a href="\\10.224.54.1\Raghavendra\OpenCV">OpenCV folder</a> to downloads directory</li>
-                    <li>Install OpenCV by running the <a href="\\10.224.54.1\Raghavendra\OpenCV\install-opencv.sh">OpenCV install script</a></li>
-                    <li>Copy the <a href="../views/labs/downloads/workshop.zip"> workshop folder </a> to /home/Documents/ and unzip it</li>
-
+                    <li>Install Ubuntu 16.04 from <a href="http://releases.ubuntu.com/16.04/">http://releases.ubuntu.com/16.04/</a></li>
+                    <li>Note: While installing, select the option "install Ubuntu alongside with Windows"</li>
+                  </br><div class="alert alert-warning"><p>Set name: intel</p>
+                      <p>computer name: intel&lt;NUC Number&gt;</p>
+                      <p>Username: intel</p>
+                      <p>Password: intel123</p></div>
+                  </br>
+                  <li>Update the Ubuntu packages:
+                    <div class="alert alert-warning">$sudo apt-get update</div>
+                    <p>Note: Troubleshoot for core dump error on update- $sudo apt-get purge libappstream3</p>
+		    <p>Install Media Server Studio for Linux from <a href="https://software.intel.com/en-us/intel-media-server-studio">https://software.intel.com/en-us/intel-media-server-studio</a></p>
+ 		    <p>Note: Use Ctrl+Alt+F1 to switch to one of the classic UNIX terminals and install the above SDK.
+                      It won't install properly in GUI based terminal. If you wan't to come back to GUI, press Ctrl+Alt+F7</p>
+                  </li>
+	            <p>Reboot the system</p>
+                    <li>Install OpenCV with Python from <a href="https://opencv.org/releases.html">https://opencv.org/releases.html</a></li>
 </br>
 <p><b>Verification and Validation</b></p>
                 <p>1. Run python <div class="alert alert-warning">$idle </div>from terminal. Type: import cv2</p>
