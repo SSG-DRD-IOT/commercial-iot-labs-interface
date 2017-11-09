@@ -43,9 +43,9 @@
       <div ibox title="Overview of the Facial Recogition Sample">
 
         <div content-block name="opencv_motion-newfile" message="Create a new Python script and load the required modules">
-          <h5>The first step is load the Haar-like features classifer cascade file, which is a file create through machine learning to contain the esstential features of a face. In OpenCV, you can detect different types of objects by changing the classifier file.</h5>
+          <p>The first step is load the Haar-like features classifer cascade file, which is a file create through machine learning to contain the esstential features of a face. In OpenCV, you can detect different types of objects by changing the classifier file.</p>
 
-          <p>Download the haar cascade file, named <a href="https://raw.githubusercontent.com/SSG-DRD-IOT/lab-computer-vision/master/opencv/experiments_pretty/faceDetectionRecording/haarcascade_frontalface_default.xml">haarcascade_frontalface_default.xml</a>face, and save it into the same directory as your python script.</p>
+          <p>Download the haar cascade file, named <a href="../views/labs/analytics-opencvface/downloads/haarcascade_frontalface_default.xml">haarcascade_frontalface_default.xml </a>face, and save it into the same directory as your python script.</p>
           <p>Create a new Python file named <b>face_detect.py</b></p>
           <p>Paste the following line</p>
           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import cv2</pre></ui-codemirror>
@@ -98,7 +98,7 @@ cap = cv2.VideoCapture(0)</pre></ui-codemirror>
     if cv2.waitKey(1) & 0xFF == ord('q'):
        break</pre></ui-codemirror>
 
-       <div class="alert alert-warning">Save the haar cascade file using "Right click > Save Link as" option <a href="./views/labs/analytics-opencvface/downloads/haar_face.xml" target="_blank">haar cascade file</a> and keep it at the same place as your face detection python file</div></li><li>Press F5</li></ul></div>
+       <div class="alert alert-warning">Save the haar cascade file using "Right click > Save Link as" option <a href="./views/labs/analytics-opencvface/downloads/haarcascade_frontalface_default.xml" target="_blank">haar cascade file</a> and keep it at the same place as your face detection python file</div></li><li>Press F5</li></ul></div>
 
     </div>
 
