@@ -95,10 +95,7 @@
           <div ibox title="Perfromance Monitoring">
           <div content-block name="xdk-issues" message="Check after initiating the Perfromance Monitoring tools" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
                   <p>We would need few performance monitoring tools before we proceed with Media Server Studio sample programs. </p>
-                  <p>Open the Performance monitoring tool by navigating to
-                  <div class="alert alert-info">
-                    <span style="color:#2554C7">Applications > System Tools > System Monitor > Resources Tab</span>
-                  </div>
+                  <p>Open the Performance monitoring tool as shown in the picture
                   <p> This tool is used to compare the CPU performance of the below two cases.</p>
                   <div class="alert alert-info">
                     Note: If you are running any other programs, their process would be added to the CPU, GPU &amp; memory utilization.
@@ -115,15 +112,15 @@
                   <div class="alert alert-warning">
                     $cd /opt/intel/mediasdk/samples/
                   </div>
-                                    <div content-block name="xdk-issues" message="Software implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.jpg">
+                                    <div content-block name="xdk-issues" message="Software implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.png">
                                       <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
                                       <p>In this example -sw stands for Software Acceleration, -r is for rendering the output.
-                                    <div class="alert alert-warning">$./sample_decode h264 -i ../content/test_stream.264 -sw -r</div>
+                                    <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/Workshop/msdk_samples/samples/input.h264' -sw -r</div>
                                     </div>
-                                    <div content-block name="xdk-issues" message="Hardware implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.jpg">
+                                    <div content-block name="xdk-issues" message="Hardware implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.png">
                                       <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
                                       <p>In this example, we are instructing the application to use vaapi memory type. If you dont specify, then it will take system memory by default. -hw stands for hardware Acceleration.
-                                                  <div class="alert alert-warning">$./sample_decode h264 -i ../content/test_stream.264 -vaapi -hw -r</div>
+                                                  <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/Workshop/msdk_samples/samples/input.h264' -vaapi -hw -r</div>
                                                   <p>If you wish to see all the available options for decode, then type ./sample_decode.
                                                     This will show the help output with variuos decode options:
                                                       <p> For example: </br>-o : output to file in RAW formats
