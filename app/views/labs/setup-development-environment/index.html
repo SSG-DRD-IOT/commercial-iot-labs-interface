@@ -22,7 +22,8 @@
          <div content-block name="read-objectives" message="Read the Lab Overview and Objectives">
             <h2 class="labHidden">Lab Overview and Objectives</h2>
             <labels linux/>
-            <p>The labs in the Intel Visual Retail Workshop are organized in a progression that will result in each attendee building their own automated and secured, multi-device IoT network supporting Visual Retail scenarios.</p>
+            <p>The labs in the Intel Visual Retail Workshop are organized in a progression that will result in each attendee building 
+			their own automated and secured, multi-device IoT network supporting Visual Retail scenarios.</p>
             <p>Start by making sure your computer, is ready for Visual Retail development.</p>
             <p>By the end of this module, you should be able to:</p>
             <div class="alert alert-info">
@@ -41,75 +42,57 @@
       <div ibox title="Setup and deployment">
          <div content-block name="sw-install" message="Software installations">
             <p><b>Hardware Requirements</b></p>
-            <p>5th Generation Core Processor</p>
-            </br>
+            <p>1. <a href="https://ark.intel.com/products/series/129708/Intel-NUC-Kit-with-5th-Generation-Intel-Core-Processors">Intel® NUC Kit with 5th Generation Intel® Core™ Processors</a></p>
+            <p>2.	Intel vPro enabled</p>
+			<p>This material is tested on <a href="https://ark.intel.com/products/84861/Intel-NUC-Kit-NUC5i5MYHE">https://ark.intel.com/products/84861/Intel-NUC-Kit-NUC5i5MYHE</a></p>
+			</br>
             <p><b>Software Requirements</b></p>
-            <p>Open network is recommended while running the CVSDK & OpenCV installations as corporte proxy blocks downloading certain files.</p>
+            <p>Open network is recommended while running the Intel&reg; Media Server Studio & OpenCV installations as corporte proxy blocks downloading certain files.</p>
             <ul>
             <li>Install Ubuntu 16.04 from <a href="http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso">http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso</a></li>
-            <li><b>Note: While installing, select the option "install Ubuntu alongside with Windows"</b></li>
-            </br>
-            <div class="alert alert-warning">
-               <p>Set name: intel</p>
-               <p>computer name: intel&lt;NUC Number&gt;</p>
-               <p>Username: intel</p>
-               <p>Password: intel123</p>
-            </div>
             </br>
             <li>
-               Update the Ubuntu packages:
+               Update the Ubuntu packages (but <font color=red>don't "upgrade"</font>):
                <div class="alert alert-warning">$sudo apt-get update</div>
                <p><b>Note: Troubleshoot for core dump error on update- $sudo apt-get purge libappstream3</b></p>
             </li>
             <li>
-               <p>Install Media Server Studio for Linux from <a href="https://software.intel.com/en-us/intel-media-server-studio">https://software.intel.com/en-us/intel-media-server-studio</a></p>
-               <p><b>Note: Use Ctrl+Alt+F1 to switch to one of the classic UNIX terminals and install the above SDK.
-                  It won't install properly in GUI based terminal. If you wan't to come back to GUI, press Ctrl+Alt+F7</b>
-               </p>
+               <p>Download Intel&reg; Media Server Studio for Linux from <a href="https://software.intel.com/en-us/intel-media-server-studio">https://software.intel.com/en-us/intel-media-server-studio</a></p>
+               <p>Install by following "Generic" steps from <a href="https://software.intel.com/sites/default/files/managed/52/a7/media_server_studio_getting_started_guide.pdf">https://software.intel.com/sites/default/files/managed/52/a7/media_server_studio_getting_started_guide.pdf</a></p>
             </li>
-            <p>Reboot the system</p>
+            <li>Reboot the system</li>
             <li>Install OpenCV with Python from <a href="https://opencv.org/releases.html">https://opencv.org/releases.html</a>
-            <li>Refer <a href="http://milq.github.io/install-opencv-ubuntu-debian">http://milq.github.io/install-opencv-ubuntu-debian</a> for neat shell script to install OpenCV</li>
-            <p>Reboot the system</p>
+            <li>Reboot the system</li>
             </li>
             <li>
                <p>System analyzer tool is a python script available for download from <a href="https://software.intel.com/en-us/articles/mss-sys-analyzer-linux">https://software.intel.com/en-us/articles/mss-sys-analyzer-linux</a></p>
-               <p>Copy the sys_analyzer_linux.py python script to <span style="color:#2554C7">/home/intel/workshop</span> folder.</p>
+               <p>Copy the sys_analyzer_linux.py python script to <span style="color:#2554C7">/home/intel/workshop</span> folder by creating suitable directory structure.</p>
             </li>
             <li>
                <p>Download samples from <a href="https://github.com/Intel-Media-SDK/samples">https://github.com/Intel-Media-SDK/samples</a></p>
                <p>Extract the samples to /home/intel/Documents/workshop/msdk_samples/ </p>
             </li>
          </div>
-</div>
-		 <div ibox title="Setup local cloud for analytics">
-              <div content-block name="opencv_motion-setup" message="Setup local cloud">
-			  <labels laptop Linux/>
-				<p>Clone the repository to your server/laptop.</p>
-				<p>Link <a href="https://github.com/SSG-DRD-IOT/lab-8.0-solution-cloud-analytics/tree/retail-workshop">https://github.com/SSG-DRD-IOT/lab-8.0-solution-cloud-analytics/tree/retail-workshop</a></p>
-				<p>Pre-requisite for this solution is node.js</p>
-				<p>Navigate to the cloned folder and run the server using <b>node server.js</b></p>
-				<p>These steps will host the cloud analytics website in separate server/laptop.</p>
-			  </div>
-			</div>
+		 </div>
+		 
          <div ibox title="Verification and Validation">
             <div content-block name="sw-install" message="Verification and Validation">
                <p>1. Run python 
-               <div class="alert alert-warning">$idle </div>
-               from terminal. Type: import cv2</p>
-               <p>2. It should not give any error.</p>
-               <p>3. Type: print cv2.__version__ </p>
-               <p>4. It should display the cv2 version </p>
-               <p>5. Execute $vainfo and check if there are no errors </p>
-               <p>6. Execute </p>
+			   <div class="alert alert-warning">$python </div>
+               from terminal. 
+			   </br></br>
+			   <p>2. Type: <div class="alert alert-warning">import cv2</div></p>
+               <p>It should not give any error.</p>
+               <p>3. Type: <div class="alert alert-warning">print cv2.__version__</div></p>
+               <p>It should display the cv2 version </p>
+               <p>4. Execute <div class="alert alert-warning">$vainfo</div> and check if there are no errors </p>
+               <p>5. Execute </p>
                <div class="alert alert-warning">
                   <p>$cd /opt/intel/mediasdk/samples/_bin/x64</p>
                   <p>$./sample_decode h264 -i ../content/test_stream.264 -hw -vaapi -r</p>
                </div>
                <p>This should run a video and show the usage of hw and vaapi for decoding frames in terminal.
-			   <p>Run the hosted cloud analytics website from your client browser and check if it is working fine</p>
-               <p>5. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
-            </div>
+			</div>
          </div>
          <!-- Lab Conclusion -->
          <div ibox title="Lab Conclusion">
