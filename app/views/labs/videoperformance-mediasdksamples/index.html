@@ -59,8 +59,9 @@
       <div content-block name="xdk-issues" message="Check after including Header files">
          <p>Open <u>custom_decode.cpp</u> file to complete the exercise with the code given in the following steps:</p>
          <p> Include the pipeline_decode.h and sstream headers. pipeline_decode has CDecodingPipeline class which does all the critical tasks associated with decode process. </p>
-         <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">#include "pipeline_decode.h"
-            #include &lt;sstream&gt;
+         <ui-codemirror ui-codemirror-opts="editorOptions" id="topic-configure">
+		 #include "pipeline_decode.h"
+		 #include &lt;sstream&gt;
          </ui-codemirror>
       </div>
    </div>
@@ -79,7 +80,7 @@
             //MFX_CODEC_AVC for H264 codec
             //MFX_CODEC_JPEG for JPEG codec
             pParams->videoType = MFX_CODEC_AVC;
-            msdk_opt_read(MSDK_STRING("/home/intel/Videos/test_stream.h264"), pParams->strSrcFile);
+            msdk_opt_read(MSDK_STRING("/opt/intel/mediasdk/samples/content/test_stream.h264"), pParams->strSrcFile);
             //Set the memory type:
             //D3D11_MEMORY for Directx11
             //D3D9_MEMORY for Directx9
