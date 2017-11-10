@@ -26,40 +26,42 @@
                 <div content-block name="opencv_motion-objectives" message="Complete Objectives" image-link="../views/labs/analytics-analyse/images/cloudmain.png">
                     <h2 class="labHidden"></h2>
                     <h5>Lab Overview</h5>
-                    <p>We have done motion and face detection in our previous modules. We have successfully counted number of faces so far.
+                    <p>We have done motion and face detection in our previous modules. 
+					We have successfully counted number of faces so far.
                     </p>
-                    <p>In this module we will publish this data to local cloud for analysis</p>
+                    <p>In this module we will setup the local cloud and publish this data to it for analysis</p>
                     <p>We will be replacing those two TODOs with following</p>
                     <ul>
-                        <li>We will import package called "requests"</li>
+                        <li>We will import a package called "requests"</li>
                         <li>We will publish the number of faces after showing the face count</li>
                         <li>Login to cloud and view charts showing the number of faces</li>
                     </ul>
               </div>
             </div>
+			
             <div ibox title="Import packages">
-
               <div content-block name="opencv_package-newfile" message="Import packages">
+			  <labels NUC Linux/>
                 <h5>We need to import requests package</h5>
                   <ol>
-                <li>replace first #TODO: Cloud integration 1</li>
-                <li>Paste the following line</li>
-                <li><pre><code>import requests
-</code></pre></li>
-                       </ol>
+					<li>replace first #TODO: Cloud integration 1</li>
+					<li>Paste the following line:
+						<pre><code>import requests</code></pre>
+					</li>
+                </ol>
               </div>
-                </div>
+            </div>
 
                 <div ibox title="Publish number of faces to cloud">
 
                   <div content-block name="opencv_package-cloud" message="Publish number of faces to cloud">
-                    <h5>We have counted number of faces in the sceen. We need to publish this counter values to cloud. </h5>
+                    <h5>We have counted the number of faces in the scene. We need to publish this counter values to cloud. </h5>
                     <p>Note: We are not publishing video stream or pictures of the sceen. We are only publishing the number of faces. </p>
                       <ol>
                     <li>replace second #TODO: Cloud integration 2</li>
                     <li>Note that we are sending the data to cloud when the motion stops</li>
                     <li>Paste the following line</li>
-                    <li><div class="alert alert-warning">Replace device id "1234" with the device id written on your computer</div></li>
+                    <li><div class="alert alert-warning">Replace device id "1234" with the device id (or any 4 digit unique number) written on your NUC</div></li>
                     <li><div class="alert alert-warning">Replace &lt;cloud server url> with the cloud URL provided in the workshop</div></li>
                     <li>your cloud server URL would be <a id="href" target="_blank"></a><script>document.getElementById("href").innerHTML = window.location.hostname + ":9002";document.getElementById("href").href = "http://" + window.location.hostname + ":9002";</script></li>
                     <li><pre><code>else:
