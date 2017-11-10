@@ -1,4 +1,4 @@
-﻿<div class="row wrapper border-bottom white-bg page-heading">
+<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>Motion detection using OpenCV</h2>
         <ol class="breadcrumb">
@@ -26,7 +26,11 @@
                 <div content-block name="opencv_motion-objectives" message="Complete Objectives">
                     <h2 class="labHidden"></h2>
                     <h5>Lab Overview</h5>
-                    <p>Our motion detector will observe the difference between consecutive frames; when this difference is high, we can assume that motion was found. In order to prevent false positives, we will observe the standard deviation of the frame. When motion of a suitably sized object is detected, the standard deviation will rise, allowing us to trigger a motion event.
+                    <p>Our motion detector will observe the difference between consecutive frames; 
+					when this difference is high, we can assume that motion was found. 
+					In order to prevent false positives, we will observe the standard deviation of the frame. 
+					When motion of a suitably sized object is detected, the standard deviation will rise, 
+					allowing us to trigger a motion event.
                     <p>Our program will be laid out as follows:</p>
                     <ul>
                         <li>import OpenCV and its dependencies</li>
@@ -47,19 +51,24 @@
             </div>
             <div ibox title="Motion detection using OpenCV">
 
-              <div content-block name="opencv_motion-newfile" message="Create new file" image-link="./views/labs/analytics-opencvinit/images/idle_newfile.png">
+              <div content-block name="opencv_motion-newfile" message="Create new file">
                 <p>To create the Python programs in this lab, we will use the terminal and gedit editor in Linux</b>.</p>
-
-                <p>Open the gedit by doing the following:</p>
-                <ol>
-                  <li>Navigate to Applications > Utilites > Terminal</li>
-                  <li> Elevate to root by typing "su" and providing root password "intel123"</li>
-                  <li> Run the following command to check where the opencv is installed: find / -name opencv </li>
-                  <li> Now navigate to &lt;opencv-installation-folder&gt;/samples/python/</li>
-                  <li>Issue the command: gedit motion_detect.py</li>
-                  <li>A blank file opens up</li>
-                  <li>Select File > Save or use Ctrl + s</li>
-                  <li> Issue the following two program statements </li>
+          <ol>
+            <li>Open terminal using <b>Ctrl + Alt + t</b></li>
+            <li>Now navigate to the new directory as follows: </li>
+          </ol>
+        <div class="alert alert-warning">
+		<p>$cd /home/intel/Documents/workshop/python_samples/</p>
+		</div>
+		</div>
+		        <div content-block name="opencv_init-newfile" message="Create new file named camera.py">
+          <p>Create new file and save it as motion_detect.py by following these steps:</p>
+          <ol>
+            <li>Issue the command: $sudo gedit motion_detect.py</li>
+            <li>A blank file opens up</li>
+            <li>Save the file using Ctrl + s</li>
+            <li>Begin by importing the numpy and opencv packages. </li>
+          </br>
                 <li><pre><code>import numpy as np
 import cv2
 #TODO: Cloud integration 1
