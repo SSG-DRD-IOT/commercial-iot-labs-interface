@@ -54,12 +54,14 @@
     </div>
 
     <div content-block message="Add An Intel&reg; AMT enabled Computer to MeshCommander" image-link="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg">
-      <p>The first step to add a system to the Intel AMT mission commander configuration utility is to click on a computer. </p>
-      <p>After that you can specify a <b>friendly name</b> which is simply a string that allows you to easily identify the system.</p>
-      <p>You can <b>tags</b> that allow you to put several systems together into recognizable categories.</p>
-      <p>You'll need to enter either the <b>host name</b> or the <b>IP address</b> of the computer.</p>
-      <p>The <b>authentication</b> should remain as digest or none.</p>
-      <p>Lastly, the <b>username and password</b> are the same as username and password that you configured during the USB drive lab.</p>
+	<ul>
+      <li>The first step to add a system to the Intel AMT mission commander configuration utility is to click on a computer. It there are no known computers, get started by adding computers</li>
+      <li>After that you can specify a <i>friendly name</i> which is simply a string that allows you to easily identify the system.</li>
+      <li>You can use <b>tags</b> that allow you to put several systems together into recognizable categories.</li>
+      <li>You'll need to enter either the <b>host name</b> or the <b>IP address</b> of the computer.</li>
+      <li>The <b>authentication</b> should remain as <i>digest or none</i>.</li>
+      <li>Lastly, the <b>username and password</b> are the same as username and password that you configured in previous section.</li>
+    </ul>
     </div>
 
     <div content-block message="Connect to your Intel&reg; IoT Gateway" image-link="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg">
@@ -76,6 +78,8 @@
       <ul>
         <li>Click on the <b>Remote Desktop</b> link in the left sidebar.</li>
         <li>Then click the <b>Connect</b> button as shown in the image</li>
+		<li>If user consent was enabled, it will display a code in IOT Gateway which has to be entered in the Mesh Commander interface to proceed further</li>
+	    <li>In default case, on connect it will directly give remote access</li>
       </ul>
     </div>
 
@@ -91,7 +95,8 @@
     </div>
 
     <div content-block message="BIOS Setup Page" image-link="../views/labs/remote-configintelmc/images/008-BIOS-Setup-Page.jpg">
-      <p>Intel&reg; AMT works at at a firmware level, that is at a level lower than the operating system. So it is possible to remote view the display even if when viewing the BIOS.</p>
+      <p>Intel&reg; AMT works at a firmware level, that is at a level lower than the operating system. 
+	  So it is possible to have a remote view of the display even when viewing the BIOS.</p>
     </div>
   </div>
 
@@ -104,6 +109,7 @@
         <li>"IDE-R Session, Connected, 0 in, 0 out" message will be displayed at top</li>
         <li>Click Power Actions and select "Reset to IDE-R CDROM"</li>
         <li>Now observe the top row showing variation in the message "IDE-R Session, Connected, 0 in, ###### out" showing number of packets going out</li>
+		<li>By this technique any image can be flashed on the NUC remotely</li>
       </ul>
     </div>
 
