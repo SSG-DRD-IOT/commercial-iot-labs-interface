@@ -115,12 +115,12 @@
                                     <div content-block name="xdk-issues" message="Software implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.png">
                                       <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
                                       <p>In this example -sw stands for Software Acceleration, -r is for rendering the output.
-                                    <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/workshop/msdk_samples/samples/input.h264' -sw -r</div>
+                                    <div class="alert alert-warning">$./sample_decode h264 -i ../content/test_stream.264 -sw -r</div>
                                     </div>
                                     <div content-block name="xdk-issues" message="Hardware implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.png">
                                       <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
                                       <p>In this example, we are instructing the application to use vaapi memory type. If you dont specify, then it will take system memory by default. -hw stands for hardware Acceleration.
-                                                  <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/workshop/msdk_samples/samples/input.h264' -vaapi -hw -r</div>
+                                                  <div class="alert alert-warning">$./sample_decode h264 -i ../content/test_stream.264 -vaapi -hw -r</div>
                                                   <p>If you wish to see all the available options for decode, then type ./sample_decode.
                                                     This will show the help output with variuos decode options:
                                                       <p> For example: </br>-o : output to file in RAW formats
@@ -136,12 +136,12 @@
             <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
             <p>We are passing an input raw video stream and converting it to h264 formatted elementary stream.</p>
             <p>We specify width, height and framerate for this conversion. You can review all the available switches by typing ./sample_encode at the terminal</p>
-			<div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/workshop/msdk_samples/samples/input.h264' -nv12 -o '/home/intel/Videos/input.yuv' -vaapi -hw</div>
-                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i '/home/intel/Videos/input.yuv' -o '/home/intel/Videos/sw_out.h264' -w 1920 -h 1080 -f 60 -sw</div>
+			<div class="alert alert-warning">$./sample_decode h264 -i ../content/test_stream.264 -nv12 -o /home/intel/Videos/test_stream.yuv -vaapi -hw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i /home/intel/Videos/test_stream.yuv -o /home/intel/Videos/sw_out.h264 -w 176 -h 96 -f 60 -sw</div>
                         
             <p>Observe the CPU utilization from System Monitor as described before</p>
             <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
-                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i /home/intel/Videos/input.yuv -o /home/intel/Videos/hw_out.h264 -w 1920 -h 1080 -f 60 -hw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i /home/intel/Videos/test_stream.yuv -o /home/intel/Videos/hw_out.h264 -w 176 -h 96 -f 60 -hw</div>
                        
             <p>To view the converted h264 file, run the decoding sample as follows:</p>
             <div class="alert alert-warning">$./sample_decode h264 -i /home/intel/Videos/hw_out.h264 -vaapi -hw -r</div>
