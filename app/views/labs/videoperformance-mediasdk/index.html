@@ -85,15 +85,16 @@
               </ul>
 
               <b>Run</b>
+               Download and copy sys_analyzer_linux.py file from <a href="../views/labs/videoperformance-mediasdk/images/sys_analyzer_linux.py">here</a> to /home/intel[machine id]/Documents/workshop folder
               <div class="alert alert-warning">
-                <p>$cd /home/intel<your number>/Documents/workshop </p>
+                <p>$cd /home/intel[machine id]/Documents/workshop</p>
                 <p>$python sys_analyzer_linux.py</p>
                 </div>
             </div>
           </div>
 
-          <div ibox title="Perfromance Monitoring">
-          <div content-block name="xdk-issues" message="Check after initiating the Perfromance Monitoring tools" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
+          <div ibox title="Performance Monitoring">
+          <div content-block name="xdk-issues" message="Check after initiating the Performance Monitoring tools" image-link="../views/labs/videoperformance-mediasdk/images/system_monitor.png">
                   <p>We would need few performance monitoring tools before we proceed with Media Server Studio sample programs. </p>
                   <p>Open the Performance monitoring tool as shown in the picture
                   <p> This tool is used to compare the CPU performance of the below two cases.</p>
@@ -115,12 +116,12 @@
                                     <div content-block name="xdk-issues" message="Software implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_SW.png">
                                       <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
                                       <p>In this example -sw stands for Software Acceleration, -r is for rendering the output.
-                                    <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/workshop/msdk_samples/samples/input.h264' -sw -r</div>
+                                    <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel[workshop id]/Documents/workshop/msdk_samples/samples/input.h264' -sw -r</div>
                                     </div>
                                     <div content-block name="xdk-issues" message="Hardware implementation" image-link="../views/labs/videoperformance-mediasdk/images/MSDK_HW.png">
                                       <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
                                       <p>In this example, we are instructing the application to use vaapi memory type. If you dont specify, then it will take system memory by default. -hw stands for hardware Acceleration.
-                                                  <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/workshop/msdk_samples/samples/input.h264' -vaapi -hw -r</div>
+                                                  <div class="alert alert-warning">$./sample_decode h264 -i '/home/intel[workshop id]/Documents/workshop/msdk_samples/samples/input.h264' -vaapi -hw -r</div>
                                                   <p>If you wish to see all the available options for decode, then type ./sample_decode.
                                                     This will show the help output with variuos decode options:
                                                       <p> For example: </br>-o : output to file in RAW formats
@@ -136,19 +137,18 @@
             <p>Case 1: Execute the below command for <u>software implementation</u>:</p>
             <p>We are passing an input raw video stream and converting it to h264 formatted elementary stream.</p>
             <p>We specify width, height and framerate for this conversion. You can review all the available switches by typing ./sample_encode at the terminal</p>
-			<div class="alert alert-warning">$./sample_decode h264 -i '/home/intel/Documents/workshop/msdk_samples/samples/input.h264' -nv12 -o '/home/intel/Videos/input.yuv' -vaapi -hw</div>
-                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i '/home/intel/Videos/input.yuv' -o '/home/intel/Videos/sw_out.h264' -w 1920 -h 1080 -f 60 -sw</div>
+			<div class="alert alert-warning">$./sample_decode h264 -i '/home/intel[machine id]/Documents/workshop/msdk_samples/samples/input.h264' -nv12 -o '/home/intel[machine id]/Documents/workshop/msdk_samples/samples/input.yuv' -vaapi -hw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i '/home/intel[machine id]/Documents/workshop/msdk_samples/samples/input.yuv' -o '/home/intel[machine id]/Documents/workshop/msdk_samples/samples/sw_out.h264' -w 1920 -h 1080 -f 60 -sw</div>
                         
             <p>Observe the CPU utilization from System Monitor as described before</p>
             <p>Case 2: Execute the below command for <u>hardware acceleration</u>:</p>
-                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i /home/intel/Videos/input.yuv -o /home/intel/Videos/hw_out.h264 -w 1920 -h 1080 -f 60 -hw</div>
+                        <div class="alert alert-warning">$./sample_encode h264 -nv12 -i /home/intel[machine id]/Documents/workshop/msdk_samples/samples/input.yuv -o /home/intel[machine id]/Documents/workshop/msdk_samples/samples/hw_out.h264 -w 1920 -h 1080 -f 60 -hw</div>
                        
             <p>To view the converted h264 file, run the decoding sample as follows:</p>
-            <div class="alert alert-warning">$./sample_decode h264 -i /home/intel/Videos/hw_out.h264 -vaapi -hw -r</div>
+            <div class="alert alert-warning">$./sample_decode h264 -i /home/intel[machine id]/Documents/workshop/msdk_samples/samples/hw_out.h264 -vaapi -hw -r</div>
 
     </div>
 </div>
-
             <div ibox title="Lessons learnt">
                 <div content-block name="xdk-issues" message="Check after completion of lesson">
                 <ul>

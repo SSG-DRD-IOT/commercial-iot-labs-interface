@@ -45,7 +45,7 @@ mfxStatus InputSetup(sInputParams* pParams) {
   // MFX_CODEC_JPEG for JPEG codec
   pParams->videoType = MFX_CODEC_AVC;
 
-  msdk_opt_read(MSDK_STRING("/home/intel/Videos/input.h264"),
+  msdk_opt_read(MSDK_STRING("/home/intel[workshop id]/Documents/workshop/msdk_samples/samples/input.h264"),
                 pParams->strSrcFile);
 
   // Set the memory type:

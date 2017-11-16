@@ -45,9 +45,10 @@
                   <li> Now create and navigate to new directory as follows: </li>
                </ol>
                <div class="alert alert-warning">
+                  <p>$cd /home/intel[workshop id]/Documents/workshop/</p>
                   <p>$sudo mkdir python_samples</p>
                   <p>$sudo chmod 777 python_samples</p>
-                  <p>$cd /home/intel/Documents/workshop/python_samples/</p>
+                  <p>$cd python_samples</p>
                </div>
             </div>
             <div content-block name="opencv_init-newfile" message="Create new file named camera.py">
@@ -57,13 +58,9 @@
                   <li>A blank file opens up</li>
                   <li>Save the file using Ctrl + s</li>
                   <li>Begin by importing the numpy and opencv packages. </li>
-                  </br>
-                  <ui-codemirror ui-codemirror-opts="editorOptions">
-                     <pre class="brush:jscript;">import numpy as np
+                  <ui-codemirror ui-codemirror-opts="editorOptions">import numpy as np
 import cv2
-</pre>
                   </ui-codemirror>
-                  </br>
                </ol>
             </div>
          </div>
@@ -78,8 +75,7 @@ import cv2
                   <li>Copy the below code and put it on your file and run your application</li>
                   <li>Press Esc to exit</li>
                   <li>
-                     <ui-codemirror ui-codemirror-opts="editorOptions">
-                        <pre class="brush:jscript;">cap = cv2.VideoCapture(0)
+                     <ui-codemirror ui-codemirror-opts="editorOptions">cap = cv2.VideoCapture(0)
 
 while(True):
     # Capture frame-by-frame
@@ -98,8 +94,6 @@ while(True):
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
-
-</pre>
                      </ui-codemirror>
                   </li>
                   <li>Press CTRL + s to save the file</li>
@@ -111,9 +105,7 @@ cv2.destroyAllWindows()
          <div ibox title="Download final solution">
             <div content-block name="opencv_init-newfile" message="Download final solution">
                <h5>Copy completed application if you are getting errors</h5>
-               <ui-codemirror ui-codemirror-opts="editorOptions">
-                  <pre class="brush:jscript;">
-import numpy as np
+               <ui-codemirror ui-codemirror-opts="editorOptions">import numpy as np
 import cv2
 
 cap = cv2.VideoCapture(0)
@@ -135,9 +127,7 @@ while(True):
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
-
-</pre>
-               </ui-codemirror>
+</ui-codemirror>
             </div>
          </div>
          <div ibox title="References">

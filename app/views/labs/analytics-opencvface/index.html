@@ -45,7 +45,7 @@
         <div content-block name="opencv_motion-newfile" message="Create a new Python script and load the required modules">
           <h5>The first step is load the Haar-like features classifer cascade file, which is a file create through machine learning to contain the esstential features of a face. In OpenCV, you can detect different types of objects by changing the classifier file.</h5>
 
-          <p>Download the haar cascade file, named <a href="../views/labs/analytics-opencvface/downloads/haarcascade_frontalface_default.xml">haarcascade_frontalface_default.xml </a>face, and save it into the same directory as your python script.</p>
+          <!--<p>Download the haar cascade file, named <a href="../views/labs/analytics-opencvface/downloads/haarcascade_frontalface_default.xml">haarcascade_frontalface_default.xml </a>face, and save it into the same directory as your python script.</p>-->
           <p>Create a new Python file named <b>face_detect.py</b></p>
           <p>Paste the following line</p>
           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import cv2</pre></ui-codemirror>
@@ -54,7 +54,7 @@
         <div content-block name="opencv_motion-newfile" message="Load the facial classifier and open a connection to the camera">
           <p>You will need to open the classifier file and a connection to the video camera.</p>
           <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;"># Create a Haar-like feature cascade classifier object
-faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+faceCascade = cv2.CascadeClassifier("haar_face.xml")
 
 # Set the camera to the first camera detected by the NUC
 cap = cv2.VideoCapture(0)</pre></ui-codemirror>

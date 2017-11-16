@@ -38,13 +38,15 @@
       <div content-block name="xdk-issues" message="Check after creating new sample">
          <p>Navigate to workshop/msdk_samples/samples directory</p>
          <div class="alert alert-warning">
-            <p>$cd /home/intel/Documents/workshop/msdk_samples/samples</p>
+            <p>$cd /home/intel[workshop id]/Documents/workshop/msdk_samples/samples</p>
          </div>
+          <!--
          <p>Copy and paste the sample_decode folder by renaming it to custom_decode</p>
          <div class="alert alert-warning">
             <p>$sudo cp -R sample_decode custom_decode</p>
          </div>
-         <p>Delete the sample_decode.cpp and CMakeLists.txt files in this custom_decode project</p>
+          -->
+         <p>Delete the sample_decode.cpp and CMakeLists.txt files in this custom_decode project(if exists)</p>
          <div class="alert alert-warning">
             <p>$cd custom_decode</p>
             <p>$cd src</p>
@@ -79,7 +81,7 @@
             //MFX_CODEC_AVC for H264 codec
             //MFX_CODEC_JPEG for JPEG codec
             pParams->videoType = MFX_CODEC_AVC;
-            msdk_opt_read(MSDK_STRING("/home/intel/Videos/test_stream.h264"), pParams->strSrcFile);
+            msdk_opt_read(MSDK_STRING("/home/intel[workshop id]/Documents/workshop/msdk_samples/samples/input.h264"), pParams->strSrcFile);
             //Set the memory type:
             //D3D11_MEMORY for Directx11
             //D3D9_MEMORY for Directx9
@@ -202,7 +204,7 @@
       <div content-block name="xdk-issues" message="Check after configuring and generating the solution">
          <p>Navigate to custom_decode directory and create CMakeLists file</p>
          <div class="alert alert-warning">
-            <p>$cd /home/intel/Documents/workshop/msdk_samples/samples/custom_decode</p>
+            <p>$cd /home/intel[workshop id]/Documents/workshop/msdk_samples/samples/custom_decode</p>
             <p>$sudo gedit CMakeLists.txt</p>
          </div>
          <p>Make sure your CMakeLists.txt file contents matches the below ones:</p>
@@ -219,7 +221,7 @@
          </div>
          <p>Generate, clean and build the project using build.pl script as follows:</p>
          <div class="alert alert-warning">
-		 <p>cd /home/intel/Documents/workshop/msdk_samples/samples/</p>
+		 <p>cd /home/intel[workshop id]/Documents/workshop/msdk_samples/samples/</p>
 		 <p>$perl build.pl --cmake=intel64.make.debug --build --clean</p>
 		 <p>$make -j4 -C __cmake/intel64.make.debug</p>
 		 </div>
