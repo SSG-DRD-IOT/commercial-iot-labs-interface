@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-lg-12">
 
-            <!-- Overview of Labs: What are we doing and where are we going? -->
+            <!-- Overview of Labs: What are we doing and where are we going?
             <div ibox title="Lab Overview and Objectives">
               <div content-block name="read-objectives" message="Read the Lab Overview and Objectives">
                 <h2 class="labHidden">Lab Overview and Objectives</h2>
@@ -40,48 +40,89 @@
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> -->
 
             <!-- Login to your Intel NUC -->
             <div ibox title="Setup and deployment">
                 <div content-block name="sw-install" message="Software installations">
 
                   <p><b>Hardware Requirements</b></p>
-                  <p>6th Generation Core Processor (Skylake)</p>
+                  <p>5th Generation Core Processor</p>
                 </br>
                   <p><b>Software Requirements</b></p>
-                  <p>Open network is recommended while running the CVSDK & OpenCV installations as corporte proxy blocks downloading certain files.</p>
+                  <p>Open network is recommended while running the Media Server Studio & OpenCV installations as corporte proxy blocks downloading certain files.</p>
                  <ul>
-                    <li>Install Ubuntu 16.04</li>
-                    <li>Note: While installing, select to install Ubuntu alongside with Windows and Set name: intel, computer name: intel<NUC Number>, Username: intel and Password: intel123 </p>
-                    <li>Install CVSDK, which will internally install Media Server studio also.
-                    <p>Link: <a href = "\\jfspercbits001.amr.corp.intel.com\shared_outgoing\VisionSDK\install\VAinstallerSept24_2.tgz">VainstallerSept24_2</a></p>
-                    <p>Note: Use ctrl+alt+F1 to switch to one of the classic UNIX terminals and install the above SDK. It won't install properly in GUI based terminal.</p>
-                    <p>Run the command: sudo python VAinstaller.py --SDK CVSDK</p>
-                        <p>Note:- If it asks for any overwriting during installation, say 'y' - yes to confirm</p>
-                        <p>Run the command: ./setupvars.sh from VAinstallerSept24 directory</p>
-                    <p>Reboot the system</p>
-                    <li>Copy the opencv setup zip file and the below opencv install script from <a href="\\10.224.54.1\Raghavendra\OpenCV">OpenCV folder</a> to downloads directory</li>
-                    <li>Install OpenCV by running the <a href="\\10.224.54.1\Raghavendra\OpenCV\install-opencv.sh">OpenCV install script</a></li>
-                    <li>Copy the <a href="../views/labs/downloads/workshop.zip"> workshop folder </a> to /home/Documents/ and unzip it</li>
+                    <li>Install Ubuntu 16.04 by downloading 64-bit ISO from the following link:
 
-</div>
-<div ibox title="Verification and Validation">
-            <div content-block name="sw-install" message="Verification and Validation">
-                <p>1. Run python <div class="alert alert-warning">$idle </div>from terminal. Type: import cv2</p>
+                        <!--<li>
+                          <a href="http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso">http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso</a>
+                        </li> -->
+                          <a href="\\10.224.54.1\Raghavendra\workshop-setup\ubuntu-16.04-desktop-amd64.iso">\\10.224.54.1\Raghavendra\workshop-setup\ubuntu-16.04-desktop-amd64.iso</a>
+                      </li>
+                    <li>Note: While installing, select the option "install Ubuntu alongside with Windows"</li>
+                  </br><div class="alert alert-warning"><p>Set name: intel</p>
+                      <p>computer name: intel&lt;NUC Number&gt;</p>
+                      <p>Username: intel</p>
+                      <p>Password: intel123</p></div>
+                  </br>
+                  <li>Update the Ubuntu packages:
+                    <div class="alert alert-warning">$sudo apt-get update</div>
+                    <p>Note: Troubleshoot for core dump error on update- $sudo apt-get purge libappstream3</p>
+                    <li>Install CVSDK, which will internally install Media Server studio also.
+                    <p>Link: <a href = "\\10.224.54.1\Raghavendra\workshop-setup\VAinstallerSept24_2.gz">\\10.224.54.1\Raghavendra\workshop-setup\VAinstallerSept24_2.gz</a></p>
+                    <li>Copy the VAinstallerSept24_2.gz to Documents folder and unzip the contents</li>
+                    <p>Note: Use Ctrl+Alt+F1 to switch to one of the classic UNIX terminals and install the above SDK.
+                      It won't install properly in GUI based terminal. If you wan't to come back to GUI, press Ctrl+Alt+F7</p>
+                  </li>
+                  <li>Provide your credentials given during installation</li>
+                  <li>Run the command: <div class="alert alert-warning">$sudo python VAinstaller.py --SDK CVSDK</div>
+                        <p>Note:- If it asks for any overwriting during installation, say 'y' - yes to confirm</p>
+                      </li>
+                      <li>Run the following command from VAinstallerSept24 directory: <div class="alert alert-warning">$./setupvars.sh </div>
+                      </li>
+                    <li>Reboot the system by issuing the following command:
+                    <div class="alert alert-warning">$reboot </div></li>
+                    <li>Execute the following command from the terminal
+                      <div class="alert alert-warning">echo 'export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/lib64/pkgconfig"' >> ~/.bashrc</div>
+                    </li>
+                    <li>Download opencv installation script from <a href="\\10.224.54.1\Raghavendra\workshop-setup\OpenCV">\\10.224.54.1\Raghavendra\workshop-setup\OpenCV</a> to downloads directory</li>
+                    <li>Install OpenCV by running the
+                        <div class="alert alert-warning">
+                          <p>$cd '/home/intel&lt;NUC Number&gt;/Downloads/OpenCV/</p>
+                          <p>$bash install-opencv.sh</div>
+                    </li>
+                    <li>Copy the workshop zip file from <a href="\\10.224.54.1\Raghavendra\workshop-setup\Workshop.zip">\\10.224.54.1\Raghavendra\workshop-setup\Workshop.zip</a> to /home/Documents/ and unzip it</li>
+					<p>Change the default password (required to proceed). The new value must be a strong password. It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and be at least eight characters. A management console application can change the Intel AMT password without modifying the CSME password.</p>
+					<div class="alert alert-warning">
+					<p>If already provisioned, unprovison vPro machines as follows:<p>
+					<p>1. Enter the MEBX ctrl-p during the boot process.</p>
+					<p>2. Enter the vPro password that was set when the machine was configured.</p>
+					<p>3. Select the Intel&reg; ME General Settings</p>
+					<p>4. Select the Unconfigure Network Acces</p>
+					<p>5. Answer Yes to the reset network settings caution. This is just a warning that is going to reset the machine to the factory defaults.</p>
+					<p>6. Select if it should be a Full or Partial Unprovision. Full will reset everything but the password.</p>
+					<p>Once the machine has been unprovisioned the machine will need to have the RCFG option started.</p>
+					<p>7. Select the Remote Setup and Configuration</p>
+					<p>8. Select the RCFG </p>
+					<p>9. Select Start Configuration</p>
+					</div>
+
+</br>
+<p><b>Verification and Validation</b></p>
+                <p>1. From the terminal Run python and test OpenCV <div class="alert alert-warning"><p>$python</p><p>$import cv2</p></div></p>
                 <p>2. It should not give any error.</p>
                 <p>3. Type: print cv2.__version__ </p>
                 <p>4. It should display the cv2 version </p>
-		     <p>5. Execute $vainfo and check if there are no errors </p>
+		     <p>5. Execute the following command and verify there are no errors:
+         <div class="alert alert-warning">$vainfo</div></p>
 		     <p>6. Execute </p>
 <div class="alert alert-warning"><p>$cd /opt/intel/mediasdk/samples/_bin/x64</p>
                 <p>$./sample_decode h264 -i ../content/test_stream.264 -hw -vaapi -r</p></div>
 		     <p>This should run a video and show the usage of hw and vaapi for decoding frames in terminal.
-        	     <p>Run the hosted cloud analytics website from your client browser and check if it is working fine</p> 	
-		     <p>5. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
-            
+                <p>5. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
+
 </div>
-		</div>
+
             <!-- Lab Conclusion -->
             <div ibox title="Lab Conclusion">
                 <div content-block name="Windows-SSH" message="Read about the next lab">
