@@ -26,10 +26,10 @@
                 <div content-block name="opencv_motion-objectives" message="Complete Objectives">
                     <h2 class="labHidden"></h2>
                     <h5>Lab Overview</h5>
-                    <p>Our motion detector will observe the difference between consecutive frames; 
-					when this difference is high, we can assume that motion was found. 
-					In order to prevent false positives, we will observe the standard deviation of the frame. 
-					When motion of a suitably sized object is detected, the standard deviation will rise, 
+                    <p>Our motion detector will observe the difference between consecutive frames;
+					when this difference is high, we can assume that motion was found.
+					In order to prevent false positives, we will observe the standard deviation of the frame.
+					When motion of a suitably sized object is detected, the standard deviation will rise,
 					allowing us to trigger a motion event.
                     <p>Our program will be laid out as follows:</p>
                     <ul>
@@ -40,7 +40,7 @@
                             <li>shift frames</li>
                             <li>apply Gaussian blur to distance mapping</li>
                             <li>apply thresholding</li>
-                            <li>calculate st dev</li>
+                            <li>calculate standard deviation</li>
                             <li>if motion detected is above threshold, then print a message</li>
 
                             </ul></li>
@@ -52,13 +52,13 @@
             <div ibox title="Motion detection using OpenCV">
 
               <div content-block name="opencv_motion-newfile" message="Create new file">
-                <p>To create the Python programs in this lab, we will use the terminal and gedit editor in Linux</b>.</p>
+                <p>To create the Python programs in this section, we will use the terminal and gedit editor in Linux</b>.</p>
           <ol>
             <li>Open terminal using <b>Ctrl + Alt + t</b></li>
             <li>Now navigate to the new directory as follows: </li>
           </ol>
         <div class="alert alert-warning">
-		<p>$cd /home/intel/Documents/workshop/python_samples/</p>
+		<p>$cd python_samples</p>
 		</div>
 		</div>
 		        <div content-block name="opencv_init-newfile" message="Create new file named camera.py">
@@ -68,10 +68,9 @@
             <li>A blank file opens up</li>
             <li>Save the file using Ctrl + s</li>
             <li>Begin by importing the numpy and opencv packages. </li>
-          </br>
+
                 <li><pre><code>import numpy as np
 import cv2
-#TODO: Cloud integration 1
 </code></pre></li>
                       <li>Press CTRL + s to save the file</li>
 
@@ -180,7 +179,7 @@ while(True):
     if stDev > sdThresh:
             print("Motion detected.. Do something!!!");
             #TODO: Face Detection 2
-    #TODO: Cloud integration 2
+
     cv2.imshow('frame', frame2)
 
     if cv2.waitKey(1) & 0xFF == 27:
@@ -198,7 +197,6 @@ cv2.destroyAllWindows()
                   <h5>Keep those TODO as it is. We will re-use this program during face detection</h5>
 <ui-codemirror ui-codemirror-opts="editorOptions"><pre class="brush:jscript;">import numpy as np
 import cv2
-#TODO: Cloud integration 1
 
 sdThresh = 10
 font = cv2.FONT_HERSHEY_SIMPLEX
@@ -246,7 +244,7 @@ while(True):
     if stDev > sdThresh:
             print("Motion detected.. Do something!!!");
             #TODO: Face Detection 2
-    #TODO: Cloud integration 2
+
     cv2.imshow('frame', frame2)
     if cv2.waitKey(1) & 0xFF == 27:
         break

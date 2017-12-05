@@ -1,6 +1,6 @@
 <div class="row wrapper border-bottom white-bg page-heading">
    <div class="col-lg-10">
-      <h2>Setup Development Environment with the Intel&reg; NUC</h2>
+      <h2>Setup Development Environment</h2>
       <ol class="breadcrumb">
          <li>
             <a href="index.html">Home</a>
@@ -9,7 +9,7 @@
             <a>Labs</a>
          </li>
          <li class="active">
-            <strong>Setup Development Environment with the Intel&reg; NUC</strong>
+            <strong>Setup Development Environment</strong>
          </li>
       </ol>
    </div>
@@ -20,86 +20,101 @@
       <!-- Overview of Labs: What are we doing and where are we going? -->
       <div ibox title="Lab Overview and Objectives">
          <div content-block name="read-objectives" message="Read the Lab Overview and Objectives">
-            <h2 class="labHidden">Lab Overview and Objectives</h2>
+            <h2 class="labHidden">Section Overview and Objectives</h2>
             <labels linux/>
-            <p>The labs in the Intel Visual Retail Workshop are organized in a progression that will result in each attendee building 
-			their own automated and secured, multi-device IoT network supporting Visual Retail scenarios.</p>
-            <p>Start by making sure your computer, is ready for Visual Retail development.</p>
+            <p>In this section we will explore the list of hardware and software needed in order execute remaining sections in this course.</p>
             <p>By the end of this module, you should be able to:</p>
             <div class="alert alert-info">
                <ul>
-                  <li>Unbox and setup your Intel&reg; NUC Hardware</li>
-                  <li>Connect your Intel&reg; NUC to power and monitor.</li>
+                  <li>You should get an understanding of required hardware and software</li>
                   <li>Install Ubuntu 16.04</li>
-                  <li>Install Media Server Studio</li>
+                  <li>Install Intel&reg; Media Server Studio</li>
                   <li>Install OpenCV with Python support</li>
-                  <li>Copy the required lab exercises</li>
                </ul>
             </div>
          </div>
       </div>
       <!-- Login to your Intel NUC -->
-      <div ibox title="Setup and deployment">
-         <div content-block name="sw-install" message="Software installations">
+      <div ibox title="System Requirement">
+         <div content-block name="sw-install" message="System Requirement">
             <p><b>Hardware Requirements</b></p>
             <p>1. <a href="https://ark.intel.com/products/series/129708/Intel-NUC-Kit-with-5th-Generation-Intel-Core-Processors">Intel® NUC Kit with 5th Generation Intel® Core™ Processors</a></p>
-            <p>2.	Intel vPro enabled</p>
-			<p>This material is tested on <a href="https://ark.intel.com/products/84861/Intel-NUC-Kit-NUC5i5MYHE">https://ark.intel.com/products/84861/Intel-NUC-Kit-NUC5i5MYHE</a></p>
+            <p>2.	Make sure your device supports Intel&reg; vPro.</p>
+			<p>This course material is tested on <a href="https://ark.intel.com/products/84861/Intel-NUC-Kit-NUC5i5MYHE">Intel NUC Kit NUC5i5MYHE</a></p>
 			</br>
-            <p><b>Software Requirements</b></p>
-            <p>Open network is recommended while running the Intel&reg; Media Server Studio & OpenCV installations as corporte proxy blocks downloading certain files.</p>
+            <p><b>Software and OS Requirements</b></p>
             <ul>
-            <li>Install Ubuntu 16.04 from <a href="http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso">http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso</a></li>
-            </br>
-            <li>
-               Update the Ubuntu packages (but <font color=red>don't "upgrade"</font>):
-               <div class="alert alert-warning">$sudo apt-get update</div>
-               <p><b>Note: Troubleshoot for core dump error on update- $sudo apt-get purge libappstream3</b></p>
-            </li>
-            <li>
-               <p>Download Intel&reg; Media Server Studio for Linux from <a href="https://software.intel.com/en-us/intel-media-server-studio">https://software.intel.com/en-us/intel-media-server-studio</a></p>
-               <p>Install by following "Generic" steps from <a href="https://software.intel.com/sites/default/files/managed/52/a7/media_server_studio_getting_started_guide.pdf">https://software.intel.com/sites/default/files/managed/52/a7/media_server_studio_getting_started_guide.pdf</a></p>
-            </li>
-            <li>Reboot the system</li>
-            <li>Install OpenCV with Python from <a href="https://opencv.org/releases.html">https://opencv.org/releases.html</a>
-            <li>Reboot the system</li>
-            </li>
-            <li>
-               <p>System analyzer tool is a python script available for download from <a href="https://software.intel.com/en-us/articles/mss-sys-analyzer-linux">https://software.intel.com/en-us/articles/mss-sys-analyzer-linux</a></p>
-               <p>Copy the sys_analyzer_linux.py python script to <span style="color:#2554C7">/home/intel/workshop</span> folder by creating suitable directory structure.</p>
-            </li>
-            <li>
-               <p>Download samples from <a href="https://github.com/Intel-Media-SDK/samples">https://github.com/Intel-Media-SDK/samples</a></p>
-               <p>Extract the samples to /home/intel/Documents/workshop/msdk_samples/ </p>
-            </li>
+              <li>Ubuntu 16.04</li>
+              <li>Intel &reg; Media Server Studio</li>
+              <li>OpenCV with Python Support</li>
+            </ul>
          </div>
 		 </div>
-		 
+     <div ibox title="Setting up process">
+        <div content-block name="sw-install" message="Setting up process">
+           <p>Open network is recommended while running the Intel&reg; Media Server Studio & OpenCV installations as corporate proxy blocks downloading certain files.</p>
+           <ul>
+           <li>Install Ubuntu 16.04 from <a href="http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso">http://old-releases.ubuntu.com/releases/16.04.1/ubuntu-16.04-desktop-amd64.iso</a></li>
+           <li>
+              Update the Ubuntu packages (but <font color=red>don't "upgrade"</font>):
+              <div class="alert alert-warning">$sudo apt-get update</div>
+              <p><b>Note:</b> If you find core dump during update process, run following command and then run apt-get update</p>
+                <div class="alert alert-warning">$sudo apt-get purge libappstream3</div>
+           </li>
+           <li>
+              <p>Download Intel&reg; Media Server Studio for Linux from <a href="https://software.intel.com/en-us/intel-media-server-studio">https://software.intel.com/en-us/intel-media-server-studio</a></p>
+           </li>
+           <li>
+             Follow the latest installation procedure documented at <a href="https://software.intel.com/en-us/intel-media-server-studio/documentation" target="_new">Getting Started Guide - Linux* Installation</a>. You should use "Generic" installation steps in the installation documentation to install on Ubuntu.
+           </li>
+           <li>Reboot the system</li>
+           <li>Install OpenCV with Python from <a href="https://opencv.org/releases.html">https://opencv.org/releases.html</a>
+           <li>Reboot the system</li>
+           </li>
+           <li>
+              <p><strong>System Analyzer:</strong> System analyzer tool is a python script available for download from <a href="https://software.intel.com/en-us/articles/mss-sys-analyzer-linux"  target="_blank">https://software.intel.com/en-us/articles/mss-sys-analyzer-linux</a>.</p>
+           </li>
+           <li>
+              <p>Copy the sys_analyzer_linux.py python script to <span style="color:#2554C7">/home/intel/workshop</span> folder by creating suitable directory structure.</p>
+            </li>
+           <li>
+              <p>Download samples from <a href="https://github.com/Intel-Media-SDK/samples" target="_blank">https://github.com/Intel-Media-SDK/samples</a></p>
+              <p>Extract the samples to /home/[user]/Documents/workshop/msdk_samples/ </p>
+           </li>
+        </div>
+    </div>
+
          <div ibox title="Verification and Validation">
             <div content-block name="sw-install" message="Verification and Validation">
-               <p>1. Run python 
+              <p><strong>Intel&reg; Media Server Studio installation:</strong></p>
+              <ol>
+                <li>Execute <div class="alert alert-warning">$vainfo</div> and check if there are no errors </p></li>
+                <li>Execute
+                <div class="alert alert-warning">
+                   <p>$cd /opt/intel/mediasdk/samples/_bin/x64</p>
+                   <p>$./sample_decode h264 -i ../content/test_stream.264 -hw -vaapi -r</p>
+                </div></li>
+                <li>Look in the termial. You should see hardware IMPL as "hw(hardware)" and vaapi as Memory for decoding frames.
+                </li>
+              </ol>
+
+              <p><strong>OpenCv installation:</strong></p>
+               <p>1. Run python
 			   <div class="alert alert-warning">$python </div>
-               from terminal. 
+               from terminal.
 			   </br></br>
 			   <p>2. Type: <div class="alert alert-warning">import cv2</div></p>
                <p>It should not give any error.</p>
                <p>3. Type: <div class="alert alert-warning">print cv2.__version__</div></p>
                <p>It should display the cv2 version </p>
-               <p>4. Execute <div class="alert alert-warning">$vainfo</div> and check if there are no errors </p>
-               <p>5. Execute </p>
-               <div class="alert alert-warning">
-                  <p>$cd /opt/intel/mediasdk/samples/_bin/x64</p>
-                  <p>$./sample_decode h264 -i ../content/test_stream.264 -hw -vaapi -r</p>
-               </div>
-               <p>This should run a video and show the usage of hw and vaapi for decoding frames in terminal.
 			</div>
          </div>
          <!-- Lab Conclusion -->
          <div ibox title="Lab Conclusion">
             <div content-block name="Windows-SSH" message="Read about the next lab">
                <h2 class="labHidden">Read about the next lab</h2>
-               <p>Congratulations! You have successfully setup your Intel&reg; NUC with Ubuntu for Visual Retail workshop.
-                  In the next section, you will learn how to enhance the video performance using Intel software.
+               <p>Congratulations! You have successfully setup your development machine for Visual Retail course.
+                  In the next section, you will learn how to enhance the video performance using Intel&reg; Media Server Studio
                </p>
             </div>
          </div>

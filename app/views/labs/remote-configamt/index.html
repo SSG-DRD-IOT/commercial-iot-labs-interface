@@ -17,17 +17,16 @@
       <p>This guide is intended to be a starting point for testing your Intel &reg; vPro&trade; technology systems within your environment.</p>
       <p>It will guide you through setting up a "Sandbox" test environment using your own network environment so that you can test your specific use cases on Intel&reg; vPro technology that ultimately reduces overall support costs and costly service/truck rolls.</p>
       <p>
-         The first step in enabling Intel® AMT is to install the Intel® AMT agent. In this lab,
+         The first step in enabling Intel® AMT is to install the Intel&reg; AMT agent. In this lab,
          <!--we create a USB drive that will install the Intel® AMT agent onto a host system.-->
-         we will manually configure the AMT from BIOS. Then we will verify that the agent is correctly installed by going to a web browser and accessing the Intel® AMT firmware based web configuration console.
-         The Converged Security and Manageability Engine (CSME) powers the Intel AMT system. As a component of the Intel® vPro™ platform, Intel AMT uses a number of elements in the Intel vPro platform architecture.
+         we will manually configure the AMT from BIOS Extension (MEBx extension). Then we will verify if the agent is correctly installed by going to a web browser and accessing the Intel® AMT firmware based web configuration console.
       </p>
    </div>
 </div>
 <div ibox title="Configuring Intel&reg; AMT">
    <div content-block name="step1" message="Check after completion of this section" image-link="../views/labs/remote-configamt/images/MEBX001.JPG">
       <labels nuc/>
-      <p>Start by performing these actions on your Intel IoT Gateway.</p>
+      <p>Start by performing these actions on your Intel&reg; vPro enabled device.</p>
       <p>During power up, the Intel AMT platform displays the BIOS startup screen, then it processes the MEBx.
          During this process, access to the Intel MEBX can be made; however the method is BIOS vendor-dependent. Some methods are discussed here.
       </p>
@@ -46,7 +45,7 @@
       <ul>
         <li>Change the default password (required to proceed).</li>
         <li>The new value must be a strong password. </li>
-        <li>It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character, 
+        <li>It should contain at least one uppercase letter, one lowercase letter, one digit, and one special character,
           and be at least <u>eight</u> characters.</li>
         <li>A management console application can change the Intel AMT password without modifying the CSME password.</li>
      </ul>
