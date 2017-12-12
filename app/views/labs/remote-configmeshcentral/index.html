@@ -12,7 +12,7 @@
                 <a>Remote Management</a>
             </li>
             <li class="active">
-                <strong>Remote System Management with MeshCentral</strong>
+                <strong>Cloud based Remote System Management with MeshCentral</strong>
             </li>
         </ol>
     </div>
@@ -24,8 +24,10 @@
           <div ibox title="Objective">
                 <div content-block image-link="../views/labs/remote-configamt/images/mesh0.png" message="Objective">
   <p>
-  Meshcentral is open source and peer-to-peer technology with a wide range of use cases, including web services that enable remote monitoring and management of computers and devices. Users can manage all their devices from a single web site, no matter the location of the computers or if they are behind routers or proxies.</p>
-<p>In this module we will explore following
+  Meshcentral is an open source and peer-to-peer technology with a wide range of use cases,
+  including web services that enable remote monitoring and management of computers and devices.
+  Users can manage all their devices from a single web site, no matter the location of the computers or if they are behind proxies.</p>
+<p>In this section we will explore following
   <ul><li>
   How to create device mesh?</li>
   <li>
@@ -33,25 +35,29 @@
   <li>How to explore file system on the remote machine?</li>
   <li>How to login to command line?</li>
 </ul>
+<div class="alert alert-warning">You can refer <a href="http://www.meshcommander.com/meshcentral2/tutorials" target="_blank">http://www.meshcommander.com/meshcentral2/tutorials</a>
+  for detailed video tutorial on various features of meshcentral.</div>
                 </div>
+
           </div>
       </div>
     </div>
+
       <div class="row">
         <div class="col-lg-12">
-              <div ibox title="Step1: Login to local mesh central server">
+              <div ibox title="Create meshcentral account">
                     <div content-block image-link="../views/labs/remote-configamt/images/mesh0.png" message="Login successful">
-                        <p>Install the meshcentral in a server/laptop from <a href="http://www.meshcommander.com/meshcentral2/installation">http://www.meshcommander.com/meshcentral2/installation</a></p>
-                        <p>Create an account with convenient username and password.</p>
+                        <p>You have two options. <ol><li>Install the meshcentral on your premise by following <a href="http://www.meshcommander.com/meshcentral2/installation">http://www.meshcommander.com/meshcentral2/installation</a> guide. </li><li>Create account directly on meshcentral.com website.</li></ol></p>
+                        <p>We will use the second option in this section</p>
+                        <p>Create an account with convenient username and password on <a href="http://www.meshcentral.com" target="_blank">www.meshcentral.com</a>.</p>
                         <p>Login to meshcentral using above credentials</p>
                     </div>
               </div>
           </div>
         </div>
-
         <div class="row">
                 <div class="col-lg-12">
-                    <div ibox title="Step 2: Create Mesh Agent">
+                    <div ibox title="Create Mesh Agent">
                         <div content-block image-link="../views/labs/remote-configamt/images/mesh1.png" message="Mesh Agent Created">
                               <p>Goto MyAccount tab > Administrative Meshes > New</p>
                               <p>In the Create new mesh popup, provide mesh name and password</p>
@@ -63,11 +69,11 @@
 
             <div class="row">
                     <div class="col-lg-12">
-                        <div ibox title="Step 3: Test & install the created Mesh">
+                        <div ibox title="Test &amp; install the created Mesh">
                             <div content-block image-link="../views/labs/remote-configamt/images/mesh2.png" message="Mesh Tested & installed">
                                   <p>Goto MyAccount tab and click the newly created mesh.</p>
                                   <p>Have a look on Web Authorizations.</p>
-                                  <p>Click on Install</p>
+                                  <p>Click on <b>Install</b></p>
                                   <p>Select <b>Linux/x86-64 (Ubuntu) Mesh Agent</b></p>
                                   <div class="alert alert-warning">Run the commands given there in a linux terminal to install the Mesh Agent.</div>
                             </div>
@@ -77,10 +83,14 @@
 
               <div class="row">
                       <div class="col-lg-12">
-                          <div ibox title="Step 4: Web device refresh">
+                          <div ibox title="Web device refresh">
                               <div content-block image-link="../views/labs/remote-configamt/images/018-web-device-refresh.jpg" message="Web device refreshed">
-                                <p>Goto MyAccount tab and click the newly created mesh.</p>
-                                <p>This is the method to see the connected devices through web interface.</p>
+                                <p>Goto <b>My Devices tab</b> and click the newly attached device.</p>
+                                <p>This takes you to device information page, which shows the information about Mesh agent version, target operating system, associated mesh name
+                                  and interface IP address.</p>
+                                  <p>You can do remote AMT configuration using this page under Intel &reg; AMT section. Click on appropriate links and icons to know more about these configurations.</p>
+                                  <div class="alert alert-warning">You can refer <a href="http://www.meshcommander.com/meshcentral2/tutorials" target="_blank">http://www.meshcommander.com/meshcentral2/tutorials</a>
+                                    for detailed video tutorial on various features of meshcentral.</div>
                               </div>
                           </div>
                     </div>
@@ -91,7 +101,7 @@
                             <div ibox title="Step 5: Explore file system">
                                 <div content-block image-link="../views/labs/remote-configamt/images/mesh3.png" message="File system Explored">
                                   <p>This method gives access to the client file system.</p>
-                                  <p>File operations can be performed to check the level of control</p>
+                                  <p>Various file operations can be performed using file system explorer. You can copy, upload, delete files using this interface.</p>
                                 </div>
                             </div>
                       </div>
@@ -99,9 +109,9 @@
 
                   <div class="row">
                           <div class="col-lg-12">
-                              <div ibox title="Step 6: Explore Terminal">
+                              <div ibox title="Explore Terminal">
                                   <div content-block image-link="../views/labs/remote-configamt/images/mesh4.png" message="Terminal explored">
-                                    <p>This method gives access to terminal through which system supported commands can be run.</p>
+                                    <p>This method gives access to terminal through which system supported commands can be executed. You need to CTRL+C to start the command prompt.</p>
                                   </div>
                               </div>
                         </div>
@@ -109,10 +119,11 @@
 
                     <div class="row">
                             <div class="col-lg-12">
-                                <div ibox title="Step 7: Web Socket Desktop Loop">
-                                    <div content-block image-link="../views/labs/remote-configamt/images/020-websocket-desktop-loop.jpg" message="Desktop looping successful">
-                                      <p>This method accessess the client desktop by web sockets.</p>
-                                      <p>It opens another web instance from desktop. This is repeated infinitely</p>.
+                                <div ibox title="Remote desktop sharing">
+                                    <div content-block image-link="../views/labs/remote-configamt/images/020-websocket-desktop-loop.jpg" message="Remote desktop sharing successful">
+                                      <p>This method accessess the client desktop using web sockets.</p>
+                                      <p>In this example, we are sharing the desktop from the machine, hence you see this infinite loop of
+                                        desktops. However, in realtime scenario, you would be connecting to your remote machine from another machine sitting miles away.</p>.
                                     </div>
                                 </div>
                           </div>

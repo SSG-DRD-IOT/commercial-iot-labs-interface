@@ -12,7 +12,7 @@
         <a>Remote Management</a>
       </li>
       <li class="active">
-        <strong>Remote Configuration with Mesh Commander</strong>
+        <strong>Remote Management with Mesh Commander</strong>
       </li>
     </ol>
   </div>
@@ -21,10 +21,10 @@
 <div class="wrapper wrapper-content animated fadeInRight" ng-controller="CodeEditorCtrl">
   <div ibox title="Overview">
     <div content-block name="step1" message="Read the Objectives">
-      <labels laptop windows/>
+      <labels laptop/>
       <h2 class="labHidden">Read the Overview</h2>
-      <p>The Mesh Commander is an application that provides an interface for using Intel&reg; Active Management technology. Its project site states that its purpose is to make hardware configuration easy over Internet.</p>
-      <p>MeshCommander is primarily used for 1:1 remote management of devices. Current supported features include:</p>
+      <p>The Mesh Commander is an application that provides an interface for using Intel&reg; Active Management technology. It's purpose is to make hardware configuration easy over Internet.</p>
+      <p>MeshCommander is primarily used for peer to peer remote management of devices. Currently supported features include:</p>
       <ul>
         <li>Hardware KVM viewer</li>
         <li>Serial over LAN terminal</li>
@@ -38,39 +38,35 @@
         <li>WIFI management</li>
         <li>User consent and control</li>
         <li>Certificate &amp; TLS management</li>
-        <li>CIRA &amp; Environment Detection</li>
+        <li>CIRA(Client Initiated Remote Access) &amp; Environment Detection</li>
         <li>WSMAN browser</li>
       </ul>
     </div>
 
     <div content-block message="Launch the MeshCommander utility" image-link="../views/labs/remote-configintelmc/images/launch.png">
       <p>The MeshCommander utility should be installed on any other Windows machine such as your personal Laptop.</p>
-      <p>Download Link: <a href="../views/labs/downloads/meshcommander.msi">meshcommander.msi</a></p>
+      <p>Download Link: <a href="http://www.meshcommander.com/meshcommander" target="_blank">meshcommander.msi</a></p>
       <p>Go to the Windows launch bar icon in the lower left of your screen and type <b>Mesh Commander</b>.</p>
-
-      <div class="alert alert-warning">
-        <p>Be sure to right click on the MeshCommander application and select <b>Run as Administrator</b>.</p>
-      </div>
     </div>
 
     <div content-block message="Add An Intel&reg; AMT enabled Computer to MeshCommander" image-link="../views/labs/remote-configintelmc/images/001-Add-AMT-Computer.jpg">
 	<ul>
-      <li>The first step to add a system to the Intel AMT mission commander configuration utility is to click on a computer. It there are no known computers, get started by adding computers</li>
+      <li>The first  add a computer to Meshcommander by clicking on a computer. It there are no known computers, get started by adding computers</li>
       <li>After that you can specify a <i>friendly name</i> which is simply a string that allows you to easily identify the system.</li>
       <li>You can use <b>tags</b> that allow you to put several systems together into recognizable categories.</li>
       <li>You'll need to enter either the <b>host name</b> or the <b>IP address</b> of the computer.</li>
-      <li>The <b>authentication</b> should remain as <i>digest or none</i>.</li>
+      <li>Depending on the way you configured your remote machine, you should chooose the <b>authentication</b></i>. Most common method is Digest/None.</li>
       <li>Lastly, the <b>username and password</b> are the same as username and password that you configured in previous section.</li>
     </ul>
     </div>
 
-    <div content-block message="Connect to your Intel&reg; IoT Gateway" image-link="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg">
-      <p>Next to each computer that has been added to the system there is a button labeled connect.</p>
-      <pre><code>Click the Connect button to begin communicating with your gateway.</code></pre>
+    <div content-block message="Connect to your Intel&reg; NUC" image-link="../views/labs/remote-configintelmc/images/003-Click-Connect.jpg">
+      <p>Next to each computer that has been added to the mesh commander there is a button labeled connect.</p>
+      <p>Click the <b>Connect</b> button to begin communicating with your remote machine.</p>
     </div>
 
     <div content-block message="Click Remote Desktop" image-link="../views/labs/remote-configintelmc/images/004-Click-Remote-Desktop.jpg">
-      <p>After connecting to a system, you'll see the system information on the screen, such as the power state, the unique identifier and basic settings. Take a moment to browse around and see the different bits of information available to you.</p>
+      <p>After connecting to a system, you'll see the system information on the screen, such as the power state, the unique identifier, Intel&reg; ME version, AMT activation mode and basic settings of the remote machine. Take a moment to browse around and see the different bits of information available to you.</p>
     </div>
 
     <div content-block message="Click Connect Remote Desktop" image-link="../views/labs/remote-configintelmc/images/005-Click-Connect-Remote-Desktop.jpg">
@@ -78,16 +74,14 @@
       <ul>
         <li>Click on the <b>Remote Desktop</b> link in the left sidebar.</li>
         <li>Then click the <b>Connect</b> button as shown in the image</li>
-		<li>If user consent was enabled, it will display a code in IOT Gateway which has to be entered in the Mesh Commander interface to proceed further</li>
-	    <li>In default case, on connect it will directly give remote access</li>
+		<li>If user consent was enabled, it will display a code in NUC, which has to be entered in the Mesh Commander interface to proceed further</li>
+	    <li>In admin control mode, on clicking "Connect" it will directly give remote access</li>
       </ul>
     </div>
 
     <div content-block message="Out of band Remote Desktop" image-link="../views/labs/remote-configintelmc/images/006-Out-of-band-Remote-Desktop.jpg">
       <p>You will now see the screen of the remote system.</p>
-      <div class="alert alert-info">
-        <p>You will be able to see the screen of the remote system even if the remote computer is rebooting, in the BIOS or in a crashed state.</p>
-      </div>
+        <p>Since AMT is out of the band control to remote device, you will be able to see the screen of the remote system even if the remote computer is rebooting, in the BIOS or in a crashed state.</p>
     </div>
 
     <div content-block message="Power Actions Reset To BIOS" image-link="../views/labs/remote-configintelmc/images/007-Power-Actions-Reset-To-BIOS.jpg">
@@ -95,7 +89,7 @@
     </div>
 
     <div content-block message="BIOS Setup Page" image-link="../views/labs/remote-configintelmc/images/008-BIOS-Setup-Page.jpg">
-      <p>Intel&reg; AMT works at a firmware level, that is at a level lower than the operating system. 
+      <p>Intel&reg; AMT is an out of band service, that is at a level lower than the operating system.
 	  So it is possible to have a remote view of the display even when viewing the BIOS.</p>
     </div>
   </div>
@@ -116,25 +110,17 @@
     <div content-block image-link="../views/labs/remote-configintelmc/images/IDER.png" message="IDE-R completed">
       <ul>
         <li>CDROM Image content will be displayed</li>
-        <li>A samle DOS image is loaded here</li>
+        <li>Your OS image will be loaded here.</li>
         <li>Click the Disconnect button inside the Remote Desktop</li>
         <li>Click Stop IDE-R Session</li>
-        <li>Goto Power Actions &gt; Reset to complete the session</li>
+        <li>Goto Power Actions then click on Reset option to complete the session</li>
       </ul>
     </div>
   </div>
 
-  <div ibox title="Mesh Commander's System Defense panel">
-    <div content-block image-link="../views/labs/remote-configintelmc/images/010-MeshCommanderMatchingRules.jpg">
-      <p>Within Mesh Commander's System Defense panel, you can add to Intel AMT network filters and policies that can be used to match certain type of network traffic. You can use Intel AMT system defense to count, drop or rate limit network traffic that
-        matches certain rules. In this page, we look at how to create advanced filters that use the "Matching Rules" box in the "Add System Defense Filter" dialog box.</p>
-      <p>The "Matching Rules" field is a comma separated list of name and values. The names must have exact capitalization and no extra spaces must be added. </p>
-      <p>The first matching rule is the <b>ProtocolID</b>, usually TCP (6) or UDP (17). For example, if you want to match on TCP traffic, you put "ProtocolID=6" in the matching rules. You must specify a protocol id of TCP or UDP before you can use any of
-        the other filters below.</p>
-      <p><b>DestAddress</b> and <b>DestMask</b> to filter the destination of the packet. Both of these must be used at the same time. For example, you can set the matching rules to "ProtocolID=6,DestAddress=192.168.1.0,DestMask=255.255.255.0". This will
-        filter all packets that go to 192.168.1.*.</p>
-      <p>In addition, you can filter based on source address with <b>SrcAddress</b> and <b>SrcMask</b>. Both must be used at the same time. For example, you can have "ProtocolID=6,SrcAddress=192.168.1.0,SrcMask=255.255.0.0" to match all packets with a source
-        address of 192.168.*.</p>
+  <div ibox title="Explore Mesh Commander" message="Explore Mesh Commander">
+    <div content-block>
+      <p>Mesh commander website has many code samples, documentation and very nice video tutorials on each of Mesh commander features. We would recomment you going through <a href="http://www.meshcommander.com/meshcommander/tutorials" target="_blank">http://www.meshcommander.com/meshcommander/tutorials</a> to learn more.
     </div>
   </div>
 </div>
