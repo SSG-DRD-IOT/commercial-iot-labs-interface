@@ -34,6 +34,7 @@
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""><span class="nav-label">Video Performance</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-overview">Video Performance Overview</a></li>
                           <li ui-sref-active="active"><a ui-sref="labs.videoperformance-mediasdk">Explore Intel &reg; Media Server Studio Samples</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.videoperformance-mediasdksamples">Build Video Decode app using Intel &reg; Media Server Studio Samples</a></li>
                               <!--<li ui-sref-active="active"><a ui-sref="labs.videoperformance-marsunderstand">Intel &reg; Media Server Studio with FFMPEG</a></li>-->
@@ -43,6 +44,7 @@
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""> <span class="nav-label">Remote Management</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                            <li ui-sref-active="active"><a ui-sref="labs.remote-config-overview">Remote Management Overview</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.remote-configamt">Configure AMT</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.remote-configintelmc">Manage remote systems</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.remote-configmeshcentral">Manage remote systems using opensource cloud</a></li>
@@ -51,6 +53,7 @@
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""> <span class="nav-label">Video Analytics</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                            <li ui-sref-active="active"><a ui-sref="labs.analytics-overview">Video Analytics Overview</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.analytics-opencvinit">A Simple video capture using OpenCV</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.analytics-opencvmotion">Motion detection using OpenCV</a></li>
                             <li ui-sref-active="active"><a ui-sref="labs.analytics-opencvface">Face detection with OpenCV</a></li>

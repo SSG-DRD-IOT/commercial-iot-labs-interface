@@ -75,6 +75,75 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
+    .state('labs.videoperformance-overview', {
+      url: "/videoperformance-overview",
+      templateUrl: "views/labs/videoperformance-overview/index.html",
+      data: {
+        pageTitle: 'Page Overview'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+    .state('labs.remote-config-overview', {
+      url: "/remote-config-overview",
+      templateUrl: "views/labs/remote-config-overview/index.html",
+      data: {
+        pageTitle: 'Page Overview'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+    .state('labs.analytics-overview', {
+      url: "/analytics-overview",
+      templateUrl: "views/labs/analytics-overview/index.html",
+      data: {
+        pageTitle: 'Page Overview'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
     .state('labs.labInfrastructure', {
       url: "/laboverview",
       templateUrl: "views/labs/labInfrastructure/index.html",
