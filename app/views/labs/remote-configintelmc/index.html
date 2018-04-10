@@ -127,6 +127,9 @@
         the other filters below.</p>
       <p><b>DestAddress</b> and <b>DestMask</b> to filter the destination of the packet. Both of these must be used at the same time. For example, you can set the matching rules to "ProtocolID=6,DestAddress=192.168.1.0,DestMask=255.255.255.0". This will
         filter all packets that go to 192.168.1.*.</p>
+      <div class="alert alert-warning">
+        Don't do this as it will stop all communication between the MeshCommander and the remote system.
+      </div>
       <p>In addition, you can filter based on source address with <b>SrcAddress</b> and <b>SrcMask</b>. Both must be used at the same time. For example, you can have "ProtocolID=6,SrcAddress=192.168.1.0,SrcMask=255.255.0.0" to match all packets with a source
         address of 192.168.*.</p>
     </div>
