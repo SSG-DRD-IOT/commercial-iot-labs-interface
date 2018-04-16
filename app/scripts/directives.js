@@ -6,9 +6,9 @@ function pageTitle($rootScope, $timeout) {
         link: function(scope, element) {
             var listener = function(event, toState, toParams, fromState, fromParams) {
                 // Default title - load on Dashboard 1
-                var title = 'Intel Commercial IoT Workshop';
+                var title = 'Intel Retail Workshop';
                 // Create your own title pattern
-                if (toState.data && toState.data.pageTitle) title = 'Intel Commercial IoT Workshop | ' + toState.data.pageTitle;
+                if (toState.data && toState.data.pageTitle) title = 'Intel Retail Workshop | ' + toState.data.pageTitle;
                 $timeout(function() {
                     element.text(title);
                 });
@@ -128,6 +128,8 @@ function labels($timeout) {
       scope.xdk = 'xdk' in attrs;
       scope.nodered = 'nodered' in attrs;
       scope.windows = 'windows' in attrs;
+      scope.laptop = 'laptop' in attrs;
+        scope.nuc = 'nuc' in attrs;
       scope.apple = 'apple' in attrs;
       scope.linux = 'linux' in attrs;
     }

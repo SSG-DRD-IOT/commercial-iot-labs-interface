@@ -33,13 +33,13 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         pageTitle: 'Slides View'
       }
     })
-    .state('index.videos', {
+  /*  .state('index.videos', {
       url: "/videos",
       templateUrl: "views/videos.html",
       data: {
         pageTitle: 'Videos'
       }
-    })
+    }) */
     .state('labs', {
       abstract: true,
       url: "/labs",
@@ -52,11 +52,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         pageTitle: ''
       }
     })
-    .state('labs.hdc', {
-      url: "/hdc",
-      templateUrl: "views/labs/hdc/index.html",
+    .state('labs.laboverview', {
+      url: "/laboverview",
+      templateUrl: "views/labs/laboverview/index.html",
       data: {
-        pageTitle: 'The Helix Device Cloud'
+        pageTitle: 'Lab Overview'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -75,11 +75,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.protocols-javascript-http', {
-      url: "/protocols-javascript-http",
-      templateUrl: "views/labs/protocols-javascript-http/index.html",
+    .state('labs.labInfrastructure', {
+      url: "/laboverview",
+      templateUrl: "views/labs/labInfrastructure/index.html",
       data: {
-        pageTitle: 'Application Protocols: MQTT and HTTP'
+        pageTitle: 'Lab Infrastructure'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -98,11 +98,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.protocols-javascript-mqtt', {
-      url: "/protocols-javascript-mqtt",
-      templateUrl: "views/labs/protocols-javascript-mqtt/index.html",
+    .state('labs.videoperformance-maarssetup', {
+      url: "/videoperformance-maarssetup",
+      templateUrl: "views/labs/videoperformance-maarssetup/index.html",
       data: {
-        pageTitle: ''
+        pageTitle: 'MAARS Source Setup'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -121,11 +121,34 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.protocols-javascript', {
-      url: "/protocols-javascript",
-      templateUrl: "views/labs/protocols-javascript/index.html",
+    .state('labs.videoperformance-marsunderstand', {
+      url: "/videoperformance-marsunderstand",
+      templateUrl: "views/labs/videoperformance-marsunderstand/index.html",
       data: {
-        pageTitle: 'IoT Protocols: JavaScript'
+        pageTitle: 'MARS Application Walkthrough'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+    .state('labs.videoperformance-maarscustomize', {
+      url: "/videoperformance-maarsunderstand",
+      templateUrl: "views/labs/videoperformance-maarscustomize/index.html",
+      data: {
+        pageTitle: 'MAARS Customize'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -145,11 +168,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       }
     })
 
-    .state('labs.protocols-node-red', {
-      url: "/protocols-node-red",
-      templateUrl: "views/labs/protocols-node-red/index.html",
+    .state('labs.videoperformance-maarscustomsoln', {
+      url: "/videoperformance-maarscustomsoln",
+      templateUrl: "views/labs/videoperformance-maarscustomsoln/index.html",
       data: {
-        pageTitle: 'IoT Protocols: Node-Red'
+        pageTitle: 'Integrate MAARs into custom solution'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -168,11 +191,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.databases', {
-      url: "/databases",
-      templateUrl: "views/labs/databases/index.html",
+
+    .state('labs.videoperformance-mediasdk', {
+      url: "/videoperformance-mediasdk",
+      templateUrl: "views/labs/videoperformance-mediasdk/index.html",
       data: {
-        pageTitle: 'Build an Edge Device'
+        pageTitle: 'Explore Intel Media SDK'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -191,18 +215,12 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-    .state('labs.admin-interface', {
-      url: "/admin-interface",
-      templateUrl: "views/labs/admin-interface/index.html",
+
+    .state('labs.videoperformance-mediasdksamples', {
+      url: "/videoperformance-mediasdksamples",
+      templateUrl: "views/labs/videoperformance-mediasdksamples/index.html",
       data: {
-        pageTitle: 'Custom Administrative Interface'
-      }
-    })
-    .state('labs.automation', {
-      url: "/automation",
-      templateUrl: "views/labs/automation/index.html",
-      data: {
-        pageTitle: 'Automation on the Internet of Things'
+        pageTitle: 'Understand Media Acceleration Reference Software'
       },
       resolve: {
         loadPlugin: function($ocLazyLoad) {
@@ -221,12 +239,60 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
         }
       }
     })
-  .state('labs.security', {
-    url: "/security",
-    templateUrl: "views/labs/security/index.html",
-    data: {
-      pageTitle: 'Security on the Internet of Things'
-    },
+
+    .state('labs.remote-configamt', {
+      url: "/remote-configamt",
+      templateUrl: "views/labs/remote-configamt/index.html",
+      data: {
+        pageTitle: 'Configure AMT'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+
+    .state('labs.remote-configintelmc', {
+      url: "/remote-configintelmc",
+      templateUrl: "views/labs/remote-configintelmc/index.html",
+      data: {
+        pageTitle: 'Manage remote systems'
+      },
+      resolve: {
+        loadPlugin: function($ocLazyLoad) {
+          return $ocLazyLoad.load([{
+            serie: true,
+            files: [
+              'bower_components/codemirror/lib/codemirror.css',
+              'bower_components/codemirror/theme/ambiance.css',
+              'bower_components/codemirror/lib/codemirror.js',
+              'bower_components/codemirror/mode/javascript/javascript.js'
+            ]
+          }, {
+            name: 'ui.codemirror',
+            files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+          }]);
+        }
+      }
+    })
+    .state('labs.remote-configmeshcentral', {
+      url: "/remote-configmeshcentral",
+      templateUrl: "views/labs/remote-configmeshcentral/index.html",
+      data: {
+        pageTitle: 'Manage remote systems using opensource cloud'
+      },
     resolve: {
       loadPlugin: function($ocLazyLoad) {
         return $ocLazyLoad.load([{
@@ -245,11 +311,37 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
     }
   })
 
-  .state('labs.security-tls', {
-    url: "/security-tls",
-    templateUrl: "views/labs/security-tls/index.html",
+
+.state('labs.analytics-opencvinit', {
+    url: "/labs.analytics-opencvinit",
+    templateUrl: "views/labs/analytics-opencvinit/index.html",
     data: {
-      pageTitle: 'Setup TLS'
+        pageTitle: 'Simple Video capture using OpenCV'
+    },
+    resolve: {
+        loadPlugin: function ($ocLazyLoad) {
+            return $ocLazyLoad.load([{
+                serie: true,
+                files: [
+                  'bower_components/codemirror/lib/codemirror.css',
+                  'bower_components/codemirror/theme/ambiance.css',
+                  'bower_components/codemirror/lib/codemirror.js',
+                  'bower_components/codemirror/mode/javascript/javascript.js'
+                ]
+            }, {
+                name: 'ui.codemirror',
+                files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+            }]);
+        }
+    }
+})
+
+
+  .state('labs.analytics-opencvmotion', {
+    url: "/analytics-opencvmotion",
+    templateUrl: "views/labs/analytics-opencvmotion/index.html",
+    data: {
+      pageTitle: 'Motion detection using OpenCV'
     },
     resolve: {
       loadPlugin: function($ocLazyLoad) {
@@ -268,11 +360,11 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
       }
     }
 })
-.state('labs.security-mcafee', {
-  url: "/security-mcafee",
-  templateUrl: "views/labs/security-mcafee/index.html",
+.state('labs.analytics-opencvface', {
+  url: "/analytics-opencvface",
+  templateUrl: "views/labs/analytics-opencvface/index.html",
   data: {
-    pageTitle: 'McAfee'
+    pageTitle: 'Face detection with OpenCV'
   },
   resolve: {
     loadPlugin: function($ocLazyLoad) {
@@ -292,6 +384,29 @@ function config($stateProvider, $urlRouterProvider, $ocLazyLoadProvider) {
   }
 })
 
+.state('labs.analytics-analyse', {
+  url: "/analytics-analyse",
+  templateUrl: "views/labs/analytics-analyse/index.html",
+  data: {
+    pageTitle: 'Analyse face data'
+  },
+  resolve: {
+    loadPlugin: function($ocLazyLoad) {
+      return $ocLazyLoad.load([{
+        serie: true,
+        files: [
+          'bower_components/codemirror/lib/codemirror.css',
+          'bower_components/codemirror/theme/ambiance.css',
+          'bower_components/codemirror/lib/codemirror.js',
+          'bower_components/codemirror/mode/javascript/javascript.js'
+        ]
+      }, {
+        name: 'ui.codemirror',
+        files: ['bower_components/angular-ui-codemirror/ui-codemirror.min.js']
+      }]);
+    }
+  }
+})
 .state('labs.security-systemd', {
   url: "/security-systemd",
   templateUrl: "views/labs/security-systemd/index.html",
