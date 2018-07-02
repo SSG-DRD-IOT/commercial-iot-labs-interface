@@ -1,221 +1,113 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-    <div class="col-lg-10">
-        <h2>Setup Development Environment with the Intel® NUC and Arudino* 101</h2>
-        <ol class="breadcrumb">
-            <li>
-                <a href="index.html">Home</a>
-            </li>
-            <li>
-                <a>Labs</a>
-            </li>
-            <li class="active">
-                <strong>Setup Development Environment with the Intel® NUC and Arudino* 101</strong>
-            </li>
-        </ol>
-    </div>
+<div class="col-lg-10">
+<h2>Setup Development Environment with the Intel&reg; NUC</h2>
+<ol class="breadcrumb">
+<li>
+<a href="index.html">Home</a>
+</li>
+<li>
+<a>Labs</a>
+</li>
+<li class="active">
+<strong>Setup Development Environment with the Intel&reg; NUC</strong>
+</li>
+</ol>
+</div>
 </div>
 
 <div class="wrapper wrapper-content">
-    <div class="row">
-        <div class="col-lg-12">
+<div class="row">
+<div class="col-lg-12">
 
-            <!-- Overview of Labs: What are we doing and where are we going? -->
-            <div ibox title="Lab Overview and Objectives">
-              <div content-block name="read-objectives" message="Read the Lab Overview and Objectives" image-link="./views/labs/setup-development-environment/images/setup-development-environment.png">
-                <h2 class="labHidden">Lab Overview and Objectives</h2>
+<!-- Overview of Labs: What are we doing and where are we going? -->
+<div ibox title="Lab Overview and Objectives">
+<div content-block name="read-objectives" message="Read the Lab Overview and Objectives">
+<h2 class="labHidden">Lab Overview and Objectives</h2>
 
-                <labels gateway arduino windows apple linux/>
-                <p>The labs in the Intel Commercial IoT Workshop are organized in a progression that will result in each attendee building their own automated and secured, multi-device IoT network.</p>
-                <p>Start by making sure your computer, Arduino* 101, and Intel® IoT Gateway are ready for IoT development.</p>
+<labels windows/>
+<p>The labs in the Intel Visual Retail Workshop are organized in a progression that will result in each attendee building their own automated and secured, multi-device IoT network supporting Visual Retail scenarios.</p>
+<p>Start by making sure your computer, is ready for Visual Retail development.</p>
+<p>By the end of this module, you should be able to:</p>
 
-                <div class="alert alert-info">
-                  <p>By the end of this module, you should be able to:</p>
-                  <ul>
-                    <li>Unbox and setup your Intel® IoT Gateway and Arduino* 101 Hardware</li>
-                    <li>Connect to your Intel® IoT Gateway from your development computer and open a console window</li>
-                    <li>
-                      Change the root password
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+<div class="alert alert-info">
+<ul>
+<li>Unbox and setup your Intel&reg; NUC Hardware</li>
+<li>Connect to your Intel&reg; NUC to power and monitor.</li>
+<li>Install Windows 10 Pro</a></li>
+<li>Install Media Server Studio</li>
+<li>Install OpenCV with Python support</li>
+<li>Copy the required lab exercises</li>
+</ul>
+</div>
+</div>
+</div>
 
-            <!-- Login to your Intel IoT Gateway -->
-            <div ibox title="Getting Started with Grove* IoT Commercial Development Kit">
-                <div content-block name="unbox-kit" message="Unbox Your Grove IoT Commercial Developer Kit" image-link="./views/labs/setup-development-environment/images/1.png">
-                    <h2 class="labHidden">Getting Started with Grove* IoT Commercial Development Kit</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/1.png"></img>
-                    <labels gateway/>
+<!-- Login to your Intel NUC -->
+<div ibox title="Setup and deployment">
+<div content-block name="sw-install" message="Software installations">
 
-                    <p>The Grove* IoT Commercial Development Kit will provide you with a hardware and software stack to prototype and build Internet of Things services.</p>
-                    <p>It comes with a IoT gateway which is an intermediate device between sensors, actuators and your corporate network or the cloud. The gateway allows you to efficiently collect and securely transport data from devices, remote users, and
-                        applications to serve your particular IoT application.</p>
-                    <p>It also comes with a starter pack of sensors. These sensors were put in the starter kit because they are commonly used in IoT projects. However, there are many other types of sensors that can be used with the Intel® IoT Gateway. The
-                        libupm sensor library current supports more than 300 types of sensors and actuators.</p>
-                </div>
+<p><b>Hardware Requirements</b></p>
+<p>6th Generation Core Processor (Skylake)</p>
+<p>1. Unscrew the NUC kit.</p>
+<p>2. Upgrade 1 DDR3 RAM in provided slot properly.</p>
+<p>3. Insert Solid state drive in the back case.</p>
+<p>4. Screw the NUC kit.</p>
+<p>5. Power on the NUC with Monitor connected.</p>
+</br>
+<p><b>Software Requirements</b></p>
+<p>There are manual and automatic named two ways to configure Windows environment for Visual Retail Workshop</p>
+</br>
+<p><b>Automatic Windows Configuration</b></p>
+<p>1. Automatic method involves the windows image created by Macrium Software and placed in
+<a href="\\10.224.54.1\Raghavendra\workshop-setup\Visual_Retail_Windows_Image\23-03-2018\">\\10.224.54.1\Raghavendra\workshop-setup\Visual_Retail_Windows_Image\23-03-2018\</a>
+<p>Copy the above images in suitable storage device</p>
+<p>2. Prepare a Resuce disk (USB) using the ISO provided in
+<a href="\\10.224.54.1\Raghavendra\workshop-setup\Visual_Retail_Windows_Image\23-03-2018\Rescue.iso">\\10.224.54.1\Raghavendra\workshop-setup\Visual_Retail_Windows_Image\23-03-2018\Rescue.iso</a> according to the instructions given in <a href="https://knowledgebase.macrium.com/display/KNOW7/Creating+rescue+media">Creating rescue media</a></p>
+<p>3. Boot through this rescue disk and restore the above said windows image using the instructions given in
+<a href="https://knowledgebase.macrium.com/display/KNOW7/Restoring+a+system+image">Restoring a system image</a></p>
+<p>4. On Completion of system image restore, it asks to reboot, after which the Windows system will be ready for Visual Retail Workshop</p>
+<p>5. Through elevated command prompt run Desktop > Retail > 01-MARS > filterDlls > regdll.bat, execute to register the dlls required for Mars</p>
+<p>6. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
+<p>Note:- <a href="http://kb.macrium.com/KnowledgebaseArticle50168.aspx">Windows Boot Troubleshoot</a></p>
+</br>
+<p>Note:-If the automatic configuration fails, you can try manual installation as follows</p>
+<p><b>Manual Windows Configuration</b></p>
+<p>1. Power on the Intel NUC</p>
+<p>2. Press F10 and boot from Windows 10 USB prepared using <a href="\\10.224.54.1\Raghavendra\en_windows_10_multiple_editions_version_1607_updated_jul_2016_x64_dvd_9058187.iso">Windows 10 </a></p>
+<p>3. Install Windows 10.</p>
+<p>4. Set Username: intel<NUC Number> and Password: intel123 </p>
+<p>5. Download Workshop contents from <a href="\\10.224.54.1\Raghavendra\Retail_workshop_prep">Workshop folder</a></p>
+<p>6. Open the command prompt in admin mode and navigate to downloaded Workshop folder</p>
+<p>7. Goto 00-Installers, RunMe1.bat to install drivers. Don't restart in between.</p>
+<p>8. Reboot the system after RunMe1.bat finishes.</p>
+<p>9. Execute RunMe2.bat to install WindowsSDK, Directx 11 and <a href="\\10.224.54.1\Raghavendra\en_visual_studio_2010_professional_x86_dvd_509727.iso">Visual Studio 10.</a></p>
+<p>Note:- Directx installation may ask for .NET framework 3.5 for which internet connection is a must.</p>
+<p>10. Execute RunMe3.bat to unmount the VS image, register Mars dlls, install opencv and Mesh commander.</p>
+<p>11. Copy folders 01 - 04 to Desktop > Retail</p>
+<p>12. Through elevated command prompt run Desktop > Retail > 01-MARS > filterDlls > regdll.bat, execute to register the dlls required for Mars</p>
+<p>13. Goto Desktop Retail > 01-Mars > Bin > Right Click on MARS.exe and Send to Desktop (create a link).</p>
+</br>
 
-                <div content-block name="unbox-arduino" message="Unbox Your Ardunio/Genuino 101" image-link="./views/labs/setup-development-environment/images/2.png">
-                    <h2 class="labHidden">Connect to your Gateway's Wi-Fi Hotspot SSID</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/2.png"></img>
+<p><b>Verification and Validation</b></p>
+<p>1. Run MARS.exe and check if one video is running properly.</p>
+<p>Troubleshoot: Through elevated command prompt run Desktop > Retail > 01-MARS > filterDlls > regdll.bat, execute to register the dlls required for Mars</p>
+<p>2. Run Python idle. Type: import cv2</p>
+<p>3. It should not give any error.</p>
+<p>4. Type: print cv2.__version__ </p>
+<p>5. It should display the cv2 version </p>
+<p>Troubleshoot: If OpenCV python doesn't work, try copying the whole site packages from <a href="\\10.224.54.1\Raghavendra\Retail_workshop_prep\00-Installers\site-packages">\\10.224.54.1\Raghavendra\Retail_workshop_prep\00-Installers\site-packages</a> to C:\Python27\Lib\site-packages </p>
+<p>6. Create System Restore point named "Retail".</p>
+<p>7. Shutdown the system, unplug the cables and stick Intel logo provided in the box, on to the NUC and pack the box.</p>
+</div>
 
-                    <p>The Arduino* 101 board (USA only) and the Genuino 101* board (outside USA) have been designed in collaboration with Intel. We use the Arduino* 101 board because it offers easily-accessible pins for IoT sensors or the Grove Starter Kit,
-                        which is described below, and simplifies connection to them—you can easily attach your sensors to the Arduino* 101 board and start communicating with them. The module contains two tiny cores, an x86 (Intel® Quark™ Compute Module)
-                        and a 32-bit ARC core, both clocked at 32MHz. The Intel toolchain compiles your Arduino sketches optimally, across both cores, to accomplish the most demanding tasks.</p>
-                    <p>The 101 comes with the following:</p>
-                    <ul>
-                        <li>14 digital input/output pins (four of which can be used as PWM outputs)</li>
-                        <li>Six analog inputs</li>
-                        <li>A USB connector for serial communication and sketch upload</li>
-                        <li>A power jack</li>
-                        <li>An ICSP header with SPI signals and I2C dedicated pins</li>
-                    </ul>
-                </div>
-
-                <div content-block name="connect-base-block" message="Connect Base shield to Arduino* 101" image-link="./views/labs/setup-development-environment/images/3.png">
-                    <h2 class="labHidden">Connect Base shield to Arduino* 101</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/3.png"></img>
-
-                    <labels gateway windows/>
-
-                    <p>Base shield will be included in the Grove starter kit. Attach Grove base shield with Arduino* 101.</p>
-                    <p>The base shield allow you to quickly attach and detach sensors to your device without the need for a breadboard or soldering.</p>
-                </div>
-
-                <div content-block name="intro-place-arduino" message="Move Base Shield switch towards 5 Volts" image-link="./views/labs/setup-development-environment/images/4.png">
-                    <h2 class="labHidden">Move Base Shield switch towards 5 Volts</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/4.png"></img>
-                    <p>Move Base Shield switch towards 5 Volts.</p>
-                    <p class="alert alert-warning">Some sensors and actuators, such as the LCD screen, will not work properly unless the base shield is set to 5V.</p>
-                </div>
-
-                <div content-block name="intro-press" message="Connect LCD and Rotatry Angle to Arduino* 101" image-link="./views/labs/setup-development-environment/images/5.png">
-                    <h2 class="labHidden">Connect LCD and Rotatry Angle to Arduino* 101</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/5.png"></img>
-                    <p>Connect the LCD screen to any of the I2C pins on base shield. Then connect the rotary angle sensor to pin A0 of base shield.</p>
-                </div>
-
-                <div content-block name="intro-press" message="Now connect Arduino* 101 with Intel IoT Gateway via USB A-B cable" image-link="./views/labs/setup-development-environment/images/6.png">
-                    <h2 class="labHidden">Now connect Arduino* 101 with Intel IoT Gateway via USB A-B cable.</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/6.png"></img>
-
-                </div>
-
-                <div content-block name="intro-press" message="Connect Intel IoT gateway with Ethernet cable and Power adapter" image-link="./views/labs/setup-development-environment/images/7.png">
-                    <h2 class="labHidden">Connect Intel IoT gateway with Ethernet cable and Power adapter</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/7.png"></img>
-                </div>
-
-                <div content-block name="intro-press" message="Press Power button to start Gateway" image-link="./views/labs/setup-development-environment/images/8.png">
-                    <h2 class="labHidden">Press Power button to start Gateway</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/8.png"></img>
-                    <p>Press power button to start gateway. After around 2 minutes, it will display the IP address of Gateway on the LCD. Note Down the IP address.</p>
-                    <p class="alert alert-warning">If the IP address does not display, this is an indication that the Gateway was unable to connect to the network. Please raise your hand and contact an Intel developer about the problem.</p>
-                </div>
-
-                <div content-block name="intro-press" message="Access IoT Developer Hub." image-link="./views/labs/setup-development-environment/images/9.png">
-                    <h2 class="labHidden">Access IoT Developer Hub.</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/9.png"></img>
-                    <ol>
-                        <li>Open your browser and enter the IP address noted down in last step to access IoT Developer Hub.</li>
-                        <li>Login to the Intel® IoT Gateway Developer Hub using root for both the username and the password.</li>
-                        <li>Once you login you should see the home page as shown in the figure. A graphical representation of the Rotary sensor can be seen on the home page. Move the rotary sensor to see change in values</li>
-                        <li>Use the Intel® IoT Gateway Developer Hub to explore and extend the basic capabilities of the Gateway.</li>
-                    </ol>
-                    <p class="alert alert-warning">Please <b>do not</b> install any updates for our labs as it might result in an unkown behavior</p>
-                </div>
-            </div>
-
-
-
-            <!-- SSH to the Intel IoT Gateway for Windows Users -->
-            <div ibox title="SSH to the Intel IoT Gateway for Windows Users">
-                <div content-block name="Windows-SSH" message="Download Putty" image-link="./views/labs/setup-development-environment/images/10.png">
-                    <h2 class="labHidden">Download Putty</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/10.png"></img>
-                    <labels gateway arduino windows/>
-
-                    <ol>
-                        <li>Windows does not come with a built-in terminal emulator so download and use the PuTTY client.</li>
-                        <li>Visit the <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html">PuTTY download page</a>.</li>
-                        <li>Under the "For Windows on Intel x86" heading, click on the "putty.exe" link to download the latest release version to your computer.</li>
-                    </ol>
-                </div>
-
-                <div content-block name="Windows-SSH" message="Launch Putty and type in Your IP Address to connect" image-link="./views/labs/setup-development-environment/images/11.png">
-                    <h2 class="labHidden">Launch Putty and type in Your IP Address to connect</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/11.png"></img>
-
-                    <ol>
-                        <li>Double-click putty.exe on your computer to launch PuTTY.</li>
-                        <li>Enter IP address of the Gateway</li>
-                        <li>You can login with the username root and the password root.</li>
-                    </ol>
-                    <p class="alert alert-warning">Note that your development computer and your NUC device has to be on the same network with same subnet else it will not connect</p>
-                </div>
-            </div>
-
-
-
-            <!-- SSH to the Intel IoT Gateway for Mac Users -->
-            <div ibox title="SSH to the Intel IoT Gateway for Mac Users">
-                <div content-block name="Windows-SSH" message="Open a Console and use the ssh command to connect" image-link="./views/labs/setup-development-environment/images/12.png">
-                    <h2 class="labHidden">Open a Console and use the ssh command to connect</h2>
-                    <img class="labHidden" src="./views/labs/setup-development-environment/images/12.png"></img>
-
-                    <ol>
-                        <li>Open Terminal</li>
-                        <li>Type $ ssh root@
-                            <<IP Address>>. Replace
-                                <<IP Address>> to IP address of your gateway. E.g. root@192.168.3.3</li>
-                        <li>Enter root as password</li>
-                    </ol>
-                    <p class="alert alert-warning">Note that your development computer and your NUC device has to be on the same network with same subnet else it will not connect</p>
-
-                </div>
-            </div>
-
-
-
-            <!-- Change the password of your Intel IoT Gateway -->
-            <div ibox title="Change the password of your Intel IoT Gateway">
-                <div content-block name="Windows-SSH" message="Change the password of your Intel IoT Gateway">
-                    <h2 class="labHidden">Change the password of your Intel IoT Gateway</h2>
-
-                    <p>At the console type the follow:</p>
-                    <pre><code>passwd</code></pre>
-
-                    <p>Follow the prompts at change your password.</p>
-                </div>
-            </div>
-
-
-
-            <!-- Lab Conclusion -->
-            <div ibox title="Lab Conclusion">
-                <div content-block name="Windows-SSH" message="Read about the next lab">
-                    <h2 class="labHidden">Read about the next lab</h2>
-                    <p>Congratulations! You have successfully setup your Intel Iot Gateway and connected it to the Arduino* 101. In the next section, you will learn how build an IoT device from the starter kit and to develop an IoT application and deploy
-                        it to the Intel IoT Gateway.</p>
-                </div>
-            </div>
-
-
-            <!-- Lab Conclusion -->
-            <div ibox title="Additional Resources">
-                <div content-block name="" message="When you finish the lab, take a look at some of the online resources at http://software.intel.com/iot">
-                    <h2 class="labHidden">When you finish the lab, take a look at some of the online resources at http://software.intel.com/io</h2>
-                    <ul>
-                        <li><a href="https://software.intel.com/en-us/iot/journey/basics">IoT Basics</a> - With the help of sensors, devices, the cloud, and your code, everyday objects or "things" can take on new abilities. Plants can let you know they need
-                            water, garage doors can be closed remotely, or drones can avoid flying into trees. The Internet of Things (IoT) is how all these objects connect together to create a smart world.</li>
-                        <li><a href="https://software.intel.com/en-us/iot/hardware/gateways">Intel® IoT Gateway Technology</a> - the landing page for getting started with Intel® IoT Gateways</li>
-                        <li><a href="https://software.intel.com/en-us/articles/what-is-the-gateway-and-why-should-i-care">What Is the Gateway and Why Should I Care?</a></li>
-                        <li><a href="https://software.intel.com/en-us/getting-started-with-intel-iot-gateways-and-iotdk">Getting Started with Intel® IoT Gateways with the Intel® IoT Developer Kit
-</a></li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- Lab Conclusion -->
+<div ibox title="Lab Conclusion">
+<div content-block name="Windows-SSH" message="Read about the next lab">
+<h2 class="labHidden">Read about the next lab</h2>
+<p>Congratulations! You have successfully setup your Intel&reg; NUC with Windows for Visual Retail workshop.
+In the next section, you will learn how to enhance the video performance using Intel software.</p>
+</div>
+</div>
+</div>
+</div>
 </div>

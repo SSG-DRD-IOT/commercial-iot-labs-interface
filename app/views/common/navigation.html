@@ -31,55 +31,62 @@
                 <a ui-sref="index.presentations"><i class="fa fa-slideshare"></i> <span class="nav-label">Presentations</span></a>
             </li>
 
-            <li>
+          <!--  <li>
                 <a ui-sref="index.videos"><i class="fa fa-desktop"></i> <span class="nav-label">Videos</span></a>
-            </li>
+            </li> -->
 
             <li ng-class="{active: $state.includes('labs')}">
                 <a href=""><i class="fa fa-flask"></i> <span class="nav-label">Labs</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('labs')}">
-                    <li><a ui-sref="labs.setup-development-environment">Setup Development Environment</a></li>
-                    <li><a ui-sref="labs.sensors-javascript">Sensors and Actuators</a></li>
-                    <li><a ui-sref="labs.security-tls">Setup TLS</a></li>
+                  <li ng-class="{active: $state.includes('labs')}">
+                      <a href=""><span class="nav-label">Setup and deployment</span> <span class="fa arrow"></span></a>
+                      <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                        <li ui-sref-active="active"><a ui-sref="labs.setup-development-environment">setup development environment</a></li>
+                    </ul>
+                  </li>
                     <li ng-class="{active: $state.includes('labs')}">
-                        <a href=""><span class="nav-label">Protocols</span> <span class="fa arrow"></span></a>
+                        <a href=""><span class="nav-label">Video Performance</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
-                          <li ui-sref-active="active"><a ui-sref="labs.protocols-javascript-mqtt">Publishing Sensor data via MQTT</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.protocols-javascript-http">Restful IoT Actuator Control via HTTP</a></li>
-                          <li ui-sref-active="active"><a ui-sref="labs.protocols-node-red">IoT Devices with Node-Red</a></li>
+                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-mediasdk">Explore Intel &reg; Media SDK Samples</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.videoperformance-mediasdksamples">Build Video decode app using Intel &reg; Media SDK Samples</a></li>
+                          <li ui-sref-active="active"><a ui-sref="labs.videoperformance-marsunderstand">Understand Media Acceleration Reference Software</a></li>
                         </ul>
                     </li>
                     <li ng-class="{active: $state.includes('labs')}">
-                        <a href=""> <span class="nav-label">Security</span> <span class="fa arrow"></span></a>
+                        <a href=""> <span class="nav-label">Remote Management</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
-                            <li ui-sref-active="active"><a ui-sref="labs.security-mcafee">McAfee&reg; Embedded Control Orientation</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.security-systemd">Systemd</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.remote-configamt">Configure AMT</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.remote-configintelmc">Manage remote systems</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.remote-configmeshcentral">Manage remote systems using opensource cloud</a></li>
                         </ul>
                     </li>
-                    <li ui-sref-active="active"><a ui-sref="labs.databases">Databases at the Edge</a></li>
-                    <li ui-sref-active="active"><a ui-sref="labs.admin-interface">Custom Administrative Interfaces</a></li>
-                    <li ui-sref-active="active"><a ui-sref="labs.automation">Automation on the Edge Network</a></li>
-                    <li ui-sref-active="active"><a ui-sref="labs.hdc">The Helix Device Cloud</a></li>
-                    <li ui-sref-active="active"><a ui-sref="labs.cloud">Data Analytics</a></li>
+                    <li ng-class="{active: $state.includes('labs')}">
+                        <a href=""> <span class="nav-label">Video Analytics</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
+                            <li ui-sref-active="active"><a ui-sref="labs.analytics-exploreopenvinosamples"> Explore Intel &reg; OpenVINO &trade; toolkit Samples</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.analytics-openvinoface">Face detection using OpenVINO &trade;</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.analytics-openvinoagegenderdetection">Age and Gender detection using OpenVINO &trade;</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.analytics-analyse">Analyse face data on cloud</a></li>
+                        </ul>
+                    </li>
+                    <!--
                     <li ng-class="{active: $state.includes('labs')}">
                         <a href=""> <span class="nav-label">Additional Information</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level collapse" ng-class="{in: $state.includes('labs')}">
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mqtt">Debugging MQTT</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-xdk">Debugging Intel&reg; XDK</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb">Using MongoDB</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-mongodb-schemas">Mongoose Schemas</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-virtual-sensor">Virtual Sensor</a></li>
-                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-hdc">Helix Device Cloud (HDC)</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-vaapi">Video performance through VA-API on Linux</a></li>
+                            <li ui-sref-active="active"><a ui-sref="labs.additional-info-remote_linux">Managing Linux systems with Intel&reg; AMT and Mesh Central</a></li>
                         </ul>
                     </li>
+                    -->
                 </ul>
             </li>
-
+            <!--
             <li>
                 <li ui-sref-active="active"><a ui-sref="labs.solutions"><i class="fa fa-github"></i> <span class="nav-label">Solutions</span></a></li>
             </li>
 
             <li ui-sref-active="active"><a ui-sref="index.faq">FAQ</a></li>
+            -->
         </ul>
 
     </div>
